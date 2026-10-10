@@ -1,0 +1,33 @@
+/* NUIT : immersive. Noir profond et or, grand fond video, recit epingle,
+   menu plein ecran, apercu d'images au curseur. */
+:root {
+  color-scheme: dark;
+  --fond: #08080a; --fond-alt: #0e0d11; --surface: #121116; --surface-bord: rgba(201, 164, 92, .22);
+  --encre: #eee8dc; --encre-douce: #aaa293; --accent: #c9a45c; --accent-texte: #d7b46e; --trait: rgba(201, 164, 92, .24);
+  --sur-image: #f4efe6; --voile: 8, 8, 10;
+  --bouton-fond: transparent; --bouton-encre: #ead6a5; --bouton-bord: rgba(215, 180, 110, .75); --bouton-survol: #d7b46e; --bouton-survol-encre: #08080a;
+  --police-titre: "Cormorant", Garamond, Georgia, serif; --police-texte: "Jost", "Futura", "Century Gothic", sans-serif;
+  --titre-poids: 400; --titre-espacement: -.005em; --titre-hauteur: 1.02;
+  --nom-poids: 300; --nom-espacement: .005em; --nom-echelle: 1.05;
+  --etiquette-espacement: .32em; --texte-poids: 350; --texte-hauteur: 1.75;
+  --rayon: 0px; --rayon-bouton: 0px;
+  --carte-fond: linear-gradient(180deg, rgba(201, 164, 92, .07), rgba(201, 164, 92, 0) 60%); --carte-bord: 1px solid var(--surface-bord);
+  --duree: 1.7s; --courbe: cubic-bezier(.22, .61, .36, 1); --pas-lettre: .07s; --pas-mot: 0s;
+  --dep-y: 0px; --dep-flou: 16px; --dep-echelle: 1.04; --masque: visible;
+}
+.marque__sceau { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--accent); border-radius: 50%; font: 400 .78rem/1 var(--police-titre); letter-spacing: .08em; color: var(--accent-texte); }
+.entete { color: var(--sur-image); }
+.menu--plein .menu__panneau { background: radial-gradient(90% 70% at 70% 20%, rgba(201, 164, 92, .12), transparent 60%), #08080a; }
+.menu--plein .menu__panneau nav a span { color: var(--accent-texte); }
+.surtitre { letter-spacing: .42em; }
+.ac--video .surtitre { color: #e2c182; }
+.ac--video .ac__nom { text-shadow: 0 2px 30px rgba(0, 0, 0, .35); }
+.seance--recit { background: var(--fond); }
+.tarif { text-align: center; position: relative; }
+.tarif::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(201, 164, 92, .18); pointer-events: none; }
+.tarif__details li { text-align: left; }
+.apports--lignes { background: var(--fond-alt); }
+.questions { background: var(--fond-alt); }
+.emplacement { background: #111015 repeating-linear-gradient(135deg, transparent 0 14px, rgba(201, 164, 92, .04) 14px 15px); border-color: rgba(201, 164, 92, .3); }
+.emplacement__icone { background: #111015; }
+.portrait__cadre { background: #111015; }

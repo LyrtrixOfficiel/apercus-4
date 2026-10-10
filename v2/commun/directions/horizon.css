@@ -1,0 +1,24 @@
+/* HORIZON : immersive. Brume claire et bleu ardoise, ecran partage, menu
+   lateral fixe, seance en defilement horizontal, parallaxe. */
+:root {
+  color-scheme: light; --rail: 230px;
+  --fond: #f3f5f4; --fond-alt: #e8ecea; --surface: #ffffff; --surface-bord: rgba(29, 42, 51, .09);
+  --encre: #1d2a33; --encre-douce: #4c5a63; --accent: #6f8fa3; --accent-texte: #3f6075; --trait: rgba(29, 42, 51, .15);
+  --sur-image: #ffffff; --voile: 18, 30, 40;
+  --bouton-fond: #1d2a33; --bouton-encre: #f3f5f4; --bouton-bord: #1d2a33; --bouton-survol: #3f6075; --bouton-survol-encre: #fff;
+  --police-titre: "Bellefair", "Cormorant Garamond", Georgia, serif; --police-texte: "Albert Sans", "Segoe UI", sans-serif;
+  --titre-poids: 400; --titre-espacement: -.01em; --titre-hauteur: 1.04;
+  --nom-poids: 400; --nom-espacement: -.015em; --nom-echelle: .92;
+  --etiquette-espacement: .26em; --texte-poids: 400;
+  --rayon: 2px; --rayon-bouton: 999px;
+  --duree: 1.2s; --courbe: cubic-bezier(.16, 1, .3, 1); --pas-lettre: .035s; --dep-y: 105%; --masque: hidden;
+}
+@media (min-width: 1100px) { .ac--partage .ac__contenu { padding-left: 5vw; } }
+.apports--grille { background: var(--fond-alt); }
+.grille__num { font-size: 3rem; }
+.seance--horizontal { background: var(--fond); }
+.horizontal__panneau .etape { padding-right: 1rem; }
+.contact--image .titre-section em { color: #cfe0ea; }
+.contact--image .etiquette, .contact--image .contact__cta, .contact--image .infos dt { color: #cfe0ea; }
+.portrait--haut-arrondi .portrait__cadre { outline: 1px solid var(--accent); outline-offset: 10px; }
+.contact--image .contact__voile { background: rgba(18, 30, 40, .66); }

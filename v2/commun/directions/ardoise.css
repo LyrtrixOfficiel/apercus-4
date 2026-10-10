@@ -1,0 +1,23 @@
+/* ARDOISE : sobre. Grille editoriale suisse, gris bleu, tres grande
+   typographie, bande photo, tableau. Animations : fondus et masques courts. */
+:root {
+  color-scheme: light;
+  --fond: #eef0f1; --fond-alt: #e3e7e9; --surface: #f8f9fa; --surface-bord: rgba(22, 25, 28, .1);
+  --encre: #16191c; --encre-douce: #4a5259; --accent: #5f7a8b; --accent-texte: #2f4a5b; --trait: rgba(22, 25, 28, .18);
+  --bouton-fond: #16191c; --bouton-encre: #eef0f1; --bouton-bord: #16191c; --bouton-survol: #2f4a5b; --bouton-survol-encre: #fff;
+  --police-titre: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif; --police-texte: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --titre-poids: 700; --titre-espacement: -.035em; --titre-hauteur: 1; --titre-echelle: .95;
+  --nom-poids: 800; --nom-espacement: -.05em; --nom-echelle: 1;
+  --em-style: italic; --em-couleur: var(--accent-texte);
+  --etiquette-espacement: .16em;
+  --rayon: 0px; --rayon-bouton: 0px;
+  --duree: .9s; --courbe: cubic-bezier(.3, .7, .2, 1); --pas-lettre: 0s; --pas-mot: .07s; --dep-y: 100%; --masque: hidden;
+}
+.titre-section em, .citation-simple, .exergue, .cerf blockquote, .signature { font-family: "Spectral", Georgia, serif; font-weight: 300; }
+.titre-section em { letter-spacing: -.01em; }
+.ac--typo .ac__nom { line-height: .9; }
+.etape__num { border-radius: 0; border: 0; background: none; width: auto; height: auto; place-items: start; font-size: 2.2rem; font-weight: 700; color: var(--accent-texte); }
+.colonnes .etape { grid-template-columns: 1fr; }
+.grille__num { font-weight: 700; }
+.apports--grille { background: var(--fond-alt); }
+.tableau tbody th, .tableau .tableau__prix { font-weight: 600; }

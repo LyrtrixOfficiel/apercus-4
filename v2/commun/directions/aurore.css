@@ -1,0 +1,28 @@
+/* AURORE : immersive. Lumiere vivante qui suit le curseur, photos en
+   apesanteur, barre flottante, cartes empilees, verre depoli. */
+:root {
+  color-scheme: light;
+  --fond: #fbf7f8; --fond-alt: #f6eff4; --surface: rgba(255, 255, 255, .62); --surface-bord: rgba(255, 255, 255, .9); --surface-solide: #ffffff;
+  --encre: #251f30; --encre-douce: #564f66; --accent: #c86684; --accent-texte: #9c3f63; --trait: rgba(37, 31, 48, .13);
+  --degrade: linear-gradient(100deg, #e27a92 0%, #f3a47e 32%, #b9a0de 66%, #7fb2df 100%);
+  --bouton-fond: #251f30; --bouton-encre: #fff; --bouton-bord: #251f30; --bouton-survol: var(--degrade); --bouton-survol-encre: #251f30;
+  --police-titre: "Instrument Serif", "Iowan Old Style", Georgia, serif; --police-texte: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --titre-poids: 400; --titre-espacement: -.02em; --titre-hauteur: 1;
+  --nom-poids: 400; --nom-espacement: -.03em; --nom-echelle: .98;
+  --etiquette-espacement: .2em;
+  --rayon: 26px; --rayon-bouton: 999px;
+  --carte-fond: rgba(255, 255, 255, .62); --carte-bord: 1px solid rgba(255, 255, 255, .9); --carte-ombre: 0 24px 50px -32px rgba(120, 80, 140, .45); --carte-flou: blur(18px) saturate(1.3);
+  --carte-solide: #ffffff;
+  --duree: 1.25s; --pas-lettre: 0s; --pas-mot: .11s; --dep-y: 100%; --masque: hidden;
+}
+body { background: linear-gradient(180deg, #fbf7f8 0%, #f8f1f6 30%, #f2f3fb 60%, #fbf4f1 100%); }
+.ac__nom { color: #2a1f36; }
+.ac__nom em { color: var(--accent-texte); }
+.ac__ligne { height: 2px; background: var(--degrade); }
+.etiquette::before { background: var(--degrade); opacity: 1; height: 2px; }
+.empile__carte:nth-child(2) { background: #fff8f6; } .empile__carte:nth-child(3) { background: #f8f5ff; } .empile__carte:nth-child(4) { background: #f3f8ff; }
+.tarif { background: rgba(255, 255, 255, .78); }
+.contact--panneau .contact__panneau { --panneau-fond: radial-gradient(80% 120% at 0% 0%, rgba(246, 179, 160, .35), transparent 60%), radial-gradient(80% 120% at 100% 100%, rgba(156, 198, 236, .35), transparent 60%), rgba(255, 255, 255, .8); }
+.emplacement { background: rgba(255, 255, 255, .6) repeating-linear-gradient(135deg, transparent 0 14px, rgba(37, 31, 48, .035) 14px 15px); }
+.pied { background: transparent; }
+.ac--affiche .surtitre { color: #6e2348; }
