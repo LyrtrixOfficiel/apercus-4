@@ -1,0 +1,27 @@
+/* VEGETAL : animee. Vert foret, carte posee sur une fougere, barre centree,
+   accordeon, apports en medaillons. */
+:root {
+  color-scheme: dark;
+  --fond: #0c1812; --fond-alt: #102019; --surface: #14271e; --surface-bord: rgba(169, 199, 127, .18);
+  --encre: #e7efe2; --encre-douce: #a9bba8; --accent: #a9c77f; --accent-texte: #b8d48f; --trait: rgba(169, 199, 127, .22);
+  --sur-image: #f1f6ec; --voile: 10, 22, 16;
+  --bouton-fond: #a9c77f; --bouton-encre: #0c1812; --bouton-bord: #a9c77f; --bouton-survol: #e2ecc4; --bouton-survol-encre: #0c1812;
+  --police-titre: "Fraunces", "Iowan Old Style", Georgia, serif; --police-texte: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+  --titre-poids: 350; --titre-espacement: -.02em; --titre-hauteur: 1.02;
+  --nom-poids: 300; --nom-espacement: -.03em; --nom-echelle: .72;
+  --etiquette-espacement: .22em; --texte-poids: 350;
+  --rayon: 28px; --rayon-bouton: 999px;
+  --carte-fond: var(--surface); --carte-bord: 1px solid var(--surface-bord);
+  --duree: 1.35s; --courbe: cubic-bezier(.2, .8, .2, 1); --pas-lettre: 0s; --pas-mot: .085s; --dep-y: .5em; --dep-flou: 9px; --dep-rot: -3deg; --masque: visible;
+}
+.entete { color: var(--encre); }
+.ac--carte::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(10, 22, 16, .55), transparent 50%); }
+.carte-accueil { background: rgba(14, 30, 22, .94); border: 1px solid var(--surface-bord); }
+.approche--image .approche__figure { border-radius: 999px 999px var(--rayon) var(--rayon); }
+.accordeon__figure { border-radius: var(--rayon); }
+.tarif { background: var(--surface); }
+.contact--image .contact__voile { background: rgba(10, 22, 16, .82); }
+.contact--image .etiquette, .contact--image .contact__cta, .contact--image .infos dt { color: var(--accent-texte); }
+.emplacement { background: #11231a repeating-linear-gradient(135deg, transparent 0 14px, rgba(169, 199, 127, .045) 14px 15px); }
+.emplacement__icone, .portrait__cadre { background: #11231a; }
+.ac--carte::before { content: ""; position: absolute; inset: 0 0 auto; height: 220px; z-index: -1; background: linear-gradient(rgba(10, 22, 16, .82), rgba(10, 22, 16, 0)); }

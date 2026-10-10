@@ -1,0 +1,21 @@
+/* LIN : sobre. Classique et lumineux, encre marine, fenetre en arche,
+   nom centre dans l'en-tete, tableau des tarifs. Animations : fondus seuls. */
+:root {
+  color-scheme: light;
+  --fond: #f7f4ee; --fond-alt: #efeae1; --surface: #fffdf9; --surface-bord: rgba(31, 36, 51, .1);
+  --encre: #1f2433; --encre-douce: #545a68; --accent: #8c96ab; --accent-texte: #2f3e5c; --trait: rgba(31, 36, 51, .15);
+  --bouton-fond: #1f2433; --bouton-encre: #f7f4ee; --bouton-bord: #1f2433; --bouton-survol: #2f3e5c; --bouton-survol-encre: #fff;
+  --police-titre: "Newsreader", "Iowan Old Style", Georgia, serif; --police-texte: "Mulish", "Segoe UI", sans-serif;
+  --titre-poids: 400; --titre-espacement: -.015em; --titre-hauteur: 1.08;
+  --nom-poids: 400; --nom-espacement: -.02em; --nom-echelle: .82;
+  --etiquette-espacement: .22em;
+  --rayon: 4px; --rayon-bouton: 2px;
+  --duree: 1.2s; --courbe: cubic-bezier(.25, .6, .3, 1); --pas-lettre: 0s; --pas-mot: .06s; --dep-y: .3em; --dep-flou: 0px; --masque: visible;
+}
+.ac__ligne { background: var(--accent-texte); width: 60px; }
+.seance--liste { background: var(--fond-alt); }
+.etapes-liste .etape__num { color: var(--accent-texte); }
+.tarifs--tableau { background: var(--fond-alt); }
+.pied { text-align: center; }
+.pied__bas { text-align: left; }
+.pied__avert { margin-inline: auto; }
