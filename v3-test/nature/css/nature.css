@@ -1,0 +1,300 @@
+/* Nature : une prairie vivante, de la lumiere, du papier d'herbier. */
+
+:root {
+  --fond: #f7f3e6;
+  --papier: #fffdf6;
+  --mousse: #1d3a28;
+  --sous-bois: #344f3c;
+  --feuille: #356b2b;
+  --pousse: #6fae4f;
+  --tendre: #cfe5b0;
+  --soleil: #ffd36e;
+  --lavande: #574a85;
+  --ligne: rgba(29, 58, 40, .14);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --souple: cubic-bezier(.22, 1, .36, 1);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--fond); color: var(--mousse);
+  font: 400 1.0625rem/1.72 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  transition: background-color 1.8s ease;
+}
+a { color: inherit; }
+::selection { background: #d9ebbf; }
+:focus-visible { outline: 2px solid var(--feuille); outline-offset: 4px; border-radius: 8px; }
+.evitement { position: absolute; left: 1rem; top: -4rem; z-index: 50; padding: .7rem 1rem; background: var(--mousse); color: #fff; border-radius: 999px; }
+.evitement:focus { top: 1rem; }
+h1, h2, h3, h4, .phare, .prix, .tel-geant, .pied-nom, .citation p { font-variation-settings: 'SOFT' 100, 'WONK' 0; }
+
+/* ---------- Couches vivantes ---------- */
+#site { position: relative; z-index: 2; }
+.feuillage { position: fixed; inset: -12%; z-index: 1; pointer-events: none; opacity: 0; transition: opacity 3s ease; }
+.feuillage.pret { opacity: 1; }
+.feuillage span { position: absolute; inset: 0; background: var(--ombre) center / cover no-repeat; opacity: .07; transform-origin: 50% 0; }
+.feuillage span:nth-child(2) { transform: scaleX(-1) translateY(18%); opacity: .06; }
+.feuillage.flou-css span { filter: blur(4px); }
+.mouvement .feuillage span { animation: branche 12s ease-in-out infinite alternate; will-change: transform; }
+.mouvement .feuillage span:nth-child(2) { animation: branche2 17s ease-in-out infinite alternate; }
+@keyframes branche { from { transform: rotate(-1.2deg) translate3d(-1%, 0, 0); } to { transform: rotate(1.4deg) translate3d(1.5%, .8%, 0); } }
+@keyframes branche2 { from { transform: scaleX(-1) translateY(18%) rotate(1deg); } to { transform: scaleX(-1) translateY(17%) rotate(-1.6deg) translateX(2%); } }
+.pollens { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; }
+
+/* ---------- En-tete ---------- */
+.barre {
+  position: fixed; z-index: 20; top: max(12px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+  width: min(1160px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 6px; border-radius: 999px; background: rgba(255, 253, 246, .72); border: 1px solid rgba(29, 58, 40, .1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 18px 50px -30px rgba(29, 58, 40, .45);
+  -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+}
+.sceau { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; text-decoration: none; background: #eef4e2; }
+.sceau .fleurette { position: absolute; inset: 3px; width: 40px; height: 40px; opacity: .55; }
+.sceau span { position: relative; font: italic 500 1.05rem/1 var(--serif); color: var(--mousse); }
+.mouvement .sceau .fleurette { animation: tourne 30s linear infinite; }
+@keyframes tourne { to { transform: rotate(360deg); } }
+.barre-liens { display: none; gap: .2rem; }
+.barre-liens a { text-decoration: none; font-size: .9rem; font-weight: 500; color: var(--sous-bois); padding: .55rem .9rem; border-radius: 999px; transition: background .3s, color .3s; }
+.barre-liens a:hover { background: rgba(111, 174, 79, .14); color: var(--mousse); }
+@media (min-width: 860px) { .barre-liens { display: flex; } }
+
+/* ---------- Boutons ---------- */
+.pilule { display: inline-flex; align-items: center; justify-content: center; gap: .6em; padding: 1em 1.6em; border-radius: 999px; text-decoration: none; font: 600 .95rem/1.2 var(--sans); white-space: nowrap; transition: transform .6s var(--souple), box-shadow .6s ease, background .4s ease; }
+.pilule:active { transform: scale(.97); }
+.pilule-sombre { background: var(--mousse); color: #fbf8ee; box-shadow: 0 14px 30px -14px rgba(29, 58, 40, .7), inset 0 1px 0 rgba(255, 255, 255, .14); }
+.pilule-sombre:hover { transform: translateY(-2px); background: #24482f; box-shadow: 0 20px 40px -16px rgba(29, 58, 40, .75); }
+.pilule-claire { background: rgba(255, 253, 246, .82); color: var(--mousse); border: 1px solid rgba(29, 58, 40, .16); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pilule-claire:hover { transform: translateY(-2px); background: #fff; }
+.barre .pilule { padding: .8em 1.3em; font-size: .88rem; }
+
+/* ---------- Accueil ---------- */
+.accueil {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: auto minmax(36vh, 1fr);
+  background: linear-gradient(180deg, #fbf5e1 0%, #f8f2e0 38%, #eef1dc 56%, #e5edd5 72%, #e2ead2 100%);
+}
+.jour { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.soleil { position: absolute; width: 90vmax; height: 90vmax; right: -34vmax; top: -48vmax; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 246, 214, 1) 0%, rgba(255, 232, 160, .55) 22%, rgba(255, 226, 150, .18) 42%, rgba(255, 226, 150, 0) 62%); }
+.rayons { position: absolute; inset: -30% -10% 0 -10%; transform-origin: 86% 0;
+  background: repeating-conic-gradient(from 196deg at 86% 0%, rgba(255, 249, 226, 0) 0deg 2.6deg, rgba(255, 249, 226, .7) 3.4deg 4.6deg, rgba(255, 249, 226, 0) 5.6deg 9deg);
+  -webkit-mask-image: radial-gradient(120% 95% at 86% 0%, #000 0%, rgba(0, 0, 0, .55) 40%, transparent 78%);
+  mask-image: radial-gradient(120% 95% at 86% 0%, #000 0%, rgba(0, 0, 0, .55) 40%, transparent 78%);
+  mix-blend-mode: soft-light; opacity: .9; }
+@media (min-width: 900px) and (hover: hover) { .rayons { filter: blur(5px); } }
+.rayons-2 { mix-blend-mode: screen; opacity: .3; transform: rotate(3deg); }
+.mouvement .rayons { animation: lumiere 14s ease-in-out infinite alternate; }
+.mouvement .rayons-2 { animation: lumiere2 19s ease-in-out infinite alternate; }
+@keyframes lumiere { from { transform: rotate(-1.5deg); opacity: .65; } to { transform: rotate(2deg); opacity: 1; } }
+@keyframes lumiere2 { from { transform: rotate(3deg); opacity: .15; } to { transform: rotate(-.5deg); opacity: .4; } }
+.brume { position: absolute; left: 0; right: 0; z-index: 2; height: 16vh; top: calc(var(--horizon, 60%) - 9vh); pointer-events: none;
+  background: linear-gradient(180deg, rgba(240, 243, 226, 0), rgba(238, 242, 224, .75) 52%, rgba(232, 238, 216, 0)); }
+.collines { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 44%; z-index: 0; }
+.gl .accueil > .collines { display: none; }
+.prairie { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; touch-action: pan-y; }
+.accueil-texte { position: relative; z-index: 3; grid-row: 1; text-align: center; padding: calc(110px + 5vh) 20px 1.5rem; max-width: 1180px; margin: 0 auto; }
+.prairie-place { grid-row: 2; }
+.sur-titre { display: inline-flex; align-items: center; gap: .65em; margin: 0 0 1.6rem; padding: .55em 1.2em; border-radius: 999px;
+  font: 600 .76rem/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--sous-bois);
+  background: rgba(255, 253, 246, .7); border: 1px solid var(--ligne); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sur-titre i { font-style: normal; color: var(--feuille); }
+.pastille { width: 8px; height: 8px; border-radius: 50%; background: var(--pousse); box-shadow: 0 0 0 4px rgba(111, 174, 79, .2); }
+.mouvement .pastille { animation: respire-point 10s ease-in-out infinite; }
+@keyframes respire-point { 0%, 100% { transform: scale(.7); } 40% { transform: scale(1.25); } }
+.nom { margin: 0; font: 330 clamp(3.3rem, 10.6vw, 9.8rem)/.95 var(--serif); letter-spacing: -.025em; color: var(--mousse); text-wrap: balance;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; }
+.nom .mot { display: inline-block; white-space: nowrap; }
+.nom .mot-fin { font-style: italic; font-weight: 300; color: #24482f; }
+.nom .l { display: inline-block; }
+.js.mouvement .nom .l { opacity: 0; transform: translateY(.45em) scale(.96); filter: blur(10px); transform-origin: 50% 100%; }
+.js.mouvement .eveil .nom .l { animation: pousse 1.7s var(--souple) calc(.25s + var(--i) * 55ms) forwards; }
+@keyframes pousse { to { opacity: 1; transform: none; filter: blur(0); } }
+.accroche { margin: 1.5rem auto 0; max-width: 34ch; font: italic 350 clamp(1.2rem, 2.2vw, 1.65rem)/1.38 var(--serif); color: var(--sous-bois); font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: 2rem; }
+.js.mouvement .accueil .sur-titre, .js.mouvement .accueil .accroche, .js.mouvement .accueil .actions { opacity: 0; transform: translateY(16px); filter: blur(6px); transition: opacity 1.6s ease, transform 1.8s var(--souple), filter 1.6s ease; }
+.js.mouvement .eveil .sur-titre { opacity: 1; transform: none; filter: none; transition-delay: .1s; }
+.js.mouvement .eveil .accroche { opacity: 1; transform: none; filter: none; transition-delay: 1.1s; }
+.js.mouvement .eveil .actions { opacity: 1; transform: none; filter: none; transition-delay: 1.4s; }
+
+/* L'invitation a respirer : 4 secondes pour inspirer, 6 pour expirer */
+.souffle { position: absolute; z-index: 5; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  display: flex; align-items: center; gap: .8rem; padding: .55rem 1.1rem .55rem .6rem; border-radius: 999px; text-decoration: none;
+  background: rgba(19, 40, 26, .8); color: #fbf8ee; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  font: 600 .78rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, .16); }
+.souffle-rond { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid rgba(251, 248, 238, .9); position: relative; }
+.souffle-rond::after { content: ''; position: absolute; inset: 6px; border-radius: 50%; background: #e9f3d6; }
+.souffle-mots { position: relative; display: grid; min-width: 6.4em; }
+.souffle-mots span { grid-area: 1 / 1; }
+.souffle-mots span + span { opacity: 0; }
+.mouvement .souffle-rond::after { animation: souffle 10s ease-in-out infinite; }
+.mouvement .souffle-mots span:first-child { animation: mot-in 10s ease-in-out infinite; }
+.mouvement .souffle-mots span + span { animation: mot-ex 10s ease-in-out infinite; }
+@keyframes souffle { 0% { transform: scale(.35); } 40% { transform: scale(1.18); } 100% { transform: scale(.35); } }
+@keyframes mot-in { 0%, 36% { opacity: 1; } 42%, 96% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes mot-ex { 0%, 38% { opacity: 0; } 44%, 94% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- Sections ---------- */
+.section { position: relative; padding: clamp(4.5rem, 12vh, 9rem) 0; }
+.cadre { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+.etiquette { display: flex; align-items: center; gap: .8em; margin: 0; font: 600 .74rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--sous-bois); }
+.etiquette-num { font: italic 500 1.15rem/1 var(--serif); letter-spacing: 0; color: var(--feuille); }
+.etiquette::after { content: ''; width: 46px; height: 1px; background: currentColor; opacity: .4; }
+.titre { margin: .45rem 0 2.4rem; font: 330 clamp(2.8rem, 7.6vw, 6rem)/1 var(--serif); letter-spacing: -.02em; text-wrap: balance; }
+.titre .mot { display: inline-block; }
+.js.mouvement [data-respire] .mot { opacity: 0; transform: translateY(.3em); filter: blur(8px); transition: opacity 1.2s ease, transform 1.4s var(--souple), filter 1.1s ease; transition-delay: calc(var(--m) * 110ms); }
+.js.mouvement [data-respire].vu .mot { opacity: 1; transform: none; filter: none; }
+.sous-titre { margin: 4rem 0 1.6rem; font: 600 .76rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--sous-bois); }
+.emplacement-texte { font-style: italic; color: var(--lavande); }
+.emplacement-texte::before { content: '✿ '; font-style: normal; color: #8a7cc0; }
+
+/* Apparitions : on inspire (flou, retenue), on expire (net, pose) */
+.js.mouvement .revele { opacity: 0; transform: translateY(22px) scale(.985); filter: blur(6px); transition: opacity 1s ease, transform 1.3s var(--souple), filter .9s ease; transition-delay: var(--d, 0ms); }
+.js.mouvement .revele.vu { opacity: 1; transform: none; filter: none; }
+
+/* ---------- Approche ---------- */
+.approche-grille { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 900px) { .approche-grille { grid-template-columns: 7fr 4fr; gap: 4rem; } .approche-plante { position: sticky; top: 14vh; } }
+.phare { margin: 0 0 2rem; max-width: 24ch; font: 380 clamp(1.7rem, 3.5vw, 2.85rem)/1.24 var(--serif); color: var(--mousse); }
+.js.mouvement [data-mots] .w { opacity: .3; transition: opacity .9s ease; }
+.js.mouvement [data-mots] .w.lit { opacity: 1; }
+.corps { max-width: 60ch; color: var(--sous-bois); margin: 0 0 1.1em; }
+.approche-plante { display: flex; justify-content: center; }
+.fougere { width: min(300px, 70vw); height: auto; overflow: visible; }
+.fougere .tige, .rameau .tige { fill: none; stroke: #4f7d3a; stroke-width: 1.6; stroke-linecap: round; }
+.fougere .penne { fill: rgba(143, 190, 110, .42); stroke: #5d8a45; stroke-width: .7; stroke-linejoin: round; }
+.js.mouvement .fougere .tige { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--trace, 0)); }
+.js.mouvement .fougere .penne { opacity: clamp(0, calc(var(--trace, 0) * 20 - var(--k)), 1); transform-box: fill-box; transform-origin: 50% 100%; transition: opacity .6s ease; }
+@media (max-width: 899px) { .approche-grille { position: relative; } .approche-plante { position: absolute; right: 4px; top: -2.4rem; width: 58px; pointer-events: none; } .fougere { width: 58px; transform: rotate(12deg); } }
+.approche { overflow-x: clip; }
+
+.cartes { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr)); }
+.carte { position: relative; padding: 1.6rem 1.5rem 1.6rem; border-radius: 30px 30px 30px 8px; background: var(--papier); border: 1px solid var(--ligne);
+  box-shadow: 0 1px 0 #fff inset, 0 24px 40px -32px rgba(29, 58, 40, .45); transition: transform .8s var(--souple), box-shadow .8s ease; }
+.carte:hover { transform: translateY(-5px); box-shadow: 0 1px 0 #fff inset, 0 34px 50px -30px rgba(29, 58, 40, .5); }
+.feuille-icone { width: 58px; height: 58px; margin: -.2rem 0 .6rem -.3rem; overflow: visible; }
+.feuille-icone .limbe { fill: var(--tendre); stroke: #4f7d3a; stroke-width: 1.5; stroke-linejoin: round; }
+.feuille-icone .nervure { fill: none; stroke: #4f7d3a; stroke-width: 1; stroke-linecap: round; opacity: .75; }
+.carte:nth-child(4n+2) .limbe { fill: #e6e9b5; } .carte:nth-child(4n+3) .limbe { fill: #d7ead0; } .carte:nth-child(4n+4) .limbe { fill: #f0dfbd; }
+.carte .feuille-icone g { transform-box: fill-box; transform-origin: 50% 100%; transition: transform 1.2s var(--souple); }
+.carte:hover .feuille-icone g { transform: rotate(-8deg); }
+.carte h4 { margin: 0 0 .4rem; font: 450 1.45rem/1.2 var(--serif); }
+.carte p { margin: 0; color: var(--sous-bois); font-size: 1rem; }
+
+/* ---------- La seance : une tige qui pousse ---------- */
+.deux-col { display: grid; gap: 0 5rem; align-items: start; }
+@media (min-width: 900px) { .deux-col { grid-template-columns: 4fr 7fr; } .col-tete { position: sticky; top: 7.5rem; } }
+.col-plante { display: none; }
+@media (min-width: 900px) { .col-plante { display: block; width: 140px; margin: 1rem 0 0 1rem; } .col-plante .rameau { width: 100%; height: auto; } }
+.tige-boite { position: relative; max-width: 800px; padding-left: 74px; }
+.tige-svg { position: absolute; left: 0; top: 0; width: 60px; overflow: visible; }
+.tige-trait { fill: none; stroke: #5b8c41; stroke-width: 2; stroke-linecap: round; }
+.js.mouvement .tige-trait { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--prog, 0)); }
+html:not(.js) .tige-boite::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: #5b8c41; }
+.etapes { list-style: none; margin: 0; padding: 0; }
+.etape { position: relative; padding-bottom: 3.2rem; }
+.etape:last-child { padding-bottom: 0; }
+.bourgeon { position: absolute; left: -74px; top: -6px; width: 58px; height: 58px; display: grid; place-items: center; }
+.bourgeon .feuille-icone { width: 46px; height: 46px; margin: 0; }
+.js.mouvement .bourgeon .feuille-icone { transform: scale(.2) rotate(-60deg); opacity: 0; transition: transform 1.4s var(--souple), opacity 1s ease; transform-origin: 50% 90%; }
+.js.mouvement .etape.atteint .bourgeon .feuille-icone { transform: none; opacity: 1; }
+.etape-num { margin: 0; font: italic 500 1.1rem/1 var(--serif); color: var(--feuille); }
+.etape h3 { margin: .35rem 0 .6rem; font: 400 clamp(1.7rem, 3vw, 2.35rem)/1.12 var(--serif); }
+.etape p { margin: 0; color: var(--sous-bois); max-width: 58ch; }
+.etape .etape-duree { display: inline-block; margin-top: .9rem; padding: .35rem .85rem; border-radius: 999px; background: #e9f2dc; border: 1px solid #c4dba8; color: var(--mousse); font-size: .86rem; font-weight: 500; }
+.etape-emplacement > p:not(.etape-num) { font-style: italic; color: var(--lavande); }
+.etape-emplacement > p:not(.etape-num)::before { content: '✿ '; font-style: normal; color: #8a7cc0; }
+
+/* ---------- Tarifs : des etiquettes d'herbier ---------- */
+.herbiers { list-style: none; margin: 0; padding: 1rem 0 0; display: grid; gap: 2.6rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+@media (min-width: 900px) { .herbiers { padding-top: 5.5rem; } }
+.herbier { position: relative; display: grid; grid-template-columns: 92px 1fr; gap: 1.1rem; align-items: center; padding: 1.9rem 1.6rem 1.6rem 1.2rem; border-radius: 6px;
+  background: linear-gradient(#fffef9, #fbf7ea); border: 1px solid #e3dcc5; transform: rotate(var(--r, 0deg));
+  box-shadow: 0 1px 0 #fff inset, 0 2px 0 rgba(120, 100, 40, .05), 0 26px 40px -30px rgba(70, 58, 22, .5); transition: transform .9s var(--souple); }
+.herbier:hover { transform: rotate(0deg) translateY(-4px); }
+.scotch { position: absolute; top: -13px; left: 50%; width: 96px; height: 26px; transform: translateX(-50%) rotate(-3deg); background: rgba(232, 220, 182, .78); box-shadow: 0 1px 2px rgba(80, 60, 20, .08); }
+.herbier-plante .rameau { width: 92px; height: auto; display: block; }
+.rameau .feuille { fill: #d3e6b4; stroke: #5d8445; stroke-width: 1; }
+.js.mouvement .dessin .tige { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s var(--souple); }
+.js.mouvement .dessin.vu .tige { stroke-dashoffset: 0; }
+.js.mouvement .rameau.dessin .feuille { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: 50% 50%; transition: opacity 1s ease, transform 1.2s var(--souple); transition-delay: calc(.5s + var(--k) * 140ms); }
+.js.mouvement .rameau.dessin.vu .feuille { opacity: 1; transform: none; }
+.herbier-num { margin: 0 0 .4rem; font: 600 .72rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--sous-bois); }
+.herbier h3 { margin: 0 0 .5rem; font: italic 400 1.4rem/1.2 var(--serif); font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.prix { margin: 0; font: 330 clamp(2.3rem, 4.6vw, 3.1rem)/1.05 var(--serif); color: var(--mousse); }
+.durees { list-style: none; margin: 1rem 0 0; padding: 0; }
+.durees li { padding: .5rem 0; border-top: 1px dashed #d6cfb5; color: var(--sous-bois); font-size: .93rem; }
+.herbier-note { margin: .6rem 0 0; color: var(--sous-bois); font-size: .95rem; }
+.herbier.emplacement h3, .herbier.emplacement .prix { color: var(--lavande); font-style: italic; }
+.note { margin: -.6rem 0 2rem; color: var(--sous-bois); max-width: 30ch; }
+
+/* ---------- A propos : une fenetre en arche ---------- */
+.apropos-grille { display: grid; gap: 3.5rem; align-items: center; }
+@media (min-width: 900px) { .apropos-grille { grid-template-columns: 5fr 7fr; gap: 6rem; } }
+.arche { position: relative; margin: 0 auto; width: min(400px, 78vw); aspect-ratio: 3 / 4; }
+.arche-fenetre { position: absolute; inset: 0; overflow: hidden; border-radius: 999px 999px 26px 26px;
+  background: radial-gradient(120% 80% at 70% 12%, #fff7da 0%, #f6edcc 28%, #dfe9c6 62%, #bdd5a1 100%);
+  border: 1px solid #d2dbc0; box-shadow: inset 0 0 0 10px rgba(255, 253, 246, .6), 0 40px 60px -44px rgba(29, 58, 40, .55); }
+.arche-lumiere { position: absolute; inset: -20%; transform-origin: 75% 0;
+  background: repeating-conic-gradient(from 190deg at 75% 0%, rgba(255, 255, 240, 0) 0deg 4deg, rgba(255, 255, 240, .6) 5deg 6.5deg, rgba(255, 255, 240, 0) 8deg 13deg);
+  filter: blur(4px); mix-blend-mode: soft-light; }
+.mouvement .arche-lumiere { animation: lumiere 16s ease-in-out infinite alternate; }
+.arche-plante { position: absolute; left: -54px; bottom: -14px; width: 140px; pointer-events: none; }
+.arche-plante .rameau { width: 100%; height: auto; display: block; }
+.arche figcaption { position: absolute; left: 0; right: 0; bottom: 18%; display: grid; justify-items: center; gap: .6rem; font: italic 400 1.5rem/1.2 var(--serif); color: var(--mousse); font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.arche figcaption .fleurette { width: 36px; height: 36px; }
+.fleurette .petales { fill: #fffdf6; stroke: #b9a77a; stroke-width: .8; }
+.fleurette .coeur { fill: #f0c24a; }
+.apropos-texte .titre { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.apropos-texte p { margin: 0 0 1.1em; max-width: 60ch; color: var(--sous-bois); }
+.citation { margin: 2.2rem 0 0; padding: .3rem 0 .3rem 1.4rem; border-left: 2px solid #a9c98e; }
+.citation p { margin: 0; font: italic 380 clamp(1.4rem, 2.6vw, 1.85rem)/1.35 var(--serif) !important; color: var(--mousse) !important; }
+
+/* ---------- Contact ---------- */
+.contact { padding-bottom: 0; background: linear-gradient(180deg, rgba(233, 239, 221, 0), #e7efdb 30%, #e1ead3 100%); }
+.contact-cadre { text-align: center; }
+.contact .etiquette { justify-content: center; }
+.contact .etiquette::before { content: ''; width: 46px; height: 1px; background: currentColor; opacity: .4; }
+.contact .titre { margin-bottom: 1rem; }
+.contact-rdv { margin: 0 0 .6rem; color: var(--sous-bois); }
+.tel-geant { display: inline-block; text-decoration: none; font: 300 clamp(2.8rem, 11vw, 8rem)/1.05 var(--serif); letter-spacing: -.01em; color: var(--mousse); white-space: nowrap; transition: color .5s ease; }
+.tel-geant:hover { color: var(--feuille); }
+.tel-geant.emplacement-texte { font-size: clamp(2rem, 6vw, 4rem); white-space: normal; }
+.contact .actions { margin-top: 1.8rem; }
+.infos { display: grid; gap: 12px; margin: 3.4rem auto 0; max-width: 980px; text-align: left; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.infos > div { padding: 1.3rem 1.5rem; border-radius: 22px 22px 22px 6px; background: rgba(255, 253, 246, .85); border: 1px solid var(--ligne); }
+.infos dt { margin-bottom: .6rem; font: 600 .72rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--feuille); }
+.infos dd { margin: 0; line-height: 1.6; }
+.prairie-bas { position: relative; height: clamp(230px, 36vh, 380px); margin-top: 3.5rem; overflow: hidden; }
+.prairie-bas .collines { height: 100%; }
+.gl .prairie-bas .collines { opacity: 0; transition: opacity 1s ease; }
+
+/* ---------- Pied : la terre ---------- */
+.pied { position: relative; z-index: 2; padding: 3.6rem 0 calc(3.6rem + env(safe-area-inset-bottom)); text-align: center; background: #1b3324; color: #eef2e2; }
+.pied .fleurette { width: 40px; height: 40px; }
+.pied .fleurette .petales { fill: #f4efdc; stroke: none; }
+.pied-nom { margin: .8rem 0 1.2rem; font: 400 2rem/1.1 var(--serif); }
+.pied-nom span { display: block; margin-top: .5rem; font: 600 .76rem/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: #c9d8bf; }
+.pied-avert { max-width: 62ch; margin: 0 auto 1.3rem; font-size: .9rem; color: #c9d8bf; }
+.pied-apercu { max-width: 46ch; margin: 0 auto 1.3rem; font: italic 380 1.3rem/1.4 var(--serif); color: #f3e3b0; font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.pied-legal { margin: 0 0 1.3rem; font-size: .84rem; color: #c9d8bf; }
+.pied-haut { font-size: .9rem; color: #eef2e2; text-underline-offset: 4px; }
+
+@media (max-width: 640px) {
+  .nom { font-size: min(16.5vw, 5.6rem); }
+  .accueil-texte { padding-top: calc(96px + 3vh); }
+  .actions { flex-direction: column; align-items: center; gap: .55rem; }
+  .actions .pilule { width: min(100%, 320px); }
+  .accueil { grid-template-rows: auto minmax(30vh, 1fr); }
+  .tige-boite { padding-left: 62px; }
+  .bourgeon { left: -64px; }
+  .herbier { grid-template-columns: 70px 1fr; padding: 1.6rem 1.2rem 1.4rem .9rem; }
+  .herbier-plante .rameau { width: 70px; }
+  .arche-plante { left: -26px; width: 110px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}

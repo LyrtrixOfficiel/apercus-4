@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr" data-famille="calme" style="--accent: #2b3bc4">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurore Nussbaum · Hypnothérapeute à Porcelette</title>
+<meta name="description" content="Chaque accompagnement est unique, adapté à votre rythme et à vos besoins.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23141210'/%3E%3Ctext x='32' y='46' font-family='Georgia' font-style='italic' font-size='40' text-anchor='middle' fill='%23f1ece3'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+<link rel="preload" as="image" href="images/plume-brune-objet-600.webp" type="image/webp">
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js">
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js">
+<link rel="stylesheet" href="css/editorial.css">
+<script>
+  // Le contenu reste visible sans JavaScript : les états cachés n'existent qu'avec la classe « js ».
+  // Si l'animation ne démarre pas (bibliothèque bloquée, erreur), on rend tout visible au bout de 4 s.
+  (function () {
+    var h = document.documentElement;
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      h.classList.add('js');
+      // un autre praticien que celui rendu à l'avance : l'ouverture attend son rendu
+      var p = new URLSearchParams(location.search).get('p');
+      if (p && p !== 'aurore-nussbaum') h.classList.add('attente');
+      if (location.hash && location.hash !== '#accueil') h.classList.add('saute');
+    }
+    setTimeout(function () { if (!h.classList.contains('pret')) h.classList.remove('js'); }, 4000);
+  })();
+</script>
+</head>
+<body>
+<div id="site" data-dossier="aurore-nussbaum">
+
+<a class="evitement" href="#approche">Aller au contenu</a>
+<header class="tete" data-tete>
+  <a class="tete-num" href="#couverture" aria-label="Revenir à la couverture">N° 01</a>
+  <p class="tete-nom">Aurore Nussbaum</p>
+  <div class="tete-droite">
+    <button class="tete-sommaire" type="button" aria-expanded="false" aria-controls="sommaire-plein" data-sommaire-bouton>Sommaire</button>
+    <a class="tete-appel" href="tel:+33781452328">Appeler</a>
+  </div>
+  <span class="tete-progression" aria-hidden="true" data-progression></span>
+</header>
+<div class="sommaire-plein" id="sommaire-plein" hidden data-sommaire>
+  <p class="sommaire-plein-titre">Sommaire</p>
+  <ol role="list"><li><a href="#approche"><b>01</b><span>L’approche</span></a></li><li><a href="#seance"><b>02</b><span>La séance</span></a></li><li><a href="#apports"><b>03</b><span>Ce que vous y trouverez</span></a></li><li><a href="#tarifs"><b>04</b><span>Infos pratiques</span></a></li><li><a href="#portrait"><b>05</b><span>Le portrait</span></a></li><li><a href="#rdv"><b>06</b><span>Rendez-vous</span></a></li></ol>
+</div><main id="contenu">
+<section class="couverture" id="couverture" aria-label="Couverture">
+  <div class="couverture-filets">
+    <span>N° 01</span><span>Hypnothérapeute à Porcelette</span><span>Sur rendez-vous</span>
+  </div>
+  <h1 class="couverture-titre" aria-label="Aurore Nussbaum" data-lignes="2">
+    <span class="couverture-bloc" aria-hidden="true" data-bloc></span>
+    <span class="titre-ligne titre-ligne-a" style="--n:6;--l:0" data-ligne="0"><span class="titre-texte">Aurore</span></span><span class="titre-ligne titre-ligne-b" style="--n:8;--l:1" data-ligne="1"><span class="titre-texte">Nussbaum</span></span>
+    <img class="objet couverture-objet" src="images/plume-brune-objet-600.webp" srcset="images/plume-brune-objet-600.webp 600w, images/plume-brune-objet-1100.webp 1100w" sizes="(min-width: 900px) 40vw, 70vw" width="1100" height="709" alt="" loading="eager" decoding="async" data-objet-couverture>
+  </h1>
+  <div class="couverture-bas">
+    <nav class="sommaire" aria-label="Dans ce numéro">
+      <p class="sommaire-titre">Dans ce numéro</p>
+      <ol role="list"><li><a href="#approche"><b>01</b>L’approche</a></li><li><a href="#seance"><b>02</b>La séance</a></li><li><a href="#apports"><b>03</b>Ce que vous y trouverez</a></li><li><a href="#tarifs"><b>04</b>Infos pratiques</a></li><li><a href="#portrait"><b>05</b>Le portrait</a></li><li><a href="#rdv"><b>06</b>Rendez-vous</a></li></ol>
+    </nav>
+    <p class="couverture-phrase">Un temps pour <span class="tournant" data-mots-tournants='[&quot;ralentir&quot;,&quot;respirer&quot;,&quot;se poser&quot;,&quot;lâcher prise&quot;]'><span class="tournant-mot">ralentir</span></span></p>
+    <svg class="badge" viewBox="0 0 200 200" aria-hidden="true" data-badge>
+      <defs><path id="cercle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <circle cx="100" cy="100" r="96" class="badge-fond"/>
+      <text><textPath href="#cercle" textLength="486" lengthAdjust="spacing">Numéro 01 · Porcelette · Sur rendez-vous ·</textPath></text>
+      <text x="100" y="114" text-anchor="middle" class="badge-centre">AN</text>
+    </svg>
+  </div>
+</section>
+<div class="bandeau" aria-hidden="true"><div class="bandeau-piste" data-bandeau><span>Hypnothérapeute</span><i aria-hidden="true">✦</i><span>Porcelette</span><i aria-hidden="true">✦</i><span>Sur rendez-vous</span><i aria-hidden="true">✦</i><span>07 81 45 23 28</span><i aria-hidden="true">✦</i><span>Hypnothérapeute</span><i aria-hidden="true">✦</i><span>Porcelette</span><i aria-hidden="true">✦</i><span>Sur rendez-vous</span><i aria-hidden="true">✦</i><span>07 81 45 23 28</span><i aria-hidden="true">✦</i><span>Hypnothérapeute</span><i aria-hidden="true">✦</i><span>Porcelette</span><i aria-hidden="true">✦</i><span>Sur rendez-vous</span><i aria-hidden="true">✦</i><span>07 81 45 23 28</span><i aria-hidden="true">✦</i><span>Hypnothérapeute</span><i aria-hidden="true">✦</i><span>Porcelette</span><i aria-hidden="true">✦</i><span>Sur rendez-vous</span><i aria-hidden="true">✦</i><span>07 81 45 23 28</span><i aria-hidden="true">✦</i></div></div>
+<section class="rubrique approche" id="approche" aria-labelledby="t-approche">
+  
+  <header class="rubrique-entete">
+    <p class="rubrique-num" aria-hidden="true">01</p>
+    <p class="rubrique-label"><span>Rubrique 01</span><span class="filet" aria-hidden="true"></span><span>L’approche</span></p>
+    <h2 class="glisse" data-glisse="gauche" id="t-approche">L’approche</h2>
+  </header>
+  <div class="article">
+    <aside class="article-cote">
+      <p class="chapo">« Chaque accompagnement est unique, adapté à votre rythme et à vos besoins. »</p>
+      <figure class="figure" data-figure>
+        <picture class="photo figure-photo"><source media="(min-width: 900px)" srcset="images/ombre-fleurs-1600.webp"><img src="images/ombre-fleurs-900.webp" width="900" height="1201" alt="Photo d’ambiance : ombre de fleurs sur un mur" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4WAoAAAAAAAAADwAAFAAAVlA4IEQAAADQAwCdASoQABUAPslSo0snpKMhsAgA8BkJYwCdAB6J6WxpAb3nlQAA8nQ63tfIIRn2dCNRb+0zN+6/HHRk/C6F1iAAAA==)"></picture>
+        <figcaption><b>Fig. 1</b> Photo d’ambiance, ombre de fleurs sur un mur. Vos images prendront sa place.</figcaption>
+      </figure>
+    </aside>
+    <div class="article-texte colonnes">
+      <p class="avec-lettrine"><span class="lettrine" aria-hidden="true">C</span><span class="lu">C</span>e moment est dédié à instaurer un climat de confiance et d’écoute, afin que vous vous sentiez en sécurité et à l’aise.</p><p>La séance se déroule dans une atmosphère apaisante, et vous êtes guidé progressivement vers un état de relaxation profonde, où votre esprit peut accéder à ses propres ressources pour amorcer les changements désirés tout en douceur.</p><p>Au fil des séances, vous pourrez constater des améliorations concrètes dans votre quotidien ainsi qu’un développement de vos capacités, qu’il s’agisse de gestion des émotions, de confiance en vous, ou d’autres aspects de votre bien-être personnel.</p>
+    </div>
+    <img class="objet objet-flottant" src="images/pierre-ronde-objet-600.webp" srcset="images/pierre-ronde-objet-600.webp 600w, images/pierre-ronde-objet-1100.webp 1100w" sizes="(min-width: 900px) 40vw, 70vw" width="572" height="553" alt="" loading="lazy" decoding="async" data-flotte>
+  </div>
+</section>
+<section class="citation" aria-label="Citation">
+  <blockquote>
+    <span class="guillemet" aria-hidden="true">«</span>
+    <p class="citation-texte" data-citation><span class="mot"><span>Je</span></span> <span class="mot"><span>crois</span></span> <span class="mot"><span>profondément</span></span> <span class="mot"><span>que</span></span> <span class="mot"><span>chacun</span></span> <span class="mot"><span>a</span></span> <span class="mot"><span>en</span></span> <span class="mot"><span>lui</span></span> <span class="mot"><span>la</span></span> <span class="mot"><span>capacité</span></span> <span class="mot"><span>de</span></span> <span class="mot"><span>changer</span></span> <span class="mot"><span>et</span></span> <span class="mot"><span>de</span></span> <span class="mot"><span>s’épanouir.</span></span></p>
+    <footer>Aurore Nussbaum, hypnothérapeute</footer>
+  </blockquote>
+</section>
+<section class="rubrique seance" id="seance" aria-labelledby="t-seance">
+  
+  <header class="rubrique-entete">
+    <p class="rubrique-num" aria-hidden="true">02</p>
+    <p class="rubrique-label"><span>Rubrique 02</span><span class="filet" aria-hidden="true"></span><span>La séance</span></p>
+    <h2 class="glisse" data-glisse="droite" id="t-seance">La séance</h2>
+  </header>
+  <p class="seance-durees"><span>Première séance <b>1 h 30 à 2 h</b></span><span>Suivi <b>1 h à 1 h 30</b></span></p>
+  <div class="seance-grille">
+    <ol class="etapes" role="list">
+      
+      <li class="etape">
+        <p class="etape-num" aria-hidden="true">1</p>
+        <h3 class="etape-titre" data-glisse="gauche">Le premier rendez-vous</h3>
+        <div class="etape-texte">
+          <p>Lors de la 1ère séance d’hypnose, qui dure environ 1 h 30 à 2 h, nous prenons le temps d’explorer en profondeur vos besoins et vos attentes.</p>
+          <p class="etape-duree">Première séance · 1 h 30 à 2 h</p>
+        </div>
+      </li>
+      <li class="etape">
+        <p class="etape-num" aria-hidden="true">2</p>
+        <h3 class="etape-titre" data-glisse="droite">Vos objectifs</h3>
+        <div class="etape-texte">
+          <p>Mon objectif est de vous accompagner vers un mieux-être durable en exploitant vos ressources intérieures et en vous aidant à atteindre vos objectifs personnels.</p>
+          
+        </div>
+      </li>
+      <li class="etape">
+        <p class="etape-num" aria-hidden="true">3</p>
+        <h3 class="etape-titre" data-glisse="gauche">La séance</h3>
+        <div class="etape-texte">
+          <p>Mon accompagnement est fondé sur la bienveillance, l’écoute et la personnalisation ; il repose sur l’hypnose ericksonienne et conversationnelle, axée sur la détente et la relaxation.</p>
+          
+        </div>
+      </li>
+      <li class="etape">
+        <p class="etape-num" aria-hidden="true">4</p>
+        <h3 class="etape-titre" data-glisse="droite">Le suivi</h3>
+        <div class="etape-texte">
+          <p>Les séances de suivi, d’une durée d’1 h à 1 h 30, sont spécifiquement conçues pour continuer à travailler sur vos besoins, vos objectifs et pour renforcer les changements initiés.</p>
+          <p class="etape-duree">Séances de suivi · 1 h à 1 h 30</p>
+        </div>
+      </li>
+    </ol>
+    <figure class="figure seance-figure" data-figure>
+      <picture class="photo figure-photo"><source media="(min-width: 900px)" srcset="images/main-pierre-1600.webp"><img src="images/main-pierre-900.webp" width="900" height="741" alt="Photo d’ambiance : main tenant une pierre" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAAAAAADwAADAAAVlA4ICwAAACwAQCdASoQAA0AAsBKJaQAAub2C53kAP7zN7BrurgRxDxtem8lQXx5voAAAA==)"></picture>
+      <figcaption><b>Fig. 2</b> Photo d’ambiance, main tenant une pierre.</figcaption>
+    </figure>
+  </div>
+</section>
+<section class="rubrique apports" id="apports" aria-labelledby="t-apports">
+  
+  <header class="rubrique-entete">
+    <p class="rubrique-num" aria-hidden="true">03</p>
+    <p class="rubrique-label"><span>Rubrique 03</span><span class="filet" aria-hidden="true"></span><span>Ce que vous y trouverez</span></p>
+    <h2 class="glisse long" data-glisse="gauche" id="t-apports">Ce que vous y trouverez</h2>
+  </header>
+  <ul class="index" role="list">
+    <li class="index-ligne"><span class="index-num">01</span><h3>Détente et relaxation</h3><p>Un temps pour relâcher, dans une atmosphère apaisante.</p></li><li class="index-ligne"><span class="index-num">02</span><h3>Gestion des émotions</h3><p>Apprendre à accueillir ce que vous ressentez, à votre rythme.</p></li><li class="index-ligne"><span class="index-num">03</span><h3>Confiance en vous</h3><p>Découvrir et libérer votre plein potentiel, accompagné avec bienveillance.</p></li><li class="index-ligne"><span class="index-num">04</span><h3>Vos ressources intérieures</h3><p>Avancer vers vos objectifs en vous appuyant sur ce qui est déjà en vous.</p></li>
+  </ul>
+</section>
+<section class="rubrique tarifs" id="tarifs" aria-labelledby="t-tarifs">
+  
+  <header class="rubrique-entete">
+    <p class="rubrique-num" aria-hidden="true">04</p>
+    <p class="rubrique-label"><span>Rubrique 04</span><span class="filet" aria-hidden="true"></span><span>Infos pratiques</span></p>
+    <h2 class="glisse long" data-glisse="droite" id="t-tarifs">Infos pratiques</h2>
+  </header>
+  <div class="carnet">
+    <div class="carnet-tarifs">
+      <p class="carnet-label">Tarifs</p>
+      <ul role="list"><li><span>Séance d’hypnothérapie</span><b>60 € à 90 €</b></li></ul>
+    </div>
+    <dl class="carnet-infos">
+      <div><dt>Accueil</dt><dd>Sur rendez-vous</dd></div>
+      <div><dt>Première séance</dt><dd>1 h 30 à 2 h</dd></div>
+      <div><dt>Suivi</dt><dd>1 h à 1 h 30</dd></div>
+      <div><dt>Règlement</dt><dd>Espèces, chèque ou PayPal</dd></div>
+    </dl>
+    <svg class="badge badge-carnet" viewBox="0 0 200 200" aria-hidden="true" data-badge>
+      <defs><path id="cercle2" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <circle cx="100" cy="100" r="96" class="badge-fond"/>
+      <text><textPath href="#cercle2" textLength="486" lengthAdjust="spacing">Sur rendez-vous · Sur rendez-vous ·</textPath></text>
+      <text x="100" y="116" text-anchor="middle" class="badge-centre">✦</text>
+    </svg>
+  </div>
+</section>
+<section class="rubrique portrait" id="portrait" aria-labelledby="t-portrait">
+  
+  <header class="rubrique-entete">
+    <p class="rubrique-num" aria-hidden="true">05</p>
+    <p class="rubrique-label"><span>Rubrique 05</span><span class="filet" aria-hidden="true"></span><span>Le portrait</span></p>
+    <h2 class="glisse" data-glisse="gauche" id="t-portrait">Le portrait</h2>
+  </header>
+  <div class="portrait-grille">
+    <figure class="portrait-cadre" data-figure>
+      <div class="portrait-vide"><span class="portrait-initiales" aria-hidden="true">AN</span><figcaption>Ici, votre portrait<small>une photo de vous, dans votre lumière</small></figcaption></div>
+    </figure>
+    <div class="portrait-texte">
+      <p class="portrait-nom">Aurore Nussbaum</p>
+      <p class="portrait-metier">Hypnothérapeute à Porcelette</p>
+      <p class="avec-lettrine"><span class="lettrine" aria-hidden="true">J</span><span class="lu">J</span>’ai découvert un outil incroyable qui a profondément contribué à ma transformation personnelle.</p><p>Désireuse de mieux comprendre cette approche, j’ai commencé à pratiquer l’hypnose pour moi-même.</p><p>Cette expérience m’a inspirée à me former davantage afin d’accompagner les autres vers le changement et le mieux-être ; pour cela j’ai choisi l’école EHTN.</p><p>Je suis prête à vous accompagner et vous guider avec bienveillance afin que vous puissiez découvrir et libérer votre plein potentiel.</p>
+    </div>
+  </div>
+</section>
+<section class="rdv" id="rdv" aria-labelledby="t-rdv">
+  <div class="rdv-haut">
+    <p class="rubrique-label"><span>Rubrique 06</span><span class="filet" aria-hidden="true"></span><span>Rendez-vous</span></p>
+    <h2 class="rdv-titre" id="t-rdv">Appelez.</h2>
+  </div>
+  <a class="rdv-tel" href="tel:+33781452328" data-ajuste style="--n:14"><span>07 81 45 23 28</span></a>
+  <div class="rdv-infos">
+    <dl>
+      <div><dt>Lieu</dt><dd>57890 Porcelette</dd></div>
+      <div><dt>Accueil</dt><dd>Sur rendez-vous</dd></div>
+      <div><dt>Horaires</dt><dd><span class="emplacement"><span class="emplacement-tag">À compléter</span>Ici, vos jours et heures.</span></dd></div>
+    </dl>
+    <div class="rdv-actions">
+      <a class="bouton" href="tel:+33781452328">Appeler</a>
+      <a class="bouton bouton-creux" href="https://www.resalib.fr/praticien/97907-aurore-nussbaum-hypnotherapeute-porcelette" target="_blank" rel="noopener">Réserver sur Resalib <span aria-hidden="true">↗</span></a><a class="bouton bouton-creux" href="https://www.facebook.com/AuroreQuelquemots" target="_blank" rel="noopener">Facebook <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <p class="rdv-phrase">À l’image du cerf, avancez avec calme et assurance vers votre transformation intérieure.</p>
+  <div class="bandeau bandeau-rdv" aria-hidden="true"><div class="bandeau-piste" data-bandeau data-sens="-1"><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i><span>Prendre rendez-vous</span><i>✦</i></div></div>
+</section></main>
+<footer class="colophon">
+  <p class="colophon-titre">Colophon</p>
+  <dl class="colophon-grille">
+    <div><dt>Ce numéro</dt><dd>Aperçu préparé pour Aurore Nussbaum. Textes, photos, couleurs : tout se modifie selon vos goûts.</dd></div>
+    <div><dt>Rédaction</dt><dd>Aurore Nussbaum, hypnothérapeute</dd></div>
+    <div><dt>Lieu</dt><dd>57890 Porcelette</dd></div>
+    <div><dt>Contact</dt><dd><a href="tel:+33781452328">07 81 45 23 28</a></dd></div>
+    <div><dt>Images</dt><dd>Photos d’ambiance Unsplash, objets détourés par nos soins</dd></div>
+    <div><dt>SIRET</dt><dd>98523476400019</dd></div>
+  </dl>
+  <p class="colophon-avert">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+  <p class="colophon-fin"><span>N° 01</span><a href="#couverture">Revenir à la couverture ↑</a><span>Maquette non publiée</span></p>
+</footer>
+</div>
+<script type="module" src="js/editorial.js"></script>
+</body>
+</html>

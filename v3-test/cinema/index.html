@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr" data-famille="calme">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurore Nussbaum · Hypnothérapeute à Porcelette</title>
+<meta name="description" content="Chaque accompagnement est unique, adapté à votre rythme et à vos besoins.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15120f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2315120f'/%3E%3Cpath d='M20 44V26a12 12 0 0 1 24 0v18' fill='none' stroke='%23e9dcc6' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap">
+<link rel="preload" as="image" href="images/soleil-rideaux-1000.webp">
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js">
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js">
+<link rel="stylesheet" href="css/cinema.css">
+<script>
+  // Le contenu reste visible sans JavaScript : les états cachés n'existent qu'avec la classe « js ».
+  // Si l'animation ne démarre pas (bibliothèque bloquée, erreur), on rend tout visible au bout de 4 s.
+  (function () {
+    var h = document.documentElement;
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      h.classList.add('js');
+      // un autre praticien que celui rendu à l'avance : l'ouverture attend son rendu
+      var p = new URLSearchParams(location.search).get('p');
+      if (p && p !== 'aurore-nussbaum') h.classList.add('attente');
+      if (location.hash && location.hash !== '#accueil') h.classList.add('saute');
+    }
+    setTimeout(function () { if (!h.classList.contains('pret')) h.classList.remove('js'); }, 4000);
+  })();
+</script>
+</head>
+<body>
+<div id="site" data-dossier="aurore-nussbaum">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+<symbol id="i-fleche" viewBox="0 0 24 24"><path d="M4 12h15M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-haut" viewBox="0 0 24 24"><path d="M12 20V5M6 10l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-lien" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<a class="evitement" href="#approche">Aller au contenu</a>
+<header class="barre" data-barre>
+  <a class="barre-nom" href="#accueil" aria-label="Aurore Nussbaum, retour en haut"><span class="monogramme" aria-hidden="true">AN</span><span class="barre-nom-texte">Aurore Nussbaum</span></a>
+  <nav class="barre-nav" aria-label="Navigation principale">
+    <a href="#approche">L’approche</a><a href="#seance">La séance</a><a href="#tarifs">Tarifs</a><a href="#apropos">À propos</a>
+  </nav>
+  <a class="barre-rdv" href="tel:+33781452328"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>Rendez-vous</span></a>
+  <button class="barre-menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-bouton><span>Menu</span></button>
+</header>
+<div class="menu" id="menu" hidden data-menu>
+  <nav aria-label="Menu">
+    <a href="#approche"><i>I</i>L’approche</a><a href="#seance"><i>II</i>La séance</a><a href="#galerie"><i>III</i>Ce que vous y trouverez</a><a href="#tarifs"><i>IV</i>Tarifs</a><a href="#apropos"><i>V</i>À propos</a><a href="#contact"><i>VI</i>Rendez-vous</a>
+  </nav>
+  <a class="menu-tel" href="tel:+33781452328">07 81 45 23 28</a>
+</div>
+<div class="curseur" aria-hidden="true"><span class="curseur-point"></span><span class="curseur-anneau"><span class="curseur-texte"></span></span></div>
+<div class="rideau" aria-hidden="true" data-rideau><span class="rideau-barre rideau-haut"></span><span class="rideau-barre rideau-bas"></span><p class="rideau-carton"><span>Aurore Nussbaum</span><small>Hypnothérapeute à Porcelette</small></p></div><main id="contenu">
+<section class="accueil" id="accueil" aria-label="Accueil">
+  <div class="accueil-cadre" data-accueil-cadre>
+    <picture class="photo accueil-photo"><source media="(min-width: 900px)" srcset="images/soleil-rideaux-1920.webp"><img src="images/soleil-rideaux-1000.webp" width="1000" height="667" alt="Photo d’ambiance : soleil à travers les rideaux" loading="eager" decoding="async" fetchpriority="high" style="background-image:url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4WAoAAAAAAAAADwAACgAAVlA4IDgAAACwAQCdASoQAAsAAsBKJZgCdADGKDYAAP7r+PwgvB2bv1wXinuD2+9NFD0vr7nk4HekcjoEH8NUAA==)"></picture>
+    <div class="accueil-voile" aria-hidden="true"></div>
+  </div>
+  <div class="accueil-contenu">
+    <p class="accueil-sur" data-intro style="--d:0">Hypnothérapeute<span class="point" aria-hidden="true"></span>Porcelette</p>
+    <h1 class="accueil-titre"><span class="lu">Aurore Nussbaum</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">A</span><span class="lettre" style="--i:1">u</span><span class="lettre" style="--i:2">r</span><span class="lettre" style="--i:3">o</span><span class="lettre" style="--i:4">r</span><span class="lettre" style="--i:5">e</span></span> <span class="mot"><span class="lettre" style="--i:6">N</span><span class="lettre" style="--i:7">u</span><span class="lettre" style="--i:8">s</span><span class="lettre" style="--i:9">s</span><span class="lettre" style="--i:10">b</span><span class="lettre" style="--i:11">a</span><span class="lettre" style="--i:12">u</span><span class="lettre" style="--i:13">m</span></span></span></h1>
+    <p class="accueil-accroche" data-intro style="--d:1">« Chaque accompagnement est unique, adapté à votre rythme et à vos besoins. »</p>
+  </div>
+  <div class="accueil-pied" data-intro style="--d:2">
+    <a class="defiler" href="#approche" data-curseur="Entrer"><span class="defiler-ligne" aria-hidden="true"></span><span>Défiler</span></a>
+    <p class="accueil-rdv">Sur rendez-vous <a href="tel:+33781452328">07 81 45 23 28</a></p>
+  </div>
+</section>
+<section class="approche" id="approche" aria-labelledby="t-approche">
+  <p class="chapitre" data-reveal><span class="chapitre-num">I</span><span class="chapitre-trait" aria-hidden="true"></span><span>L’approche</span></p>
+  <h2 class="approche-phrase" id="t-approche" data-mots><span class="mot">Je</span> <span class="mot">crois</span> <span class="mot">profondément</span> <span class="mot">que</span> <span class="mot">chacun</span> <span class="mot">a</span> <span class="mot">en</span> <span class="mot">lui</span> <span class="mot">la</span> <span class="mot">capacité</span> <span class="mot">de</span> <span class="mot">changer</span> <span class="mot">et</span> <span class="mot">de</span> <span class="mot">s’épanouir.</span></h2>
+  <div class="approche-scene">
+    <div class="plan plan-a" data-parallax="-0.12"><picture class="photo masque" data-masque><img src="images/canape-rideau-1000.webp" width="1000" height="1500" alt="Photo d’ambiance : fauteuil bouclé près d’un voilage" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRmAAAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4IEIAAAAQBACdASoQABgAPslQoUsnpKMhsAgA8BkJZQC06B6RNX3xXQvujo1GAAD+7c26dfRhgmS7CJ9cdazNhrUHxX6CgAA=)"></picture></div>
+    <div class="plan plan-cadre" data-parallax="0.18" aria-hidden="true"></div>
+    <div class="plan plan-b" data-parallax="0.32"><picture class="photo masque" data-masque><img src="images/bougie-travertin-1000.webp" width="1000" height="1500" alt="Photo d’ambiance : bougie et coupelle sur pierre" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRm4AAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4IFAAAADwAwCdASoQABgAPslWpUunpKOhsAgA8BkJYwCw7Bn2QaTGppnlYTYAAP7GrGf7LJsdGzMcJBQzCtJgWX5AXeugUeN1tcBeoZM1llcFgkgAAA==)"></picture></div>
+    <div class="approche-texte">
+      <p data-reveal class="lead">Ce moment est dédié à instaurer un climat de confiance et d’écoute, afin que vous vous sentiez en sécurité et à l’aise.</p><p data-reveal>La séance se déroule dans une atmosphère apaisante, et vous êtes guidé progressivement vers un état de relaxation profonde, où votre esprit peut accéder à ses propres ressources pour amorcer les changements désirés tout en douceur.</p><p data-reveal>Au fil des séances, vous pourrez constater des améliorations concrètes dans votre quotidien ainsi qu’un développement de vos capacités, qu’il s’agisse de gestion des émotions, de confiance en vous, ou d’autres aspects de votre bien-être personnel.</p>
+    </div>
+  </div>
+  
+    <ul class="apports" role="list">
+      <li class="apport" data-reveal><span class="apport-num">01</span><h3>Détente et relaxation</h3><p>Un temps pour relâcher, dans une atmosphère apaisante.</p></li><li class="apport" data-reveal><span class="apport-num">02</span><h3>Gestion des émotions</h3><p>Apprendre à accueillir ce que vous ressentez, à votre rythme.</p></li><li class="apport" data-reveal><span class="apport-num">03</span><h3>Confiance en vous</h3><p>Découvrir et libérer votre plein potentiel, accompagné avec bienveillance.</p></li><li class="apport" data-reveal><span class="apport-num">04</span><h3>Vos ressources intérieures</h3><p>Avancer vers vos objectifs en vous appuyant sur ce qui est déjà en vous.</p></li>
+    </ul>
+</section>
+<section class="seance" id="seance" aria-labelledby="t-seance" style="--n:4">
+  <div class="seance-entete">
+    <p class="chapitre" data-reveal><span class="chapitre-num">II</span><span class="chapitre-trait" aria-hidden="true"></span><span>La séance</span></p>
+    <h2 id="t-seance" class="titre-section" data-lettres><span class="lu">Le déroulé</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">L</span><span class="lettre" style="--i:1">e</span></span> <span class="mot"><span class="lettre" style="--i:2">d</span><span class="lettre" style="--i:3">é</span><span class="lettre" style="--i:4">r</span><span class="lettre" style="--i:5">o</span><span class="lettre" style="--i:6">u</span><span class="lettre" style="--i:7">l</span><span class="lettre" style="--i:8">é</span></span></span></h2>
+    <p class="seance-durees" data-reveal><span>Première séance <b>1 h 30 à 2 h</b></span><span>Séances de suivi <b>1 h à 1 h 30</b></span></p>
+  </div>
+  <div class="seance-corps">
+    <div class="seance-scene" aria-hidden="true">
+      <div class="seance-cadre" data-seance-cadre>
+        <picture class="photo seance-photo actif" data-i="0"><source media="(min-width: 900px)" srcset="images/brume-lac-1920.webp"><img src="images/brume-lac-1000.webp" width="1000" height="1500" alt="Photo d’ambiance : forêt dans la brume et lac" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRlYAAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4IDgAAABwAwCdASoQABgAPslSoksnpKMhsAgA8BkJaQAAW+s0pw23fcAA/vNpwVilTdWAkjZhiyGaUIAAAA==)"></picture><picture class="photo seance-photo" data-i="1"><source media="(min-width: 900px)" srcset="images/ombres-sol-1920.webp"><img src="images/ombres-sol-1000.webp" width="1000" height="750" alt="Photo d’ambiance : soleil et ombres sur un mur, parquet" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkwAAABXRUJQVlA4WAoAAAAAAAAADwAACwAAVlA4IC4AAADQAQCdASoQAAwAAsBKJYwC7ACmKUcjiADg1SgwExww2cjzJfY5esF0Szed7oAA)"></picture><picture class="photo seance-photo" data-i="2"><source media="(min-width: 900px)" srcset="images/ciel-ocean-1920.webp"><img src="images/ciel-ocean-1000.webp" width="1000" height="750" alt="Photo d’ambiance : ciel pastel sur océan calme" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkgAAABXRUJQVlA4WAoAAAAAAAAADwAACwAAVlA4ICoAAADQAQCdASoQAAwAAsBKJYwCw7EOr+4gAAD+7Vvc38ooZcF3tqeq3GAAAAA=)"></picture><picture class="photo seance-photo" data-i="3"><source media="(min-width: 900px)" srcset="images/rideaux-blancs-1920.webp"><img src="images/rideaux-blancs-1000.webp" width="1000" height="667" alt="Photo d’ambiance : rideaux blancs dans la lumière" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkQAAABXRUJQVlA4WAoAAAAAAAAADwAACgAAVlA4ICYAAABwAQCdASoQAAsAAsBKJZwAAbZwsAD99p1O7X4X9r8dtNcXH2tgAA==)"></picture>
+        <div class="seance-compteur"><span data-seance-num>01</span><span class="sep"></span><span>04</span></div>
+      </div>
+    </div>
+    <ol class="etapes" role="list">
+      
+      <li class="etape" data-etape="0">
+        <span class="etape-num" aria-hidden="true">01</span>
+        <h3>Le premier rendez-vous</h3>
+        <p>Lors de la 1ère séance d’hypnose, qui dure environ 1 h 30 à 2 h, nous prenons le temps d’explorer en profondeur vos besoins et vos attentes.</p>
+        <p class="etape-duree">Première séance · 1 h 30 à 2 h</p>
+      </li>
+      <li class="etape" data-etape="1">
+        <span class="etape-num" aria-hidden="true">02</span>
+        <h3>Vos objectifs</h3>
+        <p>Mon objectif est de vous accompagner vers un mieux-être durable en exploitant vos ressources intérieures et en vous aidant à atteindre vos objectifs personnels.</p>
+        
+      </li>
+      <li class="etape" data-etape="2">
+        <span class="etape-num" aria-hidden="true">03</span>
+        <h3>La séance</h3>
+        <p>Mon accompagnement est fondé sur la bienveillance, l’écoute et la personnalisation ; il repose sur l’hypnose ericksonienne et conversationnelle, axée sur la détente et la relaxation.</p>
+        
+      </li>
+      <li class="etape" data-etape="3">
+        <span class="etape-num" aria-hidden="true">04</span>
+        <h3>Le suivi</h3>
+        <p>Les séances de suivi, d’une durée d’1 h à 1 h 30, sont spécifiquement conçues pour continuer à travailler sur vos besoins, vos objectifs et pour renforcer les changements initiés.</p>
+        <p class="etape-duree">Séances de suivi · 1 h à 1 h 30</p>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="galerie" id="galerie" aria-labelledby="t-galerie">
+  <div class="galerie-colle">
+    <div class="galerie-entete">
+      <p class="chapitre" data-reveal><span class="chapitre-num">III</span><span class="chapitre-trait" aria-hidden="true"></span><span>Ce que vous y trouverez</span></p>
+      <h2 id="t-galerie" class="titre-section" data-lettres><span class="lu">Un temps pour soi</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">U</span><span class="lettre" style="--i:1">n</span></span> <span class="mot"><span class="lettre" style="--i:2">t</span><span class="lettre" style="--i:3">e</span><span class="lettre" style="--i:4">m</span><span class="lettre" style="--i:5">p</span><span class="lettre" style="--i:6">s</span></span> <span class="mot"><span class="lettre" style="--i:7">p</span><span class="lettre" style="--i:8">o</span><span class="lettre" style="--i:9">u</span><span class="lettre" style="--i:10">r</span></span> <span class="mot"><span class="lettre" style="--i:11">s</span><span class="lettre" style="--i:12">o</span><span class="lettre" style="--i:13">i</span></span></span></h2>
+      <p class="galerie-note" data-reveal>Photos d’ambiance : les images de votre cabinet prendront leur place.</p>
+    </div>
+    <div class="galerie-piste" data-piste tabindex="0" aria-label="Galerie de photos d’ambiance, faites défiler">
+      <figure class="carte carte-haute" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/arches-1000.webp" width="1000" height="750" alt="Photo d’ambiance : grande baie en arc, intérieur lumineux" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkgAAABXRUJQVlA4WAoAAAAAAAAADwAACwAAVlA4ICoAAACwAQCdASoQAAwAAsBKJZwCdAEMmgmAAP7Wi+095LnmVuwY9yiJlDgbAAA=)"></picture></div>
+      <figcaption><span class="carte-num">01</span><b>Détente et relaxation</b></figcaption>
+    </figure><figure class="carte carte-large" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/lin-1000.webp" width="1000" height="1498" alt="Photo d’ambiance : drap de lin froissé" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRlwAAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4ID4AAABQAwCdASoQABgAPslSoksnpKMhsAgA8BkJZQAAetoRBeGhAAD+6xclMa+mK8W4+e9uzEUpBAytdqO4EUZoAA==)"></picture></div>
+      <figcaption><span class="carte-num">02</span><b>Gestion des émotions</b></figcaption>
+    </figure><figure class="carte carte-carree" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/colonnes-1000.webp" width="1000" height="750" alt="Photo d’ambiance : colonnes de pierre et ombres franches" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkwAAABXRUJQVlA4WAoAAAAAAAAADwAACwAAVlA4IC4AAADQAQCdASoQAAwAAsBKJZQAAjQ4jScD6AD+0Olx57EzkB8MNMeu/89QLb+uAAAA)"></picture></div>
+      <figcaption><span class="carte-num">03</span><b>Confiance en vous</b></figcaption>
+    </figure><figure class="carte carte-haute" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/marbre-1000.webp" width="1000" height="667" alt="Photo d’ambiance : marbre blanc et longue ombre" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkgAAABXRUJQVlA4WAoAAAAAAAAADwAACgAAVlA4ICoAAACwAQCdASoQAAsAAsBKJaQAAlvuh0aAAP7411ZGwCCjFxlhKC3nHrAOcAA=)"></picture></div>
+      <figcaption><span class="carte-num">04</span><b>Vos ressources intérieures</b></figcaption>
+    </figure><figure class="carte carte-large" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/mur-fenetre-1000.webp" width="1000" height="1500" alt="Photo d’ambiance : ombre de fenêtre sur un mur" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRmoAAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4IEwAAAAwBACdASoQABgAPslQoUsnpKMhsAgA8BkJYwCw7B6VyLw545Luj/l8jcAA/ujwJKafn1+V2kavjz2+ERINCV3T807y8HL5O1wVouAA)"></picture></div>
+      <figcaption><span class="carte-num">05</span><span>ombre de fenêtre sur un mur</span></figcaption>
+    </figure><figure class="carte carte-carree" data-curseur="Glisser">
+      <div class="carte-cadre"><picture class="photo carte-photo"><img src="images/fleurs-sechees-1000.webp" width="1000" height="1500" alt="Photo d’ambiance : fleurs séchées en lumière dorée" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRngAAABXRUJQVlA4WAoAAAAAAAAADwAAFwAAVlA4IFoAAADQAwCdASoQABgAPslUo0unpKMhsAgA8BkJQBOgBDtKR94L3CaD97AA/vEOZPSUkBBOL2xY6DOe+VU8Gb66X4jEpLndHzZH/pWFZgXE7l2uCL69UL4aVBKAAAA=)"></picture></div>
+      <figcaption><span class="carte-num">06</span><span>fleurs séchées en lumière dorée</span></figcaption>
+    </figure>
+      <figure class="carte carte-vide">
+        <div class="carte-cadre"><span class="carte-vide-texte">Ici, vos photos<small>votre salle, votre lumière, vos objets</small></span></div>
+      </figure>
+    </div>
+    <div class="galerie-barre" aria-hidden="true"><span data-galerie-barre></span></div>
+  </div>
+</section>
+<section class="tarifs" id="tarifs" aria-labelledby="t-tarifs">
+  <p class="chapitre" data-reveal><span class="chapitre-num">IV</span><span class="chapitre-trait" aria-hidden="true"></span><span>Tarifs</span></p>
+  <div class="tarifs-grille">
+    <h2 id="t-tarifs" class="titre-section" data-lettres><span class="lu">Les séances</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">L</span><span class="lettre" style="--i:1">e</span><span class="lettre" style="--i:2">s</span></span> <span class="mot"><span class="lettre" style="--i:3">s</span><span class="lettre" style="--i:4">é</span><span class="lettre" style="--i:5">a</span><span class="lettre" style="--i:6">n</span><span class="lettre" style="--i:7">c</span><span class="lettre" style="--i:8">e</span><span class="lettre" style="--i:9">s</span></span></span></h2>
+    <div>
+      <ul class="tarifs-liste" role="list"><li class="tarif" data-ligne><span class="tarif-nom">Séance d’hypnothérapie</span><span class="tarif-points" aria-hidden="true"></span><span class="tarif-prix">60 € à 90 €</span></li></ul>
+      <dl class="tarifs-infos" data-reveal>
+        <div><dt>Rendez-vous</dt><dd>Sur rendez-vous</dd></div>
+        <div><dt>Première séance</dt><dd>1 h 30 à 2 h</dd></div>
+        <div><dt>Suivi</dt><dd>1 h à 1 h 30</dd></div>
+        <div><dt>Règlement</dt><dd>Espèces, chèque ou PayPal</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+<section class="apropos" id="apropos" aria-labelledby="t-apropos">
+  <p class="chapitre" data-reveal><span class="chapitre-num">V</span><span class="chapitre-trait" aria-hidden="true"></span><span>À propos</span></p>
+  <div class="apropos-grille">
+    <figure class="portrait" data-masque>
+      <div class="portrait-arche">
+        <span class="portrait-initiales" aria-hidden="true">AN</span>
+        <figcaption class="portrait-texte">Ici, votre portrait<small>une photo de vous, dans votre lumière</small></figcaption>
+      </div>
+    </figure>
+    <div class="apropos-texte">
+      <h2 id="t-apropos" class="titre-section" data-lettres><span class="lu">Aurore Nussbaum</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">A</span><span class="lettre" style="--i:1">u</span><span class="lettre" style="--i:2">r</span><span class="lettre" style="--i:3">o</span><span class="lettre" style="--i:4">r</span><span class="lettre" style="--i:5">e</span></span> <span class="mot"><span class="lettre" style="--i:6">N</span><span class="lettre" style="--i:7">u</span><span class="lettre" style="--i:8">s</span><span class="lettre" style="--i:9">s</span><span class="lettre" style="--i:10">b</span><span class="lettre" style="--i:11">a</span><span class="lettre" style="--i:12">u</span><span class="lettre" style="--i:13">m</span></span></span></h2>
+      <p class="apropos-metier" data-reveal>Hypnothérapeute à Porcelette</p>
+      <p data-reveal class="lead">J’ai découvert un outil incroyable qui a profondément contribué à ma transformation personnelle.</p><p data-reveal>Désireuse de mieux comprendre cette approche, j’ai commencé à pratiquer l’hypnose pour moi-même.</p><p data-reveal>Cette expérience m’a inspirée à me former davantage afin d’accompagner les autres vers le changement et le mieux-être ; pour cela j’ai choisi l’école EHTN.</p><p data-reveal>Je suis prête à vous accompagner et vous guider avec bienveillance afin que vous puissiez découvrir et libérer votre plein potentiel.</p>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact" aria-labelledby="t-contact">
+  <div class="contact-cadre" data-contact-cadre>
+    <picture class="photo contact-photo"><source media="(min-width: 900px)" srcset="images/rideau-soleil-1920.webp"><img src="images/rideau-soleil-1000.webp" width="1000" height="1778" alt="Photo d’ambiance : soleil sur un rideau" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRnIAAABXRUJQVlA4WAoAAAAAAAAADwAAGwAAVlA4IFQAAAAQBACdASoQABwAPslQoUsnpKMhsAgA8BkJYwCdABaqb5NeITRdHxaiAAD+7ERHukOwY2JGsxs6sEW3nxDsLIys2XEEuzCWmpX19/ooX03uq3KgAAA=)"></picture>
+    <div class="contact-voile" aria-hidden="true"></div>
+  </div>
+  <div class="contact-contenu">
+    <p class="chapitre" data-reveal><span class="chapitre-num">VI</span><span class="chapitre-trait" aria-hidden="true"></span><span>Rendez-vous</span></p>
+    <h2 id="t-contact" class="contact-titre" data-lettres><span class="lu">Prenons rendez-vous</span><span aria-hidden="true"><span class="mot"><span class="lettre" style="--i:0">P</span><span class="lettre" style="--i:1">r</span><span class="lettre" style="--i:2">e</span><span class="lettre" style="--i:3">n</span><span class="lettre" style="--i:4">o</span><span class="lettre" style="--i:5">n</span><span class="lettre" style="--i:6">s</span></span> <span class="mot"><span class="lettre" style="--i:7">r</span><span class="lettre" style="--i:8">e</span><span class="lettre" style="--i:9">n</span><span class="lettre" style="--i:10">d</span><span class="lettre" style="--i:11">e</span><span class="lettre" style="--i:12">z</span><span class="lettre" style="--i:13">-</span><span class="lettre" style="--i:14">v</span><span class="lettre" style="--i:15">o</span><span class="lettre" style="--i:16">u</span><span class="lettre" style="--i:17">s</span></span></span></h2>
+    <p class="contact-phrase" data-reveal>À l’image du cerf, avancez avec calme et assurance vers votre transformation intérieure.</p>
+    <a class="contact-tel" href="tel:+33781452328" data-reveal data-curseur="Appeler"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>07 81 45 23 28</span></a>
+    <div class="contact-actions" data-reveal>
+      <a class="bouton bouton-plein" href="tel:+33781452328"><span>Appeler</span><svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+      <a class="bouton" href="https://www.resalib.fr/praticien/97907-aurore-nussbaum-hypnotherapeute-porcelette" target="_blank" rel="noopener"><span>Réserver en ligne sur Resalib</span><svg aria-hidden="true"><use href="#i-lien"/></svg></a><a class="bouton" href="https://www.facebook.com/AuroreQuelquemots" target="_blank" rel="noopener"><span>Sa page Facebook</span><svg aria-hidden="true"><use href="#i-lien"/></svg></a>
+    </div>
+    <dl class="contact-infos" data-reveal>
+      <div><dt>Lieu</dt><dd>57890 Porcelette</dd></div>
+      <div><dt>Accueil</dt><dd>Sur rendez-vous</dd></div>
+      <div><dt>Horaires</dt><dd><span class="emplacement"><span class="emplacement-tag">À compléter</span>Ici, vos jours et heures d’ouverture.</span></dd></div>
+    </dl>
+  </div>
+</section></main>
+<footer class="pied">
+  <div class="pied-haut">
+    <a class="pied-nom" href="#accueil"><span class="monogramme" aria-hidden="true">AN</span><span>Aurore Nussbaum<small>Hypnothérapeute à Porcelette</small></span></a>
+    <nav class="pied-nav" aria-label="Plan du site">
+      <a href="#approche">L’approche</a><a href="#seance">La séance</a><a href="#tarifs">Tarifs</a><a href="#apropos">À propos</a><a href="#contact">Rendez-vous</a>
+    </nav>
+    <a class="pied-haut-lien" href="#accueil" aria-label="Revenir en haut"><svg aria-hidden="true"><use href="#i-haut"/></svg></a>
+  </div>
+  <p class="pied-apercu">Aperçu préparé pour Aurore Nussbaum. Textes, photos, couleurs : tout se modifie selon vos goûts.</p>
+  <p class="pied-petit">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+  <p class="pied-petit">SIRET 98523476400019<span class="point" aria-hidden="true"></span>Photos d’ambiance Unsplash<span class="point" aria-hidden="true"></span>Maquette non publiée</p>
+</footer>
+</div>
+<script type="module" src="js/cinema.js"></script>
+</body>
+</html>

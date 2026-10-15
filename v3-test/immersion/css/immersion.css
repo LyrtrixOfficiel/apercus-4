@@ -1,0 +1,297 @@
+/* IMMERSION : nuit profonde, verre, eau et brume. Le texte vit toujours sur
+   une zone calme : un voile sombre a gauche sur ordinateur, des panneaux de
+   verre fume sur telephone. Contrastes mesures sur le fond reel. */
+:root {
+  --nuit: #04060b;
+  --nuit-2: #070b13;
+  --ivoire: #efebe4;
+  --texte: #d9d6cf;
+  --doux: #aab3bd;
+  --aqua: #a6dcd4;
+  --or: #e8cba3;
+  --trait: rgba(239, 235, 228, 0.14);
+  --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "DM Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --g: clamp(1.15rem, 5.2vw, 6rem);
+  --col: 36rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+body {
+  margin: 0;
+  background: var(--nuit) radial-gradient(120% 80% at 75% 10%, #0b1522 0%, var(--nuit) 60%) fixed;
+  color: var(--texte);
+  font: 400 1.0625rem/1.75 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: rgba(166, 220, 212, 0.35); color: #fff; }
+a { color: inherit; }
+img { max-width: 100%; }
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+.mono { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400; }
+
+.evitement { position: absolute; left: -999px; top: 0; z-index: 100; background: var(--ivoire); color: var(--nuit); padding: 0.6rem 1rem; }
+.evitement:focus { left: 1rem; top: 1rem; }
+:focus-visible { outline: 2px solid var(--aqua); outline-offset: 4px; border-radius: 4px; }
+
+/* ── Les couches du fond ─────────────────────────────────────────────── */
+.toile { position: fixed; inset: 0; width: 100%; height: 100lvh; height: 100vh; display: block; z-index: 0; opacity: 0; transition: opacity 1.6s ease; }
+.avec-3d .toile { opacity: 1; }
+.sans-3d .toile { display: none; }
+@supports (height: 100lvh) { .toile { height: 100lvh; } }
+
+/* Le repli sans WebGL (et sans JavaScript) : des lueurs lentes. */
+.fond-repli { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.avec-3d .fond-repli { display: none; }
+.fond-repli i { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; }
+.fond-repli i:nth-child(1) { width: 60vmax; height: 60vmax; right: -18vmax; top: -16vmax; background: radial-gradient(circle, rgba(70, 140, 160, 0.55), transparent 65%); animation: lueur 26s ease-in-out infinite alternate; }
+.fond-repli i:nth-child(2) { width: 50vmax; height: 50vmax; left: -20vmax; bottom: -10vmax; background: radial-gradient(circle, rgba(60, 60, 130, 0.45), transparent 65%); animation: lueur 32s ease-in-out infinite alternate-reverse; }
+.fond-repli i:nth-child(3) { width: 34vmax; height: 34vmax; right: 10vmax; bottom: 20vh; background: radial-gradient(circle, rgba(232, 203, 163, 0.18), transparent 65%); animation: lueur 40s ease-in-out infinite alternate; }
+@keyframes lueur { to { transform: translate3d(-6vmax, 5vmax, 0) scale(1.12); } }
+
+/* Le voile : une zone calme a gauche, sous le texte. */
+.voile { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(4, 6, 11, 0.86) 0%, rgba(4, 6, 11, 0.74) 32%, rgba(4, 6, 11, 0.3) 52%, rgba(4, 6, 11, 0) 64%); }
+
+/* ── Le HUD ───────────────────────────────────────────────────────────── */
+.hud { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between;
+  padding: max(1rem, env(safe-area-inset-top)) var(--g) 1rem; pointer-events: none; }
+.hud::before { content: ""; position: absolute; inset: 0 0 -2.5rem; background: linear-gradient(rgba(4, 6, 11, 0.82), rgba(4, 6, 11, 0)); z-index: -1; }
+.hud > * { pointer-events: auto; }
+.hud-nom { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: var(--ivoire); }
+.hud-mono { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border: 1px solid rgba(239, 235, 228, 0.32); border-radius: 50%;
+  font: 400 italic 1.05rem/1 var(--serif); letter-spacing: 0.02em; }
+.hud-t { font: 400 1.2rem/1 var(--serif); letter-spacing: 0.01em; }
+.hud-d { display: flex; align-items: center; gap: 0.5rem; }
+.hud-appel, .hud-menu, .son {
+  display: inline-flex; align-items: center; gap: 0.5rem; height: 2.5rem; padding: 0 1.05rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(239, 235, 228, 0.26); background: rgba(6, 9, 15, 0.55); color: var(--ivoire); text-decoration: none;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background 0.4s, border-color 0.4s, color 0.4s; }
+.hud-appel { background: var(--ivoire); color: var(--nuit); border-color: var(--ivoire); }
+.hud-appel:hover { background: #fff; }
+.hud-menu:hover, .son:hover { border-color: rgba(239, 235, 228, 0.6); }
+.son-ondes { display: inline-flex; align-items: flex-end; gap: 2px; height: 0.8rem; }
+.son-ondes i { width: 2px; height: 40%; background: currentColor; border-radius: 1px; opacity: 0.55; transition: height 0.4s, opacity 0.4s; }
+.son-ondes i:nth-child(2) { height: 85%; }
+.son-ondes i:nth-child(3) { height: 60%; }
+.son[aria-pressed="true"] .son-ondes i { opacity: 1; }
+.son[aria-pressed="true"] .son-ondes i { animation: onde 1.1s ease-in-out infinite; }
+.son[aria-pressed="true"] .son-ondes i:nth-child(2) { animation-delay: -0.4s; }
+.son[aria-pressed="true"] .son-ondes i:nth-child(3) { animation-delay: -0.75s; }
+@keyframes onde { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+
+/* L'indice de section, en bas */
+.indice { position: fixed; right: var(--g); bottom: max(1.4rem, env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 0.9rem;
+  color: var(--doux); pointer-events: none; font-size: 0.68rem; }
+.no-js .indice { display: none; }
+.indice-barre { position: relative; width: 6rem; height: 1px; background: var(--trait); overflow: hidden; }
+.indice-barre i { position: absolute; inset: 0; background: var(--aqua); transform-origin: 0 50%; transform: scaleX(0); }
+.indice-nom { color: var(--ivoire); }
+
+/* Le menu */
+.menu { position: fixed; inset: 0; z-index: 15; display: grid; align-content: center; padding: 6rem var(--g);
+  background: rgba(4, 6, 11, 0.9); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  opacity: 0; visibility: hidden; transition: opacity 0.6s var(--ease), visibility 0s 0.6s; }
+.menu-ouvert .menu { opacity: 1; visibility: visible; transition: opacity 0.6s var(--ease); }
+.menu ol { display: grid; gap: 0.2rem; }
+.menu a { display: flex; align-items: baseline; gap: 1.2rem; text-decoration: none; color: var(--ivoire);
+  font: 300 clamp(2.4rem, 7vw, 4.8rem)/1.1 var(--serif); transform: translateY(14px); opacity: 0; transition: transform 0.8s var(--ease), opacity 0.8s, color 0.3s; }
+.menu a .mono { color: var(--aqua); }
+.menu a:hover { color: var(--aqua); }
+.menu-ouvert .menu a { transform: none; opacity: 1; }
+.menu-ouvert .menu li:nth-child(2) a { transition-delay: 0.04s; }
+.menu-ouvert .menu li:nth-child(3) a { transition-delay: 0.08s; }
+.menu-ouvert .menu li:nth-child(4) a { transition-delay: 0.12s; }
+.menu-ouvert .menu li:nth-child(5) a { transition-delay: 0.16s; }
+.menu-ouvert .menu li:nth-child(6) a { transition-delay: 0.2s; }
+
+/* Le chargeur */
+.chargeur { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--nuit); transition: opacity 1.3s ease, visibility 0s 1.3s; }
+.chargeur.parti { opacity: 0; visibility: hidden; }
+.chargeur-in { display: grid; justify-items: center; gap: 1.1rem; color: var(--doux); }
+.chargeur-anneau { width: 3.6rem; height: 3.6rem; border-radius: 50%; border: 1px solid var(--trait); border-top-color: var(--aqua); animation: tourne 1.4s linear infinite; }
+.chargeur-n { font-size: 1.1rem; color: var(--ivoire); letter-spacing: 0.3em; }
+@keyframes tourne { to { transform: rotate(1turn); } }
+
+/* ── Les sections ─────────────────────────────────────────────────────── */
+main, .pied { position: relative; z-index: 2; }
+.sc { position: relative; padding: 24vh var(--g); }
+.sc-in { max-width: var(--col); }
+
+.etiquette { display: flex; align-items: center; gap: 0.9rem; color: var(--aqua); margin-bottom: 1.6rem; }
+.etiquette .num:not(:empty)::after { content: ""; display: inline-block; width: 2.2rem; height: 1px; background: currentColor; margin-left: 0.9rem; vertical-align: middle; opacity: 0.6; }
+.titre { font: 300 clamp(2.5rem, 5.4vw, 4.6rem)/1.02 var(--serif); color: var(--ivoire); letter-spacing: -0.012em; margin-bottom: 2.2rem; text-wrap: balance; }
+.titre em { font-style: italic; color: var(--aqua); }
+.texte p + p { margin-top: 1.1rem; }
+.chapo { font: 400 clamp(1.35rem, 2.1vw, 1.65rem)/1.45 var(--serif); color: var(--ivoire); }
+
+/* Un emplacement : ce qui viendra, dit avec soin. */
+.emplacement { position: relative; font-style: italic; color: var(--doux); padding: 1rem 1.15rem 1rem 2.6rem; border: 1px dashed rgba(166, 220, 212, 0.4);
+  border-radius: 14px; background: rgba(166, 220, 212, 0.05); }
+.emplacement::before { content: ""; position: absolute; left: 1.15rem; top: 1.45rem; width: 0.5rem; height: 0.5rem; border: 1px solid var(--aqua); transform: rotate(45deg); }
+
+/* L'accueil */
+.sc-accueil { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 7rem; padding-bottom: 13vh; isolation: isolate; }
+.sc-accueil .sc-in { max-width: 54rem; }
+.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; color: var(--aqua); }
+.kicker .sep { width: 2.4rem; height: 1px; background: currentColor; opacity: 0.6; }
+.nom { font: 300 clamp(3.6rem, 13.5vw, 10.5rem)/0.86 var(--serif); color: var(--ivoire); letter-spacing: -0.025em; margin: 1.6rem 0 2rem; }
+.nom .ligne { display: block; overflow: hidden; padding: 0.02em 0 0.1em; margin-bottom: -0.08em; }
+.nom .ligne:nth-child(even) { padding-left: 0.85em; font-style: italic; }
+.nom .mot { display: inline-block; }
+.accroche { font: 400 italic clamp(1.3rem, 2.2vw, 1.75rem)/1.4 var(--serif); color: var(--texte); max-width: 30ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.4rem; }
+.btn { display: inline-flex; align-items: center; gap: 0.8rem; min-height: 3.3rem; padding: 0 1.6rem; border-radius: 999px; text-decoration: none;
+  font: 500 0.95rem/1 var(--sans); letter-spacing: 0.01em; transition: background 0.4s, color 0.4s, border-color 0.4s, transform 0.6s var(--ease); }
+.btn:hover { transform: translateY(-2px); }
+.btn-plein { background: var(--ivoire); color: var(--nuit); }
+.btn-plein .btn-n { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; opacity: 0.75; }
+.btn-plein:hover { background: #fff; }
+.btn-fil { border: 1px solid rgba(239, 235, 228, 0.42); color: var(--ivoire); background: rgba(4, 6, 11, 0.35); }
+.btn-fil:hover { border-color: var(--ivoire); }
+.defiler { position: absolute; right: var(--g); bottom: 13vh; display: flex; align-items: center; gap: 0.9rem; color: var(--doux); writing-mode: vertical-rl; transform: rotate(180deg); }
+.defiler-trait { width: 1px; height: 4.5rem; background: linear-gradient(var(--aqua), transparent); animation: descend 2.6s var(--ease) infinite; }
+@keyframes descend { 0% { transform: scaleY(0); transform-origin: 0 100%; } 50% { transform: scaleY(1); transform-origin: 0 100%; } 51% { transform-origin: 0 0; } 100% { transform: scaleY(0); transform-origin: 0 0; } }
+
+/* L'approche */
+.sc-approche { padding-top: 34vh; }
+.citation { max-width: 40rem; margin: 36vh 0 0; }
+.citation blockquote p { font: 300 italic clamp(1.9rem, 3.8vw, 3.2rem)/1.18 var(--serif); color: var(--ivoire); text-wrap: balance; }
+.citation blockquote p::before { content: "\201C"; display: block; font-size: 2.2em; line-height: 0.6; color: var(--aqua); margin-bottom: 0.15em; }
+.citation figcaption { margin-top: 1.4rem; color: var(--doux); }
+.apports-bloc { max-width: 46rem; margin-top: 34vh; }
+.apports { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+.apport { padding: 1.5rem 1.4rem 1.6rem; border: 1px solid var(--trait); border-radius: 18px; background: linear-gradient(160deg, rgba(14, 22, 32, 0.78), rgba(6, 9, 15, 0.7));
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.apport-n { color: var(--aqua); }
+.apport h3 { font: 400 1.55rem/1.15 var(--serif); color: var(--ivoire); margin: 0.9rem 0 0.5rem; }
+.apport p { font-size: 0.97rem; line-height: 1.6; }
+
+/* La seance : une carte par galet */
+.sc-seance { padding-top: 34vh; }
+.etapes { display: grid; gap: 52vh; margin-top: 30vh; padding-bottom: 20vh; }
+.etape { max-width: 34rem; padding: 2rem 2rem 2.1rem; border-radius: 22px; border: 1px solid var(--trait);
+  background: linear-gradient(160deg, rgba(12, 20, 29, 0.8), rgba(5, 8, 13, 0.74)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.etape-n { color: var(--aqua); }
+.etape h3 { font: 400 clamp(1.9rem, 3vw, 2.5rem)/1.1 var(--serif); color: var(--ivoire); margin: 1rem 0 0.9rem; }
+.duree { display: inline-block; margin-top: 1.3rem; padding: 0.55rem 0.9rem; border: 1px solid rgba(166, 220, 212, 0.35); border-radius: 999px; color: var(--aqua); font-size: 0.68rem; }
+
+/* Les tarifs */
+.sc-tarifs { padding-top: 20vh; padding-bottom: 30vh; }
+.tarifs { border-top: 1px solid var(--trait); }
+.tarif { display: flex; align-items: baseline; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--trait); }
+.tarif-nom { color: var(--ivoire); }
+.tarif-pointilles { flex: 1; border-bottom: 1px dotted rgba(239, 235, 228, 0.28); transform: translateY(-0.3em); min-width: 1rem; }
+.tarif-prix { font: 400 1.6rem/1 var(--serif); color: var(--ivoire); white-space: nowrap; }
+.tarif-duree .tarif-nom { color: var(--texte); }
+.tarif-duree .tarif-prix { font-size: 1.25rem; color: var(--aqua); }
+.paiement { margin-top: 1.6rem; color: var(--texte); }
+.avert { margin-top: 1.2rem; font-size: 0.88rem; line-height: 1.6; color: var(--doux); }
+
+/* A propos : d'abord la scene du prenom, puis le texte */
+.sc-apropos { padding-top: 0; }
+.scene-nom { height: 125vh; display: grid; place-items: center; }
+.scene-nom-t { font: 300 italic clamp(4rem, 17vw, 13rem)/1 var(--serif); color: var(--ivoire); text-align: center; overflow-wrap: anywhere;
+  text-shadow: 0 0 60px rgba(166, 220, 212, 0.35); }
+.avec-3d .scene-nom-t { opacity: 0; }
+.apropos-grille { display: grid; gap: 2rem; }
+.portrait { width: min(17rem, 70%); }
+.portrait-cadre { position: relative; aspect-ratio: 4 / 5; border-radius: 999px 999px 22px 22px; border: 1px solid rgba(239, 235, 228, 0.22); overflow: hidden;
+  display: grid; place-items: end center; padding-bottom: 1.6rem;
+  background: radial-gradient(80% 60% at 50% 38%, rgba(166, 220, 212, 0.16), transparent 70%), linear-gradient(180deg, rgba(16, 26, 38, 0.85), rgba(5, 8, 13, 0.9)); }
+.portrait-cadre::before { content: ""; position: absolute; left: 50%; top: 24%; width: 38%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+  border: 1px dashed rgba(166, 220, 212, 0.45); }
+.portrait-cadre::after { content: ""; position: absolute; left: 50%; top: 52%; width: 66%; height: 40%; transform: translateX(-50%); border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+  border: 1px dashed rgba(166, 220, 212, 0.45); border-bottom: 0; }
+.portrait-t { position: relative; z-index: 1; font: 400 italic 1.15rem/1.2 var(--serif); color: var(--ivoire); background: rgba(4, 6, 11, 0.7); padding: 0.4rem 0.9rem; border-radius: 999px; }
+.cerf { margin-top: 2.4rem; padding-top: 1.6rem; border-top: 1px solid var(--trait); font: 400 italic 1.45rem/1.4 var(--serif); color: var(--ivoire); }
+
+/* Le contact */
+.sc-contact { min-height: 100vh; padding-top: 30vh; padding-bottom: 26vh; }
+.rdv { font: 400 1.35rem/1.5 var(--serif); color: var(--ivoire); }
+.tel-grand { display: grid; gap: 0.6rem; margin: 2.2rem 0; text-decoration: none; font: 300 clamp(2.6rem, 7vw, 5.2rem)/1 var(--serif); color: var(--ivoire); letter-spacing: 0.01em; transition: color 0.4s; }
+.tel-grand .mono { color: var(--aqua); }
+.tel-grand:hover { color: #fff; }
+.liens { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; margin-bottom: 2rem; }
+.lien { color: var(--ivoire); text-decoration: none; border-bottom: 1px solid rgba(166, 220, 212, 0.55); padding-bottom: 0.15rem; transition: border-color 0.3s; }
+.lien:hover { border-color: var(--ivoire); }
+.adresse { margin-top: 0.4rem; }
+
+/* Le pied */
+.pied { padding: 14vh var(--g) max(6rem, calc(env(safe-area-inset-bottom) + 5rem)); background: linear-gradient(rgba(4, 6, 11, 0), rgba(4, 6, 11, 0.92) 22%); }
+.pied-in { max-width: 46rem; border-top: 1px solid var(--trait); padding-top: 2.4rem; display: grid; gap: 0.9rem; }
+.pied-nom { font: 400 2rem/1.1 var(--serif); color: var(--ivoire); }
+.pied-meta { color: var(--doux); font-size: 0.68rem; line-height: 1.8; }
+.pied-avert { font-size: 0.9rem; color: var(--doux); }
+.apercu { margin-top: 0.8rem; font: 400 italic 1.15rem/1.45 var(--serif); color: var(--ivoire); }
+
+/* ── Le mouvement ─────────────────────────────────────────────────────── */
+.js .nom .mot { transform: translateY(108%); }
+.js.pret .nom .mot { transform: none; transition: transform 1.5s var(--ease) calc(0.15s + var(--i, 0) * 0.13s); }
+.js .sc-accueil .kicker, .js .sc-accueil .accroche, .js .sc-accueil .actions, .js .defiler { opacity: 0; transform: translateY(14px); }
+.js.pret .sc-accueil .kicker, .js.pret .sc-accueil .accroche, .js.pret .sc-accueil .actions, .js.pret .defiler { opacity: 1; transform: none; transition: opacity 1.2s ease 0.5s, transform 1.4s var(--ease) 0.5s; }
+.js.pret .sc-accueil .accroche { transition-delay: 0.75s; }
+.js.pret .sc-accueil .actions { transition-delay: 0.95s; }
+.js.pret .defiler { transition-delay: 1.3s; }
+.js .defiler { transform: rotate(180deg) translateY(14px); }
+.js.pret .defiler { transform: rotate(180deg); }
+.rev { opacity: 0; transform: translateY(26px); transition: opacity 1.1s ease, transform 1.4s var(--ease); }
+.rev.vu { opacity: 1; transform: none; }
+.sc-accueil .rev { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .js .nom .mot, .js .sc-accueil .kicker, .js .sc-accueil .accroche, .js .sc-accueil .actions { transform: none; opacity: 1; }
+  .js .defiler { opacity: 1; transform: rotate(180deg); }
+  .rev { opacity: 1; transform: none; }
+}
+
+/* ── Telephone ────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  body { font-size: 1rem; line-height: 1.7; }
+  .voile { display: none; }
+  .hud { padding-left: 16px; padding-right: 16px; }
+  .hud-t { display: none; }
+  .hud-appel, .hud-menu, .son { height: 2.4rem; padding: 0 0.9rem; }
+  .son .son-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .son { padding: 0 0.85rem; }
+  .indice { left: 50%; right: auto; transform: translateX(-50%); padding: 0.55rem 0.9rem; border-radius: 999px; background: rgba(4, 6, 11, 0.7); border: 1px solid var(--trait);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); white-space: nowrap; }
+  .indice-barre { width: 3rem; }
+  .indice { opacity: 0; transition: opacity 0.6s ease; }
+  .indice.montre { opacity: 1; }
+  .kicker .sep { display: none; }
+  .kicker { gap: 0.3rem 1.1rem; }
+  .sc { padding: 18vh 16px; }
+  .sc-accueil { padding-bottom: 11vh; padding-left: 20px; padding-right: 20px; }
+  .sc-accueil::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 78%; z-index: -1;
+    background: linear-gradient(to top, rgba(4, 6, 11, 0.95) 0%, rgba(4, 6, 11, 0.86) 45%, rgba(4, 6, 11, 0) 100%); }
+  .nom { margin: 1.1rem 0 1.3rem; }
+  .actions { margin-top: 1.8rem; }
+  .btn { width: 100%; justify-content: center; }
+  .defiler { display: none; }
+  .panneau { padding: 1.6rem 1.3rem 1.7rem; border-radius: 20px; border: 1px solid var(--trait);
+    background: linear-gradient(165deg, rgba(10, 16, 25, 0.78), rgba(4, 7, 12, 0.74)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .titre { margin-bottom: 1.6rem; }
+  .sc-approche, .sc-seance { padding-top: 26vh; }
+  .citation { margin-top: 28vh; }
+  .citation.panneau { padding: 1.8rem 1.4rem; }
+  .apports-bloc { margin-top: 26vh; }
+  .apports { grid-template-columns: 1fr; }
+  .apport { padding: 1.3rem 1.2rem; }
+  .etapes { gap: 58vh; margin-top: 40vh; }
+  .etape { padding: 1.6rem 1.3rem; }
+  .scene-nom { height: 100vh; }
+  .portrait { width: 62%; }
+  .sc-contact { padding-top: 22vh; }
+  .tel-grand { font-size: clamp(2.3rem, 11vw, 3.4rem); }
+  .pied { padding-left: 20px; padding-right: 20px; }
+}
+@media (min-width: 761px) {
+  .panneau.sc-in, .citation.panneau { background: none; }
+}

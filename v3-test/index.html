@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Votre site, en huit univers</title>
+<meta name="description" content="Huit expériences de site internet préparées pour vous, et celle qui vous ressemble le plus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fond: #0c0b10; --fond-2: #15131c; --carte: #1b1924; --ligne: rgba(255,255,255,.09);
+  --texte: #f4f1ea; --doux: #b9b3c4; --accent: #e9c46a; --accent-2: #b89cff;
+  --rayon: 22px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--fond); color: var(--texte); font: 400 16px/1.6 Manrope, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+.serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+.page { width: min(1240px, 100% - 32px); margin-inline: auto; }
+
+/* Accueil */
+.tete { position: relative; padding: 72px 0 40px; isolation: isolate; }
+.tete::before { content: ''; position: absolute; inset: -200px -40vw 0; z-index: -1;
+  background: radial-gradient(60% 50% at 20% 20%, rgba(184,156,255,.22), transparent 70%),
+              radial-gradient(50% 45% at 85% 10%, rgba(233,196,106,.16), transparent 70%),
+              radial-gradient(40% 40% at 60% 80%, rgba(90,200,170,.10), transparent 70%);
+  animation: derive 18s ease-in-out infinite alternate; }
+@keyframes derive { to { transform: translate3d(3vw, 2vh, 0) scale(1.06); } }
+.sur { display: block; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--doux); }
+.sur::before { content: ''; display: inline-block; vertical-align: middle; width: 28px; height: 1px; margin-right: 10px; background: currentColor; }
+h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 9vw, 128px); line-height: .95; letter-spacing: -.02em; margin: 18px 0 18px; }
+h1 em { color: var(--accent); }
+.chapeau { max-width: 640px; font-size: clamp(17px, 2vw, 20px); color: var(--doux); margin: 0; }
+.chapeau strong { color: var(--texte); font-weight: 600; }
+
+/* Recommandation */
+.reco { margin: 48px 0 24px; display: grid; grid-template-columns: 1.35fr 1fr; gap: 28px; align-items: stretch; }
+.reco-visuel { position: relative; border-radius: var(--rayon); overflow: hidden; background: var(--carte); aspect-ratio: 16/10; width: 100%; align-self: center; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); }
+.reco-visuel img.ordi { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reco-visuel img.tel { position: absolute; right: 4%; bottom: -6%; width: 20%; border-radius: 18px; border: 3px solid #000; box-shadow: 0 20px 50px rgba(0,0,0,.6); }
+.reco-texte { background: var(--fond-2); border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 32px; display: flex; flex-direction: column; gap: 14px; }
+.etiquette { align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #1a1406; background: var(--accent); padding: 6px 12px; border-radius: 99px; }
+.reco-texte h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 4.5vw, 60px); line-height: 1; margin: 4px 0 0; }
+.reco-texte p { margin: 0; color: var(--doux); }
+.pourquoi { font-size: 15px; }
+.bouton { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; border-radius: 99px; background: var(--texte); color: var(--fond); font-weight: 700; text-decoration: none; transition: transform .25s cubic-bezier(.2,.8,.2,1.4), box-shadow .25s; align-self: flex-start; margin-top: auto; }
+.bouton:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 30px rgba(255,255,255,.15); }
+.bouton svg { width: 18px; height: 18px; }
+
+/* Questions */
+.quiz { margin: 56px 0 8px; padding: 28px; border-radius: var(--rayon); background: var(--fond-2); border: 1px solid var(--ligne); }
+.quiz h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3vw, 38px); margin: 0 0 6px; }
+.quiz > p { margin: 0 0 18px; color: var(--doux); }
+.question { margin: 18px 0 0; }
+.question b { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--doux); font-weight: 600; margin-bottom: 10px; }
+.puces { display: flex; flex-wrap: wrap; gap: 10px; }
+.puce { appearance: none; border: 1px solid var(--ligne); background: var(--carte); color: var(--texte); font: 600 15px/1 Manrope, sans-serif; padding: 12px 16px; border-radius: 99px; cursor: pointer; display: inline-flex; align-items: center; gap: 9px; transition: border-color .2s, background .2s, transform .2s; }
+.puce:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.3); }
+.puce[aria-pressed="true"] { background: var(--texte); color: var(--fond); border-color: var(--texte); }
+.pastilles { display: inline-flex; }
+.pastilles i { width: 14px; height: 14px; border-radius: 50%; margin-left: -4px; border: 2px solid var(--carte); }
+.puce[aria-pressed="true"] .pastilles i { border-color: var(--texte); }
+.pastilles i:first-child { margin-left: 0; }
+
+/* Galerie */
+.titre-galerie { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 80px 0 24px; flex-wrap: wrap; }
+.titre-galerie h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(36px, 5vw, 64px); line-height: 1; margin: 0; }
+.titre-galerie p { margin: 0; color: var(--doux); max-width: 420px; }
+.grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.carte { position: relative; background: var(--carte); border-radius: var(--rayon); overflow: hidden; border: 1px solid var(--ligne); display: flex; flex-direction: column; text-decoration: none; transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .45s; opacity: 0; transform: translateY(30px); }
+.carte.vue { opacity: 1; transform: none; }
+.carte:hover { transform: translateY(-6px); border-color: rgba(255,255,255,.22); box-shadow: 0 40px 70px -30px rgba(0,0,0,.8); }
+.carte .visuel { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--g, #222); }
+.carte .visuel img.ordi { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+.carte:hover .visuel img.ordi { transform: scale(1.05); }
+.carte .visuel img.tel { position: absolute; z-index: 2; right: 5%; bottom: -10%; width: 21%; border-radius: 14px; border: 3px solid #000; box-shadow: 0 16px 40px rgba(0,0,0,.6); transition: transform .6s cubic-bezier(.2,.8,.2,1.3); }
+.carte:hover .visuel img.tel { transform: translateY(-8%) rotate(-2deg); }
+.carte .visuel .repli { position: absolute; inset: 0; display: grid; place-items: center; font: 400 44px/1 'Instrument Serif', serif; color: rgba(255,255,255,.85); }
+.carte .corps { padding: 22px 24px 26px; display: grid; gap: 8px; }
+.carte .ligne1 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.carte h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1; margin: 0; }
+.carte .num { font-size: 13px; color: var(--doux); letter-spacing: .1em; }
+.carte p { margin: 0; color: var(--doux); font-size: 15px; }
+.carte .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.carte .tags span { font-size: 12px; padding: 5px 10px; border-radius: 99px; background: rgba(255,255,255,.06); color: var(--doux); }
+.carte .ouvrir { margin-top: 10px; font-weight: 700; display: inline-flex; gap: 8px; align-items: center; }
+.carte .ouvrir svg { width: 16px; height: 16px; transition: transform .3s; }
+.carte:hover .ouvrir svg { transform: translateX(4px); }
+.carte.recommandee { border-color: rgba(233,196,106,.6); }
+.carte .badge { position: absolute; top: 14px; left: 14px; z-index: 3; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--accent); color: #1a1406; padding: 6px 11px; border-radius: 99px; }
+.carte .score { position: absolute; top: 14px; left: 14px; z-index: 3; font-size: 12px; font-weight: 600; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); color: #fff; padding: 6px 11px; border-radius: 99px; }
+
+/* Pied */
+.promesse { margin: 96px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.promesse div { padding: 24px; border-radius: var(--rayon); border: 1px solid var(--ligne); }
+.promesse b { display: block; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 26px; margin-bottom: 6px; }
+.promesse p { margin: 0; color: var(--doux); font-size: 15px; }
+footer { margin: 80px 0 40px; padding-top: 28px; border-top: 1px solid var(--ligne); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--doux); font-size: 14px; }
+.demo { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.demo select { background: var(--carte); color: var(--texte); border: 1px solid var(--ligne); border-radius: 10px; padding: 8px 10px; font: inherit; }
+
+@media (max-width: 900px) {
+  .reco { grid-template-columns: 1fr; }
+  .grille { grid-template-columns: 1fr; }
+  .promesse { grid-template-columns: 1fr; }
+  .tete { padding-top: 48px; }
+  .reco-texte { padding: 24px; }
+}
+@media (scripting: none) { .carte { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="tete">
+    <span class="sur" id="sur">Aperçu préparé pour <span data-nom>Ingrid Hinchliffe</span></span>
+    <h1>Votre site,<br>en <em>huit</em> univers.</h1>
+    <p class="chapeau">Chaque univers est un vrai site, déjà rempli avec <strong>vos informations</strong>. Ouvrez-les, faites-les défiler, jouez avec. Celui qui vous ressemble le plus est mis en avant juste en dessous.</p>
+  </header>
+
+  <section class="reco" aria-labelledby="reco-titre">
+    <a class="reco-visuel" id="reco-lien" href="nature/?p=ingrid-hinchliffe" aria-label="Ouvrir l'univers recommandé">
+      <img class="ordi" id="reco-ordi" src="galerie/vignettes/ingrid-hinchliffe/nature-ordi.webp" alt="">
+      <img class="tel" id="reco-tel" src="galerie/vignettes/ingrid-hinchliffe/nature-tel.webp" alt="">
+    </a>
+    <div class="reco-texte">
+      <span class="etiquette">Recommandé pour vous</span>
+      <h2 id="reco-titre">Nature</h2>
+      <p id="reco-phrase">Une prairie qui pousse à l'ouverture et s'écarte sous la main.</p>
+      <p class="pourquoi" id="reco-pourquoi">Choisi d'après votre métier. Répondez aux deux questions plus bas pour l'affiner à vos goûts.</p>
+      <a class="bouton" id="reco-bouton" href="nature/?p=ingrid-hinchliffe">Découvrir cet univers
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-titre">
+    <h3 id="quiz-titre">Et vous, qu'est-ce qui vous ressemble ?</h3>
+    <p>Deux clics, et la recommandation s'ajuste. Rien n'est enregistré.</p>
+    <div class="question">
+      <b>L'ambiance</b>
+      <div class="puces" data-q="ambiance">
+        <button class="puce" type="button" data-v="nuit" aria-pressed="false">Nuit et mystère</button>
+        <button class="puce" type="button" data-v="clair" aria-pressed="false">Clair et apaisant</button>
+        <button class="puce" type="button" data-v="vif" aria-pressed="false">Vif et joyeux</button>
+        <button class="puce" type="button" data-v="nature" aria-pressed="false">Nature et lumière</button>
+        <button class="puce" type="button" data-v="chic" aria-pressed="false">Chic et élégant</button>
+      </div>
+    </div>
+    <div class="question">
+      <b>Vos couleurs</b>
+      <div class="puces" data-q="couleurs">
+        <button class="puce" type="button" data-v="violet" aria-pressed="false"><span class="pastilles"><i style="background:#2a1f6b"></i><i style="background:#8b6cff"></i><i style="background:#62e0c8"></i></span>Violet et bleu nuit</button>
+        <button class="puce" type="button" data-v="vert" aria-pressed="false"><span class="pastilles"><i style="background:#2f6b3a"></i><i style="background:#a9d18e"></i><i style="background:#f3e7c4"></i></span>Verts et tons doux</button>
+        <button class="puce" type="button" data-v="vives" aria-pressed="false"><span class="pastilles"><i style="background:#ff6b3d"></i><i style="background:#ffd23f"></i><i style="background:#7b2ff7"></i></span>Couleurs vives</button>
+        <button class="puce" type="button" data-v="pastel" aria-pressed="false"><span class="pastilles"><i style="background:#ffd6c9"></i><i style="background:#d9ccff"></i><i style="background:#c9ecff"></i></span>Pastels lumineux</button>
+        <button class="puce" type="button" data-v="neutre" aria-pressed="false"><span class="pastilles"><i style="background:#111"></i><i style="background:#c8b28a"></i><i style="background:#f4efe6"></i></span>Noir, crème et or</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="titre-galerie">
+    <h2>Les huit univers</h2>
+    <p>Classés du plus adapté à vous au plus inattendu. Tous marchent sur téléphone, et tout s'adapte : textes, photos, couleurs.</p>
+  </div>
+  <div class="grille" id="grille"></div>
+  <noscript><p>Les univers : <a href="aurora-nuit/">Aurora Nuit</a>, <a href="immersion/">Immersion</a>, <a href="liquid-glass/">Liquid Glass</a>, <a href="fluide/">Fluide</a>, <a href="pop-vitamine/">Pop vitaminé</a>, <a href="nature/">Nature</a>, <a href="cinema/">Cinéma</a>, <a href="editorial/">Éditorial</a>.</p></noscript>
+
+  <section class="promesse" aria-label="Ce qui est compris">
+    <div><b>Tout se modifie</b><p>Textes, photos, couleurs, ordre des sections : on ajuste ensemble jusqu'à ce que ce soit vraiment vous.</p></div>
+    <div><b>Rendez-vous en ligne</b><p>Vos clients réservent directement depuis le site, sur téléphone comme sur ordinateur.</p></div>
+    <div><b>Le site est à vous</b><p>Votre nom de domaine est à votre nom. Vous gardez tout, quoi qu'il arrive.</p></div>
+  </section>
+
+  <footer>
+    <span>Aperçu préparé pour <span data-nom>Ingrid Hinchliffe</span>. Textes, photos, couleurs : tout se modifie selon vos goûts.</span>
+    <label class="demo">Voir pour
+      <select id="choix">
+        <option value="ingrid-hinchliffe">Ingrid Hinchliffe, naturopathe</option>
+        <option value="aurore-nussbaum">Aurore Nussbaum, hypnothérapeute</option>
+        <option value="marilou-carrieu-marilou-yoga">Marilou Carrieu, hypnose</option>
+        <option value="cornouaille-massage-quimper-quimper">Cornouaille Massage, massage</option>
+        <option value="nathalie-navarro-coach-de-vie-paris-17">Nathalie Navarro, coaching</option>
+      </select>
+    </label>
+  </footer>
+</div>
+
+<noscript><style>.carte { opacity: 1; transform: none; }</style></noscript>
+<script>
+const UNIVERS = [
+  { id: 'aurora-nuit', nom: 'Aurora Nuit', phrase: "Votre nom s'écrit en étoiles, sous des aurores boréales qui suivent la main.", tags: ['Nuit', 'Magique', 'Étoiles'], g: 'linear-gradient(135deg,#071229,#2b1d63 60%,#1fb59a)' },
+  { id: 'immersion', nom: 'Immersion', phrase: 'Un monde de verre, d\'eau et de brume que l\'on traverse en défilant. Votre prénom naît de la fumée.', tags: ['3D', 'Mystère', 'Haut de gamme'], g: 'linear-gradient(135deg,#05070d,#1a2a4a 60%,#6fb7ff)' },
+  { id: 'liquid-glass', nom: 'Liquid Glass', phrase: 'Des panneaux de verre qui réfractent la lumière, une goutte qui suit votre geste et fusionne.', tags: ['Verre', 'Premium', 'Rassurant'], g: 'linear-gradient(135deg,#e7dcff,#c7d3ff 50%,#ffd9c7)' },
+  { id: 'fluide', nom: 'Fluide', phrase: 'Un dégradé qui coule, des gouttes de verre qui se détachent et se posent sur chaque section.', tags: ['Clair', 'Moderne', 'Lumineux'], g: 'linear-gradient(135deg,#ffd9c2,#cdeedd 50%,#d9ccff)' },
+  { id: 'pop-vitamine', nom: 'Pop vitaminé', phrase: 'Un flacon à votre nom qui flotte près d\'un titre géant, des couleurs qui changent à chaque section.', tags: ['Couleurs vives', '3D', 'Joyeux'], g: 'linear-gradient(135deg,#1d7a5a,#5a3fd0)' },
+  { id: 'nature', nom: 'Nature', phrase: 'Une prairie de quinze mille brins d\'herbe qui pousse à l\'ouverture et s\'écarte sous la main.', tags: ['Vivant', 'Frais', 'Ancré'], g: 'linear-gradient(135deg,#cfe8b0,#6ea85a 60%,#f3d27a)' },
+  { id: 'cinema', nom: 'Cinéma', phrase: "Une ouverture de film : deux bandes noires s'écartent et votre nom apparaît comme au générique.", tags: ['Cinématographique', 'Luxe', 'Images'], g: 'linear-gradient(135deg,#0b0b0b,#3a2e22 60%,#c8a165)' },
+  { id: 'editorial', nom: 'Éditorial', phrase: "Une couverture de magazine vivante : votre nom en titre, un objet qui s'envole au défilement.", tags: ['Magazine', 'Typographie', 'Élégant'], g: 'linear-gradient(135deg,#f4efe6,#e2d6c2 60%,#1c1c1c)' },
+];
+const FAMILLES = {
+  plantes: { re: /naturo|phyto|herbor|aroma|fleurs? de bach|nutri|diet|ayurv|plante|gemmo|iridolog/i, mot: 'la naturopathie et les plantes', score: { nature: 5, 'pop-vitamine': 4, fluide: 3, editorial: 2, cinema: 1, 'liquid-glass': 1 } },
+  esprit: { re: /hypno|sophro|m[ée]dit|mindful|relaxa|pnl|eft|emdr|psycho|th[ée]rap|gestalt|constellation|art-?th/i, mot: "l'accompagnement intérieur", score: { 'aurora-nuit': 5, immersion: 4, 'liquid-glass': 3, editorial: 2, cinema: 1, fluide: 1 } },
+  toucher: { re: /massage|shiatsu|r[ée]flexo|kin[ée]si|ost[ée]o|reiki|magn[ée]t|[ée]nerg|soin|esth[ée]t|drainage|amma|tuina/i, mot: 'le soin par le toucher', score: { cinema: 5, nature: 4, fluide: 3, immersion: 2, 'liquid-glass': 2, editorial: 1 } },
+  mouvement: { re: /yoga|pilates|qi ?gong|ta[iï] ?chi|danse|gym|sport|stretch|respir/i, mot: 'le mouvement et la respiration', score: { fluide: 5, nature: 4, 'pop-vitamine': 3, 'liquid-glass': 2, editorial: 1 } },
+  elan: { re: /coach|accompagn|orientation|bilan|d[ée]veloppement|mentor|conseil/i, mot: "l'élan et le coaching", score: { 'pop-vitamine': 5, 'liquid-glass': 4, editorial: 3, fluide: 2, cinema: 1 } },
+};
+const ORDRE = ['plantes', 'esprit', 'toucher', 'mouvement', 'elan'];
+const GOUTS = {
+  ambiance: { nuit: ['aurora-nuit', 'immersion'], clair: ['liquid-glass', 'fluide'], vif: ['pop-vitamine'], nature: ['nature'], chic: ['cinema', 'editorial'] },
+  couleurs: { violet: ['aurora-nuit', 'immersion', 'liquid-glass'], vert: ['nature', 'fluide'], vives: ['pop-vitamine'], pastel: ['fluide', 'liquid-glass'], neutre: ['editorial', 'cinema'] },
+};
+const MOTS = {
+  ambiance: { nuit: 'la nuit et le mystère', clair: 'la clarté et le calme', vif: 'les couleurs vives', nature: 'la nature', chic: "l'élégance" },
+  couleurs: { violet: 'les violets profonds', vert: 'les verts', vives: 'les couleurs franches', pastel: 'les pastels', neutre: 'le noir, le crème et l\'or' },
+};
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const fleche = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const choix = { ambiance: null, couleurs: null };
+let P = 'ingrid-hinchliffe', D = { nom: 'Ingrid Hinchliffe', metier: 'Naturopathe' };
+
+function famille(d) {
+  const texte = [d.metier, ...(d.approche || [])].join(' ');
+  for (const k of ORDRE) if (FAMILLES[k].re.test(d.metier || '')) return k;
+  for (const k of ORDRE) if (FAMILLES[k].re.test(texte)) return k;
+  return 'plantes';
+}
+function classement() {
+  const f = FAMILLES[famille(D)];
+  return UNIVERS.map((u, i) => {
+    let s = f.score[u.id] || 0;
+    for (const q of ['ambiance', 'couleurs']) if (choix[q] && GOUTS[q][choix[q]].includes(u.id)) s += 6;
+    return { u, s: s - i * 0.01 };
+  }).sort((a, b) => b.s - a.s);
+}
+const vignette = (u, t) => `galerie/vignettes/${P}/${u.id}-${t}.webp`;
+const lien = (u) => `${u.id}/?p=${encodeURIComponent(P)}`;
+
+function rendre() {
+  const rang = classement(), top = rang[0].u, f = FAMILLES[famille(D)];
+  document.querySelectorAll('[data-nom]').forEach((e) => (e.textContent = D.nom));
+  document.title = `${D.nom} : votre site, en huit univers`;
+  const set = (id, k, v) => (document.getElementById(id)[k] = v);
+  set('reco-titre', 'textContent', top.nom);
+  set('reco-phrase', 'textContent', top.phrase);
+  set('reco-lien', 'href', lien(top)); set('reco-bouton', 'href', lien(top));
+  set('reco-ordi', 'src', vignette(top, 'ordi')); set('reco-tel', 'src', vignette(top, 'tel'));
+  const gouts = ['ambiance', 'couleurs'].filter((q) => choix[q]).map((q) => MOTS[q][choix[q]]);
+  set('reco-pourquoi', 'textContent', gouts.length
+    ? `Choisi pour ${f.mot}, et parce que vous aimez ${gouts.join(' et ')}.`
+    : `Choisi pour ${f.mot}. Répondez aux deux questions plus bas pour l'affiner à vos goûts.`);
+  document.getElementById('grille').innerHTML = rang.map(({ u, s }, i) => `
+    <a class="carte${i === 0 ? ' recommandee' : ''}" href="${lien(u)}" style="--g:${u.g}">
+      ${i === 0 ? '<span class="badge">Recommandé</span>' : ''}
+      ${i > 0 && i < 3 ? '<span class="score">Vous irait aussi</span>' : ''}
+      <div class="visuel">
+        <span class="repli">${esc(u.nom)}</span>
+        <img class="ordi" loading="lazy" src="${vignette(u, 'ordi')}" alt="Aperçu ${esc(u.nom)} sur ordinateur" onerror="this.remove()">
+        <img class="tel" loading="lazy" src="${vignette(u, 'tel')}" alt="" onerror="this.remove()">
+      </div>
+      <div class="corps">
+        <div class="ligne1"><h3>${esc(u.nom)}</h3><span class="num">${String(i + 1).padStart(2, '0')} / 08</span></div>
+        <p>${esc(u.phrase)}</p>
+        <div class="tags">${u.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>
+        <span class="ouvrir">Ouvrir cet univers ${fleche}</span>
+      </div>
+    </a>`).join('');
+  observer();
+}
+function observer() {
+  const cartes = document.querySelectorAll('.carte');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { cartes.forEach((c) => c.classList.add('vue')); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vue'), (e.target.dataset.i % 2) * 120); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  cartes.forEach((c, i) => { c.dataset.i = i; io.observe(c); });
+}
+document.querySelectorAll('.puces').forEach((g) => g.addEventListener('click', (e) => {
+  const b = e.target.closest('.puce'); if (!b) return;
+  const q = g.dataset.q, v = b.dataset.v;
+  choix[q] = choix[q] === v ? null : v;
+  g.querySelectorAll('.puce').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === choix[q])));
+  rendre();
+}));
+async function charger(p) {
+  if (!/^[a-z0-9-]+$/.test(p || '')) return rendre();
+  try { const r = await fetch(`donnees/${p}.json`); if (r.ok) { D = await r.json(); P = p; } } catch {}
+  document.getElementById('choix').value = P;
+  rendre();
+}
+document.getElementById('choix').addEventListener('change', (e) => {
+  const u = new URL(location.href); u.searchParams.set('p', e.target.value); history.replaceState(null, '', u);
+  charger(e.target.value);
+});
+for (const id of ['reco-ordi', 'reco-tel']) {
+  const img = document.getElementById(id);
+  img.addEventListener('error', () => (img.style.visibility = 'hidden'));
+  img.addEventListener('load', () => (img.style.visibility = ''));
+}
+charger(new URLSearchParams(location.search).get('p') || P);
+</script>
+</body>
+</html>
