@@ -1,0 +1,55 @@
+{
+ "dossier": "marilou-carrieu-marilou-yoga",
+ "nom": "Marilou Carrieu",
+ "initiales": "MC",
+ "metier": "Hypnose",
+ "ville": "Aix-en-Provence",
+ "cp": "",
+ "region": "",
+ "tel": "06 48 76 68 62",
+ "telLien": "tel:+33648766862",
+ "parMail": false,
+ "appeler": "Appeler",
+ "facebook": "",
+ "resalib": "",
+ "siret": "",
+ "rdv": "Sur rendez-vous",
+ "accroche": "Hypnose à Aix-en-Provence, sur rendez-vous.",
+ "accrocheSienne": false,
+ "approche": [
+  "Séance d’hypnose, sur rendez-vous."
+ ],
+ "conviction": "",
+ "apropos": [
+  "Après un parcours classique en études supérieur de communication, et une première expérience professionnelle en tant que chargée Marketing pour un grand groupe international, j’ai décidé de me réorienter vers ce qui faisait vraiment sens pour moi : le potentiel humain et l’accomplissement personnel.",
+  "Je me suis donc formée à différentes qui remettaient l’humain au centre : Enseignement du yoga (Certifiée Yoga Alliance, Sundari Center, Madeire, Portugal) Massage ayurvédique (Azenday, Paris) Hypnose (Ipnotyz, Paris) J’ai une vision holistique de l’être humain, et je combine les apprentissages issues de sagesses ancestrales et les dernières recherches en neuro sciences et stomatologue pour aider les personnes que j’accompagne à sortir du mental, et du contrôle pour pouvoir se libérer du passé, et du poids des injonctions familiales et sociétales, et ainsi se sentir plus libres et sereines."
+ ],
+ "cerf": "",
+ "etapes": [
+  {
+   "titre": "Le premier rendez-vous",
+   "texte": "Ici, comment se passe votre accueil, ce dont vous parlez ensemble la première fois.",
+   "duree": ""
+  },
+  {
+   "titre": "La séance",
+   "texte": "Ici, le déroulé d’une séance, à votre façon : sa durée, son rythme, ce que l’on y fait.",
+   "duree": ""
+  },
+  {
+   "titre": "Après la séance",
+   "texte": "Ici, ce que vous proposez ensuite : le suivi, le rythme des rendez-vous.",
+   "duree": ""
+  }
+ ],
+ "etapesEmplacement": true,
+ "apports": [],
+ "tarifs": [],
+ "dureePremiere": "",
+ "dureeSuivi": "",
+ "paiement": "",
+ "paiementListe": "",
+ "avertissement": "Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.",
+ "apercu": "Aperçu préparé pour Marilou Carrieu. Textes, photos, couleurs, pages : tout se modifie selon vos goûts.",
+ "court": false
+}
