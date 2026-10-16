@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="fr" data-palette="prairie" data-palette-fiche="prairie" data-defaut="ingrid-hinchliffe">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  // Avant le premier rendu : JavaScript present, mouvement plein ou adouci, palette demandee, fiche attendue.
+  (function () {
+    var h = document.documentElement, q = new URLSearchParams(location.search), p = q.get('p'), pal = q.get('palette');
+    h.classList.add('js', matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduit' : 'mouvement');
+    if (pal && /^[a-z-]{2,30}$/.test(pal)) h.setAttribute('data-palette', pal);
+    if (p && p !== h.getAttribute('data-defaut') && /^[a-z0-9-]{2,120}$/.test(p)) {
+      // La fiche part tout de suite (le module la reprend) : les initiales du chargement arrivent sans attendre le reste.
+      h.classList.add('attente-fiche');
+      window.__ficheTot = fetch('../donnees/' + p + '.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+      window.__ficheTot.then(function (d) {
+        if (!d) return;
+        var m = String(d.nom || '').trim().split(/\s+/), t = [d.accroche, d.conviction].concat(d.approche || [], d.apropos || []).join(' ');
+        var ini = m.length === 2 && t.indexOf(m[1] + ' ' + m[0]) >= 0 ? (m[1][0] + m[0][0]).toUpperCase() : d.initiales;
+        var poser = function () { var e = document.getElementById('graine-initiales'); if (e) e.textContent = ini || ''; h.classList.remove('attente-fiche'); };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', poser); else poser();
+      });
+    }
+  })();
+</script>
+<!--TITRE--><title>Ingrid Hinchliffe · Naturopathe à La Destrousse</title>
+<meta name="description" content="Naturopathe à La Destrousse, sur rendez-vous."><!--/TITRE-->
+<meta name="theme-color" content="#f7f3e6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23f7f3e6'/%3E%3Cpath d='M16 27C9 21 8 12 16 5c8 7 7 16 0 22z' fill='%235f9a3e'/%3E%3Cpath d='M16 27V9' stroke='%231f3d2b' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&amp;family=Figtree:wght@400..600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&amp;family=Figtree:wght@400..600&amp;display=swap"></noscript>
+<link rel="stylesheet" href="css/palettes.css">
+<link rel="stylesheet" href="css/nature.css">
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+<!--CHARGEMENT--><div class="graine" id="graine" aria-hidden="true">
+  <div class="graine-scene">
+    <p class="graine-initiales" id="graine-initiales">IH</p>
+    <svg class="graine-dessin" viewBox="0 0 200 170" focusable="false">
+      <defs>
+        <radialGradient id="graine-g-jour" cx="50%" cy="50%" r="50%"><stop class="gj0" offset="0"/><stop class="gj1" offset="1"/></radialGradient>
+        <radialGradient id="graine-g-terre" cx="50%" cy="0%" r="62%"><stop class="gt0" offset="0"/><stop class="gt1" offset="1"/></radialGradient>
+      </defs>
+      <circle class="graine-jour" cx="100" cy="78" r="74" fill="url(#graine-g-jour)"/>
+      <path class="graine-terre" d="M8 110C58 103 142 103 192 110V170H8Z" fill="url(#graine-g-terre)"/>
+      <path class="graine-sol" d="M12 110C60 103 140 103 188 110"/>
+      <path class="graine-miette" d="M40 122h2M62 134h2.5M146 126h2M158 140h2.5M74 152h2M128 156h2"/>
+      <path class="graine-racine r1" pathLength="1" d="M99 125C97 135 91 143 84 155"/>
+      <path class="graine-racine r2" pathLength="1" d="M100 126C102 139 100 150 103 163"/>
+      <path class="graine-racine r3" pathLength="1" d="M101 125C107 132 115 138 120 149"/>
+      <ellipse class="graine-grain" cx="100" cy="121" rx="7.5" ry="4.6" transform="rotate(-12 100 121)"/>
+      <path class="graine-tige" pathLength="1" d="M100 118C100 103 97 91 100 71"/>
+      <path class="graine-cotyledon gauche" d="M100 73C88 71 76 62 73 49C87 49 98 57 100 73Z"/>
+      <path class="graine-cotyledon droite" d="M100 71C109 62 122 58 131 62C127 72 113 77 100 71Z"/>
+      <path class="graine-feuille" d="M100 71C95 61 96 50 103 41C109 51 107 62 100 71Z"/>
+      <circle class="graine-rosee" cx="129.5" cy="63.5" r="2.3"/>
+    </svg>
+  </div>
+</div><!--/CHARGEMENT-->
+
+<!-- Ombres de feuillage et pollens : generes en code (canvas), au-dessus du fond, sous le texte. -->
+<div class="feuillage" id="feuillage" aria-hidden="true"><span></span><span></span></div>
+<canvas class="pollens" id="pollens" aria-hidden="true"></canvas>
+
+<!--CONTENU--><div id="site" data-p="ingrid-hinchliffe">
+<header class="barre" id="barre">
+  <a class="sceau" href="#accueil" aria-label="Ingrid Hinchliffe, retour en haut"><svg class="fleurette" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path class="petales" d="M20 20Q28.9 27.5 38.3 21.8Q30.2 14.4 20 20ZM20 20Q14.6 30.3 22.3 38.3Q27.8 28.7 20 20ZM20 20Q8.4 19.4 4.4 29.7Q15.4 30.7 20 20ZM20 20Q16.5 8.9 5.4 8.8Q8.4 19.4 20 20ZM20 20Q29.4 13.2 26.1 2.6Q16.9 8.8 20 20Z"/><circle class="coeur" cx="20" cy="20" r="5.2"/></svg><span>IH</span></a>
+  <nav class="barre-liens" aria-label="Sections">
+    <a href="#approche">L’approche</a><a href="#seance">La séance</a><a href="#tarifs">Tarifs</a><a href="#apropos">À propos</a>
+  </nav>
+  <a class="pilule pilule-sombre" href="#contact">Rendez-vous</a>
+</header>
+<main id="contenu">
+<section class="accueil" id="accueil" aria-label="Accueil">
+  <div class="jour" aria-hidden="true"><span class="soleil"></span><span class="rayons"></span><span class="rayons rayons-2"></span></div>
+  <div class="brume" aria-hidden="true"></div>
+  <svg class="collines" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="c1" d="M0 170C220 120 420 150 640 130S1100 90 1440 140V400H0Z"/>
+    <path class="c2" d="M0 240C260 200 520 230 760 205S1180 180 1440 220V400H0Z"/>
+    <path class="c3" d="M0 310C300 280 600 300 900 285S1260 270 1440 300V400H0Z"/>
+    <path class="c4" d="M823 400Q829 331 841 286Q835 337 832 400ZM1289 400Q1288 329 1284 282Q1294 335 1298 400ZM751 400Q755 366 763 344Q761 369 760 400ZM834 400Q842 311 860 252Q848 318 843 400ZM1420 400Q1427 343 1444 305Q1433 348 1429 400ZM488 400Q495 323 511 272Q501 330 497 400ZM1138 400Q1132 345 1117 309Q1138 350 1147 400ZM894 400Q899 367 911 345Q905 370 903 400ZM230 400Q232 328 239 281Q238 334 239 400ZM777 400Q770 347 755 311Q776 351 786 400ZM453 400Q447 347 432 311Q453 351 462 400ZM548 400Q543 317 532 261Q549 324 557 400ZM1384 400Q1376 353 1359 322Q1382 357 1393 400ZM603 400Q601 345 597 309Q607 350 612 400ZM668 400Q672 366 682 343Q678 369 677 400ZM705 400Q699 372 684 353Q705 374 714 400ZM1179 400Q1184 351 1195 318Q1190 355 1188 400ZM594 400Q594 313 592 255Q600 320 603 400ZM676 400Q679 370 685 350Q685 373 685 400ZM675 400Q680 373 691 355Q686 375 684 400ZM1171 400Q1177 365 1192 342Q1183 368 1180 400ZM1157 400Q1156 325 1153 276Q1162 332 1166 400ZM522 400Q516 326 503 277Q522 332 531 400ZM500 400Q497 356 492 326Q503 360 509 400ZM392 400Q398 326 411 277Q404 332 401 400ZM103 400Q101 346 95 310Q107 350 112 400ZM447 400Q443 311 432 252Q449 319 456 400ZM991 400Q991 335 990 292Q997 340 1000 400ZM1208 400Q1203 364 1190 339Q1209 367 1217 400ZM855 400Q856 337 860 294Q862 342 864 400ZM552 400Q556 322 563 271Q562 329 561 400ZM609 400Q608 305 608 242Q614 313 618 400ZM1135 400Q1131 370 1123 350Q1137 373 1144 400ZM185 400Q188 345 196 309Q194 350 194 400ZM151 400Q159 352 177 321Q165 356 160 400ZM904 400Q908 313 917 255Q914 320 913 400ZM1059 400Q1062 340 1069 300Q1068 345 1068 400ZM1182 400Q1175 318 1160 264Q1181 325 1191 400ZM1422 400Q1425 350 1433 317Q1431 354 1431 400ZM277 400Q276 341 275 302Q282 346 286 400ZM946 400Q938 354 919 323Q944 358 955 400ZM755 400Q750 368 739 347Q756 371 764 400ZM1176 400Q1170 371 1158 352Q1176 374 1185 400ZM1059 400Q1051 323 1033 272Q1057 330 1068 400ZM621 400Q614 356 595 327Q620 360 630 400ZM1065 400Q1072 360 1088 333Q1078 363 1074 400ZM547 400Q545 323 540 272Q551 330 556 400ZM192 400Q183 321 164 268Q189 328 201 400ZM170 400Q176 326 188 277Q182 333 179 400ZM1299 400Q1303 361 1314 334Q1309 364 1308 400ZM927 400Q927 323 926 272Q933 330 936 400ZM566 400Q572 362 584 336Q578 365 575 400ZM1306 400Q1312 353 1326 321Q1318 357 1315 400ZM344 400Q341 337 333 294Q347 342 353 400ZM491 400Q498 329 515 281Q504 334 500 400ZM665 400Q659 361 646 335Q665 364 674 400ZM557 400Q554 328 548 281Q560 334 566 400ZM866 400Q872 335 885 292Q878 341 875 400ZM348 400Q351 331 358 284Q357 336 357 400ZM288 400Q293 358 306 329Q299 361 297 400ZM595 400Q596 375 597 358Q602 377 604 400ZM279 400Q283 313 291 255Q289 320 288 400ZM491 400Q499 349 519 315Q505 353 500 400ZM661 400Q660 314 658 256Q666 321 670 400ZM1101 400Q1101 326 1103 277Q1107 332 1110 400ZM772 400Q767 363 756 338Q773 366 781 400ZM184 400Q180 358 172 329Q186 361 193 400ZM622 400Q624 312 628 253Q630 319 631 400ZM1406 400Q1415 319 1435 264Q1421 325 1415 400ZM949 400Q941 357 921 328Q947 361 958 400ZM64 400Q55 351 35 319Q61 355 73 400ZM341 400Q346 319 358 266Q352 326 350 400ZM67 400Q75 334 93 291Q81 340 76 400ZM686 400Q694 323 711 271Q700 329 695 400ZM1215 400Q1217 305 1223 242Q1223 313 1224 400ZM1243 400Q1252 367 1272 345Q1258 370 1252 400ZM1250 400Q1243 305 1224 242Q1249 313 1259 400ZM489 400Q482 345 466 308Q488 349 498 400ZM1040 400Q1040 339 1040 299Q1046 345 1049 400ZM464 400Q463 323 460 272Q469 330 473 400ZM454 400Q447 354 430 323Q453 358 463 400ZM1153 400Q1146 342 1130 303Q1152 347 1162 400ZM1249 400Q1256 356 1272 327Q1262 360 1258 400ZM1167 400Q1166 330 1163 284Q1172 336 1176 400ZM710 400Q704 344 690 306Q710 348 719 400ZM1284 400Q1280 357 1273 328Q1286 361 1293 400ZM723 400Q732 364 752 339Q738 367 732 400ZM1360 400Q1365 343 1376 305Q1371 348 1369 400ZM858 400Q864 351 879 319Q870 355 867 400ZM794 400Q786 340 768 300Q792 345 803 400Z"/>
+  </svg>
+  <div class="accueil-texte">
+    
+    <h1 class="nom" id="nom" data-pousse><span class="mot">Ingrid</span> <span class="mot mot-fin">Hinchliffe</span></h1>
+    <p class="accroche">Naturopathe à La Destrousse, sur rendez‑vous.</p>
+    <div class="actions">
+      <a class="pilule pilule-sombre" href="tel:+33625394832">Appeler le 06 25 39 48 32</a>
+      <a class="pilule pilule-claire" href="#contact">Prendre rendez-vous</a>
+    </div>
+  </div>
+  <div class="prairie-place" data-place="accueil" aria-hidden="true"></div>
+  <a class="souffle" href="#approche" aria-label="Découvrir la suite"><span class="souffle-rond" aria-hidden="true"></span><span class="souffle-mots" aria-hidden="true"><span>Inspirez</span><span>Expirez</span></span></a>
+</section>
+<section class="section approche" id="approche" aria-labelledby="approche-titre">
+  <div class="cadre approche-cadre">
+    <div class="approche-texte">
+      <h2 class="titre" data-respire id="approche-titre">L’approche</h2>
+      <p class="phare" data-mots>J’utilise différents outils : nutrition, aromathérapie, phytothérapie, gemmothérapie, oligothérapie, Fleurs de Bach...</p>
+      
+    </div>
+    <div class="herbier" data-herbier>
+      <ol class="planches" role="list" aria-label="Herbier : les thèmes de l’accompagnement">
+        <li class="planche planche-vide" style="--rot:-1.6deg" data-i="0">
+          <div class="planche-papier">
+            <div class="planche-specimen" aria-hidden="true"><svg class="specimen tige-fleurie" viewBox="0 0 300 400" aria-hidden="true" focusable="false"><path class="feuille" d="M154.1 368.2Q146.5 337.1 123.9 327.1Q126.7 351.6 154.1 368.2Z"/><path class="feuille" d="M157.2 346.4Q186.4 341.8 197.4 321.8Q174.6 322.5 157.2 346.4Z"/><path class="feuille" d="M159 324.7Q148.4 299.9 128.3 294.6Q134 314.6 159 324.7Z"/><path class="feuille" d="M160 303.1Q184.7 298.9 193.9 281.9Q174.6 282.7 160 303.1Z"/><path class="feuille" d="M160.7 281.7Q153.9 261.7 138.5 256.4Q141.8 272.3 160.7 281.7Z"/><path class="feuille" d="M161.3 260.5Q178.7 255.5 183.8 242.6Q170.1 244.7 161.3 260.5Z"/><path class="feuille" d="M162.4 239.6Q153 223.5 138.7 221.5Q144.3 234.8 162.4 239.6Z"/><path class="tige" d="M150 388C170.4 305.6 148.4 223.3 182.6 152.7"/><path class="tige" d="M165.6 209.9Q158.1 186.7 146.9 161.2"/><path class="tige" d="M170.1 187.4Q183.5 169.7 203.6 147.9"/><path class="fleur" d="M182.6 152.7Q190.8 156.3 199 152.7Q190.8 149.1 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q188.9 158.4 197.3 157.6Q191 151.9 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q185.7 159.4 192.8 161.6Q189.6 154.9 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q181.9 159 186.2 163.8Q186.8 157.4 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q178.3 157.4 178.9 163.8Q183.2 159 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q175.5 154.9 172.3 161.6Q179.4 159.4 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q174.1 151.9 167.8 157.6Q176.3 158.4 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q174.4 149.1 166.2 152.7Q174.4 156.3 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q176.3 147 167.8 147.8Q174.1 153.5 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q179.4 146 172.3 143.8Q175.5 150.5 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q183.2 146.4 178.9 141.6Q178.3 148 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q186.8 148 186.2 141.6Q181.9 146.4 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q189.6 150.5 192.8 143.8Q185.7 146 182.6 152.7Z"/><path class="fleur" d="M182.6 152.7Q191 153.5 197.3 147.8Q188.9 147 182.6 152.7Z"/><ellipse class="coeur" cx="182.6" cy="152.7" rx="4.9" ry="3.4"/><path class="fleur" d="M146.9 161.2Q155.9 165.1 164.9 161.2Q155.9 157.2 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q153 168 162.1 168.2Q156.1 161.3 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q148.1 168.7 154.4 173Q153.3 165.4 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q142.8 167 144.4 174.1Q148.5 168.2 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q138.9 163.5 135.1 171Q143.2 168.7 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q137.5 159.2 129.6 164.8Q139.1 166.8 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q139.1 155.5 129.6 157.5Q137.5 163.1 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q143.2 153.6 135.1 151.3Q138.9 158.8 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q148.5 154.1 144.4 148.2Q142.8 155.3 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q153.3 156.9 154.4 149.3Q148.1 153.6 146.9 161.2Z"/><path class="fleur" d="M146.9 161.2Q156.1 161 162.1 154.1Q153 154.3 146.9 161.2Z"/><ellipse class="coeur" cx="146.9" cy="161.2" rx="5.4" ry="3.9"/><path class="fleur" d="M203.6 147.9Q212.8 151.9 222 147.9Q212.8 143.8 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q209.7 155 219.1 155.3Q212.9 148.2 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q204.6 155.8 211.2 160.3Q210.1 152.4 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q199.3 154.1 200.9 161.4Q205.2 155.2 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q195.2 150.4 191.5 158.2Q199.8 155.7 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q193.9 145.9 185.8 151.7Q195.5 153.7 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q195.5 142.1 185.8 144Q193.9 149.9 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q199.8 140.1 191.5 137.5Q195.2 145.4 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q205.2 140.5 200.9 134.3Q199.3 141.7 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q210.1 143.3 211.2 135.4Q204.6 140 203.6 147.9Z"/><path class="fleur" d="M203.6 147.9Q212.9 147.6 219.1 140.5Q209.7 140.8 203.6 147.9Z"/><ellipse class="coeur" cx="203.6" cy="147.9" rx="5.5" ry="4.1"/><rect class="bandelette" x="133" y="347" width="34" height="10" transform="rotate(3.2 150 352)"/><rect class="bandelette" x="143.8" y="272.9" width="34" height="10" transform="rotate(-2.3 160.8 277.9)"/></svg></div>
+            <div class="planche-etiquette">
+              <p class="planche-collection">Herbier d’Ingrid Hinchliffe, La Destrousse</p>
+              <h3>Ici, les thèmes de votre accompagnement</h3><p>Chacun sur sa planche, avec vos mots : ce que vos séances apportent.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+<section class="section seance" id="seance" aria-labelledby="seance-titre">
+  <div class="cadre seance-tete">
+    <h2 class="titre" data-respire id="seance-titre">La séance</h2>
+  </div>
+  <div class="cadre sentier" data-sentier>
+    <svg class="sentier-trace" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path class="sentier-bord"/><path class="sentier-chemin"/><path class="sentier-lumiere"/><path class="sentier-cailloux"/><path class="sentier-herbes"/><path class="sentier-herbes foncees"/></svg>
+    <ol class="haltes" role="list">
+      
+      <li class="halte halte-place">
+        <svg class="halte-pierre" viewBox="0 0 64 26" aria-hidden="true" focusable="false"><path d="M58.1 8.9Q60.2 13 58.1 17.1Q56 21.2 46.3 22.4Q36.6 23.5 26 24.1Q15.4 24.7 9.1 21Q2.8 17.3 2.6 13Q2.3 8.6 10.4 6Q18.4 3.4 27.8 2.4Q37.1 1.3 46.5 3.1Q55.9 4.8 58.1 8.9Z"/></svg>
+        <h3>Le premier rendez‑vous</h3>
+        <p>Ici, comment se passe votre accueil, ce dont vous parlez ensemble la première fois.</p>
+        
+      </li>
+      <li class="halte halte-place">
+        <svg class="halte-pierre" viewBox="0 0 64 26" aria-hidden="true" focusable="false"><path d="M57.4 8.9Q58.5 13 56.2 16.7Q54 20.5 45.8 23.3Q37.7 26 28.1 24.3Q18.4 22.5 10.1 20Q1.7 17.5 3 13.2Q4.3 8.9 10.4 5.5Q16.4 2 26.8 1.5Q37.2 1 46.8 2.8Q56.3 4.7 57.4 8.9Z"/></svg>
+        <h3>La séance</h3>
+        <p>Ici, le déroulé d’une séance, à votre façon : sa durée, son rythme, ce que l’on y fait.</p>
+        
+      </li>
+      <li class="halte halte-place">
+        <svg class="halte-pierre" viewBox="0 0 64 26" aria-hidden="true" focusable="false"><path d="M57.2 9Q59.1 13 56.5 16.7Q53.9 20.5 45.7 23.2Q37.6 25.9 27.1 24.8Q16.7 23.8 9.8 20.5Q2.9 17.3 3.5 13.1Q4 8.9 10.9 5.9Q17.8 3 27.2 2.6Q36.7 2.3 46 3.7Q55.3 5 57.2 9Z"/></svg>
+        <h3>Après la séance</h3>
+        <p>Ici, ce que vous proposez ensuite : le suivi, le rythme des rendez‑vous.</p>
+        
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="section tarifs" id="tarifs" aria-labelledby="tarifs-titre">
+  <div class="cadre tarifs-cadre">
+    <div class="tarifs-tete">
+      <h2 class="titre" data-respire id="tarifs-titre">Tarifs</h2>
+      
+      
+    </div>
+    <div class="sachets-place">
+      <ul class="sachets sachets-1" role="list">
+      <li class="sachet" style="--r:-2.4deg">
+        <div class="sachet-enveloppe">
+          <span class="sachet-rabat" aria-hidden="true"></span>
+          <div class="sachet-fenetre" aria-hidden="true"><svg class="specimen sachet-plante tige-fleurie" viewBox="45 70 210 200" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false"><path class="feuille" d="M149 367Q135.7 340.3 113.2 335.9Q120.8 357.5 149 367Z"/><path class="feuille" d="M150.1 343.7Q176.5 339.8 186.5 321.9Q166 322.3 150.1 343.7Z"/><path class="feuille" d="M153 320.5Q143.7 298 125.7 292.9Q130.5 311.1 153 320.5Z"/><path class="feuille" d="M157 297.5Q181.9 294.3 191.6 277.7Q172.3 277.7 157 297.5Z"/><path class="feuille" d="M161.9 274.7Q154.6 254.5 138.9 249.3Q142.4 265.5 161.9 274.7Z"/><path class="feuille" d="M166.8 252.2Q186.8 252.8 196.6 241Q181.4 238.5 166.8 252.2Z"/><path class="feuille" d="M171.5 229.9Q165.8 215.9 154.6 212.7Q157.5 224 171.5 229.9Z"/><path class="tige" d="M150 388C141.4 300.3 191.9 212.5 174.5 137.3"/><path class="tige" d="M176.5 198.3Q165.8 167.8 149.7 137.5"/><path class="tige" d="M178.1 174.3Q190.8 147.3 209.8 119.3"/><path class="fleur" d="M174.5 137.3Q184 141.5 193.5 137.3Q184 133.1 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q181.2 143.8 190.5 143.1Q183.8 136.7 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q176.3 143.9 182.4 147.1Q180.6 140.5 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q170.8 142 171.7 147.9Q175.4 143.2 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q166.4 138.6 162 145.4Q170 144.1 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q164.6 134.8 156.2 140.4Q166 142.9 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q166 131.8 156.2 134.3Q164.6 139.9 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q170 130.5 162 129.2Q166.4 136 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q175.4 131.4 171.7 126.7Q170.8 132.6 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q180.6 134.2 182.4 127.6Q176.3 130.7 174.5 137.3Z"/><path class="fleur" d="M174.5 137.3Q183.8 138 190.5 131.6Q181.2 130.9 174.5 137.3Z"/><ellipse class="coeur" cx="174.5" cy="137.3" rx="5.7" ry="3.2"/><path class="fleur" d="M149.7 137.5Q159.3 141.7 168.9 137.5Q159.3 133.3 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q156.7 144 166.3 143.3Q159.3 136.7 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q152.3 144.6 159.3 147.5Q156.7 140.4 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q147.1 143.3 149.7 149.1Q152.2 143.3 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q142.7 140.4 140.1 147.5Q147.1 144.6 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q140.1 136.7 133.1 143.3Q142.7 144 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q140.1 133.3 130.5 137.5Q140.1 141.7 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q142.7 130.9 133.1 131.7Q140.1 138.2 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q147.1 130.4 140.1 127.4Q142.7 134.6 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q152.2 131.7 149.7 125.9Q147.1 131.7 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q156.7 134.6 159.3 127.4Q152.3 130.4 149.7 137.5Z"/><path class="fleur" d="M149.7 137.5Q159.3 138.2 166.3 131.7Q156.7 130.9 149.7 137.5Z"/><ellipse class="coeur" cx="149.7" cy="137.5" rx="5.8" ry="3.5"/><path class="fleur" d="M209.8 119.3Q218.1 122.9 226.3 119.3Q218.1 115.7 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q216.2 124.7 224.4 123.7Q218.1 118.3 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q212.8 125.2 219.2 127Q216.2 121.1 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q208.8 124.4 211.8 128.6Q212.9 123.5 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q205 122.4 204 128.1Q208.9 125 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q202.3 119.7 197.5 125.5Q205.1 125.1 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q201.4 116.9 193.9 121.5Q202.3 123.9 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q202.3 114.6 193.9 117Q201.4 121.7 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q205.1 113.4 197.5 113Q202.3 118.9 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q208.9 113.6 204 110.5Q205 116.2 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q212.9 115 211.8 109.9Q208.8 114.2 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q216.2 117.5 219.2 111.5Q212.8 113.3 209.8 119.3Z"/><path class="fleur" d="M209.8 119.3Q218.1 120.3 224.4 114.9Q216.2 113.9 209.8 119.3Z"/><ellipse class="coeur" cx="209.8" cy="119.3" rx="4.9" ry="2.8"/><rect class="bandelette" x="133" y="347" width="34" height="10" transform="rotate(1.9 150 352)"/><rect class="bandelette" x="145.7" y="265.7" width="34" height="10" transform="rotate(-6.2 162.7 270.7)"/></svg></div>
+          <div class="sachet-texte">
+            <h3>Séance de naturopathie</h3>
+            <p class="prix prix-texte">Sur demande</p>
+            
+          </div>
+          <p class="sachet-lieu" aria-hidden="true">La Destrousse</p>
+        </div>
+      </li>
+      </ul>
+      <svg class="graines" viewBox="0 0 160 70" aria-hidden="true" focusable="false"><ellipse cx="82.3" cy="28.9" rx="3.9" ry="2.1" transform="rotate(167 82.3 28.9)"/><ellipse cx="35" cy="36.3" rx="3.9" ry="2.1" transform="rotate(11 35 36.3)"/><ellipse cx="24.5" cy="48.8" rx="3.4" ry="1.9" transform="rotate(132 24.5 48.8)"/><ellipse cx="84.4" cy="51.7" rx="4.2" ry="2.3" transform="rotate(131 84.4 51.7)"/><ellipse cx="47.8" cy="54.8" rx="3" ry="1.6" transform="rotate(70 47.8 54.8)"/><ellipse cx="24.5" cy="43.9" rx="4" ry="2.2" transform="rotate(7 24.5 43.9)"/><ellipse cx="59" cy="44.8" rx="3.8" ry="2.1" transform="rotate(33 59 44.8)"/><ellipse cx="67.1" cy="22.1" rx="3.7" ry="2" transform="rotate(13 67.1 22.1)"/><ellipse cx="134.1" cy="55.1" rx="4.1" ry="2.3" transform="rotate(152 134.1 55.1)"/><ellipse cx="102.2" cy="25.1" rx="3.6" ry="2" transform="rotate(34 102.2 25.1)"/><ellipse cx="19.8" cy="58.3" rx="3.7" ry="2" transform="rotate(108 19.8 58.3)"/></svg>
+    </div>
+  </div>
+</section>
+<section class="section apropos" id="apropos" aria-labelledby="apropos-titre">
+  <div class="cadre apropos-grille">
+    <figure class="arche" aria-label="Emplacement pour votre portrait">
+      <div class="arche-fenetre" aria-hidden="true"><span class="arche-lumiere"></span></div>
+      <div class="arche-plante" aria-hidden="true"><svg class="rameau dessin" viewBox="0 0 150 420" aria-hidden="true" focusable="false"><path class="tige" pathLength="1" d="M75 416Q75 382.7 81.9 356T88.7 349.3Q88.7 316 95.8 289.3T102.9 282.7Q102.9 249.3 99 222.7T95.1 216Q95.1 182.7 89.5 156T83.9 149.3Q83.9 116 76.8 89.3T69.6 82.7Q69.6 49.3 64.4 22.7T59.1 16"/><path class="feuille" style="--k:0" d="M84.9 368Q70.3 346.7 48.9 349.2Q59.1 368.3 84.9 368Z"/><path class="feuille" style="--k:1" d="M91.3 337.1Q119.5 332.1 126.7 309.2Q102.8 310.9 91.3 337.1Z"/><path class="feuille" style="--k:2" d="M97.9 306.2Q82.6 276.7 54.8 276.6Q64.9 302.5 97.9 306.2Z"/><path class="feuille" style="--k:3" d="M102 275.3Q126.1 273.7 134.2 255.2Q114 254.4 102 275.3Z"/><path class="feuille" style="--k:4" d="M98.4 244.4Q87.1 214.8 60.7 211.8Q67.5 237.4 98.4 244.4Z"/><path class="feuille" style="--k:5" d="M94.7 213.5Q124.8 208.3 132.7 183.8Q107.1 185.5 94.7 213.5Z"/><path class="feuille" style="--k:6" d="M89.5 182.5Q79.6 163 61.3 162.8Q67.8 179.9 89.5 182.5Z"/><path class="feuille" style="--k:7" d="M84.3 151.6Q110.1 145.9 115.8 124.5Q93.8 126.9 84.3 151.6Z"/><path class="feuille" style="--k:8" d="M77.8 120.7Q67.7 96.8 46.1 95.1Q52.3 115.9 77.8 120.7Z"/><path class="feuille" style="--k:9" d="M71.2 89.8Q91.9 90.8 100.6 75.7Q83.4 73.1 71.2 89.8Z"/><path class="feuille" style="--k:10" d="M65.9 58.9Q58.8 41.3 43 39.8Q47.3 55.1 65.9 58.9Z"/></svg></div>
+      <figcaption><svg class="fleurette" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><path class="petales" d="M18 18Q25.6 25.2 34.4 20.4Q27.4 13.4 18 18ZM18 18Q17.3 28.5 26.6 32.2Q27.6 22.3 18 18ZM18 18Q9.4 24 12.3 33.5Q20.6 28.1 18 18ZM18 18Q8.1 14.4 2 22.2Q11.2 26 18 18ZM18 18Q13.5 8.5 3.6 9.8Q7.6 18.9 18 18ZM18 18Q23.7 9.2 17.5 1.4Q11.8 9.6 18 18ZM18 18Q28.3 16.1 29.7 6.3Q19.9 7.7 18 18Z"/><circle class="coeur" cx="18" cy="18" r="4.7"/></svg><span>Ici, votre portrait</span></figcaption>
+    </figure>
+    <div class="apropos-texte">
+      <h2 class="titre titre-nom" data-respire id="apropos-titre">Ingrid Hinchliffe</h2>
+      <p>Je suis donc devenue praticienne Naturopathe en 2024, dans le but d’accompagner des personnes désireuses de prendre en charge leur santé par des moyens naturels.</p><p>Après 13 ans en tant qu’ingénieur Biologiste au CNRS j’ai pu œuvrer pour la santé médicale mais je souhaitais me tourner plus vers la prévention et l’accompagnement individuel.</p>
+      
+    </div>
+  </div>
+</section>
+<section class="section contact" id="contact" aria-labelledby="contact-titre">
+  <div class="cadre contact-cadre">
+    <h2 class="titre" data-respire id="contact-titre">Prendre rendez‑vous</h2>
+    <p class="contact-rdv">Sur rendez‑vous</p>
+    <a class="tel-geant" href="tel:+33625394832">06 25 39 48 32</a>
+    <div class="contact-liens">
+      <a class="pilule pilule-sombre" href="tel:+33625394832">Appeler</a>
+      
+      
+    </div>
+    <dl class="carnet">
+      <div><dt>Où</dt><dd>La Destrousse<br><span class="emplacement-texte">Ici, l’adresse et l’accès</span></dd></div>
+      <div><dt>Quand</dt><dd><span class="emplacement-texte">Ici, vos jours et horaires</span></dd></div>
+      
+    </dl>
+  </div>
+  <div class="prairie-place prairie-bas" data-place="contact" aria-hidden="true"><svg class="collines" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="c1" d="M0 170C220 120 420 150 640 130S1100 90 1440 140V400H0Z"/>
+    <path class="c2" d="M0 240C260 200 520 230 760 205S1180 180 1440 220V400H0Z"/>
+    <path class="c3" d="M0 310C300 280 600 300 900 285S1260 270 1440 300V400H0Z"/>
+    <path class="c4" d="M943 400Q950 342 967 303Q956 346 952 400ZM5 400Q-2 332 -18 287Q4 338 14 400ZM1417 400Q1422 363 1435 339Q1428 367 1426 400ZM767 400Q760 326 743 277Q766 332 776 400ZM86 400Q80 339 66 298Q86 344 95 400ZM679 400Q675 360 667 334Q681 363 688 400ZM288 400Q285 364 278 340Q291 367 297 400ZM1040 400Q1035 305 1023 242Q1041 313 1049 400ZM488 400Q494 343 510 305Q500 348 497 400ZM848 400Q854 365 869 342Q860 368 857 400ZM1418 400Q1412 326 1400 277Q1418 333 1427 400ZM797 400Q799 353 805 322Q805 357 806 400ZM114 400Q113 320 112 266Q119 326 123 400ZM9 400Q18 308 38 246Q24 315 18 400ZM165 400Q164 309 164 249Q170 317 174 400ZM492 400Q484 328 466 280Q490 334 501 400ZM16 400Q16 349 17 315Q22 353 25 400ZM1387 400Q1389 334 1394 291Q1395 340 1396 400ZM1127 400Q1118 351 1099 318Q1124 355 1136 400ZM34 400Q29 332 16 286Q35 337 43 400ZM1197 400Q1192 342 1180 303Q1198 346 1206 400ZM125 400Q123 352 117 320Q129 356 134 400ZM1078 400Q1074 308 1063 247Q1080 316 1087 400ZM1236 400Q1236 355 1237 325Q1242 359 1245 400ZM430 400Q430 365 431 342Q436 368 439 400ZM750 400Q745 340 733 300Q751 345 759 400ZM1374 400Q1377 321 1382 268Q1383 327 1383 400ZM1356 400Q1363 356 1381 326Q1369 359 1365 400ZM729 400Q734 363 744 339Q740 366 738 400ZM1002 400Q994 359 977 331Q1000 362 1011 400ZM776 400Q777 351 779 318Q783 355 785 400ZM521 400Q520 346 516 310Q526 350 530 400ZM1439 400Q1437 364 1432 340Q1443 367 1448 400ZM62 400Q54 309 36 248Q60 316 71 400ZM452 400Q447 365 435 342Q453 368 461 400ZM1363 400Q1359 320 1349 266Q1365 326 1372 400ZM1146 400Q1145 310 1144 250Q1151 318 1155 400ZM441 400Q434 338 418 297Q440 343 450 400ZM192 400Q188 346 178 310Q194 351 201 400ZM549 400Q556 317 575 262Q562 324 558 400ZM1286 400Q1295 370 1314 351Q1301 373 1295 400ZM1157 400Q1149 344 1132 306Q1155 348 1166 400ZM235 400Q229 342 213 303Q235 347 244 400ZM980 400Q982 317 986 262Q988 324 989 400ZM76 400Q72 336 62 293Q78 341 85 400ZM740 400Q735 329 723 281Q741 335 749 400ZM1417 400Q1414 346 1406 310Q1420 351 1426 400ZM439 400Q431 353 412 322Q437 357 448 400ZM606 400Q610 310 620 250Q616 317 615 400ZM528 400Q528 366 526 344Q534 369 537 400ZM657 400Q653 360 645 333Q659 363 666 400ZM1032 400Q1026 362 1011 337Q1032 365 1041 400ZM224 400Q229 343 240 306Q235 348 233 400ZM342 400Q345 361 352 334Q351 364 351 400ZM3 400Q2 339 1 299Q8 344 12 400ZM842 400Q842 375 843 358Q848 377 851 400ZM33 400Q25 364 5 340Q31 367 42 400ZM1145 400Q1154 358 1174 329Q1160 361 1154 400ZM735 400Q741 321 756 268Q747 327 744 400ZM491 400Q482 341 463 301Q488 346 500 400ZM515 400Q511 367 501 344Q517 369 524 400ZM15 400Q8 365 -9 342Q14 368 24 400ZM1002 400Q1009 344 1024 307Q1015 349 1011 400ZM333 400Q337 356 347 327Q343 360 342 400ZM1013 400Q1015 308 1021 246Q1021 316 1022 400ZM1312 400Q1309 327 1304 278Q1315 333 1321 400ZM588 400Q596 362 615 336Q602 365 597 400ZM237 400Q240 308 246 247Q246 316 246 400ZM1365 400Q1365 337 1366 295Q1371 342 1374 400ZM1232 400Q1234 371 1239 351Q1240 373 1241 400ZM1033 400Q1034 347 1035 312Q1040 352 1042 400ZM1098 400Q1099 347 1099 311Q1105 351 1107 400ZM1139 400Q1140 346 1143 310Q1146 351 1148 400ZM683 400Q684 332 687 286Q690 337 692 400ZM663 400Q671 318 691 264Q677 325 672 400ZM296 400Q295 317 292 262Q301 324 305 400ZM581 400Q577 355 565 325Q583 359 590 400ZM768 400Q770 369 774 349Q776 372 777 400ZM978 400Q973 349 960 315Q979 353 987 400ZM522 400Q521 320 520 267Q527 327 531 400ZM551 400Q550 334 547 290Q556 340 560 400ZM61 400Q70 314 90 257Q76 321 70 400ZM626 400Q623 327 617 278Q629 333 635 400ZM536 400Q533 304 525 240Q539 312 545 400ZM21 400Q16 308 4 246Q22 315 30 400ZM270 400Q269 353 268 321Q275 356 279 400ZM917 400Q923 344 936 306Q929 349 926 400ZM1128 400Q1120 355 1101 325Q1126 359 1137 400ZM646 400Q653 324 670 273Q659 330 655 400ZM590 400Q589 351 588 319Q595 355 599 400Z"/>
+  </svg></div>
+</section>
+</main>
+<footer class="pied" id="pied">
+  <div class="cadre pied-cadre">
+    <div class="pied-gauche">
+      <svg class="fleurette" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="petales" d="M22 22Q32.4 29.5 42.2 22.4Q32.7 14.9 22 22ZM22 22Q16 33.3 24.4 42.1Q30.5 31.6 22 22ZM22 22Q9.4 19.8 3.6 30.4Q15.5 33 22 22ZM22 22Q18.3 9.7 6.2 9.4Q9.2 21.1 22 22ZM22 22Q32.2 14.3 28.3 2.8Q18.4 9.7 22 22Z"/><circle class="coeur" cx="22" cy="22" r="5.7"/></svg>
+      <p class="pied-nom">Ingrid Hinchliffe<span>Naturopathe · La Destrousse</span></p>
+      <p class="pied-tel"><a href="tel:+33625394832">06 25 39 48 32</a></p>
+      <nav class="pied-liens" aria-label="Plan de la page"><a href="#approche">L’approche</a><a href="#seance">La séance</a><a href="#tarifs">Tarifs</a><a href="#apropos">À propos</a><a href="#contact">Rendez-vous</a></nav>
+    </div>
+    <div class="pied-droite">
+      <p class="pied-apercu">Aperçu préparé pour Ingrid Hinchliffe. Textes, photos, couleurs : tout se modifie selon vos goûts.</p>
+      <p class="pied-suite">Cette prairie est un point de départ. On peut la garder telle quelle, la mêler à un autre univers ou repartir d’une page blanche, jusqu’au site qui vous ressemble exactement.</p>
+      <p class="pied-avert">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+      
+      <a class="pied-haut" href="#accueil">Revenir en haut</a>
+    </div>
+  </div>
+</footer>
+</div><!--/CONTENU-->
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

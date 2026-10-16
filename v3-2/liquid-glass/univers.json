@@ -1,0 +1,146 @@
+{
+  "id": "liquid-glass",
+  "nom": "Liquid Glass",
+  "promesse": "Le verre d’Apple posé sur de grandes photos : votre prénom en lettres de verre sur un écran verrouillé, des boutons qui s’étirent en menus et en feuilles sous le doigt.",
+  "pourVous": "{prenom}, votre site se tient comme une belle application de téléphone : votre prénom en lettres de verre sur une grande photo, et l’essentiel de votre métier de {metier} à portée de pouce.",
+  "familles": {
+    "esprit": 5,
+    "psy": 5,
+    "beaute": 4,
+    "creation": 4,
+    "elan": 4,
+    "mouvement": 4,
+    "plantes": 3,
+    "toucher": 3,
+    "energie": 3,
+    "famille": 3
+  },
+  "motsCles": [
+    "confiance",
+    "clart",
+    "seren",
+    "moderne",
+    "simpl",
+    "calme",
+    "equilibr",
+    "ressource",
+    "ecoute",
+    "lumi",
+    "apais",
+    "douceur",
+    "accompagn"
+  ],
+  "ambiances": [
+    "lumineux",
+    "chic",
+    "vif",
+    "doux"
+  ],
+  "polices": {
+    "titre": "Inter",
+    "texte": "Inter",
+    "css": "https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"
+  },
+  "palettes": [
+    {
+      "id": "lagon",
+      "nom": "Lagon",
+      "teinte": "bleu",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#E8F2FA",
+        "encre": "#0A1A2A",
+        "accent": "#0A63B8",
+        "accent2": "#2FC3E3"
+      },
+      "defautPour": [
+        "psy",
+        "mouvement"
+      ]
+    },
+    {
+      "id": "prairie",
+      "nom": "Prairie",
+      "teinte": "vert",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#ECF5EC",
+        "encre": "#0B1D11",
+        "accent": "#1C7440",
+        "accent2": "#8ED46A"
+      },
+      "defautPour": [
+        "plantes"
+      ]
+    },
+    {
+      "id": "lavande",
+      "nom": "Lavande",
+      "teinte": "violet",
+      "ton": "clair",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#F1EEFB",
+        "encre": "#16112B",
+        "accent": "#5636C2",
+        "accent2": "#BFA2FF"
+      },
+      "defautPour": [
+        "esprit",
+        "creation"
+      ]
+    },
+    {
+      "id": "corail",
+      "nom": "Corail",
+      "teinte": "rose",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#FCEDEA",
+        "encre": "#2A1012",
+        "accent": "#B8283F",
+        "accent2": "#FF9A87"
+      },
+      "defautPour": [
+        "famille",
+        "beaute"
+      ]
+    },
+    {
+      "id": "soleil",
+      "nom": "Soleil",
+      "teinte": "orange",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#FFF2E2",
+        "encre": "#251304",
+        "accent": "#AE4308",
+        "accent2": "#FFB340"
+      },
+      "defautPour": [
+        "energie",
+        "toucher",
+        "elan"
+      ]
+    },
+    {
+      "id": "minuit",
+      "nom": "Minuit",
+      "teinte": "bleu",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#090E1C",
+        "encre": "#F2F5FF",
+        "accent": "#8DB5FF",
+        "accent2": "#B996FF"
+      },
+      "defautPour": []
+    }
+  ],
+  "affiche": "Grande photo plein cadre aux couleurs de la palette ; en haut, une petite ligne métier · ville puis le prénom en très grandes lettres de verre blanc translucide à liseré lumineux et ombre douce (Inter 800, serré) ; en bas, une notification de verre arrondie (pastille aux initiales, nom, « maintenant », une phrase) et deux boutons capsule de verre écartés (Appeler, Rendez-vous), un trait blanc dessous."
+}
