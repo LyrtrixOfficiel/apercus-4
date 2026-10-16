@@ -20,7 +20,7 @@ export const typo = (html) => html.replace(/>([^<]+)</g, (m, t) => `>${t.replace
 export const fr = (s) => esc(apos(s)).replace(/ ([:;!?»])/g, '&nbsp;$1').replace(/« /g, '«&nbsp;');
 
 /** Le contact de Mathéo (le même que sur le site Kazura). */
-export const CONTACT = { prenom: 'Mathéo', tel: '06 30 11 00 38', telLien: 'tel:+33630110038' };
+export const CONTACT = { prenom: 'Mathéo' };
 
 /** Taille de la fenêtre simulée dans chaque appareil (le site s'y affiche exactement comme en vrai). */
 export const APPAREILS = { ordi: { l: 1280, h: 800, nom: 'Ordinateur' }, tel: { l: 390, h: 844, nom: 'Téléphone' } };
@@ -376,8 +376,7 @@ export function rendreCorps(vue, { gouts = {}, mode = 'ordi' } = {}) {
   </div>
   <div class="contact">
     <p class="contact-titre">Envie d’en parler ?</p>
-    <p>Répondez simplement au message qui vous a conduit ici, ou appelez ${CONTACT.prenom}.</p>
-    <a class="appel" href="${CONTACT.telLien}">${APPEL}<span>${CONTACT.tel}</span></a>
+    <p>Répondez simplement au message qui vous a conduit ici : ${CONTACT.prenom} vous répond lui-même.</p>
   </div>
 </main>
 
