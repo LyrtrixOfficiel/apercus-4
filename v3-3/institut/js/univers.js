@@ -1,0 +1,65 @@
+// Institut : la fiche de l'univers. Source unique : batir.mjs en tire univers.json (contrat BRIEF-2),
+// app.js et rendu.js y lisent les palettes. Couleurs : fond, encre, accent, accent2 (contrat) et des
+// couleurs de travail (fond2, encre2, papier, creme, huile, nuit, surNuit, surBouton) pour la matiere WebGL.
+export const UNIVERS = {
+  id: 'institut',
+  nom: 'Institut',
+  promesse: 'Une maison de soin comme les grandes marques : une crème qu’on étire du bout du doigt, une goutte d’huile qui signe vos initiales, une vraie carte de soins.',
+  // imagine : la fin de la phrase de la page d'arrivée (« ... : on vous a imaginé <imagine>. »)
+  imagine: 'une maison de soin où la crème s’étire sous le doigt et où une goutte d’huile signe vos initiales',
+  pourVous: '{prenom}, votre institut présenté comme une grande maison de soin : la matière, le rituel, la carte, et vous.',
+  familles: { beaute: 5, toucher: 3, plantes: 2, famille: 2, esprit: 1, psy: 1, energie: 1 },
+  // racines cherchées dans ses textes (début de mot ; « = » : le mot entier). Pas de mot que tout le monde emploie
+  // (soin, bien-être, douceur, confiance) : il ferait monter l'univers chez n'importe qui.
+  motsCles: ['esthet', 'socio', 'beaute', 'visage', '=peau', 'cosmet', 'maquill', 'eclat', 'image de soi', 'estime de soi', 'rituel', 'embelli', 'creme', 'huile', 'modelage', 'institut', 'epil', 'manucur', 'ongle', '=cils', 'soin du visage', 'soins du visage'],
+  ambiances: ['chic', 'doux', 'lumineux', 'chaleureux'],
+  polices: {
+    titre: 'Noto Serif Display',
+    texte: 'Jost',
+    css: 'https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,200..600;1,62.5..100,200..600&family=Jost:wght@400;500&family=Courier+Prime&family=Corinthia&display=swap',
+  },
+  palettes: [
+    {
+      id: 'porcelaine', nom: 'Porcelaine', teinte: 'neutre-clair', ton: 'clair', vivacite: 'douce',
+      couleurs: { fond: '#f3ede4', encre: '#2b211b', accent: '#86542f', accent2: '#c8a072', fond2: '#ebe2d5', encre2: '#5a493d', papier: '#fbf7f0', creme: '#efe5d8', huile: '#d4a03c', nuit: '#231a15', surNuit: '#efe4d6', surBouton: '#fbf7f0' },
+      defautPour: ['beaute'],
+    },
+    {
+      id: 'rose-argile', nom: 'Rose argile', teinte: 'rose', ton: 'clair', vivacite: 'douce',
+      couleurs: { fond: '#f2e5e0', encre: '#33201f', accent: '#94454e', accent2: '#d9a6a0', fond2: '#ead7d0', encre2: '#62443e', papier: '#fbf3f0', creme: '#efd3cb', huile: '#d09a45', nuit: '#2b191a', surNuit: '#f4e3de', surBouton: '#fbf3f0' },
+      defautPour: ['toucher', 'famille'],
+    },
+    {
+      id: 'argile-verte', nom: 'Argile verte', teinte: 'vert', ton: 'clair', vivacite: 'douce',
+      couleurs: { fond: '#e6e9dc', encre: '#1d291f', accent: '#45633e', accent2: '#a9b48b', fond2: '#dadfcd', encre2: '#45513e', papier: '#f4f5ec', creme: '#cfd9b9', huile: '#c9a042', nuit: '#18221a', surNuit: '#e6ead9', surBouton: '#f4f5ec' },
+      defautPour: ['plantes'],
+    },
+    {
+      id: 'lagon', nom: 'Lagon', teinte: 'bleu', ton: 'clair', vivacite: 'douce',
+      couleurs: { fond: '#e4ebea', encre: '#132a2f', accent: '#2a5f6b', accent2: '#9cc0c3', fond2: '#d6e0df', encre2: '#3a5458', papier: '#f2f6f5', creme: '#d3e4e4', huile: '#c9a24f', nuit: '#0f2329', surNuit: '#e2ecec', surBouton: '#f2f6f5' },
+      defautPour: ['esprit', 'psy'],
+    },
+    {
+      id: 'ambre', nom: 'Ambre', teinte: 'or', ton: 'sombre', vivacite: 'douce',
+      couleurs: { fond: '#1c1410', encre: '#f3e7d7', accent: '#d9a05b', accent2: '#8a5a2b', fond2: '#251b15', encre2: '#cdb8a1', papier: '#2a1f18', creme: '#8a5312', huile: '#f2c46e', nuit: '#110c09', surNuit: '#f0e2cf', surBouton: '#1c1410' },
+      defautPour: ['energie'],
+    },
+    {
+      id: 'charbon', nom: 'Charbon', teinte: 'neutre-sombre', ton: 'sombre', vivacite: 'vive',
+      couleurs: { fond: '#151413', encre: '#efebe5', accent: '#cfae7a', accent2: '#6d6359', fond2: '#1d1b19', encre2: '#bdb5aa', papier: '#1f1d1b', creme: '#1d1c1b', huile: '#d9a84c', nuit: '#0b0a0a', surNuit: '#ece6dc', surBouton: '#151413' },
+      defautPour: ['elan', 'creation', 'mouvement'],
+    },
+  ],
+  affiche: 'Gros plan d’une crème ivoire striée par une spatule, initiales dorées posées dessus comme une goutte d’huile, nom en Noto Serif Display très fin.',
+};
+
+// Palette par defaut : celle dont defautPour contient la famille, sinon la premiere.
+export function paletteDe(id, fam) {
+  const P = UNIVERS.palettes;
+  return P.find((p) => p.id === id) || P.find((p) => p.defautPour.includes(fam)) || P[0];
+}
+
+// Variables CSS d'une palette (pour le style en ligne de <html> et pour le rendu sans JavaScript).
+export function variables(p) {
+  return Object.entries(p.couleurs).map(([k, v]) => `--${k}:${v}`).join(';');
+}

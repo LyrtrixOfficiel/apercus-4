@@ -1,0 +1,213 @@
+/* Resonance : le son rendu visible. Mobile d'abord.
+   Couleurs : variables de la palette (style#palette, ou posees par app.js pour ?palette=). */
+:root {
+  --titre: 'Bricolage Grotesque', 'Arial Narrow', 'Helvetica Neue', system-ui, sans-serif;
+  --texte: 'Spectral', 'Iowan Old Style', Georgia, serif;
+  --marge: clamp(20px, 5.4vw, 84px);
+  --doux: cubic-bezier(.22, .8, .24, 1);
+  --ressort: cubic-bezier(.34, 1.4, .44, 1);
+  --ligne: color-mix(in srgb, var(--encre) 18%, transparent);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--fond); color: var(--encre); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fond); color: var(--encre); font: 300 18px/1.6 var(--texte); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+p { margin: 0 0 1em; }
+::selection { background: var(--accent); color: var(--surBouton); }
+.evitement { position: absolute; left: 12px; top: -60px; z-index: 200; background: var(--encre); color: var(--fond); padding: 10px 14px; }
+.evitement:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.emplacement { color: var(--encre2); text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: .26em; text-decoration-color: color-mix(in srgb, var(--encre2) 40%, transparent); }
+
+/* ---------- Chargement : le sable se rassemble en initiales ---------- */
+.chargement { display: none; position: fixed; inset: 0; z-index: 100; background: var(--fond); cursor: pointer; }
+.js .chargement { display: block; }
+.chargement canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ch-nom { position: absolute; left: 0; right: 0; bottom: calc(12svh + env(safe-area-inset-bottom)); margin: 0; text-align: center; font: 500 11.5px/1 var(--titre); letter-spacing: .32em; text-transform: uppercase; color: var(--encre2); opacity: 0; transition: opacity .9s ease .3s; }
+.chargement.vu .ch-nom { opacity: 1; }
+.chargement.fini { opacity: 0; visibility: hidden; transition: opacity .8s var(--doux), visibility 0s .8s; }
+.reduit .chargement.fini { transition: opacity .5s ease, visibility 0s .5s; }
+
+/* ---------- Barre ---------- */
+.barre { position: fixed; z-index: 30; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 14px; padding: calc(12px + env(safe-area-inset-top)) var(--marge) 12px; color: var(--encre); transition: background-color .6s var(--doux), box-shadow .6s; }
+.barre.pleine { background: color-mix(in srgb, var(--fond) 84%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--ligne); }
+.barre-nom { display: flex; align-items: center; gap: 12px; margin-right: auto; text-decoration: none; min-height: 44px; }
+.barre-ini { font: 600 15px/1 var(--titre); font-stretch: 75%; letter-spacing: .04em; }
+.barre-texte { display: none; font: 400 15px/1 var(--titre); font-stretch: 85%; letter-spacing: .01em; }
+.son { display: none; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; border: 0; background: none; color: inherit; font: 500 12px/1 var(--titre); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.js .son { display: inline-flex; }
+.son-barres { display: inline-flex; align-items: center; gap: 2.5px; height: 16px; }
+.son-barres i { display: block; width: 2px; height: 16px; background: currentColor; border-radius: 1px; transform: scaleY(.18); transform-origin: 50% 50%; transition: transform .5s var(--ressort); }
+.son[aria-pressed="true"] { color: var(--accent); }
+.son[aria-pressed="true"] .son-barres i { animation: barre 1.1s ease-in-out infinite alternate; }
+.son[aria-pressed="true"] .son-barres i:nth-child(2) { animation-delay: -.4s; } .son[aria-pressed="true"] .son-barres i:nth-child(3) { animation-delay: -.7s; } .son[aria-pressed="true"] .son-barres i:nth-child(4) { animation-delay: -.2s; }
+.reduit .son[aria-pressed="true"] .son-barres i { animation-duration: 2.4s; }
+@keyframes barre { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+.barre-rdv { font: 500 12px/1 var(--titre); letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 7px; padding: 14px 0 14px 8px; }
+@media (min-width: 700px) { .barre-texte { display: inline; } .barre-ini { padding-right: 12px; border-right: 1px solid var(--ligne); } .son { margin-right: 18px; } }
+
+/* ---------- Accueil : la plaque qui vibre ---------- */
+.accueil { position: relative; }
+.scene { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; gap: 40px; padding: 120px var(--marge) 64px; }
+.js .accueil { height: 270svh; }
+.js .scene { position: sticky; top: 0; height: 100svh; min-height: 0; display: block; padding: 0; }
+.plaque { position: absolute; inset: 0; z-index: 0; background: radial-gradient(120% 90% at 30% 20%, color-mix(in srgb, var(--plaque) 80%, #fff 6%), var(--plaque) 60%); touch-action: pan-y; }
+.plaque canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.figure { position: absolute; left: 50%; top: 50%; width: max(130vw, 130vh); height: max(130vw, 130vh); translate: -50% -50%; }
+.figure path { fill: none; stroke: var(--sable); stroke-width: 6; stroke-linecap: round; stroke-dasharray: .01 8; opacity: .9; }
+.gl .figure-fixe { display: none; }
+.lavis-fixe { position: absolute; inset: 0; }
+.lavis-photo { width: 100%; height: 100%; object-fit: cover; opacity: .8; }
+.gl .lavis-fixe { display: none; }
+.voile { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, color-mix(in srgb, var(--fond) 88%, transparent) 0, color-mix(in srgb, var(--fond) 55%, transparent) 70px, transparent 150px), linear-gradient(to top, color-mix(in srgb, var(--fond) 86%, transparent) 0%, color-mix(in srgb, var(--fond) 40%, transparent) 38%, transparent 62%); }
+.couche { position: relative; z-index: 2; }
+.js .couche { position: absolute; left: var(--marge); right: var(--marge); opacity: 0; visibility: hidden; transform: translateY(24px); transition: opacity .9s var(--doux), transform 1.1s var(--doux), visibility 0s .9s; pointer-events: none; }
+.js.reduit .couche { transform: none; transition: opacity .8s ease, visibility 0s .8s; }
+.js .couche.active { opacity: 1; visibility: visible; transform: none; transition-delay: .1s, .1s, 0s; }
+.js .couche.active a, .js .couche.active button { pointer-events: auto; }
+.js .couche-0 { bottom: calc(40px + env(safe-area-inset-bottom)); }
+.js .couche-1 { top: 50%; translate: 0 -50%; }
+.js .couche-1.active { transform: none; }
+.js .couche-2 { bottom: calc(44px + env(safe-area-inset-bottom)); text-align: center; }
+.lieu { margin: 0 0 14px; font: 500 12px/1.5 var(--titre); letter-spacing: .2em; text-transform: uppercase; }
+.nom { margin: 0; text-shadow: 0 0 34px color-mix(in srgb, var(--fond) 85%, transparent); font: 300 clamp(66px, 22vw, 250px)/.84 var(--titre); font-stretch: 75%; font-variation-settings: 'opsz' 96; letter-spacing: -.025em; overflow-wrap: anywhere; }
+.nom-long { font-size: clamp(58px, 19vw, 210px); }
+.nom-tres-long { font-size: clamp(44px, 12vw, 160px); }
+.enseigne { margin: 12px 0 0; font: italic 300 clamp(19px, 4.8vw, 30px)/1.25 var(--texte); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 26px; }
+.bouton { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; background: var(--encre); color: var(--fond); font: 500 12.5px/1 var(--titre); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background-color .4s, color .4s, transform .5s var(--ressort); }
+.bouton:hover { background: var(--accent); color: var(--surBouton); }
+.bouton:active { transform: scale(.97); }
+.lien-tel { font: 400 17px/1 var(--titre); letter-spacing: .04em; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.accroche { margin: 0 auto; max-width: 19ch; text-align: center; font: italic 300 clamp(27px, 7.4vw, 70px)/1.14 var(--texte); text-wrap: balance; text-shadow: 0 0 30px color-mix(in srgb, var(--fond) 80%, transparent), 0 0 4px color-mix(in srgb, var(--fond) 90%, transparent); }
+.fin-sequence { margin: 0 0 18px; font: italic 300 clamp(20px, 5vw, 30px)/1.3 var(--texte); text-shadow: 0 0 18px var(--fond); }
+.invite, .defiler { display: none; }
+.gl .invite { display: block; position: absolute; z-index: 2; left: var(--marge); max-width: calc(100% - 2 * var(--marge)); top: calc(80px + env(safe-area-inset-top)); margin: 0; padding: 7px 12px; border-radius: 3px; background: color-mix(in srgb, var(--fond) 74%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: italic 300 15px/1.4 var(--texte); color: var(--encre); opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
+.gl.ouvert .invite { opacity: .95; }
+.invite.parti, .invite.loin { opacity: 0 !important; }
+.js .defiler { display: flex; align-items: center; gap: 12px; position: absolute; z-index: 2; right: var(--marge); bottom: calc(12px + env(safe-area-inset-bottom)); margin: 0; font: 500 10.5px/1 var(--titre); letter-spacing: .2em; text-transform: uppercase; color: var(--encre2); transition: opacity .6s; }
+.defiler span { display: block; width: 34px; height: 1px; background: currentColor; transform-origin: 0 50%; animation: tirer 2.4s var(--doux) infinite; }
+.reduit .defiler span { animation-duration: 4s; }
+@keyframes tirer { 0% { transform: scaleX(0); } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+.defiler.parti { opacity: 0; }
+@media (max-width: 699px) { .js .defiler { left: var(--marge); right: auto; bottom: auto; top: calc(100svh - 30px); display: none; } }
+@media (min-width: 900px) {
+  .js .couche-0 { bottom: 56px; right: 40vw; }
+  .gl .invite { left: auto; right: var(--marge); top: auto; bottom: 64px; max-width: 26ch; text-align: right; }
+}
+
+/* ---------- Sections ---------- */
+.section { position: relative; padding: clamp(110px, 17vw, 210px) var(--marge); overflow-x: clip; }
+.insecable { white-space: nowrap; }
+.titre { margin: 0 0 .55em; font: 300 clamp(48px, 13vw, 168px)/.88 var(--titre); font-stretch: 75%; font-variation-settings: 'opsz' 96; letter-spacing: -.025em; }
+.nuance { font: italic 300 .24em/1 var(--texte); letter-spacing: .01em; color: var(--accent); white-space: nowrap; vertical-align: .9em; margin-left: .2em; }
+
+/* L'approche : la phrase, les cordes, la gamme */
+.approche { background: var(--fond); }
+.phare { margin: 0; max-width: 21ch; font: 300 clamp(30px, 7.6vw, 84px)/1.06 var(--titre); font-stretch: 82%; letter-spacing: -.012em; }
+.phare-long { max-width: 30ch; font-size: clamp(24px, 5.6vw, 58px); line-height: 1.12; }
+.cordes { position: relative; height: clamp(230px, 44vw, 400px); margin: clamp(48px, 9vw, 110px) calc(-1 * var(--marge)); touch-action: pan-y; cursor: crosshair; }
+.cordes canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cordes-fixes span { position: absolute; left: 4%; right: 4%; top: calc(14% + var(--i) * 11.4%); height: 1px; background: linear-gradient(90deg, transparent, var(--accent) 12%, var(--accent) 88%, transparent); opacity: .55; }
+.gl-cordes .cordes-fixes { display: none; }
+.cordes-invite { position: absolute; right: var(--marge); bottom: 0; margin: 0; font: italic 300 15px/1 var(--texte); color: var(--encre2); }
+.approche-suite p { max-width: 34ch; font: 300 clamp(19px, 4.7vw, 25px)/1.55 var(--texte); }
+.gamme { margin-top: clamp(80px, 14vw, 170px); }
+.gamme-titre { margin: 0 0 28px; font: italic 300 clamp(20px, 4.8vw, 28px)/1.2 var(--texte); color: var(--accent); }
+.gamme-notes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column-reverse; }
+.gamme-notes li { margin-left: calc(var(--k) * 7%); padding: 16px 0 12px; border-bottom: 1px solid var(--ligne); }
+.gamme-notes strong { display: block; font: 400 clamp(26px, 6.6vw, 58px)/1 var(--titre); font-stretch: 80%; letter-spacing: -.01em; }
+.gamme-notes span { display: block; margin-top: 8px; font: italic 300 17px/1.45 var(--texte); color: var(--encre2); max-width: 36ch; }
+@media (min-width: 900px) {
+  .approche-suite { columns: 2; column-gap: 6vw; max-width: 1200px; margin-left: 18vw; }
+  .approche-suite p { break-inside: avoid; }
+  .gamme-notes li { margin-left: calc(var(--k) * 14%); max-width: 62%; }
+}
+
+/* La seance : le bol, puis l'enveloppe du son */
+.seance { background: var(--fond2); overflow-x: clip; }
+
+.bol { position: relative; margin: 0 calc(-1 * var(--marge)); aspect-ratio: 4 / 5; overflow: hidden; background: #0b0907; cursor: pointer; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
+.bol-photo { width: 100%; height: 100%; object-fit: cover; object-position: 43% 50%; }
+.bol canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.gl-bol .bol-photo { visibility: hidden; }
+.bol-invite { position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; font: italic 300 18px/1.2 var(--texte); color: #f6eddf; text-shadow: 0 1px 14px rgba(0, 0, 0, .7); pointer-events: none; transition: opacity .8s; }
+.bol.touche .bol-invite { opacity: 0; }
+.enveloppe { margin-top: clamp(70px, 12vw, 150px); display: grid; gap: clamp(56px, 9vw, 110px); }
+.trace { display: block; width: 100%; height: 64px; overflow: visible; }
+.trace path { fill: none; stroke: var(--accent); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-dasharray: 1 1; stroke-dashoffset: var(--trace, 0); }
+.mesure h3 { margin: 22px 0 12px; font: 400 clamp(28px, 7vw, 54px)/1.02 var(--titre); font-stretch: 78%; letter-spacing: -.01em; }
+.mesure p { max-width: 38ch; font: 300 clamp(18px, 4.4vw, 22px)/1.55 var(--texte); }
+.mesure .duree { font: 500 12px/1 var(--titre); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.mesure-tenue .trace path { opacity: .8; }
+.mesure-extinction .trace path { opacity: .7; }
+.durees { font: italic 300 18px/1.5 var(--texte); color: var(--encre2); }
+@media (min-width: 900px) {
+  .bol { aspect-ratio: 16 / 7.4; }
+  .mesure { max-width: 58%; }
+  .mesure-tenue { margin-left: 22%; }
+  .mesure-extinction { margin-left: 42%; }
+  .mesure-attaque .trace, .mesure-tenue .trace, .mesure-extinction .trace { width: 170%; }
+}
+
+/* Tarifs : la note tenue */
+.tarifs { background: var(--fond); }
+.notes { list-style: none; margin: 0; padding: 0; }
+.note-tenue { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 18px; padding: 26px 0 24px; border-top: 1px solid var(--ligne); }
+.note-tenue:last-child { border-bottom: 1px solid var(--ligne); }
+.nt-nom { grid-column: 1 / -1; margin-bottom: 12px; font: 300 clamp(28px, 7.4vw, 64px)/1.02 var(--titre); font-stretch: 78%; letter-spacing: -.01em; }
+.nt-onde { display: block; width: 100%; height: 26px; overflow: visible; }
+.nt-onde path { fill: none; stroke: var(--accent); stroke-width: 1.3; vector-effect: non-scaling-stroke; transform-origin: 50% 50%; }
+.nt-prix { font: 400 clamp(24px, 6.4vw, 56px)/1 var(--titre); font-stretch: 78%; color: var(--accent); white-space: nowrap; }
+.tarifs-note { margin-top: 26px; font: italic 300 18px/1.5 var(--texte); color: var(--encre2); }
+@media (min-width: 900px) {
+  .note-tenue { grid-template-columns: auto minmax(120px, 1fr) auto; column-gap: 32px; }
+  .nt-nom { grid-column: auto; margin: 0; }
+}
+
+/* A propos : le disque */
+.apropos { background: var(--fond2); display: grid; gap: clamp(56px, 9vw, 100px); }
+.disque { position: relative; margin: 0; justify-self: center; width: min(80vw, 460px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; overflow: hidden; isolation: isolate; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .6); }
+.disque-sillons { position: absolute; inset: 0; border-radius: 50%; transform: rotate(var(--rot, 0deg)); background:
+  conic-gradient(from 20deg, transparent 0 8%, color-mix(in srgb, var(--accent) 22%, transparent) 12%, transparent 18% 58%, color-mix(in srgb, var(--accent) 16%, transparent) 62%, transparent 68%),
+  repeating-radial-gradient(circle, color-mix(in srgb, var(--encre) 9%, transparent) 0 1px, transparent 1px 5px),
+  radial-gradient(circle, var(--fond2) 0 22%, color-mix(in srgb, var(--accent) 30%, var(--papier)) 22.5% 24%, var(--papier) 24.5% 100%);
+  box-shadow: inset 0 0 0 1px var(--ligne); }
+/* Art-therapie : pas de disque, une tache de lavis posee sur le papier, bord plus sombre la ou l'eau a seche */
+.disque[data-mode="pigment"] { border-radius: 47% 53% 44% 56% / 55% 45% 55% 45%; box-shadow: none; overflow: visible; }
+.disque[data-mode="pigment"] .disque-sillons { border-radius: inherit; transform: rotate(calc(var(--rot, 0deg) * .15)); background:
+  radial-gradient(60% 55% at 34% 38%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%),
+  radial-gradient(55% 60% at 70% 66%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 72%),
+  radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 10%, var(--papier)) 0 62%, color-mix(in srgb, var(--accent) 22%, var(--papier)) 70%, transparent 71.5%);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent), inset 0 0 26px color-mix(in srgb, var(--accent) 22%, transparent); }
+.disque figcaption { position: relative; max-width: 9em; text-align: center; font: italic 300 clamp(18px, 4.6vw, 22px)/1.25 var(--texte); color: var(--encre); }
+.apropos-texte p { max-width: 32ch; font: 300 clamp(20px, 4.8vw, 27px)/1.5 var(--texte); }
+.citation { font-style: italic; color: var(--accent); }
+@media (min-width: 900px) { .apropos { grid-template-columns: 5fr 7fr; align-items: center; } }
+
+/* Contact */
+.contact { background: var(--fond); }
+.contact-mode { font: italic 300 clamp(19px, 4.6vw, 26px)/1.4 var(--texte); color: var(--encre2); margin-top: -.6em; }
+.tel-geant { display: inline-block; margin: 26px 0 8px; font: 300 clamp(50px, 15vw, 176px)/1 var(--titre); font-stretch: 75%; letter-spacing: -.01em; text-decoration: none; white-space: nowrap; }
+.tel-onde { display: block; width: 100%; height: 30px; margin-top: 10px; overflow: visible; }
+.tel-onde path { fill: none; stroke: var(--accent); stroke-width: 1.4; vector-effect: non-scaling-stroke; transform-origin: 0 50%; }
+.contact-liens { display: flex; flex-wrap: wrap; gap: 12px 30px; margin: 22px 0 56px; }
+.contact-liens a { font: 500 12.5px/1 var(--titre); letter-spacing: .16em; text-transform: uppercase; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; padding: 8px 0; }
+.infos { display: grid; gap: 20px; margin: 0; max-width: 760px; }
+.infos div { display: grid; grid-template-columns: 7em 1fr; gap: 14px; padding-top: 16px; border-top: 1px solid var(--ligne); }
+.infos dt { font: 500 12px/1.9 var(--titre); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.infos dd { margin: 0; font: 300 18px/1.55 var(--texte); }
+
+/* Pied de page */
+.pied { background: var(--nuit); color: var(--surNuit); padding: clamp(90px, 14vw, 170px) var(--marge) calc(44px + env(safe-area-inset-bottom)); }
+.pied-nom { margin: 0 0 44px; font: 300 clamp(40px, 11vw, 120px)/.9 var(--titre); font-stretch: 75%; letter-spacing: -.02em; }
+.pied-nom span { display: block; margin-top: 14px; font: italic 300 clamp(17px, 4vw, 22px)/1.3 var(--texte); letter-spacing: 0; opacity: .92; }
+.pied-apercu, .pied-mesure { max-width: 46ch; font: 300 18px/1.55 var(--texte); }
+.pied-avert, .pied-legal { max-width: 62ch; font: 400 13.5px/1.6 var(--titre); opacity: .88; }
+.pied-haut { display: inline-block; margin-top: 22px; font: 500 12px/1 var(--titre); letter-spacing: .16em; text-transform: uppercase; text-underline-offset: 6px; }
+
+/* ---------- Apparitions (avec JavaScript ; adoucies sous mouvement reduit, jamais coupees) ---------- */
+.js .apparait { opacity: 0; transform: translateY(26px); transition: opacity 1.1s var(--doux), transform 1.3s var(--doux); transition-delay: var(--d, 0s); }
+.js.reduit .apparait { transform: none; transition: opacity .9s ease; transition-delay: var(--d, 0s); }
+.js .apparait.vu { opacity: 1; transform: none; }

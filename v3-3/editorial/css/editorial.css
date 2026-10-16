@@ -1,0 +1,377 @@
+/* Univers Éditorial : le site comme un numéro de magazine (esprit Kinfolk, Cereal) qui bouge.
+   Papier, encre, UNE couleur franche par palette ; un Didone immense, un grotesque étroit,
+   un texte de lecture. Chaque partie a la forme d'une page de magazine : couverture,
+   sommaire, grand entretien, brèves en colonnes, pleine page, encadré pratique,
+   quatrième de couverture, colophon. */
+
+:root, [data-palette="klein"] { --accent: #1a2fc4; }
+[data-palette="encre"] { --accent: #141210; }
+[data-palette="vert"] { --accent: #13693a; }
+[data-palette="terracotta"] { --accent: #a33a1f; }
+[data-palette="rose"] { --accent: #b0245e; }
+[data-palette="violet"] { --accent: #5a2bbf; }
+
+:root {
+  --papier: #f1ece3;
+  --papier-2: #e8e0d3;
+  --encre: #141210;
+  --encre-2: #4b463e;
+  --sur-accent: #fffaf2;
+  --didone: 'Bodoni Moda', 'Bodoni 72', Didot, 'Times New Roman', serif;
+  --grot: 'Archivo', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --texte: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --marge: clamp(18px, 4.6vw, 72px);
+  --tete: 54px;
+  --sortie: cubic-bezier(.16, 1, .3, 1);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .9 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--papier); }
+body { margin: 0; background: var(--papier); color: var(--encre); font: 400 18px/1.6 var(--texte); -webkit-font-smoothing: antialiased; overflow-x: clip; font-optical-sizing: auto; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, figure, blockquote, dl, dd, ol, ul { margin: 0; }
+h1, h2, h3 { font-weight: 400; }
+::selection { background: var(--accent); color: var(--sur-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#site { overflow-x: clip; }
+.lu { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.evitement { position: fixed; left: 12px; top: -60px; z-index: 300; background: var(--encre); color: var(--papier); padding: 10px 16px; font: 600 13px var(--grot); }
+.evitement:focus { top: 12px; }
+.caps { font-family: var(--grot); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; }
+
+/* ce qui manque : un emplacement qui dit ce qui viendra */
+.vide { font-style: italic; }
+.vide-quoi { font: 700 .66em/1 var(--grot); font-style: normal; letter-spacing: .12em; text-transform: uppercase; font-stretch: 85%; color: var(--accent); margin-right: .45em; vertical-align: .12em; }
+
+/* ---- tête de page ---------------------------------------------------------------------- */
+.tete {
+  position: fixed; inset: 0 0 auto; z-index: 60; height: var(--tete); padding: 0 var(--marge);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  background: var(--papier); border-bottom: 1px solid var(--encre);
+  font: 600 11px/1 var(--grot); letter-spacing: .16em; text-transform: uppercase; font-stretch: 90%;
+  transition: opacity .8s ease, transform .8s var(--sortie);
+}
+.tete-num { text-decoration: none; }
+.tete-nom { font: italic 400 19px/1 var(--didone); letter-spacing: 0; text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
+.tete-droite { justify-self: end; display: flex; gap: 8px; align-items: center; }
+.tete-sommaire { background: none; border: 0; padding: 10px 6px; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; cursor: pointer; }
+.tete-appel { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; background: var(--accent); color: var(--sur-accent); text-decoration: none; }
+.tete-progression { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+@media (max-width: 560px) {
+  .tete { grid-template-columns: auto 1fr auto; }
+  .tete-nom { justify-self: center; font-size: 17px; max-width: 40vw; }
+  .tete-sommaire { display: none; }
+}
+.presse .tete { opacity: 0; transform: translateY(-100%); }
+.sommaire-plein { position: fixed; inset: var(--tete) 0 0; z-index: 55; background: var(--papier); padding: 5vh var(--marge); overflow: auto; }
+.sommaire-plein[hidden] { display: none; }
+.sommaire-plein-titre { font: 600 11px var(--grot); letter-spacing: .18em; text-transform: uppercase; border-bottom: 2px solid var(--encre); padding-bottom: 12px; }
+.sommaire-plein ol { list-style: none; padding: 0; }
+.sommaire-plein a { display: flex; align-items: baseline; gap: 18px; padding: 12px 0; border-bottom: 1px solid rgba(20, 18, 16, .2); text-decoration: none; font: 400 clamp(2rem, 6.4vw, 4.4rem)/1.02 var(--didone); }
+.sommaire-plein a b { font: italic 500 .42em/1 var(--didone); color: var(--accent); min-width: 2.4ch; }
+.sommaire-plein a:hover span { font-style: italic; }
+
+/* ---- couverture -------------------------------------------------------------------------- */
+.couverture { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; padding: calc(var(--tete) + 14px) var(--marge) 22px; overflow: hidden; isolation: isolate; }
+.couverture::before { content: ''; position: absolute; inset: 0; background: var(--grain); opacity: .09; pointer-events: none; z-index: -1; }
+.couverture-haut { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--encre); font: 600 11px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; }
+.couverture-haut span:nth-child(2) { text-align: center; }
+@media (max-width: 560px) { .couverture-haut span:nth-child(2) { display: none; } }
+.repere { position: absolute; width: 22px; height: 22px; pointer-events: none; opacity: .55; }
+.repere::before, .repere::after { content: ''; position: absolute; background: var(--encre); }
+.repere::before { width: 100%; height: 1px; top: 50%; } .repere::after { height: 100%; width: 1px; left: 50%; }
+.repere-hg { left: 6px; top: calc(var(--tete) + 4px); } .repere-hd { right: 6px; top: calc(var(--tete) + 4px); }
+.repere-bg { left: 6px; bottom: 6px; } .repere-bd { right: 6px; bottom: 6px; }
+.gamme { position: absolute; right: calc(var(--marge) + 2px); top: calc(var(--tete) + 40px); display: flex; gap: 3px; z-index: 3; }
+.gamme i { width: 12px; height: 12px; border: 1px solid rgba(20, 18, 16, .5); transition: background-color .35s ease; }
+.gamme i.encree:nth-child(1) { background: #00a0dc; } .gamme i.encree:nth-child(2) { background: #e2007a; } .gamme i.encree:nth-child(3) { background: #ffd200; }
+.gamme i.encree:nth-child(4) { background: var(--encre); } .gamme i.encree:nth-child(5) { background: var(--accent); } .gamme i.encree:nth-child(6) { background: var(--papier-2); }
+html:not(.js) .gamme i, .imprime .gamme i { background-color: transparent; }
+html:not(.js) .gamme i:nth-child(1), .imprime .gamme i:nth-child(1) { background: #00a0dc; }
+html:not(.js) .gamme i:nth-child(2), .imprime .gamme i:nth-child(2) { background: #e2007a; }
+html:not(.js) .gamme i:nth-child(3), .imprime .gamme i:nth-child(3) { background: #ffd200; }
+html:not(.js) .gamme i:nth-child(4), .imprime .gamme i:nth-child(4) { background: var(--encre); }
+html:not(.js) .gamme i:nth-child(5), .imprime .gamme i:nth-child(5) { background: var(--accent); }
+html:not(.js) .gamme i:nth-child(6), .imprime .gamme i:nth-child(6) { background: var(--papier-2); }
+
+.couverture-titre { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(14px, 3vh, 40px) 0 clamp(10px, 2vh, 24px); flex: 1; min-height: 0; }
+.couverture-surtitre { display: block; font: italic 400 clamp(1.3rem, 2.6vw, 2.2rem)/1 var(--didone); margin-bottom: .1em; }
+.titre-ligne {
+  display: block; position: relative; white-space: nowrap; line-height: .82; letter-spacing: -.035em;
+  font-family: var(--didone); font-weight: 500; font-variation-settings: 'opsz' 48;
+  font-size: min(calc((100vw - 2 * var(--marge)) / (var(--n) * .6)), 26vh);
+}
+.titre-ligne + .titre-ligne { margin-top: .04em; }
+.titre-ligne-b { text-align: right; font-style: italic; color: var(--accent); }
+.titre-texte { display: inline-block; position: relative; }
+.titre-texte::before { content: attr(data-t); position: absolute; left: 0; top: 0; color: var(--accent); mix-blend-mode: multiply; opacity: 0; pointer-events: none; }
+.titre-ligne-b .titre-texte::before { color: var(--encre); }
+.couverture-vedette { display: block; margin-top: .5em; font: italic 400 clamp(1.25rem, 2.4vw, 2rem)/1.15 var(--didone); text-align: right; }
+@media (min-width: 900px) {
+  .titre-ligne { max-width: 78%; } .titre-ligne-b { margin-left: auto; }
+  /* trois lignes et plus : on décale en escalier plutôt que d'envoyer une ligne seule à droite */
+  .couverture-titre[data-lignes="3"] .titre-ligne-b, .couverture-titre[data-lignes="4"] .titre-ligne-b { margin-left: 9%; text-align: left; }
+}
+
+/* l'objet de couverture : on l'attrape, on le lance */
+.couverture-objet-zone { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.couverture-objet {
+  position: absolute; left: 50%; top: 24%; height: min(24vh, 230px); width: auto; max-width: 70vw; object-fit: contain;
+  pointer-events: auto; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+  mix-blend-mode: multiply; rotate: -6deg; transition: filter .4s ease, scale .4s var(--sortie);
+}
+.couverture-objet:hover { scale: 1.03; }
+.couverture-objet.tenu { cursor: grabbing; scale: 1.06; filter: drop-shadow(0 22px 18px rgba(20, 18, 16, .22)); }
+
+/* accroches de couverture : chacune a sa voix */
+.accroches { position: relative; z-index: 3; display: grid; gap: 14px; max-width: 520px; padding-top: 4px; }
+.accroche { display: grid; gap: 2px; text-decoration: none; }
+.accroche b { font: 700 11px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 85%; color: var(--accent); }
+.accroche span { font: 400 16px/1.35 var(--texte); }
+.accroche-0 span { font: italic 400 clamp(1.25rem, 2vw, 1.65rem)/1.18 var(--didone); }
+.accroche:hover span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.couverture-bas { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; margin-top: 18px; }
+.couverture-rdv { font: 600 11px/1.5 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; }
+.couverture-rdv a { display: block; font: 400 18px/1.3 var(--didone); letter-spacing: .02em; text-transform: none; text-decoration: none; }
+.couverture-code { display: grid; justify-items: center; gap: 4px; background: #fffdf8; padding: 8px 10px 6px; border: 1px solid rgba(20, 18, 16, .15); }
+.code-barres { width: 120px; height: 38px; display: block; fill: var(--encre); }
+.couverture-code span { font: 600 10.5px/1 var(--grot); letter-spacing: .18em; }
+@media (min-width: 900px) {
+  .couverture-titre { padding-bottom: 0; }
+  .couverture-bas { position: absolute; left: var(--marge); right: var(--marge); bottom: 22px; margin: 0; justify-content: flex-end; }
+  .couverture-rdv { text-align: right; }
+  .accroches { position: absolute; left: var(--marge); bottom: 24px; max-width: min(46vw, 560px); }
+  .couverture { padding-bottom: clamp(180px, 26vh, 250px); }
+}
+
+/* impression du numéro : le chargement est la couverture qui se compose */
+.presse .titre-texte, .presse .couverture-surtitre, .presse .couverture-vedette, .presse .accroches, .presse .couverture-bas, .presse .couverture-objet { opacity: 0; }
+.attente .couverture-haut span { opacity: 0; }
+.imprime .titre-texte { animation: encre 1.15s cubic-bezier(.3, .7, .2, 1) calc(.42s + var(--l, 0) * .22s) both; }
+.imprime .titre-texte::before { animation: plaque 1.25s cubic-bezier(.3, .7, .2, 1) calc(.24s + var(--l, 0) * .22s) both; }
+.imprime .couverture-surtitre, .imprime .couverture-vedette { animation: apparait .9s ease .7s both; }
+.imprime .couverture-objet { animation: pose 1.3s var(--sortie) .55s both; }
+.imprime .accroches { animation: monte 1s var(--sortie) .85s both; }
+.imprime .couverture-bas { animation: apparait 1s ease 1s both; }
+@keyframes encre { 0% { opacity: 0; clip-path: inset(0 100% 0 0); } 35% { opacity: 1; } 100% { opacity: 1; clip-path: inset(0 0 0 0); } }
+@keyframes plaque { 0% { opacity: 0; transform: translate(14px, -8px); } 25% { opacity: .85; transform: translate(14px, -8px); } 80% { opacity: .55; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(0, 0); } }
+@keyframes pose { from { opacity: 0; transform: translateY(-34px) scale(1.12); } to { opacity: 1; transform: none; } }
+@keyframes monte { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+/* mouvement réduit : la même impression, sans décalage de plaque ni chute */
+.doux.imprime .titre-texte { animation: apparait .9s ease calc(.3s + var(--l, 0) * .15s) both; }
+.doux.imprime .titre-texte::before { animation: none; }
+.doux.imprime .couverture-objet { animation: apparait .9s ease .4s both; }
+.doux.imprime .accroches { animation: apparait .8s ease .6s both; }
+.saute .titre-texte, .saute .couverture-objet, .saute .accroches, .saute .couverture-bas, .saute .couverture-surtitre, .saute .couverture-vedette { animation: none !important; opacity: 1 !important; }
+.saute .tete { opacity: 1 !important; transform: none !important; }
+
+/* ---- le chargement : l'épreuve du numéro, « bon à tirer » --------------------------------
+   Les initiales du praticien, imprimées en quatre plaques (cyan, magenta, jaune, noir) qui se
+   calent à mesure que la page est prête ; la gamme de couleurs se remplit. Puis la feuille
+   d'épreuve se retire vers le haut et la couverture s'imprime. 2,5 s au plus, un toucher la passe. */
+.epreuve { display: none; }
+.js .epreuve {
+  display: grid; place-items: center; position: fixed; inset: 0; z-index: 120; overflow: hidden; background: var(--papier); color: var(--encre);
+  transition: transform .85s cubic-bezier(.76, 0, .24, 1), box-shadow .85s ease, visibility 0s linear .9s;
+}
+.js .epreuve::before { content: ''; position: absolute; inset: 0; background: var(--grain); opacity: .09; pointer-events: none; }
+.js.imprime .epreuve, .js.saute .epreuve { transform: translateY(-104%); box-shadow: 0 30px 60px rgba(20, 18, 16, .25); visibility: hidden; pointer-events: none; }
+.js.doux.imprime .epreuve { transform: none; opacity: 0; transition: opacity .45s ease, visibility 0s linear .45s; }
+.js.saute .epreuve { transition: none; }
+.epreuve-feuille { position: relative; display: grid; justify-items: center; gap: clamp(14px, 2.4vh, 22px); padding: clamp(40px, 8vh, 80px) clamp(30px, 8vw, 110px); text-align: center; }
+.epreuve-feuille .repere { opacity: .5; }
+.epreuve-feuille .repere-hg { left: 0; top: 0; } .epreuve-feuille .repere-hd { right: 0; top: 0; }
+.epreuve-feuille .repere-bg { left: 0; bottom: 0; } .epreuve-feuille .repere-bd { right: 0; bottom: 0; }
+.epreuve-initiales { display: grid; font: italic 500 clamp(7.5rem, 34vw, 17rem)/.9 var(--didone); letter-spacing: -.045em; font-variation-settings: 'opsz' 48; padding: 0 .08em; transition: opacity .5s ease; }
+.plaque { grid-area: 1 / 1; mix-blend-mode: multiply; transform: translate(calc(var(--dx) * var(--calage, 1)), calc(var(--dy) * var(--calage, 1))); transition: transform .75s cubic-bezier(.22, 1, .36, 1), opacity .6s ease; }
+.plaque-c { color: #00a0dc; --dx: -.12em; --dy: -.05em; }
+.plaque-m { color: #e2007a; --dx: .1em; --dy: .04em; }
+.plaque-j { color: #ffd200; --dx: -.03em; --dy: .11em; }
+.plaque-n { color: var(--encre); --dx: .05em; --dy: -.08em; opacity: calc(1 - var(--calage, 1) * .55); }
+.doux .plaque { --dx: 0em !important; --dy: 0em !important; }
+.doux .plaque-c, .doux .plaque-m, .doux .plaque-j { opacity: var(--calage, 1); }
+.epreuve-nom { max-width: 26ch; font: italic 400 clamp(1.2rem, 2.4vw, 1.6rem)/1.25 var(--didone); transition: opacity .6s ease .1s; }
+.epreuve-bat { display: flex; align-items: center; gap: 12px; font: 600 11px/1 var(--grot); letter-spacing: .16em; text-transform: uppercase; font-stretch: 90%; color: var(--encre-2); }
+.epreuve-gamme { display: flex; gap: 3px; }
+.epreuve-gamme i { width: 11px; height: 11px; border: 1px solid rgba(20, 18, 16, .45); transition: background-color .35s ease; }
+.epreuve-gamme i.encree:nth-child(1) { background: #00a0dc; } .epreuve-gamme i.encree:nth-child(2) { background: #e2007a; } .epreuve-gamme i.encree:nth-child(3) { background: #ffd200; }
+.epreuve-gamme i.encree:nth-child(4) { background: var(--encre); } .epreuve-gamme i.encree:nth-child(5) { background: var(--accent); } .epreuve-gamme i.encree:nth-child(6) { background: var(--papier-2); }
+/* praticien pas encore lu, ou polices pas encore là : la feuille attend, sans lettres d'un autre */
+.js:not(.polices) .epreuve-initiales, .attente .epreuve-initiales, .attente .epreuve-nom { opacity: 0; }
+.attente .epreuve-gamme i.encree:nth-child(5) { background: #8a8378; }
+
+/* ---- folios ---------------------------------------------------------------------------------- */
+.folio { display: flex; justify-content: space-between; gap: 12px; margin-top: clamp(50px, 8vh, 90px); padding-top: 10px; border-top: 1px solid currentColor; font: 600 10.5px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; opacity: .85; }
+.folio span:first-child { font: italic 500 15px/1 var(--didone); letter-spacing: 0; }
+@media (max-width: 560px) { .folio span:nth-child(3) { display: none; } }
+
+/* ---- sommaire -------------------------------------------------------------------------------- */
+.sommaire { display: grid; gap: clamp(30px, 5vh, 56px); padding: clamp(80px, 13vh, 150px) var(--marge) 34px; border-top: 2px solid var(--encre); }
+.sommaire-figure .figure-photo { aspect-ratio: 3 / 4; }
+.sommaire-titre { font: italic 400 clamp(3.6rem, 11vw, 9.5rem)/.85 var(--didone); letter-spacing: -.03em; font-variation-settings: 'opsz' 48; }
+.sommaire-liste { list-style: none; padding: 0; margin-top: clamp(24px, 4vh, 44px); display: grid; gap: 0; }
+.entree a { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: baseline; padding: 16px 0 18px; border-top: 1px solid rgba(20, 18, 16, .3); text-decoration: none; }
+.entree-page { font: italic 500 1.05rem/1 var(--didone); color: var(--accent); grid-row: span 2; min-width: 1.6em; }
+.entree-titre { font: 400 clamp(1.6rem, 3vw, 2.5rem)/1.05 var(--didone); }
+.entree-dek { margin-top: 6px; font: italic 400 16px/1.4 var(--texte); color: var(--encre-2); max-width: 46ch; }
+.entree-0 .entree-titre { font-size: clamp(2.3rem, 5.4vw, 4.6rem); font-style: italic; }
+.entree a:hover .entree-titre { color: var(--accent); }
+@media (min-width: 900px) {
+  .sommaire { grid-template-columns: 5fr 7fr; column-gap: 5vw; align-items: start; }
+  .sommaire-figure { grid-row: span 2; position: sticky; top: calc(var(--tete) + 30px); }
+  .sommaire-liste { grid-template-columns: 1fr 1fr; column-gap: 34px; }
+  .entree-0 { grid-column: 1 / -1; }
+  .sommaire .folio { grid-column: 1 / -1; }
+}
+
+/* figures */
+.figure-photo { display: block; overflow: hidden; background: var(--papier-2); }
+.figure-photo img { width: 100%; height: 100%; object-fit: cover; background-size: cover; will-change: transform; transform: translateY(var(--glisse, 0%)) scale(1.14); }
+figure figcaption { margin-top: 12px; font: italic 400 14.5px/1.45 var(--texte); color: var(--encre-2); max-width: 46ch; }
+.js [data-figure] .figure-photo, .js .portrait-cadre { clip-path: inset(0 100% 0 0); transition: clip-path 1.4s cubic-bezier(.77, 0, .18, 1); }
+.js [data-figure].vu .figure-photo, .js .portrait.vu .portrait-cadre { clip-path: inset(0 0 0 0); }
+.doux [data-figure] .figure-photo, .doux .portrait-cadre { clip-path: none !important; opacity: 0; transition: opacity .9s ease !important; }
+.doux [data-figure].vu .figure-photo, .doux .portrait.vu .portrait-cadre { opacity: 1; }
+
+/* ---- le grand entretien --------------------------------------------------------------------- */
+.entretien { position: relative; padding: clamp(80px, 13vh, 150px) var(--marge) 34px; border-top: 2px solid var(--encre); }
+.rubrique { font: italic 500 clamp(1.05rem, 1.6vw, 1.3rem)/1 var(--didone); color: var(--accent); }
+.entretien-titre { margin-top: .5em; max-width: 22ch; font: italic 400 clamp(2.3rem, 5.6vw, 5.6rem)/1.02 var(--didone); letter-spacing: -.02em; text-wrap: balance; font-variation-settings: 'opsz' 48; }
+.entretien-titre.long { font-size: clamp(1.9rem, 3.8vw, 3.8rem); max-width: 30ch; line-height: 1.08; }
+.entretien-titre .guillemet { color: var(--accent); }
+.entretien-titre .guillemet:first-child { margin-right: .12em; }
+.entretien-titre .guillemet:last-child { margin-left: .12em; }
+.chapo { margin-top: clamp(20px, 3vh, 32px); max-width: 52ch; font: 400 clamp(1.2rem, 1.7vw, 1.45rem)/1.45 var(--texte); }
+.entretien-grille { position: relative; display: grid; gap: clamp(34px, 5vh, 56px); margin-top: clamp(40px, 7vh, 80px); }
+.entretien-figure .figure-photo { aspect-ratio: 4 / 5; }
+.entretien-texte { font-size: clamp(17.5px, 1.25vw, 19.5px); line-height: 1.62; }
+.entretien-texte > p + p { margin-top: .9em; }
+.question { margin-top: 1.6em; margin-bottom: .55em; font: italic 600 1.18em/1.3 var(--didone); color: var(--accent); break-after: avoid; }
+.question:first-child { margin-top: 0; }
+.reponse-vide { color: var(--encre-2); }
+.avec-lettrine::first-line { font-variant: small-caps; letter-spacing: .03em; }
+.lettrine { float: left; font: 400 5.4em/.74 var(--didone); color: var(--accent); margin: .07em .1em 0 -.02em; font-variation-settings: 'opsz' 48; }
+.js .lettrine { opacity: 0; transform: scale(.5) rotate(-8deg); transform-origin: 60% 70%; transition: opacity .9s ease, transform 1.2s var(--sortie); }
+.js .vu .lettrine, .js .lettrine.vu { opacity: 1; transform: none; }
+.doux .lettrine { transform: none !important; }
+.portrait { margin-top: 2em; break-inside: avoid; max-width: 360px; }
+.portrait-cadre { position: relative; aspect-ratio: 4 / 5; background: var(--accent); color: var(--sur-accent); display: grid; place-items: center; overflow: hidden; }
+.portrait-initiales { font: italic 400 clamp(7rem, 22vw, 11rem)/1 var(--didone); letter-spacing: -.05em; opacity: .26; font-variation-settings: 'opsz' 48; }
+.objet-marge { display: block; width: min(46vw, 280px); height: auto; margin: 6px 0 0 auto; pointer-events: none; mix-blend-mode: multiply; translate: 0 var(--flotte, 0px); rotate: var(--tourne, 0deg); }
+@media (min-width: 900px) {
+  .entretien-grille { grid-template-columns: repeat(12, 1fr); column-gap: clamp(20px, 2.4vw, 40px); align-items: start; }
+  .entretien-marge { grid-column: 1 / span 4; }
+  .entretien-texte { grid-column: 6 / span 7; columns: 2; column-gap: 40px; }
+  .entretien-texte p, .entretien-texte figure { break-inside: avoid-column; }
+  .objet-marge { width: min(19vw, 290px); margin: clamp(60px, 9vh, 100px) 6% 0 auto; }
+}
+
+/* ---- en bref : la séance en colonnes de journal --------------------------------------------- */
+.breves { padding: clamp(80px, 13vh, 150px) var(--marge) 34px; background: var(--papier-2); }
+.breves-tete { border-top: 7px solid var(--encre); padding-top: 8px; }
+.breves-titre { font: 900 clamp(4rem, 15vw, 13rem)/.82 var(--grot); font-stretch: 62%; text-transform: uppercase; letter-spacing: -.01em; border-bottom: 1px solid var(--encre); padding-bottom: .06em; }
+.breves-dek { margin-top: 12px; font: italic 400 clamp(1.2rem, 2vw, 1.6rem)/1.3 var(--didone); }
+.colonnes { margin-top: clamp(26px, 4vh, 40px); columns: 1; column-gap: 34px; column-rule: 1px solid rgba(20, 18, 16, .35); font: 400 17.5px/1.55 var(--texte); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.breve { break-inside: avoid; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid rgba(20, 18, 16, .25); }
+.breve-tete { font: 800 .9em/1 var(--grot); font-stretch: 72%; text-transform: uppercase; letter-spacing: .02em; }
+.breve-duree { margin-top: 6px; font: italic 400 .95em/1.3 var(--didone); text-align: left; color: var(--accent); }
+.breve-encadre { break-inside: avoid; border: 2px solid var(--encre); padding: 14px 16px; margin-bottom: 18px; text-align: left; }
+.encadre-titre { font: 800 13px/1 var(--grot); font-stretch: 72%; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; color: var(--accent); }
+.breve-encadre p + p { margin-top: 4px; }
+.breve-figure { break-inside: avoid; margin-top: 4px; }
+.breve-figure .figure-photo { aspect-ratio: 4 / 3; }
+.breve-figure figcaption { text-align: left; }
+.js .breve { opacity: 0; transform: translateY(14px); transition: opacity .9s ease, transform 1s var(--sortie); }
+.js .breve.vu { opacity: 1; transform: none; }
+.doux .breve { transform: none !important; }
+@media (min-width: 700px) { .colonnes { columns: 2; } }
+@media (min-width: 1100px) { .colonnes { columns: 3; } }
+/* trois brèves ou moins : deux colonnes (les brèves, la photo), jamais une colonne vide */
+@media (min-width: 700px) {
+  .colonnes-courtes { columns: auto; column-rule: none; display: grid; grid-template-columns: 7fr 5fr; column-gap: 56px; align-items: start; }
+  .colonnes-courtes .breve-figure { grid-column: 2; grid-row: 1 / span 6; margin-top: 0; padding-left: 28px; border-left: 1px solid rgba(20, 18, 16, .35); }
+  .colonnes-courtes .breve-figure .figure-photo { aspect-ratio: 3 / 2; }
+}
+
+/* ---- pleine page ---------------------------------------------------------------------------------- */
+.pleine { position: relative; overflow: hidden; background: var(--accent); color: var(--sur-accent); padding: clamp(80px, 13vh, 140px) 0 34px; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+.pleine-rubrique { order: 3; padding: 0 var(--marge); margin-top: clamp(30px, 5vh, 50px); font: 700 12px/1.3 var(--grot); letter-spacing: .16em; text-transform: uppercase; font-stretch: 85%; }
+.pleine-mots { display: grid; gap: .02em; flex: 1; align-content: center; }
+.pleine-ligne { white-space: nowrap; padding: 0 var(--marge); line-height: .9; font-family: var(--didone); font-weight: 500; letter-spacing: -.03em; font-variation-settings: 'opsz' 48; font-size: min(calc((100vw - 2 * var(--marge)) / (var(--n) * .55)), 18vh); }
+.pleine-ligne span { display: inline-block; translate: var(--x, 0) 0; will-change: translate; }
+.pleine-ligne-b { font-style: italic; text-align: right; }
+.pleine-legendes { order: 4; display: grid; gap: 10px 30px; padding: 14px var(--marge) 0; margin-top: 14px; border-top: 1px solid rgba(255, 250, 242, .55); font: 400 15px/1.45 var(--texte); }
+.pleine-legendes dt { display: inline; font: italic 600 15px var(--didone); }
+.pleine-legendes dt::after { content: ' : '; }
+.pleine-legendes dd { display: inline; margin: 0; }
+.pleine .folio { order: 5; margin: 26px var(--marge) 0; }
+@media (min-width: 900px) { .pleine-legendes { grid-template-columns: repeat(2, 1fr); } }
+.pleine-photo { padding: 0; color: #fff; background: var(--encre); }
+.pleine-image { position: absolute; inset: 0; }
+.pleine-image img { width: 100%; height: 100%; object-fit: cover; }
+.pleine-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 9, 8, .86), rgba(10, 9, 8, .5) 38%, rgba(10, 9, 8, .08) 70%); }
+.pleine-texte { position: relative; z-index: 1; margin-top: auto; padding: 0 var(--marge) 20px; display: grid; gap: 10px; }
+.pleine-grand { font: italic 400 clamp(3.4rem, 11vw, 10rem)/.9 var(--didone); letter-spacing: -.03em; }
+.pleine-texte .vide-quoi { color: #fff; }
+.pleine-photo .folio { position: relative; z-index: 1; margin: 10px var(--marge) 24px; }
+
+/* ---- pratique : l'encadré --------------------------------------------------------------------- */
+.pratique { padding: clamp(80px, 13vh, 150px) var(--marge) 34px; display: grid; gap: clamp(24px, 4vh, 40px); }
+.pratique-titre { font: italic 400 clamp(3.6rem, 12vw, 10rem)/.85 var(--didone); letter-spacing: -.03em; border-top: 7px solid var(--encre); padding-top: .12em; font-variation-settings: 'opsz' 48; }
+.pratique-corps { display: grid; gap: 22px; align-content: start; }
+.tarif { border-bottom: 1px solid var(--encre); padding-bottom: 16px; }
+.tarif-nom { font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.2 var(--didone); }
+.tarif-prix { margin-top: 4px; font: 400 clamp(3rem, 8vw, 6.6rem)/1 var(--didone); letter-spacing: -.02em; font-variant-numeric: lining-nums; font-variation-settings: 'opsz' 48; }
+.tarif-vide .tarif-prix { font-style: italic; color: var(--encre-2); }
+.carnet { font: 400 clamp(17.5px, 1.3vw, 20px)/1.65 var(--texte); }
+.carnet-cle { font: 800 .7em/1 var(--grot); font-stretch: 75%; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.carnet-sep { color: var(--encre-2); }
+.pratique-note { font: italic 400 1rem/1.5 var(--texte); color: var(--encre-2); }
+@media (min-width: 900px) {
+  .pratique { grid-template-columns: 5fr 7fr; column-gap: 5vw; align-items: start; }
+  .pratique .folio { grid-column: 1 / -1; }
+}
+
+/* ---- quatrième de couverture -------------------------------------------------------------------- */
+.quatrieme { position: relative; overflow: hidden; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; gap: clamp(18px, 3vh, 30px); padding: calc(var(--tete) + 30px) var(--marge) 26px; background: var(--accent); color: var(--sur-accent); }
+.quatrieme-haut { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 250, 242, .6); font: 600 11px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; }
+.quatrieme-titre { font: italic 400 clamp(3.4rem, 12vw, 11rem)/.88 var(--didone); letter-spacing: -.03em; margin-top: auto; font-variation-settings: 'opsz' 48; }
+.quatrieme-dos { max-width: 26ch; margin-top: clamp(24px, 7vh, 80px); font: italic 400 clamp(1.55rem, 3.2vw, 2.9rem)/1.18 var(--didone); letter-spacing: -.01em; text-wrap: balance; font-variation-settings: 'opsz' 48; }
+.quatrieme-courte { min-height: 0; }
+.quatrieme-courte .quatrieme-titre { margin-top: clamp(70px, 16vh, 180px); }
+.quatrieme-tel { display: block; text-decoration: none; white-space: nowrap; font: 900 clamp(2.6rem, 10vw, 16rem)/.86 var(--grot); font-stretch: 62%; letter-spacing: -.015em; }
+.quatrieme-tel span { display: inline-block; transition: transform .6s var(--sortie); }
+.quatrieme-tel:hover span { transform: skewX(-7deg); }
+.quatrieme-vide { font-size: 1.3rem; }
+.quatrieme-vide .vide-quoi { color: var(--sur-accent); }
+.quatrieme-bas { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 22px; margin-top: clamp(16px, 4vh, 40px); }
+.quatrieme-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.bouton { display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 24px; background: var(--sur-accent); color: var(--encre); text-decoration: none; font: 700 12px/1.2 var(--grot); letter-spacing: .12em; text-transform: uppercase; font-stretch: 90%; transition: transform .4s var(--sortie); }
+.bouton:hover { transform: translateY(-2px) rotate(-1.2deg); }
+.bouton-creux { background: transparent; color: var(--sur-accent); border: 1px solid var(--sur-accent); }
+.quatrieme-code { display: grid; justify-items: center; gap: 4px; background: #fffdf8; color: var(--encre); padding: 10px 12px 8px; }
+.quatrieme-code span { font: 600 10.5px/1 var(--grot); letter-spacing: .16em; text-transform: uppercase; }
+
+/* ---- colophon ------------------------------------------------------------------------------------- */
+.colophon { padding: clamp(70px, 12vh, 130px) var(--marge) 36px; border-top: 7px solid var(--encre); }
+.colophon-titre { font: italic 400 clamp(2.8rem, 8vw, 6.4rem)/1 var(--didone); border-bottom: 1px solid var(--encre); padding-bottom: 18px; }
+.colophon-grille { display: grid; gap: 20px 40px; padding: 28px 0; }
+.colophon dt { font: 700 11px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 85%; color: var(--encre-2); }
+.colophon dd { margin-top: 6px; font: 400 1.05rem/1.45 var(--texte); }
+.colophon-numero dd { font: italic 400 clamp(1.35rem, 2.3vw, 1.85rem)/1.3 var(--didone); }
+.colophon-suite dd { font-size: 1.12rem; }
+.colophon-avert { font: 400 14.5px/1.6 var(--texte); color: var(--encre-2); max-width: 80ch; border-top: 1px solid rgba(20, 18, 16, .35); padding-top: 20px; }
+.colophon-fin { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 28px; font: 600 11px/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; font-stretch: 90%; color: var(--encre-2); }
+.colophon-fin a { color: var(--encre); }
+@media (min-width: 900px) {
+  .colophon-grille { grid-template-columns: 2fr 2fr 1fr 1fr; }
+  .colophon-numero, .colophon-suite { grid-row: span 2; }
+}
+
+/* apparitions communes */
+.js [data-revele] { opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1.1s var(--sortie); }
+.js [data-revele].vu { opacity: 1; transform: none; }
+.doux [data-revele] { transform: none !important; }

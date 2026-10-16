@@ -1,0 +1,410 @@
+/* Aurora Nuit : nuit profonde, aurores en shader, constellations, trajet d'une nuit.
+   Couleurs : variables de css/palettes.css (ecrites par batir.mjs depuis js/univers.js).
+   Mouvement : .mouvement (plein) ou .reduit (adouci, jamais coupe). Rien ne suit le pointeur. */
+
+@property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --balayage { syntax: '<percentage>'; inherits: false; initial-value: -40%; }
+
+:root {
+  --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+  --sans: 'Jost', 'Futura', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ressort: cubic-bezier(.2, .8, .2, 1);
+  --verre: color-mix(in srgb, var(--nuit-2) 55%, transparent);
+  --bord: rgba(255, 255, 255, .14);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html.mouvement { scroll-behavior: smooth; }
+body { margin: 0; background: var(--nuit); color: var(--encre); font: 350 1.0625rem/1.75 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); color: #fff; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+.evitement { position: absolute; left: 1rem; top: -4rem; z-index: 90; padding: .7rem 1rem; background: var(--bouton); color: var(--bouton-encre); border-radius: 999px; }
+.evitement:focus { top: 1rem; }
+
+/* ---------- Le chargement : une carte du ciel gravee qui se trace autour des initiales ---------- */
+.voile { display: none; }
+.js .voile {
+  position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(120% 70% at 50% 110%, color-mix(in srgb, var(--accent) 16%, var(--nuit-2)) 0%, var(--nuit-2) 38%, var(--nuit) 78%);
+  transition: opacity 1.1s ease, visibility 0s linear 1.1s;
+  animation: voile-secours .8s ease 4.4s forwards; /* si le script ne repond pas, la page se montre quand meme */
+}
+@keyframes voile-secours { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+.js .voile.partie { opacity: 0; visibility: hidden; pointer-events: none; animation: none; }
+.astrolabe { grid-area: 1 / 1; width: min(360px, 74vw); height: auto; overflow: visible; transition: transform 1.3s cubic-bezier(.5, 0, .2, 1), opacity 1.1s ease; }
+.js.mouvement .voile.partie .astrolabe { transform: scale(1.9) rotate(18deg); opacity: 0; }
+.a-anneau, .a-pointille, .a-ecliptique { fill: none; stroke: color-mix(in srgb, var(--accent) 75%, #fff); stroke-width: .9; }
+.a-anneau { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracer 1.3s cubic-bezier(.6, .1, .2, 1) .05s forwards; }
+.a-graduations { fill: none; stroke: color-mix(in srgb, var(--encre) 70%, transparent); stroke-width: .8; opacity: 0; animation: apparaitre .9s ease .7s forwards; }
+.a-pointille { stroke-dasharray: 2 7; opacity: 0; transform-origin: 200px 200px; animation: apparaitre .9s ease .9s forwards, tourner 40s linear infinite; }
+.a-ecliptique { stroke: var(--accent2); stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .8; animation: tracer 1.2s ease .6s forwards; }
+.a-astre { fill: var(--encre); opacity: 0; animation: scintille 2.4s ease-in-out infinite; }
+.a-astre:nth-of-type(2) { animation-delay: .5s; } .a-astre:nth-of-type(3) { animation-delay: 1s; } .a-astre:nth-of-type(4) { animation-delay: 1.4s; }
+@keyframes tracer { to { stroke-dashoffset: 0; } }
+@keyframes apparaitre { to { opacity: 1; } }
+@keyframes tourner { to { transform: rotate(360deg); } }
+@keyframes scintille { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+.voile-initiales { grid-area: 1 / 1; margin: 0; font: italic 400 clamp(3rem, 11vw, 4.8rem)/1 var(--serif); letter-spacing: .1em; padding-left: .1em; color: var(--encre);
+  text-shadow: 0 0 34px color-mix(in srgb, var(--accent) 45%, transparent); opacity: 0; filter: blur(8px); animation: initiales .85s ease .05s forwards; }
+@keyframes initiales { to { opacity: 1; filter: none; } }
+.attente-fiche .voile-initiales { animation-play-state: paused; }
+.js.reduit .voile, .js.reduit .voile.partie { transition-duration: .6s; }
+.js.reduit .a-anneau { animation: tracer .8s ease forwards; }
+.js.reduit .a-graduations { animation-duration: .6s; animation-delay: .2s; }
+.js.reduit .a-pointille { animation: apparaitre .6s ease .3s forwards, tourner 120s linear infinite; }
+.js.reduit .voile-initiales { filter: blur(3px); animation-duration: .7s; animation-delay: 0s; }
+
+/* ---------- Le ciel ---------- */
+.ciel, .etoiles { position: fixed; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.ciel { z-index: 0; opacity: 0; transition: opacity 2.4s ease; }
+.gl .ciel { opacity: 1; }
+.etoiles { z-index: 1; }
+#site { position: relative; z-index: 3; }
+.ciel-repli { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: radial-gradient(120% 70% at 50% 0%, var(--nuit-2) 0%, var(--nuit) 70%); }
+.ciel-repli span { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; }
+.ciel-repli span:nth-child(1) { width: 90vw; height: 26vh; left: -10vw; top: 8vh; background: var(--accent); opacity: .3; transform: rotate(-8deg); }
+.ciel-repli span:nth-child(2) { width: 70vw; height: 22vh; right: -15vw; top: 2vh; background: var(--accent2); transform: rotate(10deg); opacity: .3; }
+.ciel-repli span:nth-child(3) { width: 60vw; height: 18vh; left: 20vw; top: 18vh; background: var(--accent3); opacity: .2; }
+.js .ciel-repli span { animation: voile-lent 18s ease-in-out infinite alternate; }
+.js.reduit .ciel-repli span { animation-duration: 40s; }
+@keyframes voile-lent { to { transform: translate3d(6vw, 3vh, 0) rotate(4deg) scaleX(1.15); } }
+.gl .ciel-repli { opacity: 0; transition: opacity 2.4s ease; }
+
+/* ---------- En-tete en verre ---------- */
+.barre {
+  position: fixed; z-index: 20; top: max(12px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+  width: min(1120px, calc(100% - 24px)); display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 7px; border-radius: 999px; background: color-mix(in srgb, var(--nuit) 62%, transparent); border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 20px 60px -30px rgba(0, 0, 0, .8);
+  -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
+}
+.sceau { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%;
+  font: italic 500 1.15rem/1 var(--serif); letter-spacing: .02em; text-decoration: none; color: var(--encre);
+  background: radial-gradient(circle at 35% 30%, var(--lune1), var(--lune3)); }
+.sceau::before { content: ''; position: absolute; inset: -1px; border-radius: 50%; padding: 1px;
+  background: conic-gradient(from var(--a), var(--accent), transparent 30%, var(--accent2) 55%, transparent 80%, var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.js .sceau::before { animation: orbite 12s linear infinite; }
+.js.reduit .sceau::before { animation-duration: 40s; }
+@keyframes orbite { to { --a: 360deg; } }
+.barre-liens { display: none; gap: .3rem; }
+.barre-liens a { text-decoration: none; font-size: .86rem; font-weight: 400; color: var(--doux); padding: .55rem .9rem; border-radius: 999px; transition: color .3s, background .3s; }
+.barre-liens a:hover { color: var(--encre); background: rgba(255, 255, 255, .06); }
+@media (min-width: 860px) { .barre-liens { display: flex; } }
+
+/* ---------- Boutons ---------- */
+.pilule { display: inline-flex; align-items: center; gap: .65em; justify-content: center; padding: .95em 1.55em; border-radius: 999px; text-decoration: none;
+  font: 500 .95rem/1.2 var(--sans); letter-spacing: .01em; white-space: nowrap; transition: transform .5s var(--ressort), box-shadow .5s ease, background .4s ease; }
+.pilule:active { transform: scale(.97); }
+.pilule-claire { background: var(--bouton); color: var(--bouton-encre);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .7), 0 12px 40px -12px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 70px -14px color-mix(in srgb, var(--accent2) 70%, transparent); }
+.pilule-claire:hover { transform: translateY(-2px); }
+.pilule-verre { background: color-mix(in srgb, var(--nuit-2) 50%, transparent); color: var(--encre); border: 1px solid rgba(255, 255, 255, .16); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16);
+  -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%); }
+.pilule-verre:hover { background: color-mix(in srgb, var(--nuit-2) 80%, transparent); transform: translateY(-2px); }
+.barre .pilule { padding: .8em 1.3em; font-size: .88rem; }
+.lien-lueur { position: relative; color: var(--encre); text-decoration: none; font-weight: 400; padding: .6em .2em; }
+.lien-lueur::after { content: ''; position: absolute; left: .2em; right: .2em; bottom: .35em; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent); box-shadow: 0 0 10px var(--accent); transform-origin: left; transition: transform .6s var(--ressort); }
+.lien-lueur:hover::after { transform: scaleX(1.15); }
+
+/* ---------- Accueil ---------- */
+.accueil { position: relative; min-height: 100vh; min-height: 100svh; display: grid; align-items: end; justify-items: center; text-align: center;
+  padding: 7.5rem 20px clamp(6.5rem, 15vh, 10rem); }
+.accueil::before { content: ''; position: absolute; inset: 30% 0 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(75% 62% at 50% 66%, color-mix(in srgb, var(--nuit) 66%, transparent), transparent 78%); }
+.constellation { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; }
+.accueil-centre { position: relative; z-index: 2; max-width: 1200px; }
+.metier-lieu { margin: 0 0 1.3rem; font: italic 400 clamp(1.2rem, 1.8vw, 1.5rem)/1.4 var(--serif); letter-spacing: .02em; color: var(--encre); text-shadow: 0 1px 16px rgba(0, 0, 0, .65), 0 0 4px rgba(0, 0, 0, .4); }
+.metier-lieu span { margin: 0 .5em; font-style: normal; font-size: .8em; color: var(--encre); }
+.nom { margin: 0; font: 400 clamp(2.9rem, 9.4vw, 8.4rem)/1 var(--serif); letter-spacing: -.01em; color: var(--encre); text-wrap: balance;
+  text-shadow: 0 0 46px color-mix(in srgb, var(--accent) 26%, transparent), 0 2px 22px rgba(0, 0, 0, .7), 0 0 8px rgba(0, 0, 0, .45); }
+.nom.nom-long { font-size: clamp(2.5rem, 6.6vw, 6.2rem); }
+.nom.nom-tres-long { font-size: clamp(2.1rem, 5vw, 4.7rem); line-height: 1.04; }
+.nom .mot { display: inline-block; }
+.nom .mot:nth-child(2n) { font-style: italic; }
+/* Le nom : chaque lettre nait d'un eclat de lumiere, de gauche a droite, la ou ses etoiles se sont allumees ;
+   rien ne bouge ni ne se deforme. Mouvement reduit : un fondu lettre a lettre, plus court. */
+.js .nom .l { opacity: 0; }
+.js .nom.allume .l { animation: lettre 1.6s cubic-bezier(.25, .6, .2, 1) calc(var(--l) * 60ms) both; }
+.js .nom:not(.allume) .l { animation: secours-op 1s ease 6.5s forwards; }
+@keyframes lettre {
+  0% { opacity: 0; text-shadow: 0 0 0 transparent; }
+  26% { opacity: 1; text-shadow: 0 0 9px #fff, 0 0 26px var(--accent), 0 0 64px color-mix(in srgb, var(--accent) 45%, transparent); }
+  100% { opacity: 1; text-shadow: 0 0 46px color-mix(in srgb, var(--accent) 26%, transparent), 0 2px 22px rgba(0, 0, 0, .7), 0 0 8px rgba(0, 0, 0, .45); }
+}
+.js.reduit .nom.allume .l { animation: secours-op .9s ease calc(var(--l) * 28ms) both; }
+.accroche { margin: 1.5rem auto 0; max-width: 32ch; font: italic 400 clamp(1.15rem, 2.1vw, 1.6rem)/1.45 var(--serif); color: var(--doux); }
+.js .accueil .metier-lieu, .js .accueil .accroche, .js .accueil .actions { opacity: 0; transition: opacity 1.3s ease, transform 1.5s var(--ressort), filter 1.3s ease; animation: secours-op 1s ease 6s forwards; }
+.js.mouvement .accueil:not(.lever) .accroche, .js.mouvement .accueil:not(.lever) .actions, .js.mouvement .accueil:not(.debut) .metier-lieu { transform: translateY(14px); filter: blur(6px); }
+.js .accueil.debut .metier-lieu { opacity: 1; animation: none; transition-delay: .2s; }
+.js .accueil.lever .accroche, .js .accueil.lever .actions { opacity: 1; animation: none; }
+.js .accueil.lever .actions { transition-delay: .3s; }
+.js.reduit .accueil .metier-lieu, .js.reduit .accueil .accroche, .js.reduit .accueil .actions { transition-duration: .7s; }
+@keyframes secours-op { to { opacity: 1; transform: none; filter: none; } }
+.actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .8rem 1.4rem; margin-top: 2.2rem; }
+.descendre { position: absolute; z-index: 2; left: 50%; bottom: 28px; width: 1px; height: 56px; transform: translateX(-50%); background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .35)); overflow: hidden; }
+.descendre span { position: absolute; left: -1px; width: 3px; height: 14px; border-radius: 3px; background: var(--accent); box-shadow: 0 0 10px var(--accent); top: -14px; }
+.js .descendre span { animation: filer 2.6s ease-in-out infinite; }
+.js.reduit .descendre span { animation-duration: 5s; }
+@keyframes filer { to { top: 60px; } }
+
+/* ---------- Sections ---------- */
+.section { position: relative; padding: clamp(5rem, 14vh, 10rem) 0; }
+.cadre { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+.titre { margin: 0 0 2.4rem; font: 400 clamp(2.6rem, 7vw, 5.8rem)/1.02 var(--serif); letter-spacing: -.012em; text-wrap: balance; }
+.titre .mot-a { white-space: nowrap; }
+.js.mouvement [data-allume] .car { opacity: .07; }
+.js.mouvement [data-allume].on .car { animation: allume 2s cubic-bezier(.2, .7, .2, 1) calc(var(--i) * 32ms) both; }
+@keyframes allume {
+  0% { opacity: .07; text-shadow: none; }
+  30% { opacity: 1; text-shadow: 0 0 14px #fff, 0 0 36px var(--accent); }
+  100% { opacity: 1; text-shadow: 0 0 26px color-mix(in srgb, var(--accent) 16%, transparent); }
+}
+.js.reduit [data-allume] .car { opacity: .1; transition: opacity .7s ease calc(var(--i) * 12ms); }
+.js.reduit [data-allume].on .car { opacity: 1; }
+.phare { margin: 0 0 3rem; max-width: 28ch; font: 400 clamp(1.55rem, 3.2vw, 2.6rem)/1.3 var(--serif); color: var(--encre); text-wrap: pretty; }
+.js [data-illumine] .w { opacity: .26; transition: opacity .7s ease, text-shadow .9s ease; }
+.js.reduit [data-illumine] .w { transition-duration: .4s; }
+.js [data-illumine] .w.lit { opacity: 1; text-shadow: 0 0 24px color-mix(in srgb, var(--accent) 22%, transparent); }
+.colonnes { max-width: 980px; color: var(--doux); }
+.colonnes p { margin: 0 0 1.2em; }
+@media (min-width: 900px) { .colonnes { columns: 2; column-gap: 4rem; } .colonnes p { break-inside: avoid; } }
+.emplacement-texte { font-style: italic; color: var(--reve); }
+/* Un emplacement se reconnait a son italique et a un souligne pointille, sans pictogramme repete. */
+.emplacement-texte { text-decoration: underline dotted var(--reve-signe); text-decoration-thickness: 1px; text-underline-offset: .28em; }
+.phare.emplacement-texte { max-width: 30ch; }
+.js.mouvement .revele { opacity: 0; transform: translateY(26px); filter: blur(4px); transition: opacity 1.2s ease, transform 1.4s var(--ressort), filter 1.2s ease; transition-delay: calc(var(--i, 0) * 90ms); }
+.js.reduit .revele { opacity: 0; transition: opacity .7s ease; transition-delay: calc(var(--i, 0) * 50ms); }
+.js .revele.vu { opacity: 1; transform: none; filter: none; }
+
+/* ---------- L'approche : un atlas du ciel ----------
+   Une carte celeste unique (sticky) et sa legende. En lisant la legende, la constellation du theme
+   s'allume ; celles deja lues restent tracees, discretes. Sans JavaScript : tout est allume. */
+.asterisme { width: clamp(170px, 16vw, 250px); height: auto; overflow: visible; }
+.ast-lien { fill: none; stroke: color-mix(in srgb, var(--accent) 70%, transparent); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.ast-branche { stroke-opacity: .6; }
+.ast-etoile { fill: var(--encre); filter: drop-shadow(0 0 3px var(--accent)) drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 60%, transparent)); }
+.ast-vive { fill: #fff; }
+
+.atlas { position: relative; width: min(1240px, calc(100% - 40px)); margin: clamp(3rem, 9vh, 7rem) auto 0; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 0 clamp(2rem, 4vw, 4.5rem); }
+.atlas-carte { position: sticky; top: 11vh; height: 78vh; align-self: start; display: grid; place-items: center; }
+.atlas-svg { width: 100%; height: 100%; overflow: visible; color: var(--encre); }
+.atlas-lacte { opacity: .9; }
+.atlas-gravure { fill: none; stroke: color-mix(in srgb, var(--encre) 20%, transparent); stroke-width: .8; }
+.atlas-gravure .fin { stroke-opacity: .5; stroke-width: .6; }
+.atlas-ecliptique { stroke: color-mix(in srgb, var(--accent2) 55%, transparent); stroke-dasharray: 1 7; stroke-width: 1; }
+.atlas-fond circle { fill: color-mix(in srgb, var(--encre) 55%, transparent); }
+.fig-lien { fill: none; stroke: var(--accent); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: .9; }
+.fig-branche { stroke-opacity: .55; }
+.fig-etoile { fill: var(--encre); filter: drop-shadow(0 0 3px var(--accent)) drop-shadow(0 0 9px color-mix(in srgb, var(--accent) 60%, transparent)); }
+.fig-vive { fill: #fff; }
+.fig-nom { font: italic 400 23px var(--serif); fill: var(--encre); letter-spacing: .02em; paint-order: stroke; stroke: var(--nuit); stroke-width: 6px; stroke-linejoin: round; }
+.figure-vide .fig-lien { stroke-dasharray: .012 .02; stroke: var(--reve); }
+.figure-vide .fig-nom { fill: var(--reve); }
+.figure { cursor: pointer; }
+/* Avec JavaScript : eteinte, puis tracee discretement une fois lue, et vive quand on la lit */
+.js .fig-lien { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s cubic-bezier(.5, .1, .2, 1), stroke-opacity .9s ease; }
+.js .figure-vide .fig-lien { stroke-dasharray: .012 .02; stroke-dashoffset: 0; }
+.js .fig-etoile { opacity: .3; transition: opacity .9s ease calc(var(--k) * 90ms), filter .9s ease; filter: none; }
+.js .fig-nom { opacity: 0; transition: opacity 1s ease .4s; }
+.js .figure.vu .fig-lien { stroke-dashoffset: 0; stroke-opacity: .32; }
+.js .figure.vu .fig-etoile { opacity: .62; }
+.js .figure.vu .fig-nom { opacity: .5; }
+.js .figure.active .fig-lien { stroke-dashoffset: 0; stroke-opacity: .95; }
+.js .figure.active .fig-etoile { opacity: 1; filter: drop-shadow(0 0 3px var(--accent)) drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 65%, transparent)); }
+.js .figure.active .fig-nom { opacity: 1; }
+.js .figure.brille .fig-etoile { animation: ravive 1.4s ease; }
+.js.reduit .fig-lien { transition-duration: 1s; }
+.js.reduit .fig-etoile { transition-delay: calc(var(--k) * 40ms); }
+@keyframes ravive { 30% { opacity: 1; filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 16px var(--accent)); } }
+
+.atlas-legende { list-style: none; margin: 0; padding: 14vh 0 26vh; }
+.atlas-entree { min-height: 56vh; display: flex; flex-direction: column; justify-content: center; cursor: pointer; }
+.atlas-entree h3 { margin: 0 0 .8rem; font: italic 400 clamp(1.8rem, 2.8vw, 2.5rem)/1.12 var(--serif); color: var(--encre); text-wrap: balance; }
+.atlas-entree p { margin: 0; max-width: 34ch; color: var(--doux); font-size: 1.06rem; line-height: 1.7; }
+.js .atlas-entree { opacity: .22; transition: opacity .9s ease; }
+.js .atlas-entree.active { opacity: 1; }
+.js.reduit .atlas-entree { transition-duration: .5s; }
+.atlas-1 .atlas-legende { padding: 22vh 0; }
+.atlas-1 .atlas-entree { min-height: 34vh; }
+.entree-vide p { color: var(--reve); font-style: italic; }
+
+@media (max-width: 859px) {
+  .atlas { display: block; width: 100%; }
+  .atlas-carte { top: 64px; z-index: 2; height: 46vh; height: 46svh; padding: 0 12px;
+    background: linear-gradient(var(--nuit) 0, color-mix(in srgb, var(--nuit) 92%, transparent) 78%, transparent); }
+  .fig-nom { font-size: 40px; stroke-width: 9px; }
+  .atlas-legende { padding: 6vh 20px 30vh; }
+  .atlas-entree { min-height: 50vh; min-height: 50svh; justify-content: flex-start; padding-top: 4vh; }
+  .atlas-entree h3 { font-size: 2.05rem; }
+  .atlas-1 .atlas-entree { min-height: 30vh; }
+}
+
+/* ---------- La seance : le trajet d'une nuit ---------- */
+.seance { padding: 0; }
+.nuit-piste { position: relative; }
+.nuit-scene { position: relative; overflow: hidden; padding: clamp(5rem, 14vh, 9rem) 0; }
+.nuit-ciel, .nuit-etoiles, .nuit-decor, .nuit-lune { display: none; }
+.nuit-etapes { list-style: none; margin: 0; padding: 0; }
+.nuit-etape { margin-bottom: 3rem; max-width: 640px; }
+.nuit-quand { margin: 0 0 .2rem; font: italic 400 1.15rem/1.3 var(--serif); color: var(--accent); }
+.nuit-etape h3 { margin: 0 0 .6rem; font: 400 clamp(1.85rem, 3.4vw, 2.8rem)/1.1 var(--serif); }
+.nuit-dit { margin: 0; color: var(--doux); }
+.nuit-duree { margin: 1rem 0 0; font: italic 400 1.2rem/1.3 var(--serif); color: var(--encre); }
+.nuit-duree::before { content: '✦'; margin-right: .5em; font-style: normal; font-size: .75em; color: var(--accent); }
+.etape-place .nuit-dit { font-style: italic; color: var(--reve); }
+/* avec le script : la scene reste a l'ecran, on traverse la nuit en faisant defiler */
+.nuit-active .nuit-piste { height: calc(var(--n) * 85vh + 100vh); }
+.nuit-active .nuit-scene { position: sticky; top: 0; height: 100vh; height: 100svh; padding: 0; isolation: isolate; }
+.nuit-active .nuit-ciel { display: block; position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, var(--nuit) 0%, var(--nuit-2) 100%); }
+.nuit-active .nuit-ciel, .nuit-active .nuit-etoiles { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24vh); mask-image: linear-gradient(180deg, transparent 0, #000 24vh); }
+.nuit-ciel span { position: absolute; inset: 0; }
+.nuit-crepuscule { background: linear-gradient(180deg, var(--crepuscule1) 0%, var(--crepuscule2) 84%, var(--crepuscule3) 100%); opacity: var(--crepuscule, 1); }
+.nuit-aube { background: linear-gradient(180deg, var(--aube1) 0%, var(--aube2) 84%, var(--aube3) 100%); opacity: var(--aube, 0); }
+.nuit-active .nuit-etoiles { display: block; position: absolute; inset: 0 0 25% 0; width: 100%; height: 75%; z-index: 1; fill: var(--encre); opacity: var(--etoiles, .4); }
+.nuit-active .nuit-decor { display: block; position: absolute; left: 0; top: 0; z-index: 2; overflow: visible; }
+.nuit-arc { fill: none; stroke: color-mix(in srgb, var(--encre) 40%, transparent); stroke-width: 1; stroke-dasharray: 2 7; }
+.nuit-reperes circle { fill: var(--nuit); stroke: color-mix(in srgb, var(--encre) 60%, transparent); stroke-width: 1.2; transition: fill .8s ease, stroke .8s ease; }
+.nuit-reperes circle.passe { fill: var(--accent); stroke: var(--accent); }
+.nuit-horizon { fill: color-mix(in srgb, var(--nuit) 70%, #000); }
+.nuit-active .nuit-lune { display: block; position: absolute; left: 0; top: 0; z-index: 3; will-change: transform; }
+.nuit-disque { position: absolute; left: -16px; top: -16px; width: 32px; height: 32px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #fffdf4, #f3ead2 60%, #d9cfb4); box-shadow: 0 0 22px 6px rgba(255, 246, 220, .35), 0 0 80px 20px color-mix(in srgb, var(--accent) 22%, transparent); }
+.nuit-moment { position: absolute; left: 0; top: -54px; transform: translateX(-50%); white-space: nowrap; font: italic 400 1.25rem/1 var(--serif); color: var(--encre); text-shadow: 0 1px 10px rgba(0, 0, 0, .7); }
+.nuit-active .nuit-texte { position: relative; z-index: 4; height: 100%; display: grid; grid-template-rows: auto 1fr; padding: clamp(6rem, 13vh, 8.5rem) 0 clamp(5.5rem, 17vh, 10rem); }
+.nuit-active .titre-nuit { margin: 0; }
+.nuit-active .nuit-etapes { position: relative; align-self: end; display: grid; }
+.nuit-active .nuit-etape { grid-area: 1 / 1; align-self: end; justify-self: center; margin: 0; width: min(640px, 100%); text-align: center; opacity: 0; visibility: hidden;
+  transition: opacity 1s ease, transform 1.2s var(--ressort), visibility 0s linear 1s; }
+.nuit-active .nuit-quand { display: none; }
+.nuit-active .nuit-dit { margin: 0 auto; max-width: 52ch; color: var(--encre); } /* plus clair : l'aube eclaircit le ciel derriere */
+.js.mouvement.nuit-active .nuit-etape { transform: translateY(24px); }
+.js.mouvement.nuit-active .nuit-etape.passee { transform: translateY(-24px); }
+.nuit-active .nuit-etape.active { opacity: 1; visibility: visible; transform: none; transition-delay: .15s, .15s, 0s; }
+.js.reduit.nuit-active .nuit-etape { transition-duration: .5s, .5s, 0s; }
+.nuit-active .nuit-etape h3, .nuit-active .nuit-duree { text-shadow: 0 1px 16px rgba(0, 0, 0, .55); }
+.nuit-active .nuit-dit { text-shadow: 0 1px 12px rgba(0, 0, 0, .8), 0 0 3px rgba(0, 0, 0, .5); }
+
+/* ---------- Les tarifs : une carte du ciel gravee ---------- */
+.tarifs-cadre { display: grid; gap: 1.2rem; justify-items: center; text-align: center; }
+.tarifs-tete { max-width: 680px; }
+.tarifs .titre { margin-bottom: 1rem; }
+.note { color: var(--doux); font-size: 1rem; margin: 0; }
+.pl-aide { margin: .6rem 0 0; font: italic 400 1.15rem/1.4 var(--serif); color: var(--pale); }
+.planisphere { position: relative; margin: 1rem auto 0; width: min(660px, 92vw); aspect-ratio: 1; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+.planisphere.tenue { cursor: grabbing; }
+.pl-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pl-trait { fill: none; stroke: color-mix(in srgb, var(--encre) 55%, transparent); stroke-width: 1; }
+.pl-trait.fin { stroke-opacity: .55; stroke-width: .7; }
+.pl-anneau { font: 500 15px var(--sans); letter-spacing: .32em; fill: color-mix(in srgb, var(--encre) 78%, transparent); }
+.pl-astre { fill: var(--encre); opacity: .75; }
+.pl-centre-fond { fill: color-mix(in srgb, var(--nuit) 82%, transparent); stroke: color-mix(in srgb, var(--accent) 50%, transparent); stroke-width: 1; }
+.pl-centre { position: absolute; inset: 22%; display: grid; place-content: center; justify-items: center; text-align: center; gap: .3rem; pointer-events: none; }
+.pl-nom { margin: 0; font: italic 400 clamp(1.15rem, 2vw, 1.5rem)/1.2 var(--serif); color: var(--doux); }
+.prix { margin: .1rem 0; font: 400 clamp(2.1rem, 4.6vw, 3.3rem)/1.05 var(--serif); color: var(--encre); text-shadow: 0 0 30px color-mix(in srgb, var(--accent) 35%, transparent); white-space: nowrap; }
+.prix.prix-texte { font-size: clamp(2rem, 4vw, 2.8rem); }
+.durees { list-style: none; margin: .5rem 0 0; padding: 0; }
+.durees li { font-size: .86rem; line-height: 1.5; color: var(--doux); }
+.pl-note { margin: .3rem 0 0; max-width: 22ch; font-size: .88rem; color: var(--reve); font-style: italic; }
+.pl-vide .pl-nom, .pl-vide .prix { color: var(--reve); font-style: italic; }
+.pl-legende { margin: 2rem auto 0; width: min(560px, 100%); grid-column: 1 / -1; }
+.pl-legende div { display: flex; align-items: baseline; gap: .6rem; padding: .4rem 0; }
+.pl-legende dt { font: italic 400 1.3rem/1.3 var(--serif); }
+.pl-legende div::after { content: ''; order: 1; flex: 1; border-bottom: 1px dotted color-mix(in srgb, var(--encre) 40%, transparent); transform: translateY(-4px); }
+.pl-legende dd { order: 2; margin: 0; font: 400 1.4rem/1.3 var(--serif); }
+
+/* ---------- A propos : la lune-portrait ---------- */
+.apropos-grille { display: grid; gap: 2.6rem; justify-items: center; text-align: center; }
+.apropos-texte { max-width: 700px; }
+.lune { position: relative; margin: 0 auto; width: min(380px, 74vw); aspect-ratio: 1; display: grid; place-items: center; }
+.lune-disque { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 34% 28%, var(--lune1) 0%, var(--lune2) 45%, var(--lune3) 75%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 0 90px -10px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 180px -40px color-mix(in srgb, var(--accent2) 60%, transparent), inset -30px -50px 90px rgba(0, 0, 0, .55); }
+.lune-disque img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lune-halo { position: absolute; inset: -30%; filter: blur(34px); opacity: .55;
+  background: conic-gradient(from var(--a), color-mix(in srgb, var(--accent) 70%, transparent), transparent 25%, color-mix(in srgb, var(--accent2) 70%, transparent) 50%, transparent 72%, color-mix(in srgb, var(--accent3) 50%, transparent) 88%, color-mix(in srgb, var(--accent) 70%, transparent)); }
+.js .lune-halo { animation: orbite 26s linear infinite; }
+.js.reduit .lune-halo { animation-duration: 80s; }
+.lune figcaption { position: relative; font: italic 400 clamp(1.4rem, 3vw, 1.8rem)/1.2 var(--serif); color: var(--encre); text-shadow: 0 0 20px rgba(0, 0, 0, .9), 0 0 4px rgba(0, 0, 0, .9); }
+.lune figcaption::before { content: ''; display: block; width: 26px; height: 26px; margin: 0 auto .8rem; background: var(--encre); opacity: .9; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+.titre-nom { font-size: clamp(2.6rem, 6vw, 4.8rem); }
+.apropos-texte p { color: var(--doux); margin: 0 auto 1.1em; max-width: 60ch; }
+.citation { margin: 2.6rem auto 0; padding: 1.6rem 0 0; max-width: 34ch; position: relative; }
+.citation::before { content: '✦'; position: absolute; left: 50%; top: -.6rem; transform: translateX(-50%); color: var(--accent); font-size: .9rem; }
+.citation p { margin: 0; font: italic 400 clamp(1.25rem, 2.2vw, 1.65rem)/1.45 var(--serif) !important; color: var(--encre) !important; }
+
+/* ---------- Contact ---------- */
+.contact { padding-bottom: clamp(6rem, 18vh, 12rem); }
+.contact-cadre { text-align: center; }
+.contact .titre { margin-bottom: 1.2rem; }
+.contact-rdv { margin: 0 0 1rem; color: var(--doux); }
+.tel-geant { display: inline-block; margin: .5rem 0 0; text-decoration: none; font: 400 clamp(2.4rem, 9.4vw, 7rem)/1.08 var(--serif); letter-spacing: .01em; color: var(--encre);
+  text-shadow: 0 0 40px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 90px color-mix(in srgb, var(--accent2) 30%, transparent); transition: text-shadow .8s ease; white-space: nowrap; }
+.tel-geant:hover { text-shadow: 0 0 30px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 120px color-mix(in srgb, var(--accent2) 60%, transparent); }
+.tel-geant.emplacement-texte { font-size: clamp(2rem, 6vw, 4rem); white-space: normal; }
+.actions-contact { margin-top: 2rem; }
+@media (min-width: 960px) {
+  .contact-cadre { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 3.5rem; text-align: left; align-items: end; }
+  .contact .titre { font-size: clamp(2.6rem, 4.6vw, 4.6rem); }
+  .contact .titre { grid-column: 1; grid-row: 1; margin: 0; }
+  .contact-rdv { grid-column: 1; grid-row: 2; margin: 1.2rem 0 0; align-self: start; }
+  .contact .tel-geant { grid-column: 2; grid-row: 1; justify-self: end; margin: 0; font-size: clamp(2.8rem, 5vw, 5rem); white-space: nowrap; }
+  .actions-contact { grid-column: 2; grid-row: 2; justify-content: flex-end; margin-top: 1.4rem; }
+  .reperes { grid-column: 1 / -1; grid-row: 3; text-align: left; margin: 4.5rem 0 0; max-width: none; padding-top: 1.6rem; border-top: 1px solid rgba(255, 255, 255, .12); }
+  .reperes i:first-of-type { margin-left: 1rem; }
+}
+.reperes { margin: 3.4rem auto 0; max-width: 980px; color: var(--doux); line-height: 2.1; }
+.reperes i { margin: 0 1rem; font-style: normal; font-size: .75em; color: var(--accent); }
+.reperes .emplacement-texte::before { content: none; }
+/* Telephone et tablette : le contact se lit comme une legende d'atlas, aligne a gauche
+   (Nature, elle, centre son contact : les deux univers ne partagent pas cette mise en page). */
+@media (max-width: 959px) {
+  .contact-cadre { text-align: left; }
+  .contact .titre { margin-bottom: .8rem; }
+  .actions-contact { justify-content: flex-start; align-items: flex-start; }
+  .contact .reperes { margin: 3rem 0 0; padding-top: 1.4rem; border-top: 1px solid rgba(255, 255, 255, .12); line-height: 1.6; }
+  .contact .reperes i { display: none; }
+  .contact .reperes span { display: block; margin: 0 0 .7rem; }
+}
+
+/* ---------- Pied ---------- */
+.pied { position: relative; padding: 4.5rem 0 calc(4.5rem + env(safe-area-inset-bottom)); text-align: center; border-top: 1px solid rgba(255, 255, 255, .08);
+  background: linear-gradient(transparent, color-mix(in srgb, var(--nuit) 88%, transparent) 35%); }
+.pied-asterisme { width: 200px; margin: 0 auto 1rem; display: block; }
+.pied-asterisme .ast-etoile { opacity: .9; }
+.pied-nom { margin: 0 0 1rem; font: 400 1.9rem/1.15 var(--serif); }
+.pied-nom span { display: block; margin-top: .5rem; font: italic 400 1.15rem/1.4 var(--serif); color: var(--pale); }
+.pied-tel { margin: 0 0 1.2rem; font: 400 1.5rem/1.2 var(--serif); }
+.pied-tel a { text-decoration: none; }
+.pied-liens { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem 1.4rem; margin: 0 0 2.2rem; }
+.pied-liens a { color: var(--doux); font-size: .92rem; text-underline-offset: 4px; }
+.pied-apercu { max-width: 44ch; margin: 0 auto 1rem; font: italic 400 1.22rem/1.5 var(--serif); color: var(--reve); }
+.pied-suite { max-width: 52ch; margin: 0 auto 1.8rem; color: var(--doux); }
+.pied-avert { max-width: 62ch; margin: 0 auto 1rem; font-size: .88rem; color: var(--pale); }
+.pied-legal { margin: 0 0 1rem; font-size: .82rem; color: var(--pale); }
+.pied-haut { font-size: .9rem; color: var(--doux); text-underline-offset: 4px; }
+
+@media (max-width: 640px) {
+  .nom { font-size: min(17vw, 5.4rem); line-height: .95; }
+  .nom.nom-long { font-size: min(12.6vw, 4.2rem); }
+  .nom.nom-tres-long { font-size: min(10.4vw, 3.4rem); }
+  .titre { font-size: clamp(2.9rem, 14vw, 4.2rem); }
+}
+@media (max-width: 520px) {
+  body { font-size: 1rem; }
+  .barre .pilule { padding: .75em 1.1em; }
+  .actions { flex-direction: column; gap: .4rem; }
+  .actions .pilule { width: min(100%, 320px); }
+  .accueil { padding-bottom: 7rem; }
+  .reperes { line-height: 1.6; }
+  .reperes span { display: block; }
+  .reperes i { display: block; margin: .45rem 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (hover: none) { .barre { background: color-mix(in srgb, var(--nuit) 80%, transparent); } }
+
+/* Phrases de prix ou de duree tirees de son approche : rangees avec les tarifs, en note. */
+.note.note-mots { margin-top: .55rem; font-style: italic; max-width: 40ch; margin-inline: auto; }
