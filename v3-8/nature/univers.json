@@ -1,0 +1,137 @@
+{
+  "id": "nature",
+  "nom": "Nature",
+  "promesse": "Une prairie qui pousse à l'ouverture, s'écarte sous la main, et un herbier où l'on tourne les planches.",
+  "pourVous": "{prenom}, votre accompagnement raconté comme une promenade : un herbier pour votre approche, un sentier pour la séance, des sachets de graines pour vos tarifs.",
+  "familles": {
+    "plantes": 5,
+    "toucher": 4,
+    "mouvement": 4,
+    "famille": 4,
+    "energie": 3,
+    "beaute": 3,
+    "elan": 3,
+    "esprit": 2,
+    "creation": 2,
+    "psy": 2
+  },
+  "motsCles": [
+    "nature",
+    "plante",
+    "jardin",
+    "terre",
+    "saison",
+    "respir",
+    "equilibre",
+    "naturel",
+    "vital",
+    "herb",
+    "fleur",
+    "prevention",
+    "aroma",
+    "phyto",
+    "douceur",
+    "racine",
+    "foret",
+    "campagne"
+  ],
+  "ambiances": [
+    "lumineux",
+    "naturel",
+    "doux",
+    "chaleureux"
+  ],
+  "polices": {
+    "titre": "Fraunces",
+    "texte": "Figtree",
+    "css": "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&family=Figtree:wght@400..600&display=swap"
+  },
+  "affiche": "Bande de prairie en bas (brins verts, quelques marguerites et coquelicots), fond crème ensoleillé, nom en Fraunces doux avec le dernier mot en italique.",
+  "palettes": [
+    {
+      "id": "prairie",
+      "nom": "Prairie d'été",
+      "teinte": "vert",
+      "ton": "clair",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#f7f3e6",
+        "encre": "#1d3a28",
+        "accent": "#356b2b",
+        "accent2": "#e8b84a"
+      },
+      "defautPour": [
+        "plantes",
+        "elan"
+      ]
+    },
+    {
+      "id": "bles",
+      "nom": "Prairie dorée d'automne",
+      "teinte": "or",
+      "ton": "clair",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#f8efd9",
+        "encre": "#33260f",
+        "accent": "#875811",
+        "accent2": "#c8452c"
+      },
+      "defautPour": [
+        "toucher",
+        "energie"
+      ]
+    },
+    {
+      "id": "lavande",
+      "nom": "Prairie de lavande",
+      "teinte": "violet",
+      "ton": "clair",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#f5f2f8",
+        "encre": "#2a2340",
+        "accent": "#5b4a98",
+        "accent2": "#8fa86a"
+      },
+      "defautPour": [
+        "esprit",
+        "psy",
+        "beaute"
+      ]
+    },
+    {
+      "id": "crepuscule",
+      "nom": "Prairie au crépuscule",
+      "teinte": "rose",
+      "ton": "sombre",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#1d1a2b",
+        "encre": "#f6eee4",
+        "accent": "#f4b06a",
+        "accent2": "#e77f8f"
+      },
+      "defautPour": [
+        "creation"
+      ]
+    },
+    {
+      "id": "rosee",
+      "nom": "Prairie de rosée",
+      "teinte": "bleu",
+      "ton": "clair",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#eef3f6",
+        "encre": "#16303d",
+        "accent": "#24607a",
+        "accent2": "#9cc6d2"
+      },
+      "defautPour": [
+        "famille",
+        "mouvement"
+      ]
+    }
+  ]
+}

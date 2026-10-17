@@ -1,0 +1,234 @@
+{
+  "_lisezmoi": "Estimation provisoire des 11 univers du deuxième tour, écrite par l'agent accueil d'après les FICHE.md et le code du premier tour (7 univers repris) et d'après leur description (4 nouveaux). Dès qu'un univers publie son propre <id>/univers.json, le moteur (commun/recommandation.js) le lit en priorité et ne prend ici que les champs manquants. Champs ajoutés au contrat, facultatifs : « imagine » (fin de la phrase « on vous a imaginé ... ») et « ordre » (ordre d'affichage à égalité).",
+  "univers": [
+    {
+      "id": "nature",
+      "nom": "Nature",
+      "ordre": 1,
+      "promesse": "Une prairie qui pousse à l'ouverture et s'écarte sous la main.",
+      "imagine": "une prairie qui pousse à l'ouverture et s'écarte sous la main",
+      "pourVous": "{prenom}, votre nom pousse comme une herbe folle, au milieu d'une prairie vivante.",
+      "familles": { "plantes": 5, "mouvement": 4, "toucher": 3, "famille": 3, "energie": 3, "esprit": 2, "elan": 2, "beaute": 1, "creation": 1, "psy": 1 },
+      "motsCles": ["nature", "naturel", "plante", "jardin", "=terre", "saison", "fleur", "arbre", "foret", "racine", "respir", "vitalit", "prevention", "vegetal", "herb", "ancrage", "soleil", "printemps", "phyto", "aromath", "gemmo", "naturo"],
+      "ambiances": ["lumineux", "naturel", "doux", "chaleureux"],
+      "polices": { "titre": "Fraunces", "texte": "Figtree", "css": "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&family=Figtree:wght@400..600&display=swap" },
+      "palettes": [
+        { "id": "prairie", "nom": "Prairie", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f4f1e6", "encre": "#1f3a22", "accent": "#5d8f3c", "accent2": "#e8b84a" }, "defautPour": ["plantes", "toucher", "mouvement", "energie", "creation"] },
+        { "id": "lavande", "nom": "Lavande", "teinte": "violet", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f2eff6", "encre": "#2e2546", "accent": "#7b68b0", "accent2": "#d9a441" }, "defautPour": ["esprit", "psy"] },
+        { "id": "coquelicot", "nom": "Coquelicot", "teinte": "rouge", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f7efe6", "encre": "#3a1b14", "accent": "#c8452f", "accent2": "#6f9a3d" }, "defautPour": [] },
+        { "id": "ble", "nom": "Blé", "teinte": "jaune", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f7f0dc", "encre": "#3b2f12", "accent": "#c99a2e", "accent2": "#6c8a3a" }, "defautPour": ["elan"] },
+        { "id": "bruyere", "nom": "Bruyère", "teinte": "rose", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f8eef0", "encre": "#3a1f2a", "accent": "#b5567a", "accent2": "#7a9a4a" }, "defautPour": ["famille", "beaute"] },
+        { "id": "sous-bois", "nom": "Sous-bois", "teinte": "vert", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#14261a", "encre": "#eef3e6", "accent": "#8fc06d", "accent2": "#e8c25a" }, "defautPour": [] }
+      ],
+      "affiche": "Bande d'herbes et de fleurs des champs qui ondule en bas, soleil doux en haut, nom en Fraunces souple avec le dernier mot en italique."
+    },
+    {
+      "id": "aurora-nuit",
+      "nom": "Aurora Nuit",
+      "ordre": 2,
+      "promesse": "Votre nom s'écrit en étoiles, sous des aurores boréales.",
+      "imagine": "un ciel de nuit où votre nom s'écrit en étoiles, sous des aurores boréales",
+      "pourVous": "{prenom}, votre nom s'allume en constellation dans un ciel du Grand Nord.",
+      "familles": { "esprit": 5, "energie": 4, "creation": 3, "psy": 3, "elan": 1, "toucher": 1, "mouvement": 1 },
+      "motsCles": ["interieur", "ressource", "transformation", "reve", "=nuit", "sommeil", "etoile", "lumiere", "inconscient", "voyage", "magie", "magique", "potentiel", "eveil", "intuition", "=ciel", "=lune", "hypno", "meditation", "subconscient", "invisible", "spirituel"],
+      "ambiances": ["sombre", "mystere", "doux", "chic"],
+      "polices": { "titre": "Cormorant", "texte": "Manrope", "css": "https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..600;1,300..500&family=Manrope:wght@300..600&display=swap" },
+      "palettes": [
+        { "id": "boreale", "nom": "Boréale", "teinte": "vert", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#050813", "encre": "#eef1fb", "accent": "#7cf5c8", "accent2": "#b9a8ff" }, "defautPour": ["esprit", "energie", "plantes", "mouvement"] },
+        { "id": "amethyste", "nom": "Améthyste", "teinte": "violet", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0b0718", "encre": "#f1edfb", "accent": "#b9a8ff", "accent2": "#ffb0da" }, "defautPour": ["psy", "creation"] },
+        { "id": "aube", "nom": "Aube", "teinte": "rose", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#120a14", "encre": "#fbeef3", "accent": "#ffb0da", "accent2": "#ffd59e" }, "defautPour": ["famille", "beaute", "toucher"] },
+        { "id": "ocean", "nom": "Océan", "teinte": "bleu", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#03101c", "encre": "#eaf4fb", "accent": "#7cc8ff", "accent2": "#7cf5c8" }, "defautPour": [] },
+        { "id": "or", "nom": "Nuit d'or", "teinte": "or", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0c0a06", "encre": "#f6f0e2", "accent": "#f0cf7a", "accent2": "#7cf5c8" }, "defautPour": ["elan"] }
+      ],
+      "affiche": "Nuit d'encre, rideaux d'aurore flous qui ondulent, ciel d'étoiles, petite constellation reliée, nom en Cormorant léger, mots alternés droit et italique."
+    },
+    {
+      "id": "cinema",
+      "nom": "Cinéma",
+      "ordre": 3,
+      "promesse": "Une ouverture de film : deux bandes s'écartent et votre nom apparaît au générique.",
+      "imagine": "une ouverture de film, lente et feutrée, où votre nom apparaît au générique",
+      "pourVous": "{prenom}, votre cabinet filmé comme un beau lieu, avec votre nom au générique.",
+      "familles": { "toucher": 5, "beaute": 4, "psy": 3, "esprit": 3, "elan": 3, "plantes": 2, "mouvement": 2, "famille": 2, "energie": 2, "creation": 2 },
+      "motsCles": ["confort", "accueil", "=lieu", "moment", "detente", "rituel", "chaleur", "chaleureu", "cocooning", "parenthese", "relach", "prendre soin", "pause", "lenteur", "ambiance", "atmosphere"],
+      "ambiances": ["chic", "chaleureux", "sombre", "doux"],
+      "polices": { "titre": "Cormorant Garamond", "texte": "Manrope", "css": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" },
+      "palettes": [
+        { "id": "pierre", "nom": "Pierre", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#eee8df", "encre": "#1c1915", "accent": "#7a5a3c", "accent2": "#14110e" }, "defautPour": ["toucher", "beaute", "esprit", "psy", "elan", "creation", "energie"] },
+        { "id": "nuit", "nom": "Salle obscure", "teinte": "neutre-sombre", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#14110e", "encre": "#f2ece2", "accent": "#c8a165", "accent2": "#eee8df" }, "defautPour": [] },
+        { "id": "olive", "nom": "Olivier", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#e9e8dc", "encre": "#1d2016", "accent": "#5e6b3a", "accent2": "#2a2a1e" }, "defautPour": ["plantes", "mouvement"] },
+        { "id": "terre-cuite", "nom": "Terre cuite", "teinte": "terre", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#efe3d6", "encre": "#2a1810", "accent": "#9a4a2a", "accent2": "#1a120c" }, "defautPour": ["famille"] },
+        { "id": "ardoise", "nom": "Ardoise", "teinte": "bleu", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#10151b", "encre": "#e9eef2", "accent": "#8fa9c0", "accent2": "#c8a165" }, "defautPour": [] },
+        { "id": "bordeaux", "nom": "Velours", "teinte": "rouge", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#1a0d0f", "encre": "#f4e9e6", "accent": "#d68a84", "accent2": "#d8b07a" }, "defautPour": [] }
+      ],
+      "affiche": "Image en format cinéma entre deux bandes noires, lumière chaude et grain de pellicule, nom en capitales Cormorant espacées comme un carton de générique."
+    },
+    {
+      "id": "editorial",
+      "nom": "Éditorial",
+      "ordre": 4,
+      "promesse": "Un magazine dont vous faites la couverture, avec vos mots en grand.",
+      "imagine": "un magazine dont vous faites la couverture, avec vos mots en grand",
+      "pourVous": "{prenom}, vous faites la couverture, et vos mots deviennent des titres.",
+      "familles": { "psy": 4, "elan": 4, "creation": 4, "beaute": 3, "mouvement": 3, "plantes": 2, "esprit": 2, "toucher": 2, "famille": 2, "energie": 1 },
+      "motsCles": ["histoire", "parcours", "=mots", "parole", "ecriture", "valeur", "regard", "=art", "creativ", "culture", "chemin", "recit", "livre", "lecture", "passion", "sens", "conviction", "engag", "mission", "transgenerationnel", "genealog"],
+      "ambiances": ["chic", "vif", "lumineux"],
+      "polices": { "titre": "Bodoni Moda", "texte": "Newsreader", "css": "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" },
+      "palettes": [
+        { "id": "outremer", "nom": "Outremer", "teinte": "bleu", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#2b3bc4", "accent2": "#141210" }, "defautPour": ["esprit", "psy", "elan"] },
+        { "id": "framboise", "nom": "Framboise", "teinte": "rose", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#b42356", "accent2": "#141210" }, "defautPour": ["toucher", "beaute"] },
+        { "id": "sapin", "nom": "Vert sapin", "teinte": "vert", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#1f6b3b", "accent2": "#141210" }, "defautPour": ["plantes"] },
+        { "id": "orange", "nom": "Orange brûlé", "teinte": "orange", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#b5491b", "accent2": "#141210" }, "defautPour": ["mouvement"] },
+        { "id": "violet", "nom": "Violet", "teinte": "violet", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#5b2bc0", "accent2": "#141210" }, "defautPour": ["energie", "creation"] },
+        { "id": "terre-cuite", "nom": "Terre cuite", "teinte": "terre", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f1ece3", "encre": "#141210", "accent": "#a8432c", "accent2": "#141210" }, "defautPour": ["famille"] }
+      ],
+      "affiche": "Couverture de magazine sur papier : nom en Bodoni Moda géant sur plusieurs lignes, pierre ronde de couleur glissée entre les lignes, lignes de couverture en Archivo étroit, code-barres."
+    },
+    {
+      "id": "liquid-glass",
+      "nom": "Liquid Glass",
+      "ordre": 5,
+      "promesse": "Des panneaux de verre posés sur la lumière, qui courbent ce qui passe dessous.",
+      "imagine": "des panneaux de verre clair posés sur la lumière, comme les plus belles interfaces",
+      "pourVous": "{prenom}, un site net et rassurant, en verre et en lumière.",
+      "familles": { "psy": 4, "esprit": 4, "elan": 4, "beaute": 3, "plantes": 2, "energie": 2, "toucher": 2, "mouvement": 2, "famille": 1, "creation": 1 },
+      "motsCles": ["confiance", "clart", "serenit", "securit", "ecoute", "rassur", "cadre", "fiable", "transparen", "precis", "personnalis", "respect", "bienveillan", "apaisement", "legerete"],
+      "ambiances": ["lumineux", "chic", "doux"],
+      "polices": { "titre": "système", "texte": "système", "css": "" },
+      "palettes": [
+        { "id": "menthe", "nom": "Menthe", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f3faf7", "encre": "#0b1a15", "accent": "#0f6b4f", "accent2": "#9fefcb" }, "defautPour": ["plantes"] },
+        { "id": "lilas", "nom": "Lilas", "teinte": "violet", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f6f4fd", "encre": "#15122b", "accent": "#4b37c9", "accent2": "#cdbbff" }, "defautPour": ["esprit", "psy", "creation"] },
+        { "id": "peche", "nom": "Pêche", "teinte": "orange", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#fdf6f2", "encre": "#24130d", "accent": "#8c3520", "accent2": "#ffc9ae" }, "defautPour": ["toucher", "energie"] },
+        { "id": "rose", "nom": "Rose poudré", "teinte": "rose", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#fdf5f7", "encre": "#230c1a", "accent": "#931f55", "accent2": "#ffbde3" }, "defautPour": ["mouvement", "beaute", "famille"] },
+        { "id": "ciel", "nom": "Ciel", "teinte": "bleu", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f5f8fc", "encre": "#0f1a2a", "accent": "#1d4f8f", "accent2": "#a9dbff" }, "defautPour": ["elan"] },
+        { "id": "nuit", "nom": "Verre fumé", "teinte": "neutre-sombre", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0d1018", "encre": "#eef1f7", "accent": "#9db4ff", "accent2": "#ffd3be" }, "defautPour": [] }
+      ],
+      "affiche": "Lumières colorées et floues en fond, initiales géantes derrière, carte de verre dépoli aux bords brillants qui porte le nom, petite barre d'onglets en verre."
+    },
+    {
+      "id": "pop-vitamine",
+      "nom": "Pop vitaminé",
+      "ordre": 6,
+      "promesse": "Deux couleurs franches, un nom géant et des objets qui flottent, plein d'énergie.",
+      "imagine": "un site plein d'énergie, avec deux couleurs franches et votre nom en géant",
+      "pourVous": "{prenom}, votre énergie en grand : couleurs franches, nom géant, bonne humeur.",
+      "familles": { "elan": 5, "mouvement": 4, "plantes": 3, "famille": 2, "beaute": 2, "creation": 2, "toucher": 1, "esprit": 1, "energie": 1 },
+      "motsCles": ["dynami", "joie", "joyeu", "sourire", "elan", "envie", "plaisir", "positi", "rayonn", "epanoui", "bouger", "motiv", "vitalite", "fun", "pep", "audace", "oser", "enthousias", "bonne humeur", "energie"],
+      "ambiances": ["vif", "lumineux", "chaleureux"],
+      "polices": { "titre": "Bricolage Grotesque", "texte": "système", "css": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&display=swap" },
+      "palettes": [
+        { "id": "menthe-violette", "nom": "Menthe et violette", "teinte": "vert", "ton": "sombre", "vivacite": "vive", "couleurs": { "fond": "#0f7a58", "encre": "#ffffff", "accent": "#6644cf", "accent2": "#b9f2d6" }, "defautPour": ["plantes"] },
+        { "id": "indigo-peche", "nom": "Indigo et pêche", "teinte": "violet", "ton": "sombre", "vivacite": "vive", "couleurs": { "fond": "#3a2fc0", "encre": "#ffffff", "accent": "#b03e7b", "accent2": "#ffd6ba" }, "defautPour": ["esprit", "psy", "energie"] },
+        { "id": "terracotta", "nom": "Terracotta et rose", "teinte": "rouge", "ton": "sombre", "vivacite": "vive", "couleurs": { "fond": "#b0442b", "encre": "#ffffff", "accent": "#a3345c", "accent2": "#ffddc2" }, "defautPour": ["toucher"] },
+        { "id": "mandarine", "nom": "Mandarine", "teinte": "orange", "ton": "sombre", "vivacite": "vive", "couleurs": { "fond": "#c2441a", "encre": "#ffffff", "accent": "#ae2974", "accent2": "#ffd9b8" }, "defautPour": ["mouvement"] },
+        { "id": "soleil", "nom": "Soleil", "teinte": "jaune", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#ffd23f", "encre": "#2a1406", "accent": "#ff7a5c", "accent2": "#3a2fc0" }, "defautPour": ["elan"] },
+        { "id": "framboise", "nom": "Framboise", "teinte": "rose", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#ffc7dc", "encre": "#3a0f2a", "accent": "#d12f6e", "accent2": "#ffd23f" }, "defautPour": ["famille", "beaute", "creation"] }
+      ],
+      "affiche": "Dégradé de deux couleurs vives, nom géant en Bricolage Grotesque gras et serré, deux sphères brillantes qui flottent, vague en bas, bouton blanc arrondi."
+    },
+    {
+      "id": "immersion",
+      "nom": "Immersion",
+      "ordre": 7,
+      "promesse": "Un monde de verre, d'eau et de brume que l'on traverse en défilant.",
+      "imagine": "un monde de verre, d'eau et de brume que l'on traverse en défilant",
+      "pourVous": "{prenom}, un monde calme et profond, où votre prénom naît de la brume.",
+      "familles": { "esprit": 4, "psy": 4, "energie": 3, "creation": 3, "elan": 2, "toucher": 1, "beaute": 1 },
+      "motsCles": ["profond", "calme", "silence", "=eau", "brume", "lacher", "apais", "serenit", "inconscient", "relaxation", "meditation", "presence", "pause", "immersion", "plonger", "detente profonde", "etat", "hypno"],
+      "ambiances": ["sombre", "mystere", "chic"],
+      "polices": { "titre": "Cormorant Garamond", "texte": "Manrope", "css": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@400&family=Manrope:wght@400;500;600&display=swap" },
+      "palettes": [
+        { "id": "abysse", "nom": "Abysse", "teinte": "bleu", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#04060b", "encre": "#efebe4", "accent": "#a6dcd4", "accent2": "#e8cba3" }, "defautPour": ["esprit", "psy", "energie"] },
+        { "id": "aube", "nom": "Aube dorée", "teinte": "or", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0b0906", "encre": "#f3ece0", "accent": "#e8cba3", "accent2": "#a6dcd4" }, "defautPour": ["elan", "beaute"] },
+        { "id": "brume", "nom": "Brume mauve", "teinte": "violet", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#08060f", "encre": "#eeeaf5", "accent": "#b8a6e8", "accent2": "#e8cba3" }, "defautPour": ["creation"] },
+        { "id": "lagon", "nom": "Lagon", "teinte": "vert", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#03100d", "encre": "#e8f2ee", "accent": "#7fe0c0", "accent2": "#e8cba3" }, "defautPour": ["plantes", "toucher", "mouvement", "famille"] },
+        { "id": "givre", "nom": "Givre", "teinte": "bleu", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#e7eef3", "encre": "#0f1820", "accent": "#2f6f78", "accent2": "#9a7a4f" }, "defautPour": [] }
+      ],
+      "affiche": "Nuit profonde, cristal de verre hexagonal qui réfracte la lumière, eau calme et reflets, brume qui passe, nom en Cormorant Garamond léger et espacé."
+    },
+    {
+      "id": "meridiens",
+      "nom": "Méridiens",
+      "ordre": 8,
+      "promesse": "Une carte du corps à l'encre, où votre approche suit le fil des méridiens.",
+      "imagine": "une carte du corps à l'encre, où chaque thème de votre approche suit le fil d'un méridien",
+      "pourVous": "{prenom}, une carte du corps tracée à l'encre, avec votre sceau.",
+      "familles": { "energie": 5, "toucher": 4, "mouvement": 3, "plantes": 2, "esprit": 2, "beaute": 1, "psy": 1, "creation": 1 },
+      "motsCles": ["corps", "energ", "meridien", "=points", "reflex", "zones", "circulation", "tension", "harmon", "souffle", "shiatsu", "kinesio", "=pieds", "=mains", "toucher", "pression", "flux", "=chi", "=qi", "acupress", "stimul", "reequilibr"],
+      "ambiances": ["naturel", "doux", "chic", "lumineux"],
+      "polices": { "titre": "Shippori Mincho", "texte": "Zen Kaku Gothic New", "css": "https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" },
+      "palettes": [
+        { "id": "washi", "nom": "Washi", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f3eee4", "encre": "#1d1a16", "accent": "#b23a2a", "accent2": "#5b6b5a" }, "defautPour": ["energie", "toucher", "elan"] },
+        { "id": "jade", "nom": "Jade", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#e9f0e7", "encre": "#16231c", "accent": "#2f7a5b", "accent2": "#b23a2a" }, "defautPour": ["plantes", "mouvement"] },
+        { "id": "indigo", "nom": "Indigo", "teinte": "bleu", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0f1a2b", "encre": "#eef0f3", "accent": "#d9a35b", "accent2": "#7fa6c9" }, "defautPour": ["esprit", "psy"] },
+        { "id": "sumi", "nom": "Sumi", "teinte": "neutre-sombre", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#141312", "encre": "#efe9df", "accent": "#d9654c", "accent2": "#a89f8f" }, "defautPour": [] },
+        { "id": "sakura", "nom": "Sakura", "teinte": "rose", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f8eeee", "encre": "#2a1618", "accent": "#b04a5a", "accent2": "#5b6b5a" }, "defautPour": ["famille", "beaute"] },
+        { "id": "ocre", "nom": "Ocre", "teinte": "terre", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f1e6d6", "encre": "#2b1d12", "accent": "#a65a2a", "accent2": "#3e5a4a" }, "defautPour": ["creation"] }
+      ],
+      "affiche": "Papier washi, longues lignes de méridiens tracées à l'encre avec leurs points, sceau rouge carré aux initiales, nom en Shippori Mincho."
+    },
+    {
+      "id": "cocon",
+      "nom": "Cocon",
+      "ordre": 9,
+      "promesse": "Un carnet de naissance tout en douceur, enveloppant comme un cocon.",
+      "imagine": "un carnet de naissance tout en douceur, enveloppant comme un cocon",
+      "pourVous": "{prenom}, un site doux et enveloppant, pour accueillir les familles.",
+      "familles": { "famille": 5, "toucher": 2, "psy": 2, "plantes": 2, "beaute": 2, "mouvement": 2, "esprit": 1, "energie": 1, "creation": 1, "elan": 1 },
+      "motsCles": ["parent", "bebe", "naissance", "grossesse", "maternit", "allait", "nourrisson", "cocon", "=nid", "douceur", "tendresse", "berce", "enfant", "repit", "accouch", "futurs", "aventure", "portage", "doula"],
+      "ambiances": ["doux", "lumineux", "chaleureux"],
+      "polices": { "titre": "Young Serif", "texte": "Nunito Sans", "css": "https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito+Sans:opsz,wght@6..12,400..700&display=swap" },
+      "palettes": [
+        { "id": "poudre", "nom": "Poudre", "teinte": "rose", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f8ece8", "encre": "#3a2224", "accent": "#b4606c", "accent2": "#e9c39b" }, "defautPour": ["famille", "beaute"] },
+        { "id": "sauge", "nom": "Sauge", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#eef1e8", "encre": "#22301f", "accent": "#5f8253", "accent2": "#e6b8a2" }, "defautPour": ["plantes", "toucher", "mouvement"] },
+        { "id": "miel", "nom": "Miel", "teinte": "jaune", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f8f0dc", "encre": "#3a2a12", "accent": "#b5841f", "accent2": "#c0707a" }, "defautPour": ["elan"] },
+        { "id": "lait", "nom": "Lait d'amande", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f6f1ea", "encre": "#2e2622", "accent": "#94705a", "accent2": "#c9b6a6" }, "defautPour": ["psy", "esprit"] },
+        { "id": "ciel-doux", "nom": "Ciel doux", "teinte": "bleu", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#ecf1f6", "encre": "#1e2836", "accent": "#55799c", "accent2": "#e8b9a6" }, "defautPour": ["energie"] },
+        { "id": "veilleuse", "nom": "Veilleuse", "teinte": "terre", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#2a1d1a", "encre": "#f7ebe2", "accent": "#f0b48a", "accent2": "#e8c9a0" }, "defautPour": ["creation"] }
+      ],
+      "affiche": "Ellipses emboîtées comme un nid, lumière chaude au centre, fil pointillé qui s'enroule, nom en Young Serif au creux du cocon."
+    },
+    {
+      "id": "institut",
+      "nom": "Institut",
+      "ordre": 10,
+      "promesse": "Une carte de soins d'institut, élégante et lumineuse, comme un rituel.",
+      "imagine": "une carte de soins d'institut, élégante et lumineuse, comme un rituel",
+      "pourVous": "{prenom}, votre carte de soins, présentée comme dans un bel institut.",
+      "familles": { "beaute": 5, "toucher": 3, "plantes": 2, "famille": 1, "elan": 1, "energie": 1, "mouvement": 1 },
+      "motsCles": ["esthet", "beaute", "visage", "=peau", "maquill", "cosmet", "eclat", "rituel", "estime", "image de soi", "elegan", "soin du", "soins du", "manucure", "epilation", "regard", "mission humaine", "embelli"],
+      "ambiances": ["chic", "lumineux", "doux"],
+      "polices": { "titre": "Italiana", "texte": "Jost", "css": "https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300..600&display=swap" },
+      "palettes": [
+        { "id": "nude", "nom": "Nude", "teinte": "rose", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f5ebe4", "encre": "#2e1f1a", "accent": "#9a6550", "accent2": "#c9a46a" }, "defautPour": ["beaute", "famille"] },
+        { "id": "champagne", "nom": "Champagne", "teinte": "or", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f6f0e4", "encre": "#2a2216", "accent": "#8c6d2f", "accent2": "#c9a46a" }, "defautPour": ["elan", "toucher"] },
+        { "id": "noir-or", "nom": "Noir et or", "teinte": "neutre-sombre", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#121110", "encre": "#f3ece0", "accent": "#d4b06a", "accent2": "#8a7a66" }, "defautPour": ["psy"] },
+        { "id": "eucalyptus", "nom": "Eucalyptus", "teinte": "vert", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#eaefea", "encre": "#1c2a24", "accent": "#456d5c", "accent2": "#c9a46a" }, "defautPour": ["plantes", "mouvement"] },
+        { "id": "lilas", "nom": "Lilas", "teinte": "violet", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f1edf5", "encre": "#261f33", "accent": "#6c5594", "accent2": "#c9a46a" }, "defautPour": ["esprit", "creation", "energie"] },
+        { "id": "grenat", "nom": "Grenat", "teinte": "rouge", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#24100f", "encre": "#f5e8e4", "accent": "#d48a7a", "accent2": "#d4b06a" }, "defautPour": [] }
+      ],
+      "affiche": "Arche fine cernée d'un double filet doré, nom en Italiana capitales espacées, « Carte des soins » en italique, lignes du menu séparées par de petits losanges."
+    },
+    {
+      "id": "resonance",
+      "nom": "Résonance",
+      "ordre": 11,
+      "promesse": "Une partition vivante : votre approche résonne comme une onde.",
+      "imagine": "une partition vivante, où votre approche résonne comme une onde",
+      "pourVous": "{prenom}, un site qui vibre : ondes, partition, et votre nom qui résonne.",
+      "familles": { "creation": 5, "energie": 3, "esprit": 3, "psy": 2, "mouvement": 2, "toucher": 1, "elan": 1, "famille": 1 },
+      "motsCles": ["vibration", "=sons", "sonor", "sonoth", "musique", "music", "chant", "=voix", "=bols", "=gong", "harmonis", "=ondes", "creativ", "atelier", "dessin", "peinture", "artist", "=art", "expression", "resonan", "=ecoute", "rythme"],
+      "ambiances": ["mystere", "sombre", "vif", "doux"],
+      "polices": { "titre": "Instrument Serif", "texte": "Instrument Sans", "css": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..600&display=swap" },
+      "palettes": [
+        { "id": "bronze", "nom": "Bronze", "teinte": "or", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0e0c0a", "encre": "#f3ede2", "accent": "#d9a75a", "accent2": "#8fb3a8" }, "defautPour": ["creation"] },
+        { "id": "indigo", "nom": "Indigo", "teinte": "violet", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#120f24", "encre": "#efeaf8", "accent": "#a993ff", "accent2": "#f0b86a" }, "defautPour": ["esprit", "energie"] },
+        { "id": "cuivre", "nom": "Cuivre", "teinte": "orange", "ton": "clair", "vivacite": "vive", "couleurs": { "fond": "#f6ece2", "encre": "#2a170c", "accent": "#a64e22", "accent2": "#2f3a5a" }, "defautPour": ["elan"] },
+        { "id": "lagune", "nom": "Lagune", "teinte": "bleu", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#06141c", "encre": "#e8f3f6", "accent": "#6cc4d6", "accent2": "#e8b86a" }, "defautPour": ["psy"] },
+        { "id": "papier", "nom": "Papier à musique", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce", "couleurs": { "fond": "#f2eee6", "encre": "#1a1714", "accent": "#7a3b2e", "accent2": "#2f4a6a" }, "defautPour": ["famille", "beaute", "toucher"] },
+        { "id": "mousse", "nom": "Mousse", "teinte": "vert", "ton": "sombre", "vivacite": "douce", "couleurs": { "fond": "#0c1610", "encre": "#eaf2ea", "accent": "#9fd18a", "accent2": "#e0b45a" }, "defautPour": ["plantes", "mouvement"] }
+      ],
+      "affiche": "Cercles d'ondes qui partent d'un bol, portée de cinq lignes traversée d'une onde, nom en Instrument Serif italique."
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "id": "pop-vitamine",
+  "nom": "Pop vitaminé",
+  "promesse": "Un duo de couleurs franches, votre nom en lettres géantes et de vrais objets à votre nom qu’on attrape et qu’on lance.",
+  "pourVous": "{prenom}, votre site a l’énergie d’une jolie marque : votre nom en très grand, un produit à vos initiales, et votre métier de {metier} raconté avec le sourire.",
+  "familles": {
+    "elan": 5,
+    "mouvement": 5,
+    "plantes": 4,
+    "famille": 4,
+    "beaute": 4,
+    "creation": 4,
+    "toucher": 3,
+    "energie": 3,
+    "esprit": 2,
+    "psy": 2
+  },
+  "motsCles": [
+    "joie",
+    "energ",
+    "dynami",
+    "sourire",
+    "vital",
+    "envie",
+    "plaisir",
+    "couleur",
+    "bouger",
+    "gourmand",
+    "naturel",
+    "pep",
+    "motiv",
+    "fun"
+  ],
+  "ambiances": [
+    "vif",
+    "chaleureux",
+    "lumineux"
+  ],
+  "polices": {
+    "titre": "Bricolage Grotesque",
+    "texte": "police du système",
+    "css": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@96,75..100,500..800&display=swap"
+  },
+  "palettes": [
+    {
+      "id": "menthe",
+      "nom": "Menthe et violette",
+      "teinte": "vert",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#0B7A55",
+        "encre": "#FFFFFF",
+        "accent": "#6A3FD4",
+        "accent2": "#0B7A55"
+      },
+      "defautPour": [
+        "plantes"
+      ]
+    },
+    {
+      "id": "mangue",
+      "nom": "Mangue et framboise",
+      "teinte": "orange",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#FF8A3D",
+        "encre": "#2A0A10",
+        "accent": "#FF3D7F",
+        "accent2": "#FF8A3D"
+      },
+      "defautPour": [
+        "toucher",
+        "energie"
+      ]
+    },
+    {
+      "id": "lagon",
+      "nom": "Lagon et citron",
+      "teinte": "bleu",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#1E5BFF",
+        "encre": "#FFFFFF",
+        "accent": "#FFD60A",
+        "accent2": "#1E5BFF"
+      },
+      "defautPour": [
+        "psy",
+        "mouvement"
+      ]
+    },
+    {
+      "id": "cerise",
+      "nom": "Cerise et pêche",
+      "teinte": "rose",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#FF4F86",
+        "encre": "#2A0A12",
+        "accent": "#D81B5F",
+        "accent2": "#FF9E7A"
+      },
+      "defautPour": [
+        "famille",
+        "beaute"
+      ]
+    },
+    {
+      "id": "raisin",
+      "nom": "Raisin et lilas",
+      "teinte": "violet",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#5B2BD6",
+        "encre": "#FFFFFF",
+        "accent": "#C9A7FF",
+        "accent2": "#5B2BD6"
+      },
+      "defautPour": [
+        "esprit"
+      ]
+    },
+    {
+      "id": "citron",
+      "nom": "Citron et corail",
+      "teinte": "jaune",
+      "ton": "clair",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#FFD23F",
+        "encre": "#2A0E08",
+        "accent": "#FF7A59",
+        "accent2": "#FFD23F"
+      },
+      "defautPour": [
+        "elan",
+        "creation"
+      ]
+    }
+  ],
+  "affiche": "Dégradé franc de deux couleurs (gauche vers droite), nom en capitales Bricolage Grotesque 800 très serrées et géantes au centre, une pilule blanche dessous, une vague de couleur en bas."
+}

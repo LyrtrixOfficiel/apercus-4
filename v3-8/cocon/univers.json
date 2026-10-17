@@ -1,0 +1,47 @@
+{
+  "id": "cocon",
+  "nom": "Cocon",
+  "promesse": "Un mobile de feutre et de papier suspendu au-dessus de votre nom : il se balance, on le fait tourner du doigt, et la page se lit comme un carnet de naissance.",
+  "pourVous": "Un site tendre et lumineux comme un carnet de naissance de créateur, pour accompagner {metier} avec douceur, sans mièvrerie.",
+  "familles": { "famille": 5, "toucher": 3, "esprit": 2, "psy": 2, "plantes": 2, "beaute": 2, "mouvement": 1, "elan": 1 },
+  "motsCles": ["perinat", "doula", "bebe", "naissance", "grossesse", "parent", "maternit", "portage", "allaitement", "post-partum", "nuit", "famille", "enfant", "douceur", "cocon", "bulle", "repit", "accueil"],
+  "ambiances": ["lumineux", "doux", "chaleureux", "naturel"],
+  "polices": {
+    "titre": "Young Serif",
+    "texte": "Nunito Sans",
+    "css": "https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..700;1,6..12,400..700&family=Caveat:wght@500..600&display=swap"
+  },
+  "palettes": [
+    {
+      "id": "avoine", "nom": "Avoine et sauge", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#f3ece0", "encre": "#2f2b25", "accent": "#5c6b4e", "accent2": "#d6a24a" },
+      "defautPour": ["famille", "plantes"]
+    },
+    {
+      "id": "argile", "nom": "Argile et miel", "teinte": "terre", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#f2e5da", "encre": "#3a271f", "accent": "#974a31", "accent2": "#d9a24e" },
+      "defautPour": ["toucher", "beaute"]
+    },
+    {
+      "id": "brume", "nom": "Brume bleue", "teinte": "bleu", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#e6ecef", "encre": "#1f2d38", "accent": "#486684", "accent2": "#d6a95c" },
+      "defautPour": ["psy", "esprit"]
+    },
+    {
+      "id": "pistache", "nom": "Pistache", "teinte": "vert", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#eef0de", "encre": "#28301f", "accent": "#566f2c", "accent2": "#e0967a" },
+      "defautPour": ["mouvement", "elan"]
+    },
+    {
+      "id": "beurre", "nom": "Beurre frais", "teinte": "jaune", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#f6edd2", "encre": "#36301e", "accent": "#85620f", "accent2": "#8fa89a" },
+      "defautPour": ["creation"]
+    },
+    {
+      "id": "veilleuse", "nom": "Nuit de veille", "teinte": "neutre-sombre", "ton": "sombre", "vivacite": "douce",
+      "couleurs": { "fond": "#1b2333", "encre": "#f2ead9", "accent": "#f0c879", "accent2": "#9fb3c8" },
+      "defautPour": ["energie"]
+    }
+  ],
+  "affiche": "Un anneau de bois clair d’où pendent une lune de feutre miel, deux nuages blancs et des étoiles de papier plié, leurs ombres douces sur un mur avoine ; le nom en Young Serif, la fin en écriture manuscrite."
+}

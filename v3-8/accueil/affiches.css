@@ -1,0 +1,269 @@
+/* Affiches construites des univers : seulement un REPLI, chargé par accueil.js si l'aperçu en direct échoue.
+   (Extraites de l'ancienne accueil.css du deuxième tour ; les variables --amp, --lent, --ressort viennent de accueil.css.) */
+
+@property --f { syntax: '<color>'; inherits: true; initial-value: #f3eee6; }
+@property --e { syntax: '<color>'; inherits: true; initial-value: #1b1814; }
+@property --a { syntax: '<color>'; inherits: true; initial-value: #7a5a3c; }
+@property --b { syntax: '<color>'; inherits: true; initial-value: #c9a46a; }
+@property --cl { syntax: '<color>'; inherits: true; initial-value: #f3eee6; }
+@property --so { syntax: '<color>'; inherits: true; initial-value: #1b1814; }
+@property --p2 { syntax: '<color>'; inherits: true; initial-value: #7a5a3c; }
+@property --p3 { syntax: '<color>'; inherits: true; initial-value: #c9a46a; }
+
+.affiche { position: absolute; inset: 0; overflow: hidden; container-type: size; background: var(--f); color: var(--e); isolation: isolate; font-family: var(--px); }
+.affiche > * { position: absolute; margin: 0; }
+.affiche svg { max-width: none; }
+.a-nom { font-family: var(--pt); line-height: .95; z-index: 3; overflow-wrap: normal; hyphens: none; }
+.a-sous { z-index: 3; font-size: max(11px, 2.9cqw); line-height: 1.3; letter-spacing: .01em; }
+.affiche-grise { filter: grayscale(1) contrast(.94) brightness(1.03); }
+/* les animations ne tournent que pour les affiches à l'écran (économie de batterie, 50 images/s sur téléphone) */
+.affiche:not(.en-vue), .affiche:not(.en-vue) *, .affiche:not(.en-vue) *::before, .affiche:not(.en-vue) *::after { animation-play-state: paused !important; }
+.t-mini .a-sous { display: none; }
+
+/* --- Nature : prairie au pied du nom --- */
+.m-nature .n-ciel { inset: 0; background: radial-gradient(46cqmax 46cqmax at 82% 12%, color-mix(in oklab, var(--b) 52%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in oklab, var(--f) 72%, #fff) 0%, var(--f) 72%); }
+.m-nature[data-ton="sombre"] .n-ciel { background: radial-gradient(40cqmax 40cqmax at 80% 14%, color-mix(in oklab, var(--b) 40%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in oklab, var(--f) 80%, #000) 0%, var(--f) 72%); }
+.m-nature .a-sous { left: 8cqw; right: 8cqw; top: 6cqh; }
+.n-nom { left: 8cqw; right: 8cqw; top: 12cqh; font-weight: 400; font-size: min(calc(150cqw / var(--L)), 15.5cqh); font-variation-settings: 'SOFT' 100, 'opsz' 144; letter-spacing: -.025em; line-height: .9; }
+.n-nom em { font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; color: color-mix(in oklab, var(--a) 62%, var(--e)); }
+.n-herbe { left: 0; right: 0; bottom: 0; width: 100%; height: 47%; }
+.n-herbe .c0 { fill: color-mix(in oklab, var(--a) 52%, var(--f)); }
+.n-herbe .c1 { fill: var(--a); }
+.n-herbe .c2 { fill: color-mix(in oklab, var(--a) 68%, var(--e)); }
+.n-herbe g { transform-box: fill-box; transform-origin: 50% 100%; animation: n-vent calc(6.5s * var(--lent)) ease-in-out infinite alternate; }
+.n-herbe .g1 { animation-duration: calc(7.8s * var(--lent)); animation-delay: -2.4s; }
+.n-herbe .g2 { animation-duration: calc(5.4s * var(--lent)); animation-delay: -1.2s; }
+.n-herbe .fleurs { animation-duration: calc(7s * var(--lent)); animation-delay: -3s; }
+.fleurs ellipse { fill: #fffdf6; }
+.fleurs circle { fill: var(--b); }
+.fleurs .bouton circle { fill: var(--b); stroke: color-mix(in oklab, var(--b) 70%, var(--e)); stroke-width: .6; }
+.fleurs .tige { fill: none; stroke: color-mix(in oklab, var(--a) 75%, var(--e)); stroke-width: 1; }
+@keyframes n-vent { from { transform: skewX(calc(-4deg * var(--amp))); } to { transform: skewX(calc(4deg * var(--amp))); } }
+
+/* --- Aurora Nuit : aurores, étoiles, constellation --- */
+.au-etoiles { inset: 0; animation: au-scint calc(5s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes au-scint { to { opacity: .55; } }
+.au-rideau { left: -30%; width: 160%; height: 56%; top: -2%; mix-blend-mode: screen; opacity: .85; filter: blur(1.6cqw);
+  background: repeating-linear-gradient(90deg, transparent 0 3cqw, color-mix(in oklab, var(--a) 80%, transparent) 6cqw, transparent 9.5cqw, color-mix(in oklab, var(--a) 45%, transparent) 12cqw, transparent 15cqw);
+  -webkit-mask: linear-gradient(180deg, transparent 0%, #000 34%, rgba(0, 0, 0, .55) 60%, transparent 100%); mask: linear-gradient(180deg, transparent 0%, #000 34%, rgba(0, 0, 0, .55) 60%, transparent 100%);
+  border-radius: 50% / 30%; transform: rotate(-10deg) skewX(-18deg); animation: au-onde calc(14s * var(--lent)) ease-in-out infinite alternate; }
+.au-rideau.r2 { top: 8%; opacity: .6; transform: rotate(-4deg) skewX(14deg); animation-duration: calc(18s * var(--lent)); animation-delay: -7s;
+  background: repeating-linear-gradient(90deg, transparent 0 5cqw, color-mix(in oklab, var(--b) 75%, transparent) 9cqw, transparent 14cqw); }
+.au-rideau.r3 { top: 18%; height: 40%; opacity: .45; background: linear-gradient(90deg, transparent 10%, color-mix(in oklab, var(--a) 60%, transparent) 40%, transparent 75%); animation-duration: calc(11s * var(--lent)); animation-delay: -3s; }
+@keyframes au-onde { from { translate: calc(-6% * var(--amp)) 0; scale: 1 .9; } to { translate: calc(6% * var(--amp)) 2%; scale: 1 1.12; } }
+.au-constellation { inset: 0; width: 100%; height: 100%; }
+.au-constellation polyline { fill: none; stroke: var(--e); stroke-opacity: .32; stroke-width: .22; }
+.au-constellation circle { fill: var(--e); animation: au-point calc(3s * var(--lent)) ease-in-out infinite alternate; animation-delay: calc(var(--k) * -.7s); }
+@keyframes au-point { to { opacity: .35; } }
+.au-nom { left: 7cqw; right: 7cqw; bottom: 14cqh; text-align: center; font-weight: 300; font-size: min(calc(165cqw / var(--L)), 16.5cqh); letter-spacing: .005em; line-height: .95; text-shadow: 0 0 4cqw color-mix(in oklab, var(--a) 40%, transparent); }
+.au-nom em { font-weight: 400; }
+.m-aurora-nuit .a-sous { left: 6cqw; right: 6cqw; bottom: 7cqh; text-align: center; font-family: var(--pt); font-style: italic; font-size: max(12px, 3.6cqw); }
+
+/* --- Éditorial : couverture de magazine --- */
+.ed-haut { left: 6cqw; right: 6cqw; top: 4.5cqh; display: flex; justify-content: space-between; padding-bottom: 1.4cqh; border-bottom: 1px solid var(--e); font: 600 max(10px, 2.5cqw)/1 'Archivo', var(--sans); font-stretch: 82%; text-transform: uppercase; letter-spacing: .08em; z-index: 3; }
+.ed-nom { left: 5cqw; right: 5cqw; top: 11cqh; font-weight: 500; font-size: min(calc(100cqw / (var(--L) * .6)), calc(64cqh / var(--n)), 32cqh); line-height: .84; letter-spacing: -.035em; }
+.ed-nom .w { display: block; }
+.ed-nom .w2 { padding-left: 9cqw; font-style: italic; }
+.ed-nom .w3 { padding-left: 3cqw; }
+.ed-pierre { width: min(36cqw, 40cqh); height: min(36cqw, 40cqh); right: -6cqw; bottom: 14cqh; border-radius: 50%; z-index: 2; box-shadow: -2cqw 3cqw 5cqw -1cqw rgba(0, 0, 0, .25);
+  background: radial-gradient(circle at 34% 30%, color-mix(in oklab, var(--a) 50%, #fff) 0%, var(--a) 44%, color-mix(in oklab, var(--a) 68%, #000) 100%); animation: ed-flotte calc(8s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes ed-flotte { to { translate: calc(-2cqw * var(--amp)) calc(-2.5cqh * var(--amp)); rotate: calc(10deg * var(--amp)); } }
+.ed-lignes { left: 6cqw; bottom: 6cqh; max-width: 64cqw; display: grid; gap: 1cqh; z-index: 3; font: 700 max(10px, 3cqw)/1.1 'Archivo', var(--sans); font-stretch: 75%; text-transform: uppercase; letter-spacing: .02em; }
+.ed-mot { color: var(--a); font-family: var(--pt); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 1.35em; }
+.ed-code { right: 6cqw; bottom: 5cqh; width: 15cqw; height: 7.5cqw; padding: 1cqw; background: #fff; z-index: 3; }
+.ed-code::before { content: ''; position: absolute; inset: 1cqw; background: repeating-linear-gradient(90deg, #111 0 1px, transparent 1px 2.6px, #111 2.6px 4.2px, transparent 4.2px 5px, #111 5px 5.6px, transparent 5.6px 7.6px); }
+
+/* --- Photos d'univers (Cinéma, Liquid Glass, Institut) : la photo est une variable, le motif dessiné reste dessous --- */
+.a-photo { position: absolute; inset: 0; background: var(--photo, none) center / cover no-repeat; }
+
+/* --- Cinéma : sa photo d'ouverture étalonnée dans la palette, bandes 2,39:1, carton de générique --- */
+.m-cinema { background: #0c0b0a; }
+.ci-image { inset: 0; overflow: hidden; background: radial-gradient(70% 60% at 30% 28%, color-mix(in oklab, var(--a) 45%, #2a2018), transparent 70%), linear-gradient(180deg, color-mix(in oklab, var(--a) 30%, #1a140f), #0c0b0a); }
+.ci-photo { filter: grayscale(1) contrast(1.12) brightness(1.1); scale: 1.06; animation: ci-travelling calc(24s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes ci-travelling { to { scale: calc(1.06 + .06 * var(--amp)); translate: calc(-1.6% * var(--amp)) 0; } }
+.ci-teinte { position: absolute; inset: 0; background: var(--a); mix-blend-mode: color; opacity: .88; }
+.ci-lumiere { position: absolute; inset: 0; mix-blend-mode: screen; opacity: .55; background: radial-gradient(38% 50% at 86% 18%, color-mix(in oklab, var(--a) 70%, #fff3dc), transparent 72%); animation: ci-derive calc(14s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes ci-derive { to { translate: calc(-6% * var(--amp)) calc(3% * var(--amp)); opacity: .35; } }
+.ci-image::after { content: ''; position: absolute; inset: 0; background: radial-gradient(52% 38% at 50% 50%, rgba(10, 8, 6, .55), rgba(10, 8, 6, .12) 100%), radial-gradient(130% 100% at 50% 45%, transparent 45%, rgba(10, 8, 6, .5)); }
+.ci-grain { position: absolute; inset: 0; opacity: .16; mix-blend-mode: overlay; animation: ci-grain .9s steps(3) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion: reduce) { .ci-grain { animation-duration: 2.4s; } }
+@keyframes ci-grain { 33% { background-position: 37px 11px; } 66% { background-position: -23px 41px; } }
+/* les bandes : hauteur du format 2,39:1, fermées tant que l'affiche n'a pas été vue */
+/* en portrait, le vrai 2,39:1 noircirait l'affiche : la bande est plafonnée */
+.ci-bande { left: 0; right: 0; height: min(max(5cqh, calc(50cqh - 20.92cqw)), 13cqh); background: #0b0a09; z-index: 4; transition: height calc(1.9s * var(--lent)) var(--glisse) .2s; }
+.ci-bande.haut { top: 0; }
+.ci-bande.bas { bottom: 0; }
+.js .m-cinema:not(.vue):not(.t-mini) .ci-bande { height: 50%; }
+.ci-carton { left: 8cqw; right: 8cqw; top: 50%; translate: 0 -50%; display: grid; justify-items: center; gap: min(3.4cqh, 3.4cqw); z-index: 3; text-align: center; color: color-mix(in oklab, var(--cl) 72%, #fff); }
+.ci-mono { position: relative; display: grid; place-items: center; width: min(11cqw, 13cqh); aspect-ratio: 1; border-radius: 50%; border: 1px solid color-mix(in oklab, currentColor 80%, transparent); outline: 1px solid color-mix(in oklab, currentColor 45%, transparent); outline-offset: min(.8cqw, 1cqh); font: italic 400 min(4.4cqw, 5.2cqh)/1 var(--pt); letter-spacing: .02em; }
+.ci-nom { position: static; font-style: italic; font-weight: 300; font-size: min(calc(118cqw / var(--L)), 12.5cqh, 13cqw); line-height: 1.02; letter-spacing: .005em; text-wrap: balance; text-shadow: 0 0 3cqw rgba(0, 0, 0, .35); }
+.ci-credits { left: 7cqw; right: 7cqw; bottom: calc(min(max(5cqh, 50cqh - 20.92cqw), 13cqh) / 2); translate: 0 50%; display: flex; justify-content: space-between; gap: 4cqw; z-index: 5; font: 600 max(10px, 2.2cqw)/1.2 var(--px); text-transform: uppercase; letter-spacing: .14em; color: #d9d0c2; opacity: 0; transition: opacity 1.2s ease 1.4s; }
+.m-cinema.vue .ci-credits, html:not(.js) .ci-credits { opacity: 1; }
+.t-petite .ci-credits span + span { display: none; }
+
+/* --- Liquid Glass : un écran verrouillé, sa grande photo, le prénom en verre --- */
+.m-liquid-glass { background: var(--f); }
+.lg-fond { inset: 0; background: linear-gradient(160deg, var(--b), var(--a)); }
+.lg-fond i { position: absolute; border-radius: 50%; filter: blur(6cqw); width: 70cqw; height: 70cqw; }
+.lg-fond i:first-child { left: -16cqw; top: -10cqh; background: color-mix(in oklab, var(--b) 60%, #fff); }
+.lg-fond i:last-child { right: -20cqw; bottom: -14cqh; background: var(--a); }
+.lg-photo { inset: -2%; transition: background-image .9s ease; animation: lg-respire calc(20s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes lg-respire { to { scale: calc(1 + .045 * var(--amp)); } }
+.lg-voile { inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .2), transparent 30%, transparent 58%, rgba(0, 0, 0, .26)); }
+.lg-date { left: 0; right: 0; top: min(7cqh, 7cqw); text-align: center; font: 600 max(10px, min(2.7cqw, 3.4cqh))/1 var(--px); color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .45); z-index: 3; }
+.lg-verre { left: 3cqw; right: 3cqw; top: min(12cqh, 13cqw); text-align: center; white-space: nowrap; font-weight: 800; font-size: min(calc(140cqw / var(--lv, 7)), 23cqh); line-height: 1; letter-spacing: -.045em; z-index: 3;
+  /* lettres de verre : un dégradé clair découpé dans le texte (pas de contour : les polices variables de Windows
+     montrent alors leurs contours internes, des rectangles dans le A et le e) ; reflet et ombre portée par filtre */
+  color: rgba(255, 255, 255, .7); background: linear-gradient(172deg, rgba(255, 255, 255, .97) 8%, rgba(255, 255, 255, .5) 46%, rgba(255, 255, 255, .62) 60%, rgba(255, 255, 255, .9) 96%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 .018em 0 rgba(255, 255, 255, .5)) drop-shadow(0 .035em .06em rgba(0, 0, 0, .22)) drop-shadow(0 0 .22em rgba(255, 255, 255, .28)); }
+.lg-notif { left: 50%; translate: -50% 0; width: min(88cqw, 82cqh); bottom: calc(min(7cqh, 7cqw) + max(30px, min(9cqw, 10cqh)) + 2.4cqh); display: grid; grid-template-columns: auto 1fr auto; gap: min(2.6cqw, 3cqh); align-items: center; padding: min(2.8cqw, 3.2cqh) min(3.2cqw, 3.6cqh); border-radius: min(4.6cqw, 5.4cqh); z-index: 3; color: var(--so);
+  background: linear-gradient(140deg, rgba(255, 255, 255, .7), rgba(255, 255, 255, .42)); -webkit-backdrop-filter: blur(2.6cqw) saturate(1.8); backdrop-filter: blur(2.6cqw) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, .78); box-shadow: inset 0 1px 1px rgba(255, 255, 255, .95), 0 2cqw 6cqw -2cqw rgba(10, 20, 40, .35); }
+.lg-app { display: grid; place-items: center; width: max(24px, min(8cqw, 9cqh)); aspect-ratio: 1; border-radius: 28%; background: var(--a); color: #fff; font: 700 max(10px, min(2.8cqw, 3.2cqh))/1 var(--px); letter-spacing: .02em; }
+.lg-texte { display: grid; gap: .3em; min-width: 0; font: 400 max(10px, min(2.5cqw, 2.9cqh))/1.25 var(--px); }
+.lg-texte b { font-weight: 650; }
+.lg-texte span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lg-quand { align-self: start; font: 500 max(9px, min(2cqw, 2.4cqh))/1 var(--px); opacity: .75; }
+.lg-capsules { left: 50%; translate: -50% 0; width: min(88cqw, 82cqh); bottom: min(7cqh, 7cqw); display: flex; justify-content: space-between; z-index: 3; }
+.lg-capsules span { display: inline-flex; align-items: center; gap: .5em; height: max(30px, min(9cqw, 10cqh)); padding: 0 1.1em; border-radius: 99px; font: 600 max(10px, min(2.5cqw, 2.9cqh))/1 var(--px); color: var(--so);
+  background: linear-gradient(140deg, rgba(255, 255, 255, .66), rgba(255, 255, 255, .38)); -webkit-backdrop-filter: blur(2cqw) saturate(1.7); backdrop-filter: blur(2cqw) saturate(1.7); border: 1px solid rgba(255, 255, 255, .75); box-shadow: inset 0 1px 1px rgba(255, 255, 255, .9); }
+.lg-capsules svg { width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.m-liquid-glass[data-ton="sombre"] .lg-notif, .m-liquid-glass[data-ton="sombre"] .lg-capsules span { color: var(--cl); background: linear-gradient(140deg, rgba(40, 46, 70, .55), rgba(20, 24, 40, .4)); border-color: rgba(255, 255, 255, .28); box-shadow: inset 0 1px 1px rgba(255, 255, 255, .25), 0 2cqw 6cqw -2cqw rgba(0, 0, 0, .5); }
+.t-petite .lg-quand { display: none; }
+
+/* --- Pop vitaminé : dégradé franc, nom géant, pilule blanche, pot à ses initiales --- */
+.m-pop-vitamine { background: var(--f); }
+.po-fond { inset: 0; background: radial-gradient(55% 45% at 88% 6%, rgba(255, 255, 255, .22), transparent 70%), linear-gradient(102deg, var(--f) 16%, var(--p2) 94%); }
+.po-centre { left: 5cqw; right: 5cqw; top: 44%; translate: 0 -50%; display: grid; justify-items: center; gap: min(4cqh, 5cqw); z-index: 3; text-align: center; }
+.po-nom { position: static; color: var(--e); font-weight: 800; font-stretch: 75%; font-variation-settings: 'wdth' 75, 'opsz' 96; text-transform: uppercase; font-size: min(calc(100cqw / (var(--L) * .6)), calc(48cqh / var(--n)), 25cqh); line-height: .86; letter-spacing: -.02em; }
+.po-nom .w { display: block; }
+.po-bouton { position: static; padding: min(2.5cqw, 3cqh) min(6cqw, 7cqh); border-radius: 99px; background: #fff; color: #17120c; font: 700 max(11px, min(3cqw, 3.6cqh))/1 var(--pt); box-shadow: 0 1.2cqw 3cqw rgba(0, 0, 0, .2); }
+.po-vague { left: 0; bottom: 0; width: 200%; height: 13cqh; z-index: 1; animation: po-vague calc(9s * var(--lent)) linear infinite; }
+.po-vague path { fill: var(--p3); }
+@keyframes po-vague { to { translate: -50% 0; } }
+.po-pot { right: 5cqw; bottom: 3cqh; width: min(21cqw, 24cqh); aspect-ratio: .84; z-index: 4; rotate: -9deg; container-type: inline-size; filter: drop-shadow(0 2cqh 2cqh rgba(0, 0, 0, .3)); animation: po-flotte calc(6s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes po-flotte { to { translate: 0 calc(-2.4cqh * var(--amp)); rotate: calc(-9deg + 5deg * var(--amp)); } }
+.po-couvercle { position: absolute; left: 3%; right: 3%; top: 0; height: 30%; border-radius: 14% / 26%; z-index: 2;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--a) 62%, #000) 0%, var(--a) 18%, color-mix(in oklab, var(--a) 62%, #fff) 34%, var(--a) 52%, color-mix(in oklab, var(--a) 70%, #000) 100%); }
+.po-couvercle::before { content: ''; position: absolute; left: 2%; right: 2%; top: -9%; height: 30%; border-radius: 50%; background: color-mix(in oklab, var(--a) 72%, #fff); }
+.po-corps { position: absolute; left: 0; right: 0; top: 25%; bottom: 0; border-radius: 9% / 11%; display: grid; place-content: center; text-align: center; gap: 3cqw; padding-bottom: 14%; color: #1b1612;
+  background: linear-gradient(90deg, #cfc7b8 0%, #f6f1e7 22%, #fffdf8 38%, #efe8da 70%, #bdb4a4 100%); }
+.po-corps b { font: 800 30cqw/1 var(--pt); letter-spacing: -.04em; }
+.po-corps small { font: 700 6.4cqw/1.1 var(--pt); text-transform: uppercase; letter-spacing: .02em; padding-inline: 8%; }
+.po-corps i { position: absolute; left: 0; right: 0; bottom: 8%; height: 11%; background: var(--a); opacity: .9; }
+
+/* --- Immersion : nuit, cristal de filets clairs et son reflet sous l'horizon --- */
+.m-immersion { background: radial-gradient(80% 60% at 72% 30%, color-mix(in oklab, var(--a) 16%, var(--f)), var(--f) 72%); }
+.im-halo { left: 72%; top: 32%; width: 92cqw; height: 92cqw; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklab, var(--a) 24%, transparent), transparent 62%); animation: im-respire calc(7s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes im-respire { to { scale: calc(1 + .08 * var(--amp)); opacity: .7; } }
+.im-poussiere { inset: 0; width: 100%; height: 100%; }
+.im-poussiere circle { fill: var(--e); opacity: .5; animation: im-scintille calc(4s * var(--lent)) ease-in-out infinite alternate; animation-delay: calc(var(--k) * -.37s); }
+@keyframes im-scintille { to { opacity: .12; } }
+.im-cristal, .im-reflet { left: 72%; height: 50cqh; width: auto; aspect-ratio: 100 / 160; translate: -50% 0; overflow: visible; }
+.im-cristal { top: 8cqh; z-index: 2; animation: im-flotte calc(9s * var(--lent)) ease-in-out infinite alternate; }
+.im-reflet { top: 62cqh; z-index: 1; transform: scaleY(-1); opacity: .3; -webkit-mask: linear-gradient(0deg, #000, transparent 70%); mask: linear-gradient(0deg, #000, transparent 70%); animation: im-reflet calc(9s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes im-flotte { to { translate: -50% calc(-2.4cqh * var(--amp)); rotate: calc(2.4deg * var(--amp)); } }
+@keyframes im-reflet { to { translate: -50% calc(2.4cqh * var(--amp)); rotate: calc(-2.4deg * var(--amp)); } }
+.im-cristal .eclat, .im-reflet .eclat { fill: color-mix(in oklab, var(--a) 13%, transparent); }
+.im-cristal .face, .im-reflet .face { fill: color-mix(in oklab, var(--a) 22%, transparent); }
+.im-cristal .arete, .im-reflet .arete { fill: none; stroke: color-mix(in oklab, var(--e) 78%, transparent); stroke-width: .7; stroke-linejoin: round; }
+.im-horizon { left: 0; right: 0; top: 60cqh; height: 1px; z-index: 2; background: linear-gradient(90deg, transparent 2%, color-mix(in oklab, var(--a) 75%, #fff) 60%, transparent 98%); box-shadow: 0 0 2.4cqw .3cqw color-mix(in oklab, var(--a) 40%, transparent); }
+.im-eau { left: 0; right: 0; top: 60cqh; bottom: 0; background: linear-gradient(180deg, color-mix(in oklab, var(--a) 10%, transparent), transparent 70%); }
+.im-eau i { position: absolute; left: 72%; top: 6%; width: 54cqw; height: 6cqw; margin-left: -27cqw; border-radius: 50%; border: 1px solid color-mix(in oklab, var(--a) 55%, transparent); opacity: 0; animation: im-onde calc(6s * var(--lent)) ease-out infinite; }
+.im-eau i:nth-child(2) { animation-delay: calc(-3s * var(--lent)); }
+@keyframes im-onde { 0% { scale: .14; opacity: .9; } 100% { scale: 1.2; opacity: 0; } }
+.im-nom { left: 7cqw; right: 48cqw; top: 26cqh; font-weight: 300; font-size: min(calc(96cqw / var(--li, 7)), 15cqh); line-height: .98; z-index: 3; overflow-wrap: normal; }
+.im-nom em { font-style: italic; }
+.m-immersion .a-sous { left: 7cqw; right: 48cqw; top: auto; bottom: 8cqh; font-size: max(10px, 2.3cqw); text-transform: uppercase; letter-spacing: .16em; color: color-mix(in oklab, var(--e) 82%, var(--f)); }
+@container (aspect-ratio > 1.15) {
+  .im-nom { right: 45cqw; top: 30cqh; }
+  .im-cristal, .im-reflet, .im-halo, .im-eau i { left: 70%; }
+}
+
+/* --- Méridiens : une paire de pieds au fil d'or, la lumière qui circule --- */
+.m-meridiens { background: radial-gradient(70% 55% at 68% 66%, color-mix(in oklab, var(--a) 10%, var(--f)), var(--f) 75%); }
+.me-pieds { left: 50%; bottom: 4cqh; height: 58cqh; width: auto; aspect-ratio: 220 / 260; translate: -50% 0; z-index: 1; overflow: visible; }
+.me-pieds .contour { fill: color-mix(in oklab, var(--a) 7%, transparent); stroke: var(--a); stroke-width: .9; }
+.me-pieds .lumiere { fill: none; stroke: var(--b); stroke-width: 1; stroke-linecap: round; stroke-dasharray: 3 24; opacity: .9; animation: me-flux calc(4.2s * var(--lent)) linear infinite; animation-delay: calc(var(--k) * -.7s); }
+@keyframes me-flux { to { stroke-dashoffset: -27; } }
+.me-pieds .point { fill: var(--a); transform-box: fill-box; transform-origin: center; animation: me-pouls calc(3.4s * var(--lent)) ease-in-out infinite; animation-delay: calc(var(--k) * -.55s); }
+@keyframes me-pouls { 50% { scale: calc(1 + .6 * var(--amp)); opacity: .55; } }
+.me-nom { left: 7cqw; right: 7cqw; top: 7cqh; font-weight: 300; font-size: min(calc(132cqw / var(--L)), calc(30cqh / var(--n)), 15cqh); line-height: 1; letter-spacing: -.01em; color: var(--e); text-shadow: 0 0 1.4cqw var(--f), 0 0 3cqw var(--f); z-index: 3; }
+.me-nom .w { display: block; }
+.me-nom em { font-style: italic; color: var(--a); }
+.m-meridiens .a-sous { left: 7cqw; bottom: 4cqh; max-width: 40cqw; font-size: max(10px, 2.3cqw); color: color-mix(in oklab, var(--e) 80%, var(--f)); z-index: 3; text-shadow: 0 0 1cqw var(--f), 0 0 2cqw var(--f); }
+@container (aspect-ratio > 1.15) {
+  .me-pieds { left: auto; right: 5cqw; translate: none; height: 76cqh; bottom: 9cqh; }
+  .me-nom { right: 55cqw; top: 50%; translate: 0 -50%; font-size: min(calc(90cqw / var(--L)), calc(46cqh / var(--n)), 18cqh); }
+}
+
+/* --- Cocon : un mobile de berceau au-dessus du nom, ombres sur le mur --- */
+.m-cocon { background: var(--f); }
+.co-mur { inset: 0; background: radial-gradient(70% 45% at 50% 26%, color-mix(in oklab, var(--f) 60%, #fff), transparent 72%), linear-gradient(180deg, var(--f), color-mix(in oklab, var(--f) 90%, var(--e))); }
+.m-cocon[data-ton="sombre"] .co-mur { background: radial-gradient(60% 40% at 50% 28%, color-mix(in oklab, var(--a) 14%, var(--f)), transparent 72%), var(--f); }
+.co-mobile { left: 50%; top: 1cqh; width: min(86cqw, 72cqh); height: auto; translate: -50% 0; z-index: 2; overflow: visible; }
+.co-mobile .ombre { translate: 5px 10px; filter: blur(1.2px); opacity: .14; }
+.co-mobile .ombre * { fill: var(--e) !important; stroke: var(--e) !important; }
+.co-mobile .ficelle { stroke: color-mix(in oklab, var(--e) 40%, var(--f)); stroke-width: .3; }
+.co-mobile .anneau { fill: none; stroke: color-mix(in oklab, var(--b) 40%, #b48a58); stroke-width: 1.7; }
+.co-mobile .lune { fill: var(--b); }
+.co-mobile .nuage { fill: color-mix(in oklab, var(--f) 25%, #fff); stroke: color-mix(in oklab, var(--e) 14%, transparent); stroke-width: .25; }
+.co-mobile .pli-a { fill: color-mix(in oklab, var(--f) 20%, #fff); }
+.co-mobile .pli-b { fill: color-mix(in oklab, var(--f) 78%, var(--e)); }
+.m-cocon[data-ton="sombre"] .co-mobile .pli-b { fill: color-mix(in oklab, var(--cl) 70%, var(--f)); }
+.co-mobile .pendu { animation: co-balance calc(5.2s * var(--lent)) ease-in-out infinite alternate; animation-delay: calc(var(--k) * -1.3s); }
+@keyframes co-balance { from { rotate: calc(-4deg * var(--amp)); } to { rotate: calc(4deg * var(--amp)); } }
+.co-nom { left: 8cqw; right: 8cqw; top: 66%; translate: 0 -50%; text-align: center; font-size: min(calc(100cqw / var(--L)), calc(26cqh / var(--n)), 11cqh); line-height: 1.04; z-index: 3; text-wrap: balance; }
+.co-main { font-family: 'Caveat', cursive; font-weight: 600; font-size: 1.28em; color: var(--a); }
+.m-cocon .a-sous { left: 6cqw; right: 6cqw; bottom: 5cqh; text-align: center; color: color-mix(in oklab, var(--e) 82%, var(--f)); }
+@container (aspect-ratio > 1.15) {
+  .co-mobile { left: auto; right: 2cqw; translate: none; width: min(56cqw, 104cqh); top: 4cqh; }
+  .co-nom { left: 7cqw; right: 52cqw; top: 50%; text-align: left; font-size: min(calc(70cqw / var(--L)), calc(40cqh / var(--n)), 15cqh); }
+  .m-cocon .a-sous { right: auto; left: 7cqw; text-align: left; }
+}
+
+/* --- Institut : la crème étirée (sa photo, étalonnée), initiales d'or, nom très fin --- */
+.m-institut { background: var(--f); }
+.in-creme { inset: 0; width: 100%; height: 100%; }
+.in-creme .strie-o { fill: none; stroke: color-mix(in oklab, var(--e) 14%, transparent); stroke-width: 3; }
+.in-creme .strie-l { fill: none; stroke: color-mix(in oklab, var(--f) 30%, #fff); stroke-width: 2.4; }
+.in-photo { filter: grayscale(1) contrast(1.04) brightness(1.06); animation: in-respire calc(16s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes in-respire { to { scale: calc(1 + .05 * var(--amp)); } }
+.in-teinte { inset: 0; background: var(--a); mix-blend-mode: color; opacity: .5; }
+.m-institut[data-ton="sombre"] .in-photo { filter: grayscale(1) brightness(.42) contrast(1.25); }
+.m-institut[data-ton="sombre"] .in-teinte { background: color-mix(in oklab, var(--a) 40%, var(--f)); opacity: .8; }
+.in-or { left: 0; right: 0; top: 16cqh; text-align: center; font: italic 300 min(40cqw, 30cqh)/1 var(--pt); letter-spacing: -.04em; z-index: 3; color: #d4a03c;
+  background: linear-gradient(165deg, #fbeab0 0%, #e2b450 30%, #a87418 55%, #f0cf78 72%, #b98428 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 .5cqw .5cqw rgba(90, 55, 10, .35)) drop-shadow(0 0 .2cqw rgba(255, 240, 200, .6)); }
+.in-nom { left: 7cqw; right: 7cqw; bottom: 8cqh; font-weight: 300; font-size: min(calc(118cqw / var(--L)), calc(30cqh / var(--n)), 14cqh); line-height: 1; letter-spacing: -.01em; color: var(--e); z-index: 3; }
+.in-nom .w { display: block; }
+.m-institut .a-sous { left: 7cqw; right: 7cqw; top: 6cqh; font-size: max(10px, 2.2cqw); text-transform: uppercase; letter-spacing: .2em; color: var(--e); z-index: 3; }
+@container (aspect-ratio > 1.15) {
+  .in-or { top: 12cqh; font-size: min(30cqw, 40cqh); }
+  .in-nom { right: 40cqw; }
+}
+
+/* --- Résonance : la figure de sable sur la plaque, une onde d'or, nom étroit --- */
+.m-resonance { background: var(--f); }
+.re-plaque { inset: 0; background: radial-gradient(90% 70% at 50% 38%, color-mix(in oklab, var(--f) 86%, var(--e)), var(--f) 78%); animation: re-respire calc(3.2s * var(--lent)) ease-in-out infinite alternate; }
+.re-plaque::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, color-mix(in oklab, var(--f) 88%, transparent) 0%, transparent 46%); }
+@keyframes re-respire { to { opacity: .82; } }
+.re-plaque svg { width: 100%; height: 100%; }
+.re-plaque .grains { fill: none; stroke: color-mix(in oklab, var(--e) 88%, var(--f)); stroke-width: .34; stroke-linecap: round; }
+.re-plaque .bande-large, .re-plaque .bande { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.re-plaque .bande-large { stroke-width: 5.2; }
+.re-plaque .bande { stroke-width: 2.1; }
+.t-mini .re-plaque .grains { stroke-width: .5; }
+/* l'onde d'or vit sous la ligne du métier : elle la suit quelle que soit sa longueur */
+.m-resonance .a-sous::after { content: ''; display: block; width: min(34cqw, 100%); height: 3.6cqh; margin-top: 1.8cqh; background: var(--a); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 10L5 10.2L10 10.9L15 11.6L20 12.1L25 11.9L30 11L35 9.4L40 7.6L45 5.9L50 5.1L55 5.3L60 6.7L65 9.1L70 11.9L75 14.6L80 16.3L85 16.7L90 15.6L95 13.2L100 10L105 6.8L110 4.4L115 3.3L120 3.7L125 5.4L130 8.1L135 10.9L140 13.3L145 14.7L150 14.9L155 14.1L160 12.4L165 10.6L170 9L175 8.1L180 7.9L185 8.4L190 9.1L195 9.8L200 10' fill='none' stroke='%23000' stroke-width='1.6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 10L5 10.2L10 10.9L15 11.6L20 12.1L25 11.9L30 11L35 9.4L40 7.6L45 5.9L50 5.1L55 5.3L60 6.7L65 9.1L70 11.9L75 14.6L80 16.3L85 16.7L90 15.6L95 13.2L100 10L105 6.8L110 4.4L115 3.3L120 3.7L125 5.4L130 8.1L135 10.9L140 13.3L145 14.7L150 14.9L155 14.1L160 12.4L165 10.6L170 9L175 8.1L180 7.9L185 8.4L190 9.1L195 9.8L200 10' fill='none' stroke='%23000' stroke-width='1.6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat; transform-origin: 50% 50%; animation: re-vibre calc(1.8s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes re-vibre { to { scale: 1 calc(1 - .55 * var(--amp)); } }
+.m-resonance .a-sous { left: 7cqw; right: 7cqw; top: 6cqh; font-size: max(10px, 2.2cqw); text-transform: uppercase; letter-spacing: .18em; color: var(--e); z-index: 3; }
+.re-nom { left: 6cqw; right: 6cqw; bottom: 7cqh; font-weight: 500; font-stretch: 75%; font-variation-settings: 'wdth' 75, 'opsz' 96; font-size: min(calc(165cqw / var(--L)), calc(40cqh / var(--n)), 19cqh); line-height: .9; letter-spacing: -.025em; color: var(--e); z-index: 3; }
+
+/* --- Univers inconnu (repli) --- */
+.ge-disque { width: 62cqw; height: 62cqw; right: -12cqw; bottom: -12cqw; border-radius: 50%; background: var(--a); }
+.ge-nom { left: 7cqw; right: 7cqw; top: 9cqh; font-size: min(calc(140cqw / var(--L)), 15cqh); }
+.m-generique .a-sous { left: 7cqw; bottom: 6cqh; }
+
