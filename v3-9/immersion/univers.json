@@ -1,0 +1,142 @@
+{
+  "id": "immersion",
+  "nom": "Immersion",
+  "promesse": "Un monde de verre, d’eau et de brume que l’on traverse en défilant, où votre prénom naît de la brume.",
+  "pourVous": "{prenom}, votre site devient un monde de nuit que l’on traverse : un cristal, une eau calme sous la lune, et votre prénom qui naît de la brume.",
+  "familles": {
+    "esprit": 5,
+    "psy": 3,
+    "energie": 3,
+    "creation": 3,
+    "elan": 2,
+    "toucher": 2,
+    "plantes": 1,
+    "mouvement": 1,
+    "beaute": 1,
+    "famille": 1
+  },
+  "motsCles": [
+    "hypno",
+    "medit",
+    "sophro",
+    "inconscient",
+    "interieur",
+    "profond",
+    "calme",
+    "silence",
+    "conscience",
+    "ressource",
+    "energ",
+    "vibration",
+    "lumiere",
+    "eau",
+    "nuit",
+    "reve",
+    "sommeil",
+    "transform",
+    "lacher",
+    "apais",
+    "serenit",
+    "detente",
+    "relax"
+  ],
+  "ambiances": [
+    "sombre",
+    "mystere",
+    "chic",
+    "doux"
+  ],
+  "polices": {
+    "titre": "Cormorant Garamond",
+    "texte": "Manrope",
+    "css": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@400&family=Manrope:wght@400;500;600&display=swap"
+  },
+  "palettes": [
+    {
+      "id": "nuit-bleue",
+      "nom": "Nuit bleue",
+      "teinte": "bleu",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#04060b",
+        "encre": "#efebe4",
+        "accent": "#a6dcd4",
+        "accent2": "#e8cba3"
+      },
+      "defautPour": [
+        "esprit",
+        "psy",
+        "elan"
+      ]
+    },
+    {
+      "id": "nuit-violette",
+      "nom": "Nuit violette",
+      "teinte": "violet",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#07050d",
+        "encre": "#f2ecf5",
+        "accent": "#c9b6f2",
+        "accent2": "#f0c2c8"
+      },
+      "defautPour": [
+        "creation",
+        "energie"
+      ]
+    },
+    {
+      "id": "aube-doree",
+      "nom": "Aube dorée",
+      "teinte": "or",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#0a0705",
+        "encre": "#f5ede1",
+        "accent": "#ecc58c",
+        "accent2": "#f2a37a"
+      },
+      "defautPour": [
+        "toucher",
+        "beaute"
+      ]
+    },
+    {
+      "id": "brume-verte",
+      "nom": "Brume verte",
+      "teinte": "vert",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#040907",
+        "encre": "#edf3eb",
+        "accent": "#a3dcb3",
+        "accent2": "#e6d79a"
+      },
+      "defautPour": [
+        "plantes",
+        "mouvement"
+      ]
+    },
+    {
+      "id": "rosee",
+      "nom": "Rosée",
+      "teinte": "rose",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#0b0609",
+        "encre": "#f7edf0",
+        "accent": "#f3b6c6",
+        "accent2": "#f2c9a0"
+      },
+      "defautPour": [
+        "famille"
+      ]
+    }
+  ],
+  "affiche": "Fond de nuit profonde à la couleur de la palette, un cristal hexagonal pointu dessiné en filets clairs à droite avec son reflet inversé sous une ligne d’horizon lumineuse, le prénom en Cormorant Garamond italique léger à gauche."
+}

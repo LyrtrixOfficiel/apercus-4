@@ -1,0 +1,137 @@
+{
+  "id": "aurora-nuit",
+  "nom": "Aurora Nuit",
+  "promesse": "Une nuit d'aurores boréales : le nom s'écrit en étoiles, chaque thème devient une constellation, la séance traverse la nuit jusqu'à l'aube.",
+  "pourVous": "{prenom}, votre accompagnement raconté comme une nuit claire : vos thèmes en constellations, la séance du crépuscule à l'aube, vos tarifs gravés sur une carte du ciel.",
+  "familles": {
+    "esprit": 5,
+    "psy": 4,
+    "energie": 4,
+    "creation": 4,
+    "elan": 3,
+    "famille": 2,
+    "beaute": 2,
+    "mouvement": 2,
+    "toucher": 2,
+    "plantes": 1
+  },
+  "motsCles": [
+    "nuit",
+    "etoile",
+    "reve",
+    "sommeil",
+    "hypno",
+    "medit",
+    "interieur",
+    "ressource",
+    "conscience",
+    "lumiere",
+    "energ",
+    "transformation",
+    "apais",
+    "calme",
+    "lacher",
+    "ciel",
+    "lune",
+    "intuition"
+  ],
+  "ambiances": [
+    "sombre",
+    "mystere",
+    "chic",
+    "doux"
+  ],
+  "polices": {
+    "titre": "Bodoni Moda",
+    "texte": "Jost",
+    "css": "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@300..500&display=swap"
+  },
+  "affiche": "Ciel bleu nuit avec un rideau d'aurore vert et violet en haut, quelques étoiles reliées en constellation, nom en Bodoni Moda (didone des atlas célestes), un mot en italique.",
+  "palettes": [
+    {
+      "id": "aurore-verte",
+      "nom": "Aurore verte",
+      "teinte": "vert",
+      "ton": "sombre",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#050813",
+        "encre": "#eef1fb",
+        "accent": "#7cf5c8",
+        "accent2": "#b9a8ff"
+      },
+      "defautPour": [
+        "esprit",
+        "plantes"
+      ]
+    },
+    {
+      "id": "aurore-violette",
+      "nom": "Aurore violette",
+      "teinte": "violet",
+      "ton": "sombre",
+      "vivacite": "vive",
+      "couleurs": {
+        "fond": "#07051a",
+        "encre": "#f1edff",
+        "accent": "#c9adff",
+        "accent2": "#ff9fd8"
+      },
+      "defautPour": [
+        "energie",
+        "creation"
+      ]
+    },
+    {
+      "id": "nuit-bleue",
+      "nom": "Nuit bleue",
+      "teinte": "bleu",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#040a18",
+        "encre": "#eef4ff",
+        "accent": "#8cc8ff",
+        "accent2": "#a8b8ff"
+      },
+      "defautPour": [
+        "psy",
+        "mouvement"
+      ]
+    },
+    {
+      "id": "aube-rose",
+      "nom": "Aube rose",
+      "teinte": "rose",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#120818",
+        "encre": "#fff0f4",
+        "accent": "#ffb3c8",
+        "accent2": "#ffd2a0"
+      },
+      "defautPour": [
+        "famille",
+        "beaute"
+      ]
+    },
+    {
+      "id": "aube-doree",
+      "nom": "Aube dorée",
+      "teinte": "or",
+      "ton": "sombre",
+      "vivacite": "douce",
+      "couleurs": {
+        "fond": "#0d0a12",
+        "encre": "#fff7e8",
+        "accent": "#f5d08a",
+        "accent2": "#ffb07a"
+      },
+      "defautPour": [
+        "toucher",
+        "elan"
+      ]
+    }
+  ]
+}
