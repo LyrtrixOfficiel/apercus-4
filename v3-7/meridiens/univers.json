@@ -1,0 +1,47 @@
+{
+  "id": "meridiens",
+  "nom": "Méridiens",
+  "promesse": "Une carte du corps tracée au fil d’or : on touche une zone, elle s’éveille et la lumière circule depuis ce point.",
+  "pourVous": "Votre métier dessiné comme une planche d’atlas : {metier}, pris au sérieux, et une lumière qui circule là où l’on pose la main.",
+  "familles": { "energie": 5, "toucher": 3, "esprit": 2, "mouvement": 2, "plantes": 1, "beaute": 1 },
+  "motsCles": ["reflexo", "zone", "plantaire", "pied", "shiatsu", "acupress", "meridien", "energ", "reiki", "magneti", "kinesio", "circul", "point", "flux", "chi", "equilibr", "harmon", "corps"],
+  "ambiances": ["sombre", "chic", "mystere", "doux"],
+  "polices": {
+    "titre": "Playfair",
+    "texte": "Instrument Sans",
+    "css": "https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..600;1,5..1200,300..600&family=Instrument+Sans:wdth,wght@85..100,400..600&display=swap"
+  },
+  "palettes": [
+    {
+      "id": "nuit-or", "nom": "Nuit d’or", "teinte": "or", "ton": "sombre", "vivacite": "douce",
+      "couleurs": { "fond": "#0c121c", "encre": "#f1e9d8", "accent": "#dcb46c", "accent2": "#86c2b2" },
+      "defautPour": ["energie"]
+    },
+    {
+      "id": "lavis", "nom": "Lavis d’encre", "teinte": "neutre-clair", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#f2ede3", "encre": "#1c1a17", "accent": "#85601f", "accent2": "#a8432c" },
+      "defautPour": ["famille", "beaute"]
+    },
+    {
+      "id": "terre", "nom": "Lin et terre cuite", "teinte": "terre", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#ebe2d4", "encre": "#36231a", "accent": "#984624", "accent2": "#5f6e4c" },
+      "defautPour": ["toucher", "mouvement"]
+    },
+    {
+      "id": "jade", "nom": "Jade", "teinte": "vert", "ton": "sombre", "vivacite": "douce",
+      "couleurs": { "fond": "#0d1d19", "encre": "#e8f0ea", "accent": "#8fd3b4", "accent2": "#d8b46e" },
+      "defautPour": ["plantes"]
+    },
+    {
+      "id": "prune", "nom": "Prune et cuivre", "teinte": "violet", "ton": "sombre", "vivacite": "douce",
+      "couleurs": { "fond": "#1a1120", "encre": "#f3e6ec", "accent": "#e3a47c", "accent2": "#b993d6" },
+      "defautPour": ["esprit", "creation"]
+    },
+    {
+      "id": "ciel", "nom": "Encre bleue", "teinte": "bleu", "ton": "clair", "vivacite": "douce",
+      "couleurs": { "fond": "#e8edf1", "encre": "#13243a", "accent": "#2b5f8f", "accent2": "#b07a32" },
+      "defautPour": ["psy", "elan"]
+    }
+  ],
+  "affiche": "Une paire de pieds vus par la plante, tracés d’un fil d’or très fin sur fond nuit, quelques lignes de lumière du talon aux orteils ; le nom en Playfair italique, grand et fin."
+}
