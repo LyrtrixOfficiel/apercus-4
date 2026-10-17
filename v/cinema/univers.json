@@ -1,0 +1,138 @@
+{
+ "id": "cinema",
+ "nom": "Cinéma",
+ "promesse": "Votre cabinet raconté comme un film : un carton à vos initiales, une ouverture en format cinéma, votre séance en plan-séquence sous-titré.",
+ "pourVous": "{prenom}, votre métier de {metier} raconté comme un film : votre nom au générique, vos mots sur les cartons, votre séance en plan-séquence.",
+ "familles": {
+  "esprit": 5,
+  "toucher": 5,
+  "psy": 4,
+  "beaute": 4,
+  "elan": 4,
+  "energie": 3,
+  "plantes": 3,
+  "famille": 3,
+  "mouvement": 3,
+  "creation": 3
+ },
+ "motsCles": [
+  "calme",
+  "lumier",
+  "lieu",
+  "cabinet",
+  "cocon",
+  "apais",
+  "ambiance",
+  "temps pour",
+  "silence",
+  "detente",
+  "serenit",
+  "confiance",
+  "ecoute",
+  "intim",
+  "histoire",
+  "parcours",
+  "voyage",
+  "instant"
+ ],
+ "ambiances": [
+  "sombre",
+  "chic",
+  "chaleureux",
+  "doux",
+  "mystere"
+ ],
+ "polices": {
+  "titre": "Cormorant Garamond",
+  "texte": "Manrope",
+  "css": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Courier+Prime:wght@400;700&family=Manrope:wght@400;500;600&display=swap"
+ },
+ "palettes": [
+  {
+   "id": "ambre",
+   "nom": "Ambre feutré",
+   "teinte": "or",
+   "ton": "sombre",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#16110d",
+    "encre": "#f4ece0",
+    "accent": "#dcab6e",
+    "accent2": "#efe7db"
+   },
+   "defautPour": [
+    "esprit",
+    "toucher",
+    "psy"
+   ]
+  },
+  {
+   "id": "nuit",
+   "nom": "Nuit bleue",
+   "teinte": "bleu",
+   "ton": "sombre",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#0f1624",
+    "encre": "#e7edf6",
+    "accent": "#8db0ea",
+    "accent2": "#070c16"
+   },
+   "defautPour": [
+    "creation",
+    "elan"
+   ]
+  },
+  {
+   "id": "lin",
+   "nom": "Lin clair",
+   "teinte": "neutre-clair",
+   "ton": "clair",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#f4f0e8",
+    "encre": "#29231c",
+    "accent": "#7a6244",
+    "accent2": "#e6ddcf"
+   },
+   "defautPour": [
+    "famille",
+    "mouvement"
+   ]
+  },
+  {
+   "id": "foret",
+   "nom": "Vert forêt",
+   "teinte": "vert",
+   "ton": "sombre",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#121c16",
+    "encre": "#e8efe4",
+    "accent": "#9cc290",
+    "accent2": "#0a120d"
+   },
+   "defautPour": [
+    "plantes",
+    "energie"
+   ]
+  },
+  {
+   "id": "rose",
+   "nom": "Rosé",
+   "teinte": "rose",
+   "ton": "clair",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#f6ece9",
+    "encre": "#3a2125",
+    "accent": "#a04556",
+    "accent2": "#2a161a"
+   },
+   "defautPour": [
+    "beaute"
+   ]
+  }
+ ],
+ "affiche": "Photo chaude étalonnée prise entre deux bandes noires de format cinéma (2,39:1), nom en Cormorant Garamond léger centré comme un carton de générique, initiales dans un double filet."
+}

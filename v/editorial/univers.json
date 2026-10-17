@@ -1,0 +1,153 @@
+{
+ "id": "editorial",
+ "nom": "Éditorial",
+ "promesse": "Votre site comme un numéro de magazine : votre nom en couverture, vos mots en grand entretien, un objet qu’on attrape et qu’on lance.",
+ "pourVous": "{prenom}, votre métier de {metier} mis en page comme un magazine : votre nom en couverture, vos mots en grand entretien, votre numéro en quatrième de couverture.",
+ "familles": {
+  "psy": 5,
+  "elan": 5,
+  "creation": 4,
+  "esprit": 3,
+  "beaute": 3,
+  "mouvement": 3,
+  "plantes": 3,
+  "famille": 2,
+  "toucher": 2,
+  "energie": 2
+ },
+ "motsCles": [
+  "ecri",
+  "parole",
+  "mots",
+  "lecture",
+  "livre",
+  "histoire",
+  "raconte",
+  "regard",
+  "style",
+  "creati",
+  "culture",
+  "identite",
+  "authentique",
+  "expression",
+  "estime",
+  "confiance en",
+  "changement",
+  "chemin",
+  "projet",
+  "sens"
+ ],
+ "ambiances": [
+  "vif",
+  "chic",
+  "lumineux"
+ ],
+ "polices": {
+  "titre": "Bodoni Moda",
+  "texte": "Newsreader",
+  "css": "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap"
+ },
+ "palettes": [
+  {
+   "id": "klein",
+   "nom": "Bleu Klein",
+   "teinte": "bleu",
+   "ton": "clair",
+   "vivacite": "vive",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#1a2fc4",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "esprit"
+   ]
+  },
+  {
+   "id": "encre",
+   "nom": "Noir d’encre",
+   "teinte": "neutre-clair",
+   "ton": "clair",
+   "vivacite": "douce",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#141210",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "psy",
+    "elan"
+   ]
+  },
+  {
+   "id": "vert",
+   "nom": "Vert sapin",
+   "teinte": "vert",
+   "ton": "clair",
+   "vivacite": "vive",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#13693a",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "plantes"
+   ]
+  },
+  {
+   "id": "terracotta",
+   "nom": "Terre cuite",
+   "teinte": "terre",
+   "ton": "clair",
+   "vivacite": "vive",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#a33a1f",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "famille",
+    "mouvement"
+   ]
+  },
+  {
+   "id": "rose",
+   "nom": "Framboise",
+   "teinte": "rose",
+   "ton": "clair",
+   "vivacite": "vive",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#b0245e",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "beaute",
+    "toucher"
+   ]
+  },
+  {
+   "id": "violet",
+   "nom": "Violet d’imprimerie",
+   "teinte": "violet",
+   "ton": "clair",
+   "vivacite": "vive",
+   "couleurs": {
+    "fond": "#f1ece3",
+    "encre": "#141210",
+    "accent": "#5a2bbf",
+    "accent2": "#e8e0d3"
+   },
+   "defautPour": [
+    "energie",
+    "creation"
+   ]
+  }
+ ],
+ "affiche": "Couverture de magazine sur papier crème : le nom en Bodoni Moda immense sur deux lignes (la seconde en italique, à droite, couleur d’accent), un objet détouré posé à côté, une gamme de six carrés d’imprimerie en haut à droite et un code-barres en bas."
+}

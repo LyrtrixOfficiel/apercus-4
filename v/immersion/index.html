@@ -1,0 +1,183 @@
+<!doctype html>
+<!--RACINE--><html lang="fr" class="no-js" data-palette="nuit-bleue" data-p="aurore-nussbaum" data-famille="esprit"><!--/RACINE-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--TETE--><title>Aurore Nussbaum, Hypnothérapeute à Porcelette</title>
+<meta name="description" content="Chaque accompagnement est unique, adapté à votre rythme et à vos besoins."><!--/TETE-->
+<script>
+(function () {
+  var h = document.documentElement, q = new URLSearchParams(location.search);
+  h.classList.replace('no-js', 'js');
+  var pal = q.get('palette'), ok = ['nuit-bleue', 'nuit-violette', 'aube-doree', 'brume-verte', 'rosee'];
+  if (pal && ok.indexOf(pal) >= 0) h.setAttribute('data-palette', pal);
+  var p = q.get('p'); if (p && p !== h.getAttribute('data-p')) h.classList.add('attend');
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('reduit');
+  setTimeout(function () { h.classList.add('pret'); h.classList.remove('attend'); }, 4000);
+})();
+</script>
+<script type="importmap">{ "imports": { "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.170.0/three.module.min.js" } }</script>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 24 10v12l-8 8-8-8V10z' fill='%2304060b' stroke='%23a6dcd4' stroke-width='1.5'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#04060b">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="css/immersion.css">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@400&family=Manrope:wght@400;500;600&display=swap" data-polices onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@400&family=Manrope:wght@400;500;600&display=swap"></noscript>
+<link rel="modulepreload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.170.0/three.module.min.js" crossorigin>
+</head>
+<!--CORPS--><body data-p="aurore-nussbaum" data-prenom="Aurore" data-etapes="4" data-vide=""><!--/CORPS-->
+<div class="chargeur" aria-hidden="true">
+  <div class="ch-brume"><i></i><i></i><i></i></div>
+  <div class="ch-centre">
+    <svg class="ch-cristal" viewBox="-60 -110 120 220" fill="none">
+      <defs>
+        <linearGradient id="ch-g" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="currentColor" stop-opacity="0.42"/>
+          <stop offset="0.82" stop-color="currentColor" stop-opacity="0.12"/>
+          <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="ch-clip"><path d="M4,-100 L34,-46 L34,46 L-2,100 L-32,46 L-32,-46 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#ch-clip)"><rect class="ch-montee" x="-60" y="-110" width="120" height="220" fill="url(#ch-g)"/></g>
+      <path class="ch-t ch-t1" pathLength="1" d="M4,-100 L34,-46 L34,46 L-2,100 L-32,46 L-32,-46 Z"/>
+      <path class="ch-t ch-t2" pathLength="1" d="M-10,-40 L-10,52 M14,-43 L14,49"/>
+      <path class="ch-t ch-t3" pathLength="1" d="M-32,-46 L-10,-40 L14,-43 L34,-46 M4,-100 L-10,-40 M4,-100 L14,-43 M-32,46 L-10,52 L14,49 L34,46 M-2,100 L-10,52 M-2,100 L14,49"/>
+    </svg>
+    <p class="ch-ini"><!--INI-->AN<!--/INI--></p>
+  </div>
+  <p class="ch-nom"><!--CHNOM-->Aurore Nussbaum<!--/CHNOM--></p>
+</div>
+<canvas class="toile" aria-hidden="true"></canvas>
+<div class="fond-repli" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="voile" aria-hidden="true"></div>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+<header class="hud">
+  <a class="hud-nom" href="#accueil"><!--HUD--><span class="hud-mono">AN</span><span class="hud-t">Aurore Nussbaum</span><!--/HUD--></a>
+  <div class="hud-d">
+    <button class="son" type="button" aria-pressed="false" hidden><span class="son-ondes" aria-hidden="true"><i></i><i></i><i></i></span><span class="son-t">Son coupé</span></button>
+    <!--APPEL--><a class="hud-appel" href="tel:+33781452328">Appeler</a><!--/APPEL-->
+    <button class="hud-menu" type="button" aria-expanded="false" hidden>Menu</button>
+  </div>
+</header>
+<div class="indice" aria-hidden="true"><span class="indice-barre"><i></i></span><span class="indice-nom">Accueil</span></div>
+<main id="contenu">
+<!--CONTENU-->
+
+<section class="sc sc-accueil" id="accueil" data-monde="cristal" data-nom="Accueil">
+  <div class="accueil-in">
+    <h1 class="nom" aria-label="Aurore Nussbaum" style="--n:8"><span class="ligne l1"><span class="mot">Aurore</span></span><span class="ligne l2"><span class="mot">Nussbaum</span></span></h1>
+    
+    <p class="qui"><em>Hypnothérapeute</em> à Porcelette</p>
+    <p class="accroche">Chaque accompagnement est unique, adapté à votre rythme et à vos besoins.</p>
+    <div class="actions">
+      <a class="btn btn-plein" href="tel:+33781452328">Appeler le <span class="btn-n">07 81 45 23 28</span></a>
+      <a class="btn btn-fil" href="#contact">Prendre rendez-vous</a>
+    </div>
+  </div>
+  <p class="defiler" aria-hidden="true"><span class="defiler-trait"></span>Défiler pour entrer</p>
+</section>
+
+<section class="sc sc-approche" id="approche" data-monde="eau" data-nom="L’approche">
+  <h2 class="horizon" data-reflet="Mon approche">Mon approche</h2>
+  <div class="phrases">
+    <p class="phrase phrase-1">La séance se déroule dans une atmosphère apaisante, et vous êtes guidé progressivement vers un état de relaxation profonde, où votre esprit peut accéder à ses propres ressources pour amorcer les changements désirés tout en douceur.</p>
+    <p class="phrase phrase-2">Ce moment est dédié à instaurer un climat de confiance et d’écoute, afin que vous vous sentiez en sécurité et à l’aise.</p>
+  </div>
+  <figure class="conviction"><blockquote><p>Je crois profondément que chacun a en lui la capacité de changer et de s’épanouir.</p></blockquote><figcaption>Aurore</figcaption></figure>
+  <div class="ondes">
+    <p class="ondes-intro">Ce que l’on vient y chercher</p>
+    <ul class="ondes-liste">
+      <li class="onde-mot o1"><h3>Détente et relaxation</h3><p>Un temps pour relâcher, dans une atmosphère apaisante.</p></li>
+      <li class="onde-mot o2"><h3>Gestion des émotions</h3><p>Apprendre à accueillir ce que vous ressentez, à votre rythme.</p></li>
+      <li class="onde-mot o3"><h3>Confiance en vous</h3><p>Découvrir et libérer votre plein potentiel, accompagné avec bienveillance.</p></li>
+      <li class="onde-mot o4"><h3>Vos ressources intérieures</h3><p>Avancer vers vos objectifs en vous appuyant sur ce qui est déjà en vous.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sc sc-seance" id="seance" data-monde="galets" data-nom="La séance">
+  <header class="gue-tete">
+    <h2 class="titre">Séance d’hypnothérapie</h2>
+    <p class="gue-sous">d’une pierre à l’autre, à votre rythme</p>
+  </header>
+  <ol class="gue">
+    <li class="pas pas-g" data-etape="0">
+      <h3>Le premier rendez-vous</h3>
+      <p>Lors de la 1ère séance d’hypnose, qui dure environ 1 h 30 à 2 h, nous prenons le temps d’explorer en profondeur vos besoins et vos attentes.</p>
+      <p class="duree">Première séance : 1 h 30 à 2 h</p>
+    </li>
+    <li class="pas pas-d" data-etape="1">
+      <h3>Vos objectifs</h3>
+      <p>Mon objectif est de vous accompagner vers un mieux-être durable en exploitant vos ressources intérieures et en vous aidant à atteindre vos objectifs personnels.</p>
+      
+    </li>
+    <li class="pas pas-g" data-etape="2">
+      <h3>La séance</h3>
+      <p>Mon accompagnement est fondé sur la bienveillance, l’écoute et la personnalisation ; il repose sur l’hypnose ericksonienne et conversationnelle, axée sur la détente et la relaxation.</p>
+      
+    </li>
+    <li class="pas pas-d" data-etape="3">
+      <h3>Le suivi</h3>
+      <p>Les séances de suivi, d’une durée d’1 h à 1 h 30, sont spécifiquement conçues pour continuer à travailler sur vos besoins, vos objectifs et pour renforcer les changements initiés.</p>
+      <p class="duree">Séances de suivi : 1 h à 1 h 30</p>
+    </li>
+  </ol>
+</section>
+
+<section class="sc sc-tarifs" id="tarifs" data-monde="galets" data-nom="Tarifs">
+  <div class="gravure">
+    <h2 class="titre">Tarifs <em>et durées</em></h2>
+    <ul class="prix-liste"><li class="prix"><span class="prix-nom">Séance d’hypnothérapie</span><span class="prix-val">60 € à 90 €</span></li></ul>
+    <p class="durees">Première séance : 1 h 30 à 2 h<br>Séances de suivi : 1 h à 1 h 30</p>
+    
+    <p class="paiement">Paiement : espèces, chèque ou PayPal.</p>
+    <p class="avert">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+  </div>
+</section>
+
+<section class="sc sc-apropos" id="apropos" data-monde="brume" data-nom="À propos">
+  <div class="scene-nom" aria-hidden="true"><p class="scene-nom-t">Aurore</p></div>
+  <div class="brume-in">
+    <h2 class="titre">Aurore Nussbaum</h2>
+    <div class="brume-grille">
+      <figure class="vitre"><div class="vitre-verre"></div><figcaption>Ici, votre portrait</figcaption></figure>
+      <div class="recit">
+        <p class="recit-1">J’ai découvert un outil incroyable qui a profondément contribué à ma transformation personnelle.</p>
+        <p>Désireuse de mieux comprendre cette approche, j’ai commencé à pratiquer l’hypnose pour moi-même.</p>
+        <p>Cette expérience m’a inspirée à me former davantage afin d’accompagner les autres vers le changement et le mieux-être ; pour cela j’ai choisi l’école EHTN.</p>
+        <p>Je suis prête à vous accompagner et vous guider avec bienveillance afin que vous puissiez découvrir et libérer votre plein potentiel.</p>
+      </div>
+    </div>
+    <p class="cerf">À l’image du cerf, avancez avec calme et assurance vers votre transformation intérieure.</p>
+  </div>
+</section>
+
+<section class="sc sc-contact" id="contact" data-monde="cristal" data-variante="aube" data-nom="Contact">
+  <div class="aube-in">
+    <h2 class="titre">Prendre <em>rendez-vous</em></h2>
+    <p class="rdv">Sur rendez-vous, à Porcelette.</p>
+    <a class="tel-grand" href="tel:+33781452328"><span class="tel-t">Appeler le</span>07 81 45 23 28</a>
+    <p class="liens"><a class="lien" href="https://www.resalib.fr/praticien/97907-aurore-nussbaum-hypnotherapeute-porcelette" rel="noopener" target="_blank">Réserver en ligne sur Resalib</a><a class="lien" href="https://www.facebook.com/AuroreQuelquemots" rel="noopener" target="_blank">Facebook</a></p>
+    <p class="emplacement adresse">Ici, l’adresse de votre cabinet et un plan pour venir.</p>
+  </div>
+</section>
+<!--/CONTENU-->
+</main>
+<!--PIED-->
+<footer class="pied" data-monde="cristal" data-variante="aube">
+  <div class="pied-in">
+    <p class="pied-nom">Aurore Nussbaum</p>
+    <p class="pied-meta">Hypnothérapeute, Porcelette (57890)<span class="pied-siret">SIRET 98523476400019</span></p>
+    <p class="pied-avert">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+    <p class="apercu">Aperçu préparé pour Aurore Nussbaum. Textes, photos, couleurs : tout se modifie selon vos goûts.</p>
+    <p class="apercu-2">On peut partir de ce monde, en mélanger deux, ou repartir de zéro, jusqu’au site qui vous ressemble exactement.</p>
+    <p class="palettes">Le même monde, d’une autre lumière : <a class="pal pal-nuit-violette" href="?p=aurore-nussbaum&amp;palette=nuit-violette">nuit violette</a>, <a class="pal pal-aube-doree" href="?p=aurore-nussbaum&amp;palette=aube-doree">aube dorée</a>, <a class="pal pal-brume-verte" href="?p=aurore-nussbaum&amp;palette=brume-verte">brume verte</a>, <a class="pal pal-rosee" href="?p=aurore-nussbaum&amp;palette=rosee">rosée</a>.</p>
+  </div>
+</footer><!--/PIED-->
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

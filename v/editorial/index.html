@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr" data-famille="esprit" data-palette="klein">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurore Nussbaum · Hypnothérapeute à Porcelette</title>
+<meta name="description" content="Chaque accompagnement est unique, adapté à votre rythme et à vos besoins.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f1ece3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f1ece3'/%3E%3Ctext x='32' y='46' font-family='Georgia' font-style='italic' font-size='40' text-anchor='middle' fill='%23141210'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="polices/bodoni-moda-normal-400-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="polices/bodoni-moda-italic-400-700.woff2" crossorigin>
+<link rel="stylesheet" href="polices/polices.css">
+<link rel="preload" as="image" href="images/plume-brune-objet-600.webp" type="image/webp">
+<link rel="stylesheet" href="css/editorial.css">
+<script>
+  // Avant tout affichage : palette demandée (?palette=), mouvement réduit (adouci, jamais coupé),
+  // praticien à rendre (?p=). Sans JavaScript, la page est entière ; si le script ne démarre pas,
+  // tout redevient visible au bout de 5 s.
+  (function () {
+    var h = document.documentElement, q = new URLSearchParams(location.search);
+    var pal = q.get('palette');
+    if (pal && /^(encre|klein|vert|terracotta|rose|violet)$/.test(pal)) h.setAttribute('data-palette', pal);
+    h.classList.add('js', 'presse');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('doux');
+    var p = q.get('p');
+    if (p && p !== 'aurore-nussbaum') h.classList.add('attente');
+    if (location.hash && location.hash !== '#couverture') h.classList.add('saute');
+    setTimeout(function () { if (!h.classList.contains('pret')) h.classList.remove('js', 'presse'); }, 5000);
+  })();
+</script>
+</head>
+<body>
+<div class="epreuve" data-epreuve aria-hidden="true">
+  <div class="epreuve-feuille">
+    <span class="repere repere-hg"></span><span class="repere repere-hd"></span><span class="repere repere-bg"></span><span class="repere repere-bd"></span>
+    <p class="epreuve-initiales" data-epreuve-initiales><span class="plaque plaque-c">AN</span><span class="plaque plaque-m">AN</span><span class="plaque plaque-j">AN</span><span class="plaque plaque-n">AN</span></p>
+    <p class="epreuve-nom" data-epreuve-nom>Aurore Nussbaum</p>
+    <p class="epreuve-bat"><span class="epreuve-gamme" data-epreuve-gamme><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Bon à tirer, n° 01</span></p>
+  </div>
+</div>
+<div id="site" data-dossier="aurore-nussbaum">
+
+<a class="evitement" href="#entretien">Aller au contenu</a>
+<header class="tete" data-tete>
+  <a class="tete-num" href="#couverture" aria-label="Revenir à la couverture">N° 01</a>
+  <p class="tete-nom">Aurore Nussbaum</p>
+  <div class="tete-droite">
+    <button class="tete-sommaire" type="button" aria-expanded="false" aria-controls="sommaire-plein" data-sommaire-bouton>Sommaire</button>
+    <a class="tete-appel" href="tel:+33781452328">Appeler</a>
+  </div>
+  <span class="tete-progression" aria-hidden="true" data-progression></span>
+</header>
+<div class="sommaire-plein" id="sommaire-plein" hidden data-sommaire>
+  <p class="sommaire-plein-titre">Dans ce numéro</p>
+  <ol role="list"><li><a href="#couverture"><b>1</b><span>Couverture</span></a></li><li><a href="#entretien"><b>4</b><span>Le grand entretien</span></a></li><li><a href="#seance"><b>10</b><span>En bref : la séance</span></a></li><li><a href="#pleine"><b>12</b><span>Pleine page</span></a></li><li><a href="#pratique"><b>14</b><span>Pratique</span></a></li><li><a href="#rdv"><b>IV</b><span>Quatrième de couverture</span></a></li></ol>
+</div><main id="contenu">
+<section class="couverture" id="couverture" aria-label="Couverture">
+  <div class="repere repere-hg" aria-hidden="true"></div><div class="repere repere-hd" aria-hidden="true"></div><div class="repere repere-bg" aria-hidden="true"></div><div class="repere repere-bd" aria-hidden="true"></div>
+  <div class="gamme" aria-hidden="true" data-gamme><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <p class="couverture-haut"><span>N° 01</span><span>Hypnothérapeute à Porcelette</span><span class="date-numero">Octobre 2026</span></p>
+  <h1 class="couverture-titre" data-lignes="2">
+    
+    <span class="titre-ligne titre-ligne-a" style="--n:6;--l:0"><span class="titre-texte" data-t="Aurore">Aurore</span></span><span class="titre-ligne titre-ligne-b" style="--n:8;--l:1"><span class="titre-texte" data-t="Nussbaum">Nussbaum</span></span>
+    
+  </h1>
+  <div class="couverture-objet-zone" data-zone>
+    <img class="objet couverture-objet" src="images/plume-brune-objet-600.webp" srcset="images/plume-brune-objet-600.webp 600w, images/plume-brune-objet-1100.webp 1100w" sizes="(min-width: 900px) 34vw, 60vw" width="1100" height="709" alt="" loading="eager" decoding="async" draggable="false" data-objet>
+  </div>
+  <nav class="accroches" aria-label="Dans ce numéro">
+    <a class="accroche accroche-0" href="#entretien"><b>Le grand entretien</b><span>« Je crois profondément que chacun a en lui la capacité de changer et de… »</span></a><a class="accroche accroche-1" href="#seance"><b>En bref</b><span>Le premier rendez-vous, puis le suivi</span></a><a class="accroche accroche-2" href="#pleine"><b>Pleine page</b><span>Détente et relaxation, gestion des émotions, confiance en vous</span></a><a class="accroche accroche-3" href="#pratique"><b>Pratique</b><span>Séance d’hypnothérapie, 60 € à 90 €</span></a>
+  </nav>
+  <div class="couverture-bas">
+    <p class="couverture-rdv">Sur rendez-vous<a href="tel:+33781452328">07 81 45 23 28</a></p>
+    <div class="couverture-code"><svg class="code-barres" viewBox="0 0 81 40" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="1" height="40"/><rect x="2" y="0" width="1" height="40"/><rect x="6" y="0" width="1" height="40"/><rect x="7" y="0" width="1" height="40"/><rect x="9" y="0" width="1" height="40"/><rect x="11" y="0" width="1" height="40"/><rect x="12" y="0" width="1" height="40"/><rect x="13" y="0" width="1" height="40"/><rect x="15" y="0" width="1" height="40"/><rect x="16" y="0" width="1" height="40"/><rect x="18" y="0" width="1" height="40"/><rect x="19" y="0" width="1" height="40"/><rect x="21" y="0" width="1" height="40"/><rect x="22" y="0" width="1" height="40"/><rect x="23" y="0" width="1" height="40"/><rect x="26" y="0" width="1" height="40"/><rect x="27" y="0" width="1" height="40"/><rect x="30" y="0" width="1" height="40"/><rect x="32" y="0" width="1" height="40"/><rect x="36" y="0" width="1" height="40"/><rect x="37" y="0" width="1" height="40"/><rect x="39" y="0" width="1" height="40"/><rect x="41" y="0" width="1" height="40"/><rect x="44" y="0" width="1" height="40"/><rect x="45" y="0" width="1" height="40"/><rect x="49" y="0" width="1" height="40"/><rect x="52" y="0" width="1" height="40"/><rect x="55" y="0" width="1" height="40"/><rect x="56" y="0" width="1" height="40"/><rect x="58" y="0" width="1" height="40"/><rect x="59" y="0" width="1" height="40"/><rect x="60" y="0" width="1" height="40"/><rect x="61" y="0" width="1" height="40"/><rect x="63" y="0" width="1" height="40"/><rect x="66" y="0" width="1" height="40"/><rect x="69" y="0" width="1" height="40"/><rect x="70" y="0" width="1" height="40"/><rect x="72" y="0" width="1" height="40"/><rect x="73" y="0" width="1" height="40"/><rect x="75" y="0" width="1" height="40"/><rect x="76" y="0" width="1" height="40"/><rect x="77" y="0" width="1" height="40"/><rect x="78" y="0" width="1" height="40"/><rect x="80" y="0" width="1" height="40"/></svg><span>07 81 45 23 28</span></div>
+  </div>
+</section>
+<section class="sommaire" id="sommaire" aria-labelledby="t-sommaire">
+  <figure class="sommaire-figure" data-figure>
+    <picture class="photo figure-photo"><source media="(min-width: 900px)" srcset="images/voile-irise-1600.webp"><img src="images/voile-irise-900.webp" width="900" height="601" alt="Photo d’ambiance : voile blanc et reflet irisé" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRjoAAABXRUJQVlA4WAoAAAAAAAAADwAACgAAVlA4IBwAAAAwAQCdASoQAAsAAsBKJZwAA3AA/u4wGDXReBAA)"></picture>
+    <figcaption>Photo d’ambiance, voile blanc et reflet irisé. Vos images prendront sa place.</figcaption>
+  </figure>
+  <div class="sommaire-corps">
+    <h2 id="t-sommaire" class="sommaire-titre">Sommaire</h2>
+    <ol class="sommaire-liste" role="list">
+      <li class="entree entree-0"><a href="#entretien"><span class="entree-page">4</span><span class="entree-titre">Le grand entretien</span><span class="entree-dek">Aurore Nussbaum raconte son approche et son chemin, avec ses mots.</span></a></li><li class="entree entree-1"><a href="#seance"><span class="entree-page">10</span><span class="entree-titre">En bref : la séance</span><span class="entree-dek">Le premier rendez-vous, vos objectifs, la séance, le suivi.</span></a></li><li class="entree entree-2"><a href="#pleine"><span class="entree-page">12</span><span class="entree-titre">Pleine page</span><span class="entree-dek">Ce que vous y trouverez.</span></a></li><li class="entree entree-3"><a href="#pratique"><span class="entree-page">14</span><span class="entree-titre">Pratique</span><span class="entree-dek">Tarifs, durée, règlement, adresse.</span></a></li><li class="entree entree-4"><a href="#rdv"><span class="entree-page">IV</span><span class="entree-titre">Quatrième de couverture</span><span class="entree-dek">Prendre rendez-vous.</span></a></li>
+    </ol>
+  </div>
+  <p class="folio" aria-hidden="true"><span>3</span><span>Aurore Nussbaum</span><span>N° 01, <span class="date-numero">Octobre 2026</span></span></p>
+</section>
+<section class="entretien" id="entretien" aria-labelledby="t-entretien">
+  <header class="entretien-tete">
+    <p class="rubrique">Le grand entretien</p>
+    <h2 id="t-entretien" class="entretien-titre"><span class="guillemet" aria-hidden="true">«</span>Je crois profondément que chacun a en lui la capacité de changer et de s’épanouir.<span class="guillemet" aria-hidden="true">»</span></h2>
+    <p class="chapo">Aurore Nussbaum est hypnothérapeute à Porcelette. Ici, elle raconte son approche et son chemin, avec ses mots.</p>
+  </header>
+  <div class="entretien-grille">
+    <div class="entretien-marge">
+    <figure class="entretien-figure" data-figure>
+      <picture class="photo figure-photo"><source media="(min-width: 900px)" srcset="images/ombre-fleurs-1600.webp"><img src="images/ombre-fleurs-900.webp" width="900" height="1201" alt="Photo d’ambiance : ombre de fleurs sur un mur" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4WAoAAAAAAAAADwAAFAAAVlA4IEQAAADQAwCdASoQABUAPslSo0snpKMhsAgA8BkJYwCdAB6J6WxpAb3nlQAA8nQ63tfIIRn2dCNRb+0zN+6/HHRk/C6F1iAAAA==)"></picture>
+      <figcaption>Photo d’ambiance, ombre de fleurs sur un mur. Vos images prendront sa place.</figcaption>
+    </figure>
+    <img class="objet objet-marge" src="images/pierre-ronde-objet-600.webp" srcset="images/pierre-ronde-objet-600.webp 600w, images/pierre-ronde-objet-1100.webp 1100w" sizes="(min-width: 900px) 34vw, 60vw" width="572" height="553" alt="" loading="lazy" decoding="async" draggable="false" data-flotte>
+    </div>
+    <div class="entretien-texte">
+      <p class="question">Votre approche, en quelques mots ?</p>
+      <p class="avec-lettrine"><span class="lettrine" aria-hidden="true">C</span><span class="lu">C</span>e moment est dédié à instaurer un climat de confiance et d’écoute, afin que vous vous sentiez en sécurité et à l’aise.</p><p>La séance se déroule dans une atmosphère apaisante, et vous êtes guidé progressivement vers un état de relaxation profonde, où votre esprit peut accéder à ses propres ressources pour amorcer les changements désirés tout en douceur.</p>
+      <p class="question">Et votre chemin jusqu’ici ?</p>
+      <p>J’ai découvert un outil incroyable qui a profondément contribué à ma transformation personnelle.</p><p>Désireuse de mieux comprendre cette approche, j’ai commencé à pratiquer l’hypnose pour moi-même.</p><p>Cette expérience m’a inspirée à me former davantage afin d’accompagner les autres vers le changement et le mieux-être ; pour cela j’ai choisi l’école EHTN.</p><p>Je suis prête à vous accompagner et vous guider avec bienveillance afin que vous puissiez découvrir et libérer votre plein potentiel.</p>
+      <p class="question">Un dernier mot ?</p>
+      <p>À l’image du cerf, avancez avec calme et assurance vers votre transformation intérieure.</p>
+      <figure class="portrait" data-figure>
+        <div class="portrait-cadre"><span class="portrait-initiales" aria-hidden="true">AN</span></div>
+        <figcaption>Ici, votre portrait : une photo de vous, dans votre lumière.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="folio" aria-hidden="true"><span>4</span><span>Aurore Nussbaum</span><span>N° 01, <span class="date-numero">Octobre 2026</span></span></p>
+</section>
+<section class="breves" id="seance" aria-labelledby="t-seance">
+  <header class="breves-tete">
+    <h2 id="t-seance" class="breves-titre">En bref</h2>
+    <p class="breves-dek">La séance, du premier pas au suivi, racontée par Aurore.</p>
+  </header>
+  <div class="colonnes">
+    
+    <article class="breve">
+      <p><b class="breve-tete">Le premier rendez-vous.</b> Lors de la 1ère séance d’hypnose, qui dure environ 1 h 30 à 2 h, nous prenons le temps d’explorer en profondeur vos besoins et vos attentes.</p>
+      <p class="breve-duree">Première séance · 1 h 30 à 2 h</p>
+    </article>
+    <article class="breve">
+      <p><b class="breve-tete">Vos objectifs.</b> Mon objectif est de vous accompagner vers un mieux-être durable en exploitant vos ressources intérieures et en vous aidant à atteindre vos objectifs personnels.</p>
+      
+    </article>
+    <article class="breve">
+      <p><b class="breve-tete">La séance.</b> Mon accompagnement est fondé sur la bienveillance, l’écoute et la personnalisation ; il repose sur l’hypnose ericksonienne et conversationnelle, axée sur la détente et la relaxation.</p>
+      
+    </article>
+    <article class="breve">
+      <p><b class="breve-tete">Le suivi.</b> Les séances de suivi, d’une durée d’1 h à 1 h 30, sont spécifiquement conçues pour continuer à travailler sur vos besoins, vos objectifs et pour renforcer les changements initiés.</p>
+      <p class="breve-duree">Séances de suivi · 1 h à 1 h 30</p>
+    </article>
+    <figure class="breve-figure" data-figure>
+      <picture class="photo figure-photo"><source media="(min-width: 900px)" srcset="images/main-pierre-1600.webp"><img src="images/main-pierre-900.webp" width="900" height="741" alt="Photo d’ambiance : main tenant une pierre" loading="lazy" decoding="async" style="background-image:url(data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAAAAAADwAADAAAVlA4ICwAAACwAQCdASoQAA0AAsBKJaQAAub2C53kAP7zN7BrurgRxDxtem8lQXx5voAAAA==)"></picture>
+      <figcaption>Photo d’ambiance, main tenant une pierre.</figcaption>
+    </figure>
+  </div>
+  <p class="folio" aria-hidden="true"><span>10</span><span>Aurore Nussbaum</span><span>N° 01, <span class="date-numero">Octobre 2026</span></span></p>
+</section>
+<section class="pleine" id="pleine" aria-labelledby="t-pleine">
+  <h2 id="t-pleine" class="pleine-rubrique">Ce que vous y trouverez</h2>
+  <div class="pleine-mots" aria-hidden="true">
+    <p class="pleine-ligne pleine-ligne-a" data-glisse="-1" style="--n:21"><span>Détente et relaxation</span></p><p class="pleine-ligne pleine-ligne-b" data-glisse="1" style="--n:20"><span>Gestion des émotions</span></p><p class="pleine-ligne pleine-ligne-a" data-glisse="-1" style="--n:17"><span>Confiance en vous</span></p><p class="pleine-ligne pleine-ligne-b" data-glisse="1" style="--n:26"><span>Vos ressources intérieures</span></p>
+  </div>
+  <dl class="pleine-legendes">
+    <div><dt>Détente et relaxation</dt><dd>Un temps pour relâcher, dans une atmosphère apaisante.</dd></div><div><dt>Gestion des émotions</dt><dd>Apprendre à accueillir ce que vous ressentez, à votre rythme.</dd></div><div><dt>Confiance en vous</dt><dd>Découvrir et libérer votre plein potentiel, accompagné avec bienveillance.</dd></div><div><dt>Vos ressources intérieures</dt><dd>Avancer vers vos objectifs en vous appuyant sur ce qui est déjà en vous.</dd></div>
+  </dl>
+  <p class="folio" aria-hidden="true"><span>12</span><span>Aurore Nussbaum</span><span>N° 01, <span class="date-numero">Octobre 2026</span></span></p>
+</section>
+<section class="pratique" id="pratique" aria-labelledby="t-pratique">
+  <h2 id="t-pratique" class="pratique-titre">Pratique</h2>
+  <div class="pratique-corps">
+    <div class="tarif"><p class="tarif-nom">Séance d’hypnothérapie</p><p class="tarif-prix">60 € à 90 €</p></div>
+    <p class="carnet"><span class="carnet-cle">Durée</span> 1 h 30 à 2 h, puis 1 h à 1 h 30 en suivi<span class="carnet-sep" aria-hidden="true"> · </span><span class="carnet-cle">Règlement</span> Espèces, chèque ou PayPal<span class="carnet-sep" aria-hidden="true"> · </span><span class="carnet-cle">Accueil</span> Sur rendez-vous<span class="carnet-sep" aria-hidden="true"> · </span><span class="carnet-cle">Lieu</span> 57890 Porcelette<span class="carnet-sep" aria-hidden="true"> · </span><span class="carnet-cle">Horaires</span> <span class="vide"><span class="vide-quoi">À préciser</span> Ici, vos jours et heures.</span></p>
+    
+  </div>
+  <p class="folio" aria-hidden="true"><span>14</span><span>Aurore Nussbaum</span><span>N° 01, <span class="date-numero">Octobre 2026</span></span></p>
+</section>
+<section class="quatrieme" id="rdv" aria-labelledby="t-rdv">
+  <p class="quatrieme-haut"><span>Quatrième de couverture</span><span>Sur rendez-vous</span></p>
+  <p class="quatrieme-dos">« Chaque accompagnement est unique, adapté à votre rythme et à vos besoins. »</p>
+  <h2 id="t-rdv" class="quatrieme-titre">Appelez Aurore.</h2>
+  <a class="quatrieme-tel" href="tel:+33781452328" data-ajuste><span>07 81 45 23 28</span></a>
+  <div class="quatrieme-bas">
+    <div class="quatrieme-actions">
+      <a class="bouton" href="tel:+33781452328">Appeler</a>
+      <a class="bouton bouton-creux" href="https://www.resalib.fr/praticien/97907-aurore-nussbaum-hypnotherapeute-porcelette" target="_blank" rel="noopener">Réserver sur Resalib <span aria-hidden="true">↗</span></a>
+      <a class="bouton bouton-creux" href="https://www.facebook.com/AuroreQuelquemots" target="_blank" rel="noopener">Facebook <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="quatrieme-code"><svg class="code-barres" viewBox="0 0 81 40" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="1" height="40"/><rect x="2" y="0" width="1" height="40"/><rect x="6" y="0" width="1" height="40"/><rect x="7" y="0" width="1" height="40"/><rect x="9" y="0" width="1" height="40"/><rect x="11" y="0" width="1" height="40"/><rect x="12" y="0" width="1" height="40"/><rect x="13" y="0" width="1" height="40"/><rect x="15" y="0" width="1" height="40"/><rect x="16" y="0" width="1" height="40"/><rect x="18" y="0" width="1" height="40"/><rect x="19" y="0" width="1" height="40"/><rect x="21" y="0" width="1" height="40"/><rect x="22" y="0" width="1" height="40"/><rect x="23" y="0" width="1" height="40"/><rect x="26" y="0" width="1" height="40"/><rect x="27" y="0" width="1" height="40"/><rect x="30" y="0" width="1" height="40"/><rect x="32" y="0" width="1" height="40"/><rect x="36" y="0" width="1" height="40"/><rect x="37" y="0" width="1" height="40"/><rect x="39" y="0" width="1" height="40"/><rect x="41" y="0" width="1" height="40"/><rect x="44" y="0" width="1" height="40"/><rect x="45" y="0" width="1" height="40"/><rect x="49" y="0" width="1" height="40"/><rect x="52" y="0" width="1" height="40"/><rect x="55" y="0" width="1" height="40"/><rect x="56" y="0" width="1" height="40"/><rect x="58" y="0" width="1" height="40"/><rect x="59" y="0" width="1" height="40"/><rect x="60" y="0" width="1" height="40"/><rect x="61" y="0" width="1" height="40"/><rect x="63" y="0" width="1" height="40"/><rect x="66" y="0" width="1" height="40"/><rect x="69" y="0" width="1" height="40"/><rect x="70" y="0" width="1" height="40"/><rect x="72" y="0" width="1" height="40"/><rect x="73" y="0" width="1" height="40"/><rect x="75" y="0" width="1" height="40"/><rect x="76" y="0" width="1" height="40"/><rect x="77" y="0" width="1" height="40"/><rect x="78" y="0" width="1" height="40"/><rect x="80" y="0" width="1" height="40"/></svg><span>N° 01 · <span class="date-numero">Octobre 2026</span></span></div>
+  </div>
+</section></main>
+<footer class="colophon">
+  <p class="colophon-titre">Colophon</p>
+  <dl class="colophon-grille">
+    <div class="colophon-numero"><dt>Ce numéro</dt><dd>Aperçu préparé pour Aurore Nussbaum. Textes, photos, couleurs : tout se modifie selon vos goûts.</dd></div>
+    <div class="colophon-suite"><dt>La suite</dt><dd>On peut partir de cet univers, en mélanger deux, ou repartir d’une page blanche, jusqu’au site qui vous ressemble exactement.</dd></div>
+    <div><dt>Publication</dt><dd>Aurore Nussbaum</dd></div>
+    <div><dt>Rédaction</dt><dd>Ses mots, mis en page</dd></div>
+    <div><dt>Lieu</dt><dd>57890 Porcelette</dd></div>
+    <div><dt>Contact</dt><dd><a href="tel:+33781452328">07 81 45 23 28</a></dd></div>
+    <div><dt>Images</dt><dd>Photos d’ambiance Unsplash, objets détourés par nos soins</dd></div>
+    <div><dt>SIRET</dt><dd>98523476400019</dd></div>
+  </dl>
+  <p class="colophon-avert">Les accompagnements proposés relèvent du bien-être. Ils ne remplacent en aucun cas un avis, un diagnostic ou un traitement médical.</p>
+  <p class="colophon-fin"><span>N° 01, <span class="date-numero">Octobre 2026</span></span><a href="#couverture">Revenir à la couverture <span aria-hidden="true">↑</span></a><span>Maquette non publiée</span></p>
+</footer>
+</div>
+<script type="module" src="js/editorial.js"></script>
+</body>
+</html>
