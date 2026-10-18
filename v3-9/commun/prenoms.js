@@ -232,5 +232,22 @@ export function villePropre(v) {
 export function salutation(d) {
   const a = analyserNom(d?.nom);
   if (a.prenom) return { mot: 'Bonjour', nom: a.prenom, avecPrenom: true, analyse: a };
+  // listes d'octobre : l'enseigne (« Sandra'beauty ») et la personne (« Sandra Guillaume ») sont séparées
+  const p = d?.personne ? analyserNom(d.personne) : null;
+  if (p?.prenom) return { mot: 'Bonjour', nom: p.prenom, avecPrenom: true, analyse: { ...a, prenom: p.prenom, genre: p.genre, personne: p.personne } };
+  // champ « personne » du registre (SIRENE) : « Prénom Nom », même si le prénom n'est pas dans notre liste
+  const pp = prenomPersonne(d?.personne);
+  if (pp) return { mot: 'Bonjour', nom: pp, avecPrenom: true, analyse: { ...a, prenom: pp, genre: 'x', personne: d.personne } };
   return { mot: 'Bonjour', nom: a.enseigne || String(d?.nom || ''), avecPrenom: false, analyse: a };
+}
+
+/** Prénom d'un champ « personne » du registre (« Valentina Gros » donne Valentina), ou '' si ce n'est pas une personne. */
+export function prenomPersonne(personne) {
+  const a = analyserNom(personne);
+  if (a.prenom) return a.prenom;
+  const mots = String(personne ?? '').trim().split(/\s+/).filter(Boolean);
+  if (mots.length < 2 || mots.length > 4 || !mots.every((m) => /^\p{L}[\p{L}'’-]*$/u.test(m))) return '';
+  const m = mots[0];
+  if (MOTS_ENSEIGNE.has(sansAccent(m)) || m.length < 2) return '';
+  return majuscule(m.toLowerCase().replace(/(^|-)\p{L}/gu, (c) => c.toUpperCase()));
 }

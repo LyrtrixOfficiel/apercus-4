@@ -13,7 +13,7 @@
   var h = document.documentElement; h.className = 'js';
   if (!/[?&]sansouverture/.test(location.search)) { h.classList.add('ouverture'); h.classList.add('voile-actif'); }
   try { if (localStorage.getItem('kazura-accueil-vu')) h.classList.add('revisite'); } catch (e) {}
-  var p = /[?&]p=([a-z0-9-]+)/.exec(location.search); if (p && p[1] !== 'aurore-nussbaum') h.classList.add('autre-fiche');
+  var p = /[?&]p=([a-z0-9-]+)/.exec(location.search); if (p && p[1] !== 'aurore-nussbaum') { h.classList.add('autre-fiche'); document.title = 'Bonjour'; }
 })();
 </script>
 <link rel="preload" href="accueil/polices/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>

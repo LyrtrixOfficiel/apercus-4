@@ -357,3 +357,6 @@ ol { padding: 0; list-style: none; }
 .rever-liste li { position: relative; padding-left: 22px; font: 400 15.5px/1.4 var(--sans); color: var(--f-encre); }
 .rever-liste li::before { content: ''; position: absolute; left: 2px; top: .42em; width: 10px; height: 6px; border-left: 2px solid var(--f-accent); border-bottom: 2px solid var(--f-accent); transform: rotate(-45deg); }
 @media (min-width: 1000px) { .rever { grid-template-columns: 1fr; } }
+
+/* la page pré-remplie est celle d'une autre personne : rien n'en apparaît avant que SA fiche soit chargée */
+.autre-fiche #page { visibility: hidden; }

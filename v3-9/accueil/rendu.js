@@ -331,7 +331,7 @@ export function rendreCorps(vue, { gouts = {}, mode = 'ordi' } = {}) {
     ${h1}
 
     <div class="lu apres">
-      <p class="lu-texte">J’ai imaginé ${nb === 3 ? "trois maquettes" : nb === 2 ? "deux maquettes" : "une maquette"} pour votre site, avec vos propres mots. ${nb > 1 ? "Les voici" : "La voici"}&nbsp;: prenez le temps de ${nb > 1 ? "les" : "la"} découvrir, et dites-moi ce que vous en pensez.</p>
+      <p class="lu-texte">J’ai imaginé ${nb === 3 ? "trois maquettes" : nb === 2 ? "deux maquettes" : "une maquette"} pour votre site, ${(d.approche?.length || d.apropos?.length || d.accrocheSienne) ? "avec vos propres mots" : "à partir de vos informations"}. ${nb > 1 ? "Les voici" : "La voici"}&nbsp;: prenez le temps de ${nb > 1 ? "les" : "la"} découvrir, et dites-moi ce que vous en pensez.</p>
       <p class="signe">Mathéo</p>
     </div>
 
@@ -441,7 +441,7 @@ export function rendreDocument(vue, { base = '', catalogue = [] } = {}) {
   var h = document.documentElement; h.className = 'js';
   if (!/[?&]sansouverture/.test(location.search)) { h.classList.add('ouverture'); h.classList.add('voile-actif'); }
   try { if (localStorage.getItem('kazura-accueil-vu')) h.classList.add('revisite'); } catch (e) {}
-  var p = /[?&]p=([a-z0-9-]+)/.exec(location.search); if (p && p[1] !== '${esc(vue.dossier)}') h.classList.add('autre-fiche');
+  var p = /[?&]p=([a-z0-9-]+)/.exec(location.search); if (p && p[1] !== '${esc(vue.dossier)}') { h.classList.add('autre-fiche'); document.title = 'Bonjour'; }
 })();
 </script>
 <link rel="preload" href="${base}accueil/polices/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
