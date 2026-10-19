@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test 3D</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 24px 16px 40px; background: #0b0e14; color: #eef0ea; font: 17px/1.5 system-ui, -apple-system, Roboto, sans-serif; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  p { margin: 0 0 18px; color: #bcc5bf; }
+  .ligne { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; margin: 0 0 10px; border-radius: 14px; background: #151a24; }
+  .ok { color: #6ee7b7; font-weight: 700; }
+  .non { color: #ff9b9b; font-weight: 700; }
+  .detail { font: 13px/1.45 ui-monospace, Menlo, monospace; color: #96a29b; word-break: break-word; white-space: pre-wrap; background: #151a24; border-radius: 14px; padding: 14px 16px; }
+  canvas { display: block; width: 100%; height: 200px; border-radius: 14px; margin: 16px 0; background: #151a24; }
+  button { font: inherit; padding: 14px 18px; border-radius: 999px; border: 0; background: #eef0ea; color: #0b0e14; font-weight: 600; width: 100%; }
+</style>
+</head>
+<body>
+<h1>Test 3D de ce téléphone</h1>
+<p>Si le carré ci-dessous tourne en couleur, la 3D marche dans ce navigateur.</p>
+<div id="lignes"></div>
+<canvas id="c"></canvas>
+<button id="copier">Copier le résultat</button>
+<p style="margin-top:14px">Puis colle-le dans ta conversation avec Claude.</p>
+<div class="detail" id="detail"></div>
+<script>
+(function () {
+  var res = {};
+  function essai(type) {
+    try { var c = document.createElement('canvas'); var g = c.getContext(type); return g || null; } catch (e) { return 'erreur : ' + e.message; }
+  }
+  var g2 = essai('webgl2'), g1 = essai('webgl') || essai('experimental-webgl');
+  res.webgl2 = !!(g2 && typeof g2 !== 'string');
+  res.webgl1 = !!(g1 && typeof g1 !== 'string');
+  var g = (res.webgl2 && g2) || (res.webgl1 && g1);
+  if (g) {
+    var ext = g.getExtension('WEBGL_debug_renderer_info');
+    res.carte = ext ? g.getParameter(ext.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER);
+    res.fabricant = ext ? g.getParameter(ext.UNMASKED_VENDOR_WEBGL) : g.getParameter(g.VENDOR);
+    res.version = g.getParameter(g.VERSION);
+    res.textureMax = g.getParameter(g.MAX_TEXTURE_SIZE);
+  }
+  res.mouvementReduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  res.economieDonnees = !!(navigator.connection && navigator.connection.saveData);
+  res.ecran = screen.width + ' x ' + screen.height + ' (densité ' + devicePixelRatio + ')';
+  res.navigateur = navigator.userAgent;
+  var L = document.getElementById('lignes');
+  function ligne(nom, ok, txt) { var d = document.createElement('div'); d.className = 'ligne'; d.innerHTML = '<span>' + nom + '</span><span class="' + (ok ? 'ok' : 'non') + '">' + txt + '</span>'; L.appendChild(d); }
+  ligne('3D moderne (WebGL 2)', res.webgl2, res.webgl2 ? 'oui' : 'non');
+  ligne('3D simple (WebGL 1)', res.webgl1, res.webgl1 ? 'oui' : 'non');
+  ligne('Animations réduites', !res.mouvementReduit, res.mouvementReduit ? 'activé' : 'non');
+  var texte = Object.keys(res).map(function (k) { return k + ' : ' + res[k]; }).join('\n');
+  document.getElementById('detail').textContent = texte;
+  document.getElementById('copier').onclick = function () {
+    var fini = function () { document.getElementById('copier').textContent = 'Copié'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(texte).then(fini, function () { prompt('Copie ce texte :', texte); });
+    else prompt('Copie ce texte :', texte);
+  };
+  // un carré qui tourne, dessiné en WebGL
+  var cv = document.getElementById('c'), gl = cv.getContext('webgl2') || cv.getContext('webgl');
+  if (!gl) return;
+  cv.width = cv.clientWidth * devicePixelRatio; cv.height = cv.clientHeight * devicePixelRatio;
+  function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; }
+  var p = gl.createProgram();
+  gl.attachShader(p, sh(gl.VERTEX_SHADER, 'attribute vec2 a; uniform float t; uniform float r; varying vec2 v; void main(){ v=a; float c=cos(t), s=sin(t); vec2 q=mat2(c,-s,s,c)*a*0.6; q.x/=r; gl_Position=vec4(q,0.,1.); }'));
+  gl.attachShader(p, sh(gl.FRAGMENT_SHADER, 'precision mediump float; varying vec2 v; uniform float t; void main(){ gl_FragColor=vec4(0.5+0.5*sin(t+v.x*3.),0.6+0.4*v.y,0.8,1.); }'));
+  gl.linkProgram(p); gl.useProgram(p);
+  var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var a = gl.getAttribLocation(p, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+  var ut = gl.getUniformLocation(p, 't'), ur = gl.getUniformLocation(p, 'r');
+  (function f(ms) { gl.viewport(0, 0, cv.width, cv.height); gl.clearColor(0.08, 0.1, 0.14, 1); gl.clear(gl.COLOR_BUFFER_BIT); gl.uniform1f(ut, (ms || 0) / 700); gl.uniform1f(ur, cv.width / cv.height); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(f); })();
+})();
+</script>
+</body>
+</html>

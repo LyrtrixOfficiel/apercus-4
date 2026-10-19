@@ -368,19 +368,76 @@ export function demarrerPrairie(canvas, { petit, seed = 1, palette }) {
   return { dessiner, taille, pret, get horizon() { return horizon; } };
 }
 
-// Repli sans WebGL2 : une prairie dessinee une fois en 2D, aux couleurs de la palette.
+// Repli sans WebGL2 (certains telephones Android, navigateurs integres) : une prairie dessinee une fois en 2D,
+// aux couleurs de la palette, AVEC ses fleurs (memes genres et memes parts que la prairie 3D), du plus loin au plus proche.
 export function prairieFixe(canvas, horizon = .6, seed = 1, palette) {
   const g = canvas.getContext('2d'); if (!g) return;
   const r = hasard(seed), rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
-  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; g.scale(dpr, dpr);
-  const W = rect.width, H = rect.height, y0 = H * horizon, c = palette.css;
-  const fond = g.createLinearGradient(0, y0, 0, H); fond.addColorStop(0, c.colline1); fond.addColorStop(.25, c.colline3); fond.addColorStop(1, c.colline4);
+  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const W = rect.width, H = rect.height, y0 = H * horizon, c = palette.css, G = palette.gl || {};
+  const rgb = (v, a = 1) => `rgba(${v.map((x) => Math.round(Math.min(1, Math.max(0, x)) * 255)).join(',')},${a})`;
+  const mel = (a, b, t) => a.map((x, k) => x + (b[k] - x) * t);
+  const herbe = G.herbe || [[.09, .2, .1], [.25, .47, .19], [.6, .77, .38]], brume = G.brume || [.9, .92, .86];
+  const fond = g.createLinearGradient(0, y0, 0, H);
+  fond.addColorStop(0, rgb(mel(herbe[2], brume, .6))); fond.addColorStop(.3, rgb(mel(herbe[1], brume, .2))); fond.addColorStop(1, rgb(herbe[0]));
   g.fillStyle = fond; g.fillRect(0, y0, W, H - y0);
-  const teintes = [c.colline2, c.colline3, c.colline4, c.accent];
-  for (let i = 0; i < 1400; i++) {
-    const p = Math.pow(r(), .7), y = y0 + p * (H - y0) + 6, x = r() * W, h = (8 + r() * 26) * (.3 + p * 1.6), cb = (r() - .3) * h * .5;
-    g.fillStyle = teintes[Math.floor(r() * teintes.length)]; g.globalAlpha = .5 + p * .5;
-    g.beginPath(); g.moveTo(x - 2, y); g.quadraticCurveTo(x + cb * .4, y - h * .6, x + cb, y - h); g.quadraticCurveTo(x + cb * .4 + 2, y - h * .55, x + 2, y); g.fill();
+  const genres = G.fleurs || [[0, .5], [2, .3], [3, .2]], total = genres.reduce((s, [, q]) => s + q, 0);
+  const tirer = (u) => { let a = u * total; for (const [k, q] of genres) { if ((a -= q) <= 0) return k; } return genres[0][0]; };
+  const coul = G.couleurs || {};
+  const elements = [];
+  const echelle = Math.min(1.4, Math.max(.75, W / 700));
+  // les herbes
+  const NH = Math.round(3200 * Math.min(1.6, Math.max(.8, W / 900)));
+  for (let i = 0; i < NH; i++) {
+    const p = Math.pow(r(), .75);
+    elements.push({ p, herbe: true, x: r() * W, h: (8 + r() * 26) * (.25 + Math.pow(p, 1.6) * 4.2) * echelle, cb: (r() - .35), t: r(), w: (1.2 + r() * 1.8) * (.4 + p * 1.8) });
   }
-  g.globalAlpha = 1;
+  // les fleurs, en touffes
+  const lavande = genres[0][0] === 4;
+  const touffes = [];
+  for (let k = 0; k < 16; k++) touffes.push({ p: .15 + .8 * Math.pow(r(), .8), x: r() * W, genre: tirer(r()) });
+  const NF = Math.round((lavande ? 150 : 110) * Math.min(1.6, Math.max(.7, W / 900)));
+  for (let i = 0; i < NF; i++) {
+    const tf = touffes[i % touffes.length];
+    const p = Math.min(1, Math.max(.05, tf.p + (r() - .5) * .22));
+    elements.push({ p, fleur: true, x: tf.x + (r() - .5) * W * .16, genre: r() < .8 ? tf.genre : tirer(r()), h: (16 + r() * 18) * (.3 + Math.pow(p, 1.4) * 3.4) * echelle, cb: (r() - .5) * .25, a: r() * 6.28 });
+  }
+  elements.sort((a, b) => a.p - b.p);
+  const ellipse = (x, y, rx, ry, rot, coul2) => { g.fillStyle = coul2; g.beginPath(); g.ellipse(x, y, Math.max(.3, rx), Math.max(.3, ry), rot, 0, 6.2832); g.fill(); };
+  for (const e of elements) {
+    const y = y0 + e.p * (H - y0) + 4, voile = Math.max(0, .55 - e.p) * 1.1; // la brume au loin
+    if (e.herbe) {
+      const base = mel(herbe[0], herbe[1], .35 + e.t * .5), pointe = mel(herbe[1], herbe[2], .3 + e.t * .7);
+      const gr = g.createLinearGradient(0, y, 0, y - e.h);
+      gr.addColorStop(0, rgb(mel(base, brume, voile))); gr.addColorStop(1, rgb(mel(pointe, brume, voile)));
+      g.fillStyle = gr; const dx = e.cb * e.h * .55;
+      g.beginPath(); g.moveTo(e.x - e.w, y); g.quadraticCurveTo(e.x + dx * .35, y - e.h * .6, e.x + dx, y - e.h);
+      g.quadraticCurveTo(e.x + dx * .35 + e.w * .6, y - e.h * .55, e.x + e.w, y); g.fill();
+      continue;
+    }
+    const k = e.genre, [c0, c1, c2] = coul[k] || [[1, 1, 1], [.95, .95, .95], [.95, .75, .2]];
+    const tx = e.x + e.cb * e.h, ty = y - e.h, s = e.h * .27;
+    g.strokeStyle = rgb(mel(G.tige ? G.tige[0] : herbe[1], brume, voile)); g.lineWidth = Math.max(.6, s * .14);
+    g.beginPath(); g.moveTo(e.x, y); g.quadraticCurveTo(e.x, y - e.h * .5, tx, ty); g.stroke();
+    const P0 = rgb(mel(c0, brume, voile * .8)), P1 = rgb(mel(c1, brume, voile * .8)), C2 = rgb(mel(c2, brume, voile * .8));
+    if (k === 0) { // marguerite
+      for (let j = 0; j < 12; j++) { const a = e.a + j * .5236; ellipse(tx + Math.cos(a) * s * .55, ty + Math.sin(a) * s * .3, s * .5, s * .14, a, j % 2 ? P0 : P1); }
+      ellipse(tx, ty, s * .26, s * .2, 0, C2);
+    } else if (k === 1) { // bouton d'or
+      for (let j = 0; j < 5; j++) { const a = e.a + j * 1.2566; ellipse(tx + Math.cos(a) * s * .3, ty + Math.sin(a) * s * .2, s * .32, s * .26, a, j % 2 ? P0 : P1); }
+      ellipse(tx, ty, s * .14, s * .12, 0, C2);
+    } else if (k === 2) { // coquelicot
+      for (let j = 0; j < 4; j++) { const a = e.a + j * 1.5708; ellipse(tx + Math.cos(a) * s * .32, ty + Math.sin(a) * s * .22 - s * .05, s * .48, s * .4, a, j % 2 ? P0 : P1); }
+      ellipse(tx, ty, s * .14, s * .12, 0, C2);
+    } else if (k === 3) { // bleuet
+      for (let j = 0; j < 9; j++) { const a = e.a + j * .698; ellipse(tx + Math.cos(a) * s * .38, ty + Math.sin(a) * s * .26, s * .36, s * .1, a, j % 2 ? P0 : P1); }
+      ellipse(tx, ty, s * .14, s * .12, 0, C2);
+    } else { // epis de lavande (4) ou de ble (5)
+      const n = k === 4 ? 9 : 7;
+      for (let j = 0; j < n; j++) {
+        const f = j / (n - 1), yy = ty + s * 1.4 - f * s * 2.2, l = s * (k === 4 ? .2 : .26) * (1 - f * .45);
+        ellipse(tx - l * .45, yy, l, l * .7, -.5, j % 2 ? P0 : P1); ellipse(tx + l * .45, yy - l * .3, l, l * .7, .5, j % 2 ? P1 : P0);
+      }
+    }
+  }
 }
