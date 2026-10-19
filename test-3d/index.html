@@ -23,6 +23,8 @@
 <p>Si le carré ci-dessous tourne en couleur, la 3D marche dans ce navigateur.</p>
 <div id="lignes"></div>
 <canvas id="c"></canvas>
+<div class="ligne"><span>Prairie de la maquette</span><span id="prairie-etat" class="non">essai en cours…</span></div>
+<canvas id="prairie" style="height:240px"></canvas>
 <button id="copier">Copier le résultat</button>
 <p style="margin-top:14px">Puis colle-le dans ta conversation avec Claude.</p>
 <div class="detail" id="detail"></div>
@@ -55,6 +57,7 @@
   var texte = Object.keys(res).map(function (k) { return k + ' : ' + res[k]; }).join('\n');
   document.getElementById('detail').textContent = texte;
   document.getElementById('copier').onclick = function () {
+    var texte = document.getElementById('detail').textContent;
     var fini = function () { document.getElementById('copier').textContent = 'Copié'; };
     if (navigator.clipboard) navigator.clipboard.writeText(texte).then(fini, function () { prompt('Copie ce texte :', texte); });
     else prompt('Copie ce texte :', texte);
@@ -74,6 +77,33 @@
   var ut = gl.getUniformLocation(p, 't'), ur = gl.getUniformLocation(p, 'r');
   (function f(ms) { gl.viewport(0, 0, cv.width, cv.height); gl.clearColor(0.08, 0.1, 0.14, 1); gl.clear(gl.COLOR_BUFFER_BIT); gl.uniform1f(ut, (ms || 0) / 700); gl.uniform1f(ur, cv.width / cv.height); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(f); })();
 })();
+</script>
+<script type="module">
+// La vraie prairie de la maquette « Lumineux et naturel », lancée ici pour voir si elle compile sur ce téléphone.
+const etat = document.getElementById('prairie-etat'), detail = document.getElementById('detail');
+const noter = (ok, txt, plus) => { etat.textContent = txt; etat.className = ok ? 'ok' : 'non'; detail.textContent += '\nprairie : ' + txt + (plus ? '\nprairie erreur : ' + plus : ''); };
+const avert = []; const w = console.warn; console.warn = (...a) => { avert.push(a.map((x) => (x && x.message) || String(x)).join(' ')); w(...a); };
+try {
+  const [{ demarrerPrairie }, { PALETTES }] = await Promise.all([import('../v/nature/js/prairie.js'), import('../v/nature/js/univers.js')]);
+  const c = document.getElementById('prairie');
+  let echec = false;
+  c.addEventListener('prairie-echec', () => { echec = true; });
+  c.addEventListener('webglcontextlost', () => { avert.push('contexte WebGL perdu'); });
+  const p = demarrerPrairie(c, { petit: true, seed: 3, palette: PALETTES[0] });
+  if (!p) noter(false, 'pas de WebGL 2 pour la prairie');
+  else {
+    p.taille(.35);
+    await p.pret();
+    if (echec) noter(false, 'échec des nuanceurs', avert.join(' | ').slice(0, 1500));
+    else {
+      noter(true, 'oui');
+      const t0 = performance.now();
+      const E = { vent: .5, pousse: 2, trace: new Float32Array(32), onde: [0, 0, 99, 0], dolly: 0, doux: 0 };
+      const boucle = (t) => { try { p.dessiner((t - t0) / 1000, E); } catch (e) { noter(false, 'erreur au dessin', e.message); return; } requestAnimationFrame(boucle); };
+      requestAnimationFrame(boucle);
+    }
+  }
+} catch (e) { noter(false, 'erreur', (e && e.message) || String(e)); }
 </script>
 </body>
 </html>
