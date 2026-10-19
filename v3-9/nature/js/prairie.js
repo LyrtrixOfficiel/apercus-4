@@ -65,7 +65,7 @@ void main(){
 }`;
 
 const F_HERBE = `#version 300 es
-precision mediump float;
+precision highp float;
 in float vT, vCote, vDist, vReflet, vGenre; in vec3 vTeinte;
 uniform vec3 uBrume, uReflet;
 uniform vec3 uHerbe[3], uTige[2];
@@ -109,7 +109,7 @@ void main(){
 }`;
 
 const F_FLEUR = `#version 300 es
-precision mediump float;
+precision highp float;
 in vec2 vUv; in float vGenre, vVar, vDist, vRot;
 uniform vec3 uBrume;
 uniform vec3 uFc[6], uFc2[6], uFk[6];
@@ -164,7 +164,7 @@ out vec3 vP;
 void main(){ vec3 p = vec3(aP.x * 60., 0., -aP.y * 40. + 1.5); vP = p; gl_Position = uVP * vec4(p, 1.); }`;
 
 const F_SOL = `#version 300 es
-precision mediump float;
+precision highp float;
 in vec3 vP; uniform vec3 uBrume, uCam; uniform vec3 uSol[2];
 out vec4 o;
 float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
