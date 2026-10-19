@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cassez votre vieux site · Kazura</title>
+<meta name="description" content="Un jeu Kazura : cassez une vieille page web, regardez la liane pousser dans les fissures, et un nouveau site éclore.">
+<meta name="theme-color" content="#05070b">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../polices/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="casser.css">
+<script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js" defer></script>
+<script src="casser.js" defer></script>
+</head>
+<body class="phase-intro">
+
+<div id="nuit" aria-hidden="true"><img src="../../img/sceau.svg" alt="" width="100" height="100"></div>
+
+<canvas id="scene" tabindex="0" aria-label="Une vieille page web de 2007, celle de Lila Fougère, sophrologue imaginaire. Touchez-la pour y lancer des graines et la casser. Au clavier : Entrée lance une graine."></canvas>
+
+<div class="hud" id="hud">
+  <a class="hud-retour" href="../../index.html#experiences"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sceau"/></svg><span>Kazura</span></a>
+  <p class="hud-titre">Cassez votre vieux site</p>
+  <div class="hud-ruine" role="group" aria-label="Avancement de la démolition">
+    <span class="hud-ruine-mot">Ruines</span>
+    <span class="hud-ruine-val" id="ruineVal">0 %</span>
+    <span class="hud-ruine-barre" aria-hidden="true"><i id="ruineBarre"></i></span>
+  </div>
+</div>
+
+<p id="bulle" class="bulle" aria-live="polite" hidden></p>
+
+<nav class="outils" id="outils" aria-label="Outils">
+  <button type="button" class="outil" data-outil="graine" aria-pressed="true">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="17" rx="7" ry="9.5" transform="rotate(25 16 17)" fill="currentColor"/><path d="M17 8c2-4 6-5 9-4-1 4-4 6-8 6" fill="currentColor" opacity=".7"/></svg>
+    <span>Graine</span>
+  </button>
+  <button type="button" class="outil" data-outil="bourgeon" aria-pressed="false">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="18" r="10" fill="currentColor"/><path d="M16 8c-3-5-1-7 0-7s3 2 0 7zM16 8c4-3 7-2 7-1s-2 3-7 1zM16 8c-4-3-7-2-7-1s2 3 7 1z" fill="currentColor" opacity=".75"/></svg>
+    <span>Gros bourgeon</span>
+  </button>
+  <button type="button" class="outil" id="seisme">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 17h5l3-8 4 15 4-19 4 14 3-6h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Tout casser</span>
+  </button>
+  <button type="button" class="outil outil-liane" id="pousser" hidden>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30C16 20 10 18 9 10M16 22c0-6 6-8 8-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="9" cy="9" r="3.4" fill="currentColor"/><circle cx="24" cy="8" r="3.4" fill="currentColor"/></svg>
+    <span>Faire pousser</span>
+  </button>
+</nav>
+
+<div class="dialogue" id="dialogue" role="dialog" aria-modal="true" aria-labelledby="dlgTitre" aria-describedby="dlgTexte">
+  <div class="dlg-titre"><span id="dlgTitre">Message système</span><button type="button" class="dlg-x" id="dlgX" aria-label="Fermer et commencer">×</button></div>
+  <div class="dlg-corps">
+    <svg class="dlg-icone" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 38 36H2Z" fill="#f5d000" stroke="#000" stroke-width="2" stroke-linejoin="round"/><path d="M18 14h4l-1 12h-2Zm0 15h4v4h-4Z" fill="#000"/></svg>
+    <div>
+      <p id="dlgTexte">Ce site a été mis en ligne en 2007. Il a bien travaillé : il mérite une retraite.</p>
+      <p class="dlg-question" id="dlgQuestion">Voulez-vous le casser ?</p>
+    </div>
+  </div>
+  <div class="dlg-boutons">
+    <button type="button" class="dlg-btn" id="dlgOui">Oui, le casser</button>
+    <button type="button" class="dlg-btn" id="dlgNon">Annuler</button>
+  </div>
+</div>
+
+<p class="sr" id="annonce" aria-live="polite"></p>
+
+<!-- Le nouveau site de Lila : un exemple imaginaire, fixe. -->
+<div id="neuf" aria-hidden="true">
+  <div class="l-site">
+    <header class="l-tete">
+      <a class="l-marque" href="#l-haut" aria-label="Lila Fougère, accueil">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 37C20 24 17 13 9 5M20 26c-3-1-6-1-8 1m8-7c-3-2-6-2-8 0m8-6c-2-2-5-3-7-2M20 26c3-1 6-1 8 1m-8-7c3-2 6-2 8 0m-8-6c2-2 5-3 7-2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span><b>Lila Fougère</b><i>sophrologue</i></span>
+      </a>
+      <nav class="l-nav" aria-label="Site de Lila (exemple)">
+        <a href="#l-seances">Séances</a><a href="#l-approche">Approche</a><a class="l-nav-rdv" href="#l-rdv">Rendez-vous</a>
+      </nav>
+    </header>
+
+    <section class="l-hero" id="l-haut">
+      <div class="l-hero-texte">
+        <p class="l-sur">Sophrologie à Saint-Glinglin-sur-Mer</p>
+        <h1 class="l-h1" id="l-titre" tabindex="-1">Reprendre<br><em>son souffle.</em></h1>
+        <p class="l-chapo">Des séances douces pour mieux dormir, apaiser le stress et retrouver confiance. Au cabinet face à la mer, ou en visio depuis chez vous.</p>
+        <div class="l-actions">
+          <a class="l-btn" href="#l-rdv">Prendre rendez-vous</a>
+          <button type="button" class="l-btn l-btn-doux" id="respirer" aria-pressed="false">Respirer avec moi</button>
+        </div>
+      </div>
+      <div class="l-hero-visuel" aria-hidden="true">
+        <div class="l-mer"></div>
+        <i class="l-bulle"></i><i class="l-bulle"></i><i class="l-bulle"></i><i class="l-bulle"></i><i class="l-bulle"></i><i class="l-bulle"></i>
+        <div class="l-orbe" id="orbe"><span class="l-orbe-mot" id="orbeMot">Inspirez</span></div>
+        <svg class="l-fougere l-fougere-a" viewBox="0 0 60 120"><path d="M30 118C30 80 28 40 22 4M30 96c-8-2-16 0-22 6m22-24c-8-3-15-1-21 4m21-22c-7-3-14-2-19 2m19-20c-6-3-12-2-16 1m16-17c-5-3-10-3-13 0M30 96c8-2 16 0 22 6M30 78c8-3 15-1 21 4M30 60c7-3 14-2 19 2M30 42c6-3 12-2 16 1M30 26c5-3 10-3 13 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <svg class="l-fougere l-fougere-b" viewBox="0 0 60 120"><path d="M30 118C30 80 28 40 22 4M30 96c-8-2-16 0-22 6m22-24c-8-3-15-1-21 4m21-22c-7-3-14-2-19 2m19-20c-6-3-12-2-16 1M30 96c8-2 16 0 22 6M30 78c8-3 15-1 21 4M30 60c7-3 14-2 19 2M30 42c6-3 12-2 16 1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      </div>
+    </section>
+
+    <section class="l-pourqui l-vue" aria-labelledby="l-pq">
+      <h2 class="l-h2" id="l-pq">Je vous accompagne quand…</h2>
+      <ul class="l-liste">
+        <li>le sommeil se dérobe,</li>
+        <li>le stress du quotidien déborde,</li>
+        <li>un examen ou un entretien approche,</li>
+        <li>une naissance se prépare,</li>
+        <li>vous avez simplement besoin d'une pause.</li>
+      </ul>
+    </section>
+
+    <section class="l-seances l-vue" id="l-seances" aria-labelledby="l-s">
+      <h2 class="l-h2" id="l-s">Les séances</h2>
+      <div class="l-carnet">
+        <div class="l-ligne"><h3>La première rencontre</h3><p>On fait connaissance, vous me dites ce qui vous amène, et l'on pose ensemble un premier exercice simple, à refaire chez vous.</p><span class="l-duree">1 h · cabinet ou visio</span></div>
+        <div class="l-ligne"><h3>Le suivi</h3><p>Des séances régulières, au rythme qui vous va, avec des exercices qui évoluent avec vous.</p><span class="l-duree">45 min</span></div>
+        <div class="l-ligne"><h3>Le groupe du jeudi</h3><p>Six personnes au plus, un tapis, une couverture, et une heure pour souffler avant le week-end.</p><span class="l-duree">1 h · jeudi 18 h 30</span></div>
+      </div>
+    </section>
+
+    <section class="l-approche l-vue" id="l-approche" aria-labelledby="l-a">
+      <div class="l-tableau" aria-hidden="true"><div class="l-soleil"></div><div class="l-vagues"></div></div>
+      <div>
+        <h2 class="l-h2" id="l-a">Mon approche</h2>
+        <blockquote class="l-citation">« Pas de grands discours : de la respiration, du corps, et des mots simples. Vous repartez avec des outils que vous pouvez utiliser seul. »</blockquote>
+        <p class="l-signature">Lila, dans son cabinet du quai des Mouettes</p>
+      </div>
+    </section>
+
+    <section class="l-rdv l-vue" id="l-rdv" aria-labelledby="l-r">
+      <h2 class="l-h2" id="l-r">Prendre rendez-vous</h2>
+      <p class="l-rdv-intro">Choisissez un créneau : c'est confirmé tout de suite, sans attendre le répondeur.</p>
+      <div class="l-jours" role="group" aria-label="Jour">
+        <button type="button" class="l-jour" aria-pressed="true" data-jour="Mardi">Mar.<b>14</b></button>
+        <button type="button" class="l-jour" aria-pressed="false" data-jour="Mercredi">Mer.<b>15</b></button>
+        <button type="button" class="l-jour" aria-pressed="false" data-jour="Jeudi">Jeu.<b>16</b></button>
+        <button type="button" class="l-jour" aria-pressed="false" data-jour="Samedi">Sam.<b>18</b></button>
+      </div>
+      <div class="l-creneaux" role="group" aria-label="Heure">
+        <button type="button" class="l-creneau">9 h 30</button>
+        <button type="button" class="l-creneau">11 h</button>
+        <button type="button" class="l-creneau">14 h</button>
+        <button type="button" class="l-creneau">17 h 30</button>
+      </div>
+      <p class="l-confirme" id="confirme" aria-live="polite">Exemple imaginaire : aucun rendez-vous n'est vraiment pris.</p>
+    </section>
+
+    <footer class="l-pied">
+      <p><b>Lila Fougère</b>, sophrologue. Cabinet du Phare, quai des Mouettes, Saint-Glinglin-sur-Mer.</p>
+      <p class="l-pied-note">Lila n'existe pas, Saint-Glinglin-sur-Mer non plus : c'est un exemple imaginaire, dessiné par Kazura pour ce jeu.</p>
+    </footer>
+  </div>
+
+  <section class="fin" id="fin" aria-labelledby="finTitre">
+    <img class="fin-sceau" src="../../img/sceau.svg" alt="" width="120" height="120">
+    <h2 class="fin-titre" id="finTitre">Votre vieux site ne vous ressemble plus&nbsp;?</h2>
+    <p class="fin-texte">On en refait un qui vous ressemble. Dessiné sur mesure, écrit à partir de vos mots, construit par Mathéo, et à vous pour de bon.</p>
+    <div class="fin-actions">
+      <a class="fin-btn" href="../../index.html#contact">Retour au site Kazura</a>
+      <button type="button" class="fin-btn fin-btn-doux" id="recasser">Tout recasser</button>
+    </div>
+  </section>
+
+  <div class="bandeau-k">
+    <span>Exemple imaginaire · fait par Kazura</span>
+    <a href="../../index.html#contact">Retour au site Kazura</a>
+  </div>
+</div>
+
+<noscript><div class="sans-js"><p>Ce jeu a besoin de JavaScript. Une vieille page s'y casse, et un nouveau site éclot à sa place.</p><p><a href="../../index.html#contact">Retour au site Kazura</a></p></div></noscript>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sceau" viewBox="0 0 100 100"><g fill="currentColor" fill-rule="evenodd"><path d="M50 2a48 48 0 1 0 0 96 48 48 0 1 0 0-96zm0 6a42 42 0 1 1 0 84 42 42 0 1 1 0-84z"/><path id="foliole" d="M50 46C39.5 37 34.5 23.5 50 7c15.5 16.5 10.5 30 0 39zm0-7.4c6.2-6 8.6-14.4 0-23.6-8.6 9.2-6.2 17.6 0 23.6z"/><use href="#foliole" transform="rotate(120 50 50)"/><use href="#foliole" transform="rotate(240 50 50)"/><circle cx="50" cy="50" r="4.6"/></g></symbol>
+  </defs>
+</svg>
+</body>
+</html>
