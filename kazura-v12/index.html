@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kazura · Sites sur mesure pour les indépendants</title>
+<meta name="description" content="Mathéo dessine et construit des sites sur mesure pour les indépendants : bien-être, beauté, thérapeutes, artisans, commerces. Tout est compris, payable jusqu’en 10 fois sans frais.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#05070b">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icone-180.png">
+<link rel="preload" href="polices/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/page.css">
+<link rel="modulepreload" href="monde/monde.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.170.0/+esm" crossorigin>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/postprocessing/EffectComposer.js/+esm" crossorigin>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/postprocessing/UnrealBloomPass.js/+esm" crossorigin>
+<script>
+  // Le JavaScript est là : la page se met en scène. Sans lui, tout reste lisible tel quel.
+  document.documentElement.classList.add('js');
+  // filet de sécurité : le titre d'ouverture apparaît quoi qu'il arrive, même si le script de la page ne se charge pas
+  setTimeout(function () { document.documentElement.classList.add('ouvert'); }, 6000);
+</script>
+<script type="module" src="js/page.js"></script>
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu</a>
+
+<div class="fond" aria-hidden="true"><img class="fond-sceau" src="img/sceau.svg" alt="" width="100" height="100"></div>
+<canvas id="monde" aria-hidden="true"></canvas>
+<div class="voile-lecture" aria-hidden="true"></div>
+
+<header class="tete" id="tete">
+  <a class="marque" href="#ouverture" aria-label="Kazura, retour en haut de la page">
+    <img src="img/sceau.svg" alt="" width="28" height="28"><span>Kazura</span>
+  </a>
+  <nav class="nav" aria-label="Sur cette page">
+    <a href="#experiences">Essayer</a>
+    <a href="#realisations">Réalisations</a>
+    <a href="#rever">Ce qui est compris</a>
+    <a href="#deroule">Comment ça se passe</a>
+    <a href="#questions">Questions</a>
+  </nav>
+  <a class="bouton bouton-tete" href="#contact"><span class="long">Me contacter</span><span class="court" aria-hidden="true">Contact</span></a>
+  <details class="menu" id="menu">
+    <summary><span class="menu-ouvrir">Menu</span><span class="menu-fermer">Fermer</span></summary>
+    <div class="menu-panneau">
+      <nav aria-label="Menu">
+        <a href="#experiences">Essayer les expériences</a>
+        <a href="#realisations">Voir les réalisations</a>
+        <a href="#rever">Ce qui est compris</a>
+        <a href="#deroule">Comment ça se passe</a>
+        <a href="#matheo">Qui fait votre site</a>
+        <a href="#questions">Vos questions</a>
+        <a href="#contact">Me contacter</a>
+      </nav>
+      <p class="menu-pied">
+        <a href="https://wa.me/33630110038" rel="noopener">WhatsApp</a>
+        <a href="tel:+33630110038">06&nbsp;30&nbsp;11&nbsp;00&nbsp;38</a>
+      </p>
+    </div>
+  </details>
+</header>
+
+<main id="contenu">
+
+  <!-- L'OUVERTURE : posée sur le monde, quand il a fini de s'ouvrir -->
+  <section class="ouverture" id="ouverture" aria-labelledby="titre-ouverture">
+    <div class="ouv-calme">
+      <h1 class="ouv-titre" id="titre-ouverture">
+        <span class="ligne"><span>Un site qui donne</span></span>
+        <span class="ligne"><span>envie de <em>pousser</em></span></span>
+        <span class="ligne"><span><em>votre porte.</em></span></span>
+      </h1>
+      <p class="ouv-phrase">Je m’appelle Mathéo. Je dessine et je construis des sites sur mesure pour les indépendants&nbsp;: bien-être, beauté, thérapeutes, artisans, commerces. Tout est compris, et vous pouvez payer jusqu’en 10&nbsp;fois, sans frais.</p>
+      <p class="ouv-boutons">
+        <a class="bouton" href="#contact">Parler de mon projet<svg class="fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+        <a class="lien-fort" href="#realisations">Voir des réalisations</a>
+      </p>
+    </div>
+    <p class="defiler" aria-hidden="true"><span>Faites défiler</span><i></i></p>
+  </section>
+
+  <!-- LA PROMESSE : pourquoi un vrai site change tout -->
+  <section class="promesse" id="promesse" aria-labelledby="titre-promesse">
+    <div class="calme calme-gauche">
+      <h2 class="titre" id="titre-promesse" data-lignes><span class="ligne"><span>On vous recommande.</span></span> <span class="ligne"><span><em>Puis, on vous cherche.</em></span></span></h2>
+      <div class="recit">
+        <p class="pg-apparait">Une cliente a parlé de vous à une amie. Le soir même, son amie tape votre nom sur son téléphone.</p>
+        <p class="pg-apparait">Ce qu’elle trouve à ce moment-là, c’est votre première impression. Une page vide, une fiche sans photo, un vieux site qui ne s’affiche pas bien&nbsp;: elle hésite. Un site clair, chaleureux, qui vous ressemble&nbsp;: elle a envie de vous écrire.</p>
+      </div>
+    </div>
+
+    <div class="scenes">
+      <p class="scene pg-apparait"><span class="scene-quand">En quelques secondes,</span> on comprend ce que vous faites, pour qui, et où vous trouver.</p>
+      <p class="scene pg-apparait"><span class="scene-quand">Un mardi, à 23&nbsp;h,</span> quelqu’un se décide enfin. Il choisit un créneau en ligne. Vous le découvrez au réveil.</p>
+      <p class="scene pg-apparait"><span class="scene-quand">Sur Google,</span> votre fiche est reliée à votre site&nbsp;: votre adresse, vos horaires, vos photos, au même endroit.</p>
+    </div>
+
+    <p class="chute pg-apparait">Un site ne remplace pas votre talent. <em>Il lui ouvre la porte.</em></p>
+  </section>
+
+  <!-- LES EXPÉRIENCES : module de Vitrine -->
+  <section class="experiences" id="experiences" aria-labelledby="titre-experiences">
+    <div class="entete calme">
+      <h2 class="titre" id="titre-experiences" data-lignes><span class="ligne"><span>Essayez.</span></span> <span class="ligne"><span><em>C’est fait pour ça.</em></span></span></h2>
+      <p class="chapo pg-apparait">Voici quelques expériences construites pour vous montrer ce qu’un site peut faire, ici, tout de suite&nbsp;: touchez, faites glisser, réservez pour de faux. Votre site peut rester très sobre, ou aller jusque-là. C’est vous qui choisissez.</p>
+    </div>
+    <div class="module" data-module="experiences">
+      <div class="repli">
+        <p>Les expériences s’animent dans votre navigateur, avec JavaScript. Si elles ne s’affichent pas, écrivez-moi&nbsp;: je vous les montre volontiers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LES RÉALISATIONS : module de Vitrine -->
+  <section class="realisations" id="realisations" aria-labelledby="titre-realisations">
+    <div class="entete calme">
+      <h2 class="titre" id="titre-realisations" data-lignes><span class="ligne"><span>Déjà en ligne.</span></span> <span class="ligne"><span><em>Allez voir.</em></span></span></h2>
+      <p class="chapo pg-apparait">Ce sont de vrais sites, pour de vraies personnes, tels que leurs visiteurs les voient. Chacun est dessiné pour un métier et une façon de parler. Aucun ne ressemble à l’autre.</p>
+    </div>
+    <div class="module" data-module="realisations">
+      <ul class="repli repli-liste">
+        <li><a href="https://shiatsu-jiyu.fr" rel="noopener" target="_blank"><span class="r-nom">shiatsu-jiyu.fr</span><span class="r-quoi">Une praticienne de shiatsu</span></a></li>
+        <li><a href="https://lecrindespossibles.fr" rel="noopener" target="_blank"><span class="r-nom">lecrindespossibles.fr</span><span class="r-quoi">Un accompagnement</span></a></li>
+        <li><a href="https://ds-therapie.netlify.app" rel="noopener" target="_blank"><span class="r-nom">ds-therapie.netlify.app</span><span class="r-quoi">Un thérapeute, site en cours</span></a></li>
+        <li><a href="https://estelle-formation.fr" rel="noopener" target="_blank"><span class="r-nom">estelle-formation.fr</span><span class="r-quoi">Une formation à l’intelligence artificielle</span></a></li>
+        <li><a href="https://alyriaz.com" rel="noopener" target="_blank"><span class="r-nom">alyriaz.com</span><span class="r-quoi">L’intelligence artificielle</span></a></li>
+        <li><a href="https://lyrtrix.com" rel="noopener" target="_blank"><span class="r-nom">lyrtrix.com</span><span class="r-quoi">Un univers artistique</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- OSEZ RÊVER : tout ce qui est compris, aucun prix chiffré -->
+  <section class="rever" id="rever" aria-labelledby="titre-rever">
+    <div class="nappe">
+      <div class="rever-tete">
+        <h2 class="titre titre-geant" id="titre-rever" data-lignes><span class="ligne"><span>Osez</span></span> <span class="ligne"><span><em>rêver.</em></span></span></h2>
+        <p class="chapo pg-apparait">Pas de devis à rallonge, pas d’options cachées, pas de mauvaise surprise. Voici <strong>tout ce qui est compris</strong> dans la création de votre site, sans supplément&nbsp;:</p>
+      </div>
+
+      <ul class="compris">
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Un site dessiné sur mesure</strong>, avec autant de pages qu’il en faut.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Vos textes, rédigés</strong> à partir de vos mots.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Votre logo</strong>, si vous n’en avez pas.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Le référencement sur Google</strong>, pour qu’on vous trouve.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Votre fiche Google</strong>, créée et reliée au site.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>La prise de rendez-vous en ligne.</strong></span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Un espace à vous</strong> pour changer vous-même vos textes et vos tarifs.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Les statistiques de visite</strong>, pour savoir qui vient.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Les retouches</strong>, jusqu’à ce que le site vous plaise vraiment.</span></li>
+        <li class="pg-apparait"><svg class="feuille" viewBox="0 0 20 28" aria-hidden="true"><path d="M10 27C2 20-2 10 10 1c12 9 8 19 0 26z"/></svg><span><strong>Les mentions légales</strong>, et un affichage parfait sur téléphone comme sur ordinateur.</span></li>
+      </ul>
+
+      <div class="paiement pg-apparait">
+        <p class="dix" aria-hidden="true">10</p>
+        <div class="paiement-texte">
+          <p class="paiement-titre">En une fois, ou jusqu’en 10&nbsp;fois, <em>sans frais.</em></p>
+          <p>Le prix dépend de ce que votre site doit faire. Je vous le donne avant de commencer, et il ne bouge plus.</p>
+        </div>
+      </div>
+
+      <div class="ensuite">
+        <p class="pg-apparait"><strong>Ensuite, un abonnement mensuel, sans engagement.</strong> Il comprend l’hébergement, votre nom de domaine et son renouvellement, les sauvegardes, les mises à jour, et toutes les modifications de contenu que vous me demandez.</p>
+        <p class="a-part pg-apparait">À part, sur devis&nbsp;: la boutique en ligne, le paiement en ligne et l’espace membres.</p>
+      </div>
+
+      <p class="rever-action pg-apparait"><a class="bouton" href="#contact">Parler de mon projet<svg class="fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA SE PASSE : du premier message à la mise en ligne, sans étapes numérotées -->
+  <section class="deroule" id="deroule" aria-labelledby="titre-deroule">
+    <div class="deroule-tete calme">
+      <h2 class="titre" id="titre-deroule" data-lignes><span class="ligne"><span>Tout commence</span></span> <span class="ligne"><span><em>par un message.</em></span></span></h2>
+      <p class="chapo pg-apparait">Une amie vous a parlé de moi, vous m’avez trouvé sur internet, ou vous avez reçu un message de ma part&nbsp;: peu importe. Voici comment ça se passe, simplement.</p>
+    </div>
+
+    <ol class="fil" id="fil">
+      <li class="moment pg-apparait">
+        <h3>Vous m’écrivez.</h3>
+        <p>Sur WhatsApp, par téléphone ou par courriel. Quelques mots sur votre activité suffisent. C’est moi qui vous réponds.</p>
+      </li>
+      <li class="moment pg-apparait">
+        <h3>On en parle.</h3>
+        <p>Votre métier, vos clients, ce que vous aimez, ce que le site doit faire. Je vous dis ce qui est compris et le prix, avant de commencer.</p>
+      </li>
+      <li class="moment pg-apparait">
+        <h3>Je dessine votre site.</h3>
+        <p>Je rédige vos textes à partir de vos mots, je crée votre logo si vous n’en avez pas. Vous voyez votre site prendre forme.</p>
+      </li>
+      <li class="moment pg-apparait">
+        <h3>Vous ajustez.</h3>
+        <p>Une couleur, une phrase, une photo&nbsp;: on retouche jusqu’à ce qu’il vous plaise vraiment. Rien ne part en ligne sans votre accord.</p>
+      </li>
+      <li class="moment pg-apparait">
+        <h3>Votre site est en ligne.</h3>
+        <p>Environ une semaine après votre validation. Avec votre fiche Google reliée, la prise de rendez-vous et vos statistiques de visite.</p>
+      </li>
+      <li class="moment pg-apparait">
+        <h3>Et je reste là.</h3>
+        <p>Un tarif change, un nouveau soin arrive&nbsp;? Un message suffit, c’est compris dans l’abonnement. Ou vous le changez vous-même, depuis votre espace.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- QUI EST MATHÉO -->
+  <section class="matheo" id="matheo" aria-labelledby="titre-matheo">
+    <div class="matheo-signe" aria-hidden="true">
+      <img src="img/sceau.svg" alt="" width="100" height="100">
+      <p class="kanji">葛</p>
+    </div>
+    <div class="matheo-texte calme">
+      <h2 class="titre" id="titre-matheo" data-lignes><span class="ligne"><span>Ici, vous parlez</span></span> <span class="ligne"><span><em>à celui qui fait.</em></span></span></h2>
+      <div class="recit">
+        <p class="pg-apparait">Je m’appelle Mathéo Schmitt. Je dessine et je construis chaque site moi-même, de la première esquisse à la mise en ligne. Quand vous m’écrivez, c’est moi qui réponds.</p>
+        <p class="pg-apparait">Pas de standard, pas de sous-traitance, pas de jargon. Je travaille pour des indépendants&nbsp;: des gens qui font bien leur métier, et qui aimeraient que ça se voie.</p>
+        <p class="pg-apparait nom-kazura"><em>Kazura</em>, 葛, c’est la liane de kudzu en japonais. Une plante qui grimpe, s’accroche et va chercher la lumière. C’est un peu ce que j’aimerais que votre site fasse pour vous.</p>
+      </div>
+      <p class="signature pg-apparait">Mathéo</p>
+    </div>
+  </section>
+
+  <!-- LES QUESTIONS -->
+  <section class="questions" id="questions" aria-labelledby="titre-questions">
+    <div class="nappe">
+      <h2 class="titre" id="titre-questions" data-lignes><span class="ligne"><span>Ce qu’on me demande</span></span> <span class="ligne"><span><em>avant de se lancer.</em></span></span></h2>
+      <div class="faq">
+        <details class="q" name="faq">
+          <summary><span>Combien coûte un site&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Le prix dépend de ce que votre site doit faire&nbsp;: je vous le donne avant de commencer, et il ne bouge plus. Tout ce qui est listé plus haut est compris, sans option cachée. Vous payez en une fois, ou jusqu’en 10&nbsp;fois sans frais. Le plus simple pour le connaître&nbsp;: m’écrire deux lignes sur votre activité.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Combien de temps faut-il&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Votre site est en ligne environ une semaine après que vous l’avez validé. Avant, on prend le temps qu’il faut pour qu’il vous plaise vraiment.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Je n’ai ni logo ni photos.</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Ce n’est pas un problème. Si vous n’avez pas de logo, je le dessine avec votre site, c’est compris. Pour les photos, on part de ce que vous avez, même prises au téléphone&nbsp;; sinon, je choisis des images qui vous ressemblent, que vous remplacerez quand vous voudrez.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Je ne suis pas à l’aise avec l’informatique.</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Vous n’avez rien à installer ni à apprendre&nbsp;: je m’occupe de tout, de la mise en ligne à votre fiche Google. Pour un changement, un message suffit. Et si un jour vous voulez modifier un tarif vous-même, votre espace est pensé pour quelqu’un qui n’a jamais fait de site.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>À quoi sert l’abonnement&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>À garder votre site en ligne, en sécurité et à jour, sans que vous ayez à y penser. Il comprend l’hébergement, votre nom de domaine et son renouvellement, les sauvegardes, les mises à jour, et toutes les modifications de contenu que vous me demandez. Il est sans engagement.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Le site m’appartient-il&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Oui. Le nom de domaine, l’adresse de votre site, est à votre nom. Vos textes et vos photos restent à vous.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Et si j’arrête&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>Vous gardez tout. L’abonnement est sans engagement, le nom de domaine est à votre nom, et je vous rends votre site en 48&nbsp;heures. Vous n’êtes jamais enfermé.</p></div>
+        </details>
+        <details class="q" name="faq">
+          <summary><span>Et une boutique en ligne&nbsp;?</span><i aria-hidden="true"></i></summary>
+          <div class="r"><p>C’est possible, sur devis à part&nbsp;: la boutique en ligne, le paiement en ligne et l’espace membres ne font pas partie de la création. La prise de rendez-vous en ligne, elle, est comprise.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- LE CONTACT -->
+  <section class="contact" id="contact" aria-labelledby="titre-contact">
+    <div class="contact-tete calme">
+      <h2 class="titre titre-geant" id="titre-contact" data-lignes><span class="ligne"><span>Un message</span></span> <span class="ligne"><span><em>suffit.</em></span></span></h2>
+      <p class="chapo pg-apparait">Écrivez-moi comme vous me parleriez, avec vos mots. Je vous réponds moi-même, simplement et sans jargon.</p>
+    </div>
+
+    <div class="contact-corps">
+      <ul class="moyens">
+        <li class="pg-apparait">
+          <a class="moyen" href="https://wa.me/33630110038" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.4 18.6z"/><path d="M9.2 8.6c.2 2.6 3.4 5.7 6 5.9l1-1.3-1.8-1-.8.7c-1-.5-2-1.4-2.6-2.5l.7-.8-1-1.8z"/></svg>
+            <span class="m-quoi">WhatsApp</span><span class="m-detail">Écrire un message</span>
+          </a>
+        </li>
+        <li class="pg-apparait">
+          <a class="moyen" href="tel:+33630110038">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6 3.2-1.6 2.4a12 12 0 0 0 7.3 7.3l2.4-1.6 3.2 2.6-1.4 3a3 3 0 0 1-3.1 1.6C9.7 21 3 14.3 2 7.9a3 3 0 0 1 1.6-3.1z"/></svg>
+            <span class="m-quoi">M’appeler</span><span class="m-detail">06&nbsp;30&nbsp;11&nbsp;00&nbsp;38</span>
+          </a>
+        </li>
+        <li class="pg-apparait">
+          <a class="moyen" href="mailto:matheo@kazura.fr">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
+            <span class="m-quoi">Courriel</span><span class="m-detail">matheo@kazura.fr</span>
+          </a>
+        </li>
+      </ul>
+
+      <form class="formulaire nappe pg-apparait" id="formulaire" action="mailto:matheo@kazura.fr" method="get" enctype="text/plain" novalidate>
+        <h3>Ou laissez-moi vous préparer le message.</h3>
+        <p class="f-aide">Remplissez ce qui vous parle. Rien n’est envoyé d’ici&nbsp;: votre WhatsApp ou votre messagerie s’ouvre avec le message prêt, et c’est vous qui l’envoyez.</p>
+        <input type="hidden" name="subject" value="Mon projet de site">
+        <div class="f-champs">
+          <label class="champ"><span>Votre prénom</span><input type="text" id="f-prenom" autocomplete="given-name" maxlength="60"></label>
+          <label class="champ"><span>Votre activité</span><input type="text" id="f-activite" autocomplete="organization-title" maxlength="120" placeholder="Par exemple&nbsp;: sophrologue à Colmar"></label>
+        </div>
+        <fieldset class="champ f-situation">
+          <legend>Aujourd’hui&nbsp;:</legend>
+          <label><input type="radio" name="situation" value="Je n’ai pas encore de site." checked><span>Je n’ai pas de site</span></label>
+          <label><input type="radio" name="situation" value="J’ai déjà un site, que j’aimerais refaire."><span>J’ai un site à refaire</span></label>
+          <label><input type="radio" name="situation" value="J’ai reçu votre message et j’aimerais en parler."><span>J’ai reçu votre message</span></label>
+        </fieldset>
+        <label class="champ"><span>Votre projet, en quelques mots <small>(facultatif)</small></span><textarea name="body" id="f-projet" rows="3" maxlength="1200"></textarea></label>
+        <div class="f-apercu" id="f-apercu" aria-live="polite" hidden>
+          <p class="f-apercu-titre">Votre message&nbsp;:</p>
+          <p class="f-apercu-texte" id="f-apercu-texte"></p>
+        </div>
+        <div class="f-actions">
+          <button class="bouton" type="submit" name="canal" value="whatsapp" data-canal="whatsapp">Préparer sur WhatsApp</button>
+          <button class="bouton bouton-clair" type="submit" name="canal" value="courriel" data-canal="courriel">Préparer un courriel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="pied-haut">
+    <a class="marque" href="#ouverture"><img src="img/sceau.svg" alt="" width="28" height="28"><span>Kazura</span></a>
+    <p>Des sites sur mesure pour les indépendants, dessinés et construits par Mathéo.</p>
+  </div>
+  <ul class="pied-liens">
+    <li><a href="https://wa.me/33630110038" rel="noopener">WhatsApp</a></li>
+    <li><a href="tel:+33630110038">06&nbsp;30&nbsp;11&nbsp;00&nbsp;38</a></li>
+    <li><a href="mailto:matheo@kazura.fr">matheo@kazura.fr</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+  </ul>
+  <p class="pied-bas">Kazura, Matheo Schmitt, entrepreneur individuel. SIREN 100&nbsp;165&nbsp;455. Ce site ne dépose aucun cookie.</p>
+</footer>
+</body>
+</html>
