@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cassez votre vieux site · Kazura</title>
+<meta name="description" content="Un jeu Kazura : cassez une vieille page web, regardez la liane pousser dans les fissures, et un nouveau site éclore.">
+<meta name="theme-color" content="#05070b">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../polices/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="casser.css">
+<script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js" defer></script>
+<script src="casser.js" defer></script>
+</head>
+<body class="phase-intro">
+
+<div id="nuit" aria-hidden="true"><img src="../../img/sceau.svg" alt="" width="100" height="100"></div>
+
+<canvas id="scene" tabindex="0" aria-label="Une vieille page web de 2007, celle de Lila Fougère, sophrologue imaginaire. Touchez-la pour y lancer des graines et la casser. Au clavier : Entrée lance une graine."></canvas>
+
+<div class="hud" id="hud">
+  <a class="hud-retour" href="../../index.html#experiences"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sceau"/></svg><span>Kazura</span></a>
+  <p class="hud-titre">Cassez votre vieux site</p>
+  <div class="hud-ruine" role="group" aria-label="Avancement de la démolition">
+    <span class="hud-ruine-mot">Ruines</span>
+    <span class="hud-ruine-val" id="ruineVal">0 %</span>
+    <span class="hud-ruine-barre" aria-hidden="true"><i id="ruineBarre"></i></span>
+  </div>
+</div>
+
+<p id="bulle" class="bulle" aria-live="polite" hidden></p>
+
+<nav class="outils" id="outils" aria-label="Outils">
+  <button type="button" class="outil" data-outil="graine" aria-pressed="true">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="17" rx="7" ry="9.5" transform="rotate(25 16 17)" fill="currentColor"/><path d="M17 8c2-4 6-5 9-4-1 4-4 6-8 6" fill="currentColor" opacity=".7"/></svg>
+    <span>Graine</span>
+  </button>
+  <button type="button" class="outil" data-outil="bourgeon" aria-pressed="false">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="18" r="10" fill="currentColor"/><path d="M16 8c-3-5-1-7 0-7s3 2 0 7zM16 8c4-3 7-2 7-1s-2 3-7 1zM16 8c-4-3-7-2-7-1s2 3 7 1z" fill="currentColor" opacity=".75"/></svg>
+    <span>Gros bourgeon</span>
+  </button>
+  <button type="button" class="outil" id="seisme">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 17h5l3-8 4 15 4-19 4 14 3-6h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Tout casser</span>
+  </button>
+  <button type="button" class="outil outil-liane" id="pousser" hidden>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30C16 20 10 18 9 10M16 22c0-6 6-8 8-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="9" cy="9" r="3.4" fill="currentColor"/><circle cx="24" cy="8" r="3.4" fill="currentColor"/></svg>
+    <span>Faire pousser</span>
+  </button>
+</nav>
+
+<div class="dialogue" id="dialogue" role="dialog" aria-modal="true" aria-labelledby="dlgTitre" aria-describedby="dlgTexte">
+  <div class="dlg-titre"><span id="dlgTitre">Message système</span><button type="button" class="dlg-x" id="dlgX" aria-label="Fermer et commencer">×</button></div>
+  <div class="dlg-corps">
+    <svg class="dlg-icone" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 38 36H2Z" fill="#f5d000" stroke="#000" stroke-width="2" stroke-linejoin="round"/><path d="M18 14h4l-1 12h-2Zm0 15h4v4h-4Z" fill="#000"/></svg>
+    <div>
+      <p id="dlgTexte">Ce site a été mis en ligne en 2007. Il a bien travaillé : il mérite une retraite.</p>
+      <p class="dlg-question" id="dlgQuestion">Voulez-vous le casser ?</p>
+    </div>
+  </div>
+  <div class="dlg-boutons">
+    <button type="button" class="dlg-btn" id="dlgOui">Oui, le casser</button>
+    <button type="button" class="dlg-btn" id="dlgNon">Annuler</button>
+  </div>
+</div>
+
+<p class="sr" id="annonce" aria-live="polite"></p>
+
+<!-- Le nouveau site de Lila : un exemple imaginaire, fixe. -->
+<div id="neuf" aria-hidden="true">
+  <div class="l-site">
+    <header class="l-tete">
+      <a class="l-marque" href="#l-haut" aria-label="Lila Fougère, accueil">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".45"/><path d="M20 33C20 23 18.5 15 14 8M20 27c-3-1.4-5.6-1.2-7.4.4m7.4-6.6c-2.8-1.8-5.2-1.8-6.8-.4m6.8-5c-2-1.8-4-2.4-5.6-1.8M20 27c3-1.4 5.6-1.2 7.4.4m-7.4-6.6c2.8-1.8 5.2-1.8 6.8-.4m-6.8-5c2-1.8 4-2.4 5.6-1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span><b>Lila Fougère</b><i>Sophrologue</i></span>
+      </a>
+      <nav class="l-nav" aria-label="Site de Lila (exemple)">
+        <a href="#l-seances">Séances</a><a href="#l-approche">Approche</a><a href="#l-infos">Le cabinet</a><a class="l-nav-rdv" href="#l-rdv">Réserver</a>
+      </nav>
+    </header>
+
+    <section class="l-hero" id="l-haut">
+      <div class="l-hero-texte">
+        <p class="l-sur l-entre"><span class="l-point" aria-hidden="true"></span>Sophrologue à Saint-Glinglin-sur-Mer</p>
+        <h1 class="l-h1" id="l-titre" tabindex="-1"><span class="l-ligne"><span>Reprendre</span></span><span class="l-ligne"><em>son souffle.</em></span></h1>
+        <p class="l-chapo l-entre">Des séances douces pour mieux dormir, apaiser le stress et retrouver confiance. Au cabinet face à la mer, ou en visio depuis chez vous.</p>
+        <div class="l-actions l-entre">
+          <a class="l-btn" href="#l-rdv">Réserver une séance<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button type="button" class="l-btn l-btn-doux" id="respirer" aria-pressed="false"><span class="l-pastille" aria-hidden="true"></span><span id="respirerTxt">Respirer avec moi</span></button>
+        </div>
+        <ul class="l-garanties l-entre">
+          <li>Cabinet face à la mer</li><li>Séances en visio</li><li>Un créneau sous 48 h</li>
+        </ul>
+      </div>
+      <div class="l-hero-visuel" aria-hidden="true">
+        <div class="l-arche" id="arche">
+          <svg class="l-paysage" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="lp-ciel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfc3e6"/><stop offset=".36" stop-color="#ecc4c6"/><stop offset=".58" stop-color="#f7cfb2"/><stop offset=".68" stop-color="#fbe2c6"/></linearGradient>
+<radialGradient id="lp-halo"><stop offset="0" stop-color="#fff6e6" stop-opacity=".95"/><stop offset=".35" stop-color="#ffe2c2" stop-opacity=".55"/><stop offset="1" stop-color="#ffd2b0" stop-opacity="0"/></radialGradient>
+<radialGradient id="lp-soleil" cx=".42" cy=".38"><stop offset="0" stop-color="#fffdf8"/><stop offset=".55" stop-color="#ffefd8"/><stop offset="1" stop-color="#ffd3a6"/></radialGradient>
+<linearGradient id="lp-mer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c3cfd3"/><stop offset=".25" stop-color="#93aeb7"/><stop offset="1" stop-color="#46707d"/></linearGradient>
+<linearGradient id="lp-sable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efd9bd"/><stop offset="1" stop-color="#d9b892"/></linearGradient>
+<linearGradient id="lp-falaise" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a98aa6"/><stop offset="1" stop-color="#8a6d8c"/></linearGradient>
+</defs>
+<g id="l-scene">
+<rect width="400" height="336" fill="url(#lp-ciel)"/>
+<g class="lp-nuages" fill="#fdeee6"><ellipse cx="96" cy="122" rx="74" ry="5" opacity=".55"/><ellipse cx="118" cy="131" rx="44" ry="3.4" opacity=".45"/><ellipse cx="300" cy="96" rx="70" ry="4.6" opacity=".5"/><ellipse cx="272" cy="105" rx="40" ry="3" opacity=".4"/><ellipse cx="330" cy="168" rx="56" ry="3" opacity=".35"/></g>
+<g class="lp-soleil"><circle cx="200" cy="268" r="150" fill="url(#lp-halo)"/><circle cx="200" cy="268" r="50" fill="url(#lp-soleil)"/></g>
+<path d="M290 336C300 327 318 323 336 324C356 325 380 320 400 316V336Z" fill="#c4abc2"/>
+<path d="M0 336V262C14 258 34 257 52 259C74 261 96 262 112 270C128 279 140 300 158 318C164 324 170 331 176 336Z" fill="url(#lp-falaise)"/>
+<path d="M0 336V292C20 288 44 292 62 302C80 312 98 326 112 336Z" fill="#7a5d7c" opacity=".85"/>
+<g class="lp-phare"><path d="M63 260L66 222H74L77 260Z" fill="#f8efe6"/><path d="M64.2 246H75.8L76.4 253H63.6ZM65.8 230H74.2L74.6 236H65.4Z" fill="#b8553a"/><circle class="lp-feu" cx="70" cy="218.5" r="11" fill="url(#lp-halo)"/><rect x="65.5" y="214.5" width="9" height="8" rx="1.2" fill="#fff4d6" stroke="#4b3649" stroke-width="1.4"/><path d="M63.5 214.5L70 207L76.5 214.5Z" fill="#b8553a"/><path d="M62 222.5H78" stroke="#4b3649" stroke-width="1.6"/></g>
+<rect y="334" width="400" height="166" fill="url(#lp-mer)"/>
+<rect y="333" width="400" height="2.4" fill="#fbe7d3" opacity=".8"/>
+<g class="lp-reflets" fill="#fff4e2" opacity=".85"><rect x="195.4" y="336" width="18.7" height="1.6" rx="1"/><rect x="183" y="341" width="31.7" height="1.7" rx="1"/><rect x="179.3" y="346.3" width="28.2" height="1.7" rx="1"/><rect x="184.1" y="351.8" width="31.9" height="1.8" rx="1"/><rect x="179.2" y="357.6" width="27.8" height="1.8" rx="1"/><rect x="184" y="363.6" width="24" height="1.9" rx="1"/><rect x="185.4" y="370" width="28.5" height="2" rx="1"/><rect x="183.5" y="376.7" width="29.7" height="2" rx="1"/><rect x="181.2" y="383.7" width="22" height="2.1" rx="1"/><rect x="198.7" y="391.1" width="20.5" height="2.2" rx="1"/><rect x="188.6" y="398.9" width="27.7" height="2.3" rx="1"/><rect x="181" y="407" width="16.6" height="2.3" rx="1"/><rect x="184.7" y="415.6" width="24.7" height="2.4" rx="1"/><rect x="183.9" y="424.6" width="15.2" height="2.5" rx="1"/><rect x="197.6" y="434" width="21.2" height="2.6" rx="1"/><rect x="195.4" y="443.9" width="18.5" height="2.7" rx="1"/></g>
+<g class="lp-vagues" fill="none" stroke="#eef4f3" stroke-linecap="round" opacity=".38"><path d="M-20 362C20 358 60 366 100 362S180 356 220 362S300 368 340 362S400 358 430 362" stroke-width="1.2" stroke-dasharray="26 18"/><path d="M-20 392C30 386 70 398 120 392S210 384 260 392S350 398 430 390" stroke-width="1.5" stroke-dasharray="40 22"/><path d="M-20 428C30 420 90 434 140 428S240 418 290 428S380 434 430 426" stroke-width="1.8" stroke-dasharray="54 26"/></g>
+<g class="lp-voilier"><path d="M300 346H322L318 351H304Z" fill="#5a4558"/><path d="M311 345V322L322 344Z" fill="#fbf1e6"/><path d="M309.5 344V327L301 344Z" fill="#f2d2c0"/></g>
+<g class="lp-oiseaux" fill="none" stroke="#5a4558" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M258 196q5-5 10 0q5-5 10 0"/><path d="M286 212q3.5-3.5 7 0q3.5-3.5 7 0"/></g>
+<path d="M0 500V458C40 446 90 440 150 446C220 452 300 450 400 438V500Z" fill="url(#lp-sable)"/>
+<path d="M0 470C60 458 130 456 200 462C270 468 340 462 400 452" fill="none" stroke="#c9a47c" stroke-width="1.4" opacity=".6"/>
+<g class="lp-oyats"><path d="M362.5 452Q362.1 409.7 361.1 381.4M357.7 452Q359.9 404.3 364.9 372.6M374.5 452Q375.4 424.8 377.7 406.7M367.3 452Q369.1 424.8 373.3 406.6M329.3 452Q333.7 427.5 344.1 411.2M345.2 452Q343 405.4 337.9 374.4M365.9 452Q365.7 409 365.2 380.3M372.9 452Q372.8 427.2 372.4 410.6M370.7 452Q374.1 412.3 382 385.9M372.9 452Q370.3 409.6 364.3 381.4M335.7 452Q339.9 415.1 349.6 390.5M376.9 452Q376.2 408 374.5 378.6" fill="none" stroke="#7d8a5a" stroke-width="1.7" stroke-linecap="round"/><path d="M304.1 456Q301.1 431.1 293.9 414.5M310.7 456Q314.7 407.7 324 375.6M313 456Q311.4 418.1 307.7 392.9M330.1 456Q334 413.8 343.1 385.6M323.4 456Q322.2 411.2 319.5 381.3M326.3 456Q330.5 427.7 340.2 408.8M306.4 456Q312.2 427.7 325.7 408.8" fill="none" stroke="#93a06c" stroke-width="1.7" stroke-linecap="round"/></g>
+<g class="lp-fougere lp-fougere-a"><path d="M26 504L27.7 493L29.5 481.9L31.4 470.9L33.4 459.9L35.7 449L38.2 438.1L41.1 427.3L44.2 416.6L47.8 406L51.8 395.5L56.2 385.3L61.2 375.3L66.7 365.5L72.7 356.1L79.3 347.1L86.5 338.6L94.3 330.6" fill="none" stroke="#47664b" stroke-width="2.4" stroke-linecap="round"/><path d="M27.7 493Q15.7 478.7 -2.5 474.7Q9.5 489 27.7 493ZM27.7 493Q46.3 494.6 62 484.6Q43.4 483 27.7 493ZM29.5 481.9Q14.6 463.3 -8.5 457.5Q6.3 476.2 29.5 481.9ZM29.5 481.9Q53.2 483.7 73.2 470.6Q49.4 468.9 29.5 481.9ZM31.4 470.9Q17.6 452.5 -4.4 446.3Q9.3 464.7 31.4 470.9ZM31.4 470.9Q54.3 472.4 73.4 459.6Q50.4 458.1 31.4 470.9ZM33.4 459.9Q15.7 434.2 -14.1 424.7Q3.7 450.4 33.4 459.9ZM33.4 459.9Q64.6 461.8 90.5 444.3Q59.3 442.4 33.4 459.9ZM35.7 449Q18.3 421.5 -12.2 410.4Q5.2 437.8 35.7 449ZM35.7 449Q68.1 450.9 95 432.6Q62.6 430.7 35.7 449ZM38.2 438.1Q22.3 410.3 -7.2 398Q8.7 425.8 38.2 438.1ZM38.2 438.1Q70.2 440.1 96.7 422.1Q64.7 420.2 38.2 438.1ZM41.1 427.3Q28.6 402.8 3.8 391.1Q16.2 415.5 41.1 427.3ZM41.1 427.3Q68.4 429.2 91.3 414Q63.9 412.1 41.1 427.3ZM44.2 416.6Q33.1 391.5 9 378.5Q20.1 403.5 44.2 416.6ZM44.2 416.6Q71.5 418.8 94.5 403.9Q67.2 401.7 44.2 416.6ZM47.8 406Q39.3 383.5 18.8 370.9Q27.3 393.3 47.8 406ZM47.8 406Q71.7 408.3 92.1 395.5Q68.2 393.2 47.8 406ZM51.8 395.5Q44.1 370.7 22.8 355.7Q30.5 380.6 51.8 395.5ZM51.8 395.5Q77.6 398.5 99.9 385.2Q74.1 382.2 51.8 395.5ZM56.2 385.3Q50.3 360.6 30.6 344.7Q36.5 369.3 56.2 385.3ZM56.2 385.3Q81.4 388.8 103.5 376.4Q78.3 372.8 56.2 385.3ZM61.2 375.3Q57.6 353.9 41.8 339.1Q45.3 360.5 61.2 375.3ZM61.2 375.3Q82.6 378.9 101.7 368.8Q80.4 365.1 61.2 375.3ZM66.7 365.5Q65.1 347.7 52.9 334.6Q54.5 352.4 66.7 365.5ZM66.7 365.5Q84.2 369.1 100.3 361.3Q82.8 357.7 66.7 365.5ZM72.7 356.1Q72.6 342.9 64.4 332.5Q64.5 345.7 72.7 356.1ZM72.7 356.1Q85.6 359.3 97.7 353.9Q84.9 350.8 72.7 356.1ZM79.3 347.1Q80 338.3 75.1 330.9Q74.4 339.7 79.3 347.1ZM79.3 347.1Q87.9 349.6 96.1 346.3Q87.6 343.9 79.3 347.1ZM86.5 338.6Q87.3 334 85.1 329.9Q84.3 334.5 86.5 338.6ZM86.5 338.6Q90.9 340.1 95.3 338.6Q90.9 337.1 86.5 338.6Z" fill="#47664b"/></g>
+<g class="lp-fougere lp-fougere-b"><path d="M2 504L5.6 494.7L9.4 485.4L13.2 476.2L17.2 467L21.4 457.9L25.9 449L30.6 440.2L35.7 431.6L41.2 423.2L47 415.1L53.3 407.3L60.1 399.9L67.2 393L74.9 386.5" fill="none" stroke="#62825f" stroke-width="2" stroke-linecap="round"/><path d="M5.6 494.7Q-1 481.6 -14.3 475.4Q-7.6 488.4 5.6 494.7ZM5.6 494.7Q19.6 499.1 33.4 494.1Q19.4 489.7 5.6 494.7ZM9.4 485.4Q1.5 468.7 -14.9 460.3Q-7 477 9.4 485.4ZM9.4 485.4Q27 490.6 44.2 484Q26.6 478.8 9.4 485.4ZM13.2 476.2Q5.3 457.7 -12.2 447.9Q-4.3 466.3 13.2 476.2ZM13.2 476.2Q32.5 481.6 51.2 474.2Q31.9 468.7 13.2 476.2ZM17.2 467Q9.8 447.4 -8 436.4Q-0.6 456 17.2 467ZM17.2 467Q37.4 472.6 56.7 464.7Q36.6 459.1 17.2 467ZM21.4 457.9Q14.8 437.5 -2.9 425.3Q3.7 445.7 21.4 457.9ZM21.4 457.9Q42.2 463.6 62 455.4Q41.3 449.8 21.4 457.9ZM25.9 449Q21 430.8 6.1 419.3Q11 437.5 25.9 449ZM25.9 449Q44 454 61.4 446.9Q43.3 441.9 25.9 449ZM30.6 440.2Q26.4 419.6 10.5 405.8Q14.7 426.4 30.6 440.2ZM30.6 440.2Q50.9 446 70.4 438.2Q50.2 432.4 30.6 440.2ZM35.7 431.6Q32.8 410.3 17.5 395.3Q20.4 416.5 35.7 431.6ZM35.7 431.6Q56.3 437.7 76.3 430.1Q55.8 423.9 35.7 431.6ZM41.2 423.2Q40.1 408 30 396.6Q31.1 411.8 41.2 423.2ZM41.2 423.2Q55.7 427.8 70 422.7Q55.5 418 41.2 423.2ZM47 415.1Q47.1 400 37.9 387.9Q37.9 403.1 47 415.1ZM47 415.1Q61.3 420 75.7 415.2Q61.4 410.3 47 415.1ZM53.3 407.3Q54.3 395.4 47.8 385.3Q46.8 397.2 53.3 407.3ZM53.3 407.3Q64.5 411.6 76 408.1Q64.8 403.8 53.3 407.3ZM60.1 399.9Q61.3 392.3 57.7 385.6Q56.4 393.1 60.1 399.9ZM60.1 399.9Q67.2 402.9 74.6 400.9Q67.5 397.9 60.1 399.9ZM67.2 393Q68.4 388.5 66.6 384.2Q65.4 388.7 67.2 393ZM67.2 393Q71.5 394.9 76 393.9Q71.8 391.9 67.2 393Z" fill="#62825f"/></g>
+<g class="lp-fougere lp-fougere-c"><path d="M396 506L393.7 497.1L391.3 488.1L388.8 479.3L386.1 470.4L383.2 461.7L380 453L376.4 444.5L372.5 436.1L368.2 428L363.4 420.1L358.1 412.5L352.3 405.3L346 398.6" fill="none" stroke="#3e5a44" stroke-width="2" stroke-linecap="round"/><path d="M393.7 497.1Q381 490.5 366.9 493.1Q379.6 499.7 393.7 497.1ZM393.7 497.1Q407.3 492.5 415.3 480.7Q401.7 485.2 393.7 497.1ZM391.3 488.1Q376.6 480.3 360.2 483Q374.9 490.9 391.3 488.1ZM391.3 488.1Q406.9 482.3 415.7 468.2Q400.1 474 391.3 488.1ZM388.8 479.3Q372.9 470.5 354.9 473.2Q370.8 482 388.8 479.3ZM388.8 479.3Q405.6 472.2 414.5 456.4Q397.8 463.4 388.8 479.3ZM386.1 470.4Q369 460.9 349.7 463.7Q366.7 473.3 386.1 470.4ZM386.1 470.4Q403.7 462 412.6 444.5Q394.9 453 386.1 470.4ZM383.2 461.7Q364.6 451.3 343.5 454.4Q362.1 464.8 383.2 461.7ZM383.2 461.7Q401.9 451.5 410.4 432Q391.7 442.2 383.2 461.7ZM380 453Q364.2 444.3 346.5 447.1Q362.2 455.7 380 453ZM380 453Q395.2 443.5 401.4 426.6Q386.2 436.2 380 453ZM376.4 444.5Q361.8 436.6 345.3 439.3Q360 447.2 376.4 444.5ZM376.4 444.5Q389.9 434.8 394.6 418.8Q381.2 428.6 376.4 444.5ZM372.5 436.1Q358 428.7 342 431.6Q356.5 439.1 372.5 436.1ZM372.5 436.1Q385 425.7 388.5 409.8Q376 420.3 372.5 436.1ZM368.2 428Q355.4 421.8 341.5 424.7Q354.3 430.9 368.2 428ZM368.2 428Q378.3 418.1 380.3 404Q370.2 414 368.2 428ZM363.4 420.1Q352.5 415.2 340.9 418Q351.8 422.9 363.4 420.1ZM363.4 420.1Q371.2 411.1 371.9 399.2Q364.1 408.2 363.4 420.1ZM358.1 412.5Q351 409.6 343.6 411.7Q350.7 414.6 358.1 412.5ZM358.1 412.5Q362.6 406.3 362.4 398.6Q357.9 404.9 358.1 412.5ZM352.3 405.3Q348.4 403.9 344.4 405.2Q348.3 406.6 352.3 405.3ZM352.3 405.3Q354.5 401.7 353.9 397.5Q351.8 401.2 352.3 405.3Z" fill="#3e5a44"/></g>
+</g></svg>
+          <span class="l-grain"></span>
+          <span class="l-souffle"><span id="orbeMot">Inspirez</span></span>
+        </div>
+        <div class="l-dispo"><span class="l-dispo-point"></span><span><b>Prochain créneau libre</b>mardi 3 novembre, 9 h 30</span></div>
+      </div>
+    </section>
+
+    <section class="l-pourqui" aria-labelledby="l-pq">
+      <div class="l-tete-section l-vue">
+        <p class="l-sur">Pour qui</p>
+        <h2 class="l-h2" id="l-pq">Je vous accompagne <em>quand…</em></h2>
+      </div>
+      <ul class="l-liste">
+        <li class="l-vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 14.5A7.5 7.5 0 0 1 15.5 3.5z"/></svg><span>le sommeil se dérobe,</span></li>
+        <li class="l-vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9.5c3-3.5 6 3.5 9.5 0s6.5 3.5 9.5 0M2.5 15c3-3.5 6 3.5 9.5 0s6.5 3.5 9.5 0"/></svg><span>le stress du quotidien déborde,</span></li>
+        <li class="l-vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4.6L16.6 4a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8zM14.5 6l3.5 3.5"/></svg><span>un examen ou un entretien approche,</span></li>
+        <li class="l-vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8m0 0c0-4.5 3-7 8-7 0 4.5-3 7-8 7zm0 2c0-3.5-2.5-6-7-6 0 3.5 2.5 6 7 6"/></svg><span>une naissance se prépare,</span></li>
+        <li class="l-vue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10h12v4.5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5zM16.5 11.5h1.5a2.3 2.3 0 0 1 0 4.6h-1.8M9 3.5c-1 1.6 1 2.2 0 3.8M12.5 3.5c-1 1.6 1 2.2 0 3.8"/></svg><span>ou simplement : vous avez besoin d'une pause.</span></li>
+      </ul>
+    </section>
+
+    <section class="l-seances" id="l-seances" aria-labelledby="l-s">
+      <div class="l-tete-section l-vue">
+        <p class="l-sur">Séances et tarifs</p>
+        <h2 class="l-h2" id="l-s">Trois façons de <em>souffler.</em></h2>
+      </div>
+      <ul class="l-offres">
+        <li class="l-offre l-vue">
+          <div class="l-offre-txt"><h3>La première séance</h3><p>On fait connaissance, vous me dites ce qui vous amène, et l'on pose ensemble un premier exercice simple, à refaire chez vous.</p><p class="l-meta"><span>1 h</span><span>Cabinet ou visio</span></p></div>
+          <p class="l-prix">60&nbsp;€</p>
+          <a class="l-lien" href="#l-rdv" data-choix="decouverte">Réserver<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </li>
+        <li class="l-offre l-vue">
+          <div class="l-offre-txt"><h3>Le suivi</h3><p>Des séances régulières, au rythme qui vous va, avec des exercices qui évoluent avec vous.</p><p class="l-meta"><span>45 min</span><span>Cabinet ou visio</span></p></div>
+          <p class="l-prix">50&nbsp;€</p>
+          <a class="l-lien" href="#l-rdv" data-choix="suivi">Réserver<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </li>
+        <li class="l-offre l-vue">
+          <div class="l-offre-txt"><h3>Le groupe du jeudi</h3><p>Six personnes au plus, un tapis, une couverture, et une heure pour souffler avant le week-end.</p><p class="l-meta"><span>1 h</span><span>Jeudi, 18 h 30</span></p></div>
+          <p class="l-prix">18&nbsp;€</p>
+          <a class="l-lien" href="#l-rdv" data-choix="groupe">Réserver<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </li>
+      </ul>
+      <p class="l-remb l-vue">Beaucoup de mutuelles remboursent la sophrologie : une facture vous est remise à chaque séance.</p>
+    </section>
+  </div>
+
+  <section class="l-approche" id="l-approche" aria-labelledby="l-a">
+    <div class="l-nuit" aria-hidden="true">
+      <div class="l-phare-bloc"><span class="l-faisceau"></span><svg class="l-phare-nuit" viewBox="0 0 60 120"><path d="M22 120L25 46h10l3 74z" fill="#3a2c40"/><path d="M23.5 84h13l.7 12H22.8zM24.6 60h10.8l.5 9H24.1z" fill="#5a3a3e"/><rect x="24" y="34" width="12" height="12" rx="2" fill="#ffe9b8"/><path d="M21 34l9-9 9 9z" fill="#3a2c40"/><path d="M20 46h20" stroke="#3a2c40" stroke-width="2.4"/></svg></div>
+      <span class="l-etoiles"></span>
+    </div>
+    <div class="l-site l-approche-in">
+      <p class="l-sur l-vue">Mon approche</p>
+      <h2 class="l-citation l-vue" id="l-a">«&nbsp;Pas de grands discours&nbsp;: de la respiration, du corps, et des <em>mots simples.</em>&nbsp;»</h2>
+      <p class="l-signature l-vue">Lila, dans son cabinet du quai des Mouettes</p>
+      <ul class="l-piliers">
+        <li class="l-vue"><b>Le souffle</b>Respirer plus lentement pour calmer le cœur, puis la tête.</li>
+        <li class="l-vue"><b>Le corps</b>Relâcher ce qui serre : la mâchoire, les épaules, le ventre.</li>
+        <li class="l-vue"><b>Des outils à vous</b>Trois exercices courts, à refaire seul, chez vous ou au bureau.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="l-site">
+    <section class="l-rdv" id="l-rdv" aria-labelledby="l-r">
+      <div class="l-tete-section l-vue">
+        <p class="l-sur">Réservation en ligne</p>
+        <h2 class="l-h2" id="l-r">Choisissez votre <em>moment.</em></h2>
+        <p class="l-rdv-intro">Les créneaux libres de la semaine, confirmés tout de suite, avec un rappel la veille. Plus besoin d'attendre le répondeur.</p>
+      </div>
+      <div class="l-resa l-vue" id="resa">
+        <div class="l-resa-choix">
+          <div class="l-pas">
+            <p class="l-pas-titre" id="l-t-type">Votre séance</p>
+            <div class="l-types" role="group" aria-labelledby="l-t-type">
+              <button type="button" class="l-type" aria-pressed="true" data-type="decouverte" data-nom="Première séance" data-detail="1&nbsp;h&nbsp;·&nbsp;60&nbsp;€">Première séance<small>1&nbsp;h&nbsp;·&nbsp;60&nbsp;€</small></button>
+              <button type="button" class="l-type" aria-pressed="false" data-type="suivi" data-nom="Suivi" data-detail="45&nbsp;min&nbsp;·&nbsp;50&nbsp;€">Suivi<small>45&nbsp;min&nbsp;·&nbsp;50&nbsp;€</small></button>
+              <button type="button" class="l-type" aria-pressed="false" data-type="groupe" data-nom="Groupe du jeudi" data-detail="1&nbsp;h&nbsp;·&nbsp;18&nbsp;€">Groupe du jeudi<small>1&nbsp;h&nbsp;·&nbsp;18&nbsp;€</small></button>
+            </div>
+          </div>
+          <div class="l-pas">
+            <p class="l-pas-titre" id="l-t-jour">Le jour <span>novembre 2026</span></p>
+            <div class="l-jours" role="group" aria-labelledby="l-t-jour" id="jours"></div>
+          </div>
+          <div class="l-pas">
+            <p class="l-pas-titre" id="l-t-heure">L'heure <span id="l-lieu">au cabinet ou en visio</span></p>
+            <div class="l-creneaux" role="group" aria-labelledby="l-t-heure" id="creneaux"></div>
+          </div>
+        </div>
+        <div class="l-resa-bas">
+          <p class="l-resume" id="resume" aria-live="polite">Choisissez une heure.</p>
+          <button type="button" class="l-btn" id="confirmer" disabled>Confirmer</button>
+        </div>
+        <div class="l-ok" id="ok" hidden>
+          <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="25" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M17 29l7.5 7.5L40 21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="l-ok-titre" tabindex="-1" id="okTitre">C'est réservé.</p>
+          <p class="l-ok-texte" id="okTexte"></p>
+          <button type="button" class="l-btn l-btn-doux" id="autre">Choisir un autre moment</button>
+        </div>
+      </div>
+      <p class="l-note">Exemple imaginaire : aucun rendez-vous n'est vraiment pris.</p>
+    </section>
+
+    <section class="l-infos" id="l-infos" aria-labelledby="l-i">
+      <div class="l-carte l-vue" aria-hidden="true">
+        <svg viewBox="0 0 360 260">
+          <rect width="360" height="260" fill="#e9dccb"/>
+          <path d="M0 0H360V92C320 104 300 84 262 96C226 108 214 140 176 146C138 152 116 128 82 140C52 150 30 176 0 182Z" fill="#b9cfd5"/>
+          <path d="M0 182C30 176 52 150 82 140C116 128 138 152 176 146C214 140 226 108 262 96C300 84 320 104 360 92" fill="none" stroke="#f6efe6" stroke-width="5"/>
+          <g fill="none" stroke="#fbf6ef" stroke-width="7" stroke-linecap="round"><path d="M20 230C90 210 160 214 240 196S330 170 350 150"/><path d="M178 258C180 220 172 190 176 160"/></g>
+          <g fill="none" stroke="#d8c6b0" stroke-width="1.4"><path d="M40 250l22-40M110 250l10-34M250 250l-6-46M300 240l20-60"/></g>
+          <path d="M176 160L196 136" stroke="#fbf6ef" stroke-width="5" stroke-linecap="round"/>
+          <g class="l-carte-vagues" fill="none" stroke="#f3f7f7" stroke-width="1.4" stroke-linecap="round" opacity=".8"><path d="M40 60q8-5 16 0t16 0M210 40q8-5 16 0t16 0M120 96q8-5 16 0t16 0M290 56q8-5 16 0t16 0"/></g>
+          <g transform="translate(230 74)"><path d="M-4 18L-2.6 0h5.2L4 18z" fill="#f8efe6" stroke="#5a4558" stroke-width="1.2"/><path d="M-3.3 9h6.6" stroke="#b8553a" stroke-width="2.6"/><circle cy="-2" r="7" fill="#ffe9b8" opacity=".7"/></g>
+          <g class="l-epingle"><path d="M196 134c0-11 18-11 18 0 0 7-9 17-9 17s-9-10-9-17z" fill="#a1401f"/><circle cx="205" cy="134" r="3.4" fill="#f6efe6"/></g>
+          <text x="220" y="160" font-family="Bricolage Grotesque, sans-serif" font-size="12" font-weight="650" fill="#241b28">Cabinet du Phare</text>
+          <text x="32" y="222" font-family="Bricolage Grotesque, sans-serif" font-size="10" fill="#5b4d5e" transform="rotate(-9 32 222)">route de la Corniche</text>
+        </svg>
+      </div>
+      <div class="l-infos-txt">
+        <p class="l-sur l-vue">Le cabinet</p>
+        <h2 class="l-h2 l-vue" id="l-i">Au bout du quai, <em>face à la mer.</em></h2>
+        <dl class="l-dl">
+          <div class="l-vue"><dt>Adresse</dt><dd>Cabinet du Phare, 3 quai des Mouettes, Saint-Glinglin-sur-Mer</dd></div>
+          <div class="l-vue"><dt>Accès</dt><dd>Bus 2, arrêt Le Port. Parking gratuit sur le quai, cabinet de plain-pied.</dd></div>
+          <div class="l-vue"><dt>Horaires</dt><dd>Du mardi au samedi, de 9 h à 19 h</dd></div>
+          <div class="l-vue"><dt>En visio</dt><dd>Le lien arrive avec la confirmation, rien à installer.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <footer class="l-pied">
+      <p class="l-pied-marque"><b>Lila Fougère</b> Sophrologue à Saint-Glinglin-sur-Mer</p>
+      <p class="l-pied-note">Lila n'existe pas, Saint-Glinglin-sur-Mer non plus : c'est un exemple imaginaire, dessiné par Kazura pour ce jeu.</p>
+    </footer>
+  </div>
+
+  <section class="fin" id="fin" aria-labelledby="finTitre">
+    <div class="fin-lueur" aria-hidden="true"></div>
+    <p class="fin-sur">Avant, après</p>
+    <div class="fin-duo" aria-hidden="true">
+      <figure class="fin-avant"><img id="finAvant" alt="" width="320" height="240"><figcaption>2007</figcaption></figure>
+      <svg class="fin-fleche" viewBox="0 0 120 70"><path class="fin-tige" d="M6 52C26 20 70 8 108 34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M96 35l12-1-5-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 20c-2-7 3-11 8-11 0 6-3 10-8 11zM70 14c3-6 9-7 12-5-2 5-7 7-12 5z" fill="currentColor"/></svg>
+      <figure class="fin-apres">
+        <div class="fin-mini">
+          <span class="fin-mini-tete"><i></i><b></b></span>
+          <span class="fin-mini-corps"><span class="fin-mini-titre">Reprendre<em>son souffle.</em></span><svg viewBox="40 100 320 400" preserveAspectRatio="xMidYMid slice"><use href="#l-scene"/></svg></span>
+        </div>
+        <figcaption>Aujourd'hui</figcaption>
+      </figure>
+    </div>
+    <h2 class="fin-titre" id="finTitre"><span>Votre vieux site ne vous ressemble plus&nbsp;?</span> <em>On en refait un qui vous ressemble.</em></h2>
+    <p class="fin-texte">Dessiné sur mesure, écrit à partir de vos mots, construit par Mathéo, et à vous pour de bon.</p>
+    <div class="fin-actions">
+      <a class="fin-btn" href="../../index.html#contact">Retour au site Kazura<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button type="button" class="fin-btn fin-btn-doux" id="recasser"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10a5.5 5.5 0 1 0 1.8-4.1M4 3.5v3.6h3.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tout recasser</button>
+    </div>
+  </section>
+
+  <div class="bandeau-k" id="bandeau">
+    <span class="bk-mot"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sceau"/></svg>Exemple imaginaire<span class="bk-long">, fait par Kazura</span></span>
+    <a href="#fin">Et le vôtre&nbsp;?</a>
+  </div>
+</div>
+
+<noscript><div class="sans-js"><p>Ce jeu a besoin de JavaScript. Une vieille page s'y casse, et un nouveau site éclot à sa place.</p><p><a href="../../index.html#contact">Retour au site Kazura</a></p></div></noscript>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sceau" viewBox="0 0 100 100"><g fill="currentColor" fill-rule="evenodd"><path d="M50 2a48 48 0 1 0 0 96 48 48 0 1 0 0-96zm0 6a42 42 0 1 1 0 84 42 42 0 1 1 0-84z"/><path id="foliole" d="M50 46C39.5 37 34.5 23.5 50 7c15.5 16.5 10.5 30 0 39zm0-7.4c6.2-6 8.6-14.4 0-23.6-8.6 9.2-6.2 17.6 0 23.6z"/><use href="#foliole" transform="rotate(120 50 50)"/><use href="#foliole" transform="rotate(240 50 50)"/><circle cx="50" cy="50" r="4.6"/></g></symbol>
+  </defs>
+</svg>
+</body>
+</html>
