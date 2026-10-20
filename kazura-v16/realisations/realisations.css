@@ -1,0 +1,130 @@
+/* Kazura v12, module « Réalisations » (agent Vitrine). Tout est rangé sous .rl.
+   Couleurs et polices : celles de la Page (css/page.css), avec des valeurs de secours pour l'essai seul. */
+
+.rl {
+  --rl-encre: var(--encre, #eef0ea);
+  --rl-doux: var(--doux, #bcc5bf);
+  --rl-discret: var(--discret, #96a29b);
+  --rl-jade: var(--jade, #10b981);
+  --rl-jade-clair: var(--jade-clair, #6ee7b7);
+  --rl-violet-clair: var(--violet-clair, #c9b8ff);
+  --rl-or: var(--or, #e9c987);
+  --rl-titre: var(--titre, 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif);
+  --rl-texte: var(--texte, 'Newsreader', Georgia, serif);
+  --rl-ressort: cubic-bezier(.2, .85, .2, 1);
+  --rl-gouttiere: 16px;
+  position: relative;
+  color: var(--rl-encre);
+  font-family: var(--rl-titre);
+}
+.rl *, .rl *::before, .rl *::after { box-sizing: border-box; }
+.rl :where(button) { font: inherit; color: inherit; }
+.rl svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- Le rail ---------- */
+.rl-rail {
+  display: flex; gap: var(--rl-gouttiere);
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  padding: 8px 0 28px; scroll-padding-inline: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent);
+}
+.rl-rail::-webkit-scrollbar { display: none; }
+.rl-rail:focus { outline: none; }
+.rl-site {
+  position: relative; flex: 0 0 88%; scroll-snap-align: start; min-width: 0;
+  display: grid; gap: 22px; align-content: start;
+  opacity: .5; transition: opacity .6s ease;
+}
+.rl-site.rl-courant { opacity: 1; }
+
+/* ---------- La scène : l'ordinateur et le téléphone posé devant ---------- */
+.rl-scene { position: relative; aspect-ratio: 16 / 11.6; isolation: isolate; }
+.rl-scene::before {
+  content: ""; position: absolute; z-index: -1; inset: 6% 2% 0 4%; border-radius: 50%;
+  background: radial-gradient(50% 50% at 40% 55%, rgba(16, 185, 129, .2), rgba(139, 92, 246, .12) 55%, transparent 78%);
+  filter: blur(24px); opacity: 0; transition: opacity 1.2s ease;
+}
+.rl-courant .rl-scene::before { opacity: 1; }
+.rl-ordi {
+  position: absolute; left: 0; top: 0; width: 88%;
+  border-radius: 12px; overflow: hidden; background: #10131b;
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .9), 0 0 0 6px rgba(255, 255, 255, .025);
+}
+.rl-barre { display: flex; align-items: center; gap: 5px; height: 22px; padding: 0 10px; background: #161a24; border-bottom: 1px solid rgba(255, 255, 255, .06); }
+.rl-barre span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, .2); }
+.rl-barre em { margin: 0 auto; padding: 1px 10px; border-radius: 6px; background: rgba(255, 255, 255, .07); color: #c3cbc6; font-style: normal; font-size: 10px; letter-spacing: .02em; transform: translateX(-12px); }
+.rl-ecran { position: relative; aspect-ratio: 16 / 10; background: #0b0e15; }
+.rl-vue, .rl-tel-vue { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; opacity: 0; transition: opacity .7s ease; }
+.rl-vue.rl-active, .rl-tel-vue.rl-active { opacity: 1; }
+.rl-tel {
+  position: absolute; right: 0; bottom: 0; width: 30%; aspect-ratio: 600 / 1298;
+  border-radius: 22px; overflow: hidden; background: #0b0e15;
+  border: 5px solid #10131b; outline: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: -20px 30px 60px -20px rgba(0, 0, 0, .9);
+  transition: transform .9s var(--rl-ressort);
+}
+
+/* ---------- Le texte ---------- */
+.rl-texte { display: grid; gap: 10px; justify-items: start; max-width: 46ch; }
+.rl-metier { margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.1rem; font-style: italic; letter-spacing: 0; color: var(--rl-jade-clair); }
+.rl-nom { margin: 0; font-family: var(--rl-texte); font-weight: 400; font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.05; letter-spacing: -.02em; color: #fff; }
+.rl-encours { display: inline-block; vertical-align: middle; margin-left: 6px; padding: 3px 10px; border-radius: 999px; font-family: var(--rl-titre); font-size: .78rem; letter-spacing: .02em; color: #14110a; background: var(--rl-or); }
+.rl-fait { margin: 0; font-family: var(--rl-texte); font-size: 1.1rem; line-height: 1.5; color: var(--rl-doux); }
+.rl-ecrans { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.rl-ecrans button {
+  min-height: 40px; padding: 0 14px; border-radius: 999px; cursor: pointer; font-size: .88rem;
+  background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .16); color: #dfe5e1;
+  transition: background .3s, border-color .3s, color .3s;
+}
+.rl-ecrans button:hover { background: rgba(255, 255, 255, .1); }
+.rl-ecrans button[aria-pressed="true"] { background: rgba(16, 185, 129, .16); border-color: rgba(110, 231, 183, .6); color: #fff; }
+.rl-voir {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 8px; padding: 0 22px; border-radius: 999px;
+  background: #eef0ea; color: #0a0d16; font-weight: 600; font-size: 1rem; text-decoration: none;
+  transition: background .3s, transform .3s var(--rl-ressort);
+}
+.rl-voir:hover { background: #fff; transform: translateY(-1px); }
+.rl-voir svg { width: 18px; height: 18px; stroke-width: 2.2; }
+.rl-hors { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.rl :where(a, button):focus-visible { outline: 2px solid var(--rl-or); outline-offset: 3px; }
+
+/* ---------- Le pilote : précédent, compteur, jauge, suivant ---------- */
+.rl-pilote { display: flex; align-items: center; gap: 14px; }
+.rl-prec, .rl-suiv {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; flex: none;
+  background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .2); color: #fff; transition: background .3s, opacity .3s;
+}
+.rl-prec svg { transform: rotate(180deg); }
+.rl-prec:hover:not(:disabled), .rl-suiv:hover:not(:disabled) { background: rgba(255, 255, 255, .12); }
+.rl-prec:disabled, .rl-suiv:disabled { opacity: .35; cursor: default; }
+.rl-compte { margin: 0; font-size: .92rem; color: var(--rl-doux); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rl-compte b { color: #fff; font-weight: 600; }
+.rl-jauge { flex: 1; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, .12); overflow: hidden; }
+.rl-jauge i { display: block; height: 100%; background: linear-gradient(90deg, var(--rl-jade-clair), var(--rl-violet-clair)); transform-origin: left; transform: scaleX(.16); transition: transform .6s var(--rl-ressort); }
+
+/* ---------- L'arrivée ---------- */
+.rl .rl-scene, .rl .rl-texte { transition: opacity .9s ease, transform 1s var(--rl-ressort); }
+.rl:not(.rl-vu) .rl-scene { opacity: 0; transform: translateY(28px); }
+.rl:not(.rl-vu) .rl-texte { opacity: 0; transform: translateY(18px); }
+.rl:not(.rl-vu) .rl-tel { transform: translate(14px, 24px); }
+.rl.rl-vu .rl-texte { transition-delay: .12s; }
+.rl.rl-reduit:not(.rl-vu) .rl-scene, .rl.rl-reduit:not(.rl-vu) .rl-texte, .rl.rl-reduit:not(.rl-vu) .rl-tel { transform: none; }
+.rl.rl-reduit .rl-scene, .rl.rl-reduit .rl-texte { transition-duration: .5s; }
+
+/* ---------- Ordinateur ---------- */
+@media (min-width: 900px) {
+  .rl { --rl-gouttiere: clamp(28px, 4vw, 64px); }
+  .rl-site { flex-basis: 86%; grid-template-columns: minmax(0, 1.75fr) minmax(260px, 1fr); align-items: end; gap: clamp(28px, 4vw, 56px); }
+  .rl-scene { aspect-ratio: 16 / 11; }
+  .rl-ordi { width: 90%; border-radius: 14px; }
+  .rl-barre { height: 28px; padding: 0 14px; gap: 6px; }
+  .rl-barre span { width: 9px; height: 9px; }
+  .rl-barre em { font-size: 12px; padding: 2px 14px; }
+  .rl-tel { width: 24%; border-radius: 28px; border-width: 6px; }
+  .rl-texte { padding-bottom: 2%; }
+  .rl-fait { font-size: 1.15rem; }
+  .rl-pilote { max-width: 520px; }
+}
+@media (min-width: 1300px) { .rl-site { flex-basis: 82%; } }

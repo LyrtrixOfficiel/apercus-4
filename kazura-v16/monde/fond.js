@@ -1,0 +1,499 @@
+/* Kazura v16, la Scène : le fond, peint par deux triangles plein écran (chacun ne peint que ses pixels).
+   - la salle de dalles (sombre) : un cylindre de grands carreaux noirs légèrement brillants, à joints
+     fins, une grille fine, et la typographie géante projetée dessus, tramée de points de lumière
+     comme un mur d'écrans ; certains carreaux sont de vrais écrans qui s'allument ; un arc de lumière
+     (réf. ZYNO) passe derrière le mot géant ; des rayons tombent d'en haut ; un sol de pierre sombre et
+     polie reflète la paroi, l'arc et la lueur du sceau. La salle revient, apaisée, dans « Qui fait votre site » ;
+   - le monde de l'autre côté, dans son propre nuanceur : v16, d'abord le MONDE VIOLET de « Osez rêver » (matière
+     liquide irisée qui coule, dans la gamme du passage), puis la COULÉE irisée (réf. ALCHE) qui couvre l'écran et
+     se retire sur le BLANC du déroulé (studio de porcelaine, grille et croix d'ALCHE, grand sceau en relief qui se
+     trace). Les failles de la v15 sont retirées.
+   Les valeurs sont pensées avant le rendu filmique (ACES) : 1,0 donne un gris très clair. */
+import { GLSL_MASQUE, GLSL_SALLE, GLSL_TEXBRUIT, GLSL_RAMPE, GLSL_IRIS } from './glsl.js';
+
+export function creerFond(THREE, U, { mobile }) {
+  const u = {
+    ...U,
+    uInvProj: { value: new THREE.Matrix4() },
+    uCamMonde: { value: new THREE.Matrix4() },
+    uCamPos: { value: new THREE.Vector3() },
+    uNuit: { value: 0 },
+    uLueur: { value: new THREE.Vector2(0.5, 0.55) },
+    uLueurForce: { value: 0.5 },
+    uEtoile: { value: new THREE.Vector3(0.62, 0.55, 0.2) },
+    uClairTon: { value: 1 },
+    uHaloOuv: { value: 0 },
+    uArc: { value: 0 },
+    uArcCouleur: { value: new THREE.Color(0x5b6cff) },
+    uRayons: { value: 0 },
+    uEcrans: { value: 0 },
+    uSol: { value: 0 },
+    uSolY: { value: -2.3 },
+    uClairRiche: { value: 1 },
+    uMotClair: { value: 0 },      // le grand mot en contour du monde clair (RÊVER, réf. VISION d'ALCHE)
+    uMotClairL: { value: 8 },     // sa ligne dans l'atlas
+    uMotClairW: { value: 4 },     // sa largeur (en hauteurs de lettre)
+    uLent: { value: 1 },
+    uSceauBlanc: { value: 0 },    // v16 : le grand sceau en relief blanc sur blanc (réf. le A d'ALCHE), qui se trace (0 à 1)          // v16 : 0,5 en mouvement réduit (la matière violette et la coulée coulent moins vite)
+    uDefile: { value: 0 },        // position dans la page (s) : la matière violette monte avec la page
+    uTexteG: { value: 1 },        // 1 en paysage (les textes sont à gauche : la matière y reste dans l'indigo)
+  };
+  const TETE = /* glsl */ `
+      precision highp float;
+      ${GLSL_TEXBRUIT}
+      ${GLSL_RAMPE}
+      ${GLSL_MASQUE}
+      ${GLSL_SALLE}
+      ${GLSL_IRIS}
+      uniform mat4 uInvProj; uniform mat4 uCamMonde; uniform vec3 uCamPos;
+      uniform float uNuit; uniform vec2 uLueur; uniform float uLueurForce; uniform vec3 uEtoile; uniform float uClairTon; uniform float uHaloOuv;
+      uniform float uArc; uniform vec3 uArcCouleur; uniform float uRayons; uniform float uEcrans; uniform float uSol; uniform float uSolY;
+      uniform float uClairRiche; uniform float uMotClair; uniform float uMotClairL; uniform float uMotClairW;
+      uniform float uLent; uniform float uDefile; uniform float uTexteG; uniform float uSceauBlanc;
+      varying vec2 vNdc;
+`;
+  const SOMMET = /* glsl */ `varying vec2 vNdc; void main() { vNdc = position.xy; gl_Position = vec4(position.xy, 1.0, 1.0); }`;
+  const DIRECTION = /* glsl */ `
+        vec4 vv = uInvProj * vec4(vNdc, 1.0, 1.0);
+        vec3 d = normalize((uCamMonde * vec4(vv.xyz / vv.w, 0.0)).xyz);`;
+  const defines = mobile ? { KZ_MOBILE: 1 } : {};
+  /* deux nuanceurs. Le sombre (salle) ; l'autre côté (violet, coulée, blanc) à part, compilé avec le lot
+     du monde clair : le grand nuanceur de la salle reste court à compiler. Chacun ne peint que ses pixels. */
+  const m = new THREE.ShaderMaterial({
+    uniforms: u, depthWrite: false, depthTest: false, fog: false, defines,
+    vertexShader: SOMMET,
+    fragmentShader: TETE + /* glsl */ `
+      /* l'arc de lumière, posé sur la paroi : un U lumineux dont le bas passe derrière le mot */
+      vec3 arcLumiere(vec2 q, float aa) {
+        vec2 c = vec2(0.0, 3.0);
+        float r = 4.45;
+        float dd = length(q - c) - r;
+        float bas = smoothstep(c.y + 0.6, c.y - 2.2, q.y);
+        float coeur = exp(-kzC2(dd / (0.028 + aa * 1.5)));
+        float halo = exp(-abs(dd) / 0.3) * 0.22 + exp(-abs(dd) / 1.4) * 0.035;
+        float dedans = smoothstep(0.0, -2.6, dd) * 0.012;
+        float vie = 0.85 + 0.15 * sin(kzTps * 0.7 + q.x * 0.3);
+        vec3 col = uArcCouleur * (halo + dedans) * 1.2 + mix(uArcCouleur, vec3(0.9, 0.95, 1.0), 0.4) * coeur * 1.5;
+        return col * bas * vie;
+      }
+
+      /* un carreau-écran : f dans le carreau (0..1), graines, finesse du pixel */
+      vec3 ecran(vec2 f, float g, float g2, float aa) {
+        float type = floor(g2 * 5.0);
+        float t = kzTps;
+        float cycle = fract(t / (9.0 + g * 7.0) + g * 3.7);
+        float on = smoothstep(0.0, 0.06, cycle) * (1.0 - smoothstep(0.78, 0.86, cycle));
+        float scint = step(0.5, fract(sin(floor(t * 14.0) + g * 91.0) * 437.5));
+        on *= mix(0.6 + 0.4 * scint, 1.0, smoothstep(0.0, 0.12, cycle));
+        vec2 m = f - 0.5;
+        float cadre = smoothstep(0.5, 0.44, max(abs(m.x), abs(m.y)));
+        vec3 c = vec3(0.0);
+        vec3 tt = kzTeinte * 1.4 + 0.08;
+        if (type < 1.0) {
+          float lig = smoothstep(0.35, 0.0, abs(fract(f.y * 26.0 - t * 0.6) - 0.5) - 0.12);
+          float bande = exp(-kzC2((fract(f.y - t * 0.13 + g) - 0.5) / 0.08));
+          float forme = smoothstep(0.32, 0.3, length(m * vec2(1.0, 1.25)) - 0.04 * sin(t + f.x * 9.0));
+          c = tt * lig * (0.25 + 0.75 * forme) * (0.5 + bande);
+        } else if (type < 2.0) {
+          vec2 p = m * 2.2;
+          float z = sqrt(max(0.0, 1.0 - dot(p, p) * 1.6));
+          float an = 1.0 - smoothstep(0.0, 0.08, abs(length(p * vec2(1.0, 2.6)) - 0.95));
+          float dep = max(z, an * 0.55);
+          float tr = floor(f.x * 5.0);
+          float phase = fract(t * 0.22 + g + tr * 0.17);
+          vec3 gris = vec3(dep * 0.9);
+          vec3 coul = kzRampe(1.0 - dep) * (0.15 + 0.9 * dep);
+          c = mix(gris * 0.35, coul, step(0.5, phase)) * smoothstep(0.0, 0.02, dep);
+          c += vec3(0.6) * (1.0 - smoothstep(0.0, aa * 2.0 + 0.01, fract(f.x * 5.0))) * 0.15;
+        } else if (type < 3.0) {
+          float a = t * 0.3 + g * 6.0;
+          vec2 p = mat2(cos(a), -sin(a), sin(a), cos(a)) * m * 2.4;
+          float l = abs(length(p) - 0.92);
+          for (int i = 0; i < 3; i++) {
+            float an = float(i) * 2.0944;
+            vec2 d = vec2(cos(an), sin(an));
+            vec2 pp = vec2(dot(p, d) - 0.45, dot(p, vec2(-d.y, d.x)));
+            l = min(l, abs(length(pp * vec2(1.0, 2.1)) - 0.36) * 0.6);
+          }
+          c = tt * (1.0 - smoothstep(0.0, aa * 6.0 + 0.025, l)) * 1.2;
+        } else if (type < 4.0) {
+          float b = floor(f.x * 12.0);
+          float hgt = 0.15 + 0.7 * kzC2(0.5 + 0.5 * sin(t * (1.3 + fract(b * 0.37) * 2.0) + b));
+          float barre = step(fract(f.x * 12.0), 0.7) * step(1.0 - f.y, hgt);
+          c = mix(tt, vec3(1.0, 0.6, 0.9), f.y * 0.4) * barre * 0.8;
+        } else {
+          vec2 cel = floor(f * vec2(9.0, 7.0));
+          vec2 sf = fract(f * vec2(9.0, 7.0));
+          float gl = step(0.5, fract(sin(dot(cel, vec2(12.9, 78.2)) + floor(t * 2.0 + g * 9.0) * 3.1) * 4375.5));
+          vec2 px = floor(sf * vec2(3.0, 5.0));
+          float pix = step(0.45, fract(sin(dot(px + cel * 7.0, vec2(41.0, 17.0)) + floor(t * 2.0)) * 951.7));
+          c = mix(vec3(0.5, 1.0, 0.7), tt, 0.5) * gl * pix * 0.6;
+        }
+        c *= 0.85 + 0.15 * sin(f.y * 160.0);
+        return c * on * cadre;
+      }
+
+      /* la paroi vue par un rayon ; simple : pour le reflet du sol (sans écrans ni grille) */
+      vec3 paroi(vec3 o, vec3 d, vec2 uv, bool simple) {
+        float t = kzTouche(o, d);
+        vec3 p = o + d * t;
+        vec2 q = kzParoi(p);
+        float aa = t * kzPixAng * (simple ? 3.0 : 1.0);
+        float W = KZ_DALLE;
+        float col = floor(q.x / W);
+        float hc = kzH21(vec2(col, 7.0));
+        float H = hc < 0.3 ? W * 0.5 : W;
+        float off = hc * W;
+        float row = floor((q.y + off) / H);
+        vec2 f = vec2(fract(q.x / W), fract((q.y + off) / H));
+        float hs = kzH21(vec2(col, row)), hs2 = kzH21(vec2(row, col) + 3.1);
+        vec2 e = min(f, 1.0 - f) * vec2(W, H);
+        float bord = min(e.x, e.y);
+        float joint = smoothstep(0.03, 0.03 + aa * 1.5, bord);
+        float filet = 1.0 - smoothstep(0.0, aa * 1.2 + 0.004, abs(bord - 0.06));
+
+        vec3 c = vec3(0.004, 0.004, 0.006) + kzTeinte * (0.002 + 0.016 * hs * hs);
+        float bande = exp(-kzC2((q.y - 2.8) / 1.2)) * (0.4 + 0.6 * hs2);
+        c += vec3(0.55, 0.55, 0.66) * (bande * 0.022 + pow(clamp(1.0 - f.y, 0.0, 1.0), 5.0) * 0.016);
+        float mm = kzMot(q, kzMotA.x, kzMotA.y, KZ_LETTRE, KZ_LIGNE_Y, kzMotDecal, 5.0);
+        if (kzMotMix > 0.0) {
+          float mb = kzMot(q, kzMotA.z, kzMotA.w, KZ_LETTRE, KZ_LIGNE_Y, kzMotDecal, 5.0);
+          float yy = (q.y - KZ_LIGNE_Y) / KZ_LETTRE + 0.5;
+          float wipe = smoothstep(-0.06, 0.06, kzMotMix * 1.25 - 0.12 - yy + (kzH21(vec2(floor(q.y * 3.0), 1.0)) - 0.5) * 0.12);
+          mm = mix(mm, mb, wipe);
+        }
+        if (uArc > 0.001) c += arcLumiere(q, aa) * uArc * (1.0 - 0.75 * mm * kzMotForce);
+        if (!simple && uEcrans > 0.001 && hs > 0.84) c += ecran(f, hs, hs2, aa / W) * uEcrans * 0.09 * (1.0 - 0.8 * mm * kzMotForce);
+        else c += kzTeinte * step(0.9, hs) * (0.03 + 0.02 * sin(kzTps * 0.7 + hs2 * 30.0));
+        float g1 = simple ? 0.0 : kzMot(q, 0.0, 4.3, 1.3, 2.9, -kzMotDecal * 0.6 + 3.0, 1.6);
+        vec2 gp = fract(q * 20.0) - 0.5;
+        float pt = smoothstep(0.45, 0.15, length(gp));
+        float vis = 1.0 - smoothstep(0.22, 0.4, aa * 20.0);
+        float led = mix(0.9, 0.55 + 0.6 * pt, vis);
+        vec3 encre = mix(vec3(0.62, 0.61, 0.7), kzTeinte * 1.1 + 0.2, 0.2);
+        float lettre = mm * kzMotForce + g1 * kzMotForce * 0.1;
+        c += encre * lettre * led * (0.85 + 0.3 * hs2);
+        if (!simple) {
+          vec2 gg = abs(fract(q / (W / 6.0)) - 0.5) * (W / 6.0);
+          float grille = 1.0 - smoothstep(0.0, aa * 1.1 + 0.002, min(gg.x, gg.y));
+          c += vec3(0.6, 0.62, 0.72) * grille * 0.022;
+          c += vec3(0.55, 0.55, 0.65) * filet * 0.045;
+        }
+        vec2 dl = (uv - uLueur) * vec2(kzRes.x / kzRes.y, 1.0);
+        c += kzTeinte * exp(-dot(dl, dl) * 4.0) * 0.1 * uLueurForce;
+        c *= joint;
+        c *= 0.08 + 0.92 * smoothstep(6.5, 1.6, abs(p.y - 0.3));
+        if (kzProf > 0.001) {
+          float td = clamp(log(t / 2.5) / log(30.0 / 2.5) + 0.04 * sin(kzTps * 0.23 + uv.y * 3.0), 0.0, 1.0);
+          float onde = fract(kzTps / 9.0) * 1.4 - 0.2;
+          float L = dot(c, vec3(0.2126, 0.7152, 0.0722));
+          vec3 cp = kzRampe(td) * (0.03 + 2.6 * L) * mix(1.0, 0.5, smoothstep(0.72, 1.0, td));
+          cp += vec3(1.0, 0.92, 0.78) * exp(-kzC2((td - onde) / 0.03)) * 0.12 * joint;
+          cp += vec3(0.55, 0.04, 0.22) * 0.12 * pow(1.0 - uv.y, 3.0);
+          c = mix(c, cp, kzProf);
+        }
+        return c;
+      }
+
+      /* les rayons de lumière, en éventail depuis un point au-dessus de l'écran */
+      float rayons(vec2 uv) {
+        float asp = kzRes.x / kzRes.y;
+        vec2 src = vec2(0.5 + 0.12 * sin(kzTps * 0.031), 1.3);
+        vec2 d = (uv - src) * vec2(asp, 1.0);
+        float a = atan(d.x, -d.y);
+        float r = length(d);
+        float n = kzTB(vec2(a * 0.9 + kzTps * 0.004, kzTps * 0.003)).r * 0.6 + kzTB(vec2(a * 2.3 - kzTps * 0.007, 0.37)).g * 0.4;
+        float ry = smoothstep(0.5, 0.82, n);
+        ry *= smoothstep(1.1, 0.25, abs(a));
+        ry *= smoothstep(0.15, 0.6, r) * exp(-max(r - 0.6, 0.0) * 1.1);
+        return ry;
+      }
+
+      vec3 salle(vec3 o, vec3 d, vec2 uv) {
+        // un seul appel à paroi() (le nuanceur reste court) : soit la paroi vue en direct, soit son reflet dans le sol
+        float tParoi = kzTouche(o, d);
+        float tSol = d.y < -0.001 ? (uSolY - o.y) / d.y : 1e9;
+        bool sol = uSol > 0.001 && tSol < tParoi;
+        vec3 oo = o, dd = d;
+        vec4 nb = vec4(0.5);
+        float fres = 1.0, joint = 0.0;
+        if (sol) {
+          vec3 p = o + d * tSol;
+          vec2 sf = abs(fract(p.xz / 2.4) - 0.5);
+          float aa = tSol * kzPixAng / 2.4;
+          joint = smoothstep(0.5 - aa * 1.5 - 0.004, 0.5 - 0.004, max(sf.x, sf.y));
+          nb = kzTB(p.xz * 0.21 + vec2(0.0, kzTps * 0.01));
+          dd = vec3(d.x, -d.y, d.z);
+          dd.xz += (nb.rg - 0.5) * 0.035;
+          dd = normalize(dd);
+          oo = p;
+          fres = 0.08 + 0.55 * pow(1.0 - clamp(-d.y, 0.0, 1.0), 5.0);
+        }
+        vec3 c = paroi(oo, dd, uv, sol);
+        if (sol) {
+          vec3 base = vec3(0.006, 0.006, 0.008) + kzTeinte * 0.004 * nb.b;
+          c = base + c * fres * (1.6 - 0.6 * nb.a);
+          vec2 dl = (uv - uLueur) * vec2(kzRes.x / kzRes.y * 1.8, 1.0);
+          c += kzTeinte * exp(-dot(dl, dl) * 3.0) * 0.12 * uLueurForce;
+          c *= 1.0 - 0.6 * joint;
+          c *= smoothstep(26.0, 6.0, tSol) * uSol;
+        }
+        if (uRayons > 0.001) {
+          float ry = rayons(uv);
+          c += mix(vec3(0.75, 0.72, 1.0), kzTeinte * 1.5 + 0.2, 0.4) * ry * 0.075 * uRayons;
+        }
+        return c;
+      }
+
+      void main() {
+        vec2 fc = gl_FragCoord.xy;
+        vec2 uv = fc / kzRes;
+        if (kzClair(fc) > 0.5) { gl_FragColor = vec4(1.0); return; }
+        ${DIRECTION}
+        vec3 col = vec3(0.0);
+        if (kzSalleForce > 0.001) col = salle(uCamPos, d, uv) * kzSalleForce;
+        vec2 dh = (uv - vec2(0.86, 1.02)) * vec2(kzRes.x / kzRes.y, 1.0);
+        col += vec3(0.07, 0.03, 0.2) * exp(-dot(dh, dh) * 2.2) * uHaloOuv;
+        gl_FragColor = vec4(col, 1.0);
+      }`,
+  });
+  const mc = new THREE.ShaderMaterial({
+    uniforms: u, depthWrite: false, depthTest: false, fog: false, defines,
+    vertexShader: SOMMET,
+    fragmentShader: TETE + /* glsl */ `
+      /* v16 : LE MONDE VIOLET (« Osez rêver »). La profondeur du passage (indigo au loin, violet, magenta, rose
+         tout près) devient une MATIÈRE LIQUIDE qui coule : un champ de hauteur lisse, deux fois déformé (bruit lu
+         dans la texture, petites octaves effacées), peint avec la gamme violette du passage ; ses pentes vernies
+         d'un film mince (l'irisation), ses crêtes qui accrochent la lumière, quelques filets irisés. Elle coule
+         lentement et monte avec la page. Les couleurs sont pensées À L'ÉCRAN (kzEcran les ramène avant le rendu
+         filmique) : exactement la gamme des tranches. Côté textes (à gauche en paysage), la matière reste dans
+         l'indigo et le violet : le texte clair de la page y garde un contraste solide. */
+      /* bruit de gradient lisse (raccords quintiques) : la matière garde des pentes continues, donc un vernis net */
+      vec2 kzGrad(vec2 p) { p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3))); return -1.0 + 2.0 * fract(sin(p) * 43758.5453); }
+      float kzBG(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        vec2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+        return mix(mix(dot(kzGrad(i), f), dot(kzGrad(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
+                   mix(dot(kzGrad(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)), dot(kzGrad(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x), u.y);
+      }
+      float kzBG2(vec2 p) { return kzBG(p) + 0.45 * kzBG(p * 2.03 + 17.1); }
+      /* le champ de hauteur de la matière (0 à 1) : deux déformations successives, lentes */
+      float champ(vec2 q, float t) {
+        vec2 w1 = vec2(kzBG2(q * 1.1 + vec2(t * 0.05, -t * 0.07)), kzBG2(q * 1.1 + vec2(5.2 - t * 0.06, 1.3 + t * 0.04)));
+        vec2 q2 = q + w1 * 0.75;
+        vec2 w2 = vec2(kzBG(q2 * 1.7 + vec2(-t * 0.08, t * 0.05) + 9.0), kzBG(q2 * 1.7 + vec2(t * 0.06, -t * 0.09) + 3.7));
+        float h = kzBG2(q2 * 1.2 + w2 * 0.6 + vec2(0.0, t * 0.04));
+        return clamp(h * 1.25 + 0.5, 0.0, 1.0);
+      }
+      vec3 violet(vec2 fc, vec2 uv) {
+        float asp = kzRes.x / kzRes.y;
+        vec2 p = vec2((uv.x - 0.5) * asp, uv.y - 0.5);
+        float t = kzTps * uLent;
+        // la matière : des coulées étirées le long d'une diagonale (comme la vague d'ALCHE), qui montent avec la page
+        vec2 ax = asp < 1.0 ? vec2(0.34, 0.94) : vec2(0.5, 0.866);
+        vec2 r2 = vec2(dot(p, ax), dot(p, vec2(ax.y, -ax.x)));
+        vec2 q = r2 * vec2(0.75, 1.9) + vec2(-(uDefile - 4.0) * 0.5, -(uDefile - 4.0) * 0.4);
+        vec2 wq = q + vec2(kzBG2(q * 0.7 + vec2(t * 0.045, 0.0)), kzBG2(q * 0.7 + vec2(4.1, -t * 0.04))) * 0.85;
+        float h = kzBG2(wq * vec2(0.6, 1.0) + vec2(0.0, t * 0.035)) * 1.3 + 0.5;
+        // où la matière s'allume : à droite et en bas en paysage (les textes sont à gauche) ; au téléphone, en haut et en bas
+        float zone = uTexteG > 0.5
+          ? smoothstep(0.22, 0.92, uv.x) * (0.7 + 0.3 * smoothstep(0.9, 0.2, uv.y))
+          : 0.25 + 0.4 * smoothstep(0.22, 0.48, abs(uv.y - 0.5));
+        // des bandes : indigo, violet, magenta, rose, puis retour, qui glissent dans la coulée
+        float tri = abs(fract(h * 0.85 + 0.1) * 2.0 - 1.0);
+        float dv = clamp(0.05 + tri * mix(0.45, 1.0, zone), 0.0, 1.0);
+        vec3 c = kzViolet(dv) * (0.52 + 0.5 * dv) + vec3(0.1, 0.02, 0.26) * (1.0 - dv) * 0.3;
+        // le vernis : un film mince irisé sur les pentes, des reflets sur les crêtes
+        vec2 g = vec2(dFdx(h), dFdy(h)) * kzRes.y * 0.12;
+        vec3 n = normalize(vec3(-g, 1.0));
+        float pente = clamp(length(g), 0.0, 1.0);
+        vec3 film = kzHolo(h * 0.9 + p.x * 0.15 - t * 0.015 + n.x * 0.6 + n.y * 0.3);
+        c = mix(c, film * (0.32 + 0.55 * dv), smoothstep(0.12, 0.85, pente) * 0.6 * (0.2 + 0.8 * zone));
+        vec3 rf = reflect(vec3(0.0, 0.0, -1.0), n);
+        c += vec3(1.0, 0.82, 0.98) * pow(max(dot(rf, normalize(vec3(-0.3, 0.5, 0.8))), 0.0), 14.0) * 0.55 * zone;
+        // un remous sombre qui s'enroule dans la coulée
+        float rr = fract(h * 0.85 + 0.62);
+        c = mix(c, vec3(0.05, 0.02, 0.16), smoothstep(0.4, 0.5, rr) * smoothstep(0.6, 0.5, rr) * 0.55);
+        // la profondeur : une lueur rose au loin, en bas à droite (en bas au téléphone), qui respire
+        vec2 lc = uTexteG > 0.5 ? vec2(0.36 * asp, -0.38) : vec2(0.1, -0.44);
+        vec2 dl = p - lc - vec2(0.04 * sin(t * 0.13), 0.03 * cos(t * 0.11));
+        c += vec3(0.85, 0.22, 0.72) * exp(-dot(dl, dl) * 3.0) * (0.34 + 0.07 * sin(t * 0.4));
+        // le balayage lumineux du passage, très doux
+        float bal = fract(t * 0.04);
+        c += vec3(0.75, 0.55, 1.0) * exp(-kzC2((p.y + p.x * 0.35 - (0.9 - bal * 2.2)) / 0.06)) * 0.07;
+        // côté textes : l'indigo profond
+        c *= uTexteG > 0.5 ? mix(1.0, 0.62, smoothstep(0.62, 0.1, uv.x)) : 0.82;
+        // la trame des tranches
+        c *= 0.96 + 0.04 * sin(fc.y * 1.5708);
+        // les croix d'ALCHE, en lavande
+        float px = max(kzRes.y / 900.0, 0.75);
+        float grand = 26.0 * px * 7.0;
+        vec2 hh = abs(fract((fc - kzRes * 0.5) / grand + 0.5) - 0.5) * grand;
+        float croix = (1.0 - smoothstep(0.5 * px, 1.3 * px + 0.5, min(hh.x, hh.y))) * step(max(hh.x, hh.y), 8.0 * px);
+        c = mix(c, vec3(0.78, 0.68, 1.0), croix * 0.35);
+        return c;
+      }
+
+      /* v16 : la COULÉE irisée (réf. ALCHE, la vague liquide de la vidéo) : une peinture liquide holographique, vernie,
+         à grands remous lisses ; un remous sombre s'y enroule, des reflets blancs glissent sur les crêtes ; son bord
+         se défait en grain (dans main) */
+      vec3 coulee(vec2 uv, float d, float hw) {
+        float asp = kzRes.x / kzRes.y;
+        vec2 p = vec2((uv.x - 0.5) * asp, uv.y - 0.5);
+        vec2 ax = asp < 1.0 ? vec2(0.34, 0.94) : vec2(0.5, 0.866);
+        float le = dot(p, ax);
+        float t = kzTps * uLent;
+        vec2 q = vec2(le * 0.9, d * 2.2 - kzBlanc * 2.0);
+        vec2 wq = q + vec2(kzBG2(q * 0.8 + vec2(t * 0.06, 0.0)), kzBG2(q * 0.8 + vec2(4.1, -t * 0.05))) * 0.9;
+        float h = kzBG2(wq * vec2(0.7, 1.1) + vec2(0.0, t * 0.05)) * 1.3 + 0.5;
+        vec3 c = kzHolo(h * 0.75 + d * 0.5 + le * 0.1 + t * 0.02);
+        // un remous violet s'enroule dans la peinture (jamais sombre : l'encre foncée de la page reste lisible dessus)
+        float r = fract(h * 0.9 + 0.15);
+        c = mix(c, vec3(0.5, 0.36, 0.95), smoothstep(0.36, 0.5, r) * smoothstep(0.64, 0.5, r) * 0.6);
+        c = max(c, vec3(0.32));
+        // le vernis : des reflets blancs sur les crêtes
+        vec2 g = vec2(dFdx(h), dFdy(h)) * kzRes.y * 0.12;
+        vec3 n = normalize(vec3(-g, 1.0));
+        c += vec3(1.0) * pow(max(dot(reflect(vec3(0.0, 0.0, -1.0), n), normalize(vec3(-0.3, 0.5, 0.8))), 0.0), 14.0) * 0.55;
+        // près du bord, la peinture s'éclaircit en un liseré lumineux
+        c = mix(c, vec3(1.0, 0.98, 1.0), smoothstep(0.03, 0.0, hw - abs(d)) * 0.3);
+        return c;
+      }
+
+      /* le monde clair : un studio de porcelaine, caustiques irisées, taches de couleur, grille et croix */
+      /* v16 : le grand sceau de Kazura dessiné en RELIEF dans le blanc (comme le A d'ALCHE derrière VISION) :
+         l'anneau et les trois folioles en distance signée, un trait blanc et son ombre fine. Il se trace en tournant
+         (uSceauBlanc de 0 à 1), après la vague. */
+      float vesique(vec2 p, float r, float dd) {
+        p = abs(p);
+        float b = sqrt(max(r * r - dd * dd, 0.0));
+        return ((p.y - b) * dd > p.x * b) ? length(p - vec2(0.0, b)) : length(p - vec2(-dd, 0.0)) - r;
+      }
+      float sceauDS(vec2 p, float S) {
+        float dmin = abs(length(p) - S);
+        float h = 0.41 * S, w = 0.15 * S;
+        float r = (h * h + w * w) / (2.0 * w), dd = r - w;
+        for (int k = 0; k < 3; k++) {
+          float a = float(k) * 2.0943951;
+          vec2 q = mat2(cos(a), -sin(a), sin(a), cos(a)) * p;
+          dmin = min(dmin, abs(vesique(q - vec2(0.0, 0.5 * S), r, dd)));
+        }
+        return dmin;
+      }
+      vec3 sceauBlanc(vec3 c, vec2 fc, vec2 uv) {
+        float asp = kzRes.x / kzRes.y;
+        float S = asp < 1.0 ? 0.42 * asp : 0.4;
+        vec2 ctr = asp < 1.0 ? vec2(0.5 * asp, 0.56) : vec2(0.56 * asp, 0.5);
+        vec2 p = vec2(uv.x * asp, uv.y) - ctr;
+        float px = 1.0 / kzRes.y;
+        // il se trace en tournant depuis le haut, dans le sens des aiguilles d'une montre
+        float ang = fract(atan(p.x, p.y) / 6.2831853 + 1.0);
+        float trace = smoothstep(ang - 0.02, ang + 0.02, uSceauBlanc * 1.04);
+        float dl = sceauDS(p, S);
+        float dO = sceauDS(p - vec2(1.6, -1.6) * px, S);
+        float trait = 1.0 - smoothstep(0.6 * px, 1.8 * px, dl);
+        float ombre = 1.0 - smoothstep(0.6 * px, 2.2 * px, dO);
+        c = mix(c, c * 0.78, ombre * (1.0 - trait) * 0.85 * trace);
+        c = mix(c, vec3(1.16, 1.17, 1.2), trait * 0.9 * trace);
+        // la tête du tracé luit un instant
+        float tete = exp(-kzC2((ang - uSceauBlanc) / 0.012)) * step(uSceauBlanc, 0.999) * step(0.001, uSceauBlanc);
+        c += kzHolo(ang * 2.0 + kzTps * 0.1) * tete * (1.0 - smoothstep(0.0, 5.0 * px, dl)) * 0.6;
+        return c;
+      }
+      vec3 clair(vec2 fc, vec2 uv, vec3 d) {
+        float asp = kzRes.x / kzRes.y;
+        vec2 dv = (uv - vec2(0.55, 0.6)) * vec2(asp, 1.0);
+        float sol = smoothstep(0.02, -0.28, d.y);
+        vec3 paroiC = mix(vec3(1.07, 1.10, 1.14), vec3(0.86, 0.88, 0.95), smoothstep(0.1, 1.2, length(dv)));
+        vec3 solC = mix(vec3(1.12, 1.10, 1.06), vec3(0.94, 0.92, 0.9), smoothstep(-0.2, -0.9, d.y));
+        vec3 c = mix(paroiC, solC, sol);
+        c *= 1.0 - 0.05 * exp(-kzC2((d.y + 0.05) / 0.05));
+        if (uClairRiche > 0.001) {
+          vec2 q = vec2(uv.x * asp, uv.y);
+          float t = kzTps;
+          vec2 c1 = vec2(asp * (0.78 + 0.05 * sin(t * 0.07)), 0.78), c2 = vec2(asp * (0.62 + 0.06 * cos(t * 0.05)), 0.25), c3 = vec2(asp * (0.3 + 0.04 * sin(t * 0.06 + 2.0)), 0.92);
+          vec3 tache = vec3(1.0, 0.55, 0.8) * exp(-dot(q - c1, q - c1) * 5.0)
+                     + vec3(0.45, 0.85, 1.0) * exp(-dot(q - c2, q - c2) * 4.0)
+                     + vec3(0.75, 0.6, 1.0) * exp(-dot(q - c3, q - c3) * 6.0);
+          c = mix(c, c * (0.88 + 0.32 * tache), 0.9 * uClairRiche);
+          vec2 cp = q * (1.2 + sol * 0.8) + vec2(0.0, sol * 3.0);
+          float n1 = kzTB(cp * 0.55 + vec2(t * 0.011, t * 0.006)).r;
+          float n2 = kzTB(cp * 0.7 - vec2(t * 0.008, -t * 0.01) + 0.37).g;
+          float fil = pow(max(1.0 - abs(n1 - n2) * 2.0, 0.0), 10.0);
+          float masque = smoothstep(0.35, 0.75, kzTB(q * 0.18 + t * 0.002).b);
+          vec3 iris = kzHolo(n1 * 1.5 + q.x * 0.2 + t * 0.02);
+          c += iris * fil * masque * (0.09 + 0.1 * sol) * uClairRiche;
+        }
+        float px = max(kzRes.y / 900.0, 0.75);
+        float pas = 26.0 * px;
+        vec2 g = abs(fract(fc / pas + 0.5) - 0.5) * pas;
+        float fine = 1.0 - smoothstep(0.0, 1.0, min(g.x, g.y));
+        c *= 1.0 - 0.04 * fine * (1.0 - sol);
+        float grand = pas * 7.0;
+        vec2 h = abs(fract((fc - kzRes * 0.5) / grand + 0.5) - 0.5) * grand;
+        float croix = (1.0 - smoothstep(0.5 * px, 1.3 * px + 0.5, min(h.x, h.y))) * step(max(h.x, h.y), 8.0 * px);
+        c = mix(c, vec3(0.42, 0.45, 0.52), croix * 0.8 * (1.0 - sol * 0.7));
+        // le grand mot en contour fin, posé sur la paroi (comme VISION chez ALCHE)
+        if (uMotClair > 0.001) {
+          float hw = min(0.25, 0.92 * asp / uMotClairW);
+          vec2 q = vec2((uv.x - 0.5) * asp, uv.y - (asp < 1.0 ? 0.8 : 0.7));
+          float xl = q.x / hw + uMotClairW * 0.5;
+          float yl = q.y / hw + 0.5;
+          if (xl > 0.0 && xl < uMotClairW && yl > 0.0 && yl < 1.0) {
+            float u = 0.5 + (xl - uMotClairW * 0.5) / 8.0;
+            float v = 1.0 - (uMotClairL + 1.0 - yl) / kzLignes;
+            float m = texture2D(kzMots, vec2(u, v)).r;
+            float ligne = 1.0 - smoothstep(0.0, 1.3, abs(m - 0.5) / max(fwidth(m), 1e-4));
+            c = mix(c, vec3(0.5, 0.53, 0.6), ligne * 0.7 * uMotClair);
+            c = mix(c, c * vec3(0.985, 0.99, 1.0), m * 0.5 * uMotClair);
+          }
+        }
+        if (uSceauBlanc > 0.001) c = sceauBlanc(c, fc, uv);
+        return c * uClairTon;
+      }
+
+      void main() {
+        vec2 fc = gl_FragCoord.xy;
+        if (kzClair(fc) < 0.5) discard;
+        vec2 uv = fc / kzRes;
+        vec3 col;
+        if (kzBlanc <= 0.0) { col = kzEcran(violet(fc, uv)); }
+        else {
+          ${DIRECTION}
+          if (kzBlanc >= 1.0) { col = clair(fc, uv, d); }
+          else {
+            // la coulée : elle couvre le violet en s'élargissant, puis se retire en laissant le blanc
+            vec2 v = kzVague(uv);
+            col = kzBlanc < 0.5 ? kzEcran(violet(fc, uv)) : clair(fc, uv, d);
+            float bordC = 0.05 * smoothstep(0.0, 0.3, v.y);
+            float couv = smoothstep(v.y, v.y - bordC, abs(v.x));
+            // le bord se défait en grain, comme une peinture projetée
+            float grain = step(kzHm(floor(fc * 0.75) + floor(kzTps * 12.0)), couv);
+            vec3 cc = kzEcran(coulee(uv, v.x, v.y));
+            // un reflet coloré sur le monde qu'elle touche, puis la peinture elle-même
+            col = mix(col, col * 0.6 + cc * 0.55, smoothstep(v.y + 0.06, v.y, abs(v.x)) * 0.5);
+            col = mix(col, cc, max(step(1.0, couv), grain));
+          }
+        }
+        gl_FragColor = vec4(col, 1.0);
+      }`,
+  });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
+  const mesh = new THREE.Mesh(g, m);
+  mesh.frustumCulled = false;
+  mesh.renderOrder = -100;
+  const meshClair = new THREE.Mesh(g, mc);
+  meshClair.frustumCulled = false;
+  meshClair.renderOrder = -99;
+  return {
+    mesh, meshClair, u,
+    /* decalY : la descente de la caméra (déroulé) ; la salle est vue depuis sa propre hauteur */
+    maj(camera, decalY = 0) {
+      u.uInvProj.value.copy(camera.projectionMatrixInverse);
+      u.uCamMonde.value.copy(camera.matrixWorld);
+      u.uCamPos.value.setFromMatrixPosition(camera.matrixWorld);
+      u.uCamPos.value.y -= decalY;
+    },
+  };
+}
