@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06080d">
+<title>Le domaine Kazura · une vitrine imaginaire en 3D</title>
+<meta name="description" content="Une expérience Kazura : le site imaginaire d'un domaine viticole alsacien, en 3D calculée en direct. Le défilement fait visiter le coteau, la grappe, le château et la bouteille.">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.170.0/+esm" crossorigin>
+<link rel="preload" href="../../polices/newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../polices/newsreader-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="domaine.css">
+</head>
+<body class="attente">
+
+<!-- La scène : un seul monde en 3D, fixe derrière tout le reste ; le défilement y promène la caméra. -->
+<div id="scene" class="dk-scene">
+  <div class="dk-affiche" aria-hidden="true">
+    <img src="img/chapitre-1.webp" alt="" decoding="async" data-ch="0">
+    <img alt="" decoding="async" data-src="img/chapitre-2.webp" data-ch="1">
+    <img alt="" decoding="async" data-src="img/chapitre-3.webp" data-ch="2">
+    <img alt="" decoding="async" data-src="img/chapitre-4.webp" data-ch="3" style="object-position: 70% 50%">
+    <img alt="" decoding="async" data-src="img/chapitre-5.webp" data-ch="4">
+    <img alt="" decoding="async" data-src="img/chapitre-6.webp" data-ch="5" style="object-position: 63% 50%">
+    <img alt="" decoding="async" data-src="img/chapitre-7.webp" data-ch="6">
+  </div>
+</div>
+<div class="dk-voile" aria-hidden="true"></div>
+
+<!-- Le chargement -->
+<div class="dk-chargement" role="status" aria-live="polite">
+  <p class="dk-chargement-marque">Domaine Kazura</p>
+  <p class="dk-chargement-texte"><span class="dk-point"></span><span class="dk-chargement-mot">Le domaine se prépare</span></p>
+  <span class="dk-chargement-trait" aria-hidden="true"><i></i></span>
+</div>
+
+<!-- Les étiquettes ancrées dans le paysage (traits fins) -->
+<svg class="dk-traits" aria-hidden="true"></svg>
+<div class="dk-etiquettes" aria-hidden="true">
+  <p class="dk-et" data-ancre="chateau" data-ch="0" data-dx="54" data-dy="-46"><b>Le château</b><span>Grès rose des Vosges</span></p>
+  <p class="dk-et" data-ancre="coteau" data-ch="0" data-dx="-70" data-dy="-58" data-g><b>Le coteau</b><span>Exposé au levant</span></p>
+  <p class="dk-et" data-ancre="coquelicot" data-ch="1" data-dx="48" data-dy="-52"><b>Coquelicot</b><span>Papaver rhoeas</span></p>
+  <p class="dk-et" data-ancre="bleuet" data-ch="1" data-dx="60" data-dy="-90"><b>Bleuet</b><span>Centaurea cyanus</span></p>
+  <p class="dk-et" data-ancre="marguerite" data-ch="1" data-dx="-58" data-dy="-70" data-g><b>Marguerite</b><span>Leucanthemum</span></p>
+  <p class="dk-et" data-ancre="piquet" data-ch="2" data-dx="-60" data-dy="-44" data-g><b>Piquet de tête</b><span>Bois d'acacia</span></p>
+  <p class="dk-et" data-ancre="rang" data-ch="2" data-dx="-56" data-dy="-60" data-g><b>Riesling</b><span>Palissage haut</span></p>
+  <p class="dk-et" data-ancre="allee" data-ch="2" data-dx="64" data-dy="-36"><b>Allée enherbée</b><span>2,50 m entre les rangs</span></p>
+  <p class="dk-et" data-ancre="grain" data-ch="3" data-dx="70" data-dy="40"><b>La pruine</b><span>Une poudre qui protège la peau</span></p>
+  <p class="dk-et" data-ancre="rafle" data-ch="3" data-dx="-74" data-dy="-48" data-g><b>La rafle</b><span>Le squelette de la grappe</span></p>
+  <p class="dk-et" data-ancre="feuille" data-ch="3" data-dx="64" data-dy="-54"><b>La feuille</b><span>Cinq lobes, à contre-jour</span></p>
+  <p class="dk-et" data-ancre="donjon" data-ch="4" data-dx="70" data-dy="-50"><b>Le donjon</b><span>Toit pointu, quatre échauguettes</span></p>
+  <p class="dk-et" data-ancre="bastion" data-ch="4" data-dx="-64" data-dy="-56" data-g><b>Le grand bastion</b><span>Tour ronde coiffée d'un cône</span></p>
+  <p class="dk-et" data-ancre="logis" data-ch="4" data-dx="-40" data-dy="70" data-g><b>Le logis</b><span>Tuiles vernissées</span></p>
+  <p class="dk-et" data-ancre="capsule" data-ch="5" data-dx="72" data-dy="-30"><b>La capsule</b><span>Jade, sceau doré</span></p>
+  <p class="dk-et" data-ancre="etiquette" data-ch="5" data-dx="86" data-dy="40"><b>L'étiquette</b><span>Papier de coton, dorure à chaud</span></p>
+  <p class="dk-et" data-ancre="vin" data-ch="5" data-dx="70" data-dy="-70"><b>Le vin</b><span>Or pâle, reflets verts</span></p>
+  <p class="dk-et" data-ancre="liane" data-ch="6" data-dx="62" data-dy="-58"><b>La liane de Kazura</b><span>Elle ne s'éveille que la nuit</span></p>
+</div>
+
+<!-- L'en-tête -->
+<header class="dk-tete">
+  <div class="dk-marque">
+    <p class="dk-nom">Domaine Kazura</p>
+    <p class="dk-mention">Vitrine imaginaire, créée par Kazura</p>
+  </div>
+  <a class="dk-retour" href="../../index.html#experiences">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    <span>Retour au site Kazura</span>
+  </a>
+</header>
+
+<!-- Le sommaire des chapitres -->
+<nav class="dk-sommaire" aria-label="Chapitres de la visite">
+  <ol>
+    <li><a href="#ch-1" data-aller="0"><i>01</i><span>L'arrivée</span></a></li>
+    <li><a href="#ch-2" data-aller="1"><i>02</i><span>Le pré</span></a></li>
+    <li><a href="#ch-3" data-aller="2"><i>03</i><span>Les rangs</span></a></li>
+    <li><a href="#ch-4" data-aller="3"><i>04</i><span>La grappe</span></a></li>
+    <li><a href="#ch-5" data-aller="4"><i>05</i><span>Le château</span></a></li>
+    <li><a href="#ch-6" data-aller="5"><i>06</i><span>La bouteille</span></a></li>
+    <li><a href="#ch-7" data-aller="6"><i>07</i><span>La nuit</span></a></li>
+  </ol>
+</nav>
+
+<!-- Le récit : sept chapitres posés sur la 3D -->
+<main class="dk-recit">
+  <h1 class="dk-invisible">Le domaine Kazura, une visite en sept chapitres</h1>
+
+  <section class="dk-ch" id="ch-1" data-ch="0" data-cote="g" aria-labelledby="t-1">
+    <p class="dk-sur"><i>01 / 07</i> L'arrivée</p>
+    <h2 id="t-1" class="dk-titre dk-titre-grand">Au pied du château,<br><em>un coteau de riesling.</em></h2>
+    <p class="dk-texte">Un domaine alsacien imaginaire, dessiné et calculé en direct dans votre navigateur. Descendez : on vous fait visiter.</p>
+    <p class="dk-geste" data-icone="defiler">Faites défiler pour entrer dans le domaine</p>
+  </section>
+
+  <section class="dk-ch" id="ch-2" data-ch="1" data-cote="g" aria-labelledby="t-2">
+    <p class="dk-sur"><i>02 / 07</i> Le pré</p>
+    <h2 id="t-2" class="dk-titre">Devant les rangs,<br><em>on laisse fleurir.</em></h2>
+    <p class="dk-texte">Coquelicots, bleuets, marguerites : les herbes hautes gardent la terre vivante et fraîche. Elles s'écartent sous votre main.</p>
+    <p class="dk-geste" data-icone="main">Passez la main dans les herbes, touchez une fleur</p>
+  </section>
+
+  <section class="dk-ch" id="ch-3" data-ch="2" data-cote="d" aria-labelledby="t-3">
+    <p class="dk-sur"><i>03 / 07</i> Les rangs</p>
+    <h2 id="t-3" class="dk-titre">Vingt-cinq rangs,<br><em>une seule pente.</em></h2>
+    <p class="dk-texte">Des rangs bien espacés, pour que le soleil descende jusqu'au pied des ceps. Prenez l'heure en main : la lumière tourne sur le coteau.</p>
+    <p class="dk-geste" data-icone="heure">Réglez l'heure avec le curseur, en bas</p>
+  </section>
+
+  <section class="dk-ch" id="ch-4" data-ch="3" data-cote="g" aria-labelledby="t-4">
+    <p class="dk-sur"><i>04 / 07</i> La grappe</p>
+    <h2 id="t-4" class="dk-titre">La lumière<br><em>traverse les grains.</em></h2>
+    <p class="dk-texte">À contre-jour, chaque grain s'éclaire de l'intérieur. La pruine, cette fine poudre blanche, protège la peau jusqu'aux vendanges.</p>
+    <p class="dk-geste" data-icone="souris" data-tel="Glissez sur l'image : l'heure change la lumière">Bougez la souris : la caméra tourne autour de la grappe</p>
+  </section>
+
+  <section class="dk-ch" id="ch-5" data-ch="4" data-cote="g" aria-labelledby="t-5">
+    <p class="dk-sur"><i>05 / 07</i> Le château</p>
+    <h2 id="t-5" class="dk-titre">Là-haut,<br><em>le château veille.</em></h2>
+    <p class="dk-texte">Grand bastion, logis aux toits pentus, donjon carré : un château de grès rose inspiré du Haut-Koenigsbourg, posé sur son éperon au-dessus des vignes.</p>
+    <p class="dk-geste" data-icone="defiler">Continuez : on redescend vers le tonneau</p>
+  </section>
+
+  <section class="dk-ch" id="ch-6" data-ch="5" data-cote="g" aria-labelledby="t-6">
+    <p class="dk-sur"><i>06 / 07</i> La bouteille</p>
+    <h2 id="t-6" class="dk-titre">Trois Folioles,<br><em>riesling d'Alsace.</em></h2>
+    <p class="dk-texte">Une flûte élancée, un vin or pâle, une étiquette en papier de coton marquée à la dorure. Au domaine, on la débouche à l'heure dorée.</p>
+    <p class="dk-geste" data-icone="tourner">Faites glisser pour tourner la bouteille</p>
+  </section>
+
+  <section class="dk-ch" id="ch-7" data-ch="6" data-cote="g" aria-labelledby="t-7">
+    <p class="dk-sur"><i>07 / 07</i> La nuit</p>
+    <h2 id="t-7" class="dk-titre">Quand la nuit tombe,<br><em>le domaine s'allume.</em></h2>
+    <p class="dk-texte">Les lucioles montent du pré, la liane de Kazura s'éveille sur son piquet, le château s'éclaire. L'heure est à vous.</p>
+    <p class="dk-geste" data-icone="main">Réglez l'heure, touchez le pré pour lever des lucioles</p>
+  </section>
+
+  <section class="dk-fin" data-ch="7" aria-labelledby="t-fin">
+    <p class="dk-sur">Fin de la visite</p>
+    <h2 id="t-fin" class="dk-titre">Ce domaine est imaginaire.<br><em>Votre site peut être bien réel.</em></h2>
+    <p class="dk-texte">Cette vitrine imaginaire a été créée par Kazura pour montrer ce qu'un site peut raconter : un lieu, un savoir-faire, un produit, en une seule visite.</p>
+    <p class="dk-actions">
+      <a class="dk-bouton dk-bouton-plein" href="../../index.html#contact">Parler de votre projet</a>
+      <a class="dk-bouton" href="../../index.html#experiences">Retour au site Kazura</a>
+    </p>
+  </section>
+</main>
+
+<!-- Le bas : la consigne du moment et l'heure à la main -->
+<div class="dk-bas">
+  <p class="dk-consigne" aria-hidden="true"><span class="dk-consigne-icone"></span><span class="dk-consigne-texte"></span></p>
+  <div class="dk-temps" role="slider" tabindex="0" aria-label="L'heure du domaine, du jour à la nuit" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Jour">
+    <span class="dk-ic dk-ic-soleil" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></span>
+    <span class="dk-piste"><span class="dk-graduations"></span><span class="dk-rempli"></span><span class="dk-curseur"><span class="dk-lecture"><span class="dk-heure">15:00</span><span class="dk-moment">Jour</span></span></span></span>
+    <span class="dk-ic dk-ic-lune" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1z"/></svg></span>
+  </div>
+  <button class="dk-rendre" type="button" hidden>Rendre l'heure au récit</button>
+</div>
+
+<!-- Le décor technique, à la manière d'ALCHE -->
+<div class="dk-hud" aria-hidden="true">
+  <span class="dk-coin dk-hg"></span><span class="dk-coin dk-hd"></span><span class="dk-coin dk-bg"></span><span class="dk-coin dk-bd"></span>
+  <p class="dk-coord"><span class="dk-lat">48.2494° N</span><span class="dk-lon">7.3444° E</span><span class="dk-alt">ALT 180 M</span></p>
+  <div class="dk-jauge"><i></i></div>
+</div>
+
+<div class="dk-piste-defilement" aria-hidden="true"></div>
+
+<noscript><p class="dk-sansjs">Cette vitrine est un domaine en 3D calculé dans votre navigateur : elle a besoin de JavaScript. <a href="../../index.html#experiences">Retour au site Kazura</a></p></noscript>
+
+<script type="module" src="recit.js"></script>
+</body>
+</html>

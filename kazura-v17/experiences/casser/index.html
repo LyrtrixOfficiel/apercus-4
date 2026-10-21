@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cassez votre vieux site · Kazura</title>
+<meta name="description" content="Un jeu Kazura : cassez une vieille page web à coups de graines et de liane, regardez le sceau Kazura s'ouvrir sur un nouveau site.">
+<meta name="theme-color" content="#05070b">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../polices/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="casser.css">
+<script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js" defer></script>
+<script src="lila.js" defer></script>
+<script src="casser.js" defer></script>
+</head>
+<body class="phase-intro">
+
+<div id="nuit" aria-hidden="true"><img src="../../img/sceau.svg" alt="" width="100" height="100"></div>
+
+<canvas id="scene" tabindex="0" aria-label="Une vieille page web de 2007, celle de Lila Fougère, sophrologue imaginaire. Touchez-la pour y lancer des graines, glissez d'un coup pour la trancher d'un coup de liane. Au clavier : Entrée lance une graine, F donne un coup de liane."></canvas>
+
+<div class="hud" id="hud">
+  <a class="hud-retour" href="../../index.html#experiences"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sceau"/></svg><span>Kazura</span></a>
+  <p class="hud-titre">Cassez votre vieux site</p>
+  <div class="hud-ruine" role="group" aria-label="Avancement de la démolition">
+    <span class="hud-ruine-mot">Ruines</span>
+    <span class="hud-ruine-val" id="ruineVal">0 %</span>
+    <span class="hud-ruine-barre" aria-hidden="true"><i id="ruineBarre"></i></span>
+  </div>
+</div>
+
+<p id="bulle" class="bulle" aria-live="polite" hidden></p>
+
+<nav class="outils" id="outils" aria-label="Outils">
+  <button type="button" class="outil" data-outil="graine" aria-pressed="true">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="17" rx="7" ry="9.5" transform="rotate(25 16 17)" fill="currentColor"/><path d="M17 8c2-4 6-5 9-4-1 4-4 6-8 6" fill="currentColor" opacity=".7"/></svg>
+    <span>Graine</span>
+  </button>
+  <button type="button" class="outil" data-outil="bourgeon" aria-pressed="false">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="18" r="10" fill="currentColor"/><path d="M16 8c-3-5-1-7 0-7s3 2 0 7zM16 8c4-3 7-2 7-1s-2 3-7 1zM16 8c-4-3-7-2-7-1s2 3 7 1z" fill="currentColor" opacity=".75"/></svg>
+    <span>Gros bourgeon</span>
+  </button>
+  <button type="button" class="outil" id="seisme">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 17h5l3-8 4 15 4-19 4 14 3-6h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Tout casser</span>
+  </button>
+  <button type="button" class="outil outil-liane" id="pousser" hidden>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30C16 20 10 18 9 10M16 22c0-6 6-8 8-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="9" cy="9" r="3.4" fill="currentColor"/><circle cx="24" cy="8" r="3.4" fill="currentColor"/></svg>
+    <span>Faire pousser</span>
+  </button>
+</nav>
+
+<div class="dialogue" id="dialogue" role="dialog" aria-modal="true" aria-labelledby="dlgTitre" aria-describedby="dlgTexte">
+  <div class="dlg-titre"><span id="dlgTitre">Message système</span><button type="button" class="dlg-x" id="dlgX" aria-label="Fermer et commencer">×</button></div>
+  <div class="dlg-corps">
+    <svg class="dlg-icone" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 38 36H2Z" fill="#f5d000" stroke="#000" stroke-width="2" stroke-linejoin="round"/><path d="M18 14h4l-1 12h-2Zm0 15h4v4h-4Z" fill="#000"/></svg>
+    <div>
+      <p id="dlgTexte">Ce site a été mis en ligne en 2007. Il a bien travaillé : il mérite une retraite.</p>
+      <p class="dlg-question" id="dlgQuestion">Voulez-vous le casser ?</p>
+    </div>
+  </div>
+  <div class="dlg-boutons">
+    <button type="button" class="dlg-btn" id="dlgOui">Oui, le casser</button>
+    <button type="button" class="dlg-btn" id="dlgNon">Annuler</button>
+  </div>
+</div>
+
+<p class="sr" id="annonce" aria-live="polite"></p>
+
+<!-- Le monde du nouveau site (WebGL, voir lila.js) : derrière le site, et pendant l'éclosion, devant les ruines. -->
+<canvas id="monde" aria-hidden="true"></canvas>
+<div id="portail" aria-hidden="true"></div>
+
+<!-- Le nouveau site de Lila : un exemple imaginaire, fixe. -->
+<div id="neuf" class="l-avant" aria-hidden="true" data-encre="clair">
+  <header class="l-tete" id="lTete">
+    <a class="l-marque" href="#l-haut" aria-label="Lila Fougère, accueil">
+      <svg class="l-crosse" viewBox="0 0 48 48" aria-hidden="true"><path d="M19 45C20.5 37 17.5 31 18.4 24.2C19.6 15 27.6 9.4 34.2 12.6C39.6 15.3 39.4 23.2 34 25.4C29.8 27.1 25.6 24.2 26.4 20.2C27 17.2 30.8 16.6 31.6 19.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M18.8 33.5C14.6 32.6 11.8 29.6 11.4 25.6M19.2 28.6C15.4 27.2 13.8 24 14.4 20.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></svg>
+      <span class="l-marque-nom"><b>Lila Fougère</b><i>Sophrologue</i></span>
+    </a>
+    <nav class="l-nav" aria-label="Site de Lila (exemple)">
+      <a href="#l-seances">Séances</a><a href="#l-approche">Approche</a><a href="#l-infos">Le cabinet</a>
+      <a class="l-nav-rdv" href="#l-rdv"><span>Réserver</span></a>
+    </nav>
+  </header>
+
+  <section class="l-hero" id="l-haut" data-monde="haut" aria-labelledby="l-titre">
+    <p class="l-lieu l-entre"><span>Sophrologue</span><span class="l-lieu-sep" aria-hidden="true"></span><span>Saint-Glinglin-sur-Mer</span></p>
+    <h1 class="l-h1" id="l-titre" tabindex="-1">
+      <span class="l-ligne"><span>Reprendre</span></span>
+      <span class="l-ligne"><span>son <em class="l-respire-mot">souffle.</em></span></span>
+    </h1>
+    <div class="l-hero-bas">
+      <p class="l-chapo l-entre">Des séances douces pour mieux dormir, apaiser le stress et retrouver confiance. Au cabinet face à la mer, ou en visio depuis chez vous.</p>
+      <div class="l-actions l-entre">
+        <a class="l-btn l-aimant" href="#l-rdv"><span>Réserver une séance</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button type="button" class="l-respire l-aimant" id="respirer" aria-pressed="false" aria-describedby="guide">
+          <span class="l-respire-rond" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".35"/><circle class="l-respire-arc" cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" pathLength="100" transform="rotate(-90 20 20)"/></svg><i></i></span>
+          <span id="respirerTxt">Respirer avec moi</span>
+        </button>
+      </div>
+    </div>
+    <p class="l-guide" id="guide" aria-live="polite"></p>
+    <p class="l-dispo l-entre"><span class="l-dispo-point" aria-hidden="true"></span><span><b>Prochain créneau libre</b>mardi 3 novembre, 9 h 30</span></p>
+    <a class="l-descendre l-entre" href="#l-pourqui"><span>Descendre doucement</span><i aria-hidden="true"></i></a>
+  </section>
+
+  <section class="l-pourqui" id="l-pourqui" data-monde="plongee" aria-labelledby="grand">
+    <span class="l-surface" id="surfPlonge" aria-hidden="true"></span>
+    <p class="l-sur l-vue">Pour qui</p>
+    <h2 class="l-grand" id="grand">Je vous accompagne quand <em>le sommeil se dérobe,</em> quand <em>le stress déborde,</em> quand <em>un examen approche,</em> quand <em>une naissance se prépare,</em> ou simplement quand vous avez besoin <em>d'une pause.</em></h2>
+  </section>
+
+  <section class="l-seances" id="l-seances" data-monde="seances" aria-labelledby="l-s">
+    <div class="l-tete-section l-vue">
+      <p class="l-sur">Séances et tarifs</p>
+      <h2 class="l-h2" id="l-s">Trois façons de <em>souffler.</em></h2>
+    </div>
+    <ul class="l-bulles">
+      <li class="l-bulle l-vue"><div class="l-bulle-in">
+        <h3>La première séance</h3>
+        <p>On fait connaissance, vous me dites ce qui vous amène, et l'on pose un premier exercice, à refaire chez vous.</p>
+        <p class="l-meta">1 h · cabinet ou visio</p>
+        <div class="l-bulle-bas"><p class="l-prix">60&nbsp;€</p><a class="l-lien" href="#l-rdv" data-choix="decouverte">Réserver</a></div>
+      </div></li>
+      <li class="l-bulle l-vue"><div class="l-bulle-in">
+        <h3>Le suivi</h3>
+        <p>Des séances régulières, au rythme qui vous va, avec des exercices qui évoluent avec vous.</p>
+        <p class="l-meta">45 min · cabinet ou visio</p>
+        <div class="l-bulle-bas"><p class="l-prix">50&nbsp;€</p><a class="l-lien" href="#l-rdv" data-choix="suivi">Réserver</a></div>
+      </div></li>
+      <li class="l-bulle l-vue"><div class="l-bulle-in">
+        <h3>Le groupe du jeudi</h3>
+        <p>Six personnes au plus, un tapis, une couverture, et une heure pour souffler avant le week-end.</p>
+        <p class="l-meta">1 h · jeudi, 18 h 30</p>
+        <div class="l-bulle-bas"><p class="l-prix">18&nbsp;€</p><a class="l-lien" href="#l-rdv" data-choix="groupe">Réserver</a></div>
+      </div></li>
+    </ul>
+    <p class="l-remb l-vue">Beaucoup de mutuelles remboursent la sophrologie : une facture vous est remise à chaque séance.</p>
+  </section>
+
+  <section class="l-approche" id="l-approche" data-monde="profond" aria-labelledby="citation">
+    <p class="l-sur l-vue">Mon approche</p>
+    <h2 class="l-citation" id="citation">« Pas de grands discours : de la respiration, du corps, et des <em>mots simples.</em> »</h2>
+    <p class="l-signature l-vue">Lila, dans son cabinet du quai des Mouettes</p>
+    <ul class="l-piliers">
+      <li class="l-vue"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M5 17c7-6 14 6 21 0s11-3 17 0M5 25c7-6 14 6 21 0s11-3 17 0M5 33c5-4 10 4 15 0"/></svg><b>Le souffle</b><span>Respirer plus lentement pour calmer le cœur, puis la tête.</span></li>
+      <li class="l-vue"><svg viewBox="0 0 48 48" aria-hidden="true"><circle pathLength="1" cx="24" cy="11" r="5.5"/><path pathLength="1" d="M24 19c-7 7-7 19 0 26M24 19c7 7 7 19 0 26"/></svg><b>Le corps</b><span>Relâcher ce qui serre : la mâchoire, les épaules, le ventre.</span></li>
+      <li class="l-vue"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M19 45C20.5 37 17.5 31 18.4 24.2C19.6 15 27.6 9.4 34.2 12.6C39.6 15.3 39.4 23.2 34 25.4C29.8 27.1 25.6 24.2 26.4 20.2C27 17.2 30.8 16.6 31.6 19.2"/></svg><b>Des outils à vous</b><span>Trois exercices courts, à refaire seul, chez vous ou au bureau.</span></li>
+    </ul>
+  </section>
+
+  <section class="l-rdv" id="l-rdv" data-monde="aube" aria-labelledby="l-r">
+    <span class="l-surface" id="surfRemonte" aria-hidden="true"></span>
+    <div class="l-rdv-tete l-vue">
+      <p class="l-sur">Réservation en ligne</p>
+      <h2 class="l-h2" id="l-r">Choisissez votre <em>moment.</em></h2>
+      <p class="l-rdv-intro">Les créneaux libres de la semaine, confirmés tout de suite, avec un rappel la veille. Plus besoin d'attendre le répondeur.</p>
+      <ul class="l-rdv-plus"><li>Confirmation immédiate</li><li>Rappel la veille</li><li>Annulation libre jusqu'à 24 h avant</li></ul>
+    </div>
+    <div class="l-resa l-vue" id="resa">
+      <div class="l-resa-choix">
+        <div class="l-pas">
+          <p class="l-pas-titre" id="l-t-type">Votre séance</p>
+          <div class="l-types" role="group" aria-labelledby="l-t-type" id="types">
+            <span class="l-types-curseur" aria-hidden="true"></span>
+            <button type="button" class="l-type" aria-pressed="true" data-type="decouverte" data-nom="Première séance" data-detail="1&nbsp;h&nbsp;·&nbsp;60&nbsp;€">Première séance<small>1&nbsp;h&nbsp;·&nbsp;60&nbsp;€</small></button>
+            <button type="button" class="l-type" aria-pressed="false" data-type="suivi" data-nom="Suivi" data-detail="45&nbsp;min&nbsp;·&nbsp;50&nbsp;€">Suivi<small>45&nbsp;min&nbsp;·&nbsp;50&nbsp;€</small></button>
+            <button type="button" class="l-type" aria-pressed="false" data-type="groupe" data-nom="Groupe du jeudi" data-detail="1&nbsp;h&nbsp;·&nbsp;18&nbsp;€">Groupe du jeudi<small>1&nbsp;h&nbsp;·&nbsp;18&nbsp;€</small></button>
+          </div>
+        </div>
+        <div class="l-pas">
+          <p class="l-pas-titre" id="l-t-jour">Le jour <span>novembre 2026</span></p>
+          <div class="l-jours" role="group" aria-labelledby="l-t-jour" id="jours"></div>
+        </div>
+        <div class="l-pas">
+          <p class="l-pas-titre" id="l-t-heure">L'heure <span id="l-lieu">au cabinet ou en visio</span></p>
+          <div class="l-creneaux" role="group" aria-labelledby="l-t-heure" id="creneaux"></div>
+        </div>
+      </div>
+      <div class="l-resa-bas">
+        <p class="l-resume" id="resume" aria-live="polite">Choisissez une heure.</p>
+        <button type="button" class="l-btn l-btn-encre" id="confirmer" disabled><span>Confirmer</span></button>
+      </div>
+      <div class="l-ok" id="ok" hidden>
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="25" fill="none" stroke="currentColor" stroke-width="1.6" pathLength="1"/><path d="M17 29l7.5 7.5L40 21" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg>
+        <p class="l-ok-titre" tabindex="-1" id="okTitre">C'est réservé.</p>
+        <p class="l-ok-texte" id="okTexte"></p>
+        <button type="button" class="l-btn l-btn-doux" id="autre"><span>Choisir un autre moment</span></button>
+      </div>
+      <p class="l-note">Exemple imaginaire : aucun rendez-vous n'est vraiment pris.</p>
+    </div>
+  </section>
+
+  <section class="l-infos" id="l-infos" data-monde="cabinet" aria-labelledby="l-i">
+    <div class="l-hublot l-vue" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <defs><pattern id="lh-mer" width="12" height="7" patternUnits="userSpaceOnUse"><path d="M0 4.5q3-2.4 6 0t6 0" fill="none" stroke="#8fb2c4" stroke-width="1"/></pattern></defs>
+        <rect width="400" height="400" fill="#f4e9dc"/>
+        <path d="M0 0H400V150C352 168 318 140 276 156C232 172 222 214 178 222C132 230 108 196 70 208C40 218 18 242 0 250Z" fill="#d7e6ee"/>
+        <path d="M0 0H400V150C352 168 318 140 276 156C232 172 222 214 178 222C132 230 108 196 70 208C40 218 18 242 0 250Z" fill="url(#lh-mer)" opacity=".75"/>
+        <path d="M0 250C18 242 40 218 70 208C108 196 132 230 178 222C222 214 232 172 276 156C318 140 352 168 400 150" fill="none" stroke="#1b1730" stroke-width="1.4"/>
+        <g fill="none" stroke="#fffaf4" stroke-width="9" stroke-linecap="round"><path d="M14 360C96 330 170 336 262 310S374 270 396 244"/><path d="M196 400C198 352 188 300 196 262"/></g>
+        <g fill="none" stroke="#cdb8a2" stroke-width="1"><path d="M14 360C96 330 170 336 262 310S374 270 396 244M196 400C198 352 188 300 196 262"/></g>
+        <path d="M196 262L232 210" stroke="#1b1730" stroke-width="3" stroke-linecap="round"/>
+        <g transform="translate(286 104)"><path d="M-5 24L-3.2 0h6.4L5 24z" fill="#fffaf4" stroke="#1b1730" stroke-width="1.3"/><path d="M-4 12h8" stroke="#9b3653" stroke-width="3"/><circle cy="-3" r="10" fill="#ffd9a8" opacity=".55"/></g>
+        <g class="l-epingle"><path d="M222 196c0-13 22-13 22 0 0 9-11 21-11 21s-11-12-11-21z" fill="#9b3653"/><circle cx="233" cy="196" r="4" fill="#fffaf4"/></g>
+        <text x="252" y="228" font-family="Bricolage Grotesque, sans-serif" font-size="15" font-weight="650" fill="#1b1730">Cabinet du Phare</text>
+        <text x="40" y="346" font-family="Bricolage Grotesque, sans-serif" font-size="12" fill="#4a4560" transform="rotate(-9 40 346)">route de la Corniche</text>
+        <text x="60" y="110" font-family="Newsreader, serif" font-style="italic" font-size="18" fill="#3d6a80">la mer, toute calme</text>
+      </svg>
+    </div>
+    <div class="l-infos-txt">
+      <p class="l-sur l-vue">Le cabinet</p>
+      <h2 class="l-h2 l-vue" id="l-i">Au bout du quai, <em>face à la mer.</em></h2>
+      <dl class="l-dl">
+        <div class="l-vue"><dt>Adresse</dt><dd>Cabinet du Phare, 3 quai des Mouettes, Saint-Glinglin-sur-Mer</dd></div>
+        <div class="l-vue"><dt>Accès</dt><dd>Bus 2, arrêt Le Port. Parking gratuit sur le quai, cabinet de plain-pied.</dd></div>
+        <div class="l-vue"><dt>Horaires</dt><dd>Du mardi au samedi, de 9 h à 19 h</dd></div>
+        <div class="l-vue"><dt>En visio</dt><dd>Le lien arrive avec la confirmation, rien à installer.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <footer class="l-pied" data-monde="pied">
+    <p class="l-pied-mot" aria-hidden="true"><span>Lila</span> <em>Fougère</em></p>
+    <div class="l-pied-bas">
+      <p class="l-pied-marque"><b>Lila Fougère</b>, sophrologue à Saint-Glinglin-sur-Mer</p>
+      <p class="l-pied-note">Lila n'existe pas, Saint-Glinglin-sur-Mer non plus : c'est un exemple imaginaire, dessiné par Kazura pour ce jeu.</p>
+    </div>
+  </footer>
+
+  <section class="fin" id="fin" aria-labelledby="finTitre">
+    <div class="fin-lueur" aria-hidden="true"></div>
+    <p class="fin-sur">Avant, après</p>
+    <div class="fin-duo" aria-hidden="true">
+      <figure class="fin-avant"><img id="finAvant" alt="" width="320" height="240"><figcaption>2007</figcaption></figure>
+      <svg class="fin-fleche" viewBox="0 0 120 70"><path class="fin-tige" d="M6 52C26 20 70 8 108 34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M96 35l12-1-5-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <figure class="fin-apres">
+        <div class="fin-mini"><img id="finApres" alt="" width="400" height="300"><span class="fin-mini-titre">Reprendre<em>son souffle.</em></span></div>
+        <figcaption>Aujourd'hui</figcaption>
+      </figure>
+    </div>
+    <h2 class="fin-titre" id="finTitre"><span>Votre vieux site ne vous ressemble plus&nbsp;?</span> <em>On en refait un qui vous ressemble.</em></h2>
+    <p class="fin-texte">Dessiné sur mesure, écrit à partir de vos mots, construit par Mathéo, et à vous pour de bon.</p>
+    <div class="fin-actions">
+      <a class="fin-btn" href="../../index.html#contact">Retour au site Kazura<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button type="button" class="fin-btn fin-btn-doux" id="recasser"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10a5.5 5.5 0 1 0 1.8-4.1M4 3.5v3.6h3.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Tout recasser</button>
+    </div>
+  </section>
+
+  <div class="bandeau-k" id="bandeau">
+    <span class="bk-mot"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sceau"/></svg><span>Exemple imaginaire<span class="bk-long">, fait par Kazura</span></span></span>
+    <a href="#fin">Et le vôtre&nbsp;?</a>
+  </div>
+</div>
+
+<noscript><div class="sans-js"><p>Ce jeu a besoin de JavaScript. Une vieille page s'y casse, et un nouveau site éclot à sa place.</p><p><a href="../../index.html#contact">Retour au site Kazura</a></p></div></noscript>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sceau" viewBox="0 0 100 100"><g fill="currentColor" fill-rule="evenodd"><path d="M50 2a48 48 0 1 0 0 96 48 48 0 1 0 0-96zm0 6a42 42 0 1 1 0 84 42 42 0 1 1 0-84z"/><path id="foliole" d="M50 46C39.5 37 34.5 23.5 50 7c15.5 16.5 10.5 30 0 39zm0-7.4c6.2-6 8.6-14.4 0-23.6-8.6 9.2-6.2 17.6 0 23.6z"/><use href="#foliole" transform="rotate(120 50 50)"/><use href="#foliole" transform="rotate(240 50 50)"/><circle cx="50" cy="50" r="4.6"/></g></symbol>
+  </defs>
+</svg>
+</body>
+</html>
