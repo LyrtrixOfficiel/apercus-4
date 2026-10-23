@@ -21,7 +21,7 @@ if (q.has('propre')) document.head.insertAdjacentHTML('beforeend', '<style>.dk-t
 const piste = $('.dk-piste-defilement');
 let hCh = 1, margeG = 8;
 function dimensionner() {
-  hCh = Math.round(innerHeight * (mobile ? 1.3 : 1.5));
+  hCh = Math.max(1, Math.round(innerHeight * (mobile ? 1.3 : 1.5)));
   piste.style.height = `${NB * hCh + innerHeight}px`;
   mesurerPanneaux();
   const so = document.querySelector('.dk-sommaire ol');

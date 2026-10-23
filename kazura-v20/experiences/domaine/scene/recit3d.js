@@ -141,7 +141,7 @@ function vitesse(ch, u, sens) {
 
 /** L'état de la caméra pour une position s du récit. */
 export function etatRecit(s) {
-  s = Math.min(NB - 1e-4, Math.max(0, s));
+  s = Number.isFinite(s) ? Math.min(NB - 1e-4, Math.max(0, s)) : 0;
   const i = Math.floor(s), f = s - i;
   const ch = CHAPITRES[i];
   if (i === NB - 1 || f <= PART_POSE) {
@@ -165,7 +165,7 @@ export function etatRecit(s) {
 
 /** L'heure que le récit donne à la position s (continue, d'un chapitre à l'autre). */
 export function heureRecit(s) {
-  s = Math.min(NB - 1e-4, Math.max(0, s));
+  s = Number.isFinite(s) ? Math.min(NB - 1e-4, Math.max(0, s)) : 0;
   const i = Math.floor(s), f = s - i;
   const [a, b] = CHAPITRES[i].heure;
   if (i === NB - 1) return melange(a, b, douce(lisse(0.05, 0.85, f)));
