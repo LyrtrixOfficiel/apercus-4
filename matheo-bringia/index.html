@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mathéo Bringia · Pilote de karting n°15</title>
+<meta name="description" content="Mathéo Bringia, pilote de karting de location : FRKC, CRKI. Champion CRKI Junior 2025, meilleur Junior français au FRKC Indoor 2026. Calendrier, actus, partenaires.">
+<meta name="theme-color" content="#060708">
+<link rel="icon" type="image/png" href="img/logo/mb-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="modulepreload" href="js/commun.js">
+<link rel="modulepreload" href="js/accueil.js">
+<link rel="preload" as="image" href="img/kart/ts/000.webp" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" as="image" href="img/kart/os/000.webp" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+</head>
+<body class="accueil">
+<a class="evitement" href="#contenu">Aller au contenu</a>
+<!-- debut:navigation -->
+<header class="entete" data-entete>
+  <a class="marque" href="index.html" aria-label="Mathéo Bringia, accueil">
+    <img class="marque-logo" src="img/logo/mb-128.png" alt="" width="128" height="125">
+    <span class="marque-nom">Mathéo <b>Bringia</b></span>
+    <span class="marque-num" aria-hidden="true">15</span>
+  </a>
+  <a class="bouton bouton-orange entete-cta" href="partenaires.html#devenir"><span>Devenir partenaire</span></a>
+  <details class="menu">
+    <summary aria-label="Menu"><span class="menu-mot">Menu</span><span class="menu-traits" aria-hidden="true"><i></i><i></i><i></i></span></summary>
+    <div class="menu-panneau">
+      <div class="menu-fond" aria-hidden="true"><img src="img/logo/mb-512.png" alt="" width="512" height="500" loading="lazy"></div>
+      <nav class="menu-nav" aria-label="Navigation principale"><ol><li style="--i:0"><a href="index.html" aria-current="page"><span class="menu-n" aria-hidden="true">01</span><span class="menu-nom">Accueil</span><span class="menu-sous hud">Infos, dernière course</span></a></li><li style="--i:1"><a href="pilote.html"><span class="menu-n" aria-hidden="true">02</span><span class="menu-nom">Le pilote</span><span class="menu-sous hud">Classement, championnat, palmarès</span></a></li><li style="--i:2"><a href="calendrier.html"><span class="menu-n" aria-hidden="true">03</span><span class="menu-nom">Calendrier</span><span class="menu-sous hud">Prochaines courses, résultats</span></a></li><li style="--i:3"><a href="actus.html"><span class="menu-n" aria-hidden="true">04</span><span class="menu-nom">Actus</span><span class="menu-sous hud">Au fil des courses</span></a></li><li style="--i:4"><a href="galerie.html"><span class="menu-n" aria-hidden="true">05</span><span class="menu-nom">Galerie</span><span class="menu-sous hud">Photos, vidéos, événements</span></a></li><li style="--i:5"><a href="partenaires.html"><span class="menu-n" aria-hidden="true">06</span><span class="menu-nom">Partenaires</span><span class="menu-sous hud">Ils roulent avec lui</span></a></li><li style="--i:6"><a href="contact.html"><span class="menu-n" aria-hidden="true">07</span><span class="menu-nom">Contact</span><span class="menu-sous hud">Rejoindre l’aventure</span></a></li></ol></nav>
+      <div class="menu-cote">
+        <p class="hud">Prochaine course</p>
+        <p class="menu-course">FRKC Indoor 2027</p>
+        <p class="hud">5 au 7 février 2027 · Metz Kart Indoor</p>
+        <a class="bouton bouton-orange" href="partenaires.html#devenir"><span>Devenir partenaire</span></a>
+        <a class="bouton bouton-ligne" href="contact.html"><span>Rejoindre l’aventure</span></a>
+        <p class="menu-pied hud">MB 15 · Karting de location · FRKC · CRKI</p>
+      </div>
+    </div>
+  </details>
+</header>
+<!-- fin:navigation -->
+<canvas class="scene" aria-hidden="true"></canvas>
+
+<main id="contenu">
+
+  <!-- 1. LE DÉPART : le kart n°15 arrive de face, image par image au défilement -->
+  <section id="depart" class="depart" data-ambiance="depart" aria-labelledby="titre-depart">
+    <div class="depart-scene">
+      <div class="depart-geant" aria-hidden="true"><span class="g-contour">Bringia</span><span class="g-plein">Bringia</span></div>
+      <picture class="depart-affiche affiche-js">
+        <source media="(min-aspect-ratio: 4/5)" srcset="img/kart/os/000.webp">
+        <img src="img/kart/ts/000.webp" alt="" width="400" height="733" fetchpriority="high">
+      </picture>
+      <picture class="depart-affiche affiche-sansjs">
+        <source media="(min-aspect-ratio: 4/5)" srcset="img/kart/o/052.webp">
+        <img src="img/kart/t/052.webp" alt="Mathéo Bringia sur son kart n°15, de face, à la sortie d’un virage" width="600" height="1100" loading="lazy">
+      </picture>
+      <canvas class="depart-canvas" aria-hidden="true"></canvas>
+      <canvas class="depart-trainees" aria-hidden="true"></canvas>
+      <div class="depart-voile" aria-hidden="true"></div>
+      <div class="depart-num" aria-hidden="true">#<span>15</span></div>
+
+      <div class="hud-calque" aria-hidden="true">
+        <div class="hud-haut hud">
+          <span class="hud-rec"><i></i>Replay · caméra piste</span>
+          <span data-hud="tc">00:00:00:00</span>
+        </div>
+        <div class="hud-vitesse">
+          <svg viewBox="0 0 120 72"><path d="M10 64 A50 50 0 0 1 110 64" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="5"/><path data-hud="arc" d="M10 64 A50 50 0 0 1 110 64" fill="none" stroke="#ff5a14" stroke-width="5" pathLength="100" stroke-dasharray="100" stroke-dashoffset="60"/><g stroke="rgba(255,255,255,.5)" stroke-width="1"><path d="M10 64h6M104 64h6M60 14v6M24.6 28.6l4.2 4.2M95.4 28.6l-4.2 4.2"/></g></svg>
+          <div class="hud-case" style="margin-top:-30px;text-align:center"><span class="hud-val" data-hud="v">00<small>km/h</small></span></div>
+          <div class="hud-case" style="text-align:center"><span class="hud">Régime</span><span class="hud-val" style="font-size:15px" data-hud="rpm">0000<small>tr/min</small></span></div>
+        </div>
+        <div class="hud-g">
+          <svg viewBox="-50 -50 100 100"><circle r="44" fill="none" stroke="rgba(255,255,255,.25)"/><circle r="22" fill="none" stroke="rgba(255,255,255,.14)"/><path d="M-48 0H48M0-48V48" stroke="rgba(255,255,255,.14)"/><circle data-hud="g" r="5" fill="#ff5a14" cx="0" cy="0"/></svg>
+          <span class="hud">Latéral <b data-hud="gv" style="color:#fff">0,0 g</b></span>
+        </div>
+        <p class="hud hud-note">Télémétrie : exemple</p>
+        <div class="hud-carte" data-rendu="mini-circuit"><!-- debut:mini-circuit -->
+<svg viewBox="-20 -20 1040 516"><path d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="22" stroke-linejoin="round"/><path d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z" fill="none" stroke="#ff5a14" stroke-width="5" stroke-linejoin="round" opacity=".8"/><circle data-hud="mini" r="22" fill="#fff" stroke="#ff5a14" stroke-width="8" cx="567" cy="449"/></svg><span class="hud">Angerville · tracé stylisé</span>
+<!-- fin:mini-circuit --></div>
+        <div class="hud-courbe"><svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0 30H300M0 60H300M0 90H300" stroke="rgba(255,255,255,.1)" stroke-width="1" fill="none" vector-effect="non-scaling-stroke"/><polyline data-hud="courbe" fill="none" stroke="#ff5a14" stroke-width="2" vector-effect="non-scaling-stroke" points="0,120"/></svg><span class="hud">Vitesse sur le passage · exemple</span></div>
+        <div class="hud-bas">
+          <div class="hud-case"><span class="hud">Tour en cours</span><span class="hud-val" data-hud="chrono">0:00.000</span></div>
+          <div class="hud-case"><span class="hud">Tour</span><span class="hud-val">07<small>/10</small></span></div>
+          <div class="hud-case"><span class="hud">Position</span><span class="hud-val o">P3</span></div>
+          <div class="hud-case"><span class="hud">Écart</span><span class="hud-val" data-hud="delta">-0,000</span></div>
+        </div>
+        <div class="hud-secteurs"><i data-hud="s1"></i><i data-hud="s2"></i><i data-hud="s3"></i></div>
+      </div>
+
+      <div class="chargement" aria-hidden="true"><img src="img/logo/mb-128.png" alt="" width="128" height="125"><div class="feux"><i></i><i></i><i></i><i></i><i></i></div></div>
+
+      <div class="depart-titre">
+        <p class="hud devise">Performances et ambition · n°15</p>
+        <h1 id="titre-depart"><span class="prenom">Mathéo</span> <span class="nom">Bringia<i>.</i></span></h1>
+        <p class="accroche">Karting de location, à fond. Champion CRKI Junior 2025, meilleur Junior français au FRKC Indoor 2026.</p>
+      </div>
+      <p class="depart-indice hud" aria-hidden="true"><i></i>Faites défiler, il arrive</p>
+
+      <div class="depart-fin">
+        <p class="hud" style="color:#fff">FRKC Outdoor 2026 · Angerville</p>
+        <h2>Une place de la finale. <em>Cap sur la suivante.</em></h2>
+        <p>25e sur 100, 5e de sa demi-finale. Prochain départ : le FRKC Indoor 2027, du 5 au 7 février, au Metz Kart Indoor.</p>
+        <div class="actions">
+          <a class="bouton bouton-orange" href="calendrier.html"><span>Le calendrier</span></a>
+          <a class="bouton bouton-ligne" href="partenaires.html#devenir"><span>Devenir partenaire</span></a>
+        </div>
+      </div>
+      <p class="credit-images hud">Images : Driver Performance Lab</p>
+    </div>
+  </section>
+
+  <!-- 2. LE TABLEAU DE BORD : les vrais chiffres -->
+  <section id="tableau" class="bloc tableau" data-ambiance="tableau" aria-labelledby="titre-tableau">
+    <div class="bloc-in">
+      <div>
+        <p class="etiquette hud"><b>01</b> L’essentiel</p>
+        <h2 class="titre" id="titre-tableau">Les chiffres <em>officiels</em>.</h2>
+        <p class="chapo">Tout vient des classements publiés par l’organisateur du FRKC et du CRKI. <strong>En karting de location, tout le monde a le même kart : c’est le pilote qui fait le chrono.</strong></p>
+      </div>
+      <ul class="chiffres" data-rendu="chiffres"><!-- debut:chiffres -->
+<li class="chiffre apparait" style="--i:0">
+  <span class="chiffre-v">1er</span>
+  <span class="chiffre-l">Champion CRKI Junior</span>
+  <span class="chiffre-d hud">Saison 1, 2025, sur 28 pilotes</span>
+</li>
+<li class="chiffre apparait" style="--i:1">
+  <span class="chiffre-v">P2</span>
+  <span class="chiffre-l">Meilleure manche au FRKC</span>
+  <span class="chiffre-d hud">Manche 4, FRKC Indoor 2026</span>
+</li>
+<li class="chiffre apparait" style="--i:2">
+  <span class="chiffre-v">19e<small>/100</small></span>
+  <span class="chiffre-l">FRKC Indoor 2026</span>
+  <span class="chiffre-d hud">Meilleur Junior français</span>
+</li>
+<li class="chiffre apparait" style="--i:3">
+  <span class="chiffre-v">25e<small>/100</small></span>
+  <span class="chiffre-l">FRKC Outdoor 2026</span>
+  <span class="chiffre-d hud">À une place de la finale</span>
+</li>
+<!-- fin:chiffres --></ul>
+      <div class="progression apparait">
+        <div>
+          <h3>La courbe monte</h3>
+          <p>Sa place au FRKC, rapportée à la taille du plateau : dans les 71 % en 2025, puis dans les 19 % et les 25 % en 2026, sur des plateaux deux fois plus grands.</p>
+        </div>
+        <svg viewBox="0 0 520 170" role="img" aria-label="Classement au FRKC : 39e sur 55 à l’Outdoor 2025, 19e sur 100 à l’Indoor 2026, 25e sur 100 à l’Outdoor 2026">
+          <line class="prog-axe" x1="20" y1="20" x2="500" y2="20"/><line class="prog-axe" x1="20" y1="140" x2="500" y2="140"/>
+          <text class="prog-txt g" x="20" y="12">Tête du plateau</text><text class="prog-txt g" x="20" y="162">Fond du plateau</text>
+          <polyline class="prog-ligne" pathLength="1" points="60,105 260,43 460,50"/>
+          <circle class="prog-pt" cx="60" cy="105" r="7"/><circle class="prog-pt" cx="260" cy="43" r="7"/><circle class="prog-pt" cx="460" cy="50" r="7"/>
+          <text class="prog-txt" x="60" y="130" text-anchor="middle">39e / 55</text><text class="prog-txt g" x="60" y="88" text-anchor="middle">Outdoor 25</text>
+          <text class="prog-txt" x="260" y="70" text-anchor="middle">19e / 100</text><text class="prog-txt g" x="260" y="34" text-anchor="middle">Indoor 26</text>
+          <text class="prog-txt" x="460" y="77" text-anchor="middle">25e / 100</text><text class="prog-txt g" x="460" y="41" text-anchor="middle">Outdoor 26</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LE CIRCUIT : le tracé d'Angerville se dessine, le point 15 fait le tour -->
+  <section id="circuit" class="circuit" data-ambiance="circuit" aria-labelledby="titre-circuit">
+    <div class="circuit-scene">
+      <div class="circuit-texte">
+        <p class="etiquette hud"><b>02</b> Dernière course · FRKC Outdoor 2026</p>
+        <h2 class="titre" id="titre-circuit">1 198 mètres, <em>12 virages</em>.</h2>
+        <p class="chapo">Le Circuit International Anthoine Hubert, terrain du FRKC Outdoor. Le 23 août 2026, Mathéo Bringia y a couru cinq manches et une demi-finale, face à cent pilotes.</p>
+      </div>
+      <div class="circuit-plan" data-rendu="circuit-svg"><!-- debut:circuit-svg -->
+<svg viewBox="0 0 1000 476" role="img" aria-labelledby="circuit-svg-titre"><title id="circuit-svg-titre">Tracé stylisé du Circuit International Anthoine Hubert, à Angerville, d’après le plan officiel</title>
+  <path class="trace-fond" d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z"/>
+  <path class="trace-halo" d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z"/>
+  <path class="trace-lueur" d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z"/>
+  <path class="trace-coeur" d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z"/>
+  <path class="trace-sillage" d="M567.5 449.2C463.0 469.0 146.5 455.1 56.6 449.2C-33.4 443.3 3.5 481.5 27.6 414.0C51.7 346.5 162.6 109.7 201.2 44.4C239.7 -20.9 239.7 16.5 259.0 22.4C278.3 28.3 310.4 48.8 316.8 79.6C323.3 110.4 315.2 178.6 297.6 207.2C279.9 235.8 231.7 236.5 210.8 251.2C189.9 265.9 175.5 273.9 172.2 295.2C169.0 316.5 157.8 364.1 191.5 378.8C225.3 393.5 340.9 388.3 374.7 383.2C408.4 378.1 400.4 370.0 394.0 348.0C387.5 326.0 344.2 287.9 336.1 251.2C328.1 214.5 334.5 157.3 345.8 128.0C357.0 98.7 381.1 86.2 403.6 75.2C426.1 64.2 390.7 38.5 480.7 62.0C570.7 85.5 863.1 180.1 943.4 216.0C1023.8 251.9 986.8 240.2 962.7 277.6C938.6 315.0 835.8 414.7 798.8 440.4C761.9 466.1 739.4 455.8 741.0 431.6C742.6 407.4 806.9 329.7 808.5 295.2C810.1 260.7 800.4 250.5 750.6 224.8C700.8 199.1 564.3 145.6 509.6 141.2C455.0 136.8 430.9 166.9 422.9 198.4C414.8 229.9 447.0 303.3 461.4 330.4C475.9 357.5 480.7 367.1 509.6 361.2C538.6 355.3 606.0 300.3 635.0 295.2C663.9 290.1 694.4 304.7 683.2 330.4C671.9 356.1 671.9 429.4 567.5 449.2Z"/>
+  <line class="ligne-depart" x1="567.5" y1="436.2" x2="567.5" y2="462.2"/>
+  <text class="circuit-legende" x="267.5" y="489.2">Ligne droite des stands</text>
+  <g class="point-15" transform="translate(567.5 449.2)"><circle class="onde" r="24"/><circle class="disque" r="15"/><text>15</text></g>
+</svg>
+<!-- fin:circuit-svg --></div>
+      <div class="circuit-hud">
+        <div class="circuit-dist"><span class="hud">Distance</span><span class="hud-val" data-circuit="dist">1198<small>m</small></span></div>
+        <ol class="manches" aria-label="Ses manches au FRKC Outdoor 2026">
+          <li class="manche allume"><span class="hud">H1</span><b>8e</b></li>
+          <li class="manche allume"><span class="hud">H2</span><b>13e</b></li>
+          <li class="manche allume"><span class="hud">H3</span><b>5e</b></li>
+          <li class="manche allume podium"><span class="hud">H4</span><b>3e</b></li>
+          <li class="manche allume"><span class="hud">H5</span><b>11e</b></li>
+          <li class="manche allume"><span class="hud">DF</span><b>5e</b></li>
+        </ol>
+        <p class="circuit-bilan">Classement final : <strong>25e sur 100</strong>, premier non qualifié pour la finale du TOP 24.</p>
+        <p class="hud" style="margin:0;font-size:10px">Tracé stylisé d’après le plan officiel du circuit</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 bis. EN PISTE : les vraies photos de l'Outdoor 2026, qui glissent avec le défilement -->
+  <section id="piste" class="piste" data-ambiance="actus" aria-labelledby="titre-piste">
+    <div class="piste-tete bloc-in">
+      <p class="etiquette hud"><b>03</b> En piste · 23 août 2026</p>
+      <h2 class="titre" id="titre-piste">Le n°15 <em>en appui</em>.</h2>
+    </div>
+    <div class="piste-bande" data-glisse>
+      <figure><img src="medias/photos/angerville-casque-960.webp" alt="Casque orange, gants orange, BRINGIA sur le ponton du kart" width="640" height="960" loading="lazy"></figure>
+      <figure class="large"><img src="medias/photos/angerville-virage-960.webp" alt="Le kart n°15 à la corde d’un virage" width="960" height="640" loading="lazy"></figure>
+      <figure class="large"><img src="medias/photos/angerville-face-960.webp" alt="Le kart n°15 de face, en sortie de virage" width="960" height="640" loading="lazy"></figure>
+      <figure><img src="medias/photos/angerville-peloton-960.webp" alt="Mathéo Bringia dans le peloton" width="640" height="960" loading="lazy"></figure>
+      <figure class="large"><img src="medias/photos/angerville-sortie-960.webp" alt="Plein gaz en sortie de virage" width="960" height="640" loading="lazy"></figure>
+    </div>
+    <p class="piste-pied bloc-in hud">FRKC Outdoor 2026, Angerville · Photos : auteur à compléter · <a href="galerie.html#album-angerville-2026">Toute la galerie</a></p>
+  </section>
+
+  <!-- 4. LES PROCHAINES COURSES -->
+  <section id="courses" class="bloc courses" data-ambiance="grille" aria-labelledby="titre-courses">
+    <div class="bloc-in">
+      <div class="rebours">
+        <p class="etiquette hud"><b>04</b> Sur la grille</p>
+        <h2 class="titre" id="titre-courses">Prochaines <em>courses</em>.</h2>
+        <div data-rendu="rebours"><!-- debut:rebours -->
+<p class="hud">Prochaine course</p>
+<p class="rebours-j" data-compte="2027-02-05" aria-hidden="true"><small>J-</small><span>--</span></p>
+<p class="rebours-quoi">FRKC Indoor 2027</p>
+<p class="hud">5 au 7 février 2027 · Metz Kart Indoor</p>
+<!-- fin:rebours --></div>
+        <p style="margin-top:22px"><a class="bouton bouton-ligne" href="calendrier.html"><span>Tout le calendrier</span></a></p>
+      </div>
+      <ol class="liste-courses" data-rendu="courses-accueil"><!-- debut:courses-accueil -->
+<li class="course apparait" style="--i:0" data-type="frkc">
+  <div class="course-date" aria-hidden="true"><span class="course-j">05-07</span><span class="course-m">févr.</span><span class="course-a">2027</span></div>
+  <div class="course-corps">
+    <p class="course-meta hud"><span class="course-type">FRKC</span><span class="course-statut s-inscrit">Inscrit, confirmé</span></p>
+    <h3 class="course-nom">FRKC Indoor 2027</h3>
+    <p class="course-lieu"><span class="sr">Date : 5 au 7 février 2027. Lieu : </span>Metz Kart Indoor, Augny (Moselle)</p>
+    <p class="course-detail">Vendredi : entraînements officiels. Samedi : entraînements et manche 1. Dimanche : manches 2 à 5, demi-finale, finale.</p>
+    <a class="course-lien hud" href="https://www.silverlane-events.com/frkcindoor" target="_blank" rel="noopener">Page officielle <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="sr"> (nouvel onglet)</span></a>
+  </div>
+</li>
+<li class="course apparait" style="--i:1" data-type="mondial">
+  <div class="course-date" aria-hidden="true"><span class="course-j">26-31</span><span class="course-m">juil.</span><span class="course-a">2027</span></div>
+  <div class="course-corps">
+    <p class="course-meta hud"><span class="course-type">Mondial</span><span class="course-statut s-objectif">Objectif</span> <span class="badge-exemple" title="Exemple de maquette, à confirmer">exemple</span></p>
+    <h3 class="course-nom">KWC 2027, le mondial</h3>
+    <p class="course-lieu"><span class="sr">Date : 26 au 31 juillet 2027. Lieu : </span>Kart Center Campillos, Campillos (Espagne)</p>
+    <p class="course-detail">Le championnat du monde du kart de location. Le vainqueur du FRKC Outdoor y gagne sa place.</p>
+    <a class="course-lien hud" href="https://kartworldchampionship.com" target="_blank" rel="noopener">Page officielle <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="sr"> (nouvel onglet)</span></a>
+  </div>
+</li>
+<li class="course apparait" style="--i:2" data-type="frkc">
+  <div class="course-date" aria-hidden="true"><span class="course-j">--</span><span class="course-m">date à venir</span><span class="course-a">2027</span></div>
+  <div class="course-corps">
+    <p class="course-meta hud"><span class="course-type">FRKC</span><span class="course-statut s-prevu">Prévu</span> <span class="badge-exemple" title="Exemple de maquette, à confirmer">exemple</span></p>
+    <h3 class="course-nom">FRKC Outdoor 2027</h3>
+    <p class="course-lieu"><span class="sr">Date : 2027. Lieu : </span>Circuit International Anthoine Hubert, Angerville (Essonne)</p>
+    <p class="course-detail">Date pas encore annoncée par l’organisateur. Objectif : la finale du TOP 24.</p>
+    <a class="course-lien hud" href="https://www.silverlane-events.com/frkcoutdoor" target="_blank" rel="noopener">Page officielle <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="sr"> (nouvel onglet)</span></a>
+  </div>
+</li>
+<!-- fin:courses-accueil --></ol>
+    </div>
+  </section>
+
+  <!-- 5. LES DERNIÈRES ACTUS -->
+  <section id="actus" class="bloc" data-ambiance="actus" aria-labelledby="titre-actus">
+    <div class="bloc-in">
+      <div class="entete-bloc">
+        <div>
+          <p class="etiquette hud"><b>05</b> Radio paddock</p>
+          <h2 class="titre" id="titre-actus">Dernières <em>actus</em>.</h2>
+        </div>
+        <a class="bouton bouton-ligne" href="actus.html"><span>Toutes les actus</span></a>
+      </div>
+      <div class="grille-actus" data-rendu="actus-recentes"><!-- debut:actus-recentes -->
+<article class="carte-actu apparait">
+  <a href="article.html?id=inscrit-frkc-indoor-2027#inscrit-frkc-indoor-2027">
+    <div class="carte-img"><img src="medias/photos/winter-cup-portrait-480.webp" alt="" width="480" height="360" loading="lazy" decoding="async"></div>
+    <div class="carte-corps">
+      <p class="carte-meta hud"><span>octobre 2026</span><span class="carte-rub">Course</span></p>
+      <h3 class="carte-titre">Inscrit au FRKC Indoor 2027</h3>
+      <p class="carte-chapo">Rendez-vous du 5 au 7 février 2027 au Metz Kart Indoor, à Augny. L’inscription est confirmée.</p>
+      <span class="carte-lire hud">Lire <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+    </div>
+  </a>
+</article>
+<article class="carte-actu apparait">
+  <a href="article.html?id=frkc-outdoor-2026#frkc-outdoor-2026">
+    <div class="carte-img"><img src="medias/photos/angerville-casque-480.webp" alt="" width="480" height="360" loading="lazy" decoding="async"></div>
+    <div class="carte-corps">
+      <p class="carte-meta hud"><span>23 août 2026</span><span class="carte-rub">Résultat</span></p>
+      <h3 class="carte-titre">25e sur 100 à Angerville, à une place de la finale</h3>
+      <p class="carte-chapo">Au FRKC Outdoor 2026, il signe la 5e place de sa demi-finale et un podium en manche 4.</p>
+      <span class="carte-lire hud">Lire <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+    </div>
+  </a>
+</article>
+<article class="carte-actu apparait">
+  <a href="article.html?id=soiree-partenaires-mai-2026#soiree-partenaires-mai-2026">
+    <div class="carte-img"><img src="medias/photos/soiree-mai-affiche-480.webp" alt="" width="480" height="360" loading="lazy" decoding="async"></div>
+    <div class="carte-corps">
+      <p class="carte-meta hud"><span>27 mai 2026</span><span class="carte-rub">Partenaires</span></p>
+      <h3 class="carte-titre">Une soirée pour ses partenaires</h3>
+      <p class="carte-chapo">Le 27 mai 2026, Mathéo réunit ses partenaires en plein air, autour de ses trophées et de son casque.</p>
+      <span class="carte-lire hud">Lire <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+    </div>
+  </a>
+</article>
+<!-- fin:actus-recentes --></div>
+    </div>
+  </section>
+
+  <!-- 6. LE PILOTE : il met son casque (la touche de blanc) -->
+  <section id="pilote" class="pilote-accueil clair" data-ambiance="pilote" aria-labelledby="titre-pilote">
+    <div class="pilote-scene">
+      <div class="pilote-cadre">
+        <img src="img/casque/cs/000.webp" alt="Mathéo Bringia en combinaison orange et noire, en studio" width="360" height="640" loading="lazy">
+        <canvas aria-hidden="true"></canvas>
+        <span class="coin-n" aria-hidden="true">15</span>
+        <span class="hud">Vidéo : @matheo.bringia</span>
+      </div>
+      <div class="pilote-texte">
+        <p class="etiquette hud"><b>06</b> Le pilote</p>
+        <h2 class="titre" id="titre-pilote">Casque <span class="contour">fermé</span>, <em>visière</em> baissée.</h2>
+        <p>En karting de location, les karts sont fournis par la piste et tirés au sort. Ce qui reste au pilote : sa trajectoire, son freinage, et sa tête froide dans le trafic.</p>
+        <ul class="pilote-etapes">
+          <li><span class="hud">2025</span><span>Champion CRKI Junior</span></li>
+          <li><span class="hud">2025-2026</span><span>Vice-champion CRKI 90 kg</span></li>
+          <li><span class="hud">2026</span><span>Meilleur Junior français, FRKC Indoor</span></li>
+          <li><span class="hud">2027</span><span>Inscrit au FRKC Indoor, Metz</span></li>
+        </ul>
+        <img class="signature" src="medias/photos/signature.png" alt="Signature de Mathéo Bringia : Performances et ambition" width="738" height="334" loading="lazy">
+        <a class="bouton bouton-ligne" href="pilote.html"><span>Son parcours</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LES PARTENAIRES -->
+  <section id="partenaires" class="bloc partenaires-accueil" data-ambiance="partenaires" aria-labelledby="titre-partenaires">
+    <div class="defile-noms" aria-hidden="true" data-rendu="defile-noms"><!-- debut:defile-noms -->
+<span>Hot-Dog Style</span><b aria-hidden="true">/</b><span>L’Agence Alex Le Gourmand</span><b aria-hidden="true">/</b><span>KP, Kevin Petit</span><b aria-hidden="true">/</b><span>Alsace Énergies et Granulés</span><b aria-hidden="true">/</b><span>Smile</span><b aria-hidden="true">/</b><span>EUPL</span><b aria-hidden="true">/</b><span>Évolution Graphique</span><b aria-hidden="true">/</b><span>Cigo Flam’s</span><b aria-hidden="true">/</b><span>LS Téléprospection</span><b aria-hidden="true">/</b><span>Laurent Beck</span><b aria-hidden="true">/</b><span>Opticus</span><b aria-hidden="true">/</b><span>Kaisen</span><b aria-hidden="true">/</b><span>AutoEasy</span><b aria-hidden="true">/</b><span>Philippe Haas, AXA</span><b aria-hidden="true">/</b><span>Driver Performance Lab</span><b aria-hidden="true">/</b><span>Marina Racewear</span><b aria-hidden="true">/</b><span>Frevy Designs</span><b aria-hidden="true">/</b><span>Hot-Dog Style</span><b aria-hidden="true">/</b><span>L’Agence Alex Le Gourmand</span><b aria-hidden="true">/</b><span>KP, Kevin Petit</span><b aria-hidden="true">/</b><span>Alsace Énergies et Granulés</span><b aria-hidden="true">/</b><span>Smile</span><b aria-hidden="true">/</b><span>EUPL</span><b aria-hidden="true">/</b><span>Évolution Graphique</span><b aria-hidden="true">/</b><span>Cigo Flam’s</span><b aria-hidden="true">/</b><span>LS Téléprospection</span><b aria-hidden="true">/</b><span>Laurent Beck</span><b aria-hidden="true">/</b><span>Opticus</span><b aria-hidden="true">/</b><span>Kaisen</span><b aria-hidden="true">/</b><span>AutoEasy</span><b aria-hidden="true">/</b><span>Philippe Haas, AXA</span><b aria-hidden="true">/</b><span>Driver Performance Lab</span><b aria-hidden="true">/</b><span>Marina Racewear</span><b aria-hidden="true">/</b><span>Frevy Designs</span><b aria-hidden="true">/</b>
+<!-- fin:defile-noms --></div>
+    <div class="bloc-in">
+      <div class="entete-bloc">
+        <div>
+          <p class="etiquette hud"><b>07</b> Ils roulent avec lui</p>
+          <h2 class="titre" id="titre-partenaires">Les <em>partenaires</em>.</h2>
+        </div>
+        <a class="bouton bouton-ligne" href="partenaires.html"><span>Tous les partenaires</span></a>
+      </div>
+      <div class="rangs" data-rendu="partenaires-court"><!-- debut:partenaires-court -->
+<div class="rang rang-vip"><p class="rang-titre"><span>VIP</span><i aria-hidden="true"></i><span class="hud">7</span></p><ul class="liste-partenaires"><li class="partenaire r-vip apparait" style="--i:0">
+  <span class="partenaire-nom">Hot-Dog Style</span>
+  <span class="partenaire-txt">By Alex Le Gourmand. Mathéo en est l’ambassadeur.</span>
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:1">
+  <span class="partenaire-nom">L’Agence Alex Le Gourmand</span>
+  
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:2">
+  <span class="partenaire-nom">KP, Kevin Petit</span>
+  <span class="partenaire-txt">Son parrain. Le « KP » de la combinaison.</span>
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:3">
+  <span class="partenaire-nom">Alsace Énergies et Granulés</span>
+  
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:4">
+  <span class="partenaire-nom">Smile</span>
+  <span class="partenaire-txt">Agence experte en communication.</span>
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:5">
+  <span class="partenaire-nom">EUPL</span>
+  <span class="partenaire-txt">Europe Utilitaire Poids Lourds.</span>
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li><li class="partenaire r-vip apparait" style="--i:0">
+  <span class="partenaire-nom">Évolution Graphique</span>
+  
+  <span class="partenaire-site hud a-completer">Site à compléter</span>
+</li></ul></div>
+<div class="rang-lignes"><p class="rang-ligne"><span class="hud">Premium</span><span>Cigo Flam’s</span><i aria-hidden="true">/</i><span>LS Téléprospection</span></p><p class="rang-ligne"><span class="hud">Prestige</span><span>Laurent Beck</span><i aria-hidden="true">/</i><span>Opticus</span><i aria-hidden="true">/</i><span>Kaisen</span><i aria-hidden="true">/</i><span>AutoEasy</span><i aria-hidden="true">/</i><span>Philippe Haas, AXA</span></p><p class="rang-ligne"><span class="hud">Académie</span><a class="" href="https://www.driverperformancelab.com" target="_blank" rel="noopener">Driver Performance Lab<span class="sr"> (nouvel onglet)</span></a></p><p class="rang-ligne"><span class="hud">Équipement</span><a class="" href="https://www.marinaracewear.com" target="_blank" rel="noopener">Marina Racewear<span class="sr"> (nouvel onglet)</span></a><i aria-hidden="true">/</i><a class="" href="https://frevydesigns.com" target="_blank" rel="noopener">Frevy Designs<span class="sr"> (nouvel onglet)</span></a></p></div>
+<!-- fin:partenaires-court --></div>
+    </div>
+  </section>
+
+  <!-- 8. DEVENIR PARTENAIRE -->
+  <section id="devenir" class="bloc devenir" data-ambiance="devenir" aria-labelledby="titre-devenir">
+    <div class="bloc-in">
+      <div>
+        <p class="etiquette hud"><b>08</b> Votre place est libre</p>
+        <h2 class="titre" id="titre-devenir">Votre nom <span class="contour">en piste</span>.</h2>
+        <p class="chapo">Combinaison, casque, kart quand la piste l’autorise, réseaux, ce site : choisissez où l’on vous voit. Mathéo vous répond lui-même.</p>
+        <ul class="devenir-liste" data-rendu="emplacements-court"><!-- debut:emplacements-court -->
+<li><span class="hud">01</span>La combinaison</li>
+<li><span class="hud">02</span>Le casque</li>
+<li><span class="hud">03</span>Les soirées partenaires</li>
+<li><span class="hud">04</span>Le kakémono MB</li>
+<li><span class="hud">05</span>Les réseaux et ce site</li>
+<li><span class="hud">06</span>Le kart</li>
+<!-- fin:emplacements-court --></ul>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="bouton bouton-noir" href="contact.html?objet=partenariat"><span>Proposer un partenariat</span></a>
+          <a class="bouton bouton-ligne" href="partenaires.html#devenir"><span>Ce qu’il offre</span></a>
+        </div>
+      </div>
+      <figure class="fiche" style="margin:0">
+        <img src="medias/photos/pied-studio-960.webp" alt="Mathéo Bringia debout, casque orange sur la tête, pouces levés, en combinaison orange et noire" width="752" height="960" loading="lazy">
+        <span class="fiche-repere d" style="--x:54%;--y:19%"><span>Casque</span></span>
+        <span class="fiche-repere g" style="--x:82%;--y:44%"><span>Épaule</span></span>
+        <span class="fiche-repere d" style="--x:52%;--y:63%"><span>Poitrine</span></span>
+        <span class="fiche-repere d" style="--x:10%;--y:60%"><span>Gants</span></span>
+        <span class="fiche-repere d" style="--x:40%;--y:91%"><span>Jambes</span></span>
+      </figure>
+    </div>
+  </section>
+
+</main>
+<!-- debut:pied -->
+<section class="bandeau" aria-label="Les partenaires de Mathéo Bringia">
+  <p class="hud bandeau-titre">Ils roulent avec Mathéo <a href="partenaires.html">Tous les partenaires</a></p>
+  <div class="bandeau-piste"><ul class="bandeau-liste"><li><span>Hot-Dog Style</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>L’Agence Alex Le Gourmand</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>KP, Kevin Petit</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Alsace Énergies et Granulés</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Smile</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>EUPL</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Évolution Graphique</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Cigo Flam’s</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>LS Téléprospection</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Laurent Beck</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Opticus</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Kaisen</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>AutoEasy</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><span>Philippe Haas, AXA</span></li><li class="bandeau-sep" aria-hidden="true">/</li><li><a href="https://www.driverperformancelab.com" target="_blank" rel="noopener">Driver Performance Lab<span class="sr"> (nouvel onglet)</span></a></li><li class="bandeau-sep" aria-hidden="true">/</li><li><a href="https://www.marinaracewear.com" target="_blank" rel="noopener">Marina Racewear<span class="sr"> (nouvel onglet)</span></a></li><li class="bandeau-sep" aria-hidden="true">/</li><li><a href="https://frevydesigns.com" target="_blank" rel="noopener">Frevy Designs<span class="sr"> (nouvel onglet)</span></a></li></ul><ul class="bandeau-liste bandeau-copie" aria-hidden="true"><li><span>Hot-Dog Style</span></li><li class="bandeau-sep">/</li><li><span>L’Agence Alex Le Gourmand</span></li><li class="bandeau-sep">/</li><li><span>KP, Kevin Petit</span></li><li class="bandeau-sep">/</li><li><span>Alsace Énergies et Granulés</span></li><li class="bandeau-sep">/</li><li><span>Smile</span></li><li class="bandeau-sep">/</li><li><span>EUPL</span></li><li class="bandeau-sep">/</li><li><span>Évolution Graphique</span></li><li class="bandeau-sep">/</li><li><span>Cigo Flam’s</span></li><li class="bandeau-sep">/</li><li><span>LS Téléprospection</span></li><li class="bandeau-sep">/</li><li><span>Laurent Beck</span></li><li class="bandeau-sep">/</li><li><span>Opticus</span></li><li class="bandeau-sep">/</li><li><span>Kaisen</span></li><li class="bandeau-sep">/</li><li><span>AutoEasy</span></li><li class="bandeau-sep">/</li><li><span>Philippe Haas, AXA</span></li><li class="bandeau-sep">/</li><li><span>Driver Performance Lab</span></li><li class="bandeau-sep">/</li><li><span>Marina Racewear</span></li><li class="bandeau-sep">/</li><li><span>Frevy Designs</span></li></ul></div>
+</section>
+<footer class="pied" data-ambiance="pied">
+  <div class="pied-tete"><img class="pied-logo" src="img/logo/mb-256.webp" alt="Logo MB de Mathéo Bringia" width="256" height="250" loading="lazy"><div class="pied-geant" aria-hidden="true">BRINGIA</div></div>
+  <div class="pied-grille">
+    <div class="pied-bloc">
+      <p class="hud">Pilote de karting · n°15</p>
+      <p class="pied-titre">Mathéo Bringia</p>
+      <p class="pied-txt">Karting de location : FRKC, CRKI. Prochaine course : FRKC Indoor 2027, Metz Kart Indoor.</p>
+      <a class="bouton bouton-orange" href="contact.html"><span>Rejoindre l’aventure</span></a>
+    </div>
+    <nav class="pied-bloc" aria-label="Plan du site"><p class="hud">Pages</p><ul><li><a href="index.html">Accueil</a></li><li><a href="pilote.html">Le pilote</a></li><li><a href="calendrier.html">Calendrier</a></li><li><a href="actus.html">Actus</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="partenaires.html">Partenaires</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="pied-bloc"><p class="hud">Le suivre</p><ul><li><a class="" href="https://www.instagram.com/matheo.bringia/" target="_blank" rel="noopener">Instagram <span class="hud">@matheo.bringia</span><span class="sr"> (nouvel onglet)</span></a></li></ul><p class="hud pied-contact"><a href="contact.html">Écrire à Mathéo</a></p></div>
+  </div>
+  <div class="pied-bas">
+    <p>Images : reel « Race Recap » du FRKC Outdoor 2026 par Driver Performance Lab, et reel studio de @matheo.bringia. Résultats : classements officiels FRKC et CRKI (Silverlane Events). Les chiffres de télémétrie de l’accueil sont des exemples.</p>
+    <p class="hud">Maquette Kazura · 2026 · Les badges « exemple » signalent ce qui reste à confirmer</p>
+  </div>
+</footer>
+<!-- fin:pied -->
+<script type="module" src="js/accueil.js"></script>
+</body>
+</html>
