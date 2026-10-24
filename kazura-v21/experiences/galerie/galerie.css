@@ -1,0 +1,192 @@
+/* Kazura v19 : la page des expériences, devenue une expérience (agent Galerie).
+   Le couloir des portails : une scène WebGL fixe derrière la page (experiences/galerie/scene.js), et par-dessus, une étape
+   par expérience (le portail à droite ou en haut, ce qu'on y fait à gauche ou en bas).
+   Écrit en rem : la taille de base de css/page.css grandit avec l'écran (ultra-large), tout suit.
+   Sans JavaScript : l'en-tête, la liste générée (debut:affiches) et la fin. Sans WebGL : des hublots en HTML et CSS. */
+
+.galerie { position: relative; z-index: 3; }
+
+/* --------------------------------------------------------------------------------------------- la scène */
+.gx-scene { position: fixed; inset: 0; z-index: 1; width: 100%; height: 100%; display: none; pointer-events: none; }
+.js .gx-scene { display: block; }
+.gx-sans-gl .gx-scene { display: none; }
+
+/* --------------------------------------------------------------------------------------------- l'accueil */
+.gx-acc { position: relative; display: grid; align-content: start; gap: 0; min-height: 100vh; min-height: 100svh;
+  padding: calc(var(--tete-h) + clamp(.5rem, 2.6vh, 3.5rem)) var(--marge) 1.25rem var(--marge); }
+.gx-acc .s-index { margin-bottom: clamp(.6rem, 1.8vh, 1.4rem); }
+.gx-acc-texte { position: relative; isolation: isolate; display: grid; justify-items: start; max-width: 40rem; }
+.gx-acc-texte::before { content: ''; position: absolute; z-index: -1; inset: -12% -14% -10% -16%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(5, 7, 11, .7), rgba(5, 7, 11, .4) 60%, transparent); }
+.gx-titre { font-size: clamp(2.5rem, 11.4vw, 3.4rem); line-height: 1.34; }
+.gx-chapo { margin-top: clamp(.9rem, 2.4vh, 1.4rem); max-width: 34ch; }
+.gx-guide { display: block; margin-top: 1rem; max-width: 36rem;
+  font: 400 1.0625rem/1.45 var(--texte); color: var(--ink); text-shadow: var(--ombre-texte); text-wrap: pretty; }
+.gx-pastille { display: inline-flex; align-items: center; gap: .45rem; margin-right: .6rem; padding: .4rem .7rem .36rem .5rem; border-radius: 999px; vertical-align: .12em;
+  background: var(--jade-clair); color: #05070b; font: 700 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; text-shadow: none; }
+.gx-pastille .xp-main, .gx-meta .xp-main { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.gx-meta .xp-horloge { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+
+/* le sommaire : une ligne par expérience (ordinateur) */
+.gx-sommaire { display: none; }
+.gx-sommaire a { display: grid; grid-template-columns: 2.75rem auto minmax(0, 1fr) auto; align-items: center; gap: .85rem; min-height: 3.25rem; padding: .3rem .25rem;
+  color: var(--ink); text-decoration: none; border-top: 1px solid var(--trait); transition: color .3s ease, background .3s ease; }
+.gx-sommaire li:last-child a { border-bottom: 1px solid var(--trait); }
+.gx-sommaire a:hover { color: var(--accent); background: rgba(238, 240, 234, .04); }
+.gx-som-hublot { position: relative; width: 2.75rem; height: 2.75rem; border-radius: 50%; overflow: hidden; background: #120f22;
+  box-shadow: 0 0 0 1px rgba(238, 240, 234, .3), 0 0 1.1rem -.3rem var(--accent); }
+.gx-som-hublot img { width: 100%; height: 100%; object-fit: cover; }
+.gx-som-hublot i { position: absolute; inset: 22%; border: 1.5px solid var(--violet-clair); border-radius: 3px; box-shadow: 0 0 0 .3rem rgba(201, 184, 255, .18), inset 0 0 0 .35rem rgba(201, 184, 255, .25); }
+.gx-som-num { font: 600 .75rem/1 var(--mono); letter-spacing: .12em; color: var(--ink-discret); }
+.gx-som-titre { font: 600 1.06rem/1.2 var(--titre); letter-spacing: -.01em; }
+.gx-som-duree { font: 500 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-doux); }
+.gx-som-bientot .gx-som-titre, .gx-som-bientot .gx-som-hublot { opacity: .72; }
+
+/* l'indice : comment on avance */
+.gx-indice { display: none; align-items: center; gap: .7rem; margin-top: 1.1rem; max-width: 30rem; font: 500 .74rem/1.35 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-doux); text-shadow: var(--ombre-texte); }
+.gx-pret .gx-indice { display: flex; }
+.gx-indice i { flex: none; width: .55rem; height: .55rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; rotate: 45deg; translate: 0 -.15rem;
+  animation: gx-indice calc(1.8s * var(--lent)) ease-in-out infinite; }
+@keyframes gx-indice { 50% { translate: 0 .15rem; } }
+.gx-indice-doigt { display: none; }
+@media (pointer: coarse) { .gx-indice-doigt { display: inline; } .gx-indice-souris { display: none; } }
+
+.gx-acc-fenetre { display: none; }
+/* au téléphone, le couloir occupe le bas de l'écran, sous le texte (la scène y pose le premier portail, au loin) */
+.gx-pret .gx-acc-fenetre { display: block; position: absolute; z-index: -1; left: 0; right: 0; bottom: 5svh; height: 38svh; pointer-events: none; }
+/* au téléphone, l'indice passe tout en bas, sous le couloir, centré */
+@media (max-width: 899px), (max-aspect-ratio: 1/1) {
+  .gx-pret .gx-indice { position: absolute; left: var(--marge); right: var(--marge); bottom: max(.9rem, env(safe-area-inset-bottom)); margin: 0 auto; justify-content: center; text-align: center; font-size: .66rem; }
+}
+
+/* --------------------------------------------------------------------------------------------- les étapes */
+.gx-pret .gx-liste { display: none; }
+.gx-etape { position: relative; display: grid; grid-template-rows: auto auto; align-content: center; justify-items: center; gap: clamp(.75rem, 2.4vh, 1.5rem);
+  min-height: 100vh; min-height: 100svh; padding: calc(var(--tete-h) + clamp(.25rem, 1.2vh, .75rem)) var(--marge) 1.25rem; }
+.gx-fenetre { position: relative; display: block; width: min(84vw, 42svh); aspect-ratio: 1; border-radius: 50%; -webkit-tap-highlight-color: transparent; }
+.gx-carte { position: relative; isolation: isolate; display: grid; justify-items: start; gap: .7rem; width: 100%; max-width: 36rem; }
+.gx-pret .gx-carte, .gx-pret .gx-acc-texte, .gx-pret .gx-indice { opacity: calc(.08 + .92 * var(--v, 1)); }
+.gx-carte::before { content: ''; position: absolute; z-index: -1; inset: -1.2rem -1.6rem -1.4rem; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(5, 7, 11, .86), rgba(5, 7, 11, .62) 62%, transparent); }
+
+.gx-num { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .7rem; color: var(--ink); text-shadow: var(--ombre-texte); }
+.gx-num::before { content: ''; width: 1.6rem; height: 2px; background: var(--teinte, var(--accent)); }
+.gx-num-sur { color: var(--ink-discret); }
+.gx-num-nom { display: inline-flex; align-items: center; gap: .7rem; color: var(--ink-doux); }
+.gx-num-nom::before { content: ''; width: .3rem; height: .3rem; border-radius: 50%; background: var(--ink-discret); }
+@media (max-width: 899px) { .gx-num-mot { display: none; } }
+.gx-action { font: 600 clamp(1.6rem, 7vw, 2.15rem)/1.08 var(--titre); letter-spacing: -.03em; color: var(--ink); text-wrap: balance; text-shadow: var(--ombre-texte); }
+.gx-meta { gap: .45rem; font-size: .68rem; }
+.gx-meta > span:first-child { background: var(--jade-clair); color: #05070b; box-shadow: none; }
+.gx-sur { display: none !important; }
+.gx-phrase { max-width: 40ch; font: 400 1.04rem/1.5 var(--texte); color: var(--ink); text-wrap: pretty; text-shadow: var(--ombre-texte); }
+.gx-gestes { max-width: 42ch; font: 400 1.04rem/1.45 var(--texte); color: var(--ink); text-shadow: var(--ombre-texte); text-wrap: pretty; }
+.gx-gestes-t { display: block; margin-bottom: .15rem; font: 600 .68rem/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--jade-clair); }
+.gx-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.2rem; margin-top: .3rem; }
+.gx-note { font: 500 .7rem/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-discret); text-shadow: var(--ombre-texte); }
+.gx-bientot-mot { display: inline-flex; align-items: center; min-height: 3.25rem; padding: 0 1.5rem; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--violet-clair);
+  font: 600 1rem/1 var(--titre); color: var(--violet-clair); }
+
+/* au téléphone, la phrase longue se garde pour l'ordinateur : le titre, la durée et le geste disent l'essentiel */
+@media (max-width: 899px) {
+  .gx-xp .gx-phrase { display: none; }
+}
+/* téléphone bas (moins de 700 px de haut) : plus serré */
+@media (max-width: 899px) and (max-height: 700px) {
+  .gx-fenetre { width: min(70vw, 34svh); }
+  .gx-carte { gap: .5rem; }
+}
+
+/* ordinateur et tablette en largeur : le texte à gauche, le portail à droite */
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .gx-acc { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: 1fr; align-items: center; column-gap: 2rem;
+    padding: var(--tete-h) var(--marge) 1.5rem var(--marge-g); }
+  .gx-acc { grid-template-rows: 1fr auto; }
+  .gx-acc-texte { grid-column: 1; grid-row: 1; }
+  .gx-indice { grid-column: 1; grid-row: 2; margin-top: 0; }
+  .gx-pret .gx-acc-fenetre { position: relative; z-index: auto; left: auto; right: auto; bottom: auto; height: auto; grid-column: 2; grid-row: 1 / span 2; justify-self: center; align-self: center; width: min(76svh, 44vw); aspect-ratio: 1; }
+  .gx-titre { font-size: clamp(2.6rem, 4.3vw, 4.1rem); line-height: 1.32; }
+  .gx-pret .gx-sommaire { display: grid; margin-top: 1.4rem; width: min(100%, 30rem); }
+  .gx-sommaire.gx-nombreux { grid-template-columns: 1fr 1fr; column-gap: 1.2rem; width: min(100%, 38rem); }
+  .gx-sommaire.gx-nombreux a { grid-template-columns: 2.25rem auto minmax(0, 1fr); }
+  .gx-sommaire.gx-nombreux .gx-som-hublot { width: 2.25rem; height: 2.25rem; }
+  .gx-sommaire.gx-nombreux .gx-som-duree { display: none; }
+  .gx-sommaire.gx-nombreux li:nth-last-child(2) a { border-bottom: 1px solid var(--trait); }
+
+  .gx-etape { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: 1fr; align-items: center; justify-items: start; column-gap: 2rem;
+    padding: var(--tete-h) var(--marge) 1.5rem var(--marge-g); }
+  .gx-fenetre { grid-column: 2; grid-row: 1; justify-self: center; width: min(64svh, 37vw); }
+  .gx-carte { grid-column: 1; grid-row: 1; gap: .85rem; }
+  .gx-action { font-size: clamp(2rem, 2.9vw, 2.9rem); }
+  .gx-sur { display: inline-flex !important; }
+  .gx-meta { font-size: .7rem; }
+  .gx-phrase, .gx-gestes { font-size: 1.12rem; }
+}
+
+/* --------------------------------------------------------------------------------------------- les hublots (sans WebGL) */
+.gx-hublot { position: absolute; inset: 0; display: block; border-radius: 50%; overflow: hidden; background: #0c0a18;
+  box-shadow: 0 0 0 1px rgba(238, 240, 234, .25), 0 0 4rem -1rem var(--teinte, var(--accent)), inset 0 0 2.5rem rgba(5, 7, 11, .7);
+  transition: opacity .6s ease, box-shadow .4s ease; }
+.gx-hublot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; padding: .22rem;
+  background: conic-gradient(from var(--gx-a, 0deg), #c9b8ff, #6ee7b7, #e9c987, #f0a3c8, #9ad7ff, #c9b8ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: .9; }
+.gx-hublot img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 45%; animation: gx-derive calc(26s * var(--lent)) ease-in-out infinite alternate; }
+@keyframes gx-derive { from { scale: 1.08; } to { scale: 1.2; translate: -2% -1%; } }
+.gx-fenetre:hover .gx-hublot { box-shadow: 0 0 0 1px rgba(238, 240, 234, .5), 0 0 6rem -.5rem var(--teinte, var(--accent)), inset 0 0 2rem rgba(5, 7, 11, .5); }
+.gx-hublot-sceau { display: grid; place-items: center; background: radial-gradient(circle at 50% 45%, #2a1d55, #0c0a18 70%); }
+.gx-hublot-sceau img { width: 44%; height: auto; object-fit: contain; animation: none; filter: drop-shadow(0 0 1.2rem rgba(110, 231, 183, .6)); }
+.gx-bientot .gx-hublot img { filter: grayscale(.7) brightness(.6); }
+/* l'infini sans affiche : des cadres qui s'emboîtent, sans fin */
+.gx-gigogne { display: grid; place-items: center; background: radial-gradient(circle, #1a1238, #07060f 72%); }
+.gx-gigogne i { position: absolute; width: 62%; aspect-ratio: 1.25; border-radius: 7%; border: .14rem solid var(--violet-clair);
+  box-shadow: 0 0 1.2rem -.2rem currentColor, inset 0 0 1rem -.3rem currentColor; color: var(--violet-clair);
+  animation: gx-gigogne calc(7.5s * var(--lent)) linear infinite; }
+.gx-gigogne i:nth-child(2) { animation-delay: calc(-1.5s * var(--lent)); border-color: var(--jade-clair); color: var(--jade-clair); }
+.gx-gigogne i:nth-child(3) { animation-delay: calc(-3s * var(--lent)); border-color: var(--or); color: var(--or); }
+.gx-gigogne i:nth-child(4) { animation-delay: calc(-4.5s * var(--lent)); border-color: #f0a3c8; color: #f0a3c8; }
+.gx-gigogne i:nth-child(5) { animation-delay: calc(-6s * var(--lent)); }
+@keyframes gx-gigogne { from { scale: .08; opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } to { scale: 2.2; opacity: 0; } }
+
+/* l'accueil sans WebGL : trois hublots, le premier en grand */
+.gx-mini { display: none; }
+.gx-sans-gl .gx-mini { display: block; position: absolute; aspect-ratio: 1; }
+.gx-sans-gl .gx-mini-0 { height: 78%; max-width: 78%; left: 50%; top: 50%; translate: -42% -50%; }
+.gx-sans-gl .gx-mini-1 { height: 34%; left: 50%; top: 50%; translate: -170% -120%; opacity: .85; }
+.gx-sans-gl .gx-mini-2 { height: 24%; left: 50%; top: 50%; translate: -230% 40%; opacity: .7; }
+
+/* avec WebGL, la scène dessine les portails : les hublots restent là (le clic), invisibles */
+.gx-gl .gx-hublot { opacity: 0; }
+
+/* --------------------------------------------------------------------------------------------- le rail */
+.gx-rail { position: fixed; z-index: 15; right: .3rem; top: 50%; translate: 0 -50%; transition: opacity .5s ease; }
+.gx-rail ol { display: grid; gap: .15rem; }
+.gx-rail a { display: flex; align-items: center; justify-content: flex-end; gap: .6rem; min-width: 1.75rem; min-height: 1.75rem; padding: 0 .3rem; color: var(--ink); text-decoration: none; }
+.gx-rail i { display: block; width: .45rem; height: .45rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(238, 240, 234, .55); transition: background .4s ease, scale .4s var(--ressort); }
+.gx-rail a[aria-current] i { background: var(--jade-clair); box-shadow: 0 0 .6rem var(--jade-clair); scale: 1.25; }
+.gx-rail span[aria-hidden] { display: none; }
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .gx-rail { right: auto; left: 0; }
+  .gx-rail a { justify-content: flex-start; min-height: 2rem; padding-left: 1.3rem; }
+  .gx-rail i { width: .55rem; height: 1px; border-radius: 0; box-shadow: none; background: rgba(238, 240, 234, .4); transition: width calc(.6s * var(--lent)) var(--ressort), background .4s ease; }
+  .gx-rail a[aria-current] i { width: 1.6rem; scale: 1; background: var(--ink); box-shadow: none; }
+  .gx-rail span[aria-hidden] { display: inline; font: 600 .66rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-doux); text-shadow: var(--ombre-texte); opacity: 0; translate: -.4rem 0; transition: opacity .4s ease, translate calc(.5s * var(--lent)) var(--ressort); }
+  .gx-rail span[aria-hidden] { opacity: .75; translate: 0 0; }
+  .gx-rail a[aria-current] span[aria-hidden], .gx-rail a:hover span[aria-hidden], .gx-rail a:focus-visible span[aria-hidden] { opacity: 1; color: var(--ink); }
+}
+/* la page des expériences garde la croix de grille, mais pas de coordonnées en bas à gauche (le rail y est) */
+.galerie-page .hud-coord { display: none !important; }
+
+/* --------------------------------------------------------------------------------------------- la plongée */
+.gx-voile { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--teinte, #c9b8ff) 26%, #05070b), #05070b 70%); }
+.gx-plonge main, .gx-plonge .tete, .gx-plonge .gx-rail, .gx-plonge .hud { opacity: 0; transition: opacity calc(.38s * var(--lent)) ease; }
+.gx-plonge .gx-envol { opacity: 1; }
+body > .gx-envol { pointer-events: none; }
+
+/* --------------------------------------------------------------------------------------------- sans JavaScript */
+html:not(.gx-pret) .gx-acc { min-height: 0; padding-bottom: clamp(2rem, 6vh, 4rem); }
+html:not(.gx-pret) .gx-liste { padding: 0 var(--marge) clamp(4rem, 10vh, 7rem) var(--marge-g); }
+html:not(.gx-pret) .gx-fin { min-height: 0; padding-top: 2rem; padding-bottom: 4rem; }
+html:not(.gx-pret) .gx-fin .gx-fenetre { width: min(40vw, 9rem); }
+@media (min-width: 900px) { html:not(.gx-pret) .gx-acc { padding-left: var(--marge-g); } }
