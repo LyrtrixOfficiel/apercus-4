@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>K12 Shop, épicerie de nuit, Marseille 12e</title>
+<meta name="description" content="Maquette privée préparée pour K12 Shop : alimentation générale, épicerie de nuit et petite restauration, 2 rue Charles Kaddouz, Marseille 12e.">
+<meta name="theme-color" content="#052a31">
+<link rel="icon" href="data:,">
+<script>
+// Le mouvement joue toujours en entier. Mode calme seulement sur demande : ?calme=1
+(function () { var h = document.documentElement, q = location.search; h.classList.add('js');
+  if (/[?&]calme=1/.test(q)) h.classList.add('calme');
+  var p = /[?&]palette=([a-z]+)/.exec(q); if (p) h.setAttribute('data-palette', p[1]);
+  // Si le script de la page ne démarre pas, tout redevient visible sans animation.
+  setTimeout(function () { if (!window.__k12) h.classList.remove('js'); }, 5000); })();
+</script>
+<link rel="preload" href="polices/dela.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/figtree.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="logo" href="#enseigne" aria-label="K12 Shop, retour en haut"><b>K12</b><span>Shop</span></a>
+  <nav class="menu" id="menu" aria-label="Rubriques">
+    <a href="#epicerie">L’épicerie</a>
+    <a href="#manque">Il vous manque quoi&nbsp;?</a>
+    <a href="#frais">Le frais</a>
+    <a href="#manger">À manger</a>
+    <a href="#nuit">La nuit</a>
+    <a href="#venir">Venir</a>
+  </nav>
+  <a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <span class="pendule" title="L’heure qu’il est à Marseille"><i aria-hidden="true"></i><b id="pendule">.. : ..</b></span>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  <div class="tube" aria-hidden="true"><i id="tube"></i></div>
+</header>
+
+<main>
+
+<!-- 1. L'enseigne : la page est le caisson lumineux -->
+<section class="enseigne" id="enseigne">
+  <div class="caisson" id="caisson">
+    <div class="tubes" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="e-gauche">
+      <h1 class="k12" id="k12" aria-label="K12 Shop"><span class="lt" aria-hidden="true" style="--i:0;--d:8"><b>K</b></span><span class="lt" aria-hidden="true" style="--i:1;--d:14"><b>1</b></span><span class="lt" aria-hidden="true" style="--i:2;--d:20"><b>2</b></span><span class="shop" aria-hidden="true">Shop</span></h1>
+      <div class="plaques">
+        <a href="#epicerie">Alimentation générale</a>
+        <a href="#nuit">Épicerie de nuit</a>
+        <a href="#manger">Petite restauration</a>
+      </div>
+    </div>
+    <div class="e-droite">
+      <p class="etoile rose">Marseille 12e</p>
+      <p class="accroche">L’épicerie qui reste allumée.</p>
+      <p class="chapo">Le lait du petit-déjeuner, le paquet de pâtes du soir, les piles de la télécommande&nbsp;: au 2 rue Charles Kaddouz, il reste une lumière.</p>
+      <div class="boutons">
+        <a class="bt" href="#manque">Il vous manque quoi&nbsp;?</a>
+        <a class="bt clair" href="#venir">Y aller</a>
+      </div>
+      <p class="maintenant" id="maintenant">Il est <b id="il-est">.. h ..</b> à Marseille. <span>À cette heure-ci, ce qui manque dans une cuisine, c’est plutôt <a href="#manque" id="envie-heure">........</a>.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- La porte : le rideau de lanières transparentes -->
+<div class="porte" id="porte" aria-hidden="true">
+  <p class="entrez">Entrez</p>
+  <div class="tringle"></div>
+  <div class="lanieres" id="lanieres"></div>
+</div>
+
+<!-- 2. L'épicerie -->
+<section class="epicerie" id="epicerie">
+  <p class="douze" aria-hidden="true">12</p>
+  <div class="cadre deux">
+    <div class="texte" data-vu>
+      <p class="etoile orange">Repris en octobre 2026</p>
+      <h2>Ce qu’il faut,<br>quand il le faut.</h2>
+      <p class="gros">K12 Shop, c’est l’alimentation générale du 2 rue Charles Kaddouz, dans le 12e arrondissement de Marseille&nbsp;: l’épicerie de nuit du quartier, avec de la petite restauration.</p>
+      <p class="trous">Votre histoire en deux lignes <span class="pt">..............................</span></p>
+      <p class="trous">Ce qu’on trouve chez vous et pas ailleurs <span class="pt">....................</span></p>
+      <p class="note">Les pointillés se remplissent avec vous.</p>
+    </div>
+    <div class="totem" id="totem" data-vu>
+      <i class="mat" aria-hidden="true"></i>
+      <button class="pan p1" type="button"><b>Alimentation générale</b><span>Vos rayons <em>..............</em></span></button>
+      <button class="pan p2" type="button"><b>Épicerie de nuit</b><span>De .. h .. à .. h ..</span></button>
+      <button class="pan p3" type="button"><b>Petite restauration</b><span>Votre carte <em>..............</em></span></button>
+      <p class="aide">Touchez un panneau.</p>
+    </div>
+  </div>
+</section>
+
+<div class="bandeau" aria-hidden="true"><div class="piste" id="piste"></div></div>
+
+<!-- 3. Il vous manque quoi ? -->
+<section class="manque dents" id="manque">
+  <div class="cadre">
+    <div class="q-tete" data-vu>
+      <h2>Il vous manque <span>quoi&nbsp;<i>?</i></span></h2>
+      <form class="q-forme" id="q-forme" autocomplete="off">
+        <label for="q">Tapez-le, ou touchez un mot&nbsp;: le rayon s’allume.</label>
+        <div class="q-champ">
+          <input id="q" name="q" type="text" inputmode="text" maxlength="30" placeholder="du lait, des piles, des pâtes…" enterkeyhint="search">
+          <button class="bt" type="submit">Chercher</button>
+        </div>
+      </form>
+    </div>
+    <div class="envies" id="envies" data-vu></div>
+    <p class="reponse" id="reponse" aria-live="polite"><b>Rien ne manque&nbsp;?</b> Touchez un paquet pour voir.</p>
+    <div class="mur" id="mur" data-vu></div>
+    <p class="note clair">Rayons d’exemple, dessinés sans aucune marque&nbsp;: la vraie liste des vôtres s’écrit avec vous.</p>
+  </div>
+</section>
+
+<!-- 4. Le frais -->
+<section class="frais" id="frais">
+  <div class="cadre deux">
+    <div class="frigo" id="frigo" data-vu>
+      <p class="f-tete" aria-hidden="true"><span>Bien frais</span></p>
+      <div class="f-corps">
+        <div class="f-cuve" data-cuve="boissons"><div class="f-dedans"></div><button class="f-porte" type="button" aria-label="Ouvrir la porte des boissons" aria-pressed="false"><i class="reflet"></i><i class="poignee"></i><i class="buee"></i></button></div>
+        <div class="f-cuve" data-cuve="cremerie"><div class="f-dedans"></div><button class="f-porte" type="button" aria-label="Ouvrir la porte du frais" aria-pressed="false"><i class="reflet"></i><i class="poignee"></i><i class="buee"></i></button></div>
+      </div>
+      <i class="f-pied" aria-hidden="true"></i>
+      <i class="f-lueur" aria-hidden="true"></i>
+      <p class="f-mot" id="f-mot" aria-live="polite"></p>
+    </div>
+    <div class="texte" data-vu>
+      <p class="etoile vert">Boissons fraîches</p>
+      <h2>Le frigo qui éclaire le trottoir.</h2>
+      <p class="gros">Derrière la vitre&nbsp;: l’eau fraîche, les sodas, les jus, et le frais de tous les jours. Ouvrez une porte, pour voir.</p>
+      <div class="boutons"><button class="bt froid" id="f-ouvrir" type="button">Ouvrir une porte</button></div>
+      <p class="trous">Porte de gauche, les boissons <span class="pt">................</span></p>
+      <p class="trous">Porte de droite, le frais <span class="pt">................</span></p>
+      <p class="note">Ce qu’il y a vraiment dans votre frigo, vous me le dites.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. À manger : le panneau à lettres amovibles -->
+<section class="manger dents" id="manger">
+  <div class="cadre deux">
+    <div class="panneau" id="panneau" data-vu>
+      <p class="pa-tete"><span>Petite restauration</span></p>
+      <div class="rails" id="rails" aria-live="polite"></div>
+    </div>
+    <div class="texte" data-vu>
+      <p class="etoile jaune">La carte, c’est vous</p>
+      <h2>À manger, sur le pouce.</h2>
+      <p class="gros">La petite restauration fait partie de la maison. La carte, c’est vous qui la connaissez&nbsp;: écrivez un plat, il s’accroche au panneau, lettre par lettre.</p>
+      <form class="pa-forme" id="pa-forme" autocomplete="off">
+        <label for="plat">Votre plat</label>
+        <div class="q-champ">
+          <input id="plat" name="plat" type="text" maxlength="14" placeholder="écrivez ici" enterkeyhint="done">
+          <button class="bt clair" type="submit">Accrocher</button>
+        </div>
+        <button class="lien" id="decrocher" type="button">Tout décrocher</button>
+      </form>
+      <p class="note clair">Plats et prix&nbsp;: rien n’est écrit d’avance, tout vient de vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. La nuit : le quartier s'éteint, l'enseigne reste -->
+<section class="nuit" id="nuit">
+  <div class="cadre deux">
+    <div class="texte" data-vu>
+      <p class="etoile rose">Éteignez du doigt</p>
+      <h2>Quand tout s’éteint, l’enseigne reste.</h2>
+      <div class="horloge" id="horloge" aria-live="off">
+        <span class="ch" id="h1">2</span><span class="ch" id="h2">0</span><i aria-hidden="true">:</i><span class="ch" id="m1">0</span><span class="ch" id="m2">0</span>
+      </div>
+      <p class="compte"><b id="compte">0</b> <span id="compte-mot">fenêtres encore allumées</span></p>
+    </div>
+    <div class="commandes">
+      <label class="curseur"><span>Faites passer la nuit</span>
+        <input id="curseur" type="range" min="0" max="1000" value="0" step="1" aria-label="Avancer dans la nuit">
+      </label>
+      <div class="boutons">
+        <button class="bt" id="n-jouer" type="button">Laisser passer la nuit</button>
+        <button class="bt clair" id="n-rallumer" type="button">Rallumer</button>
+      </div>
+      <p class="note clair" id="n-note">Jusqu’à quelle heure&nbsp;? Vos horaires <span class="pt">.. h ..</span> s’afficheront ici.</p>
+    </div>
+    <div class="quartier" id="quartier" data-vu>
+      <div class="ciel" aria-hidden="true"></div>
+      <i class="soleil" aria-hidden="true"></i>
+      <div class="astres" aria-hidden="true"><i class="astre a1"></i><i class="astre a2"></i><i class="astre a3"></i></div>
+      <p class="dort" id="dort" aria-live="polite"><span>Tout le quartier dort.</span> <b>Sauf ici.</b></p>
+      <div class="immeubles" id="immeubles" aria-hidden="true"></div>
+      <i class="trottoir" aria-hidden="true"></i>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Venir -->
+<section class="venir dents" id="venir">
+  <div class="cadre deux">
+    <div class="texte" data-vu>
+      <p class="etoile rose">Marseille 12e</p>
+      <h2 class="adresse"><span>2 rue Charles</span> <span>Kaddouz</span> <small>13012 Marseille</small></h2>
+      <div class="boutons">
+        <a class="bt bleu" id="itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=2+rue+Charles+Kaddouz+13012+Marseille" target="_blank" rel="noopener">Ouvrir l’itinéraire</a>
+        <button class="bt clair" id="copier" type="button">Copier l’adresse</button>
+      </div>
+      <p class="trous fort">Téléphone <span class="pt">.. .. .. .. ..</span></p>
+      <p class="note">Le numéro et les horaires s’ajoutent dès que vous me les donnez.</p>
+    </div>
+    <div class="accroche-plaque" data-vu>
+      <i class="ventouse" aria-hidden="true"></i>
+      <div class="horaires" id="horaires">
+        <p class="ho-tete">Horaires</p>
+        <div class="ho-lignes" id="ho-lignes"></div>
+        <p class="ho-pied">Touchez une ligne, écrivez vos heures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Autant de pages que vous voulez -->
+<section class="pages" id="pages">
+  <div class="cadre">
+    <h2 data-vu>Votre site peut avoir <span>autant de pages</span> que vous voulez.</h2>
+    <div class="etiquettes" id="etiquettes" data-vu>
+      <button type="button" class="etoile jaune">Les rayons</button>
+      <button type="button" class="etoile rose">La carte</button>
+      <button type="button" class="etoile vert">Les horaires</button>
+      <button type="button" class="etoile orange">Les arrivages</button>
+      <button type="button" class="etoile blanc">Nous trouver</button>
+    </div>
+    <p class="gros" data-vu>Ici, une seule page pour donner l’idée. Une page pour les rayons, une pour la petite restauration, une pour les horaires&nbsp;: c’est vous qui voyez.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="cadre">
+    <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    <p>Maquette préparée pour K12 Shop, 2 rue Charles Kaddouz, 13012 Marseille. Textes, couleurs, rubriques&nbsp;: tout s’ajuste avec vous.</p>
+    <p class="petit">K12 Shop est le nom affiché à cette adresse&nbsp;: l’enseigne exacte reste à confirmer avec vous. Horaires, téléphone et carte sont en pointillés tant que vous ne les avez pas donnés. Paquets, frigo et façades sont dessinés pour la maquette, sans aucune marque.</p>
+    <a class="haut" href="#enseigne">Remonter à l’enseigne</a>
+  </div>
+</footer>
+
+</body>
+</html>
