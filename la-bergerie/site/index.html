@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La Bergerie, pizzas à emporter et traiteur à Saint-Laurent-du-Bois</title>
+<meta name="description" content="Maquette privée préparée pour La Bergerie, pizzeria à emporter et traiteur à Saint-Laurent-du-Bois (33540).">
+<meta name="theme-color" content="#d2a56d">
+<link rel="icon" href="data:,">
+<link rel="preload" as="font" type="font/woff2" href="polices/shrikhand-latin-400-normal.woff2" crossorigin>
+<link rel="preload" as="image" href="photos/pizza-carton.webp">
+<script>(function(){var h=document.documentElement;h.classList.add('js');if(/[?&]calme=1/.test(location.search))h.classList.add('calme');})();</script>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="La Bergerie, retour en haut">
+    <span class="marque-pizza" id="marque-pizza" aria-hidden="true"></span>
+    <span class="marque-nom">La Bergerie</span>
+  </a>
+  <nav class="liens" aria-label="Rubriques">
+    <a href="#carte">La carte</a>
+    <a href="#mois">Pizza du mois</a>
+    <a href="#jeu">Composez</a>
+    <a href="#histoire">L’histoire</a>
+    <a href="#traiteur">Traiteur</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#commande">Ma commande <b class="compte" data-compte hidden></b></a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="appeler" data-tel>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.5 9.9 2l1.9 5-2.4 1.7c1 2.4 2.6 4 5 5l1.7-2.4 5 1.9-.5 3.3c-.2 1.5-1.4 2.5-2.9 2.5C9.3 19 3 12.7 3 4.9c0-1.3 1.3-2.2 3.6-2.4z"/></svg>
+    <span class="appeler-mot">Appeler</span><span class="appeler-num" data-num></span>
+  </a>
+  <button class="menu-bouton" id="menu-bouton" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<div class="menu" id="menu" aria-label="Menu">
+  <a href="#carte">La carte</a>
+  <a href="#mois">Pizza du mois</a>
+  <a href="#jeu">Composez la vôtre</a>
+  <a href="#histoire">L’histoire</a>
+  <a href="#traiteur">Traiteur</a>
+  <a href="#horaires">Horaires et lieu</a>
+  <a href="#commande">Ma commande <b class="compte" data-compte hidden></b></a>
+  <a class="menu-tel" data-tel><span class="pochoir">Appeler</span><span data-num></span></a>
+</div>
+
+<main>
+
+<!-- ACCUEIL : le carton s'ouvre -->
+<section class="accueil" id="accueil">
+  <div class="accueil-texte">
+    <p class="etiquettes"><span>Pizzas à emporter</span><span>Traiteur</span><span>Saint-Laurent-du-Bois</span></p>
+    <h1 class="titre" aria-label="La Bergerie"><span class="titre-la" aria-hidden="true">La</span><span class="titre-nom" id="titre-nom" aria-hidden="true">Bergerie</span></h1>
+    <p class="accroche">Des pizzas à emporter et un traiteur, dans un corps de ferme à Saint-Laurent-du-Bois.</p>
+    <p class="ce-soir" id="ce-soir"></p>
+    <p class="actions">
+      <a class="bouton plein" data-tel><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.5 9.9 2l1.9 5-2.4 1.7c1 2.4 2.6 4 5 5l1.7-2.4 5 1.9-.5 3.3c-.2 1.5-1.4 2.5-2.9 2.5C9.3 19 3 12.7 3 4.9c0-1.3 1.3-2.2 3.6-2.4z"/></svg>Appeler pour commander</a>
+      <a class="bouton" href="#carte">Voir la carte</a>
+    </p>
+  </div>
+  <div class="accueil-nappe nappe" id="nappe">
+    <div class="boite-scene">
+      <div class="boite" id="boite" role="button" tabindex="0" aria-label="Ouvrir ou refermer le carton">
+        <span class="boite-fond"><img src="photos/pizza-carton.webp" alt="Une pizza dans son carton, vue de dessus" width="1200" height="1200"></span>
+        <span class="boite-vapeur" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="boite-couvercle" id="couvercle" aria-hidden="true">
+          <span class="couv-dedans"><span class="main">Bon appétit&nbsp;!</span><span class="pochoir">Ce côté vers le haut</span></span>
+          <span class="couv-dessus"><span class="pochoir">Pizzas à emporter</span><span class="couv-nom">La Bergerie</span><span class="pochoir couv-ville">Saint-Laurent-du-Bois</span></span>
+        </span>
+      </div>
+    </div>
+    <p class="tampon" id="tampon"><b data-note></b><span>sur Google</span><i data-avis></i></p>
+    <p class="illus">Image d’illustration, en attendant vos photos. Touchez le carton.</p>
+  </div>
+</section>
+
+<!-- LA CARTE : dix pizzas, dix parts -->
+<section class="carte" id="carte">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans">
+    <header class="tete-section">
+      <p class="pochoir sur">La carte</p>
+      <h2>Dix pizzas, <em>dix parts.</em></h2>
+      <p class="chapo">Chaque part est garnie comme sa pizza. Touchez une part ou un nom, faites tourner.</p>
+    </header>
+    <div class="carte-corps">
+      <div class="roue-zone" id="roue-zone">
+        <div class="roue-carton" aria-hidden="true"></div>
+        <div class="roue" id="roue" role="img" aria-label="Une pizza en dix parts, une par pizza de la carte"></div>
+        <i class="roue-fleche" aria-hidden="true"></i>
+      </div>
+      <div class="liste" id="liste"></div>
+    </div>
+    <p class="petit carte-note">Carte et prix relevés sur votre site actuel. <span data-supplement></span></p>
+  </div>
+</section>
+
+<!-- PIZZA DU MOIS : à la bouche du four -->
+<section class="mois" id="mois">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans mois-grille">
+    <div class="mois-texte">
+      <p class="pochoir sur">Pizza du mois</p>
+      <h2 class="fond-titre" id="fond-titre" aria-label="La Raclette"></h2>
+      <p class="mois-ing">Crème, lardons, pomme de terre, fromage à raclette, mozzarella, oignons frits.</p>
+      <p class="mois-bas">
+        <span class="etiquette-prix"><b>12,50 €</b></span>
+        <button class="bouton clair" type="button" data-noter="mois">Noter pour ma commande</button>
+      </p>
+      <p class="petit">Relevée sur votre site. Elle change chaque mois : sa place est prête.</p>
+    </div>
+    <figure class="bouche" id="bouche">
+      <span class="bouche-lueur" aria-hidden="true"></span>
+      <span class="bouche-arche"><img src="photos/raclette.webp" alt="La pizza Raclette de La Bergerie dans son carton" loading="lazy" width="453" height="1335"></span>
+      <figcaption>La Raclette, photo de La Bergerie</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- LE JEU : composez, enfournez -->
+<section class="jeu" id="jeu">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans">
+    <header class="tete-section">
+      <p class="pochoir sur">À vous de jouer</p>
+      <h2>Composez-la, <em>on vous dit laquelle.</em></h2>
+      <p class="chapo">Une base, puis ce qui vous fait envie : la carte de Jennifer vous répond. Ensuite, enfournez.</p>
+    </header>
+    <div class="jeu-corps" id="jeu-corps">
+      <div class="jeu-haut" id="jeu-haut">
+        <div class="jeu-plan">
+          <div class="four" id="four" aria-hidden="true"><span class="four-bouche"><i class="four-feu"></i></span><span class="four-barre"><i id="four-jauge"></i></span></div>
+          <div class="pelle" id="pelle"><div class="disque" id="disque" role="img" aria-label="Votre pizza"></div></div>
+        </div>
+        <div class="reponse" id="reponse" aria-live="polite"></div>
+      </div>
+      <div class="bacs" id="bacs"></div>
+      <figure class="pate-photo" id="pate-photo"><img src="photos/pate.webp" alt="Deux mains étalent une pâte à pizza sur un plan fariné" loading="lazy" width="1400" height="1045"><figcaption>Image d’illustration</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- L'HISTOIRE : du camion à la ferme -->
+<section class="histoire" id="histoire">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="hist-scene" id="hist-scene">
+    <div class="hist-texte">
+      <p class="pochoir sur">L’histoire</p>
+      <h2>Du camion <em>à la ferme.</em></h2>
+      <div class="temps" id="temps">
+        <p data-t="0"><b>La restauration, longtemps.</b> Jennifer y a travaillé des années avant de lancer La Bergerie.</p>
+        <p data-t="1"><b>Le food truck, d’abord.</b> La Bergerie commence par un projet de food truck.</p>
+        <p data-t="2"><b>Le corps de ferme, aujourd’hui.</b> La pizzeria s’installe dans un corps de ferme, à Saint-Laurent-du-Bois.</p>
+      </div>
+    </div>
+    <div class="paysage" id="paysage" aria-hidden="true">
+      <div class="ciel-soleil"></div>
+      <i class="nuage" style="--x:6%;--y:13%;--e:1"></i><i class="nuage" style="--x:36%;--y:26%;--e:.7"></i><i class="nuage" style="--x:60%;--y:10%;--e:1.25"></i>
+      <div class="collines loin" id="loin"></div>
+      <div class="monde" id="monde">
+        <div class="collines pres"></div>
+        <div class="arbres" id="arbres"></div>
+        <div class="route"></div>
+        <svg class="ferme" id="ferme" viewBox="0 0 640 300">
+          <rect x="404" y="176" width="200" height="124" fill="#ead3ab"/>
+          <polygon points="394,182 424,134 598,134 616,182" fill="#b04a25"/>
+          <path d="M470 300V236a34 34 0 0 1 68 0v64z" fill="#2a1a12"/>
+          <path class="porte-feu" d="M476 300V238a28 28 0 0 1 56 0v62z" fill="#ff8a2a"/>
+          <rect x="40" y="118" width="364" height="182" fill="#f5e2c0"/>
+          <polygon points="18,126 62,52 382,52 426,126" fill="#c4552c"/>
+          <rect x="62" y="52" width="320" height="12" fill="#a8431f"/>
+          <rect x="300" y="18" width="34" height="52" fill="#e3caa0"/><rect x="294" y="12" width="46" height="12" fill="#a8431f"/>
+          <path d="M166 300V214a56 56 0 0 1 112 0v86z" fill="#2a1a12"/>
+          <path class="porte-feu" d="M176 300V216a46 46 0 0 1 92 0v84z" fill="#ff8a2a"/>
+          <path class="porte-coeur" d="M196 300V236a26 26 0 0 1 52 0v64z" fill="#ffd36b"/>
+          <g fill="#2a1a12"><rect x="74" y="172" width="46" height="62" rx="4"/><rect x="322" y="172" width="46" height="62" rx="4"/></g>
+          <g class="fenetre-feu" fill="#ffd36b"><rect x="80" y="178" width="34" height="50" rx="2"/><rect x="328" y="178" width="34" height="50" rx="2"/></g>
+          <g class="f-second"><rect x="56" y="168" width="18" height="70" rx="3"/><rect x="120" y="168" width="18" height="70" rx="3"/><rect x="304" y="168" width="18" height="70" rx="3"/><rect x="368" y="168" width="18" height="70" rx="3"/></g>
+          <g class="enseigne"><rect x="146" y="128" width="152" height="40" rx="8" class="f-vif"/><text x="222" y="157" text-anchor="middle" font-family="Shrikhand, Georgia, serif" font-size="25" fill="#fff4e0">La Bergerie</text></g>
+        </svg>
+        <div class="camion" id="camion">
+          <svg viewBox="0 0 270 150">
+            <rect x="8" y="26" width="176" height="92" rx="12" fill="#fff4e0"/>
+            <path d="M184 52h34c26 2 38 22 42 44v22h-76z" class="f-vif"/>
+            <path d="M192 60h24c16 2 26 14 30 30h-54z" fill="#2a1a12"/>
+            <rect x="8" y="98" width="252" height="20" rx="4" class="f-vif"/>
+            <rect x="28" y="46" width="104" height="40" rx="5" fill="#2a1a12"/>
+            <path d="M22 30h116v14c-7 8-12 8-19 0-7 8-13 8-20 0-7 8-12 8-19 0-7 8-13 8-20 0-7 8-12 8-19 0-7 8-12 8-19 0z" class="f-vif"/>
+            <g fill="#fff4e0"><rect x="41" y="30" width="19" height="15"/><rect x="80" y="30" width="19" height="15"/><rect x="119" y="30" width="19" height="15"/></g>
+            <rect x="24" y="84" width="112" height="8" rx="3" fill="#a9793f"/>
+            <circle cx="80" cy="66" r="15" fill="#e8a94f"/><circle cx="80" cy="66" r="11" class="f-vif"/><circle cx="76" cy="62" r="3" fill="#fff4e0"/><circle cx="85" cy="69" r="3" fill="#fff4e0"/><circle cx="79" cy="72" r="2" fill="#1f6a41"/>
+            <text x="136" y="113" text-anchor="middle" font-family="'Stardos Stencil', Georgia, serif" font-weight="700" font-size="13" letter-spacing="1.5" fill="#fff4e0">LA BERGERIE</text>
+            <g class="roue-c" style="transform-origin:58px 120px"><circle cx="58" cy="120" r="20" fill="#2a1a12"/><circle cx="58" cy="120" r="9" fill="#fff4e0"/><rect x="55" y="103" width="6" height="34" fill="#2a1a12"/><rect x="41" y="117" width="34" height="6" fill="#2a1a12"/></g>
+            <g class="roue-c" style="transform-origin:214px 120px"><circle cx="214" cy="120" r="20" fill="#2a1a12"/><circle cx="214" cy="120" r="9" fill="#fff4e0"/><rect x="211" y="103" width="6" height="34" fill="#2a1a12"/><rect x="197" y="117" width="34" height="6" fill="#2a1a12"/></g>
+          </svg>
+        </div>
+      </div>
+      <p class="tampon tampon-ferme" id="tampon-ferme"><b data-note></b><span>sur Google</span><i data-avis></i></p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAITEUR : la grande table -->
+<section class="traiteur" id="traiteur">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans traiteur-grille">
+    <div class="traiteur-texte">
+      <p class="pochoir sur">Pizzeria et traiteur</p>
+      <h2>Traiteur, <em>aussi.</em></h2>
+      <p class="chapo">La Bergerie fait aussi traiteur. Vos formules, vos menus et vos conditions s’écrivent ici, avec vos mots.</p>
+      <dl class="a-remplir">
+        <div><dt>Pour quelles occasions</dt><dd></dd></div>
+        <div><dt>Vos formules</dt><dd></dd></div>
+        <div><dt>À partir de combien de convives</dt><dd></dd></div>
+      </dl>
+      <figure class="partage"><img src="photos/partage.webp" alt="Des mains se servent dans une pizza posée dans son carton" loading="lazy" width="1000" height="1500"><figcaption>Image d’illustration</figcaption></figure>
+    </div>
+    <div class="tablee">
+      <p class="tablee-titre">Dressez la table. Vous serez combien&#8239;?</p>
+      <div class="tablee-compte">
+        <button class="rond-bouton" type="button" id="moins" aria-label="Un convive de moins">&minus;</button>
+        <output class="tablee-nombre" id="nombre" aria-live="polite">12</output>
+        <button class="rond-bouton" type="button" id="plus" aria-label="Un convive de plus">+</button>
+        <span class="tablee-mot">convives</span>
+      </div>
+      <div class="table-zone" id="table-zone" aria-hidden="true"><div class="table-bois nappe"></div></div>
+      <p class="tablee-suite"><a class="bouton plein" data-tel data-traiteur>Appeler pour en parler</a><span class="petit" id="tablee-phrase"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- HORAIRES : sept fours, quatre allumés -->
+<section class="horaires" id="horaires">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans">
+    <header class="tete-section">
+      <p class="pochoir sur">Horaires et lieu</p>
+      <h2>Le soir, <em>quatre fois par semaine.</em></h2>
+      <p class="chapo" id="statut"></p>
+    </header>
+    <div class="fours" id="fours"></div>
+    <div class="lieu">
+      <div class="colis">
+        <p class="pochoir">Où nous trouver</p>
+        <p class="colis-ligne">Corps de ferme</p>
+        <p class="colis-ligne vide" aria-label="Adresse exacte à compléter"></p>
+        <p class="colis-ligne">33540 Saint-Laurent-du-Bois</p>
+        <p class="colis-bas"><a class="bouton" id="itineraire" target="_blank" rel="noopener">Voir sur la carte</a></p>
+      </div>
+      <p class="petit lieu-note">Horaires relevés en ligne, adresse du corps de ferme en pointillés : on les confirme ensemble avant toute mise en ligne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMANDE : un coup de fil -->
+<section class="commande" id="commande">
+  <div class="coupe" aria-hidden="true"><i class="onde"></i><span class="roulette"><i class="manche"></i><i class="lame"></i></span></div>
+  <div class="dans commande-grille">
+    <div class="commande-texte">
+      <p class="pochoir sur">Commander</p>
+      <h2>À emporter.</h2>
+      <p class="chapo">Un coup de fil, et elle est prête.</p>
+      <a class="patons" id="patons" data-tel aria-label="Appeler le 06 75 78 46 00"></a>
+      <p class="petit">Touchez les pâtons : ils composent le numéro.</p>
+    </div>
+    <div class="bloc" id="bloc">
+      <p class="pochoir">Ma commande</p>
+      <div class="bloc-lignes" id="bloc-lignes"></div>
+      <p class="bloc-total"><span>Total</span><b id="bloc-total">0,00 €</b></p>
+      <p class="petit">Hors suppléments. Rien n’est envoyé : cette liste vous sert à passer votre appel.</p>
+      <a class="bouton plein" data-tel>Appeler le <span data-num></span></a>
+    </div>
+    <figure class="siege" id="siege"><img src="photos/siege.webp" alt="Deux cartons à pizza attachés sur le siège passager d’une voiture, devant une ferme le soir" loading="lazy" width="1500" height="1120"><figcaption>Image d’illustration</figcaption></figure>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="dans pied-grille">
+    <div class="pied-pages">
+      <p class="pied-grand">Votre site peut avoir autant de pages que vous voulez.</p>
+      <p>Une page pour la carte, une pour la pizza du mois, une pour le traiteur, une pour le lieu : c’est vous qui voyez. Ici, une seule page pour vous donner l’idée.</p>
+    </div>
+    <div class="pied-fin">
+      <p>Maquette privée préparée pour La Bergerie. Rien n’est en ligne, rien n’est envoyé. Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+      <p class="petit">La Raclette : photo de La Bergerie. Les autres images sont des illustrations, en attendant les vôtres. Ce qui est en pointillés attend vos vrais mots.</p>
+      <p class="pied-liens"><a href="#carte">La carte</a><a href="#jeu">Composez</a><a href="#horaires">Horaires</a><a href="#commande">Commander</a></p>
+      <a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="fr" data-teinte="rouge">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Garage Mayen, carrosserie, peinture et mécanique à Livré-sur-Changeon</title>
+<meta name="description" content="Maquette privée préparée pour Garage Mayen, 6 rue des Bodinières à Livré-sur-Changeon : carrosserie, peinture, mécanique, achat et revente de véhicules.">
+<meta name="theme-color" content="#0e1012">
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js');/* Le mouvement joue toujours (animations de Windows coupées sur le PC de Mathéo). Mode calme sur demande : ?calme=1 */if(/[?&]calme=1/.test(location.search))document.documentElement.classList.add('calme');(function(){var m=/[?&]palette=(rouge|bleu|vert|gris|orange|jaune)/.exec(location.search);if(m)document.documentElement.dataset.teinte=m[1]})();</script>
+<link rel="stylesheet" href="style.css">
+<style>/* la laque des photos suit la teinte : le rouge de la photo est remplacé, les reflets blancs restent blancs */
+html[data-teinte=orange] .laque{filter:url(#laque-orange)}
+html[data-teinte=jaune] .laque{filter:url(#laque-jaune)}
+html[data-teinte=vert] .laque{filter:url(#laque-vert)}
+html[data-teinte=bleu] .laque{filter:url(#laque-bleu)}
+html[data-teinte=gris] .laque{filter:url(#laque-gris)}
+</style>
+<script src="app.js" defer></script>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><filter id="laque-orange" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1.5 -0.5 0 0 0  0.62 0.38 0 0 0  0.04 -0.04 1 0 0  0 0 0 1 0"/></filter><filter id="laque-jaune" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1.62 -0.62 0 0 0  1.26 -0.26 0 0 0  0.05 -0.05 1 0 0  0 0 0 1 0"/></filter><filter id="laque-vert" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.1 0.9 0 0 0  0.78 0.22 0 0 0  0.44 -0.44 1 0 0  0 0 0 1 0"/></filter><filter id="laque-bleu" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.14 0.86 0 0 0  0.4 0.6 0 0 0  1.4 -1.4 1 0 0  0 0 0 1 0"/></filter><filter id="laque-gris" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.72 0.28 0 0 0  0.76 0.24 0 0 0  0.8 -0.8 1 0 0  0 0 0 1 0"/></filter></defs></svg>
+
+<header class="tete">
+  <a class="marque" href="#haut">Garage <b>Mayen</b></a>
+  <nav aria-label="Rubriques">
+    <a href="#carrosserie">Carrosserie</a>
+    <a href="#peinture">Peinture</a>
+    <a href="#mecanique">Mécanique</a>
+    <a href="#occasions">Occasions</a>
+    <a href="#devis">Devis</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="tete-d">
+    <div class="compteur" aria-hidden="true"><span class="E">Page<br>parcourue</span><span class="tambours" id="tambours"></span><span>cm</span></div>
+    <a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    <a class="btn" href="tel:+33663697507"><span class="mot">Appeler</span><span class="num">06 63 69 75 07</span></a>
+    <button class="burger" type="button" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <nav aria-label="Menu">
+    <a href="#carrosserie" style="--i:0"><span>Carrosserie</span></a>
+    <a href="#peinture" style="--i:1"><span>Peinture</span></a>
+    <a href="#mecanique" style="--i:2"><span>Mécanique</span></a>
+    <a href="#occasions" style="--i:3"><span>Occasions</span></a>
+    <a href="#devis" style="--i:4"><span>Devis</span></a>
+    <a href="#contact" style="--i:5"><span>Contact</span></a>
+  </nav>
+  <div class="menu-bas">
+    <a class="btn" href="tel:+33663697507">06 63 69 75 07</a>
+    <p class="E">6 rue des Bodinières, Livré-sur-Changeon</p>
+  </div>
+</div>
+
+<main id="haut">
+
+<!-- ================= HÉROS ================= -->
+<section class="heros" id="heros">
+  <div class="heros-l l">
+    <div class="heros-t">
+      <p class="E heros-lieu ap">6 rue des Bodinières <b>/</b> Livré-sur-Changeon</p>
+      <h1 class="heros-nom vu" data-fit="25" aria-label="Garage Mayen">
+        <span class="lg" aria-hidden="true"><span>Garage</span></span>
+        <span class="lg" aria-hidden="true" style="--d:1"><span class="laque-mot">Mayen<span class="laque-b" id="reflet">Mayen</span></span></span>
+      </h1>
+      <p class="heros-acc ap" style="--d:4">Carrosserie, peinture, mécanique. <b>Achat et revente de véhicules.</b></p>
+      <div class="heros-btn ap" style="--d:5">
+        <a class="btn" href="#devis">Demander un devis <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        <a class="btn clair" href="tel:+33663697507">06 63 69 75 07</a>
+      </div>
+    </div>
+    <figure class="heros-photo">
+      <div class="cadre ap" style="--d:2"><img class="laque" data-px=".1" src="photos/hero.webp" alt="Une citadine garée dans un atelier sombre, sous des néons" width="1920" height="1086" fetchpriority="high"></div>
+      <figcaption class="illu">Image d'illustration, à remplacer par la vôtre</figcaption>
+    </figure>
+  </div>
+  <div class="defile" aria-hidden="true"><div class="defile-p"><span>Carrosserie <b>/</b></span><span>Peinture <b>/</b></span><span>Mécanique <b>/</b></span><span>Achat, revente <b>/</b></span><span>Livré-sur-Changeon <b>/</b></span></div></div>
+</section>
+
+<!-- ================= CARROSSERIE ================= -->
+<section class="trans" id="carrosserie" style="--de:var(--noir);--vers:var(--appret);--ct:var(--noir)" aria-label="Carrosserie">
+  <div class="trans-v">
+    <div class="essuie" aria-hidden="true"></div>
+    <div class="t-carte">
+      <div class="t-haut">
+        <p class="t-intro chapo">Avant Garage Mayen, il y avait <b>Carrosserie Mayen.</b> Le métier est resté.</p>
+        <figure class="t-photo"><div class="cadre"><img src="photos/carrosserie.webp" alt="Des mains gantées poncent une aile mastiquée" loading="lazy"><span class="illu">Image d'illustration</span></div></figure>
+      </div>
+      <span class="E">Froissée, puis redressée</span>
+      <h2 class="t-mot froisse" data-fit="30" data-lettres data-cur="Tapez">Carrosserie</h2>
+      <p class="t-ligne" data-fit="15">Un choc, une rayure : on redresse.</p>
+    </div>
+  </div>
+</section>
+<section class="bloc clair haut0">
+  <div class="l g2">
+    <div class="pile">
+      <p class="chapo ap">On regarde, on démonte ce qu'il faut, on redresse ou on remplace. <b>À la fin, ça ne se voit plus.</b></p>
+      <div class="rubans">
+        <span class="ruban" style="--r:-2deg;--i:0"><span class="ex">Redressage</span></span>
+        <span class="ruban" style="--r:1.5deg;--i:1"><span class="ex">Débosselage</span></span>
+        <span class="ruban" style="--r:-1deg;--i:2"><span class="ex">Remplacement d'éléments</span></span>
+        <span class="ruban" style="--r:2deg;--i:3"><span class="ex">Pare-chocs</span></span>
+        <span class="ruban" style="--r:-1.5deg;--i:4"><span class="ex">Vitrage</span></span>
+        <span class="ruban" style="--r:1deg;--i:5"><span class="ex">Dossier d'assurance</span></span>
+      </div>
+      <p class="note ap">Sur ruban de masquage et en pointillés : des exemples de prestations, à confirmer avec vous.</p>
+      <a class="btn sombre ap" href="#devis" data-motif="Carrosserie">Devis carrosserie <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <figure class="ap">
+      <div class="compare" id="compare" data-cur="Glisser" role="slider" tabindex="0" aria-label="Comparer avant et après réparation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <img class="laque" src="photos/macro-apres.webp" alt="Une aile de voiture après réparation : laque nette, reflet droit" width="1600" height="905" loading="lazy">
+        <div class="compare-av"><img class="laque" src="photos/macro-avant.webp" alt="La même aile avant réparation : rayée et enfoncée" width="1600" height="905" loading="lazy"></div>
+        <span class="compare-e av E">Avant</span><span class="compare-e apr E">Après</span>
+        <span class="compare-m" aria-hidden="true"><i><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></i></span>
+      </div>
+      <figcaption class="compare-leg"><span class="E">Glissez pour comparer</span><span class="illu">Images d'exemple, à remplacer par vos réalisations</span></figcaption>
+    </figure>
+  </div>
+  <div class="l carro-b">
+    <div class="pile carro-pile">
+      <p class="gros3 vu-groupe" data-fit="26" aria-label="On ponce. On prépare. On aligne.">
+        <span class="lg" aria-hidden="true"><span>On ponce.</span></span>
+        <span class="lg" aria-hidden="true" style="--d:1"><span>On prépare.</span></span>
+        <span class="lg" aria-hidden="true" style="--d:2"><span>On aligne.</span></span>
+      </p>
+      <p class="chapo ap">Le mastic, la cale, l'apprêt : tout ce qu'on ne verra plus une fois la teinte posée.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PEINTURE ================= -->
+<section class="trans" id="peinture" style="--de:var(--appret);--vers:var(--noir);--ct:var(--appret)" aria-label="Peinture">
+  <div class="trans-v">
+    <div class="passe" aria-hidden="true"></div>
+    <div class="t-carte">
+      <div class="t-haut">
+        <p class="t-intro chapo">Une teinte, ça se choisit. <b>Plus bas, le nuancier repeint tout le site.</b></p>
+        <figure class="t-photo"><div class="cadre"><img src="photos/peinture.webp" alt="Un peintre en combinaison pulvérise une portière" loading="lazy"><span class="illu">Image d'illustration</span></div></figure>
+      </div>
+      <span class="E">Une passe, et tout change</span>
+      <h2 class="t-mot monte peint-l" data-fit="30" data-lettres>Peinture</h2>
+      <p class="t-ligne" data-fit="15">La teinte, le raccord, le vernis.</p>
+    </div>
+  </div>
+</section>
+<section class="bloc sombre haut0">
+  <div class="l g2">
+    <div class="pile">
+      <h3 class="T2 vu-groupe"><span class="lg"><span>Le nuancier.</span></span></h3>
+      <p class="chapo ap">Touchez une teinte : <b>tout le site se repeint,</b> la voiture des photos aussi.</p>
+      <div class="eventail" id="eventail" data-superpose role="group" aria-label="Choisir une teinte"></div>
+    </div>
+    <figure class="teinte-carte">
+      <div class="cadre ap"><img class="laque" data-px=".1" src="photos/macro-apres.webp" alt="Gros plan sur une aile laquée" width="1600" height="905" loading="lazy"></div>
+      <p class="teinte-nom" aria-live="polite"><span id="teinte-nom">Rouge vif</span></p>
+      <figcaption class="illu">Image d'illustration</figcaption>
+    </figure>
+  </div>
+
+  <div class="l">
+    <div class="cabine-t">
+      <div class="pile" style="gap:14px">
+        <h3 class="T2 vu-groupe"><span class="lg"><span>À vous de peindre.</span></span></h3>
+        <p class="chapo ap">Les lettres sont en apprêt. Passez le doigt ou la souris dessus, comme un pistolet.</p>
+      </div>
+      <p class="etat ap" id="etat" aria-live="polite">En apprêt</p>
+    </div>
+    <div class="cabine ap" id="cabine" data-cur="Peindre">
+      <canvas id="toile" aria-label="Le mot Mayen en apprêt, à peindre du doigt ou à la souris"></canvas>
+      <span class="ruban r1">Cabine</span><span class="ruban r2">Fragile, peinture fraîche</span>
+    </div>
+    <div class="cabine-bas">
+      <div class="jauge"><span class="E">Couverture</span><span class="jauge-b"><i id="jauge"></i></span><output id="pc">0 %</output></div>
+      <div class="godets" id="godets" role="group" aria-label="Changer de teinte"></div>
+      <button class="btn clair" type="button" id="poncer">Tout poncer</button>
+    </div>
+  </div>
+
+  <div class="l g2 pein-b">
+    <div class="pile">
+      <p class="gros3 vu-groupe" data-fit="17" aria-label="La bonne teinte.">
+        <span class="lg" aria-hidden="true"><span>La bonne</span></span>
+        <span class="lg" aria-hidden="true" style="--d:1"><span style="color:var(--t)">teinte.</span></span>
+      </p>
+      <div class="rubans">
+        <span class="ruban" style="--r:1.5deg;--i:0"><span class="ex">Raccord de teinte</span></span>
+        <span class="ruban" style="--r:-2deg;--i:1"><span class="ex">Élément complet</span></span>
+        <span class="ruban" style="--r:1deg;--i:2"><span class="ex">Peinture complète</span></span>
+        <span class="ruban" style="--r:-1deg;--i:3"><span class="ex">Vernis</span></span>
+        <span class="ruban" style="--r:2deg;--i:4"><span class="ex">Retouches</span></span>
+      </div>
+      <a class="btn ap" href="#devis" data-motif="Peinture">Devis peinture <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <figure>
+      <div class="cadre ap"><img class="laque" data-px=".1" src="photos/hero-tel.webp" alt="Une citadine dans un atelier sombre, son reflet sur le sol mouillé" width="1080" height="2338" loading="lazy"></div>
+      <figcaption class="illu">Image d'illustration</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= MÉCANIQUE : le pont ================= -->
+<section class="trans pont" id="mecanique" style="--de:var(--noir);--vers:var(--t)" aria-label="Mécanique">
+  <div class="trans-v" id="pont">
+    <div class="dalle"><i class="poteau g" aria-hidden="true"></i><i class="poteau d" aria-hidden="true"></i>
+    <div class="plateau" id="plateau">
+      <h2 class="t-mot monte" data-fit="22" data-lettres>Mécanique</h2>
+      <div class="barre" aria-hidden="true"></div>
+    </div>
+    <div class="dessous">
+      <p class="meca-phrase pd" style="--d:.04">La voiture monte sur le pont. Dessous : ce qui tourne, ce qui freine, ce qui fatigue.</p>
+      <ul class="meca-liste">
+        <li style="--d:.12"><span class="ex">Entretien</span></li>
+        <li style="--d:.18"><span class="ex">Freinage</span></li>
+        <li style="--d:.24"><span class="ex">Distribution</span></li>
+        <li style="--d:.3"><span class="ex">Embrayage</span></li>
+        <li style="--d:.36"><span class="ex">Pneus</span></li>
+        <li style="--d:.42"><span class="ex">Diagnostic</span></li>
+      </ul>
+      <p class="note pd" style="--d:.5">En pointillés : des exemples, à confirmer avec vous.</p>
+      <a class="btn sombre pd" style="--d:.5" href="#devis" data-motif="Mécanique">Prendre rendez-vous <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      <figure class="meca-photo pd" style="--d:.1">
+        <div class="cadre"><img src="photos/mecanique.webp" alt="Des mains gantées serrent un écrou dans un compartiment moteur" width="960" height="1200" loading="lazy"></div>
+        <figcaption class="illu">Image d'illustration</figcaption>
+      </figure>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OCCASIONS ================= -->
+<section class="trans rub" id="occasions" style="--de:var(--t);--vers:var(--appret);--ct:var(--noir)" aria-label="Occasions">
+  <div class="trans-v">
+    <div class="fond-vers" aria-hidden="true"></div>
+    <div class="bandes" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i></div>
+    <div class="t-carte">
+      <div class="t-haut">
+        <p class="t-intro chapo">Votre voiture à vendre, <b>ou la prochaine à trouver.</b></p>
+        <figure class="t-photo"><div class="cadre"><img src="photos/achat.webp" alt="Une main tend une clé, une voiture grise derrière" loading="lazy"><span class="illu">Image d'illustration</span></div></figure>
+      </div>
+      <span class="E">On retire le ruban</span>
+      <h2 class="t-mot monte" data-fit="30" data-lettres>Occasions</h2>
+      <p class="t-ligne" data-fit="15">Achat et revente de véhicules.</p>
+    </div>
+  </div>
+</section>
+<section class="bloc clair haut0">
+  <div class="l">
+    <div class="occ-t">
+      <p class="chapo ap">Votre voiture à vendre, ou la prochaine à trouver. <b>Chaque véhicule a sa fiche, comme sur le pare-brise.</b></p>
+      <p class="rail-aide E ap">Faites glisser <svg viewBox="0 0 54 22" aria-hidden="true"><path d="M2 11h46M40 3l9 8-9 8"/></svg></p>
+    </div>
+    <div class="rail" id="rail" data-cur="Glisser">
+      <article class="fiche">
+        <div class="fiche-photo"><img src="photos/parc-citadine.webp" alt="Une citadine grise devant une porte de garage" width="960" height="717" loading="lazy"><span class="illu">Emplacement d'exemple</span></div>
+        <div class="affichette">
+          <p class="aff-t">À vendre</p>
+          <p class="aff-m ex">Marque, modèle</p>
+          <dl><div><dt>Année</dt><dd class="ex">0000</dd></div><div><dt>Kilométrage</dt><dd class="ex">00 000 km</dd></div><div><dt>Énergie</dt><dd class="ex">À préciser</dd></div></dl>
+          <div class="aff-bas"><p class="aff-p"><span class="ex">0 000 €</span></p><a class="btn" href="#devis" data-motif="Achat, revente">Ça m'intéresse</a></div>
+        </div>
+      </article>
+      <article class="fiche">
+        <div class="fiche-photo"><img src="photos/parc-suv.webp" alt="Un véhicule familial bleu nuit devant une porte de garage" width="960" height="717" loading="lazy"><span class="illu">Emplacement d'exemple</span></div>
+        <div class="affichette">
+          <p class="aff-t">À vendre</p>
+          <p class="aff-m ex">Marque, modèle</p>
+          <dl><div><dt>Année</dt><dd class="ex">0000</dd></div><div><dt>Kilométrage</dt><dd class="ex">00 000 km</dd></div><div><dt>Énergie</dt><dd class="ex">À préciser</dd></div></dl>
+          <div class="aff-bas"><p class="aff-p"><span class="ex">0 000 €</span></p><a class="btn" href="#devis" data-motif="Achat, revente">Ça m'intéresse</a></div>
+        </div>
+      </article>
+      <article class="fiche">
+        <div class="fiche-photo"><img src="photos/parc-utilitaire.webp" alt="Un utilitaire blanc devant une porte de garage" width="960" height="717" loading="lazy"><span class="illu">Emplacement d'exemple</span></div>
+        <div class="affichette">
+          <p class="aff-t">À vendre</p>
+          <p class="aff-m ex">Marque, modèle</p>
+          <dl><div><dt>Année</dt><dd class="ex">0000</dd></div><div><dt>Kilométrage</dt><dd class="ex">00 000 km</dd></div><div><dt>Énergie</dt><dd class="ex">À préciser</dd></div></dl>
+          <div class="aff-bas"><p class="aff-p"><span class="ex">0 000 €</span></p><a class="btn" href="#devis" data-motif="Achat, revente">Ça m'intéresse</a></div>
+        </div>
+      </article>
+      <article class="fiche reprise">
+        <div class="pile" style="gap:16px">
+          <span class="E">Achat</span>
+          <h3>Vous<br>vendez ?</h3>
+          <p>Montrez-nous votre voiture : quelques lignes, une photo si vous en avez une.</p>
+        </div>
+        <a class="btn sombre" href="#devis" data-motif="Achat, revente">Proposer mon véhicule <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+    </div>
+    <p class="note">Emplacements d'exemple : vos véhicules, vos photos et vos prix prendront leur place.</p>
+  </div>
+</section>
+
+<!-- ================= DEVIS ================= -->
+<section class="trans" id="devis" style="--de:var(--appret);--vers:var(--noir);--ct:var(--appret)" aria-label="Devis">
+  <div class="trans-v">
+    <div class="porte g" aria-hidden="true"></div><div class="porte d" aria-hidden="true"></div>
+    <div class="t-carte">
+      <div class="t-haut">
+        <p class="t-intro chapo">Une rayure, un bruit, une voiture à vendre : <b>dites-le en trois touches.</b></p>
+        <figure class="t-photo"><div class="cadre"><img src="photos/atelier.webp" alt="Un atelier de campagne, une voiture sur le pont" loading="lazy"><span class="illu">Image d'illustration</span></div></figure>
+      </div>
+      <span class="E">On referme l'atelier, on parle de la vôtre</span>
+      <h2 class="t-mot monte" data-fit="34" data-lettres>Devis</h2>
+      <p class="t-ligne" data-fit="15">Touchez la voiture, le bon se remplit.</p>
+    </div>
+  </div>
+</section>
+<section class="bloc sombre haut0">
+  <div class="l devis-g">
+    <div class="schema-z">
+      <p class="chapo ap">Touchez les zones abîmées.</p>
+      <span class="E" style="color:var(--gris)">Avant du véhicule</span>
+      <svg class="schema" id="schema" viewBox="0 0 320 600" role="group" aria-label="Schéma de la voiture vue de dessus" data-cur="Toucher">
+        <rect class="roue" x="36" y="98" width="22" height="72" rx="8"/><rect class="roue" x="262" y="98" width="22" height="72" rx="8"/>
+        <rect class="roue" x="36" y="440" width="22" height="72" rx="8"/><rect class="roue" x="262" y="440" width="22" height="72" rx="8"/>
+        <path class="zone" data-z="Pare-chocs avant" d="M84 28Q160 12 236 28Q258 34 264 60H56Q62 34 84 28Z"/>
+        <path class="zone" data-z="Capot" d="M100 70H220L216 172Q160 158 104 172Z"/>
+        <path class="zone" data-z="Aile avant gauche" d="M62 70H90L94 178L86 198H52V88Q52 72 62 70Z"/>
+        <path class="zone" data-z="Aile avant droite" d="M258 70H230L226 178L234 198H268V88Q268 72 258 70Z"/>
+        <path class="zone vitre" data-z="Pare-brise" d="M104 182Q160 168 216 182L206 236Q160 226 114 236Z"/>
+        <path class="zone" data-z="Toit" d="M114 246Q160 236 206 246V386Q160 394 114 386Z"/>
+        <path class="zone" data-z="Porte avant gauche" d="M52 208H86L104 246V312H52ZM52 214L38 219Q33 231 41 234L52 231Z"/>
+        <path class="zone" data-z="Porte avant droite" d="M268 208H234L216 246V312H268ZM268 214L282 219Q287 231 279 234L268 231Z"/>
+        <path class="zone" data-z="Porte arrière gauche" d="M52 322H104V386L96 418H52Z"/>
+        <path class="zone" data-z="Porte arrière droite" d="M268 322H216V386L224 418H268Z"/>
+        <path class="zone" data-z="Aile arrière gauche" d="M52 428H94L98 444L94 526H62Q52 520 52 504Z"/>
+        <path class="zone" data-z="Aile arrière droite" d="M268 428H226L222 444L226 526H258Q268 520 268 504Z"/>
+        <path class="zone vitre" data-z="Lunette arrière" d="M114 396Q160 404 206 396L214 436Q160 446 106 436Z"/>
+        <path class="zone" data-z="Coffre" d="M106 446Q160 456 214 446L218 526H102Z"/>
+        <path class="zone" data-z="Pare-chocs arrière" d="M56 536H264Q260 562 238 570Q160 586 82 570Q60 562 56 536Z"/>
+        <path class="feu" d="M66 46L100 37L102 50L64 55Z"/><path class="feu" d="M254 46L220 37L218 50L256 55Z"/>
+        <path class="feu ar" d="M64 546L98 551L98 561L70 558Z"/><path class="feu ar" d="M256 546L222 551L222 561L250 558Z"/>
+      </svg>
+      <div class="schema-cote E"><span>Côté gauche</span><span>Côté droit</span></div>
+    </div>
+
+    <form class="bon" id="bon" novalidate>
+      <div class="pile" style="gap:10px">
+        <span class="E">Bon de demande</span>
+        <h3>Dites-nous ce qu'il faut.</h3>
+      </div>
+      <div>
+        <p class="E" style="margin-bottom:10px">Zones touchées</p>
+        <div class="bon-zones" id="zones"><span class="vide">Aucune pour l'instant. Touchez le schéma, ou passez directement à la suite.</span></div>
+      </div>
+      <fieldset style="border:0;padding:0">
+        <legend class="E" style="margin-bottom:10px;padding:0">C'est pour</legend>
+        <div class="motifs">
+          <label class="motif"><input type="checkbox" name="motif" value="Carrosserie"><span>Carrosserie</span></label>
+          <label class="motif"><input type="checkbox" name="motif" value="Peinture"><span>Peinture</span></label>
+          <label class="motif"><input type="checkbox" name="motif" value="Mécanique"><span>Mécanique</span></label>
+          <label class="motif"><input type="checkbox" name="motif" value="Achat, revente"><span>Achat, revente</span></label>
+        </div>
+      </fieldset>
+      <div class="champs">
+        <label class="champ"><span>Votre nom</span><input type="text" name="nom" autocomplete="name" placeholder="Prénom et nom"></label>
+        <label class="champ" id="champ-tel"><span>Votre téléphone</span><input type="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="Pour vous rappeler"></label>
+        <label class="champ tout"><span>Le véhicule</span><input type="text" name="vehicule" placeholder="Marque, modèle, année"></label>
+        <label class="champ tout"><span>Votre message</span><textarea name="message" placeholder="Ce qui s'est passé, ce que vous cherchez"></textarea></label>
+      </div>
+      <div class="bon-bas">
+        <button class="btn sombre" type="submit" id="envoyer"><span>Préparer ma demande</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></button>
+        <p class="bon-msg" id="bon-msg" aria-live="polite">Ou par téléphone : <a href="tel:+33663697507"><b>06 63 69 75 07</b></a></p>
+      </div>
+      <p class="pret" aria-hidden="true">Demande prête</p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= INFOS ================= -->
+<div class="defile inv" aria-hidden="true"><div class="defile-p"><span>6 rue des Bodinières <b>/</b></span><span>Livré-sur-Changeon <b>/</b></span><span>06 63 69 75 07 <b>/</b></span><span>Garage Mayen <b>/</b></span></div></div>
+<section class="bloc clair" id="contact">
+  <div class="l infos-g">
+    <div class="pile" style="gap:clamp(14px,2.4vh,24px)">
+      <span class="E ap">Passez nous voir, ou appelez</span>
+      <a class="tel-gros" id="tel-gros" href="tel:+33663697507" data-num="06 63 69 75 07" aria-label="Appeler le 06 63 69 75 07">06 63 69 75 07</a>
+      <address class="adresse ap">6 rue des Bodinières<br>Livré-sur-Changeon
+        <small>Carrosserie Mayen est devenue Garage Mayen le 1er octobre 2026. Même adresse, même atelier.</small>
+      </address>
+      <div class="infos-btn ap">
+        <a class="btn sombre" href="https://www.google.com/maps/search/?api=1&amp;query=6+rue+des+Bodini%C3%A8res+Livr%C3%A9-sur-Changeon" target="_blank" rel="noopener">Itinéraire <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        <a class="btn" href="#devis">Demander un devis</a>
+      </div>
+    </div>
+    <div class="pile" style="justify-items:stretch">
+      <span class="E ap">Horaires</span>
+      <dl class="horaires ap">
+        <div><dt>Du lundi au vendredi</dt><dd>..........</dd></div>
+        <div><dt>Samedi</dt><dd>..........</dd></div>
+        <div><dt>Dimanche</dt><dd>..........</dd></div>
+      </dl>
+      <p class="note ap">En pointillés : vos horaires, à compléter avec vous.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <a class="pied-nom" data-fit="40" href="#haut" aria-label="Garage Mayen, retour en haut">Garage Mayen</a>
+  <div class="pied-l l">
+    <p class="note">Maquette privée préparée pour Garage Mayen. Les textes en pointillés et les images d'illustration sont à remplacer par les vôtres. Rien n'est envoyé depuis cette page.</p>
+    <nav aria-label="Pied de page"><a href="#carrosserie">Carrosserie</a><a href="#peinture">Peinture</a><a href="#mecanique">Mécanique</a><a href="#occasions">Occasions</a><a href="#devis">Devis</a></nav>
+    <a class="kzp" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  </div>
+</footer>
+
+<div class="vague" id="vague" aria-hidden="true"></div>
+<div class="curseur" id="curseur" aria-hidden="true"></div>
+</body>
+</html>

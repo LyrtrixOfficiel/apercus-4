@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="fr" data-palette="ambre">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>A l'Oura, brew pub et restaurant à Castellar</title>
+<meta name="description" content="Maquette privée préparée pour A l'Oura, brew pub et restaurant au 2 place Georges Clémenceau à Castellar.">
+<meta name="theme-color" content="#0f3b2e">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/abril.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Abril';font-display:swap;src:url(polices/abril.woff2) format('woff2')}
+@font-face{font-family:'Shoulders';font-weight:900;font-display:swap;src:url(polices/shoulders-900.woff2) format('woff2')}
+@font-face{font-family:'Zilla';font-weight:500;font-display:swap;src:url(polices/zilla-500.woff2) format('woff2')}
+@font-face{font-family:'Zilla';font-style:italic;font-weight:400;font-display:swap;src:url(polices/zilla-400i.woff2) format('woff2')}
+@font-face{font-family:'Playwrite';font-display:swap;src:url(polices/playwrite-fr.woff2) format('woff2')}
+@font-face{font-family:'Pochoir';font-weight:700;font-display:swap;src:url(polices/stencil-700.woff2) format('woff2')}
+
+/* ---------- l'étiquette : couleurs, caractères ---------- */
+:root{
+  --fond:#0f3b2e;--fond2:#1b5441;--biere:#d9861c;--biere2:#f2ad3e;--accent:#f4b63f;--ombre:#d9861c;--mousse:#fff7e4;
+  --creme:#fdf2d8;--papier:#f3e2bd;--encre:#1f150b;--cuivre:#b4552b;--cuivre2:#e09a6b;--ardoise:#20282b;--craie:#f5f1e6;
+  --mer:#1d5c8a;--mer2:#3d82b3;--email:#1c3f97;--facade:#eeab85;--volet:#2c6a4f;--bois:#5a3218;--nuit:#170f09;--tuile:#b4552b;
+  --gros:'Abril',Georgia,serif;--caps:'Shoulders','Arial Narrow',sans-serif;--txt:'Zilla',Georgia,serif;--main:'Playwrite','Segoe Script',cursive;--poch:'Pochoir',Georgia,serif;
+  --tete:60px;--bord:clamp(18px,5vw,96px);--grain:none;
+}
+html[data-palette=blonde]{--fond:#113848;--fond2:#1d5268;--biere:#e6ad24;--biere2:#f8d25c;--accent:#f9d15a;--ombre:#d99a12}
+html[data-palette=brune]{--fond:#2b1a12;--fond2:#49301f;--biere:#6f3611;--biere2:#9a5524;--accent:#eaa968;--ombre:#b4552b;--mousse:#f6e6c8}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:var(--tete)}
+body{background:var(--nuit);color:var(--encre);font:500 clamp(17px,.5vw + 14.5px,22px)/1.45 var(--txt);-webkit-font-smoothing:antialiased}
+.page{overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--accent);outline-offset:3px}
+h2{font:400 clamp(40px,5vw,88px)/.98 var(--gros);letter-spacing:-.01em;text-wrap:balance}
+h2 em{font-style:normal;color:var(--cuivre)}
+.sur{display:flex;align-items:center;gap:.7em;font:900 clamp(15px,1.05vw,20px)/1 var(--caps);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9em}
+.sur::before{content:'';flex:none;width:2.2em;height:.42em;background:currentColor;border-radius:2px}
+.gros-txt{font-size:clamp(19px,1.45vw,27px);line-height:1.38;max-width:34ch;text-wrap:pretty}
+.pts{flex:1 1 1.5em;min-width:1.5em;align-self:flex-end;border-bottom:4px dotted currentColor;opacity:.5;margin:0 .5em .32em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font:900 clamp(17px,1.15vw,22px)/1 var(--caps);letter-spacing:.09em;text-transform:uppercase;text-decoration:none;white-space:nowrap;padding:.8em 1.2em .72em;border:0;border-radius:7px;cursor:pointer;background:var(--accent);color:var(--encre);box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .15s,box-shadow .15s,background .7s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 rgba(0,0,0,.3)}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.btn.clair{background:var(--creme)}
+.btn.sombre{background:var(--encre);color:var(--creme)}
+.ruban{display:inline-block;font:900 clamp(14px,1vw,18px)/1 var(--caps);letter-spacing:.13em;text-transform:uppercase;padding:.62em 1.4em .5em;background:var(--accent);color:var(--encre);clip-path:polygon(0 0,100% 0,calc(100% - .62em) 50%,100% 100%,0 100%,.62em 50%);transition:background .7s}
+.rev{opacity:0;transform:translateY(34px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*90ms)}
+.rev.vu{opacity:1;transform:none}
+
+/* ---------- tête ---------- */
+.tete{position:fixed;inset:0 0 auto 0;height:var(--tete);z-index:60;display:flex;align-items:center;gap:clamp(10px,2vw,34px);padding:0 var(--bord);background:var(--fond);color:var(--creme);border-bottom:5px solid var(--accent);transition:background .7s,border-color .7s}
+.marque{display:flex;align-items:baseline;gap:.55em;font:400 clamp(25px,2vw,33px)/1 var(--gros);color:var(--creme);text-decoration:none;white-space:nowrap}
+.marque span{font:900 14px/1 var(--caps);letter-spacing:.15em;text-transform:uppercase;color:var(--accent);transition:color .7s}
+.liens{display:flex;gap:clamp(8px,1.5vw,28px);margin-left:auto}
+.liens a{font:900 clamp(15px,1.02vw,18px)/1 var(--caps);letter-spacing:.11em;text-transform:uppercase;color:var(--creme);text-decoration:none;padding:10px 3px 7px;border-bottom:4px solid transparent;white-space:nowrap}
+.liens a:hover,.liens a.ici{color:var(--accent);border-color:var(--accent)}
+.tete-d{display:flex;align-items:center;gap:clamp(10px,1.2vw,18px);margin-left:clamp(6px,1.6vw,34px)}
+.kz{font:900 14px/1 var(--caps);letter-spacing:.2em;text-transform:uppercase;color:var(--creme);text-decoration:none;padding:8px 2px}
+.kz:hover{color:var(--accent)}
+.tete .btn{font-size:16px;padding:.62em .9em .55em;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+@media(max-width:1080px){.liens{display:none}.tete-d{margin-left:auto}.marque span{display:none}}
+
+/* ---------- accueil : l'étiquette et la tireuse ---------- */
+.hero{position:relative;min-height:max(600px,min(100svh,940px));padding:calc(var(--tete) + clamp(16px,2.6vh,36px)) var(--bord) 80px;background:var(--fond);color:var(--creme);display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(16px,3vw,60px);align-items:center;overflow:clip;transition:background .7s}
+.sceau{position:absolute;right:-7vw;top:50%;width:min(96vh,62vw);aspect-ratio:1;margin-top:calc(min(96vh,62vw)/-2 + 10px);color:var(--fond2);pointer-events:none;transition:color .7s}
+.sceau-t{width:100%;height:100%;animation:tourne 90s linear infinite}
+.sceau svg{display:block;width:100%;height:100%;overflow:visible}
+.sceau text{font:900 37px/1 var(--caps);letter-spacing:.14em;fill:var(--fond);transition:fill .7s}
+.sceau .sc-fond{fill:var(--fond);transition:fill .7s}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.hero-txt{position:relative;z-index:2;container-type:inline-size;min-width:0;padding-bottom:calc(4.4*min(21px,2.3vh))}
+.rubans{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:clamp(12px,2vh,26px)}
+.rubans .r2{background:var(--creme)}
+.rubans .r3{background:var(--cuivre);color:var(--creme)}
+h1{font:400 clamp(64px,11vw,200px)/.9 var(--gros);font-size:clamp(64px,23cqw,210px);letter-spacing:-.02em;color:var(--creme);white-space:nowrap;text-shadow:.045em .05em 0 var(--ombre);margin:0 0 .12em -.03em;transition:text-shadow .7s}
+h1 .l{display:inline-block;animation:frappe .7s cubic-bezier(.2,1.5,.4,1) both,flotte 3.6s ease-in-out infinite;animation-delay:calc(.25s + var(--i)*70ms),calc(1.2s + var(--i)*-.5s)}
+h1 .esp{width:.24em}
+@keyframes frappe{from{opacity:0;transform:scale(1.9) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes flotte{0%,100%{translate:0 0}50%{translate:0 -.035em}}
+.accroche{font:italic 400 clamp(21px,1.9vw,34px)/1.22 var(--txt);max-width:24ch;text-wrap:balance;margin-bottom:clamp(16px,2.6vh,30px)}
+.boutons{display:flex;flex-wrap:wrap;gap:14px 14px}
+.adresse-h{margin-top:clamp(14px,2.4vh,26px);font:900 clamp(14px,1vw,18px)/1.3 var(--caps);letter-spacing:.13em;text-transform:uppercase;color:var(--accent);transition:color .7s}
+.entre{animation:monte .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*90ms)}
+@keyframes monte{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+.tirage{position:relative;z-index:2;align-self:end;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(12px,1.6vw,30px);justify-content:center;font-size:min(21px,2.3vh,3.85vw);user-select:none;-webkit-user-select:none}
+.scene{position:relative;width:22em;height:32em;flex:none}
+.comptoir{position:absolute;left:-100vw;right:-100vw;bottom:-130px;height:calc(4em + 130px);background:linear-gradient(#9a6033 0 .7em,#6b3d1c .7em 1.5em,#5a3218 1.5em)}
+.colonne{position:absolute;left:1.2em;bottom:4em;width:2.4em;height:20em;border-radius:1.2em 1.2em 0 0;background:linear-gradient(90deg,#7c3517,#e09a6b 38%,#f6c9a4 50%,#b4552b 72%,#6e2d12)}
+.colonne::after{content:'';position:absolute;left:-.5em;right:-.5em;bottom:0;height:1.3em;border-radius:.5em .5em 0 0;background:linear-gradient(90deg,#6e2d12,#d98a5a 45%,#7c3517)}
+.bras{position:absolute;left:1.2em;bottom:21.4em;width:17em;height:2.6em;border-radius:1.3em;background:linear-gradient(#f6c9a4,#e09a6b 30%,#b4552b 70%,#6e2d12)}
+.bec{position:absolute;left:10.5em;bottom:19.6em;width:1.6em;height:2em;border-radius:0 0 .5em .5em;background:linear-gradient(90deg,#6b7b83,#e6edef 45%,#7d8d95)}
+.poignee{position:absolute;z-index:3;bottom:23.5em;width:2.6em;height:6.6em;padding:0;border:0;border-radius:1.3em 1.3em .55em .55em;background:var(--pc);box-shadow:inset -.45em 0 0 rgba(0,0,0,.2),inset .35em 0 0 rgba(255,255,255,.28);cursor:pointer;transform-origin:50% 100%;transition:transform .14s cubic-bezier(.3,1.6,.5,1);touch-action:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.poignee span{position:absolute;inset:.5em 0;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:900 1.02em/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--pt)}
+.poignee[data-p=blonde]{left:5.5em;--pc:#f0c034;--pt:#1f150b}
+.poignee[data-p=ambre]{left:10em;--pc:#d9861c;--pt:#1f150b}
+.poignee[data-p=brune]{left:14.5em;--pc:#6f3611;--pt:#fdf2d8}
+.poignee.tire{transform:rotate(-26deg)}
+.tirage:not(.joue) .poignee[data-p=ambre]{animation:appel 2.6s ease-in-out 2.2s infinite}
+@keyframes appel{0%,55%,100%{transform:none}65%{transform:rotate(-13deg)}75%{transform:rotate(4deg)}85%{transform:rotate(-7deg)}}
+.jet{position:absolute;left:10.9em;top:12.4em;width:.8em;height:14em;border-radius:0 0 .4em .4em;background:linear-gradient(90deg,var(--biere),var(--biere2) 50%,var(--biere));transform-origin:50% 0;opacity:0;transition:opacity .1s}
+.tirage.coule .jet{opacity:1;animation:jet .16s linear infinite}
+@keyframes jet{50%{width:.62em;margin-left:.09em}}
+.piste{position:absolute;inset:0;pointer-events:none;transition:transform .7s cubic-bezier(.3,1.2,.4,1),opacity .4s}
+.piste.part{transform:translateX(15em);opacity:0;transition:transform .7s cubic-bezier(.6,0,.9,.6),opacity .5s .2s}
+.piste.avant{transform:translateX(-14em);opacity:0;transition:none}
+.dessous{position:absolute;left:5.4em;bottom:4em;width:11.8em;height:.75em;border-radius:.3em;background:var(--creme);box-shadow:inset 0 -.25em 0 rgba(0,0,0,.18)}
+.verre{position:absolute;left:6.55em;bottom:4.75em;width:9.5em;height:14em}
+.verre-in{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,90% 100%,10% 100%);background:rgba(255,247,228,.16)}
+.jauge-in{position:absolute;inset:0 0 .9em 0;overflow:hidden}
+.ecume,.liquide{position:absolute;inset:0;transform:translateY(100%);will-change:transform}
+.ecume{background:var(--mousse)}
+.ecume::before{content:'';position:absolute;left:-.4em;right:-.4em;top:-1.05em;height:1.1em;background:radial-gradient(1.5em 1.1em at 50% 100%,var(--mousse) 97%,transparent) 0 0/2.9em 1.1em repeat-x}
+.liquide{background:linear-gradient(90deg,var(--biere),var(--biere2) 42%,var(--biere) 96%);transition:background .5s}
+.verre-in::after{content:'';position:absolute;left:0;right:0;bottom:0;height:.9em;background:rgba(255,247,228,.45)}
+.verre::before{content:'';position:absolute;left:1.5em;top:1.1em;bottom:2.2em;width:.8em;border-radius:.4em;background:rgba(255,255,255,.34);transform:rotate(2.6deg);z-index:2}
+.verre::after{content:'';position:absolute;left:-.25em;right:-.25em;top:-.2em;height:.55em;border-radius:.3em;background:rgba(255,247,228,.6);z-index:2}
+.marque-trait{position:absolute;right:.42em;bottom:10.55em;width:2.4em;height:.36em;border-radius:.2em;background:var(--creme);z-index:3}
+.trait{position:absolute;left:16.5em;bottom:14.95em;display:flex;align-items:center;gap:.4em;font:900 1.02em/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.trait::before{content:'';width:1.7em;height:.36em;border-radius:.2em;background:var(--accent)}
+.deborde{position:absolute;left:-.9em;right:-.9em;top:-1.7em;height:3em;z-index:4;pointer-events:none}
+.deborde i{position:absolute;bottom:0;border-radius:50%;background:var(--mousse);transform:scale(0);transform-origin:50% 100%}
+.deborde i:nth-child(1){left:0;width:4.2em;height:3em}
+.deborde i:nth-child(2){left:3.4em;width:4.8em;height:3.5em}
+.deborde i:nth-child(3){right:0;width:4.4em;height:3em}
+.deborde b{position:absolute;top:2em;width:1.15em;height:1.2em;border-radius:.6em;background:var(--mousse);opacity:0}
+.deborde b:nth-of-type(1){left:.55em}
+.deborde b:nth-of-type(2){right:.55em}
+.verre.trop .deborde i{transform:scale(1);transition:transform .5s cubic-bezier(.3,1.7,.5,1)}
+.verre.trop .deborde i:nth-child(2){transition-delay:.08s}
+.verre.trop .deborde i:nth-child(3){transition-delay:.16s}
+.verre.trop .deborde b{opacity:1;animation:coule 1.5s cubic-bezier(.4,0,.7,1) forwards}
+.verre.trop .deborde b:nth-of-type(2){animation-delay:.25s}
+@keyframes coule{to{height:11em}}
+.carton{position:relative;max-width:22em;min-width:min(200px,100%);padding:1.2em 1.3em 1.1em;background:var(--creme);color:var(--encre);border-radius:1.1em;box-shadow:inset 0 0 0 .32em var(--creme),inset 0 0 0 .6em var(--biere),0 .7em 0 rgba(0,0,0,.25);transform:rotate(2.2deg);font-size:max(15px,.84em);transition:box-shadow .7s}
+.carton .sur{font-size:1.02em;margin-bottom:.6em;color:var(--cuivre)}
+.verdict{font:400 1.62em/1.08 var(--gros);min-height:3.3em;text-wrap:balance}
+.verdict.pop{animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{from{transform:scale(.8) rotate(-3deg);opacity:.2}}
+.compte{display:flex;flex-wrap:wrap;align-items:center;gap:.3em .7em;margin-top:.55em;font:900 1.05em/1.1 var(--caps);letter-spacing:.1em;text-transform:uppercase}
+.batons{display:flex;flex-wrap:wrap;gap:.35em 0;color:var(--cuivre)}
+.gr{position:relative;display:inline-flex;gap:.3em;height:1.5em;margin-right:.75em}
+.gr .bt{width:.32em;border-radius:.16em;background:currentColor;animation:baton .3s cubic-bezier(.3,1.6,.5,1) both}
+.gr .bt:nth-child(2n){transform:rotate(5deg)}
+.gr .bt:nth-child(3n){transform:rotate(-4deg)}
+.gr .tr{position:absolute;left:-.3em;right:-.3em;top:50%;height:.32em;margin-top:-.16em;border-radius:.16em;background:currentColor;transform:rotate(-24deg);animation:baton .3s both}
+@keyframes baton{from{opacity:0;scale:1 0}}
+.note-t{margin-top:.75em;font-size:.95em;line-height:1.3;opacity:.85}
+
+/* ---------- la mousse qui monte d'une rubrique à l'autre ---------- */
+.mousse-bord{position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:clamp(46px,6vw,84px);display:flex;align-items:flex-end;overflow:hidden;pointer-events:none}
+.mousse-bord i{flex:1 1 0;margin:0 -2.2%;height:var(--h,100%);border-radius:50% 50% 0 0/100% 100% 0 0;background:var(--c,var(--creme));transform:translateY(102%);will-change:transform}
+
+/* ---------- le brew pub : sous-bocks ---------- */
+.brewpub{position:relative;z-index:3;padding:clamp(28px,3vw,52px) var(--bord) clamp(56px,5vw,96px);background:var(--grain),var(--creme);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3.2fr) minmax(0,7fr);gap:clamp(24px,3.4vw,64px);align-items:center}
+.brewpub h2{margin-bottom:.35em}
+.brewpub .depuis{margin-top:1.1em}
+.tirages{position:relative;aspect-ratio:10/13;max-width:420px;width:100%;justify-self:center}
+.photo{position:absolute;margin:0;overflow:hidden;background:var(--fond);box-shadow:0 0 0 8px var(--creme),0 0 0 12px var(--fond),0 18px 0 -2px rgba(31,21,11,.16);transition:box-shadow .7s}
+.photo img{width:100%;height:118%;object-fit:cover;will-change:transform}
+.ph1{left:0;top:0;width:86%;aspect-ratio:3/2;border-radius:10px;transform:rotate(-3.5deg)}
+.ph2{right:0;bottom:0;width:60%;aspect-ratio:2/3;border-radius:50% 50% 10px 10px/32% 32% 10px 10px;transform:rotate(3deg)}
+.illus{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);padding:.5em .9em .42em;border-radius:5px;background:var(--creme);color:var(--encre);font:900 13px/1 var(--caps);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.sbs{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,26px);container-type:inline-size}
+.sbs-note{grid-column:1/-1;font:900 clamp(14px,1vw,18px)/1.2 var(--caps);letter-spacing:.13em;text-transform:uppercase;color:var(--cuivre);text-align:center;margin-top:.4em}
+.sb-place{aspect-ratio:1;transition:transform 1.1s cubic-bezier(.16,.9,.24,1),opacity .4s;transition-delay:calc(var(--d)*110ms);transform:translateX(70vw) rotate(260deg);opacity:0}
+.sbs.vu .sb-place{transform:rotate(var(--r));opacity:1}
+.sb{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:grab;perspective:900px;touch-action:pan-y;filter:drop-shadow(0 7px 0 rgba(31,21,11,.2));will-change:transform;-webkit-tap-highlight-color:transparent}
+.sb.prise{cursor:grabbing;filter:drop-shadow(0 18px 6px rgba(31,21,11,.25));z-index:5;position:relative}
+.sb-in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,1.3,.5,1)}
+.sb:hover .sb-in{transform:rotateY(14deg) rotateX(6deg)}
+.sb.retourne .sb-in{transform:rotateY(180deg)}
+.sb-f,.sb-d{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.28em;padding:14%;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--sc);color:var(--st);border-radius:var(--sr,50%);font-size:clamp(9px,3cqw,24px)}
+.sb-f::before{content:'';position:absolute;inset:5%;border-radius:inherit;box-shadow:inset 0 0 0 .32em var(--sl,var(--st));opacity:.9}
+.sb-d{transform:rotateY(180deg);background:var(--creme);color:var(--encre);font:italic 400 1.12em/1.2 var(--txt)}
+.sb-d::before{content:'';position:absolute;inset:5%;border-radius:inherit;box-shadow:inset 0 0 0 .32em var(--sc)}
+.sb-f small{font:900 .78em/1 var(--caps);letter-spacing:.16em;text-transform:uppercase}
+.sb-f b{font:400 1.75em/.95 var(--gros)}
+.sb-d span{position:relative;max-width:11em}
+
+/* ---------- le bandeau d'étiquette ---------- */
+.bande{position:relative;z-index:3;overflow:hidden;background:var(--accent);color:var(--encre);padding:.5em 0 .42em;border-block:6px solid var(--encre);transition:background .7s}
+.bande-in{display:flex;width:max-content;will-change:transform}
+.bande span{display:flex;align-items:center;gap:.55em;padding-right:.55em;font:900 clamp(26px,3.2vw,54px)/1 var(--caps);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.caps{display:inline-block;width:.74em;height:.74em;background:var(--cuivre);flex:none}
+
+/* ---------- de la cuve au verre ---------- */
+.cuve{position:relative;z-index:2;height:330vh;background:var(--nuit);color:var(--creme)}
+.cuve-colle{position:sticky;top:var(--tete);height:calc(100vh - var(--tete));height:calc(100svh - var(--tete));overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(14px,2.6vh,36px) 0 clamp(12px,2.2vh,28px)}
+.cuve-tete{padding:0 var(--bord)}
+.cuve h2{font-size:clamp(33px,4.3vw,72px);max-width:32ch}
+.cuve h2 em{color:var(--accent);transition:color .7s}
+.cuve .sur{color:var(--cuivre2)}
+.ligne{position:relative;display:flex;width:max-content;min-width:100%;justify-content:space-around;font-size:min(2.5vh,calc(var(--pw,280px)/14.5));padding:0 clamp(40px,5vw,110px) 0 clamp(10px,3vw,60px);will-change:transform}
+.tuyau{position:absolute;left:0;right:0;top:10.6em;height:1.7em;background:#3a2414}
+.tuyau i{position:absolute;inset:.3em 0;background:linear-gradient(var(--biere2),var(--biere));transform-origin:0 50%;transform:scaleX(0);will-change:transform}
+.poste{position:relative;flex:0 0 var(--pw);width:var(--pw);display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 .6em;opacity:.34;transition:opacity .5s}
+.poste.actif{opacity:1}
+.engin{position:relative;width:13em;height:15em;margin-bottom:.9em;transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+.poste.actif .engin{transform:translateY(-.5em)}
+.engin>*{position:absolute}
+.acier{background:linear-gradient(95deg,#5f6f77,#e6edef 36%,#aab8be 60%,#56666e)}
+.cuivre{background:linear-gradient(98deg,#7c3517,#e09a6b 34%,#f6c9a4 46%,#b4552b 70%,#6e2d12)}
+.pied-e{bottom:0;width:1em;height:1.6em;background:#2b3338}
+.hublot{left:50%;bottom:3.1em;width:2.2em;height:7.4em;margin-left:-1.1em;border-radius:1.1em;background:#12171a;overflow:hidden;box-shadow:0 0 0 .35em rgba(0,0,0,.28)}
+.hublot i{position:absolute;inset:0;background:var(--liq);transform-origin:50% 100%;transform:scaleY(0);will-change:transform}
+.hublot.rond{width:4em;height:4em;margin-left:-2em;border-radius:50%;bottom:3.4em}
+.e-eau .corps{left:2.6em;bottom:1.4em;width:7.8em;height:13.4em;border-radius:3.9em 3.9em .8em .8em}
+.e-malt .corps{left:.8em;bottom:1.4em;width:11.4em;height:9.6em;border-radius:5.7em 5.7em 1em 1em/5.4em 5.4em 1em 1em}
+.e-malt .chem{left:5.6em;bottom:10.4em;width:1.8em;height:4.4em;border-radius:.6em .6em 0 0}
+.e-houblon .corps{left:1.3em;bottom:1.4em;width:10.4em;height:11.6em;border-radius:50% 50% 12% 12%/66% 66% 9% 9%}
+.e-houblon .bouton{left:5.6em;bottom:12.6em;width:1.8em;height:1.5em;border-radius:.7em .7em 0 0}
+.vapeur{left:3.2em;bottom:13.4em;width:6.6em;height:2.2em}
+.vapeur i{position:absolute;bottom:0;width:2.6em;height:2.6em;border-radius:50%;background:var(--mousse);opacity:0}
+.vapeur i:nth-child(2){left:2em}.vapeur i:nth-child(3){left:4em}
+.poste.actif .vapeur i{animation:vapeur 2.6s ease-out infinite}
+.poste.actif .vapeur i:nth-child(2){animation-delay:.8s}.poste.actif .vapeur i:nth-child(3){animation-delay:1.6s}
+@keyframes vapeur{0%{opacity:0;transform:translateY(1em) scale(.4)}30%{opacity:.85}100%{opacity:0;transform:translateY(-3.4em) scale(1.25)}}
+.e-levure .corps{left:2.8em;bottom:5.6em;width:7.4em;height:9em;border-radius:1.4em 1.4em 0 0}
+.e-levure .cone{left:2.8em;bottom:2em;width:7.4em;height:3.65em;clip-path:polygon(0 0,100% 0,62% 100%,38% 100%);background:linear-gradient(95deg,#4f5f67,#c9d3d7 36%,#8f9da3 60%,#46565e)}
+.e-levure .pied-e{height:6.6em}
+.e-levure .hublot{bottom:6.4em;height:6.4em}
+.e-fut .corps{left:2.2em;bottom:1.4em;width:8.6em;height:11.4em;border-radius:1.5em}
+.e-fut .cercle{left:1.9em;width:9.2em;height:1.05em;border-radius:.5em;background:#48575e}
+.e-fut .nom{left:1.8em;width:7.05em;bottom:4.85em;text-align:center;font:normal 700 1.22em/1 var(--poch);letter-spacing:0;white-space:nowrap;color:#2b3338}
+.e-fut .hublot{left:auto;right:.2em;margin:0;bottom:2.2em;width:1.5em;height:9.6em}
+.e-verre .mat{left:1.6em;bottom:3em;width:1.5em;height:11.6em;border-radius:.7em .7em 0 0}
+.e-verre .bras2{left:1.6em;bottom:13em;width:6.6em;height:1.6em;border-radius:.8em}
+.e-verre .bec2{left:6.7em;bottom:11.7em;width:1em;height:1.5em;border-radius:0 0 .3em .3em}
+.e-verre .vv{left:4.1em;bottom:1.4em;width:6.2em;height:9em;clip-path:polygon(0 0,100% 0,88% 100%,12% 100%);background:rgba(255,247,228,.2);overflow:hidden}
+.e-verre .vv i{position:absolute;inset:0;background:var(--liq);border-top:1.5em solid var(--mousse);transform-origin:50% 100%;transform:scaleY(0);will-change:transform}
+.poste h3{font:400 2.1em/1 var(--gros);margin-bottom:.22em}
+.poste p{font-size:max(16px,1.1em);line-height:1.25;max-width:13.5em}
+.cuve-bas{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 30px;padding:0 calc(var(--bord) + 84px) 0 var(--bord);font-size:clamp(16px,1.1vw,20px)}
+.cuve-note{display:flex;align-items:flex-end;flex:1 1 300px;max-width:780px;color:var(--cuivre2)}
+.cuve-indice{font:900 clamp(15px,1.05vw,19px)/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);animation:respire 1.8s ease-in-out infinite;transition:color .7s}
+@keyframes respire{50%{opacity:.45}}
+
+/* ---------- la carte : l'ardoise ---------- */
+.carte{position:relative;z-index:3;padding:clamp(70px,7vw,130px) var(--bord) clamp(80px,9vw,170px);background:var(--accent);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,80px);align-items:center;transition:background .7s}
+.vague{position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:clamp(22px,2.6vw,40px);overflow:hidden;pointer-events:none}
+.vague i{position:absolute;inset:0 -200px 0 0;background:radial-gradient(60px 100% at 50% 100%,var(--accent) 98%,transparent) 0 0/120px 100% repeat-x;animation:vague 5s linear infinite;transition:background .7s}
+@keyframes vague{to{transform:translateX(-120px)}}
+.carte h2{margin-bottom:.34em}
+.carte h2 em{color:var(--creme)}
+.carte .gros-txt{max-width:30ch}
+.cuisine{position:relative;margin:clamp(22px,2.6vw,40px) 0 0;width:min(100%,430px);aspect-ratio:3/2;overflow:hidden;border-radius:10px;box-shadow:0 0 0 8px var(--creme),0 16px 0 2px rgba(31,21,11,.2);transform:rotate(-2.5deg)}
+.cuisine img{width:100%;height:118%;object-fit:cover;will-change:transform}
+.tableau{position:relative;padding:clamp(12px,1.3vw,20px);background:linear-gradient(#8a5329,#6b3d1c);border-radius:12px;box-shadow:0 20px 0 -4px rgba(31,21,11,.25);transform:rotate(1.2deg)}
+.tab-in{position:relative;min-height:clamp(380px,31vw,540px);padding:clamp(18px,2.4vw,44px) clamp(16px,2.6vw,48px) clamp(48px,4.6vw,76px);background:radial-gradient(120% 90% at 20% 10%,#2c3639,var(--ardoise) 70%);color:var(--craie);border-radius:4px;overflow:hidden}
+.tab-titre{display:inline-block;font:900 clamp(30px,3.6vw,68px)/1 var(--caps);letter-spacing:.07em;text-transform:uppercase;padding-bottom:.16em;border-bottom:.13em solid var(--accent);margin-bottom:.5em}
+.tab-l{display:flex;align-items:baseline;gap:0;font:400 clamp(17px,1.75vw,33px)/1.25 var(--main);padding:.4em 0}
+.tab-l .pts+span{font-size:.8em;text-align:right;color:var(--accent);max-width:52%}
+.tab-pied{margin-top:.9em;font:italic 400 clamp(18px,1.4vw,25px)/1.25 var(--txt);color:var(--accent)}
+.tab-in>*{transition:opacity .22s,filter .22s;transition-delay:var(--e,0s)}
+.tableau.efface .tab-in>*{opacity:0;filter:blur(5px)}
+.tableau.ecrit .tab-in>*{animation:ecrit .62s linear both;animation-delay:calc(var(--n)*.2s)}
+@keyframes ecrit{from{clip-path:inset(-10% 100% -10% 0)}to{clip-path:inset(-10% -2% -10% 0)}}
+.eponge{position:absolute;right:clamp(22px,3vw,54px);bottom:clamp(8px,.9vw,14px);width:clamp(70px,6.4vw,108px);height:clamp(40px,3.6vw,60px);padding:0;border:0;border-radius:9px;cursor:pointer;background:linear-gradient(#2f7a54 0 34%,#f2c744 34%);box-shadow:0 5px 0 rgba(0,0,0,.35);z-index:3;transition:transform .2s}
+.eponge:hover{transform:translateY(-4px) rotate(-5deg)}
+.tableau:not(.touche) .eponge{animation:invite 3.2s ease-in-out 2.4s infinite}
+@keyframes invite{0%,70%,100%{transform:none}78%{transform:translateX(-14px) rotate(-7deg)}86%{transform:translateX(8px) rotate(5deg)}93%{transform:translateX(-5px) rotate(-3deg)}}
+.tableau.efface .eponge{animation:eponge 1.25s cubic-bezier(.45,0,.55,1) both}
+@keyframes eponge{0%{transform:translate(0,0)}12%{transform:translate(calc(var(--tw)*-1 + 100%),calc(var(--th)*-.82)) rotate(-8deg)}37%{transform:translate(0,calc(var(--th)*-.72)) rotate(7deg)}62%{transform:translate(calc(var(--tw)*-1 + 100%),calc(var(--th)*-.42)) rotate(-7deg)}86%{transform:translate(0,calc(var(--th)*-.18)) rotate(6deg)}100%{transform:translate(0,0)}}
+.tab-aide{position:absolute;right:calc(clamp(22px,3vw,54px) + clamp(70px,6.4vw,108px) + 14px);bottom:clamp(16px,1.6vw,26px);font:900 clamp(14px,1vw,17px)/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--craie);opacity:.75;z-index:3}
+
+/* ---------- Castellar : cartes postales ---------- */
+.castellar{position:relative;z-index:3;padding:clamp(40px,5vw,90px) var(--bord) clamp(44px,3.6vw,70px);background:var(--mer);color:var(--creme);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,4vw,80px);align-items:center}
+.cretes{position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:clamp(70px,11vw,190px);pointer-events:none;overflow:hidden}
+.cretes i{position:absolute;inset:0;will-change:transform}
+.cretes .c1{background:var(--mer2);clip-path:polygon(0 100%,0 62%,9% 44%,17% 58%,27% 20%,35% 46%,44% 30%,52% 52%,63% 12%,71% 40%,80% 26%,90% 50%,100% 34%,100% 100%)}
+.cretes .c2{background:var(--mer);clip-path:polygon(0 100%,0 80%,8% 66%,18% 84%,30% 56%,41% 78%,50% 62%,58% 80%,69% 50%,78% 74%,88% 60%,100% 82%,100% 100%)}
+.castellar .sur{color:var(--accent)}
+.alti{display:flex;align-items:baseline;gap:.08em;font:400 clamp(110px,15vw,290px)/.8 var(--gros);letter-spacing:-.03em;color:var(--creme);text-shadow:.03em .035em 0 var(--encre);font-variant-numeric:tabular-nums}
+.alti span{font-size:.42em;color:var(--accent)}
+.alti-l{font:900 clamp(15px,1.1vw,20px)/1 var(--caps);letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:.9em 0 1.4em}
+.castellar h2{font-size:clamp(34px,3.7vw,66px);margin-bottom:.4em}
+.cartes-p{position:relative;aspect-ratio:10/8.4;width:100%;max-width:820px;justify-self:center;perspective:1200px;margin-bottom:30px}
+.cp{position:absolute;margin:0;padding:clamp(8px,1vw,16px) clamp(8px,1vw,16px) 0;background:var(--creme);color:var(--encre);border-radius:6px;box-shadow:0 18px 0 -4px rgba(8,25,40,.35);cursor:pointer;transition:box-shadow .3s;will-change:transform}
+.cp img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:3px}
+.cp figcaption{display:flex;align-items:center;min-height:3.1em;padding:.3em .2em .4em;font:400 clamp(14px,1.25vw,22px)/1.15 var(--main)}
+.cp1{left:0;top:0;width:70%;--r:-5deg;z-index:1}
+.cp2{right:0;bottom:0;width:70%;--r:4deg;z-index:2}
+.cp.devant{z-index:3}
+.timbre{position:absolute;right:clamp(14px,1.8vw,30px);top:clamp(14px,1.8vw,30px);width:clamp(42px,5.4vw,92px);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1em;background:var(--biere);color:var(--creme);font:900 clamp(12px,1.3vw,22px)/1 var(--caps);letter-spacing:.06em;box-shadow:0 0 0 5px var(--creme);border-radius:2px;transform:rotate(4deg)}
+.timbre b{font:400 1.5em/1 var(--gros)}
+.cachet{position:absolute;left:clamp(-18px,-1vw,-8px);bottom:clamp(30px,4vw,70px);width:clamp(92px,11vw,190px);color:#16306e;opacity:0;transform:scale(2.2) rotate(-40deg);pointer-events:none}
+.cartes-p.vu .cachet{opacity:.86;transform:rotate(-14deg);transition:transform .35s cubic-bezier(.5,0,.3,1.5) .9s,opacity .2s .9s}
+.cachet text{font:900 15px/1 var(--caps);letter-spacing:.12em;fill:currentColor}
+.cp-aide{position:absolute;left:0;bottom:-30px;font:900 clamp(14px,1vw,17px)/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+
+/* ---------- la place : plaques et volets ---------- */
+.place{position:relative;z-index:3;padding:clamp(92px,6.4vw,124px) var(--bord) clamp(54px,4.6vw,88px);background:var(--grain),var(--facade);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4.4fr) minmax(0,4.6fr);gap:clamp(26px,3.4vw,64px);align-items:center}
+.tuiles{position:absolute;left:0;right:0;top:0;height:60px;pointer-events:none;background:radial-gradient(circle at 50% 0,#c8603a 0 25px,transparent 26px) 0 20px/52px 30px repeat-x,radial-gradient(circle at 50% 0,#8f3a1c 0 25px,transparent 26px) 26px 28px/52px 30px repeat-x,linear-gradient(var(--tuile),var(--tuile)) 0 0/100% 22px no-repeat}
+.plaque{display:inline-block;padding:clamp(16px,1.6vw,28px) clamp(20px,2.2vw,40px) clamp(13px,1.3vw,24px);background:var(--email);color:#fff;border-radius:10px;box-shadow:inset 0 0 0 5px var(--email),inset 0 0 0 10px #fff,0 9px 0 rgba(31,21,11,.25);text-align:center;transform:rotate(-1.6deg);text-transform:uppercase}
+.plaque small{display:block;font:900 clamp(18px,1.5vw,28px)/1 var(--caps);letter-spacing:.22em;margin-bottom:.55em}
+.plaque b{display:block;font:900 clamp(31px,3.1vw,60px)/1 var(--caps);letter-spacing:.05em}
+.plaque.rev{transform:translateY(-60px) rotate(-12deg)}
+.plaque.rev.vu{transform:rotate(-1.6deg);transition:opacity .3s,transform .7s cubic-bezier(.3,1.9,.5,1)}
+.ligne-num{display:flex;align-items:center;gap:clamp(14px,1.4vw,24px);margin:clamp(18px,1.8vw,30px) 0 clamp(18px,1.8vw,30px)}
+.numero{flex:none;display:grid;place-items:center;width:clamp(62px,5vw,92px);aspect-ratio:1;background:var(--email);color:#fff;border-radius:9px;box-shadow:inset 0 0 0 4px var(--email),inset 0 0 0 8px #fff,0 7px 0 rgba(31,21,11,.25);font:900 clamp(34px,3vw,56px)/1 var(--caps);transform:rotate(3deg)}
+.ville{font:400 clamp(26px,2.3vw,42px)/1.05 var(--gros)}
+.fenetre{position:relative;justify-self:center;width:min(66%,360px);perspective:1700px}
+.fen-in{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:46% 46% 6px 6px/26% 26% 6px 6px;box-shadow:0 0 0 clamp(10px,1vw,16px) var(--creme),0 0 0 calc(clamp(10px,1vw,16px) + 5px) rgba(31,21,11,.16);background:var(--encre)}
+.fen-in img{width:100%;height:112%;object-fit:cover;will-change:transform}
+.appui{height:clamp(16px,1.5vw,24px);margin:clamp(10px,1vw,16px) -7% 0;background:var(--creme);border-radius:4px;box-shadow:0 7px 0 rgba(31,21,11,.2)}
+.volet{position:absolute;top:0;bottom:calc(clamp(16px,1.5vw,24px) + clamp(10px,1vw,16px));width:50%;background:repeating-linear-gradient(var(--volet) 0 13px,#1f4f3a 13px 19px);border-radius:5px;box-shadow:inset 0 0 0 7px var(--volet);backface-visibility:visible;will-change:transform;z-index:2}
+.volet.vg{left:0;transform-origin:0 50%;border-radius:96% 0 5px 5px/26% 0 5px 5px}
+.volet.vd{right:0;transform-origin:100% 50%;border-radius:0 96% 5px 5px/0 26% 5px 5px}
+.tringle{position:relative;display:flex;justify-content:space-around;gap:10px;padding-top:16px;margin-bottom:clamp(24px,2.6vw,44px)}
+.tringle::before{content:'';position:absolute;left:-6px;right:-6px;top:0;height:12px;border-radius:6px;background:var(--encre)}
+.enseigne{position:relative;flex:1 1 0;max-width:210px;padding-top:clamp(22px,2.2vw,34px);transform-origin:50% 0;will-change:transform;cursor:pointer}
+.enseigne::before,.enseigne::after{content:'';position:absolute;top:-4px;width:6px;height:calc(clamp(22px,2.2vw,34px) + 8px);background:var(--encre);border-radius:3px}
+.enseigne::before{left:22%}.enseigne::after{right:22%}
+.enseigne b{display:grid;place-items:center;min-height:clamp(78px,6.6vw,112px);padding:.5em .4em .4em;background:var(--ec);color:var(--et,#fff);border-radius:9px;box-shadow:inset 0 0 0 4px var(--ec),inset 0 0 0 8px var(--et,#fff),0 7px 0 rgba(31,21,11,.25);font:900 clamp(16px,1.35vw,25px)/1.02 var(--caps);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.h-gros{font:400 clamp(28px,2.5vw,46px)/1.03 var(--gros);margin-bottom:.45em}
+.h-ligne{display:flex;align-items:baseline;flex-wrap:wrap;font-size:clamp(18px,1.3vw,24px);padding:.5em 0;border-block:4px solid var(--encre)}
+.h-ligne span{white-space:nowrap}
+.h-note{margin-top:.7em;font:italic 400 clamp(17px,1.2vw,22px)/1.3 var(--txt)}
+
+/* ---------- une table ---------- */
+.table{position:relative;z-index:3;padding:clamp(54px,4.6vw,88px) var(--bord) clamp(96px,8.4vw,160px);background:var(--fond);color:var(--creme);display:grid;grid-template-columns:minmax(0,6.6fr) minmax(0,5fr);gap:clamp(30px,5vw,100px);align-items:center;transition:background .7s}
+.dents{position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:22px;pointer-events:none;background:linear-gradient(135deg,transparent 75%,var(--fond) 75%) 0 0/44px 22px,linear-gradient(225deg,transparent 75%,var(--fond) 75%) 0 0/44px 22px;transition:background .7s}
+.table .sur{color:var(--accent)}
+.table h2 em{display:block;color:var(--accent);transition:color .7s}
+.capsules{display:flex;gap:clamp(4px,.9vw,14px);margin:clamp(12px,1.6vw,26px) 0;padding:12px 8px;max-width:820px;text-decoration:none;container-type:inline-size}
+.capsules span{flex:1 1 0;max-width:150px;aspect-ratio:1;display:grid;place-items:center;background:var(--accent);color:var(--encre);font:400 clamp(20px,8.6cqw,64px)/1 var(--gros);filter:drop-shadow(0 6px 0 rgba(0,0,0,.3));transform:translateY(-120px) rotate(calc(var(--r)*4)) scale(.6);opacity:0;transition:transform .8s cubic-bezier(.3,1.7,.5,1),opacity .3s,background .7s;transition-delay:calc(var(--d)*90ms)}
+.capsules.vu span{transform:rotate(var(--r));opacity:1}
+.capsules:hover span{transform:rotate(calc(var(--r)*-1)) translateY(-6px);transition-delay:calc(var(--d)*40ms)}
+.bon{position:relative;perspective:1400px;font-size:clamp(17px,1.2vw,21px);width:min(100%,520px);justify-self:center}
+.bon-in{position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,1.2,.5,1);transform:rotate(-1.6deg)}
+.bon.note .bon-in{transform:rotate(1.4deg) rotateY(180deg)}
+.bon-f,.bon-d{padding:clamp(22px,2.2vw,38px);background:var(--creme);color:var(--encre);border-radius:26px;box-shadow:inset 0 0 0 7px var(--creme),inset 0 0 0 12px var(--biere),0 16px 0 rgba(0,0,0,.28);backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:box-shadow .7s}
+.bon-d{position:absolute;inset:0;transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;gap:.5em;text-align:center;align-items:center}
+.bon h3{font:400 clamp(27px,2.3vw,40px)/1 var(--gros);margin-bottom:.6em}
+.champ{display:block;margin-bottom:.8em}
+.champ span,.combien>span{display:block;font:900 .86em/1 var(--caps);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.4em}
+.champ input{width:100%;min-height:50px;padding:.45em .7em;border:0;border-radius:8px;background:#fff;color:var(--encre);font:500 1.05em/1.2 var(--txt);box-shadow:inset 0 0 0 3px var(--encre)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.combien-l{display:flex;align-items:center;gap:12px;margin-bottom:1em}
+.combien-l .batons{flex:1;min-height:1.9em;align-items:center;font-size:1.25em;color:var(--encre)}
+.rond{flex:none;width:50px;height:50px;border:0;border-radius:10px;background:var(--encre);color:var(--creme);font:900 28px/1 var(--caps);cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.rond:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+.bon .btn{width:100%;background:var(--encre);color:var(--creme)}
+.bon-d b{font:400 clamp(30px,2.6vw,46px)/1 var(--gros)}
+.bon-d em{font-style:italic;font-size:.95em;opacity:.8}
+
+/* ---------- autant de pages, pied ---------- */
+.pages{position:relative;z-index:3;padding:clamp(40px,4.6vw,80px) var(--bord) clamp(50px,5vw,90px);background:var(--grain),var(--creme)}
+.pages .pg-p{font:900 clamp(15px,1.1vw,20px)/1 var(--caps);letter-spacing:.15em;text-transform:uppercase;color:var(--cuivre);margin-bottom:.9em}
+.pages .pg-g{font:400 clamp(36px,4.6vw,82px)/1 var(--gros);max-width:17ch;text-wrap:balance;margin-bottom:.45em}
+.pages .rubans{margin:0 0 1em}
+.pages .rubans .ruban:nth-child(2){background:var(--fond);color:var(--creme)}
+.pages .rubans .ruban:nth-child(4){background:var(--encre);color:var(--creme)}
+.pied{position:relative;z-index:3;padding:clamp(34px,4vw,64px) calc(var(--bord) + 96px) clamp(40px,4vw,64px) var(--bord);background:var(--nuit);color:var(--creme);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 40px;align-items:end}
+.pied p{max-width:60ch}
+.kz-g{font:400 clamp(44px,5vw,84px)/1 var(--gros);color:var(--accent);text-decoration:none;grid-row:span 2;transition:color .7s}
+.kz-g:hover{color:var(--creme)}
+.credits{font-size:15px;line-height:1.4;opacity:.72}
+
+/* ---------- le verre du coin : où on en est, et le menu ---------- */
+.coin{position:fixed;right:clamp(10px,1.6vw,26px);bottom:clamp(10px,1.6vw,26px);z-index:70;display:flex;flex-direction:column;align-items:center;gap:3px;width:74px;padding:9px 0 7px;border:0;border-radius:18px;background:var(--creme);color:var(--encre);box-shadow:inset 0 0 0 4px var(--creme),inset 0 0 0 7px var(--biere),0 6px 0 rgba(0,0,0,.3);cursor:pointer;transform:translateY(140%) rotate(-20deg);transition:transform .45s cubic-bezier(.3,1.5,.5,1),box-shadow .7s}
+.coin.la{transform:rotate(3deg)}
+.coin.la:hover{transform:rotate(-3deg) scale(1.06)}
+.coin-v{position:relative;width:30px;height:40px;clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);background:rgba(31,21,11,.16);overflow:hidden}
+.coin-v i{position:absolute;inset:0;background:var(--biere);transform:translateY(100%);border-top:6px solid #fff;will-change:transform;transition:background .7s}
+.coin b{font:900 15px/1 var(--caps);letter-spacing:.06em}
+.coin small{font:900 11px/1 var(--caps);letter-spacing:.16em;text-transform:uppercase;color:var(--cuivre)}
+.menu{position:fixed;right:clamp(10px,1.6vw,26px);bottom:calc(clamp(10px,1.6vw,26px) + 104px);z-index:69;width:min(320px,calc(100vw - 20px));padding:20px 22px 18px;background:var(--creme);color:var(--encre);border-radius:22px;box-shadow:inset 0 0 0 5px var(--creme),inset 0 0 0 9px var(--biere),0 12px 0 rgba(0,0,0,.3);transform-origin:100% 100%;transform:scale(.2) rotate(8deg);opacity:0;visibility:hidden;transition:transform .4s cubic-bezier(.3,1.5,.5,1),opacity .2s,visibility 0s .4s}
+.menu.ouvert{transform:none;opacity:1;visibility:visible;transition:transform .4s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+.menu a{display:block;padding:.2em .2em;font:400 clamp(24px,3.6vh,31px)/1.12 var(--gros);text-decoration:none}
+.menu a:hover{color:var(--cuivre)}
+.menu .btn{display:flex;margin-top:12px;font-size:19px;background:var(--encre);color:var(--creme);font-family:var(--caps);font-weight:900}
+
+/* ---------- petits écrans ---------- */
+@media(min-width:1241px) and (max-width:1800px){.hero{grid-template-columns:minmax(0,1fr) minmax(0,1.16fr)}.tirage{font-size:min(21px,2.3vh,1.3vw)}}
+@media(min-width:800px) and (max-width:1240px){.tirage{grid-template-columns:auto minmax(0,1fr)!important;justify-items:start!important}.carton{max-width:24em!important;transform:rotate(2deg)!important}}
+@media(max-width:1240px){
+  .hero{grid-template-columns:minmax(0,1fr);padding-bottom:84px;min-height:0;gap:30px}
+  .sceau{right:-34vw;top:auto;bottom:-6vw;margin:0;width:118vw}
+  .tirage{grid-template-columns:minmax(0,1fr);justify-items:center;gap:22px}
+  .carton{max-width:560px;width:100%;transform:rotate(-1deg)}
+  .hero-txt{padding-bottom:0}
+  .comptoir{bottom:0;height:4em}
+}
+@media(max-width:1180px){
+  .brewpub{grid-template-columns:minmax(0,1fr) minmax(0,.7fr)}
+  .sbs{grid-column:1/-1}
+  .place{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)}
+  .place-d{grid-column:1/-1}
+}
+@media(max-width:860px){
+  :root{--tete:56px}
+  .cuve-bas{display:block;padding-right:92px}
+  .cuve-note{display:block}
+  .cuve-note .pts{display:inline-block;width:2.4em;margin:0 .3em}
+  .cuve-indice{margin-top:.6em}
+  .hero-txt{padding-bottom:0}
+  .comptoir{bottom:0;height:4em}
+  .carte,.castellar,.table{grid-template-columns:minmax(0,1fr)}
+  .cuisine{width:min(84%,430px)}
+  .cartes-p{margin-top:8px}
+  .cuve{height:420vh}
+}
+@media(max-width:700px){
+  .brewpub{grid-template-columns:minmax(0,1fr)}
+  .tirages{max-width:330px}
+  .sbs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sb-f,.sb-d{font-size:clamp(11px,4.5cqw,22px)}
+  .place{grid-template-columns:minmax(0,1fr)}
+  .fenetre{width:min(58%,300px)}
+  .pied{grid-template-columns:minmax(0,1fr)}
+  .kz-g{grid-row:auto}
+  .pied{padding:34px var(--bord) 128px}
+  .coin{width:66px}
+}
+@media(max-width:520px){
+  .rubans .ruban{font-size:13px;letter-spacing:.1em;padding:.6em 1.2em .48em}
+  .hero .boutons{gap:10px}
+  .hero .btn{font-size:16px;padding:.8em .85em .7em}
+  .adresse-h{display:none}
+  .tab-l{display:block}
+  .tab-l .pts{display:none}
+  .tab-l .pts+span{display:inline-block;white-space:nowrap;max-width:none;margin-left:.5em;font-size:.86em}
+}
+@media(max-width:380px){.enseigne b{font-size:14px;letter-spacing:.03em}.duo{grid-template-columns:1fr}.tete .btn{font-size:15px;padding:.6em .7em .52em}.kz{font-size:12px;letter-spacing:.14em}}
+/* mode calme : seulement sur demande, avec ?calme=1 (jamais d'après le réglage du système) */
+html.calme *,html.calme *::before,html.calme *::after{animation:none!important;transition:none!important}
+html.calme .rev,html.calme .sb-place,html.calme .capsules span,html.calme .plaque.rev{opacity:1!important;transform:none!important}
+html.calme .cachet{opacity:.86!important;transform:rotate(-14deg)!important}
+html.calme .poste{opacity:1}
+html.calme .mousse-bord i{transform:none!important}
+html.calme .coin{transform:rotate(3deg)}
+</style>
+<script src="contenu.js"></script>
+</head>
+<body>
+<div class="page">
+<header class="tete">
+  <a class="marque" href="#haut">A l’Oura <span>Brew pub &amp; restaurant</span></a>
+  <nav class="liens" aria-label="Rubriques">
+    <a href="#brewpub">Le brew pub</a><a href="#cuve">De la cuve au verre</a><a href="#carte">La carte</a><a href="#castellar">Castellar</a><a href="#place">La place</a><a href="#table">Une table</a>
+  </nav>
+  <div class="tete-d"><a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a><a class="btn" data-tel href="tel:+33615106071">Appeler</a></div>
+</header>
+
+<main>
+<!-- ============ ACCUEIL ============ -->
+<section class="hero" id="haut">
+  <div class="sceau" aria-hidden="true"><div class="sceau-t" id="sceau"><svg viewBox="0 0 500 500"><path id="sc-dents" fill="currentColor"/><circle class="sc-fond" cx="250" cy="250" r="150"/><defs><path id="sc-c" d="M250,250 m-178,0 a178,178 0 1,1 356,0 a178,178 0 1,1 -356,0"/></defs><text><textPath href="#sc-c" textLength="1100">BREW PUB &amp; RESTAURANT ★ CASTELLAR ★ ALPES-MARITIMES ★</textPath></text></svg></div></div>
+  <div class="hero-txt">
+    <p class="rubans"><span class="ruban entre" style="--i:0">Brew pub &amp; restaurant</span><span class="ruban r2 entre" style="--i:1">Castellar, au-dessus de Menton</span><span class="ruban r3 entre" style="--i:2">Depuis octobre 2026</span></p>
+    <h1 aria-label="A l’Oura"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l esp" style="--i:1" aria-hidden="true"></span><span class="l" style="--i:2" aria-hidden="true">l</span><span class="l" style="--i:3" aria-hidden="true">’</span><span class="l" style="--i:4" aria-hidden="true">O</span><span class="l" style="--i:5" aria-hidden="true">u</span><span class="l" style="--i:6" aria-hidden="true">r</span><span class="l" style="--i:7" aria-hidden="true">a</span></h1>
+    <p class="accroche entre" style="--i:8">Bière artisanale et cuisine maison, sur la place du village.</p>
+    <p class="boutons entre" style="--i:10"><a class="btn" href="#tirage">Tirer une pression</a><a class="btn clair" data-tel href="tel:+33615106071">06 15 10 60 71</a></p>
+    <p class="adresse-h entre" style="--i:12">2 place Georges Clémenceau, 06500 Castellar</p>
+  </div>
+  <div class="tirage entre" id="tirage" style="--i:6">
+    <div class="scene" data-superpose>
+      <div class="comptoir"></div>
+      <div class="colonne"></div><div class="bras"></div><div class="bec"></div>
+      <button class="poignee" type="button" data-p="blonde" aria-label="Tenir la poignée blonde pour tirer"><span>Blonde</span></button>
+      <button class="poignee" type="button" data-p="ambre" aria-label="Tenir la poignée ambrée pour tirer"><span>Ambrée</span></button>
+      <button class="poignee" type="button" data-p="brune" aria-label="Tenir la poignée brune pour tirer"><span>Brune</span></button>
+      <div class="jet" id="jet"></div>
+      <div class="piste" id="piste">
+        <div class="dessous"></div>
+        <div class="verre" id="verre">
+          <div class="verre-in"><div class="jauge-in"><div class="ecume" id="ecume"></div><div class="liquide" id="liquide"></div></div></div>
+          <div class="marque-trait"></div>
+          <div class="deborde"><i></i><i></i><i></i><b></b><b></b></div>
+        </div>
+      </div>
+      <div class="trait" aria-hidden="true">le trait</div>
+    </div>
+    <div class="carton">
+      <p class="sur">À vous de tirer</p>
+      <p class="verdict" id="verdict" aria-live="polite">Tenez une poignée. Lâchez au trait.</p>
+      <p class="compte"><span class="batons" id="batons" aria-hidden="true"></span><span id="compte-t">Aucune pinte tirée</span></p>
+      <p class="note-t">Trois couleurs pour l’exemple. Vos bières et leurs noms : à écrire avec vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LE BREW PUB ============ -->
+<section class="brewpub" id="brewpub">
+  <div class="mousse-bord" data-mousse style="--c:var(--creme)"></div>
+  <div class="bp-txt">
+    <p class="sur rev">Le brew pub</p>
+    <h2 class="rev" style="--d:1">Plus qu’un <em>restaurant.</em></h2>
+    <p class="gros-txt rev" style="--d:2">Un vrai brew pub, un lieu où partager une passion : la bière artisanale et la cuisine faite maison.</p>
+    <p class="depuis rev" style="--d:3"><span class="ruban">Sur la place, depuis octobre 2026</span></p>
+  </div>
+  <div class="tirages rev" style="--d:2">
+    <figure class="photo ph1"><img data-para src="photos/cuves.webp" alt="Deux petites cuves en inox et une cuve en cuivre dans une pièce aux murs de pierre" loading="lazy"></figure>
+    <figure class="photo ph2"><img data-para src="photos/tirage.webp" alt="Une bière tirée à la pression, de dos" loading="lazy"><span class="illus">Images d’illustration</span></figure>
+  </div>
+  <div class="sbs" id="sbs">
+    <div class="sb-place" style="--d:0;--r:-7deg"><button class="sb" type="button" data-superpose style="--sc:var(--fond);--st:var(--creme);--sl:var(--accent)"><span class="sb-in"><span class="sb-f"><small>A l’Oura</small><b>Bière artisanale</b><small>Castellar</small></span><span class="sb-d"><span>Une passion à partager : c’est le cœur du lieu.</span></span></span></button></div>
+    <div class="sb-place" style="--d:1;--r:5deg"><button class="sb" type="button" data-superpose style="--sc:var(--biere);--st:var(--creme);--sr:20%"><span class="sb-in"><span class="sb-f"><small>La cuisine</small><b>Faite maison</b><small>Entièrement</small></span><span class="sb-d"><span>Des plats entièrement faits maison.</span></span></span></button></div>
+    <div class="sb-place" style="--d:2;--r:-3deg"><button class="sb" type="button" data-superpose style="--sc:var(--papier);--st:var(--fond);--sl:var(--cuivre)"><span class="sb-in"><span class="sb-f"><small>La carte</small><b>Courte</b><small>Exprès</small></span><span class="sb-d"><span>Une carte volontairement courte.</span></span></span></button></div>
+    <div class="sb-place" style="--d:3;--r:6deg"><button class="sb" type="button" data-superpose style="--sc:var(--cuivre);--st:var(--creme);--sr:20%"><span class="sb-in"><span class="sb-f"><small>Les produits</small><b>Locaux</b><small>Dès que possible</small></span><span class="sb-d"><span>Des produits locaux dès que c’est possible.</span></span></span></button></div>
+    <div class="sb-place" style="--d:4;--r:-5deg"><button class="sb" type="button" data-superpose style="--sc:var(--mer);--st:var(--creme);--sl:var(--accent)"><span class="sb-in"><span class="sb-f"><small>Les circuits</small><b>Courts</b><small>Producteurs du coin</small></span><span class="sb-d"><span>Circuits courts, avec les producteurs du coin.</span></span></span></button></div>
+    <div class="sb-place" style="--d:5;--r:4deg"><button class="sb" type="button" data-superpose style="--sc:var(--encre);--st:var(--accent);--sr:20%"><span class="sb-in"><span class="sb-f"><small>La qualité</small><b>Avant</b><small>La quantité</small></span><span class="sb-d"><span>La qualité avant la quantité.</span></span></span></button></div>
+    <p class="sbs-note" id="sbs-note">Retournez les sous-bocks</p>
+  </div>
+</section>
+
+<div class="bande" aria-hidden="true"><div class="bande-in" id="bande"><span>Bière artisanale <i class="caps"></i> Cuisine maison <i class="caps"></i> Circuits courts <i class="caps"></i> Produits locaux <i class="caps"></i> Terrasse <i class="caps"></i> Castellar, 363 m <i class="caps"></i></span></div></div>
+
+<!-- ============ DE LA CUVE AU VERRE ============ -->
+<section class="cuve" id="cuve">
+  <div class="cuve-colle">
+    <div class="cuve-tete">
+      <p class="sur">De la cuve au verre</p>
+      <h2>Une bière, c’est quatre choses. <em>Et du temps.</em></h2>
+    </div>
+    <div class="ligne" id="ligne">
+      <div class="tuyau"><i id="tuyau"></i></div>
+      <article class="poste" style="--liq:#6fb6e3"><div class="engin e-eau" aria-hidden="true"><i class="pied-e" style="left:3.4em"></i><i class="pied-e" style="right:3.4em"></i><i class="corps acier"></i><i class="hublot"><i></i></i></div><h3>L’eau</h3><p>Plus de neuf dixièmes du verre.</p></article>
+      <article class="poste" style="--liq:#ecc76b"><div class="engin e-malt" aria-hidden="true"><i class="pied-e" style="left:2.4em"></i><i class="pied-e" style="right:2.4em"></i><i class="chem cuivre"></i><i class="corps cuivre"></i><i class="hublot rond"><i></i></i></div><h3>Le malt</h3><p>Il donne la couleur et le corps.</p></article>
+      <article class="poste" style="--liq:#c3c955"><div class="engin e-houblon" aria-hidden="true"><i class="vapeur"><i></i><i></i><i></i></i><i class="pied-e" style="left:2.8em"></i><i class="pied-e" style="right:2.8em"></i><i class="bouton cuivre"></i><i class="corps cuivre"></i><i class="hublot rond"><i></i></i></div><h3>Le houblon</h3><p>L’amertume, et le parfum.</p></article>
+      <article class="poste" style="--liq:var(--biere2)"><div class="engin e-levure" aria-hidden="true"><i class="pied-e" style="left:2.2em"></i><i class="pied-e" style="right:2.2em"></i><i class="cone"></i><i class="corps acier"></i><i class="hublot"><i></i></i></div><h3>La levure</h3><p>Elle change le sucre en alcool et en bulles.</p></article>
+      <article class="poste" style="--liq:var(--biere)"><div class="engin e-fut" aria-hidden="true"><i class="corps acier"></i><i class="cercle" style="bottom:9.4em"></i><i class="cercle" style="bottom:3.6em"></i><i class="nom">A L’OURA</i><i class="hublot"><i></i></i></div><h3>Le temps</h3><p>Quelques semaines, sans se presser.</p></article>
+      <article class="poste" style="--liq:var(--biere)"><div class="engin e-verre" aria-hidden="true"><i class="mat cuivre"></i><i class="bras2 cuivre"></i><i class="bec2 acier"></i><i class="vv"><i></i></i></div><h3>Le verre</h3><p>Au bout du tuyau, sur la place du village.</p></article>
+    </div>
+    <div class="cuve-bas" data-etroit>
+      <p class="cuve-note"><span>Les recettes de la maison</span><i class="pts"></i><span>à raconter avec vous.</span></p>
+      <p class="cuve-indice" id="cuve-indice">Défilez : ça brasse</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA CARTE ============ -->
+<section class="carte" id="carte">
+  <div class="vague" aria-hidden="true"><i></i></div>
+  <div class="carte-g">
+    <p class="sur rev">La carte</p>
+    <h2 class="rev" style="--d:1">Volontairement <em>courte.</em></h2>
+    <p class="gros-txt rev" style="--d:2">Des plats entièrement faits maison, avec des produits locaux dès que c’est possible. Circuits courts, producteurs du coin, et la qualité avant la quantité.</p>
+    <figure class="cuisine rev" style="--d:3"><img data-para src="photos/cuisine.webp" alt="Une cocotte qui mijote sur le feu dans une petite cuisine" loading="lazy"><span class="illus">Image d’illustration</span></figure>
+  </div>
+  <div class="tableau rev" id="tableau" style="--d:2">
+    <div class="tab-in" id="tab-in"></div>
+    <span class="tab-aide" aria-hidden="true">Passez l’éponge</span>
+    <button class="eponge" id="eponge" type="button" aria-label="Passer l’éponge sur l’ardoise"></button>
+  </div>
+</section>
+
+<!-- ============ CASTELLAR ============ -->
+<section class="castellar" id="castellar">
+  <div class="cretes" aria-hidden="true"><i class="c1" data-crete="1"></i><i class="c2" data-crete="2"></i></div>
+  <div class="cast-g">
+    <p class="sur rev">Castellar, Alpes-Maritimes</p>
+    <p class="alti" aria-label="Environ 363 mètres"><b id="alti">0</b><span>m</span></p>
+    <p class="alti-l">Environ, au-dessus de la mer</p>
+    <h2 class="rev">Un village perché <span style="white-space:nowrap">au-dessus</span> de Menton.</h2>
+    <p class="gros-txt rev" style="--d:1">En bas, Menton et la mer. En haut, le village en belvédère, sa place, et A l’Oura.</p>
+  </div>
+  <div class="cartes-p" id="cartes-p" data-pile>
+    <figure class="cp cp1" data-cp data-pile-carte><img src="photos/menton.webp" alt="La baie de Menton vue depuis Castellar" loading="lazy"><figcaption>Menton, vue depuis Castellar</figcaption><span class="timbre" aria-hidden="true"><b>0</b>m</span></figure>
+    <figure class="cp cp2" data-cp data-pile-carte><img src="photos/castellar.webp" alt="Le village de Castellar sous la montagne" loading="lazy"><figcaption>Castellar, sous la montagne</figcaption><span class="timbre" aria-hidden="true"><b>363</b>m</span>
+      <svg class="cachet" viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><circle cx="60" cy="60" r="52"/><path d="M118 34q14 -12 28 0t28 0M118 60q14 -12 28 0t28 0M118 86q14 -12 28 0t28 0"/></g><defs><path id="ca-h" d="M22,60 a38,38 0 1,1 76,0"/><path id="ca-b" d="M18,60 a42,42 0 0,0 84,0"/></defs><text><textPath href="#ca-h" startOffset="50%" text-anchor="middle">CASTELLAR</textPath></text><text><textPath href="#ca-b" startOffset="50%" text-anchor="middle">ALPES-MAR.</textPath></text><text x="60" y="67" text-anchor="middle" style="font-size:22px">06500</text></svg>
+    </figure>
+    <span class="cp-aide" aria-hidden="true">Touchez une carte</span>
+  </div>
+</section>
+
+<!-- ============ LA PLACE ============ -->
+<section class="place" id="place">
+  <div class="tuiles" aria-hidden="true"></div>
+  <div class="place-g">
+    <p class="sur rev">La place</p>
+    <h2 class="plaque rev" aria-label="2 place Georges Clémenceau"><small>Place</small><b>Georges Clémenceau</b></h2>
+    <p class="ligne-num rev" style="--d:1"><span class="numero" aria-hidden="true">2</span><span class="ville">06500 Castellar</span></p>
+    <p class="boutons rev" style="--d:2"><a class="btn sombre" id="iti" href="https://www.google.com/maps/search/?api=1&amp;query=2+place+Georges+Cl%C3%A9menceau+06500+Castellar" target="_blank" rel="noopener">Itinéraire</a><a class="btn clair" data-tel href="tel:+33615106071">06 15 10 60 71</a></p>
+  </div>
+  <div class="fenetre" id="fenetre">
+    <div class="fen-in"><img data-para src="photos/terrasse.webp" alt="Un verre de bière sur une table en terrasse, sur une place de village" loading="lazy"><span class="illus">Image d’illustration</span></div>
+    <i class="volet vg" aria-hidden="true"></i><i class="volet vd" aria-hidden="true"></i>
+    <div class="appui" aria-hidden="true"></div>
+  </div>
+  <div class="place-d">
+    <div class="tringle" id="tringle" data-superpose>
+      <div class="enseigne" style="--ec:var(--volet)"><b>Terrasse</b></div>
+      <div class="enseigne" style="--ec:var(--email)"><b>Parking à proximité</b></div>
+      <div class="enseigne" style="--ec:var(--tuile)"><b>Accessible aux poussettes</b></div>
+    </div>
+    <p class="h-gros rev">Ouvert toute l’année.</p>
+    <p class="h-ligne rev" style="--d:1"><span id="h-j">Du lundi au dimanche</span><i class="pts"></i><span id="h-h">.. h .. à .. h ..</span></p>
+    <p class="h-note rev" style="--d:2">Jours et horaires à confirmer avec vous.</p>
+  </div>
+</section>
+
+<!-- ============ UNE TABLE ============ -->
+<section class="table" id="table">
+  <div class="dents" aria-hidden="true"></div>
+  <div class="table-g">
+    <p class="sur rev">Une table ?</p>
+    <h2 class="rev" style="--d:1">Le plus simple ? <em>Un coup de fil.</em></h2>
+    <a class="capsules" id="capsules" data-tel href="tel:+33615106071" aria-label="Appeler le 06 15 10 60 71"><span style="--d:0;--r:-6deg">06</span><span style="--d:1;--r:5deg">15</span><span style="--d:2;--r:-3deg">10</span><span style="--d:3;--r:7deg">60</span><span style="--d:4;--r:-5deg">71</span></a>
+    <p class="gros-txt rev" style="--d:2">Ou notez votre table sur le sous-bock, comme on compte les verres : un bâton par personne.</p>
+  </div>
+  <form class="bon rev" id="bon" style="--d:2" novalidate>
+    <div class="bon-in" data-superpose>
+      <div class="bon-f">
+        <h3>Notez votre table</h3>
+        <div class="duo">
+          <label class="champ"><span>Votre prénom</span><input id="b-nom" type="text" autocomplete="given-name" maxlength="30"></label>
+          <label class="champ"><span>Le jour</span><input id="b-jour" type="date"></label>
+        </div>
+        <div class="combien"><span>Vous serez combien ?</span>
+          <div class="combien-l"><button class="rond" type="button" id="b-moins" aria-label="Une personne de moins">-</button><span class="batons" id="b-batons" aria-hidden="true"></span><output id="b-n" aria-live="polite" style="font:400 1.7em/1 var(--gros)">2</output><button class="rond" type="button" id="b-plus" aria-label="Une personne de plus">+</button></div>
+        </div>
+        <button class="btn" type="submit">Je note ma table</button>
+      </div>
+      <div class="bon-d" aria-hidden="true">
+        <b id="b-ok">C’est noté.</b>
+        <p id="b-detail"></p>
+        <em>Ceci est une maquette : rien n’est envoyé.</em>
+        <button class="btn" type="button" id="b-re">Recommencer</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<!-- ============ AUTANT DE PAGES ============ -->
+<section class="pages" id="pages">
+  <div class="mousse-bord" data-mousse style="--c:var(--creme)"></div>
+  <p class="pg-p rev">Cette maquette tient sur une seule page.</p>
+  <p class="pg-g rev" style="--d:1">Votre site peut avoir autant de pages que vous voulez.</p>
+  <p class="rubans rev" style="--d:2"><span class="ruban">La carte</span><span class="ruban">Chaque bière</span><span class="ruban">La terrasse</span><span class="ruban">Réserver</span></p>
+  <p class="gros-txt rev" style="--d:3;max-width:44ch">Une page pour la carte, une pour chaque bière, une pour la terrasse, une pour réserver : c’est vous qui voyez.</p>
+</section>
+</main>
+
+<footer class="pied">
+  <p>Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+  <a class="kz-g" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <p class="credits">Vue de Menton : Espirat, CC BY-SA 4.0. Castellar : Jpchevreau, CC BY-SA 3.0 (Wikimedia Commons). Cuves, pression, cuisine et terrasse : images créées pour la maquette, en attendant les vôtres.</p>
+</footer>
+</div>
+
+<button class="coin" id="coin" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span class="coin-v" aria-hidden="true"><i id="coin-n"></i></span><b id="coin-a">0 m</b><small>Menu</small></button>
+<nav class="menu" id="menu" aria-label="Menu">
+  <a href="#brewpub">Le brew pub</a><a href="#cuve">De la cuve au verre</a><a href="#carte">La carte</a><a href="#castellar">Castellar</a><a href="#place">La place</a><a href="#table">Une table</a>
+  <a class="btn" data-tel href="tel:+33615106071">06 15 10 60 71</a>
+</nav>
+
+<script>
+(function(){
+'use strict';
+var H=document.documentElement,C=window.CONTENU||{};
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+var calme=/[?&]calme=1/.test(location.search);if(calme)H.classList.add('calme');
+var borne=function(v,a,b){return v<a?a:v>b?b:v},doux=function(t){return 1-Math.pow(1-t,3)};
+
+/* ----- faits tirés de contenu.js ----- */
+if(C.telLien)$$('[data-tel]').forEach(function(a){a.href='tel:'+C.telLien});
+if(C.itineraire)$('#iti').href=C.itineraire;
+if(C.horaires&&C.horaires[0]){$('#h-j').textContent=C.horaires[0][0];$('#h-h').textContent=C.horaires[0][1]}
+
+/* ----- ambiances : ambrée, blonde, brune (bouton Couleur de la page Bonjour, et poignées) ----- */
+var PAL=['ambre','blonde','brune'];
+function palette(n){if(PAL.indexOf(n)<0)return;H.dataset.palette=n;var m=$('meta[name=theme-color]');if(m&&C.palettes&&C.palettes[n])m.content=C.palettes[n].theme}
+palette(new URLSearchParams(location.search).get('palette')||'ambre');
+addEventListener('message',function(e){if(e.data&&e.data.type==='kazura-couleur')palette(e.data.palette)});
+
+/* ----- grain de papier, capsules, sceau ----- */
+try{var cv=document.createElement('canvas');cv.width=cv.height=140;var cx=cv.getContext('2d'),im=cx.createImageData(140,140);for(var i=0;i<im.data.length;i+=4){im.data[i]=90;im.data[i+1]=56;im.data[i+2]=20;im.data[i+3]=Math.random()*26}cx.putImageData(im,0,0);H.style.setProperty('--grain','url('+cv.toDataURL()+')')}catch(e){}
+function capsule(n,creux){var p=[];for(var k=0;k<n*8;k++){var a=k/(n*8)*6.2832,r=50-creux/2+creux/2*Math.cos(a*n);p.push((50+r*Math.cos(a)).toFixed(2)+'% '+(50+r*Math.sin(a)).toFixed(2)+'%')}return 'polygon('+p.join(',')+')'}
+var CAPS=capsule(18,7);
+$$('.caps,.capsules span').forEach(function(e){e.style.clipPath=CAPS});
+$$('.sb').forEach(function(b,i){if(i%3===2)$$('.sb-f,.sb-d',b).forEach(function(f){f.style.clipPath=capsule(22,5);f.style.borderRadius='50%'})});
+(function(){var d='',n=26;for(var k=0;k<=n*10;k++){var a=k/(n*10)*6.2832,r=232+12*Math.cos(a*n);d+=(k?'L':'M')+(250+r*Math.cos(a)).toFixed(1)+' '+(250+r*Math.sin(a)).toFixed(1)}$('#sc-dents').setAttribute('d',d+'Z')})();
+var bd=$('#bande');bd.innerHTML+=bd.innerHTML+bd.innerHTML+bd.innerHTML;
+
+/* ----- bâtons de comptage (les pintes tirées, les convives) ----- */
+function batons(n){var h='';for(var g=0;g<Math.ceil(n/5);g++){var k=Math.min(5,n-g*5);h+='<i class="gr">';for(var j=0;j<Math.min(4,k);j++)h+='<i class="bt"></i>';if(k===5)h+='<i class="tr"></i>';h+='</i>'}return h}
+
+/* ----- la tireuse ----- */
+var TX=C.tirage||{},tir=$('#tirage'),verre=$('#verre'),piste=$('#piste'),liq=$('#liquide'),ecu=$('#ecume'),jet=$('#jet'),verd=$('#verdict');
+var T={niv:0,mou:0,coule:false,fini:false,repos:0,servies:0,parfaites:0,prevenu:false,reprises:0,tour:0};
+function dire(t){verd.textContent=t;verd.classList.remove('pop');void verd.offsetWidth;verd.classList.add('pop')}
+function dessiner(){var s=Math.min(1.02,T.niv+T.mou);liq.style.transform='translateY('+((1-T.niv)*100).toFixed(2)+'%)';ecu.style.transform='translateY('+((1-s)*100).toFixed(2)+'%)';ecu.style.opacity=s>.004?1:0;jet.style.transform='scaleY('+((14-Math.min(1,s)*13.1)/14).toFixed(3)+')'}
+function ouvrir(b){if(T.fini)return;if(T.niv>0&&!T.coule){T.mou+=.035;T.reprises++}T.coule=true;T.repos=0;tir.classList.add('coule');if(!T.demo)tir.classList.add('joue');b.classList.add('tire');palette(b.dataset.p)}
+function fermer(){if(!T.coule)return;T.coule=false;tir.classList.remove('coule');$$('.poignee').forEach(function(b){b.classList.remove('tire')})}
+function servir(parfait,texte,essai){T.fini=true;fermer();T.demo=false;dire(texte);
+  if(!essai){T.servies++;if(parfait)T.parfaites++;$('#batons').innerHTML=batons(T.servies)}
+  if(!essai)$('#compte-t').textContent=T.servies+(T.servies>1?' pintes tirées':' pinte tirée')+(T.parfaites?', dont '+T.parfaites+(T.parfaites>1?' parfaites':' parfaite'):'');
+  setTimeout(function(){piste.classList.add('part')},calme?600:1500);
+  setTimeout(function(){T.niv=0;T.mou=0;T.reprises=0;T.prevenu=false;verre.classList.remove('trop');piste.classList.add('avant');piste.classList.remove('part');dessiner();void piste.offsetWidth;piste.classList.remove('avant');T.fini=false},calme?900:2350)}
+function pasTirage(dt){
+  if(T.fini)return;
+  if(T.coule){T.niv+=.29*dt;T.mou+=.078*dt}
+  else if(T.niv>0){T.repos+=dt;if(T.mou>.06)T.mou-=.01*dt}
+  if(T.niv+T.mou>=1){verre.classList.add('trop');dessiner();var d=TX.deborde||['Ça déborde !'];servir(false,d[T.tour++%d.length]);return}
+  if(!T.coule&&T.niv>0&&T.repos>.9){
+    if(T.niv>=.685){if(T.demo){servir(false,TX.demo||'À vous.',true);return}var p=TX.parfait||['Parfaite.'];servir(true,p[T.tour++%p.length]);return}
+    if(!T.prevenu){T.prevenu=true;dire(T.niv<.4?(TX.encore||'Encore un peu.'):(TX.reprise||'Encore un peu.'))}
+  }
+  if(T.coule||T.niv>0)dessiner();
+}
+$$('.poignee').forEach(function(b){
+  b.addEventListener('pointerdown',function(e){e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}reprendre();ouvrir(b)});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(n){b.addEventListener(n,fermer)});
+  b.addEventListener('contextmenu',function(e){e.preventDefault()});
+  b.addEventListener('keydown',function(e){if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();reprendre();ouvrir(b)}});
+  b.addEventListener('keyup',function(e){if(e.key===' '||e.key==='Enter')fermer()});
+  b.addEventListener('blur',fermer);
+});
+dessiner();
+// Une pinte se tire toute seule à l'arrivée, pour montrer le geste ; dès qu'on touche une poignée, on a la main.
+var essaiT=0;
+function reprendre(){if(T.demo){T.demo=false;clearTimeout(essaiT);tir.classList.add('joue')}}
+if(!calme)setTimeout(function(){if(T.servies||T.niv>0||T.coule)return;T.demo=true;ouvrir($('.poignee[data-p="'+(H.dataset.palette||'ambre')+'"]'));essaiT=setTimeout(function(){if(T.demo)fermer()},2480)},1900);
+
+/* ----- sous-bocks : on retourne, on fait glisser ----- */
+$$('.sb').forEach(function(el){
+  var s={x:0,y:0,r:0,pris:false,bouge:false,px:0,py:0,ox:0,oy:0,lim:null};
+  function poser(){el.style.transform='translate('+s.x.toFixed(1)+'px,'+s.y.toFixed(1)+'px) rotate('+s.r.toFixed(1)+'deg)'}
+  el.addEventListener('pointerdown',function(e){s.bouge=false;s.px=e.clientX;s.py=e.clientY;s.ox=s.x;s.oy=s.y;
+    if(e.pointerType==='mouse'&&e.button===0){s.pris=true;var r=el.getBoundingClientRect(),z=$('#brewpub').getBoundingClientRect();s.lim=[z.left-r.left+s.x,z.right-r.right+s.x,z.top-r.top+s.y,z.bottom-r.bottom+s.y];try{el.setPointerCapture(e.pointerId)}catch(_){}}});
+  el.addEventListener('pointermove',function(e){if(!s.pris)return;var dx=e.clientX-s.px,dy=e.clientY-s.py;if(!s.bouge&&Math.abs(dx)+Math.abs(dy)<7)return;s.bouge=true;el.classList.add('prise');
+    s.x=borne(s.ox+dx,s.lim[0],s.lim[1]);s.y=borne(s.oy+dy,s.lim[2],s.lim[3]);s.r=borne(s.r+(e.movementX||0)*.12,-40,40);poser()});
+  function lacher(){s.pris=false;el.classList.remove('prise')}
+  el.addEventListener('pointerup',lacher);el.addEventListener('pointercancel',lacher);
+  el.addEventListener('click',function(e){if(s.bouge){e.preventDefault();s.bouge=false;return}el.classList.toggle('retourne')});
+});
+if(matchMedia('(hover:hover)').matches)$('#sbs-note').textContent='Retournez les sous-bocks, faites-les glisser';
+
+/* ----- l'ardoise et l'éponge ----- */
+var tab=$('#tableau'),tin=$('#tab-in'),face=0,AR=C.ardoises||[];
+function ecrire(k,anime){var a=AR[k];if(!a)return;var h='<p class="tab-titre" style="--n:0">'+a.titre+'</p>';
+  a.lignes.forEach(function(l,i){h+='<p class="tab-l" style="--n:'+(i+1)+'"><span>'+l[0]+'</span>'+(l[1]?'<i class="pts"></i><span>'+l[1]+'</span>':'')+'</p>'});
+  h+='<p class="tab-pied" style="--n:'+(a.lignes.length+1.4)+'">'+a.pied+'</p>';tin.innerHTML=h;
+  if(anime&&!calme){tab.classList.remove('ecrit');void tab.offsetWidth;tab.classList.add('ecrit')}}
+ecrire(0,false);
+var occupe=false;
+$('#eponge').addEventListener('click',function(){if(occupe)return;occupe=true;tab.classList.add('touche');
+  var r=tin.getBoundingClientRect(),hh=r.height;tab.style.setProperty('--tw',r.width+'px');tab.style.setProperty('--th',hh+'px');
+  $$('#tab-in>*').forEach(function(e){var y=(e.getBoundingClientRect().top-r.top)/hh;e.style.setProperty('--e',(y<.3?.12:y<.62?.42:.74)+'s')});
+  tab.classList.remove('ecrit');tab.classList.add('efface');
+  setTimeout(function(){face=(face+1)%AR.length;tab.classList.remove('efface');ecrire(face,true);occupe=false},calme?50:1300)});
+
+/* ----- cartes postales ----- */
+var cps=$$('[data-cp]'),cpz=$('#cartes-p'),cpi={x:0,y:0};
+cps.forEach(function(c){c.addEventListener('click',function(){cps.forEach(function(o){o.classList.toggle('devant',o===c)});sale=true})});
+cpz.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var r=cpz.getBoundingClientRect();cpi.x=(e.clientX-r.left)/r.width-.5;cpi.y=(e.clientY-r.top)/r.height-.5;sale=true});
+cpz.addEventListener('pointerleave',function(){cpi.x=cpi.y=0;sale=true});
+
+/* ----- enseignes qui se balancent ----- */
+var ens=$$('.enseigne').map(function(e,i){var o={e:e,a:0,w:0,k:i};e.addEventListener('pointerenter',function(){o.w+=(i%2?-1:1)*120});e.addEventListener('click',function(){o.w+=(i%2?1:-1)*220});return o});
+function pasEnseignes(dt,v){ens.forEach(function(o){o.w+=(-46*o.a-2.6*o.w)*dt+v*(.9+o.k*.25)*dt;o.a+=o.w*dt;o.a=borne(o.a,-28,28);
+  if(Math.abs(o.a)>.02||Math.abs(o.w)>.05){o.e.style.transform='rotate('+o.a.toFixed(2)+'deg)';o.vif=true}else if(o.vif){o.e.style.transform='';o.vif=false}})}
+
+/* ----- le sous-bock de réservation ----- */
+var bon=$('#bon'),bn=2;
+function majN(){$('#b-n').textContent=bn;$('#b-batons').innerHTML=batons(bn)}
+majN();
+$('#b-plus').addEventListener('click',function(){if(bn<12){bn++;majN()}});
+$('#b-moins').addEventListener('click',function(){if(bn>1){bn--;majN()}});
+bon.addEventListener('submit',function(e){e.preventDefault();var nom=$('#b-nom').value.trim(),j=$('#b-jour').value,d=j?j.split('-'):null;
+  $('#b-ok').textContent=nom?'C’est noté, '+nom+'.':'C’est noté.';
+  $('#b-detail').textContent=bn+(bn>1?' personnes':' personne')+(d?', le '+d[2]+'/'+d[1]:'')+'. À tout à l’heure, sur la place.';
+  bon.classList.add('note');$('.bon-d',bon).removeAttribute('aria-hidden')});
+$('#b-re').addEventListener('click',function(){bon.classList.remove('note');$('.bon-d',bon).setAttribute('aria-hidden','true')});
+
+/* ----- menu du coin, ancres ----- */
+var coin=$('#coin'),menu=$('#menu');
+function basculer(o){menu.classList.toggle('ouvert',o);coin.setAttribute('aria-expanded',o?'true':'false')}
+coin.addEventListener('click',function(){basculer(!menu.classList.contains('ouvert'))});
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');
+  if(a){var c=$(a.getAttribute('href'));if(c){e.preventDefault();basculer(false);var y=c.getBoundingClientRect().top+scrollY-(c.id==='tirage'?90:parseFloat(getComputedStyle(H).getPropertyValue('--tete'))-2);scrollTo({top:Math.max(0,y),behavior:calme?'auto':'smooth'})}return}
+  if(!e.target.closest('#menu,#coin'))basculer(false)});
+addEventListener('keydown',function(e){if(e.key==='Escape')basculer(false)});
+
+/* ----- entrées ----- */
+var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vu');io.unobserve(x.target)}})},{rootMargin:'0px 0px -12% 0px',threshold:.08});
+$$('.rev,#sbs,#cartes-p,#capsules').forEach(function(e){io.observe(e)});
+new IntersectionObserver(function(l,o){if(l[0].isIntersecting){o.disconnect();if(!calme)tab.classList.add('ecrit')}},{threshold:.35}).observe(tab);
+
+/* ----- mousse : des lobes qui montent avec le défilement ----- */
+var mousses=$$('[data-mousse]').map(function(m){var n=innerWidth<700?7:13,l=[];for(var k=0;k<n;k++){var e=document.createElement('i');e.style.setProperty('--h',(58+((k*37)%43))+'%');m.appendChild(e);l.push({e:e,ph:((k*61)%100)/100})}return {m:m,l:l,p:-1}});
+
+/* ----- le moteur : une seule boucle ----- */
+var sale=true,sy=scrollY,vel=0,t0=performance.now(),bx=0,bw=0,defile=false,centres=[];
+var tuy=$('#tuyau'),ligne=$('#ligne'),postes=$$('.poste'),hub=postes.map(function(p){return $('.hublot i,.vv i',p)}),cuve=$('#cuve'),colle=$('.cuve-colle');
+var paras=$$('[data-para]'),cretes=$$('[data-crete]'),fen=$('#fenetre'),vg=$('.vg'),vd=$('.vd'),alti=$('#alti'),cast=$('#castellar'),sceau=$('#sceau');
+var liens=$$('.liens a'),cibles=liens.map(function(a){return $(a.getAttribute('href'))}),coinN=$('#coin-n'),coinA=$('#coin-a');
+function mesurer(){var pw=Math.min(Math.max(borne(innerWidth*.155,250,330),Math.min(innerHeight*.36,400)),innerWidth*.84);ligne.style.setProperty('--pw',pw+'px');bw=bd.scrollWidth/4;centres=postes.map(function(e){return e.offsetLeft+e.offsetWidth/2})}
+function defiler(){
+  var vh=innerHeight,y=scrollY,max=Math.max(1,document.documentElement.scrollHeight-vh),p=borne(y/max,0,1);
+  coin.classList.toggle('la',y>vh*.3||menu.classList.contains('ouvert'));
+  coinN.style.transform='translateY('+((1-p)*100).toFixed(1)+'%)';coinA.textContent=Math.round(p*(C.altitude||363))+' m';
+  if(!calme)sceau.parentNode.style.transform='rotate('+(y*.04).toFixed(2)+'deg)';
+  // la mousse
+  mousses.forEach(function(o){var top=o.m.parentNode.getBoundingClientRect().top,q=borne((vh*1.02-top)/(vh*.5),0,1);if(q===o.p)return;o.p=q;
+    o.l.forEach(function(l){var s=doux(borne(q*1.7-l.ph*.7,0,1));l.e.style.transform='translateY('+((1-s)*102).toFixed(1)+'%)'})});
+  // de la cuve au verre
+  var r=cuve.getBoundingClientRect(),ch=colle.offsetHeight,f=borne(-(r.top-(vh-ch))/(r.height-ch),0,1)*1.1;
+  if(r.top<vh&&r.bottom>0&&centres.length){var n=postes.length,lw=ligne.scrollWidth,dec=Math.max(0,lw-innerWidth),u=borne(f,0,1)*(n+.25),front;
+    if(u<.3)front=centres[0]*u/.3;
+    else{var i0=Math.min(n-1,Math.floor(u-.3)),sg=u-.3-i0,suite=i0<n-1?centres[i0+1]:lw;front=sg<.5?centres[i0]:centres[i0]+(suite-centres[i0])*doux(borne((sg-.5)/.5,0,1))}
+    ligne.style.transform='translateX('+(-borne(front-innerWidth/2,0,dec)).toFixed(1)+'px)';tuy.style.transform='scaleX('+(front/lw).toFixed(4)+')';
+    postes.forEach(function(po,i){var niv=borne((u-.3-i)/.5,0,1);po.classList.toggle('actif',calme||u-.3-i>-.12);hub[i].style.transform='scaleY('+niv.toFixed(3)+')'});
+    $('#cuve-indice').textContent=f>=.97?'Au bout, un verre':'Défilez : ça brasse'}
+  // photos qui glissent dans leur cadre
+  if(!calme)paras.forEach(function(im){var b=im.parentNode.getBoundingClientRect();if(b.bottom<-50||b.top>vh+50)return;var q=borne((vh-b.top)/(vh+b.height),0,1);im.style.transform='translateY('+(-q*15).toFixed(2)+'%)'});
+  // Castellar : crêtes, altitude, cartes postales
+  var c=cast.getBoundingClientRect();
+  if(c.top<vh*1.3&&c.bottom>-100){var q=borne((vh-c.top)/(vh*.95),0,1);
+    cretes.forEach(function(e){e.style.transform='translateY('+((1-q)*(e.dataset.crete==='1'?38:14)).toFixed(1)+'%)'});
+    alti.textContent=Math.round((C.altitude||363)*doux(borne((vh*.95-c.top)/(vh*.6),0,1)));
+    var q2=borne((vh-cpz.getBoundingClientRect().top)/(vh*1.4),0,1);
+    cps.forEach(function(e,i){var s=i?1:-1;e.style.transform='translateY('+(calme?0:((.5-q2)*s*46)).toFixed(1)+'px) rotate('+(i?4:-5)+'deg) rotateX('+(-cpi.y*10*(i?1:.6)).toFixed(2)+'deg) rotateY('+(cpi.x*12*(i?1:.6)).toFixed(2)+'deg)'})}
+  // les volets
+  var fr=fen.getBoundingClientRect();
+  if(fr.top<vh*1.2&&fr.bottom>-100){var o=calme?1:doux(borne((vh*.92-fr.top)/(vh*.5),0,1)),ang=o*104;vg.style.transform='rotateY('+(-ang).toFixed(1)+'deg)';vd.style.transform='rotateY('+ang.toFixed(1)+'deg)'}
+  // rubrique en cours
+  var ici=-1;cibles.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<vh*.45)ici=i});liens.forEach(function(a,i){a.classList.toggle('ici',i===ici)});
+}
+function boucle(t){
+  var dt=Math.min(.05,(t-t0)/1000);t0=t;
+  var y=scrollY,v=(y-sy)/Math.max(dt,.004);sy=y;vel+=(v-vel)*Math.min(1,dt*7);
+  if(Math.abs(v)>1)sale=true;
+  if(sale){sale=false;defiler()}
+  if(!calme&&bw){bx-=(46+Math.min(900,Math.abs(vel))*.55)*dt;if(bx<-bw)bx+=bw;bd.style.transform='translateX('+bx.toFixed(1)+'px)'}
+  if(!calme)pasEnseignes(dt,borne(vel,-2500,2500)*.05);
+  pasTirage(dt);
+  requestAnimationFrame(boucle);
+}
+mesurer();
+addEventListener('scroll',function(){sale=true;if(!defile){defile=true;try{parent.postMessage({type:'kazura-defile'},'*')}catch(e){}}},{passive:true});
+addEventListener('resize',function(){mesurer();sale=true});
+addEventListener('load',function(){mesurer();sale=true;try{parent.postMessage({type:'kazura-pret'},'*')}catch(e){}});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){mesurer();sale=true});
+requestAnimationFrame(boucle);
+})();
+</script>
+</body>
+</html>

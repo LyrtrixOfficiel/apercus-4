@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ma Baguette, boulangerie pâtisserie place Arnaud Bernard à Toulouse</title>
+<meta name="description" content="Maquette privée : Ma Baguette, boulangerie pâtisserie, 12 place Arnaud Bernard, Toulouse.">
+<meta name="theme-color" content="#fbf2df">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/barlow-c-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="photos/baguette.webp" as="image">
+<link rel="stylesheet" href="style.css">
+<script>(function(){var h=document.documentElement;h.className='js'+(/[?&]calme=1/.test(location.search)?' calme':'')})();</script>
+<script src="contenu.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+<header class="barre" id="barre">
+  <a class="logo" href="#accueil" aria-label="Ma Baguette, retour en haut"><span class="logo-ma" aria-hidden="true">Ma</span><span class="logo-pl" aria-hidden="true">BAGUETTE</span></a>
+  <nav class="menu" id="menu" aria-label="Rubriques">
+    <a href="#composer">Ma baguette</a>
+    <a href="#metre">Au mètre</a>
+    <a href="#vitrine">La vitrine</a>
+    <a href="#journee">La journée</a>
+    <a href="#place">La place</a>
+    <a href="#commande">Mon ticket</a>
+    <a class="menu-iti" data-carte>Itinéraire</a>
+  </nav>
+  <a class="kaz" href="https://kazura.fr" target="_blank" rel="noopener" aria-label="Kazura, le studio qui a préparé cette maquette">Kazura</a>
+  <a class="led" href="#commande" id="led" aria-label="File d'attente : aller à mon ticket"><span class="led-t" id="led-t">On sert le</span><span class="led-n" id="led-n"><b>0</b><b>1</b></span></a>
+  <button class="menu-b" id="menu-b" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<main>
+<!-- 01 : la devanture à 6 h -->
+<section class="s-accueil mur" id="accueil" data-n="1">
+  <div class="aube" aria-hidden="true"></div>
+  <div class="cadre h-grille">
+    <div class="h-g">
+      <p class="pl pl-p h-metier"><i class="vis"></i><i class="vis"></i>Boulangerie pâtisserie</p>
+      <h1 class="h-titre" id="h-titre">
+        <span class="vh">Ma Baguette, boulangerie pâtisserie, 12 place Arnaud Bernard à Toulouse</span>
+        <span class="note-ma" aria-hidden="true"><i class="scotch"></i><span>Ma</span></span>
+        <span class="pl pl-g" id="pl-g" aria-hidden="true"><i class="vis"></i><i class="vis"></i><i class="vis"></i><i class="vis"></i><span class="pl-mot">BAGUETTE</span><i class="reflet"></i></span>
+      </h1>
+      <p class="pl pl-p h-adr"><i class="vis"></i><i class="vis"></i>12 place Arnaud Bernard, Toulouse</p>
+      <p class="h-phrase">La baguette comme vous l’aimez, sur la place Arnaud Bernard. <strong>La boutique ouvre à 6&nbsp;h.</strong></p>
+      <div class="h-boutons">
+        <a class="bt bt-or" href="#composer">Régler ma baguette</a>
+        <a class="bt bt-blanc" data-carte>Itinéraire</a>
+      </div>
+    </div>
+    <div class="h-d">
+      <div class="h-bag" id="h-bag"><div class="h-bag-f"><div class="h-bag-in">
+        <img src="photos/baguette.webp" alt="Une baguette dorée, grignée en biais" width="1500" height="401" draggable="false">
+        <span class="manchon" aria-hidden="true"><b>Ma Baguette</b><b>Arnaud Bernard</b><b>Ma Baguette</b></span>
+      </div></div></div>
+      <div class="h-objets">
+      <div class="horloge h-horloge" id="horloge" aria-hidden="true"><span class="ho-patte"></span><span class="ho-cadran"><i class="ho-h"></i><i class="ho-m"></i><i class="ho-s"></i><i class="ho-axe"></i></span><span class="ho-mot">Ouvre à 6 h</span></div>
+      <div class="distrib" id="distrib">
+        <div class="di-corps" aria-hidden="true"><span class="di-rond"><b>Prenez<br>un ticket</b></span></div>
+        <button class="di-ticket" id="di-ticket" type="button" aria-label="Prendre un ticket de file d'attente"><span class="tk-n" data-moi>07</span><span class="tk-t">Tirez</span></button>
+        <p class="di-aide" id="di-aide">Tirez le ticket. On vous appelle en bas de la page.</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 : ma baguette, comme je l'aime -->
+<section class="s-composer papier" id="composer" data-n="2">
+  <div class="rang tombe" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="tete revele">
+      <p class="sur">Chacun a la sienne</p>
+      <h2>Ma baguette, <em>comme je l’aime.</em></h2>
+      <p class="chapo">Réglez la vôtre. Elle s’écrit toute seule sur votre ticket.</p>
+    </div>
+    <div class="co-grille">
+      <div class="co-scene revele" id="co-scene">
+        <div class="co-feuille" aria-hidden="true"></div>
+        <div class="co-bag" id="co-bag" role="img" aria-label="Votre baguette, telle que vous la réglez">
+          <div class="co-bag-in" id="co-bag-in"></div>
+          <span class="manchon co-manchon" id="co-manchon" aria-hidden="true"><em id="co-nom">Ma baguette</em></span>
+          <button class="co-croc" id="co-croc" type="button" aria-label="Croquer le quignon"></button>
+        </div>
+        <p class="co-indice" id="co-indice">Touchez le bout de la baguette : on le croque toujours en chemin.</p>
+      </div>
+      <div class="co-reglages revele">
+        <div class="rg">
+          <label class="rg-t" for="co-cuisson">La cuisson</label>
+          <div class="rg-c">
+            <input class="curseur" id="co-cuisson" type="range" min="0" max="100" value="50" aria-describedby="co-cuisson-mot">
+            <div class="curseur-mots" aria-hidden="true"><span>Pas trop cuite</span><span>Dorée</span><span>Bien cuite</span></div>
+          </div>
+        </div>
+        <div class="rg">
+          <p class="rg-t" id="rg-taille">La taille</p>
+          <div class="rg-c choix" role="group" aria-labelledby="rg-taille"><button type="button" data-k="taille" data-v="entière" aria-pressed="true">Entière</button><button type="button" data-k="taille" data-v="une demie" aria-pressed="false">Une demie</button></div>
+        </div>
+        <div class="rg">
+          <p class="rg-t" id="rg-tranche">Tranchée</p>
+          <div class="rg-c choix" role="group" aria-labelledby="rg-tranche"><button type="button" data-k="tranchee" data-v="non" aria-pressed="true">Non</button><button type="button" data-k="tranchee" data-v="oui" aria-pressed="false">Oui</button></div>
+        </div>
+        <div class="rg">
+          <p class="rg-t" id="rg-papier">Pour l’emporter</p>
+          <div class="rg-c choix" role="group" aria-labelledby="rg-papier"><button type="button" data-k="papier" data-v="dans son papier" aria-pressed="true">Dans son papier</button><button type="button" data-k="papier" data-v="sous le bras" aria-pressed="false">Sous le bras</button></div>
+        </div>
+        <div class="rg">
+          <p class="rg-t" id="rg-quignon">Le quignon</p>
+          <div class="rg-c choix" role="group" aria-labelledby="rg-quignon"><button type="button" id="co-croquer">Croquer</button><button type="button" id="co-recoller">En remettre un</button></div>
+        </div>
+        <div class="rg">
+          <label class="rg-t" for="co-prenom">Elle est à</label>
+          <div class="rg-c"><input class="champ" id="co-prenom" type="text" maxlength="14" autocomplete="off" placeholder="votre prénom" enterkeyhint="done"></div>
+        </div>
+      </div>
+      <div class="co-ticket revele">
+        <div class="ticket" id="ticket-a" data-superpose>
+          <p class="ti-tete"><span>Ma baguette</span><b>N° <span data-moi>07</span></b></p>
+          <dl class="ti-lignes" id="ti-lignes-a"></dl>
+          <span class="tampon" id="tampon-a" aria-hidden="true">C’est la mienne</span>
+        </div>
+        <button class="bt bt-bleu" id="co-noter" type="button">C’est la mienne</button>
+        <p class="petit">Sur votre vrai site, ce ticket peut devenir une commande à venir chercher.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 : la baguette au mètre -->
+<section class="s-metre mur" id="metre" data-n="3">
+  <div class="rang monte" style="--fond:var(--papier)" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="tete revele">
+      <p class="sur"><span>La baguette, en France</span></p>
+      <h2>Au mètre, <em>et à la balance.</em></h2>
+    </div>
+    <div class="me-grille">
+      <div class="me-scene" id="me-scene">
+        <div class="me-photo"><img src="photos/baguette.webp" alt="Une baguette entière, posée à plat" loading="lazy" width="1500" height="401" draggable="false"></div>
+        <div class="me-ruban" aria-hidden="true">
+          <span class="me-boitier"><i></i></span>
+          <div class="me-bande"><div class="me-bande-in" id="me-bande"></div><i class="me-crochet"></i></div>
+        </div>
+        <div class="me-mesures">
+          <p class="pl me-cm"><i class="vis"></i><i class="vis"></i><b id="me-cm">0</b>&nbsp;cm</p>
+          <div class="horloge me-balance" aria-hidden="true"><span class="ho-cadran"><i class="ho-m"></i><i class="ho-axe"></i></span></div>
+          <p class="pl me-g"><i class="vis"></i><i class="vis"></i><b id="me-g">0</b>&nbsp;g</p>
+        </div>
+      </div>
+      <div class="me-faits">
+        <p class="me-fait revele"><i class="scotch"></i><b>Environ 65 cm, environ 250 g.</b> La longueur et le poids d’une baguette courante.</p>
+        <p class="me-fait revele"><i class="scotch"></i><b>Farine de blé, eau, sel, levure ou levain.</b> Les ingrédients d’une baguette de tradition, fixés par le décret pain de 1993.</p>
+        <p class="me-fait revele"><i class="scotch"></i><b>Au patrimoine de l’UNESCO.</b> Les savoir-faire et la culture de la baguette y sont inscrits depuis 2022.</p>
+        <p class="me-fait me-vous revele"><i class="scotch"></i><span class="pt col"><span>Et la vôtre, sa farine, son secret</span><b>............</b></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 : la vitrine -->
+<section class="s-vitrine email" id="vitrine" data-n="4">
+  <div class="dents" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="tete revele">
+      <p class="sur">Boulangerie d’un côté, pâtisserie de l’autre</p>
+      <h2>La vitrine, <em>ce matin.</em></h2>
+      <p class="chapo">Les étiquettes sont plantées. Elles attendent vos produits et vos prix.</p>
+    </div>
+    <div class="vi-grille">
+      <article class="vi-bloc vi-pain revele">
+        <h3 class="pl vi-titre balance"><i class="vis"></i><i class="vis"></i>Le pain</h3>
+        <div class="vi-cadre">
+          <img src="photos/tranches.webp" alt="Baguettes et tranches de pain sur une plaque de four" loading="lazy" width="860" height="1200">
+          <i class="vi-verre" aria-hidden="true"></i>
+          <div class="etqs" id="etqs-pain"></div>
+        </div>
+        <div class="vi-texte">
+          <p class="pt"><span>Ce qui sort du four chaque jour</span><i></i><b>............</b></p>
+          <p class="pt"><span id="vi-jour">Le pain du jour</span><i></i><b>............</b></p>
+        </div>
+      </article>
+      <article class="vi-bloc vi-pat revele">
+        <h3 class="pl vi-titre balance"><i class="vis"></i><i class="vis"></i>La pâtisserie</h3>
+        <div class="vi-cadre">
+          <img src="photos/vitrine.webp" alt="Petits gâteaux alignés derrière une vitre" loading="lazy" width="1300" height="866">
+          <i class="vi-verre" aria-hidden="true"></i>
+          <div class="etqs" id="etqs-pat"></div>
+        </div>
+        <div class="vi-texte">
+          <p class="pt"><span>Ce qu’il y a en vitrine aujourd’hui</span><i></i><b>............</b></p>
+          <p class="pt"><span>Les gâteaux sur commande</span><i></i><b>............</b></p>
+        </div>
+      </article>
+    </div>
+    <p class="vi-note revele">Images d’illustration, en attendant vos photos. Touchez une étiquette pour la retourner.</p>
+  </div>
+</section>
+
+<!-- 04 : la journée sur la place -->
+<section class="s-journee" id="journee" data-n="5">
+  <div class="dents dents-ciel" aria-hidden="true"></div>
+  <div class="j-colle" id="j-colle">
+    <div class="j-ciel" aria-hidden="true"><i class="c-jour"></i><i class="c-soir"></i><i class="c-nuit"></i><i class="lune"></i><i class="astre" id="astre"></i><i class="nuage" style="--y:12%;--w:170px;--v:70s;--dl:-8s"></i><i class="nuage" style="--y:30%;--w:110px;--v:95s;--dl:-52s"></i><i class="nuage" style="--y:20%;--w:220px;--v:120s;--dl:-88s"></i></div>
+    <div class="j-rue" id="j-rue" aria-hidden="true"></div>
+    <div class="cadre j-avant">
+      <div class="j-tete">
+        <p class="sur">De l’ouverture à la fermeture</p>
+        <h2>La journée, <em>sur la place.</em></h2>
+      </div>
+      <div class="j-bas">
+        <div class="horloge j-horloge" id="j-horloge" aria-hidden="true"><span class="ho-cadran"><i class="ho-h"></i><i class="ho-m"></i><i class="ho-axe"></i></span></div>
+        <div class="j-cartes" id="j-cartes">
+          <article class="j-carte"><h3>6 h</h3><p><strong>On ouvre.</strong> La vitrine s’allume, la place dort encore.</p></article>
+          <article class="j-carte"><h3>Le matin</h3><p class="pt col"><span>Vos viennoiseries, votre première fournée</span><b>............</b></p></article>
+          <article class="j-carte"><h3>Midi</h3><p class="pt col"><span>Vos sandwichs et vos formules, si vous en faites</span><b>............</b></p></article>
+          <article class="j-carte"><h3>L’après-midi</h3><p class="pt col"><span>Le goûter, les gâteaux, les commandes</span><b>............</b></p></article>
+          <article class="j-carte"><h3>Le soir</h3><p class="pt col"><span>La dernière fournée, puis la fermeture</span><b>.. h ..</b></p></article>
+        </div>
+      </div>
+      <div class="j-reperes" id="j-reperes" role="group" aria-label="Moments de la journée">
+        <button type="button">6 h</button><button type="button">Matin</button><button type="button">Midi</button><button type="button">Après-midi</button><button type="button">Soir</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 : la place, venir -->
+<section class="s-place mur" id="place" data-n="6">
+  <div class="rang monte" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="tete revele">
+      <p class="sur"><span>Toulouse, quartier Arnaud Bernard</span></p>
+      <h2>La place, <em>et comment venir.</em></h2>
+    </div>
+    <div class="pc-grille">
+      <div class="pc-plaques">
+        <div class="pc-rue">
+          <p class="pl pl-rue balance revele"><i class="vis"></i><i class="vis"></i><i class="vis"></i><i class="vis"></i><span>Place<br>Arnaud Bernard</span><i class="reflet"></i></p>
+          <p class="pl pl-num balance revele" aria-label="Numéro 12"><i class="vis"></i><i class="vis"></i><span>12</span></p>
+        </div>
+        <p class="pc-histoire revele"><i class="scotch"></i>Un nom porté ici depuis 1125 : c’était d’abord celui d’une porte de la ville.</p>
+        <div class="pc-faits">
+          <p class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>Métro B, station Compans-Caffarelli</p>
+          <p class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>À proximité de la basilique Saint-Sernin</p>
+          <p class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>Au bout des boulevards Lascrosses et d’Arcole</p>
+        </div>
+        <a class="bt bt-or revele" data-carte>Ouvrir l’itinéraire</a>
+      </div>
+      <div class="pc-papiers">
+        <div class="affiche revele" id="affiche">
+          <i class="scotch"></i><i class="scotch s2"></i>
+          <h3>Les horaires</h3>
+          <p class="pt court"><span>Ouverture</span><i></i><b>6 h</b></p>
+          <p class="pt court"><span>Fermeture</span><i></i><b>.. h ..</b></p>
+          <div class="semaine" id="semaine" aria-label="Jours d'ouverture, à compléter"></div>
+          <p class="pt court"><span>Téléphone</span><i></i><b>.. .. .. .. ..</b></p>
+          <p class="petit">Ce qui est en pointillés attend vos vrais mots.</p>
+        </div>
+        <div class="mot revele">
+          <i class="scotch"></i>
+          <p class="mot-main">Une nouvelle équipe s’installe au 12.</p>
+          <p class="pt col"><span>Qui vous êtes, ce que vous aimez faire</span><b>............</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="murmots">
+      <form class="ecrire revele" id="ecrire" autocomplete="off">
+        <i class="scotch"></i>
+        <label for="ec-mot">Laissez un mot sur le mur</label>
+        <div class="ec-ligne"><input class="champ" id="ec-mot" type="text" maxlength="48" placeholder="Bonjour et bienvenue !" enterkeyhint="send"><button class="bt bt-bleu" type="submit">Coller</button></div>
+        <p class="petit">Il reste sur votre écran, rien n’est envoyé. Sur votre vrai site, les mots de vos clients peuvent s’afficher à cette place.</p>
+      </form>
+      <div class="mots" id="mots" aria-live="polite"><p class="unmot" style="--r:-2.5deg"><i class="scotch"></i>Le premier mot est pour vous : bienvenue sur la place. Kazura</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 : c'est à vous -->
+<section class="s-commande papier" id="commande" data-n="7">
+  <div class="rang tombe" aria-hidden="true"></div>
+  <div class="cadre cm-grille">
+    <div class="cm-g">
+      <div class="tete revele">
+        <p class="sur">La file a avancé</p>
+        <h2>Numéro <span data-moi>07</span>, <em>c’est à vous.</em></h2>
+        <p class="chapo">Votre baguette est écrite sur le ticket. Tendez-le par-dessus le comptoir.</p>
+      </div>
+      <div class="afficheur revele" aria-hidden="true"><span>On sert le</span><b id="aff-n" data-moi>07</b></div>
+      <div class="cm-contact revele">
+        <p class="pt court"><span>Téléphone</span><i></i><b>.. .. .. .. ..</b></p>
+        <p class="pt"><span>Adresse</span><i></i><b>12 place Arnaud Bernard, 31000 Toulouse</b></p>
+        <a class="bt bt-bleu" data-carte>Itinéraire</a>
+      </div>
+    </div>
+    <div class="cm-d revele">
+      <div class="comptoir-t">
+        <div class="ticket ticket-g" id="ticket-b" data-superpose>
+          <p class="ti-tete"><span>Ma baguette</span><b>N° <span data-moi>07</span></b></p>
+          <dl class="ti-lignes" id="ti-lignes-b"></dl>
+          <p class="ti-pied">12 place Arnaud Bernard, Toulouse</p>
+          <span class="tampon" id="tampon-b" aria-hidden="true">Mise de côté</span>
+        </div>
+      </div>
+      <div class="cm-boutons">
+        <button class="bt bt-or" id="cm-donner" type="button">Tendre mon ticket</button>
+        <a class="bt bt-blanc" href="#composer">La régler encore</a>
+      </div>
+      <p class="petit" id="cm-note">Maquette : rien n’est envoyé. Sur votre vrai site, ce ticket peut partir à la boulangerie.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied email" id="pied">
+  <div class="dents" aria-hidden="true"></div>
+  <div class="cadre">
+    <p class="pi-g revele">Votre site peut avoir autant de pages que vous voulez.</p>
+    <div class="pi-pages">
+      <span class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>Le pain</span>
+      <span class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>La pâtisserie</span>
+      <span class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>Les commandes</span>
+      <span class="pl pl-p balance revele"><i class="vis"></i><i class="vis"></i>Votre équipe</span>
+    </div>
+    <p class="pi-s revele">Une page pour le pain, une pour la pâtisserie, une pour les commandes, une pour votre équipe : c’est vous qui voyez. Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+    <a class="pi-kaz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    <p class="pi-credits">Maquette préparée par Kazura. Baguette, pain tranché, vitrine : images d’illustration (Pexels), à remplacer par les vôtres. La baguette en chiffres : Wikipédia.</p>
+  </div>
+</footer>
+</body>
+</html>

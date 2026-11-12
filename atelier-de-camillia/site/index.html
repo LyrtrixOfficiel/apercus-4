@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="fr" data-palette="lin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>L’Atelier de Camillia, institut de beauté à Bayeux et à Bretteville-l’Orgueilleuse</title>
+<meta name="description" content="Maquette privée préparée pour L’Atelier de Camillia, institut de beauté à Bayeux et à Bretteville-l’Orgueilleuse.">
+<meta name="theme-color" content="#23283a">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght,SOFT@9..144,400..900,0..100&display=swap">
+<style>
+@property --m{syntax:'<number>';inherits:true;initial-value:1}
+:root{--titre:'Fraunces',Georgia,'Times New Roman',serif;--texte:'Alegreya Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--tete:66px;--fil:20px;--creme:#fff4df}
+[data-palette=lin]{--lin:#eadfc6;--lin2:#dccdaa;--encre:#23283a;--garance:#a8392a;--gaude:#d09a37;--guede:#2f5c7a;--olive:#68753a;--sarcelle:#4b7d80;--chair:#e6c9a2;--bois:#b98953;--bois2:#96683a}
+[data-palette=rose]{--lin:#f1dcd3;--lin2:#e3c3b7;--encre:#2d2230;--garance:#a5353f;--gaude:#d49a52;--guede:#6d4266;--olive:#8a6f4c;--sarcelle:#b1626a;--chair:#f0cdb9;--bois:#bb8a66;--bois2:#96664a}
+[data-palette=sauge]{--lin:#e2e5d0;--lin2:#cdd4b6;--encre:#20302b;--garance:#8f4a22;--gaude:#cba23c;--guede:#2f5f52;--olive:#6a7a3c;--sarcelle:#5a8a7a;--chair:#e3d2a8;--bois:#b08a58;--bois2:#8a683e}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:78px}
+body{font:500 18px/1.48 var(--texte);color:var(--encre);background:var(--lin);overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--titre);font-weight:900;line-height:.95;letter-spacing:-.02em;font-variation-settings:'SOFT' 100,'opsz' 144}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.toile{background-color:var(--lin);background-image:repeating-linear-gradient(0deg,rgba(96,72,30,.06) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(96,72,30,.05) 0 1px,transparent 1px 4px)}
+.kicker{font:800 14px/1.2 var(--texte);letter-spacing:.13em;text-transform:uppercase}
+.pt{border-bottom:3px dotted currentColor;padding:0 2px;letter-spacing:.12em}
+
+/* la laine : des lettres brodées, tracées au crayon puis remplies point par point */
+.L{position:relative;display:inline-block}
+.L i{position:absolute;left:0;top:0;font-style:normal;color:transparent;-webkit-text-stroke:.02em var(--trace,rgba(35,40,58,.34))}
+.L b{display:inline-block;font-weight:inherit;color:transparent;background-color:var(--c);background-image:repeating-linear-gradient(var(--ang,114deg),transparent 0 .05em,rgba(0,0,0,.2) .05em .066em,rgba(255,255,255,.15) .066em .118em,rgba(0,0,0,.2) .118em .134em);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 .028em 0 rgba(22,16,10,.36));clip-path:inset(-32% 108% -32% -8%);transition:clip-path .44s steps(7,end)}
+.L.on b{clip-path:inset(-32% -8% -32% -8%)}
+.mot{display:inline-block;white-space:nowrap}
+.lg{display:block}
+
+/* barre haute */
+.tete{position:fixed;inset:0 0 auto;z-index:40;background:var(--encre);color:var(--lin)}
+.tete-l{display:flex;align-items:center;justify-content:space-between;gap:10px;height:54px;padding:0 14px;max-width:1640px;margin:auto}
+.marque{font:900 17px/1 var(--titre);font-variation-settings:'SOFT' 100;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
+.marque b{font-weight:900;color:var(--gaude)}
+.tete nav{display:none;gap:30px;font-weight:700;font-size:17px}
+.tete nav a{text-decoration:none;padding:8px 0;border-bottom:3px solid transparent}
+.tete nav a:hover{border-bottom-color:var(--gaude)}
+.tete-d{display:flex;align-items:center;gap:12px}
+.kz{font:800 12px/1 var(--texte);letter-spacing:.09em;text-transform:uppercase;text-decoration:none;opacity:.82}
+.btn-res{display:inline-flex;align-items:center;min-height:38px;padding:0 13px;background:var(--gaude);color:#23283a;border-radius:8px;font-weight:800;font-size:16px;text-decoration:none;white-space:nowrap;box-shadow:0 3px 0 rgba(0,0,0,.4)}
+.btn-res:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.4)}
+.frise{height:12px;background:var(--lin) repeating-linear-gradient(115deg,transparent 0 20px,var(--garance) 20px 29px,transparent 29px 34px,var(--guede) 34px 43px,transparent 43px 66px,var(--gaude) 66px 75px,transparent 75px 80px,var(--olive) 80px 89px,transparent 89px 92px)}
+
+/* le fil conducteur : une couture qui descend le long de la lisière, avec son aiguille */
+.fil{position:fixed;right:0;top:var(--tete);bottom:0;width:var(--fil);z-index:30;background:var(--lin2);box-shadow:inset 3px 0 0 rgba(35,40,58,.16);display:flex;flex-direction:column;align-items:center;padding:4px 0}
+.fil i{flex:1;width:6px;margin:4px 0;border-radius:3px;background:var(--garance);transform:scaleY(0);transform-origin:50% 0;transition:transform .2s}
+.fil i.on{transform:none}
+.aig{position:absolute;left:50%;top:0;width:16px;height:64px;margin-left:-8px;will-change:transform}
+.aig svg{display:block;width:100%;height:100%;filter:drop-shadow(0 2px 0 rgba(0,0,0,.3))}
+
+/* boutons et étiquettes cousues */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 26px;background:var(--garance);color:var(--creme);border:0;border-radius:12px;font:800 19px/1.1 var(--texte);text-decoration:none;text-align:center;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.3);outline:3px dashed rgba(255,244,223,.7);outline-offset:-8px;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(0,0,0,.3)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.btn.b2{background:var(--encre)}
+.btn.b3{background:var(--lin);color:var(--encre);outline-color:rgba(35,40,58,.5)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.etiq{display:flex;flex-wrap:wrap;gap:8px}
+.etiq span{background:var(--encre);color:var(--lin);font:800 13.5px/1 var(--texte);letter-spacing:.08em;text-transform:uppercase;padding:9px 15px;clip-path:polygon(0 0,100% 0,calc(100% - 6px) 25%,100% 50%,calc(100% - 6px) 75%,100% 100%,0 100%,6px 75%,0 50%,6px 25%)}
+.etiq span:nth-child(2){background:var(--garance)}.etiq span:nth-child(3){background:var(--guede)}
+
+/* arrivée */
+.heros{position:relative;min-height:100svh;padding:calc(var(--tete) + 26px) 16px 92px;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.heros-l{position:relative;width:100%;max-width:1640px;margin:auto;padding-right:var(--fil);display:grid;gap:30px}
+.nom{font-size:clamp(40px,17.2vw,128px);margin:16px 0 14px;line-height:.92;touch-action:pan-y;cursor:default;-webkit-user-select:none;user-select:none}
+.sous{font:500 clamp(19px,5vw,25px)/1.3 var(--texte);max-width:25em;margin-bottom:20px}
+.sous strong{font-weight:800}
+.app-h{animation:monte .7s cubic-bezier(.2,.8,.2,1) backwards}
+.etiq.app-h{animation-delay:.05s}.sous.app-h{animation-delay:1.25s}.cta.app-h{animation-delay:1.4s}.h-d.app-h{animation-delay:.5s}
+@keyframes monte{from{opacity:0;transform:translateY(22px)}}
+.h-d{position:relative;display:grid;justify-items:center;gap:16px;--d:min(72vw,330px);--e:calc(var(--d)*.3)}
+.tamb-z{position:relative;width:var(--d);height:var(--d);will-change:transform}
+.tambour{display:block;width:100%;height:100%;padding:calc(var(--d)*.058);border:0;border-radius:50%;background:var(--bois);box-shadow:inset 0 0 0 calc(var(--d)*.019) var(--bois2),inset 0 0 0 calc(var(--d)*.04) var(--bois),0 calc(var(--d)*.035) 0 rgba(35,40,58,.2);cursor:pointer;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));-webkit-tap-highlight-color:transparent}
+.t-vis{position:absolute;left:50%;top:calc(var(--d)*-.05);width:calc(var(--d)*.13);height:calc(var(--d)*.1);margin-left:calc(var(--d)*-.065);background:var(--bois2);border-radius:5px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.18)}
+.t-vis::after{content:"";position:absolute;left:100%;top:22%;width:60%;height:44%;background:#d8c7a2;border-radius:0 6px 6px 0;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.t-toile{display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--lin2);box-shadow:inset 0 0 0 4px rgba(35,40,58,.18);position:relative}
+.t-toile img{width:100%;height:100%;object-fit:cover;filter:saturate(.94) sepia(.08);--m:0;-webkit-mask-image:repeating-linear-gradient(115deg,#000 0,#000 calc(var(--m)*27px),transparent calc(var(--m)*27px),transparent 26px);mask-image:repeating-linear-gradient(115deg,#000 0,#000 calc(var(--m)*27px),transparent calc(var(--m)*27px),transparent 26px);transition:--m 1.1s cubic-bezier(.3,0,.3,1)}
+.t-toile img.cousu{--m:1}
+.t-toile::after,.ph-c::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.085) 0 3px,rgba(0,0,0,.075) 3px 6px);mix-blend-mode:overlay;pointer-events:none}
+.t-tag{display:grid;gap:3px;justify-items:center;text-align:center;text-decoration:none;background:var(--creme);color:var(--encre);padding:12px 20px 11px;border-radius:5px;box-shadow:0 5px 0 rgba(35,40,58,.2);outline:3px dashed var(--garance);outline-offset:-7px;max-width:100%}
+.t-tag b{font:900 20px/1.1 var(--titre);font-variation-settings:'SOFT' 100}
+.t-tag span{font-weight:700;font-size:16.5px}
+.t-inv{font-weight:800;font-size:15.5px;display:flex;align-items:center;gap:9px}
+.t-inv::before{content:"";width:30px;height:9px;border-radius:5px;background:var(--garance);box-shadow:38px 0 0 var(--garance);margin-right:38px;flex:none}
+.ecu{position:absolute;width:var(--e);height:var(--e);display:grid;place-items:center;background:var(--b);border-radius:20% 20% 50% 50%/16% 16% 48% 48%;box-shadow:0 0 0 5px var(--lin),0 6px 0 5px rgba(35,40,58,.2);outline:3px dashed rgba(255,244,223,.82);outline-offset:-8px;will-change:transform;pointer-events:none}
+.ecu svg{width:70%;height:70%;animation:flotte 4.6s ease-in-out infinite alternate}
+.ecu.e1{--b:var(--guede);left:calc(var(--e)*-.34);top:calc(var(--e)*.08);rotate:-12deg}
+.ecu.e2{--b:var(--garance);right:calc(var(--e)*-.3);top:calc(var(--d)*.5);rotate:10deg}
+.ecu.e2 svg{animation-delay:-2s}
+@keyframes flotte{to{transform:translateY(-7%) rotate(4deg)}}
+.coc{position:absolute;left:calc(var(--e)*-.3);bottom:calc(var(--e)*-.16);width:calc(var(--e)*1.3);height:calc(var(--e)*1.3);display:grid;place-items:center;text-align:center;color:var(--encre);rotate:-9deg;will-change:transform;pointer-events:none}
+.coc::before,.coc::after,.coc i{content:"";position:absolute;inset:6%;background:var(--gaude);border-radius:16%}
+.coc::before{transform:rotate(30deg)}.coc::after{transform:rotate(60deg)}
+.coc i{box-shadow:0 5px 0 rgba(35,40,58,.22)}
+.coc span{position:relative;z-index:1;font:800 clamp(12.5px,calc(var(--e)*.14),16px)/1.05 var(--texte);letter-spacing:.01em}
+.coc span b{display:block;font:900 clamp(22px,calc(var(--e)*.31),38px)/1 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:-.02em}
+.galon{position:absolute;left:0;right:0;bottom:0;height:60px;background:var(--encre);color:var(--lin);overflow:hidden;display:flex;align-items:center;box-shadow:inset 0 5px 0 var(--gaude),inset 0 -5px 0 var(--gaude)}
+.galon-m{will-change:transform}
+.galon-r{display:flex;align-items:center;gap:26px;padding-right:26px;width:max-content;white-space:nowrap;font:900 23px/1 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:.02em;text-transform:uppercase;animation:defile 70s linear infinite}
+@keyframes defile{to{transform:translateX(-33.3333%)}}
+.croix{position:relative;display:inline-block;width:22px;height:22px;flex:none}
+.croix::before,.croix::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:7px;margin-top:-3.5px;border-radius:4px;background:var(--gaude);transform:rotate(45deg)}
+.croix::after{transform:rotate(-45deg);background:var(--garance)}
+
+/* sections : bord cranté et couture en points de croix, cousue au défilement */
+.bloc{position:relative;padding:74px 16px 84px;background-color:var(--bg);color:var(--fg,var(--encre))}
+.bloc::before,.tap::before,.pied::before{content:"";position:absolute;left:0;right:0;top:-13px;height:14px;background:linear-gradient(45deg,var(--bg) 25%,transparent 25.5%) 0 100%/28px 28px,linear-gradient(315deg,var(--bg) 25%,transparent 25.5%) 0 100%/28px 28px;pointer-events:none}
+.bloc-l{position:relative;max-width:1500px;margin:auto;padding-right:var(--fil)}
+.couture{position:absolute;left:0;right:var(--fil);top:0;height:0;z-index:6;display:flex;justify-content:space-around;pointer-events:none}
+.couture i{position:relative;width:0;height:0}
+.couture i::before,.couture i::after{content:"";position:absolute;left:-19px;top:-4.5px;width:38px;height:9px;border-radius:5px;background:var(--cc,var(--gaude));box-shadow:0 2px 0 rgba(0,0,0,.28);transform:rotate(45deg) scaleX(0);transition:transform .2s}
+.couture i::after{transform:rotate(-45deg) scaleX(0);transition-delay:.07s}
+.couture i.on::before{transform:rotate(45deg)}
+.couture i.on::after{transform:rotate(-45deg)}
+h2{font-size:clamp(38px,min(9vw,11.5svh),88px);margin:12px 0 26px}
+
+/* l'atelier : la citation se remplit mot à mot, les échantillons tombent */
+.pres{--bg:var(--encre);--fg:var(--lin);--trace:rgba(234,223,198,.42)}
+.pres .kicker{color:var(--gaude)}
+.pres-g{display:grid;gap:44px}
+.cit{font:900 clamp(34px,min(9.4vw,10.5svh),84px)/1.02 var(--titre);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:-.02em;margin:14px 0 18px;--c:var(--lin)}
+.cit .or{--c:var(--gaude)}
+.cit .L b{transition-duration:.3s}
+.cit-a{font-weight:700;font-size:17px;opacity:.85;max-width:30em}
+.ech{display:grid;gap:14px;margin-bottom:26px}
+.sw{position:relative;display:flex;align-items:center;gap:16px;padding:16px 20px;background:var(--c);color:var(--f,var(--creme));transform:rotate(var(--r,0deg));box-shadow:0 6px 0 rgba(0,0,0,.28)}
+.sw::before,.sw::after{content:"";position:absolute;left:0;right:0;height:9px;background:linear-gradient(45deg,var(--c) 25%,transparent 25.5%) 0 100%/18px 18px,linear-gradient(315deg,var(--c) 25%,transparent 25.5%) 0 100%/18px 18px}
+.sw::before{top:-8px}.sw::after{bottom:-8px;transform:scaleY(-1)}
+.sw b{font:900 clamp(50px,13vw,84px)/.9 var(--titre);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:-.03em;white-space:nowrap}
+.sw span{font-weight:800;font-size:17.5px;line-height:1.2}
+.app .sw{opacity:0;transform:translateY(-70px) rotate(calc(var(--r,0deg) - 16deg))}
+.app.vu .sw{opacity:1;transform:rotate(var(--r,0deg));transition:transform .62s calc(var(--n)*130ms) cubic-bezier(.3,1.45,.5,1),opacity .25s calc(var(--n)*130ms)}
+@media (hover:hover){
+  .app.vu .sw:hover{transform:rotate(0deg) translateY(-10px) scale(1.05);transition:transform .22s cubic-bezier(.3,1.5,.5,1);z-index:2}
+  .bob:hover i{transform:rotate(-10deg) scale(1.08)}
+  .bob i{transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
+  .vu .fleurs svg:hover{transform:rotate(72deg) scale(1.18);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+  .arche:hover .ph{scale:1.06}
+  .vif .motif:hover{transform:rotate(-6deg) scale(1.12)}
+  .laine:hover{transform:translateY(-4px)}
+  .mot-c:hover{transform:rotate(0deg) scale(1.015)}
+  .t-tag:hover{transform:translateY(-3px) rotate(-1deg)}
+}
+.ph{transition:scale .5s cubic-bezier(.2,.8,.2,1)}
+.mot-c,.t-tag{transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.pres-t{font-size:20px;max-width:27em}
+.pres-t strong{font-weight:800;color:var(--gaude)}
+
+/* la tapisserie des soins : une bande qui se déroule de droite à gauche, entre deux bordures */
+.tap{position:relative;--bg:var(--lin)}
+.tap-c{position:sticky;top:var(--tete);height:calc(100svh - var(--tete));overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.reg{flex:1 0 40px;overflow:hidden;background:var(--lin2);border-block:5px solid var(--encre)}
+.reg-m{height:100%;width:400%;background:var(--frise) 0 0/auto 100% repeat-x;will-change:transform}
+.tap-b{flex:0 1 700px;min-height:0;display:flex;will-change:transform;padding-left:max(10px,2vw)}
+.sc{position:relative;flex:none;width:min(84vw,400px);height:100%;padding:14px 16px 14px 28px;display:flex;flex-direction:column;gap:10px}
+.sc::before{content:"";position:absolute;left:6px;top:12px;bottom:12px;width:10px;border-radius:5px;background:repeating-linear-gradient(45deg,var(--guede) 0 9px,var(--lin) 9px 14px,var(--garance) 14px 23px,var(--lin) 23px 28px)}
+.sc.intro::before{display:none}
+.sc.intro{padding-left:10px;justify-content:center;gap:14px}
+.sc.intro h2{font-size:clamp(36px,min(10vw,9svh),66px);margin:0}
+.in-t{font-size:19px;font-weight:500;line-height:1.38}
+.in-t b{font:900 1.05em var(--titre);color:var(--garance)}
+.in-ph{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:340px}
+.in-ph img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border:7px solid var(--encre);border-radius:46% 46% 8px 8px/30% 30% 8px 8px}
+.in-ph img:nth-child(2){border-color:var(--garance)}
+.in-ph figcaption{grid-column:1/-1;font-weight:700;font-size:15px;line-height:1.25}
+.tap-i{font:800 16px/1 var(--texte);display:inline-flex;align-items:center;gap:10px;background:var(--encre);color:var(--lin);padding:11px 16px;border-radius:8px;width:max-content;max-width:100%}
+.tap-i svg{width:26px;height:14px;animation:pousse 1.1s ease-in-out infinite alternate}
+@keyframes pousse{to{transform:translateX(7px)}}
+.insc{font-size:clamp(25px,min(7.5vw,4.6svh),38px);line-height:1;letter-spacing:.005em;margin:0;flex:none}
+.arche{position:relative;flex:1;min-height:0;border:9px solid var(--c1);border-radius:46% 46% 10px 10px/27% 27% 10px 10px;background:var(--lin2)}
+.ph-c{position:absolute;inset:0;overflow:hidden;border-radius:42% 42% 3px 3px/25% 25% 3px 3px}
+.ph{width:116%;max-width:none;height:100%;object-fit:cover;margin-left:-8%;filter:saturate(.94) sepia(.08);transform:translate3d(calc((.5 - var(--p,1))*11%),0,0);-webkit-mask-image:repeating-linear-gradient(115deg,#000 0,#000 calc(var(--q,1)*27px),transparent calc(var(--q,1)*27px),transparent 26px);mask-image:repeating-linear-gradient(115deg,#000 0,#000 calc(var(--q,1)*27px),transparent calc(var(--q,1)*27px),transparent 26px)}
+.motif{position:absolute;right:-12px;bottom:-10px;width:clamp(86px,30%,128px);aspect-ratio:1;display:grid;place-items:center;background:var(--c2);border-radius:20% 20% 50% 50%/16% 16% 48% 48%;box-shadow:0 0 0 5px var(--lin),0 6px 0 5px rgba(35,40,58,.2);outline:3px dashed rgba(255,244,223,.82);outline-offset:-8px;transform:rotate(9deg) scale(.4);opacity:0;transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+.vif .motif{transform:rotate(9deg);opacity:1}
+.motif svg{width:74%;height:74%;overflow:visible}
+.motif .tr{fill:none;stroke:var(--creme);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s calc(.25s + var(--i,0)*.14s) ease-in-out}
+.vif .motif .tr{stroke-dashoffset:0}
+.motif .po{transform-box:fill-box;transform-origin:50% 100%;transform:scale(0);transition:transform .42s calc(.25s + var(--i,0)*.11s) cubic-bezier(.3,1.6,.5,1)}
+.vif .motif .po{transform:none}
+.cart{flex:none;display:grid;gap:9px}
+.cart p{font-weight:700;font-size:17.5px;line-height:1.28}
+.mini{display:none;list-style:none;padding:0}
+.lien-c{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 15px;background:var(--encre);color:var(--lin);border:0;border-radius:9px;font-weight:800;font-size:16px;cursor:pointer;text-align:left;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.lien-c:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.sc.outro{justify-content:center;gap:18px;width:min(88vw,460px)}
+.sc.outro .insc{font-size:clamp(34px,min(10.4vw,7svh),60px)}
+.out-n{font-weight:700;font-size:20px;line-height:1.25}
+.out-n b{font:900 1.5em var(--titre);font-variation-settings:'SOFT' 100;color:var(--garance)}
+.sc.outro .btn{align-self:flex-start}
+.tap-fin{flex:none;width:calc(var(--fil) + 14px)}
+
+/* la carte : dix bobines, une étiquette de tarifs, et « mon moment » qui additionne */
+.carte{--bg:var(--garance);--fg:var(--creme)}
+.carte-g{display:grid;gap:22px}
+.carte h2{margin-bottom:18px}
+.bobines{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bob{display:flex;align-items:center;gap:13px;min-height:54px;padding:7px 10px 7px 14px;background:rgba(0,0,0,.2);border:0;border-radius:10px;font:800 16px/1.12 var(--texte);text-align:left;cursor:pointer;transition:background .15s,color .15s,transform .15s}
+.bob i{flex:none;position:relative;width:24px;height:34px;border-radius:2px;background-color:var(--w);background-image:repeating-linear-gradient(8deg,transparent 0 3px,rgba(0,0,0,.22) 3px 4px,rgba(255,255,255,.14) 4px 6px)}
+.bob i::before,.bob i::after{content:"";position:absolute;left:-6px;right:-6px;height:7px;background:var(--bois);border-radius:3px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
+.bob i::before{top:-4px}.bob i::after{bottom:-4px}
+.bob[aria-selected=true]{background:var(--lin);color:var(--encre);transform:translateX(4px)}
+.bob[aria-selected=true] i{animation:roule .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes roule{0%{transform:rotate(-24deg) scale(.8)}60%{transform:rotate(10deg) scale(1.12)}}
+.c-liste{position:relative;background:var(--lin);color:var(--encre);border-radius:6px;padding:26px 22px 18px;box-shadow:0 9px 0 rgba(0,0,0,.24);outline:3px dashed var(--w,var(--guede));outline-offset:-9px}
+.c-liste h3{font-size:clamp(30px,7.4vw,44px);letter-spacing:-.02em}
+.c-nb{font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin:6px 0 8px;color:var(--garance)}
+.l{display:grid;grid-template-columns:1fr auto 42px;gap:12px;align-items:center;padding:8px 0;border-top:3px dashed rgba(35,40,58,.2);animation:coud .42s calc(var(--i)*42ms) cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes coud{from{opacity:0;transform:translateX(-22px)}}
+.l .n{font-weight:800;font-size:18px;line-height:1.2}
+.l .n small{display:block;font-weight:500;font-size:16px;opacity:.78}
+.l .p{font:900 23px/1 var(--titre);font-variation-settings:'SOFT' 100;white-space:nowrap}
+.plus{width:42px;height:42px;border:0;border-radius:10px;background:var(--encre);color:var(--lin);font:800 26px/1 var(--texte);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.3);transition:transform .15s,background .15s}
+.plus:active{transform:translateY(2px)}
+.plus.pris{background:var(--garance);animation:noue .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes noue{0%{transform:scale(.6) rotate(-40deg)}}
+.moment{background:var(--encre);color:var(--lin);border-radius:6px;padding:26px 22px 22px;box-shadow:0 9px 0 rgba(0,0,0,.24);outline:3px dashed rgba(234,223,198,.5);outline-offset:-9px}
+.moment h3{font-size:34px;color:var(--gaude)}
+.moment p{font-weight:700;font-size:17px;margin-top:8px;line-height:1.3}
+.m-liste{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:7px}
+.m-liste li{display:grid;grid-template-columns:1fr auto 34px;gap:10px;align-items:center;background:rgba(255,255,255,.09);border-radius:7px;padding:7px 7px 7px 12px;font-weight:700;font-size:16.5px;line-height:1.2;animation:noue .35s cubic-bezier(.3,1.5,.5,1)}
+.m-liste b{font:900 18px/1 var(--titre);white-space:nowrap}
+.m-liste button{width:34px;height:34px;border:0;border-radius:8px;background:var(--lin);color:var(--encre);font:800 21px/1 var(--texte);cursor:pointer}
+.m-total{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 16px}
+.m-total div{background:var(--lin);color:var(--encre);border-radius:7px;padding:9px 12px;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.m-total b{display:block;font:900 30px/1.05 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:-.02em;text-transform:none}
+.m-total b.bat{animation:noue .35s cubic-bezier(.3,1.5,.5,1)}
+.moment .btn{width:100%}
+.m-note{font-weight:500!important;font-size:15.5px!important;opacity:.8}
+
+/* à vous de broder : un canevas de point de croix */
+.broder{--bg:var(--guede);--fg:var(--creme)}
+.broder .kicker{color:var(--gaude)}
+.br-g{display:grid;gap:22px}
+.br-t{font-size:20px;max-width:24em;margin-bottom:18px}
+.laines{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.laine{position:relative;width:56px;height:38px;border:0;border-radius:19px;background-color:var(--w);background-image:repeating-linear-gradient(74deg,transparent 0 4px,rgba(0,0,0,.22) 4px 5px,rgba(255,255,255,.15) 5px 8px);cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.3);transition:transform .16s}
+.laine::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:15px;margin-left:-7.5px;background:var(--creme);border-radius:2px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.14)}
+.laine[aria-pressed=true]{transform:translateY(-7px) rotate(-6deg);box-shadow:0 9px 0 rgba(0,0,0,.3)}
+.br-b{display:flex;flex-wrap:wrap;gap:9px}
+.br-b button{min-height:46px;padding:0 15px;border:0;border-radius:9px;background:rgba(0,0,0,.26);color:var(--creme);font-weight:800;font-size:16.5px;cursor:pointer}
+.br-b button:active{transform:translateY(2px)}
+.br-b button.fort{background:var(--gaude);color:#23283a;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.cv-z{position:relative;justify-self:center;width:min(100%,calc((100svh - var(--tete) - 190px)*15/11),700px)}
+.cv-tete{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;font-size:16.5px;margin-bottom:8px}
+.cv-tete b{font:900 21px/1 var(--titre);font-variation-settings:'SOFT' 100}
+.canevas{display:grid;grid-template-columns:repeat(15,1fr);aspect-ratio:15/11;border:10px solid var(--bois);border-radius:8px;box-shadow:inset 0 0 0 3px var(--bois2),0 9px 0 rgba(0,0,0,.26);background-color:var(--lin);background-image:linear-gradient(rgba(35,40,58,.13) 2px,transparent 2px),linear-gradient(90deg,rgba(35,40,58,.13) 2px,transparent 2px);background-size:calc(100%/15) calc(100%/11);touch-action:pan-y;cursor:crosshair;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.canevas i{position:relative}
+.canevas i.t{background:repeating-linear-gradient(45deg,rgba(35,40,58,.26) 0 2px,transparent 2px 6px)}
+.canevas i::before,.canevas i::after{content:"";position:absolute;left:-9%;top:37%;width:118%;height:26%;border-radius:99px;background:var(--w);box-shadow:0 1.5px 0 rgba(0,0,0,.3);transform:rotate(45deg) scaleX(0);transition:transform .15s}
+.canevas i::after{transform:rotate(-45deg) scaleX(0);transition-delay:.06s}
+.canevas i.x::before{transform:rotate(45deg)}
+.canevas i.x::after{transform:rotate(-45deg)}
+.canevas i.x{background:none}
+.canevas i.saut{animation:saute .5s calc(var(--k)*26ms) cubic-bezier(.3,1.5,.5,1)}
+@keyframes saute{40%{transform:translateY(-34%) scale(1.25)}}
+.cv-fin{position:absolute;left:50%;bottom:-18px;width:max-content;max-width:94%;transform:translate(-50%,30px) rotate(-2deg) scale(.7);opacity:0;pointer-events:none;background:var(--creme);color:var(--encre);padding:13px 20px;border-radius:5px;font:900 clamp(18px,4.6vw,24px)/1.15 var(--titre);font-variation-settings:'SOFT' 100;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.28);outline:3px dashed var(--garance);outline-offset:-7px;transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+.cv-fin.vu{transform:translate(-50%,0) rotate(-2deg);opacity:1}
+
+/* les avis */
+.avis{--bg:var(--gaude);--fg:#23283a}
+.avis-g{display:grid;gap:34px;align-items:center}
+.cinq{font-size:clamp(72px,min(23vw,24svh),190px);margin:6px 0 4px;letter-spacing:-.04em;color:#23283a}
+.fleurs{display:flex;gap:6px;margin:6px 0 14px}
+.fleurs svg{width:clamp(44px,12vw,78px);height:auto;transform:scale(0) rotate(-120deg);transition:transform .7s calc(var(--n)*110ms) cubic-bezier(.3,1.5,.5,1)}
+.vu .fleurs svg{transform:none}
+.nb{font-weight:800;font-size:21px}
+.nb b{font:900 1.7em/1 var(--titre);font-variation-settings:'SOFT' 100}
+.mot-c{background:var(--creme);color:#23283a;padding:34px 26px 28px;border-radius:5px;box-shadow:0 9px 0 rgba(0,0,0,.24);outline:3px dashed var(--garance);outline-offset:-9px;transform:rotate(-1.6deg);display:grid;gap:16px;justify-items:start}
+.mot-c blockquote{font:900 clamp(30px,min(7.6vw,7.6svh),58px)/1.04 var(--titre);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:-.02em;--c:var(--garance);--trace:rgba(35,40,58,.3)}
+.mot-c figcaption{font-weight:800;font-size:17px}
+
+/* deux adresses : deux portes qu'on pousse */
+.adr{--bg:var(--lin)}
+.adr .kicker{color:var(--garance)}
+.portes{display:grid;gap:34px}
+.porte{position:relative;display:flex;perspective:1500px;perspective-origin:0 50%;--o:0}
+.p-int{position:relative;flex:1;min-height:470px;border:9px solid var(--c);border-radius:70px 70px 8px 8px;background:var(--creme);padding:44px 24px 26px;display:grid;gap:16px 34px;align-content:start}
+.p-int>div{display:grid;gap:13px;align-content:start;justify-items:start}
+.p-int h3{font-size:clamp(28px,8vw,48px);color:var(--c)}
+.p-int p{font-weight:700;font-size:19px;line-height:1.3}
+.p-int .depuis{display:inline-block;background:var(--c);color:var(--creme);font-weight:800;font-size:16.5px;padding:7px 13px;border-radius:5px;justify-self:start}
+.p-int .btn{justify-self:start}
+.p-int a.tel{font:900 26px/1 var(--titre);font-variation-settings:'SOFT' 100;text-decoration-thickness:3px;text-underline-offset:5px}
+.sem{display:grid;gap:7px;font-weight:800;font-size:16.5px}
+.sem div{display:grid;grid-template-columns:minmax(0,1fr);gap:3px}
+.sem i{display:block;height:30px;border-radius:5px;background:var(--c);background-image:repeating-linear-gradient(100deg,transparent 0 5px,rgba(0,0,0,.2) 5px 6px,rgba(255,255,255,.13) 6px 10px);width:var(--l);transform:scaleX(calc(.04 + var(--o)*.96));transform-origin:0 50%;color:var(--creme);font:800 15.5px/30px var(--texte);font-style:normal;padding-left:10px;white-space:nowrap;overflow:hidden}
+.sem i.f{background:none;color:inherit;padding-left:0;transform:none;border:3px dashed rgba(35,40,58,.3);width:38%;padding-left:8px;line-height:24px}
+.etat{font-weight:800!important;font-size:17.5px!important;display:flex;align-items:center;gap:10px}
+.etat::before{content:"";flex:none;width:26px;height:10px;border-radius:5px;background:var(--olive)}
+.etat.ferme::before{background:var(--garance)}
+.p-bat{position:absolute;inset:0;border:0;border-radius:70px 70px 8px 8px;background:var(--c);color:var(--creme);cursor:pointer;transform-origin:0 50%;transform:rotateY(calc(var(--o)*90deg));box-shadow:inset 0 0 0 9px rgba(0,0,0,.16);display:grid;align-content:center;justify-items:center;gap:16px;padding:20px;-webkit-tap-highlight-color:transparent;will-change:transform}
+.p-bat::before{content:"";position:absolute;inset:26px;border:4px dashed rgba(255,244,223,.55);border-radius:50px 50px 4px 4px;pointer-events:none}
+.p-bat::after{content:"";position:absolute;right:42px;top:50%;width:14px;height:64px;margin-top:-32px;border-radius:7px;background:var(--gaude);box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.p-bat b{font:900 clamp(34px,9.4vw,60px)/.95 var(--titre);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:-.02em;text-align:center}
+.p-bat span{font-weight:800;font-size:16.5px;background:var(--creme);color:var(--encre);padding:8px 14px;border-radius:5px}
+.porte.ouverte .p-bat{pointer-events:none}
+
+/* réserver : le bouton */
+.resa{--bg:var(--olive);--fg:var(--creme)}
+.resa-g{display:grid;gap:34px;align-items:center}
+.resa p{font-size:20px;max-width:26em;margin-bottom:20px}
+.resa .ex{font-size:17.5px;font-weight:700}
+.bouton{--s:min(64vw,270px);position:relative;display:block;justify-self:center;width:var(--s);height:var(--s);border-radius:50%;background:var(--gaude);box-shadow:inset 0 0 0 calc(var(--s)*.06) rgba(0,0,0,.14),inset 0 0 0 calc(var(--s)*.14) var(--gaude),inset 0 0 0 calc(var(--s)*.17) rgba(0,0,0,.13),0 calc(var(--s)*.05) 0 rgba(0,0,0,.3);transform:translateY(-90px) rotate(-70deg) scale(.7);opacity:0;transition:transform .8s cubic-bezier(.3,1.4,.5,1),opacity .25s}
+.vu .bouton{transform:none;opacity:1}
+.bouton:hover{transform:rotate(14deg) scale(1.04)}
+.bouton:active{transform:scale(.95)}
+.bouton i{position:absolute;width:13%;height:13%;border-radius:50%;background:#23283a;box-shadow:inset 0 4px 0 rgba(0,0,0,.4)}
+.bouton i:nth-of-type(1){left:31%;top:31%}.bouton i:nth-of-type(2){right:31%;top:31%}.bouton i:nth-of-type(3){left:31%;bottom:31%}.bouton i:nth-of-type(4){right:31%;bottom:31%}
+.bouton b{position:absolute;left:28%;top:46.5%;width:44%;height:7%;border-radius:99px;background:var(--creme);box-shadow:0 3px 0 rgba(0,0,0,.25);transform:rotate(45deg) scaleX(0);transition:transform .35s .75s}
+.bouton b+b{transform:rotate(-45deg) scaleX(0);transition-delay:1s}
+.vu .bouton b{transform:rotate(45deg)}.vu .bouton b+b{transform:rotate(-45deg)}
+.bouton u{position:absolute;left:50%;top:104%;transform:translateX(-50%);width:max-content;text-decoration:none;font-weight:800;font-size:17px;background:var(--creme);color:var(--encre);padding:8px 14px;border-radius:5px}
+
+/* pied */
+.pied{position:relative;--bg:var(--encre);background:var(--encre);color:var(--lin);padding:64px 16px 44px}
+.pied>div{max-width:1500px;margin:auto;padding-right:var(--fil);display:grid;gap:12px}
+.pied .grand{font:900 clamp(30px,7.4vw,56px)/1 var(--titre);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:-.02em;color:var(--gaude);max-width:15em}
+.pied p{max-width:44em}
+.pied .cred{font-size:15.5px;opacity:.75}
+.kzp{font:900 30px/1 var(--titre);font-variation-settings:'SOFT' 100;text-decoration:none;justify-self:start;margin-top:12px;border-bottom:4px solid var(--gaude);padding-bottom:3px}
+
+@media (max-width:349px){.marque{font-size:14.5px}.btn-res{padding:0 9px;font-size:15px}.tete-d{gap:8px}.tete-l{padding:0 10px}.kz{font-size:11px}.bob{font-size:14.5px;gap:10px;padding-left:12px}.l{gap:8px}}
+@media (min-width:600px){
+  .h-d{--d:min(54vw,430px)}
+}
+@media (min-width:700px){
+  .p-bat b{font-size:clamp(30px,5.4vw,60px)}
+  .p-int h3{font-size:clamp(30px,4.8vw,48px)}
+  .bobines{grid-template-columns:repeat(2,1fr)}
+  .ech{grid-template-columns:repeat(3,1fr);gap:0;margin:10px 0 34px}
+  .sw{display:block;padding:22px 20px 26px;margin:0 -6px}
+  .sw:nth-child(2){margin-top:26px;z-index:1}
+  .sw span{display:block;margin-top:8px}
+  .portes{grid-template-columns:1fr 1fr}
+  .l .n small{display:inline;margin-left:12px}
+}
+@media (min-width:900px){
+  :root{--fil:26px}
+  body{font-size:19px}
+  .tete nav{display:flex}
+  .tete-l{padding:0 22px}
+  .marque{font-size:21px}
+  .heros{padding-left:36px;padding-right:16px}
+  .heros-l{grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);align-items:center;gap:20px}
+  .nom{font-size:clamp(60px,min(9.5vw,21svh),196px);margin:20px 0 18px}
+  .sous{font-size:clamp(20px,min(1.5vw,3.5svh),29px);margin-bottom:26px}
+  .h-d{--d:min(34vw,58svh,600px);padding-right:calc(var(--e)*.3)}
+  .bloc{padding:92px 36px 100px}
+  .pres-g{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:center}
+  .sc{--fs:clamp(32px,5.2svh,42px);width:auto;display:grid;grid-template-columns:auto 420px;grid-template-rows:auto 1fr auto;column-gap:26px;row-gap:14px;padding:22px 26px 22px 44px}
+  .sc::before{left:10px;top:18px;bottom:18px;width:12px}
+  .arche{grid-row:1/4;grid-column:1;height:100%;aspect-ratio:.74;flex:none}
+  .insc{grid-column:2;grid-row:1;font-size:var(--fs);padding-top:6px}
+  .motif{right:auto;bottom:auto;left:calc(100% + 30px);top:calc(var(--fs)*2 + 34px);width:clamp(104px,15svh,168px)}
+  .cart{grid-column:2;grid-row:3;gap:12px}
+  .cart p{font-size:19px}
+  .mini{display:grid;gap:0}
+  .mini li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:3px dashed rgba(35,40,58,.2);font-weight:700;font-size:17px;line-height:1.2}
+  .mini b{font:900 19px/1 var(--titre);white-space:nowrap}
+  .sc.intro{display:flex;width:470px;padding:22px 30px 22px 12px}
+  .sc.outro{display:flex;width:520px}
+  .carte-g{grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:30px 36px;align-items:start}
+  .moment{grid-column:1/-1}
+  .br-g{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:center;gap:50px}
+  .avis-g{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:60px}
+  .resa-g{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+  .p-int{padding:52px 40px 34px}
+  .p-int h3{grid-column:1/-1}
+  .pied{padding:84px 36px 60px}
+}
+@media (min-width:1280px){
+  .p-int{grid-template-columns:1fr 1fr}
+  .carte-g{grid-template-columns:minmax(0,390px) minmax(0,1fr) minmax(0,350px)}
+  .moment{grid-column:auto;position:sticky;top:96px}
+  .c-liste{padding:30px 34px 22px}
+}
+@media (min-width:900px) and (max-height:820px){
+  .bloc{padding-top:70px;padding-bottom:78px}
+  .p-int{min-height:400px}
+}
+.calme .L b{clip-path:none;transition:none}
+.calme .tap-c{position:static;height:auto}
+.calme .tap-b{overflow-x:auto;height:min(700px,82svh);flex:none}
+.calme .reg{flex:0 0 40px}
+.calme *,.calme *::before,.calme *::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+html.calme{scroll-behavior:auto}
+</style>
+<script src="contenu.js"></script>
+</head>
+<body>
+
+<header class="tete">
+  <div class="tete-l">
+    <a class="marque" href="#haut">L’Atelier <b>de</b> Camillia</a>
+    <nav aria-label="Sommaire"><a href="#soins">Les soins</a><a href="#carte">La carte</a><a href="#broder">À vous de broder</a><a href="#avis">Avis</a><a href="#adresses">Adresses</a></nav>
+    <div class="tete-d"><a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a><a class="btn-res" href="#reserver">Réserver</a></div>
+  </div>
+  <div class="frise" aria-hidden="true"></div>
+</header>
+<div class="fil" id="fil" aria-hidden="true"><div class="aig" id="aig"><svg viewBox="0 0 16 64"><path d="M8 63C5 50 3.4 30 3.4 13 3.4 5 5.2 1 8 1s4.6 4 4.6 12C12.6 30 11 50 8 63z" fill="#f3ecdc" stroke="#23283a" stroke-width="2"/><rect x="6.3" y="6" width="3.4" height="11" rx="1.7" fill="#23283a"/></svg></div></div>
+
+<main id="haut">
+<section class="heros toile" id="heros" aria-label="L’Atelier de Camillia">
+  <div class="heros-l">
+    <div class="h-g">
+      <p class="etiq app-h"><span>Institut de beauté</span><span>Bayeux</span><span>Bretteville-l’Orgueilleuse</span></p>
+      <h1 class="nom" id="nom"><span class="lg" data-brode="L’Atelier" style="--c:var(--garance)"></span><span class="lg" data-brode="de Camillia" style="--c:var(--encre)"></span></h1>
+      <p class="sous app-h">Cils, ongles, soins du visage et du corps, épilations, maquillage permanent : <strong>à Bayeux et à Bretteville-l’Orgueilleuse.</strong></p>
+      <p class="cta app-h"><a class="btn" data-planity>Réserver sur Planity</a><a class="btn b2" data-tel></a></p>
+    </div>
+    <div class="h-d app-h">
+      <div class="tamb-z" id="tambZ">
+        <button class="tambour" id="tambour" type="button" aria-label="Tourner le tambour pour voir un autre soin"><span class="t-vis" aria-hidden="true"></span><span class="t-toile"><img id="tambImg" alt="" width="900" height="1205"></span></button>
+        <div class="ecu e1" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none" stroke="#fff4df" stroke-linecap="round"><path d="M14 46Q50 80 86 46" stroke-width="9"/><g stroke-width="7"><path d="M21 58l-9 13"/><path d="M35 67l-5 16"/><path d="M50 70v17"/><path d="M65 67l5 16"/><path d="M79 58l9 13"/></g></svg></div>
+        <div class="ecu e2" aria-hidden="true"><svg viewBox="0 0 100 100"><rect x="40" y="8" width="20" height="36" rx="5" fill="#23283a"/><rect x="27" y="42" width="46" height="50" rx="14" fill="#fff4df"/><rect x="36" y="56" width="28" height="28" rx="8" fill="#d09a37"/></svg></div>
+        <div class="coc" aria-hidden="true"><i></i><span><b>5 sur 5</b>244 avis Planity</span></div>
+      </div>
+      <a class="t-tag" id="tambTag" href="#carte"><b></b><span></span></a>
+      <p class="t-inv">Touchez le tambour : un autre soin</p>
+    </div>
+  </div>
+  <div class="galon" aria-hidden="true"><div class="galon-m" id="galon"></div></div>
+</section>
+
+<section class="bloc pres" id="atelier">
+  <div class="couture" aria-hidden="true"></div>
+  <div class="bloc-l pres-g">
+    <div>
+      <p class="kicker">Nouveau à Bayeux</p>
+      <blockquote class="cit" id="cit" data-mots="« Un lieu où se retrouver et |prendre |du |temps |pour |soi. »"></blockquote>
+      <p class="cit-a">C’est le titre choisi par actu.fr pour annoncer l’ouverture de l’institut de Bayeux.</p>
+    </div>
+    <div>
+      <div class="ech app">
+        <div class="sw" style="--c:var(--garance);--r:-3deg;--n:0"><b>2</b><span>instituts : Bayeux et Bretteville-l’Orgueilleuse</span></div>
+        <div class="sw" style="--c:var(--gaude);--f:#23283a;--r:2.5deg;--n:1"><b data-compte id="nSoinsA">45</b><span>soins à la carte, de <i id="pMinA" style="font-style:normal">6</i> € à <i id="pMaxA" style="font-style:normal">320</i> €</span></div>
+        <div class="sw" style="--c:var(--sarcelle);--r:-2deg;--n:2"><b data-compte>244</b><span>avis sur Planity, note de 5 sur 5</span></div>
+      </div>
+      <p class="pres-t">Camille a ouvert son premier institut à Bretteville-l’Orgueilleuse. <strong>Depuis le 15 octobre 2026</strong>, elle vous reçoit aussi à Bayeux, au 1 rue du Docteur Michel.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tap toile" id="soins" aria-label="Les soins">
+  <div class="couture" aria-hidden="true" style="--cc:var(--garance)"></div>
+  <div class="tap-c">
+    <div class="reg" aria-hidden="true"><div class="reg-m"></div></div>
+    <div class="tap-b" id="bande">
+      <article class="sc intro">
+        <p class="kicker" style="color:var(--garance)">Les soins</p>
+        <h2>La tapisserie des soins</h2>
+        <p class="in-t">À Bayeux, les scènes de la tapisserie commencent par <b>HIC</b> : « ici ». Alors ici aussi.</p>
+        <figure class="in-ph"><img src="photos/felin.webp" alt="Un félin brodé de laine rouge, détail de la tapisserie de Bayeux" width="640" height="548"><img src="photos/oie.webp" alt="Une oie brodée, détail de la tapisserie de Bayeux" width="611" height="640"><figcaption>Deux détails de la vraie, brodée au XIe siècle.</figcaption></figure>
+        <p class="tap-i" id="tapI">Défilez, elle se déroule <svg viewBox="0 0 26 14" aria-hidden="true"><path d="M1 7h20M15 1.5 22 7l-7 5.5" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+      </article>
+      <article class="sc outro" id="outro" style="--c1:var(--garance)">
+        <h3 class="insc"><span class="lg" data-brode="ET ICI," style="--c:var(--garance)"></span><span class="lg" data-brode="TOUT LE RESTE" style="--c:var(--encre)"></span></h3>
+        <p class="out-n"><b id="nSoinsB">45</b> soins, toutes les durées, tous les tarifs, de <span id="pMinB">6</span> € à <span id="pMaxB">320</span> €.</p>
+        <a class="btn" href="#carte">Ouvrir la carte des soins</a>
+      </article>
+      <div class="tap-fin" aria-hidden="true"></div>
+    </div>
+    <div class="reg" aria-hidden="true"><div class="reg-m"></div></div>
+  </div>
+</section>
+
+<section class="bloc carte" id="carte">
+  <div class="couture" aria-hidden="true" style="--cc:var(--creme)"></div>
+  <div class="bloc-l carte-g">
+    <div>
+      <p class="kicker">Durées et tarifs relevés sur Planity le 9 novembre 2026</p>
+      <h2>La carte des soins</h2>
+      <div class="bobines" id="bobines" role="tablist" aria-label="Familles de soins"></div>
+    </div>
+    <div class="c-liste" id="cListe" role="tabpanel" aria-live="polite"></div>
+    <aside class="moment" aria-label="Mon moment">
+      <h3>Mon moment</h3>
+      <p id="mVide">Touchez <b>+</b> à côté d’un soin : la durée et le total s’additionnent tout seuls.</p>
+      <ul class="m-liste" id="mListe"></ul>
+      <div class="m-total" id="mTotal" hidden><div>Durée<b id="mDuree"></b></div><div>Total<b id="mPrix"></b></div></div>
+      <a class="btn b3" data-planity>Réserver sur Planity</a>
+      <p class="m-note">Un simple calcul d’après les tarifs affichés. La réservation se fait sur Planity.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="bloc broder" id="broder">
+  <div class="couture" aria-hidden="true"></div>
+  <div class="bloc-l br-g">
+    <div>
+      <p class="kicker">Le canevas</p>
+      <h2>À vous de broder</h2>
+      <p class="br-t">Choisissez une laine, puis glissez le doigt ou la souris sur le canevas pour remplir le motif tracé au crayon.</p>
+      <div class="laines" id="laines" role="group" aria-label="Couleur de la laine"></div>
+      <div class="br-b"><button type="button" class="fort" id="bAide">Un coup de main</button><button type="button" id="bSuivant">Motif suivant</button><button type="button" id="bDecoudre">Tout découdre</button></div>
+    </div>
+    <div class="cv-z">
+      <p class="cv-tete"><b id="bNom"></b><span id="bCompte" aria-live="polite"></span></p>
+      <div class="canevas" id="canevas" role="img" aria-label="Canevas de point de croix à remplir"></div>
+      <p class="cv-fin" id="bFin" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="bloc avis app" id="avis">
+  <div class="couture" aria-hidden="true" style="--cc:var(--garance)"></div>
+  <div class="bloc-l avis-g">
+    <div>
+      <p class="kicker">Ce qu’on en dit</p>
+      <h2 class="cinq">5 sur 5</h2>
+      <p class="fleurs" id="fleurs" aria-hidden="true"></p>
+      <p class="nb"><b data-compte>244</b> avis sur Planity</p>
+    </div>
+    <figure class="mot-c">
+      <blockquote id="citAvis" data-mots="« Camille est très agréable et très efficace. »"></blockquote>
+      <figcaption>Avis laissé sur Planity le 26 octobre 2026.</figcaption>
+      <a class="btn b2" data-planity>Lire les avis sur Planity</a>
+    </figure>
+  </div>
+</section>
+
+<section class="bloc adr toile" id="adresses">
+  <div class="couture" aria-hidden="true" style="--cc:var(--garance)"></div>
+  <div class="bloc-l">
+    <p class="kicker">Deux portes à pousser</p>
+    <h2>Un atelier, deux adresses.</h2>
+    <div class="portes">
+      <div class="porte" data-superpose style="--c:var(--garance)">
+        <div class="p-int">
+          <h3>Bayeux</h3>
+          <div>
+            <p>1 rue du Docteur Michel<br>14400 Bayeux</p>
+            <p class="depuis">Ouvert depuis le 15 octobre 2026</p>
+            <p><a class="tel" data-tel></a></p>
+          </div>
+          <div>
+            <p>Horaires : <span class="pt">............</span></p>
+            <p>Réservation en ligne : <span class="pt">............</span></p>
+            <p>Ce qui est en pointillés attend les vrais mots de Camille.</p>
+          </div>
+        </div>
+        <button class="p-bat" type="button" aria-label="Pousser la porte de Bayeux"><b>Bayeux</b><span>Poussez la porte</span></button>
+      </div>
+      <div class="porte" data-superpose style="--c:var(--guede)">
+        <div class="p-int">
+          <h3>Bretteville-l’Orgueilleuse</h3>
+          <div>
+            <p>5 rue de la Délivrande<br>14740 Thue et Mue</p>
+            <p><a class="tel" data-tel></a></p>
+            <a class="btn" data-planity style="background:var(--guede)">Réserver sur Planity</a>
+          </div>
+          <div style="justify-items:stretch">
+            <div class="sem" aria-label="Horaires">
+              <div>Du lundi au vendredi<i style="--l:100%">9 h à 19 h</i></div>
+              <div>Le samedi<i style="--l:70%">9 h à 16 h</i></div>
+              <div>Le dimanche<i class="f">Fermé</i></div>
+            </div>
+            <p class="etat" id="etat"></p>
+          </div>
+        </div>
+        <button class="p-bat" type="button" aria-label="Pousser la porte de Bretteville-l’Orgueilleuse"><b>Bretteville-<br>l’Orgueilleuse</b><span>Poussez la porte</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc resa app" id="reserver">
+  <div class="couture" aria-hidden="true"></div>
+  <div class="bloc-l resa-g">
+    <div>
+      <p class="kicker">Réserver</p>
+      <h2>Prendre rendez-vous</h2>
+      <p>La réservation en ligne se fait sur Planity, pour l’institut de Bretteville-l’Orgueilleuse. Vous choisissez le soin, le jour et l’heure.</p>
+      <p class="cta"><a class="btn b2" data-planity>Réserver sur Planity</a><a class="btn b3" data-tel></a></p>
+      <p class="ex">Réservation en ligne pour Bayeux : <span class="pt">............</span></p>
+    </div>
+    <a class="bouton" data-planity aria-label="Réserver sur Planity"><i></i><i></i><i></i><i></i><b></b><b></b><u>Le bouton pour réserver</u></a>
+  </div>
+</section>
+</main>
+
+<footer class="pied"><div>
+  <p class="grand">Votre site peut avoir autant de pages que vous voulez.</p>
+  <p>Une page par institut, une pour les cils, une pour le maquillage permanent, une pour les bons cadeaux : c’est vous qui voyez. Ici, une seule pour donner l’idée.</p>
+  <p>Maquette privée préparée pour L’Atelier de Camillia. Rien n’est en ligne, rien n’est réservé pour de vrai.</p>
+  <p class="cred">Photos d’illustration en attendant les vôtres : ce ne sont pas des photos de l’institut (banque d’images Unsplash, et deux images créées pour la maquette). Détails de la tapisserie de Bayeux, XIe siècle : Wikimedia Commons, domaine public.</p>
+  <a class="kzp" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+</div></footer>
+
+<script>
+(function(){
+  'use strict';
+  var C=window.CONTENU,H=document.documentElement,req=new URLSearchParams(location.search);
+  var PAL=['lin','rose','sauge'];
+  if(PAL.indexOf(req.get('palette'))>=0)H.dataset.palette=req.get('palette');
+  // Le Windows de ce PC a ses animations coupées : le site ne suit donc pas le réglage « moins de mouvement » du système.
+  // Le mode sans mouvement existe, sur demande seulement : ajouter ?calme=1 à l'adresse.
+  var calme=req.has('calme');
+  if(calme)H.classList.add('calme');
+  var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+  var cl=function(v){return v<0?0:v>1?1:v};
+  var LAINES=['--garance','--gaude','--guede','--olive','--sarcelle','--encre'];
+  var W=innerWidth,Hh=innerHeight,TETE=66;
+
+  $$('[data-planity]').forEach(function(a){a.href=C.planity;a.target='_blank';a.rel='noopener'});
+  $$('[data-tel]').forEach(function(a){a.href='tel:'+C.telLien;if(!a.textContent.trim())a.textContent=C.telephone});
+
+  // ---------- la laine : chaque lettre a son tracé au crayon et son remplissage ----------
+  var ANG=[114,72,104,84,120,66];
+  function brode(el){
+    var t=el.getAttribute('data-brode'),n=0;
+    el.innerHTML='<span class="vh">'+t+' </span><span aria-hidden="true">'+t.split(' ').map(function(m){
+      return'<span class="mot">'+Array.from(m).map(function(ch){n++;return'<span class="L" style="--ang:'+ANG[(n*5+m.length)%6]+'deg"><i>'+ch+'</i><b>'+ch+'</b></span>'}).join('')+'</span>'}).join(' ')+'</span>';
+    return $$('.L',el);
+  }
+  function mots(el){ // une citation : « | » avant un mot le passe en doré
+    var or=false;
+    var brut=el.getAttribute('data-mots');
+    el.innerHTML='<span class="vh">'+brut.replace(/\|/g,'')+'</span><span aria-hidden="true">'+brut.split(' ').map(function(m){
+      if(m.charAt(0)==='|'){m=m.slice(1);or=true}else or=false;
+      return'<span class="mot'+(or?' or':'')+'"><span class="L"><i>'+m+'</i><b>'+m+'</b></span></span>'}).join(' ')+'</span>';
+    return $$('.L',el);
+  }
+  function pose(L,k){for(var i=0;i<L.length;i++){var on=i<k;if(L[i].classList.contains('on')!==on)L[i].classList.toggle('on',on)}}
+
+  // ---------- la frise des bordures, dessinée aux couleurs de la palette ----------
+  function frise(){
+    var v=function(n){return getComputedStyle(H).getPropertyValue(n).trim()};
+    var g=v('--garance'),b=v('--guede'),o=v('--gaude'),ol=v('--olive');
+    var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60">'+
+      '<path d="M6 60 26 0h13L19 60z" fill="'+g+'"/><path d="M27 60 47 0h13L40 60z" fill="'+b+'"/>'+
+      '<path d="M96 54V16" stroke="'+ol+'" stroke-width="6" stroke-linecap="round"/><path d="M96 40q-22-3-25-24 22 3 25 24zM96 32q22-3 25-24-22 3-25 24z" fill="'+ol+'"/>'+
+      '<path d="M176 60 156 0h-13l20 60z" fill="'+o+'"/><path d="M197 60 177 0h-13l20 60z" fill="'+g+'"/>'+
+      '<path d="M228 9l19 21-19 21-19-21z" fill="'+b+'"/><path d="M228 21l8 9-8 9-8-9z" fill="'+o+'"/>'+
+      '</svg>';
+    H.style.setProperty('--frise','url("data:image/svg+xml,'+encodeURIComponent(s)+'")');
+  }
+  frise();
+
+  // ---------- arrivée ----------
+  var nom=$('#nom'),LN=[];
+  $$('.lg',nom).forEach(function(l){LN=LN.concat(brode(l))});
+  nom.setAttribute('aria-label','L’Atelier de Camillia');
+  var entree=calme?LN.length:0,defait=LN.length;
+  function majNom(){pose(LN,Math.min(entree,defait))}
+  function lancer(){
+    if(calme){majNom();return}
+    LN.forEach(function(_,i){setTimeout(function(){entree=i+1;majNom()},260+i*62)});
+  }
+  // on repasse sur une lettre : elle se rebrode dans une autre laine
+  var derniere=null;
+  function rebrode(e){
+    var L=e.target.closest&&e.target.closest('.L');if(!L||L===derniere||!L.classList.contains('on'))return;derniere=L;
+    var k=((+L.dataset.w||0)+1+Math.floor(Math.random()*3))%LAINES.length;L.dataset.w=k;
+    L.classList.remove('on');L.style.setProperty('--c','var('+LAINES[k]+')');void L.offsetWidth;L.classList.add('on');
+  }
+  nom.addEventListener('pointerover',rebrode);nom.addEventListener('pointerdown',function(e){derniere=null;rebrode(e)});
+  nom.addEventListener('pointerleave',function(){derniere=null});
+
+  var T=C.tambour,ti=0,tamb=$('#tambour'),timg=$('#tambImg'),ttag=$('#tambTag'),tz=$('#tambZ'),occupe=false;
+  function tambMontre(i){
+    ti=(i+T.length)%T.length;var o=T[ti];
+    timg.src='photos/'+o.photo+'.webp';timg.style.objectPosition=o.pos;
+    $('b',ttag).textContent=o.nom;$('span',ttag).textContent=o.prix;ttag.dataset.cat=o.cat;
+  }
+  tambMontre(0);
+  var tf=function(a){return'perspective(900px) rotateY('+a+'deg)'};
+  tamb.addEventListener('click',function(){
+    if(occupe)return;occupe=true;
+    if(calme||!tamb.animate){tambMontre(ti+1);occupe=false;return}
+    tamb.animate([{transform:tf(0)},{transform:tf(90)}],{duration:230,easing:'cubic-bezier(.5,0,1,.6)'}).finished.then(function(){
+      timg.classList.remove('cousu');tambMontre(ti+1);
+      return tamb.animate([{transform:tf(-90)},{transform:tf(9)},{transform:tf(0)}],{duration:560,easing:'cubic-bezier(.2,.9,.3,1)'}).finished;
+    }).then(function(){occupe=false;timg.classList.add('cousu')},function(){occupe=false;timg.classList.add('cousu')});
+  });
+  ttag.addEventListener('click',function(){ouvrir(+ttag.dataset.cat)});
+  setTimeout(function(){T.forEach(function(o){new Image().src='photos/'+o.photo+'.webp'})},1800);
+  // le tambour s'incline vers la souris
+  var heros=$('#heros'),ecus=$$('.ecu,.coc',heros);
+  if(!calme&&matchMedia('(hover:hover)').matches)heros.addEventListener('pointermove',function(e){
+    var r=tz.getBoundingClientRect(),dx=cl((e.clientX-(r.left+r.width/2))/W+.5)-.5,dy=cl((e.clientY-(r.top+r.height/2))/Hh+.5)-.5;
+    tamb.style.setProperty('--ry',(dx*26).toFixed(1)+'deg');tamb.style.setProperty('--rx',(-dy*22).toFixed(1)+'deg');
+    ecus.forEach(function(el,i){el.style.translate=(dx*(18+i*12)).toFixed(1)+'px '+(dy*(14+i*10)).toFixed(1)+'px'});
+  });
+  var galon=$('#galon'),G=['Extensions de cils','Ongles','Soins du visage','Soins du corps','Épilations','Madérothérapie','Beauté du regard','Maquillage permanent','Jolis petons','Cours de maquillage'];
+  galon.innerHTML='<div class="galon-r">'+G.concat(G,G).map(function(t){return'<span>'+t+'</span><i class="croix"></i>'}).join('')+'</div>';
+
+  // ---------- la citation et les compteurs ----------
+  var CIT=mots($('#cit')),CITA=mots($('#citAvis')),citEl=$('#cit'),citAEl=$('#citAvis');
+  if(calme){pose(CIT,99);pose(CITA,99)}
+  var prix=[];C.catalogue.forEach(function(c){c.l.forEach(function(l){prix.push(parseInt(l[2],10))})});
+  ['A','B'].forEach(function(x){$('#nSoins'+x).textContent=prix.length;$('#pMin'+x).textContent=Math.min.apply(0,prix);$('#pMax'+x).textContent=Math.max.apply(0,prix)});
+  function compte(el){
+    var fin=+el.textContent,t0=performance.now();if(calme||!fin)return;
+    (function f(t){var k=cl((t-t0)/1100);k=1-Math.pow(1-k,3);el.textContent=Math.round(fin*k);if(k<1)requestAnimationFrame(f)})(t0);
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+    if(e.target.hasAttribute('data-compte'))compte(e.target);else e.target.classList.add('vu')})},{threshold:.3});
+  $$('.app,[data-compte]').forEach(function(e){io.observe(e)});
+  $('#fleurs').innerHTML=[0,1,2,3,4].map(function(n){
+    var p='';for(var a=0;a<5;a++)p+='<ellipse cx="50" cy="24" rx="15" ry="21" transform="rotate('+a*72+' 50 50)"/>';
+    return'<svg viewBox="0 0 100 100" style="--n:'+n+'"><g fill="'+(n%2?'#23283a':'var(--garance)')+'">'+p+'</g><circle cx="50" cy="50" r="13" fill="#fff4df"/></svg>'}).join('');
+
+  // ---------- la tapisserie des soins ----------
+  var MOTIFS={
+    cils:'<path class="tr" pathLength="1" stroke-width="10" d="M16 50Q60 92 104 50"/><g stroke-width="8"><path class="tr" pathLength="1" style="--i:1" d="M24 66 12 82"/><path class="tr" pathLength="1" style="--i:2" d="M41 77 34 96"/><path class="tr" pathLength="1" style="--i:3" d="M60 81v21"/><path class="tr" pathLength="1" style="--i:4" d="M79 77l7 19"/><path class="tr" pathLength="1" style="--i:5" d="M96 66l12 16"/></g>',
+    regard:'<path d="M14 80Q60 44 106 80 60 110 14 80z" fill="#fff4df"/><circle cx="60" cy="80" r="13" fill="#23283a"/><path class="tr" pathLength="1" stroke-width="13" d="M12 46Q56 12 108 36"/>',
+    visage:'<circle cx="60" cy="62" r="46" fill="var(--chair)"/><g stroke-width="15"><path class="tr" pathLength="1" d="M30 40h60"/><path class="tr" pathLength="1" style="--i:1" d="M22 64h24M74 64h24"/><path class="tr" pathLength="1" style="--i:2" d="M30 88h60"/></g><path d="M38 60q8 7 16 0M66 60q8 7 16 0" fill="none" stroke="#23283a" stroke-width="5" stroke-linecap="round"/>',
+    mains:[-44,-22,0,22,44].map(function(a,i){return'<g transform="rotate('+a+' 60 150)"><rect x="49" y="26" width="22" height="42" rx="11" fill="var(--chair)"/><rect class="po" style="--i:'+i+'" x="49" y="26" width="22" height="34" rx="11" fill="'+['#fff4df','var(--garance)','#fff4df','var(--garance)','#fff4df'][i]+'"/></g>'}).join(''),
+    pieds:'<path d="M44 108Q26 86 38 62q8-16 26-14 20 3 18 27-2 22-18 33-12 8-20 0z" fill="#fff4df"/>'+[[36,40,8],[49,29,8.5],[63,25,9],[77,29,8],[88,40,7]].map(function(c,i){return'<circle class="po" style="--i:'+i+'" cx="'+c[0]+'" cy="'+c[1]+'" r="'+c[2]+'" fill="#fff4df"/>'}).join(''),
+    corps:[38,62,86].map(function(y,i){return'<path class="tr" pathLength="1" style="--i:'+i+'" stroke-width="12" d="M12 '+y+'q12-16 24 0t24 0 24 0 24 0"/>'}).join(''),
+    cours:'<rect x="12" y="30" width="96" height="62" rx="14" fill="#fff4df"/>'+[['var(--garance)',22,40],['var(--gaude)',50,40],['var(--guede)',78,40],['var(--olive)',22,64],['#23283a',50,64],['var(--sarcelle)',78,64]].map(function(c,i){return'<rect class="po" style="--i:'+i+'" x="'+c[1]+'" y="'+c[2]+'" width="20" height="18" rx="6" fill="'+c[0]+'"/>'}).join('')+'<path class="tr" pathLength="1" style="--i:5" stroke-width="8" d="M18 110l84-8"/>'
+  };
+  var COUL=[['--garance','--guede'],['--guede','--garance'],['--olive','--garance'],['--gaude','--guede'],['--sarcelle','--garance'],['--garance','--olive'],['--guede','--gaude']];
+  var tap=$('#soins'),tapC=$('.tap-c'),bande=$('#bande'),outro=$('#outro'),regs=$$('.reg-m'),tapI=$('#tapI'),scs=[],course=0,tapTop=0,RATIO=1.2;
+  C.scenes.forEach(function(s,i){
+    var a=document.createElement('article'),cat=C.catalogue[s.cat];a.className='sc';
+    a.style.setProperty('--c1','var('+COUL[i][0]+')');a.style.setProperty('--c2','var('+COUL[i][1]+')');
+    a.innerHTML='<h3 class="insc"><span class="lg" data-brode="'+s.lignes[0]+'" style="--c:var(--c1)"></span><span class="lg" data-brode="'+s.lignes[1]+'" style="--c:var(--encre)"></span></h3>'+
+      '<div class="arche"><div class="ph-c"><img class="ph" alt="" style="object-position:'+s.pos+'"></div><div class="motif" aria-hidden="true"><svg viewBox="0 0 120 120">'+MOTIFS[s.photo]+'</svg></div></div>'+
+      '<div class="cart"><p>'+s.txt+'</p><ul class="mini">'+cat.l.slice(0,4).map(function(l){return'<li><span>'+l[0]+'</span><b>'+l[2]+'</b></li>'}).join('')+'</ul>'+
+      '<button class="lien-c" type="button" data-cat="'+s.cat+'">'+cat.t+' : tous les tarifs</button></div>';
+    $('.ph',a).src='photos/'+s.photo+'.webp';
+    bande.insertBefore(a,outro);
+  });
+  $$('.sc',bande).forEach(function(e){
+    var L=[];$$('.insc .lg',e).forEach(function(l){L=L.concat(brode(l))});
+    scs.push({e:e,L:L,x:0,w:0,p:-1,k:-1,vif:false});
+  });
+  bande.addEventListener('click',function(e){var b=e.target.closest('.lien-c');if(b){ouvrir(+b.dataset.cat);$('#carte').scrollIntoView({behavior:calme?'auto':'smooth'})}});
+  if(calme)scs.forEach(function(o){pose(o.L,99);o.e.classList.add('vif')});
+
+  // ---------- la carte ----------
+  var LW=['--gaude','--guede','--olive','--sarcelle','--encre'],bob=$('#bobines'),liste=$('#cListe'),panier=[];
+  function minutes(d){var m=/^(?:(\d+)\s*h)?\s*(\d+)?/.exec(d);return(+(m[1]||0))*60+(+(m[2]||0))}
+  function duree(m){var h=Math.floor(m/60),r=m%60;return h?h+' h'+(r?' '+(r<10?'0':'')+r:''):r+' min'}
+  C.catalogue.forEach(function(c,i){
+    var b=document.createElement('button');b.type='button';b.className='bob';b.setAttribute('role','tab');
+    b.style.setProperty('--w','var('+LW[i%LW.length]+')');b.innerHTML='<i></i><span>'+c.t+'</span>';
+    b.addEventListener('click',function(){ouvrir(i)});bob.appendChild(b);
+  });
+  function ouvrir(i){
+    var c=C.catalogue[i];liste.dataset.cat=i;
+    $$('.bob',bob).forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')});
+    liste.style.setProperty('--w','var('+LW[i%LW.length]+')');
+    liste.innerHTML='<h3>'+c.t+'</h3><p class="c-nb">'+c.l.length+(c.l.length>1?' soins':' soin')+'</p>'+c.l.map(function(l,j){
+      var k=i+'-'+j,pris=panier.indexOf(k)>=0;
+      return'<div class="l" style="--i:'+j+'"><span class="n">'+l[0]+'<small>'+l[1]+'</small></span><b class="p">'+l[2]+'</b><button class="plus'+(pris?' pris':'')+'" type="button" data-k="'+k+'" aria-label="'+(pris?'Retirer ':'Ajouter ')+l[0]+'">'+(pris?'✓':'+')+'</button></div>'}).join('');
+  }
+  function majMoment(){
+    var tot=0,min=0;
+    $('#mListe').innerHTML=panier.map(function(k){var a=k.split('-'),l=C.catalogue[a[0]].l[a[1]];tot+=parseInt(l[2],10);min+=minutes(l[1]);
+      return'<li><span>'+l[0]+'</span><b>'+l[2]+'</b><button type="button" data-k="'+k+'" aria-label="Retirer '+l[0]+'">×</button></li>'}).join('');
+    $('#mVide').hidden=panier.length>0;$('#mTotal').hidden=!panier.length;
+    $('#mDuree').textContent=duree(min);$('#mPrix').textContent=tot+' €';
+    $$('#mTotal b').forEach(function(b){b.classList.remove('bat');void b.offsetWidth;b.classList.add('bat')});
+  }
+  function bascule(k){var i=panier.indexOf(k);if(i>=0)panier.splice(i,1);else panier.push(k);majMoment();ouvrirSans()}
+  function ouvrirSans(){ // rafraîchit les + sans rejouer l'entrée des lignes
+    $$('.plus',liste).forEach(function(b){var p=panier.indexOf(b.dataset.k)>=0;if(b.classList.contains('pris')!==p){b.classList.toggle('pris',p);b.textContent=p?'✓':'+'}});
+  }
+  liste.addEventListener('click',function(e){var b=e.target.closest('.plus');if(b)bascule(b.dataset.k)});
+  $('#mListe').addEventListener('click',function(e){var b=e.target.closest('button');if(b)bascule(b.dataset.k)});
+  ouvrir(6);
+
+  // ---------- à vous de broder ----------
+  var cv=$('#canevas'),M=C.motifs,mi=0,cases=[],laine='--garance',gagne=false,mode=null,attente=null;
+  for(var n=0;n<165;n++){var ce=document.createElement('i');cv.appendChild(ce);cases.push(ce)}
+  ['--garance','--gaude','--olive','--sarcelle','--encre'].forEach(function(w,i){
+    var b=document.createElement('button');b.type='button';b.className='laine';b.style.setProperty('--w','var('+w+')');
+    b.setAttribute('aria-pressed',i===0?'true':'false');b.setAttribute('aria-label','Laine '+(i+1));
+    b.addEventListener('click',function(){laine=w;$$('.laine').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})});
+    $('#laines').appendChild(b);
+  });
+  function motif(i){
+    mi=(i+M.length)%M.length;gagne=false;
+    cases.forEach(function(e,k){e.className=M[mi].g[Math.floor(k/15)].charAt(k%15)==='X'?'t':''});
+    $('#bNom').textContent=M[mi].nom;$('#bFin').classList.remove('vu');bilan();
+  }
+  function bilan(){
+    var t=0,f=0;cases.forEach(function(e){if(e.classList.contains('t')){t++;if(e.classList.contains('x'))f++}});
+    $('#bCompte').textContent=f+' points sur '+t;
+    if(!gagne&&f===t){gagne=true;cases.forEach(function(e,k){if(e.classList.contains('x')){e.style.setProperty('--k',k%15);e.classList.remove('saut');void e.offsetWidth;e.classList.add('saut')}});
+      $('#bFin').textContent=M[mi].fin;$('#bFin').classList.add('vu')}
+  }
+  function point(e,m){
+    if(m==='e')e.classList.remove('x');else{e.style.setProperty('--w','var('+laine+')');e.dataset.w=laine;e.classList.add('x')}
+    bilan();
+  }
+  function caseSous(ev){var e=document.elementFromPoint(ev.clientX,ev.clientY);return e&&e.parentNode===cv?e:null}
+  cv.addEventListener('pointerdown',function(ev){
+    var e=caseSous(ev);if(!e)return;
+    var m=e.classList.contains('x')&&e.dataset.w===laine?'e':'p';
+    if(ev.pointerType==='touch'){attente={e:e,m:m};mode=m}else{mode=m;point(e,m)}
+  });
+  cv.addEventListener('pointermove',function(ev){
+    if(!mode)return;if(ev.pointerType==='mouse'&&!(ev.buttons&1)){mode=null;return}
+    if(attente){point(attente.e,attente.m);attente=null}
+    var e=caseSous(ev);if(e&&e.classList.contains('x')!==(mode==='p'))point(e,mode);
+  });
+  addEventListener('pointerup',function(){if(attente){point(attente.e,attente.m);attente=null}mode=null});
+  addEventListener('pointercancel',function(){attente=null;mode=null});
+  $('#bAide').addEventListener('click',function(){
+    var r=cases.filter(function(e){return e.classList.contains('t')&&!e.classList.contains('x')}).slice(0,14);
+    r.forEach(function(e,i){setTimeout(function(){point(e,'p')},i*(calme?0:55))});
+  });
+  $('#bDecoudre').addEventListener('click',function(){
+    gagne=false;$('#bFin').classList.remove('vu');
+    cases.forEach(function(e,k){if(e.classList.contains('x'))setTimeout(function(){e.classList.remove('x','saut');bilan()},calme?0:(k%15+Math.floor(k/15))*22)});
+  });
+  $('#bSuivant').addEventListener('click',function(){motif(mi+1)});
+  motif(0);
+
+  // ---------- les portes et les horaires ----------
+  var portes=$$('.porte').map(function(e){return{e:e,y:0,h:0,force:null,o:-1}});
+  portes.forEach(function(p){
+    $('.p-bat',p.e).addEventListener('click',function(){p.force=1;majPorte(p,1)});
+  });
+  function majPorte(p,o){
+    if(Math.abs(o-p.o)<.004)return;p.o=o;p.e.style.setProperty('--o',o.toFixed(3));p.e.classList.toggle('ouverte',o>.6);
+  }
+  (function(){
+    var J=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'],el=$('#etat');
+    try{
+      var d=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Paris'})),j=d.getDay(),h=d.getHours()+d.getMinutes()/60;
+      var t=function(x){for(var i=0;i<C.horaires.length;i++)if(C.horaires[i][0]===x)return C.horaires[i];return null},a=t(j);
+      if(a&&h>=a[1]&&h<a[2]){el.textContent='Ouvert en ce moment, jusqu’à '+a[2]+' h';return}
+      el.classList.add('ferme');
+      for(var k=0;k<8;k++){var jj=(j+k)%7,x=t(jj);if(x&&(k>0||h<x[1])){el.textContent='Fermé en ce moment. Réouverture '+(k===0?'aujourd’hui':k===1?'demain':J[jj])+' à '+x[1]+' h';return}}
+    }catch(e){el.hidden=true}
+  })();
+
+  // ---------- le fil, les coutures et tout ce qui suit le défilement ----------
+  var fil=$('#fil'),aig=$('#aig'),PF=[],coutures=[],docH=1,herosH=1,citY=0,citAY=0,kFil=-1;
+  (function(){var n=Math.max(8,Math.round((Hh-TETE)/36));for(var i=0;i<n;i++){var e=document.createElement('i');fil.insertBefore(e,aig);PF.push(e)}})();
+  $$('.couture').forEach(function(c){
+    var n=W<700?8:W<1200?14:20,L=[];for(var i=0;i<n;i++){var e=document.createElement('i');c.appendChild(e);L.push(e)}
+    coutures.push({e:c,L:L,y:0});
+  });
+  var haut=function(e){return e.getBoundingClientRect().top+scrollY};
+  function mesurer(){
+    W=innerWidth;Hh=innerHeight;TETE=$('.tete').offsetHeight;
+    if(!calme){
+      scs.forEach(function(o){o.x=o.e.offsetLeft;o.w=o.e.offsetWidth});
+      course=Math.max(0,bande.scrollWidth-tapC.clientWidth);RATIO=W<700?.8:1.7;
+      tap.style.height=Math.round(tapC.offsetHeight+course/RATIO)+'px';
+      regs.forEach(function(r){r.style.width=Math.round(tapC.clientWidth+course*1.4+300)+'px'});
+      // les dernières scènes ne vont pas jusqu'à gauche : leur broderie se finit là où elles s'arrêtent
+      scs.forEach(function(o){o.den=Math.max(120,Math.min(W*.82,(W-(o.x-course))*.9))});
+    }
+    tapTop=haut(tap);
+    docH=Math.max(1,document.documentElement.scrollHeight-Hh);herosH=heros.offsetHeight;
+    coutures.forEach(function(c){c.y=haut(c.e)});
+    citY=haut(citEl);citAY=haut(citAEl);
+    portes.forEach(function(p){p.y=haut(p.e);p.h=p.e.offsetHeight});
+  }
+  var sy=scrollY,demande=false;
+  function maj(s,y){
+    // le fil et son aiguille
+    var gp=cl(y/docH),k=Math.round(gp*PF.length);
+    if(k!==kFil){kFil=k;pose2(PF,k)}
+    aig.style.transform='translate3d(0,'+(gp*(fil.clientHeight-70)).toFixed(1)+'px,0) rotate('+(Math.sin(y/90)*7).toFixed(1)+'deg)';
+    // l'arrivée : le nom se découd quand on la quitte, le tambour roule
+    if(y<herosH+40){
+      var hp=cl(y/(herosH*.85));
+      defait=Math.round((1-cl((hp-.12)/.62))*LN.length);majNom();
+      if(!calme){tz.style.transform='translate3d(0,'+(hp*-70).toFixed(1)+'px,0) rotate('+(hp*46).toFixed(1)+'deg)';
+        galon.style.transform='translate3d('+(-s*.7).toFixed(1)+'px,0,0)'}
+    }
+    // les coutures
+    coutures.forEach(function(c){var d=c.y-y;if(d>Hh+60||d<-Hh)return;pose2(c.L,Math.round(cl((Hh*.99-d)/(Hh*.42))*c.L.length))});
+    // les citations
+    pose(CIT,Math.round(cl((Hh*.86-(citY-y))/(Hh*.5))*CIT.length*1.02));
+    pose(CITA,Math.round(cl((Hh*.9-(citAY-y))/(Hh*.42))*CITA.length*1.02));
+    // la tapisserie
+    if(!calme){
+      var t=course?cl((s-tapTop+TETE)/(course/RATIO)):0,x=t*course,ve=cl((Hh-(tapTop-y))/(Hh*.7));
+      if(tapTop-y<Hh+100&&y<tapTop+tap.offsetHeight+100){
+        bande.style.transform='translate3d('+(-x).toFixed(1)+'px,0,0)';
+        regs[0].style.transform='translate3d('+(-x*1.3).toFixed(1)+'px,0,0)';
+        regs[1].style.transform='translate3d('+(-x*.78-90).toFixed(1)+'px,0,0)';
+        tapI.style.opacity=(1-cl(t*18)).toFixed(2);
+        scs.forEach(function(o){
+          var g=o.x-x;if(g>W+60||g+o.w<-60)return;
+          var p=cl((W-g)/(o.den||W*.82))*ve;
+          if(Math.abs(p-o.p)>.003){o.p=p;o.e.style.setProperty('--p',p.toFixed(3));o.e.style.setProperty('--q',cl(p*1.3).toFixed(3))}
+          pose(o.L,Math.round(cl(p*1.55)*o.L.length));
+          var v=p>.6;if(v!==o.vif){o.vif=v;o.e.classList.toggle('vif',v)}
+        });
+      }
+    }
+    // les portes s'ouvrent quand elles arrivent
+    portes.forEach(function(p){if(p.force)return;var d=p.y-y;if(d>Hh+50||d+p.h<-50)return;majPorte(p,calme?1:cl((Hh*.7-d)/(Hh*.34)))});
+  }
+  function pose2(L,k){for(var i=0;i<L.length;i++){var on=i<k;if(L[i].classList.contains('on')!==on)L[i].classList.toggle('on',on)}}
+  function boucle(){
+    demande=false;var y=scrollY;sy+=(y-sy)*(calme?1:.22);if(Math.abs(y-sy)<.5)sy=y;
+    maj(sy,y);if(sy!==y)demander();
+  }
+  function demander(){if(!demande){demande=true;requestAnimationFrame(boucle)}}
+  addEventListener('scroll',demander,{passive:true});
+  var tr;addEventListener('resize',function(){clearTimeout(tr);tr=setTimeout(function(){mesurer();demander()},120)});
+  function pret(){mesurer();demander()}
+  // la page change de hauteur (une famille plus longue dans la carte, « mon moment » qui grandit) : on reprend les mesures
+  if(window.ResizeObserver){var ro=0;new ResizeObserver(function(){cancelAnimationFrame(ro);ro=requestAnimationFrame(pret)}).observe($('main'))}
+  pret();lancer();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pret);
+  addEventListener('load',function(){pret();timg.classList.add('cousu');setTimeout(pret,600);
+    try{if(parent!==window)parent.postMessage({type:'kazura-pret'},'*')}catch(e){}});
+  addEventListener('scroll',function un(){removeEventListener('scroll',un);try{if(parent!==window)parent.postMessage({type:'kazura-defile'},'*')}catch(e){}},{passive:true});
+  addEventListener('message',function(e){if(e.data&&e.data.type==='kazura-couleur'&&PAL.indexOf(e.data.palette)>=0){H.dataset.palette=e.data.palette;frise()}});
+})();
+</script>
+</body>
+</html>

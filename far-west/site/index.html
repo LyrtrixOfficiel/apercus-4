@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Far West, bar brasserie à Paris 11e</title>
+<meta name="description" content="Maquette privée préparée pour le Far West, bar brasserie au 3 rue Faidherbe, Paris 11e : jeux de société, sport à l’écran, terrasse, ouvert jusqu’à 2 h.">
+<meta name="theme-color" content="#f3e4c4">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/rye.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.className = 'js' + (/[?&]calme=1/.test(location.search) ? ' calme' : '');</script>
+<style>
+/* Far West, Paris 11e : « De 8 h à 2 h ». Une affiche de western en lettres de bois, plantée rue Faidherbe.
+   La page suit la journée du bar : le soleil traverse l'en-tête, se couche au milieu, la suite se passe sous les néons.
+   Le mouvement joue toujours en entier (le site ne lit jamais le réglage « moins de mouvement » du système) ; mode calme sur demande : ?calme=1. */
+@font-face{font-family:'Rye';font-style:normal;font-weight:400;font-display:swap;src:url(polices/rye.woff2) format('woff2')}
+@font-face{font-family:'Six Caps';font-style:normal;font-weight:400;font-display:swap;src:url(polices/six-caps.woff2) format('woff2')}
+@font-face{font-family:'Zilla';font-style:normal;font-weight:500;font-display:swap;src:url(polices/zilla.woff2) format('woff2')}
+@font-face{font-family:'Zilla';font-style:italic;font-weight:400;font-display:swap;src:url(polices/zilla-italic.woff2) format('woff2')}
+@font-face{font-family:'Stencil';font-style:normal;font-weight:700;font-display:swap;src:url(polices/stencil.woff2) format('woff2')}
+@font-face{font-family:'Courier Prime';font-style:normal;font-weight:400;font-display:swap;src:url(polices/courier.woff2) format('woff2')}
+:root{--papier:#f3e4c4;--papier2:#e6d0a2;--lait:#fbf1da;--encre:#2a1810;--rouge:#c4391f;--soleil:#f6a91f;--couchant:#ea5f27;--ciel:#f9d58c;--ciel2:#f5c873;--bois:#96592f;--bois2:#7a4424;--bois3:#4a2812;--porte:#cf9050;--turq:#178a84;--turq2:#0f6f6b;--nuit:#170d36;--nuit2:#2a1763;--violet:#5630b8;--neon:#ff4fa3;--neon2:#4fcbff;--or:#f5bc3a;--or2:#cf8a14;
+  --rye:'Rye',Georgia,serif;--six:'Six Caps','Arial Narrow',sans-serif;--zilla:'Zilla',Georgia,serif;--stencil:'Stencil','Arial Black',sans-serif;--mono:'Courier Prime','Courier New',monospace;
+  --marge:clamp(16px,4.2vw,72px);--hb:64px;
+  --etoile:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+html[data-palette=neon]{--papier:#f0e3ee;--papier2:#e0cbe0;--lait:#fbf0fa;--encre:#1f1233;--rouge:#b3207c;--soleil:#ff8d3a;--couchant:#f0457a;--ciel:#f6c9d8;--ciel2:#f1b6cc;--turq:#3d55d6;--turq2:#2c3fae;--nuit:#0f0a2c;--nuit2:#1e1668;--violet:#6a3be0;--neon:#c98bff;--neon2:#4aa3ff}
+html[data-palette=turquoise]{--papier:#f1e6cf;--rouge:#b4522a;--soleil:#f2b441;--couchant:#d9692f;--ciel:#f3dcae;--ciel2:#ecce94;--turq:#0d7f8c;--turq2:#07626d;--nuit:#062a36;--nuit2:#0b4656;--violet:#12707f;--neon:#ffb454;--neon2:#48e3d2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--encre)}
+html.calme{scroll-behavior:auto}
+body{font:500 clamp(17px,.5vw + 13px,23px)/1.5 var(--zilla);color:var(--encre);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a,button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:4px solid var(--neon2);outline-offset:3px}
+main{display:block;overflow-x:clip}
+svg{display:block}
+.et{display:inline-block;width:.74em;height:.74em;background:currentColor;clip-path:var(--etoile);flex:none;vertical-align:-.04em}
+.sec{position:relative;padding:clamp(60px,10vh,112px) var(--marge) calc(clamp(60px,10vh,112px) + clamp(40px,6.2vw,104px));scroll-margin-top:var(--hb);background:var(--fond)}
+.dans{max-width:1480px;margin:0 auto;position:relative}
+.sur{font:500 clamp(14px,.3vw + 12px,17px)/1.2 var(--zilla);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.6em;margin-bottom:.9em}
+h2{font:400 clamp(38px,6vw,84px)/1.04 var(--rye);text-wrap:balance}
+.clair h2{text-shadow:.045em .045em 0 var(--rouge)}
+.bois h2{text-shadow:.05em .05em 0 var(--bois3)}
+.sombre{color:var(--lait)}
+.sombre h2{color:var(--lait);text-shadow:0 0 .1em var(--neon),0 0 .5em var(--neon)}
+.grand{font-size:1.16em;line-height:1.42;max-width:31em;margin-top:.9em;text-wrap:pretty}
+.note{font:italic 400 .92em/1.4 var(--zilla);opacity:.82;max-width:34em;margin-top:.9em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:54px;padding:10px 24px;font:500 clamp(15px,.2vw + 14px,18px)/1.1 var(--zilla);letter-spacing:.08em;text-transform:uppercase;border-radius:8px;background:var(--lait);color:var(--encre);box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 rgba(0,0,0,.3)}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.btn.plein{background:var(--rouge);color:var(--lait)}
+.js .entre{opacity:0;transform:translateY(36px);transition:opacity .55s ease calc(var(--r,0)*90ms),transform .85s cubic-bezier(.2,1.25,.3,1) calc(var(--r,0)*90ms)}
+.js .entre.vu{opacity:1;transform:none}
+.calme .entre{transition:none!important}
+/* Les battants : chaque rubrique commence par le haut de deux portes de saloon */
+.battant{position:absolute;left:0;top:1px;width:100%;height:clamp(40px,6.2vw,104px);transform:translateY(-100%);fill:var(--fond);pointer-events:none;overflow:visible}
+.js .battant{transform:translateY(-34%);transition:transform .9s cubic-bezier(.2,1.5,.35,1)}
+.js .battant.vu{transform:translateY(-100%)}
+.calme .battant{transition:none}
+
+/* Barre du haut : le soleil suit la lecture le long de l'horizon */
+.barre{position:fixed;inset:0 0 auto 0;z-index:60;height:var(--hb);display:flex;align-items:center;gap:clamp(10px,1.5vw,24px);padding:0 var(--marge);background:var(--papier);color:var(--encre);transition:background-color .7s,color .7s;border-bottom:5px solid var(--encre)}
+.nuit .barre{background:var(--nuit);color:var(--lait);border-bottom-color:var(--violet)}
+.marque{font:400 clamp(21px,1.7vw,27px)/1 var(--rye);display:flex;align-items:center;gap:.4em;margin-right:auto;white-space:nowrap;padding:8px 0}
+.marque .et{color:var(--rouge)} .nuit .marque .et{color:var(--neon)}
+.nav{display:flex;gap:clamp(10px,1.45vw,24px)}
+.nav a{font-size:clamp(14px,.25vw + 11.5px,17px);letter-spacing:.05em;text-transform:uppercase;padding:9px 0;position:relative;white-space:nowrap}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:3px;height:4px;border-radius:2px;background:var(--rouge);transform:scaleX(0);transform-origin:left;transition:transform .28s}
+.nuit .nav a::after{background:var(--neon)}
+.nav a:hover::after,.nav a.ici::after{transform:scaleX(1)}
+.kz{font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:9px 0;border-bottom:3px solid currentColor;line-height:1}
+.appel{background:var(--rouge);color:var(--lait);padding:11px 16px 10px;font-size:15px;line-height:1;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.nuit .appel{background:var(--neon);color:var(--nuit)}
+.burger{display:none;width:46px;height:46px;border-radius:8px;flex-direction:column;justify-content:center;align-items:center;gap:6px}
+.burger i{display:block;width:28px;height:5px;border-radius:3px;background:currentColor;transition:transform .3s,opacity .2s}
+.menu .burger i:nth-child(1){transform:translateY(11px) rotate(45deg)} .menu .burger i:nth-child(2){opacity:0} .menu .burger i:nth-child(3){transform:translateY(-11px) rotate(-45deg)}
+.course{position:absolute;left:0;right:0;bottom:0;height:22px;overflow:hidden;pointer-events:none;z-index:-1}
+.astre{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--soleil);will-change:transform;transition:background-color .6s}
+.nuit .astre{background:var(--lait)}
+.astre::after{content:"";position:absolute;left:34%;top:-10%;width:100%;height:100%;border-radius:50%;background:var(--nuit);opacity:0;transition:opacity .6s}
+.nuit .astre::after{opacity:1}
+@media (max-width:1179px){
+  :root{--hb:58px}
+  .burger{display:flex}
+  .nav{position:fixed;left:0;right:0;top:var(--hb);bottom:0;flex-direction:column;justify-content:center;gap:0;padding:10px var(--marge) 30px;background:var(--encre);color:var(--lait);transform:translateY(-104%);visibility:hidden;transition:transform .5s cubic-bezier(.3,1,.3,1),visibility 0s .5s;z-index:-1;overflow:auto}
+  .menu .nav{transform:none;visibility:visible;transition:transform .5s cubic-bezier(.3,1,.3,1)}
+  .nav a{font:400 clamp(27px,8.4vw,50px)/1.1 var(--rye);text-transform:none;letter-spacing:0;padding:.3em 0;opacity:0;transform:translateX(-30px);transition:opacity .3s,transform .5s cubic-bezier(.2,1.3,.3,1)}
+  .menu .nav a{opacity:1;transform:none;transition-delay:calc(var(--i)*45ms + .12s)}
+  .nav a::after{display:none}
+}
+@media (max-width:420px){.kz{font-size:12px;letter-spacing:.06em}.appel{padding:10px 11px 9px;font-size:14px}.marque{font-size:19px}.barre{gap:9px}}
+@media (max-width:340px){.marque .et{display:none}}
+
+/* 1. Accueil : l'enseigne suspendue, la façade et ses portes battantes */
+.accueil{--fond:var(--ciel);min-height:100vh;min-height:100svh;padding:calc(var(--hb) + clamp(18px,4vh,44px)) var(--marge) 0;overflow:hidden;display:flex;flex-direction:column}
+.rayons{position:absolute;left:var(--sx,72%);top:var(--sy,58%);width:340vmax;height:340vmax;margin:-170vmax 0 0 -170vmax;animation:tourne 200s linear infinite;pointer-events:none}
+.calme .rayons{animation:none}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.ac-soleil{position:absolute;left:var(--sx,72%);top:var(--sy,58%);width:var(--sd,520px);height:var(--sd,520px);margin:calc(var(--sd,520px)/-2) 0 0 calc(var(--sd,520px)/-2);border-radius:50%;background:var(--couchant);box-shadow:0 0 0 clamp(14px,2vw,30px) color-mix(in srgb,var(--couchant) 38%,transparent);will-change:transform;z-index:1}
+.js .ac-soleil{animation:monte 1.3s cubic-bezier(.2,1.1,.3,1) both .2s}
+.calme .ac-soleil{animation:none}
+@keyframes monte{from{scale:.55;opacity:0}}
+.ac-ville{position:absolute;left:0;bottom:-1px;width:100%;height:max(10vw,110px);z-index:2;fill:var(--encre)}
+.ac-grille{position:relative;z-index:3;flex:1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,70px);max-width:1480px;width:100%;margin:0 auto}
+.ac-g{align-self:center;padding-bottom:max(10vw + 26px,130px)}
+.ac-d{position:relative;display:flex;align-items:flex-end;justify-content:center}
+.tampons{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:clamp(14px,2.6vh,26px)}
+.tampons span{font:500 clamp(13px,.3vw + 11px,16px)/1 var(--zilla);letter-spacing:.14em;text-transform:uppercase;padding:9px 12px 8px;background:var(--encre);color:var(--ciel);border-radius:4px;transform:rotate(-1.4deg)}
+.tampons span:nth-child(2){background:var(--rouge);color:var(--lait);transform:rotate(1.2deg)}
+.tampons span:nth-child(3){background:var(--lait);color:var(--encre);transform:rotate(-.6deg)}
+.js .tampons span{animation:tamponne .5s cubic-bezier(.2,1.6,.4,1) both;animation-delay:calc(var(--i)*.12s + .9s)}
+.calme .tampons span{animation:none}
+@keyframes tamponne{from{opacity:0;scale:1.7}}
+.enseigne{--fs:clamp(64px,min(7.3vw,15.5vh),118px);position:relative;display:flex;gap:0 clamp(12px,1.6vw,26px);font:400 var(--fs)/1 var(--rye);padding-top:calc(var(--fs)*.44);width:max-content;max-width:100%}
+.js .enseigne{animation:tombe 1.05s cubic-bezier(.3,1.45,.5,1) both .1s}
+.calme .enseigne{animation:none}
+@keyframes tombe{from{transform:translateY(-150%)}}
+.poutre{position:absolute;left:-16px;right:-16px;top:0;height:max(calc(var(--fs)*.14),12px);background:var(--bois3);border-radius:99px}
+.planche{position:relative;display:block;transform-origin:50% calc(var(--fs)*-.3);will-change:transform;cursor:grab;touch-action:pan-y}
+.planche b{display:block;font-weight:400;padding:.12em .26em .05em;background:var(--bois) linear-gradient(180deg,transparent 47%,rgba(0,0,0,.1) 47% 53%,transparent 53%);color:var(--lait);border-radius:.09em;box-shadow:0 .07em 0 var(--bois3),0 .2em 0 rgba(42,24,16,.2);text-shadow:0 .04em 0 var(--bois3)}
+.corde{position:absolute;bottom:100%;width:max(calc(var(--fs)*.07),6px);height:calc(var(--fs)*.36);background:var(--encre);border-radius:3px}
+.corde.g{left:15%}.corde.d{right:15%}
+.ac-phrase{font-size:clamp(18px,.6vw + 14px,24px);line-height:1.4;max-width:29em;margin-top:clamp(24px,3.6vh,42px);text-wrap:pretty}
+.ac-boutons{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(18px,3vh,28px)}
+.ac-adresse{margin-top:clamp(14px,2.2vh,22px);font-size:.95em;display:flex;align-items:center;gap:.5em}
+.ac-adresse .et{color:var(--rouge)}
+.facade{position:relative;width:min(100%,clamp(280px,min(31vw,58vh),620px));aspect-ratio:1/1.06;background:var(--bois) repeating-linear-gradient(90deg,transparent 0 11.4%,rgba(0,0,0,.2) 11.4% 12.5%);clip-path:polygon(0 15%,13% 15%,13% 6%,31% 6%,31% 0,69% 0,69% 6%,87% 6%,87% 15%,100% 15%,100% 100%,0 100%);container-type:inline-size}
+.js .facade{animation:leve .9s cubic-bezier(.2,1.2,.3,1) both .35s}
+.calme .facade{animation:none}
+@keyframes leve{from{transform:translateY(105%)}}
+.fa-nom{position:absolute;left:13%;right:13%;top:9.5%;height:16%;display:flex;align-items:center;justify-content:center;gap:.35em;background:var(--lait);color:var(--encre);font:400 12.4cqw/1 var(--six);letter-spacing:.07em;border-radius:6px;box-shadow:0 1.2cqw 0 var(--bois3);text-transform:uppercase;white-space:nowrap}
+.fa-nom .et{color:var(--rouge);width:.5em;height:.5em}
+.baie{position:absolute;left:21%;right:21%;bottom:0;top:33%;background:var(--nuit);border:solid var(--bois3);border-width:2.6cqw 2.6cqw 0;border-radius:2cqw 2cqw 0 0;perspective:900px;cursor:pointer;touch-action:pan-y;display:block;color:var(--lait)}
+.ba-ouvert{position:absolute;left:0;right:0;top:7%;text-align:center;font:400 9.4cqw/1 var(--rye);color:var(--neon);text-shadow:0 0 .12em var(--neon),0 0 .6em var(--neon);animation:gresille 6s infinite}
+.ba-heures{position:absolute;left:0;right:0;top:23%;text-align:center;font:400 9cqw/1 var(--six);letter-spacing:.1em;color:var(--neon2);text-shadow:0 0 .5em var(--neon2);text-transform:uppercase}
+.calme .ba-ouvert{animation:none}
+@keyframes gresille{0%,100%{opacity:1}2%{opacity:.35}4%{opacity:1}7%{opacity:.55}9%{opacity:1}}
+.vantail{position:absolute;top:41%;height:45%;width:49%;left:0;transform-origin:0 50%;will-change:transform}
+.vantail.d{left:auto;right:0;transform-origin:100% 50%}
+.vantail svg{width:100%;height:100%;overflow:visible}
+.vantail.d svg{transform:scaleX(-1)}
+.pb{fill:var(--porte)}.pl{fill:var(--bois2)}
+.paillasson{position:absolute;left:10%;right:10%;bottom:0;height:10.5%;background:var(--rouge);color:var(--lait);font:400 6.2cqw/1 var(--six);letter-spacing:.16em;display:flex;align-items:center;justify-content:center;border-radius:1.4cqw 1.4cqw 0 0;text-transform:uppercase;white-space:nowrap}
+.tonneau{position:absolute;left:3.5%;bottom:0;width:14%;aspect-ratio:1/1.3;background:var(--bois2);border-radius:28%/14%;overflow:hidden}
+.tonneau::before,.tonneau::after{content:"";position:absolute;left:0;right:0;height:11%;background:var(--bois3)}
+.tonneau::before{top:16%}.tonneau::after{bottom:16%}
+.fa-plaque{position:absolute;right:2.5%;top:44%;width:16%;aspect-ratio:1;background:var(--or);color:var(--encre);clip-path:var(--etoile);display:block}
+.fa-note{position:absolute;right:1.5%;top:63%;width:18%;text-align:center;font:400 5.6cqw/1 var(--six);letter-spacing:.06em;color:var(--lait)}
+@media (max-width:899px),(min-height:900px){
+  .enseigne{--fs:clamp(100px,min(9vw,14.5vh),190px);flex-direction:column;align-items:flex-start}
+  .planche+.planche{margin-top:calc(var(--fs)*.34)}
+  .planche+.planche .corde{height:calc(var(--fs)*.42)}
+  .poutre{right:auto;width:calc(var(--fs)*2.75)}
+}
+@media (max-width:899px){
+  .ac-grille{grid-template-columns:minmax(0,1fr);gap:0}
+  .ac-g{padding-bottom:0}
+  .enseigne{--fs:min(22.5vw,150px)}
+  .ac-d{margin-top:clamp(34px,7vw,60px)}
+  .facade{width:min(86%,400px)}
+  .ac-boutons .btn{flex:1 1 auto}
+}
+
+/* 2. L'affiche : imprimée ligne par ligne, languettes à arracher, télégramme */
+.affiche{--fond:var(--bois);background:var(--bois) repeating-linear-gradient(90deg,transparent 0 116px,rgba(0,0,0,.2) 116px 123px);color:var(--lait)}
+.af-grille{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,6vw,110px);align-items:center}
+.avis-cadre{container-type:inline-size;width:100%;max-width:500px;justify-self:center}
+.avis{position:relative;background:var(--papier);color:var(--encre);padding:7cqw 6.5cqw 0;transform:rotate(-1.6deg);box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;transform-origin:50% 0}
+.avis.secoue{animation:secoue 1.5s linear}
+@keyframes secoue{0%,100%{transform:rotate(-1.6deg)}8%{transform:rotate(-2.4deg) translateY(3px)}16%{transform:rotate(-1.2deg)}26%{transform:rotate(-2.2deg) translateY(2px)}36%{transform:rotate(-1.4deg)}48%{transform:rotate(-2deg) translateY(2px)}60%{transform:rotate(-1.5deg)}74%{transform:rotate(-1.9deg) translateY(1px)}}
+.clou{position:absolute;top:2.6cqw;width:4cqw;height:4cqw;border-radius:50%;background:var(--bois3)}
+.clou.g{left:2.6cqw}.clou.d{right:2.6cqw}
+.l{display:block;white-space:nowrap;line-height:1;margin:0 auto}
+.l>span{display:inline-block}
+.l.z{font:500 4cqw/1.2 var(--zilla);letter-spacing:.2em;text-transform:uppercase;white-space:normal}
+.l.zi{font:italic 400 5cqw/1.2 var(--zilla);white-space:normal;margin:.3em 0 .5em}
+.l.rye{font-family:var(--rye);margin:.16em 0 .1em}
+.l.six{font-family:var(--six);text-transform:uppercase;margin:.14em 0 .05em}
+.l.rouge{color:var(--rouge)}
+.l .et{width:.6em;height:.6em;margin:0 .12em;color:var(--rouge)}
+.filet{display:block;height:1.4cqw;background:var(--encre);margin:2.2cqw 0;border-radius:1cqw}
+.js .avis .l,.js .avis .filet{opacity:0;transform:scale(1.5) rotate(var(--t,2deg))}
+.js .avis.vu .l,.js .avis.vu .filet{opacity:1;transform:none;transition:opacity .1s linear calc(var(--n)*.12s),transform .34s cubic-bezier(.2,1.7,.4,1) calc(var(--n)*.12s)}
+.calme .avis .l,.calme .avis .filet{opacity:1;transform:none;transition:none}
+.languettes{display:flex;margin:5cqw -6.5cqw 0;border-top:1.2cqw dashed var(--bois);height:25cqw}
+.lang{flex:1;border-left:1cqw solid var(--bois);background:var(--papier);color:var(--encre);display:flex;align-items:center;justify-content:center;transform-origin:50% 0;transition:background-color .2s}
+.lang:first-child{border-left:0}
+.lang span{writing-mode:vertical-rl;font:500 3.5cqw/1 var(--zilla);letter-spacing:.06em;white-space:nowrap}
+.lang:hover{background:var(--lait)}
+.lang.parti{animation:arrache 1s cubic-bezier(.4,0,.8,.6) forwards;pointer-events:none}
+@keyframes arrache{20%{transform:rotate(-9deg) translateY(4%)}100%{transform:rotate(38deg) translateY(340%);opacity:0}}
+.poche{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font-size:1.02em}
+.poche[hidden]{display:none}
+.poche .btn{animation:tamponne .5s cubic-bezier(.2,1.6,.4,1) both}
+.telegramme{margin-top:clamp(22px,3.4vh,36px);background:var(--papier);color:var(--encre);padding:16px 20px 18px;max-width:560px;border-radius:4px;box-shadow:0 8px 0 rgba(0,0,0,.25);transform:rotate(.8deg)}
+.tg-tete{display:flex;justify-content:space-between;gap:12px;font:500 14px/1 var(--zilla);letter-spacing:.2em;text-transform:uppercase;padding-bottom:10px;border-bottom:4px solid var(--encre);margin-bottom:12px}
+.tg-texte{font:400 clamp(18px,.6vw + 14px,24px)/1.35 var(--mono);text-transform:uppercase;min-height:2.7em}
+.tg-texte::after{content:"";display:inline-block;width:.6em;height:1em;background:var(--rouge);vertical-align:-.12em;margin-left:.15em;animation:clignote 1s steps(2) infinite}
+@keyframes clignote{50%{opacity:0}}
+.tg-source{font:italic 400 .9em/1.2 var(--zilla);margin-top:8px}
+.af-indice{display:flex;align-items:center;gap:.6em;margin-top:clamp(18px,3vh,30px);font-size:.98em}
+.af-indice .main{width:34px;height:20px;background:var(--lait);clip-path:polygon(100% 35%,38% 35%,38% 8%,0 50%,38% 92%,38% 65%,100% 65%);flex:none;animation:pointe 1.4s ease-in-out infinite}
+.calme .af-indice .main{animation:none}
+@keyframes pointe{50%{transform:translateX(-8px)}}
+@media (max-width:899px){.af-grille{grid-template-columns:minmax(0,1fr)} .af-indice .main{transform:rotate(90deg);animation:none}}
+
+/* 3. La terrasse : on déplace le soleil, les ombres des parasols suivent */
+.terrasse{--fond:var(--papier)}
+.tr-grille{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,90px);align-items:center}
+.tr-scene{position:relative;aspect-ratio:4/3;background:var(--papier2);border-radius:22px;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;box-shadow:0 12px 0 rgba(42,24,16,.16)}
+.tr-ciel{position:absolute;inset:0 0 auto;height:20%;background:var(--ciel)}
+.tr-store{position:absolute;inset:20% 0 auto;height:11%;background:repeating-linear-gradient(90deg,var(--rouge) 0 6.25%,var(--lait) 6.25% 12.5%);display:flex;align-items:center;justify-content:center}
+.tr-store b{font:400 clamp(15px,2vw,28px)/1 var(--rye);background:var(--encre);color:var(--lait);padding:.2em .7em .12em;border-radius:6px}
+.tr-rue{position:absolute;inset:auto 0 0;height:12%;background:var(--encre);color:var(--papier2);display:flex;align-items:center;justify-content:center;font:400 clamp(22px,3.6vw,50px)/1 var(--six);letter-spacing:.3em;text-transform:uppercase}
+.tr-voile{position:absolute;inset:0;background:var(--couchant);opacity:0;pointer-events:none;mix-blend-mode:multiply}
+.tr-table{position:absolute;left:var(--x);top:var(--y);width:21%;aspect-ratio:1;margin:-10.5% 0 0 -10.5%}
+.tr-table i{position:absolute;display:block}
+.ombre{inset:0;border-radius:50%;background:rgba(42,24,16,.3);will-change:transform}
+.chaise{width:30%;height:30%;border-radius:22%;background:var(--bois2)}
+.chaise.a{left:-9%;top:35%}.chaise.b{right:-9%;top:35%}.chaise.c{left:35%;bottom:-9%}
+.parasol{inset:0;border-radius:50%;background:repeating-conic-gradient(var(--c,var(--rouge)) 0 45deg,var(--lait) 45deg 90deg);box-shadow:inset 0 0 0 5px rgba(42,24,16,.14);will-change:transform}
+.parasol::after{content:"";position:absolute;inset:41%;border-radius:50%;background:var(--encre)}
+.tr-soleil{position:absolute;left:0;top:0;width:10.5%;aspect-ratio:1;border-radius:50%;background:var(--soleil);box-shadow:0 0 0 clamp(6px,1vw,14px) color-mix(in srgb,var(--soleil) 40%,transparent);will-change:transform;z-index:3}
+.tr-etat{display:inline-flex;align-items:center;gap:.5em;margin-top:18px;padding:9px 14px 8px;background:var(--encre);color:var(--papier);font:500 15px/1 var(--zilla);letter-spacing:.14em;text-transform:uppercase;border-radius:4px}
+.tr-etat .et{color:var(--soleil)}
+@media (max-width:899px){.tr-grille{grid-template-columns:minmax(0,1fr)} .tr-scene{aspect-ratio:1/1;width:100%;max-width:560px;justify-self:center}}
+
+/* 4. Au comptoir : les fûts roulent jusqu'à leur place */
+.comptoir{--fond:var(--turq);color:var(--lait)}
+.comptoir h2{text-shadow:.05em .05em 0 var(--turq2)}
+.co-tete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,5vw,80px);align-items:end}
+.co-tete .grand{margin-top:0}
+.futs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.4vw,40px);margin-top:clamp(34px,6vh,64px);position:relative;z-index:1}
+.fut{position:relative;aspect-ratio:1}
+.fut-roue{position:absolute;inset:0;border-radius:50%;will-change:transform;display:block;width:100%;cursor:pointer}
+.fut-face{position:absolute;inset:0;border-radius:50%;background:var(--bois) repeating-linear-gradient(90deg,transparent 0 15.6%,rgba(0,0,0,.2) 15.6% 17%);border:clamp(9px,1.1vw,16px) solid var(--bois3);box-shadow:inset 0 0 0 clamp(5px,.6vw,9px) rgba(0,0,0,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10%;color:var(--lait);transition:transform .9s cubic-bezier(.4,0,.2,1)}
+.fut-face b{font:700 clamp(20px,2.3vw,36px)/1.02 var(--stencil);text-transform:uppercase;letter-spacing:.02em;text-shadow:0 3px 0 rgba(0,0,0,.3)}
+.fut-face span{font:italic 400 clamp(15px,1.25vw,20px)/1.2 var(--zilla);margin-top:.5em}
+.fut-face.dos b{font-size:clamp(16px,1.6vw,25px)}
+.etagere{height:clamp(20px,2.6vw,34px);background:var(--bois3);border-radius:8px;margin-top:-4px;box-shadow:0 10px 0 rgba(0,0,0,.18)}
+.co-indice{margin-top:22px;display:flex;align-items:center;gap:.6em;font-size:.98em}
+.co-indice .et{color:var(--or)}
+@media (max-width:899px){
+  .co-tete{grid-template-columns:minmax(0,1fr)} .co-tete .grand{margin-top:.9em}
+  .futs{grid-template-columns:minmax(0,1fr);gap:14px}
+  .fut{width:min(72%,300px)} .fut:nth-child(even){margin-left:auto}
+  .fut-face b{font-size:clamp(24px,7vw,36px)} .fut-face span{font-size:17px} .fut-face.dos b{font-size:clamp(18px,5.2vw,26px)}
+  .etagere{display:none}
+}
+
+/* 5. De 8 h à 2 h : la scène reste fixe, le ciel passe du matin à la nuit */
+.journee{position:relative;height:380vh;height:380svh;padding:0;background:var(--fond)}
+.jr-colle{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--fond);color:var(--encre);transition:color .5s}
+.jr-colle.soir{color:var(--lait)}
+.jr-soleil,.jr-lune{position:absolute;left:0;top:0;border-radius:50%;will-change:transform}
+.jr-soleil{width:clamp(110px,21vmin,260px);aspect-ratio:1;background:var(--soleil);box-shadow:0 0 0 clamp(10px,2vmin,26px) color-mix(in srgb,var(--soleil) 36%,transparent)}
+.jr-lune{width:clamp(84px,13vmin,160px);aspect-ratio:1;background:var(--lait);overflow:hidden}
+.jr-lune::after{content:"";position:absolute;left:30%;top:-12%;width:100%;height:100%;border-radius:50%;background:var(--nuit)}
+.jr-etoiles{position:absolute;inset:0;opacity:0;pointer-events:none}
+.jr-etoiles i{position:absolute;display:block;width:var(--s);height:var(--s);left:var(--x);top:var(--y);background:var(--lait);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:scintille 2.6s ease-in-out infinite;animation-delay:var(--d)}
+.calme .jr-etoiles i{animation:none}
+@keyframes scintille{50%{transform:scale(.55) rotate(20deg)}}
+.jr-ville{position:absolute;left:0;bottom:-1px;width:100%;height:38%;fill:var(--encre)}
+.jr-nuages{position:absolute;inset:0;pointer-events:none}
+.jr-nuages i{position:absolute;left:var(--x);top:var(--y);width:var(--w);aspect-ratio:3.2;border-radius:999px;background:var(--lait);opacity:.85;will-change:transform}
+.jr-nuages i::before,.jr-nuages i::after{content:"";position:absolute;border-radius:50%;background:inherit}
+.jr-nuages i::before{left:16%;bottom:38%;width:34%;aspect-ratio:1}
+.jr-nuages i::after{left:42%;bottom:30%;width:44%;aspect-ratio:1}
+.jr-ville .murs{transition:fill .8s}
+.jr-colle.soir .jr-ville .murs{fill:#0a0520}
+.jr-ville .eteint{fill:rgba(255,255,255,.1)}
+.jr-ville .allume{fill:var(--or);opacity:0}
+.jr-enseigne{position:absolute;right:clamp(16px,9vw,180px);bottom:13%;padding:.28em .6em .16em;font:400 clamp(24px,3.4vw,54px)/1 var(--rye);background:#0a0520;border:5px solid #0a0520;border-radius:10px;color:rgba(255,255,255,.16);transition:color .5s,text-shadow .5s,border-color .5s;white-space:nowrap}
+.jr-enseigne.allume{color:var(--neon);border-color:var(--neon2);text-shadow:0 0 .12em var(--neon),0 0 .55em var(--neon);animation:gresille 5s infinite}
+.jr-texte{position:absolute;left:var(--marge);top:calc(var(--hb) + clamp(14px,4.5vh,50px));width:min(46vw,860px);z-index:2}
+.jr-heure{font:400 clamp(104px,min(34vh,32vw),380px)/.86 var(--rye);display:flex;align-items:baseline;gap:.08em;margin:.04em 0 .1em;text-shadow:.04em .04em 0 var(--rouge)}
+.jr-colle.soir .jr-heure{text-shadow:0 0 .06em var(--neon),0 0 .3em var(--neon)}
+.jr-heure b{font-weight:400;display:inline-block}
+.jr-heure b.bat{animation:bat .32s cubic-bezier(.2,1.5,.4,1)}
+@keyframes bat{from{transform:translateY(.22em) scale(.9);opacity:.3}}
+.jr-heure i{font-style:normal;font-size:.42em}
+.jr-panneaux{position:relative;min-height:clamp(120px,10.5vw,210px)}
+.jr-p{position:absolute;inset:0 0 auto;opacity:0;transform:translateY(22px);transition:opacity .35s,transform .5s cubic-bezier(.2,1.2,.3,1);pointer-events:none}
+.jr-p.on{opacity:1;transform:none}
+.jr-p h3{font:400 clamp(30px,4.2vw,76px)/1.05 var(--rye)}
+.jr-p p{font-size:clamp(19px,1.7vw,34px);line-height:1.3;margin-top:.35em;max-width:20em}
+.jr-moments{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.jr-moments button{padding:.7em .9em .62em;font:500 clamp(13px,.4vw + 11px,19px)/1 var(--zilla);letter-spacing:.1em;text-transform:uppercase;border-radius:6px;background:rgba(42,24,16,.14);transition:background-color .3s,color .3s,transform .2s}
+.jr-colle.soir .jr-moments button{background:rgba(255,255,255,.16)}
+.jr-moments button.on{background:var(--encre);color:var(--lait);transform:translateY(-3px)}
+.jr-colle.soir .jr-moments button.on{background:var(--neon);color:var(--nuit)}
+.jr-note{position:absolute;left:var(--marge);bottom:10px;z-index:3;color:var(--lait);font:italic 400 14px/1.25 var(--zilla);max-width:min(34em,60%);background:#0a0520;padding:5px 10px 4px;border-radius:4px}
+@media (max-width:899px){.jr-etoiles{inset:46% -40% 0 -40%}.jr-texte{width:calc(100% - 2*var(--marge))}.jr-moments{gap:6px}.jr-moments button{padding:.7em .62em .62em;letter-spacing:.06em}.jr-ville{height:28%}.jr-enseigne{bottom:9%;right:auto;left:50%;translate:-50% 0}.jr-note{max-width:none;right:var(--marge);font-size:12.5px;bottom:6px}.jr-p p{font-size:1.1em}}
+@media (min-width:900px) and (max-height:860px){
+  .jr-texte{width:min(92vw,1500px);display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(30px,4vw,80px);align-items:center}
+  .jr-texte .sur{grid-column:1/-1}
+  .jr-heure{min-width:1.78em}
+  .jr-cote{max-width:30em}
+}
+@media (max-height:560px){.jr-heure{font-size:clamp(80px,26vh,150px)}}
+
+/* 6. Les soirs de match : le tableau à lettres, la salle de dos, les chapeaux en l'air */
+.matchs{--fond:var(--nuit)}
+.ma-grille{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,90px);align-items:center}
+.ecran-cadre{position:relative;padding-bottom:9%}
+.ecran{position:relative;aspect-ratio:16/9;background:linear-gradient(160deg,var(--neon2),var(--violet) 70%);border:clamp(10px,1.2vw,18px) solid #0a0520;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;box-shadow:0 0 0 5px var(--violet),0 0 70px color-mix(in srgb,var(--neon2) 45%,transparent);container-type:inline-size}
+.ecran::before{content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:26%;background:rgba(255,255,255,.2);transform:translateX(-150%) skewX(-18deg);animation:balaye 5.5s ease-in-out infinite}
+.calme .ecran::before{animation:none}
+@keyframes balaye{55%,100%{transform:translateX(520%) skewX(-18deg)}}
+.ec-sur{font:400 11cqw/1 var(--six);letter-spacing:.14em;color:var(--lait);text-transform:uppercase;position:relative;margin-top:-7%}
+.tableau{display:flex;gap:1cqw;position:relative;perspective:600px}
+.tableau i{display:flex;align-items:center;justify-content:center;width:7.2cqw;height:10.5cqw;background:#0a0520;color:var(--or);font:700 6.4cqw/1 var(--stencil);font-style:normal;border-radius:1cqw;backface-visibility:hidden}
+.tableau i.flap{animation:flap .32s ease-in-out}
+@keyframes flap{50%{transform:rotateX(-90deg)}}
+.foule{position:absolute;left:3%;right:3%;bottom:0;height:42%;display:flex;justify-content:space-between;align-items:flex-end;pointer-events:none}
+.tete{position:relative;width:12.6%;height:var(--h,82%);pointer-events:auto;cursor:pointer;display:block}
+.tete::before{content:"";position:absolute;left:14%;right:14%;top:0;aspect-ratio:1;border-radius:50%;background:#0a0520}
+.tete::after{content:"";position:absolute;left:0;right:0;top:38%;bottom:0;border-radius:44% 44% 0 0/60% 60% 0 0;background:#0a0520}
+.chapeau{position:absolute;left:-8%;right:-8%;top:-24%;aspect-ratio:1.9;background:var(--c,var(--bois));clip-path:polygon(0% 62%,10% 74%,27% 70%,31% 22%,43% 10%,50% 17%,57% 10%,69% 22%,73% 70%,90% 74%,100% 62%,94% 86%,78% 96%,22% 96%,6% 86%);z-index:2;display:block}
+.prog{margin-top:clamp(18px,3vh,30px);display:grid;gap:8px;max-width:520px}
+.prog p{display:flex;align-items:baseline;gap:.6em;padding:10px 14px 9px;background:var(--nuit2);border-left:8px solid var(--neon2);border-radius:4px;white-space:nowrap;overflow:hidden}
+.prog b{font:400 1.5em/1 var(--six);letter-spacing:.08em;text-transform:uppercase;color:var(--neon2)}
+.prog span{letter-spacing:.14em;opacity:.8;overflow:hidden}
+.ma-bouton{margin-top:clamp(18px,3vh,28px);display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.ma-bouton .btn{background:var(--neon);color:var(--nuit);box-shadow:0 6px 0 rgba(0,0,0,.4),0 0 30px color-mix(in srgb,var(--neon) 50%,transparent)}
+@media (max-width:899px){.ma-grille{grid-template-columns:minmax(0,1fr)}}
+
+/* 7. Les jeux : la pile de boîtes et le duel de rapidité */
+.jeux{--fond:var(--nuit2)}
+.je-tete{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,5vw,80px);align-items:center}
+.pile{position:relative;width:min(100%,340px);justify-self:end;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.boite{display:flex;align-items:center;justify-content:space-between;gap:10px;height:clamp(44px,5.4vh,58px);padding:0 16px;border-radius:7px;background:var(--c);color:var(--k,var(--lait));font:400 clamp(24px,2.2vw,32px)/1 var(--six);letter-spacing:.12em;text-transform:uppercase;box-shadow:inset 0 -7px 0 rgba(0,0,0,.2);transition:transform .45s cubic-bezier(.2,1.3,.3,1);white-space:nowrap;width:var(--w,100%);margin-left:var(--m,0)}
+.boite .et{width:.6em;height:.6em}
+.pile:hover .boite:nth-child(odd){transform:translateX(8px)} .pile:hover .boite:nth-child(even){transform:translateX(-8px)}
+.duel{margin:clamp(30px,5vh,56px) auto 0;max-width:1180px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1fr);gap:clamp(12px,3vw,50px);align-items:center;background:var(--rouge);border:clamp(10px,1.3vw,18px) solid var(--bois3);border-radius:clamp(26px,4vw,60px);padding:clamp(20px,3.4vw,46px);cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;color:var(--lait);transition:background-color .25s}
+.duel[data-etat=signal]{background:var(--or2)}
+.du-cote{display:flex;flex-direction:column;align-items:center;gap:18px}
+.du-nom{font:400 clamp(26px,2.6vw,40px)/1 var(--six);letter-spacing:.14em;text-transform:uppercase}
+.carte{position:relative;width:min(100%,clamp(104px,14vw,210px));aspect-ratio:5/7;perspective:800px;transition:transform .6s cubic-bezier(.4,0,.6,1),opacity .6s}
+.carte .int{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
+.carte .dos,.carte .face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6%}
+.carte .dos{background:var(--nuit2);border:8px solid var(--lait);color:var(--or)}
+.carte .dos .et{width:54%;height:auto;aspect-ratio:1}
+.carte .face{background:var(--lait);color:var(--encre);transform:rotateY(180deg);font:400 clamp(30px,4vw,60px)/1 var(--rye)}
+.carte .face .et{width:34%;height:auto;aspect-ratio:1;color:var(--rouge)}
+.carte .face small{font:400 clamp(20px,2vw,30px)/1 var(--six);letter-spacing:.12em;text-transform:uppercase}
+.carte.tire .int{transform:rotateY(180deg) scale(1.06)}
+.carte.tombe{transform:translateY(16%) rotate(18deg);opacity:.4}
+.du-centre{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;min-height:clamp(230px,30vh,300px);justify-content:center}
+.du-signal{width:clamp(70px,8vw,110px);aspect-ratio:1;background:rgba(0,0,0,.28);clip-path:var(--etoile);transition:background-color .1s,transform .3s cubic-bezier(.2,1.8,.4,1)}
+.duel[data-etat=attente] .du-signal{animation:tremble .22s linear infinite}
+.duel[data-etat=signal] .du-signal{background:var(--lait);transform:scale(1.5) rotate(36deg)}
+.duel[data-etat=gagne] .du-signal{background:var(--or);transform:scale(1.15) rotate(72deg)}
+@keyframes tremble{25%{transform:translate(2px,-1px) rotate(2deg)}75%{transform:translate(-2px,1px) rotate(-2deg)}}
+.du-msg{font:400 clamp(28px,3.4vw,50px)/1.05 var(--rye);text-wrap:balance}
+.du-temps{font-size:1.05em;line-height:1.3;min-height:1.3em;max-width:22em;text-wrap:balance}
+.du-vic{display:flex;gap:8px;font-size:30px;color:rgba(0,0,0,.3)}
+.du-vic i{transition:color .3s,transform .5s cubic-bezier(.2,1.8,.4,1)}
+.du-vic i.ok{color:var(--or);transform:scale(1.25) rotate(72deg)}
+.du-btn[hidden]{display:none}
+@media (max-width:899px){
+  .je-tete{grid-template-columns:minmax(0,1fr)} .pile{justify-self:start;margin-top:10px}
+  .duel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"c c" "v s"} .du-centre{grid-area:c;min-height:250px} .du-cote.v{grid-area:v} .du-cote.s{grid-area:s}
+}
+
+/* 8. Privatiser : l'étoile de shérif qu'on grave */
+.prive{--fond:var(--neon);color:var(--nuit)}
+.prive h2{text-shadow:.045em .045em 0 var(--lait)}
+.pr-grille{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,90px);align-items:center}
+.choix{margin-top:clamp(18px,3vh,30px)}
+.choix p{font:500 14px/1 var(--zilla);letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}
+.choix div{display:flex;flex-wrap:wrap;gap:9px}
+.choix+.choix{margin-top:18px}
+.choix button{min-height:50px;padding:10px 18px 9px;font:400 clamp(24px,2vw,30px)/1 var(--six);letter-spacing:.1em;text-transform:uppercase;background:var(--lait);color:var(--nuit);border-radius:6px;box-shadow:0 6px 0 var(--nuit);transition:transform .15s,box-shadow .15s,background-color .2s,color .2s}
+.choix button[aria-pressed=true]{background:var(--nuit);color:var(--lait);transform:translateY(5px);box-shadow:0 1px 0 var(--nuit)}
+.pr-phrase{margin-top:clamp(18px,3vh,28px);font:italic 400 clamp(20px,.9vw + 15px,28px)/1.3 var(--zilla);max-width:24em;text-wrap:balance}
+.pr-appel{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.pr-appel .btn{background:var(--nuit);color:var(--lait)}
+.insigne{position:relative;width:min(100%,clamp(260px,34vw,470px));aspect-ratio:1;justify-self:center}
+.in-tourne{position:absolute;inset:0;transition:transform 1s cubic-bezier(.3,1.5,.4,1)}
+.in-etoile{position:absolute;inset:5%;background:conic-gradient(from 0deg,var(--or) 0 30deg,var(--or2) 30deg 60deg,var(--or) 60deg 90deg,var(--or2) 90deg 120deg,var(--or) 120deg 150deg,var(--or2) 150deg 180deg,var(--or) 180deg 210deg,var(--or2) 210deg 240deg,var(--or) 240deg 270deg,var(--or2) 270deg 300deg,var(--or) 300deg 330deg,var(--or2) 330deg 360deg);clip-path:polygon(50% 0,63% 27%,93% 25%,76% 50%,93% 75%,63% 73%,50% 100%,37% 73%,7% 75%,24% 50%,7% 25%,37% 27%);overflow:hidden}
+.in-etoile::after{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:22%;background:rgba(255,255,255,.55);transform:translateX(-160%) skewX(-20deg)}
+.insigne.brille .in-etoile::after{animation:reflet .9s ease-out}
+@keyframes reflet{to{transform:translateX(620%) skewX(-20deg)}}
+.in-boule{position:absolute;width:11%;aspect-ratio:1;border-radius:50%;background:var(--or);left:calc(var(--x) - 5.5%);top:calc(var(--y) - 5.5%);box-shadow:inset 0 -4px 0 var(--or2)}
+.in-centre{position:absolute;inset:26%;border-radius:50%;background:var(--or2);box-shadow:inset 0 0 0 clamp(5px,.7vw,9px) var(--or);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--nuit);transition:transform 1s cubic-bezier(.3,1.5,.4,1);container-type:inline-size}
+.in-centre small{font:500 6.2cqw/1 var(--zilla);letter-spacing:.2em;text-transform:uppercase}
+.in-centre b{font:400 21cqw/.95 var(--six);letter-spacing:.05em;text-transform:uppercase;margin:.08em 0 .05em;white-space:nowrap}
+.in-centre span{font:italic 400 9cqw/1 var(--zilla)}
+@media (max-width:899px){.pr-grille{grid-template-columns:minmax(0,1fr)} .insigne{grid-row:1;width:min(78%,340px)}}
+
+/* 9. Venir : le poteau indicateur et les horaires */
+.venir{--fond:var(--nuit)}
+.ve-grille{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,110px);align-items:center;margin-top:clamp(26px,5vh,54px)}
+.poteau{position:relative;display:flex;flex-direction:column;gap:clamp(10px,1.6vh,16px);padding:10px 0 clamp(30px,5vh,60px);max-width:560px;width:100%;justify-self:center}
+.mat{position:absolute;left:50%;top:0;bottom:0;width:clamp(18px,2vw,26px);margin-left:calc(clamp(18px,2vw,26px)/-2);background:var(--bois3);border-radius:8px 8px 0 0}
+.fleche{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:clamp(70px,9.5vh,92px);width:82%;padding:10px 12% 8px 6%;background:var(--bois);color:var(--lait);clip-path:polygon(0 0,89% 0,100% 50%,89% 100%,0 100%);transform-origin:61% 50%;transition:transform .9s cubic-bezier(.2,1.6,.35,1) calc(var(--r)*.14s),opacity .3s calc(var(--r)*.14s);margin-left:18%}
+.fleche.g{clip-path:polygon(11% 0,100% 0,100% 100%,11% 100%,0 50%);padding:10px 6% 8px 12%;margin-left:0;transform-origin:39% 50%;background:var(--lait);color:var(--encre);text-align:right}
+.fleche b{font:400 clamp(20px,2.1vw,30px)/1.05 var(--rye);white-space:nowrap}
+.fleche span{font:400 clamp(20px,1.7vw,25px)/1.1 var(--six);letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+.js .poteau .fleche{opacity:0;transform:rotate(calc(var(--s,1)*64deg))}
+.js .poteau .fleche.g{--s:-1}
+.js .poteau.vu .fleche{opacity:1;transform:rotate(calc(var(--s,1)*var(--a,1.5deg)))}
+.calme .poteau .fleche{transition:none}
+a.fleche:hover,.poteau.vu a.fleche:hover{transform:rotate(calc(var(--s,1)*-3deg)) scale(1.03);transition-delay:0s;transition-duration:.35s}
+.h-jours{display:flex;gap:clamp(5px,.8vw,10px);margin:14px 0 8px}
+.h-jours b{flex:1;max-width:74px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font:400 clamp(22px,2.6vw,38px)/1 var(--rye);background:var(--nuit2);color:var(--lait);border-radius:8px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.3);font-weight:400}
+.h-jours b.dim{background:var(--neon);color:var(--nuit);animation:saute 2.4s cubic-bezier(.3,1.6,.5,1) infinite}
+.calme .h-jours b.dim{animation:none}
+@keyframes saute{0%,70%,100%{transform:none}82%{transform:translateY(-12px) rotate(-6deg)}}
+.h-grand{font:400 clamp(60px,9vw,150px)/.95 var(--rye);display:flex;align-items:center;gap:.16em;color:var(--lait);text-shadow:0 0 .06em var(--neon2),0 0 .35em var(--neon2);white-space:nowrap}
+.h-grand i{display:block;width:.62em;height:.34em;background:var(--neon);clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%);flex:none}
+@media (max-width:899px){.ve-grille{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:440px){.fleche{width:90%;margin-left:10%;padding:10px 11% 8px 5%}.fleche.g{padding:10px 5% 8px 11%}.fleche b{font-size:clamp(16px,5.1vw,20px)}.fleche span{font-size:19px}}
+
+/* 10. Autant de pages : l'enseigne en échelle, et le jour qui revient */
+.aube{--fond:var(--ciel);padding-bottom:clamp(150px,24vh,250px)}
+.au-ciel{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.au-grille{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,90px);align-items:start}
+.aube h2{font-size:clamp(36px,4.6vw,72px)}
+.echelle{position:relative;justify-self:center;padding-top:34px;font:400 clamp(22px,2.4vw,36px)/1 var(--rye);width:min(100%,440px);text-align:center}
+.echelle::before{content:"";position:absolute;left:8%;right:8%;top:0;height:14px;border-radius:9px;background:var(--bois3)}
+.ech{position:relative;display:block;transform-origin:50% -22px;will-change:transform}
+.ech>.ech{margin-top:22px}
+.ech>b{position:relative;display:block;font-weight:400;padding:.62em .5em .5em;background:var(--c,var(--bois));color:var(--k,var(--lait));border-radius:8px;box-shadow:0 6px 0 rgba(42,24,16,.3)}
+.ech>b::before,.ech>b::after{content:"";position:absolute;bottom:100%;width:7px;height:22px;background:var(--encre);border-radius:3px}
+.ech>b::before{left:14%}.ech>b::after{right:14%}
+.au-soleil{position:absolute;left:50%;bottom:0;width:clamp(280px,44vw,720px);aspect-ratio:2/1;margin-left:calc(clamp(280px,44vw,720px)/-2);border-radius:999px 999px 0 0;background:var(--couchant);transform:translateY(100%);transition:transform 2.2s cubic-bezier(.2,.9,.3,1) .3s;box-shadow:0 0 0 clamp(14px,2vw,30px) color-mix(in srgb,var(--couchant) 36%,transparent)}
+.au-ciel.vu .au-soleil{transform:translateY(calc(100% - clamp(104px,17vh,180px)))}
+.calme .au-soleil{transition:none}
+.au-rouvre{position:absolute;left:0;right:0;bottom:clamp(18px,3.4vh,40px);text-align:center;font:400 clamp(30px,3.4vw,54px)/1 var(--six);letter-spacing:.2em;text-transform:uppercase;color:var(--lait);z-index:1;opacity:0;transition:opacity .8s 1.6s}
+.au-ciel.vu .au-rouvre{opacity:1}
+@media (max-width:899px){.au-grille{grid-template-columns:minmax(0,1fr)}}
+.pied{position:relative;background:var(--encre);color:var(--papier);padding:clamp(40px,7vh,70px) var(--marge) clamp(30px,5vh,50px);text-align:center}
+.pied p{max-width:44em;margin:0 auto}
+.kz-g{display:inline-block;font:400 clamp(40px,6vw,84px)/1 var(--rye);color:var(--papier);margin-bottom:.3em;transition:transform .3s cubic-bezier(.2,1.6,.4,1)}
+.kz-g:hover{transform:rotate(-3deg) scale(1.05)}
+.petit{font-size:.82em;opacity:.75;margin-top:14px!important}
+</style>
+</head>
+<body>
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="Far West, retour en haut"><i class="et"></i>Far West</a>
+  <nav class="nav" id="nav" aria-label="Rubriques">
+    <a href="#affiche" style="--i:0">Le bar</a><a href="#terrasse" style="--i:1">La terrasse</a><a href="#comptoir" style="--i:2">La carte</a><a href="#journee" style="--i:3">De 8&nbsp;h à 2&nbsp;h</a><a href="#matchs" style="--i:4">Les matchs</a><a href="#jeux" style="--i:5">Les jeux</a><a href="#prive" style="--i:6">Privatiser</a><a href="#venir" style="--i:7">Venir</a>
+  </nav>
+  <a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="appel" data-tel>Appeler</a>
+  <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><i></i><i></i><i></i></button>
+  <div class="course" aria-hidden="true"><i class="astre" id="astre"></i></div>
+</header>
+
+<main>
+<!-- 1. Accueil -->
+<section class="accueil sec clair" id="accueil">
+  <canvas class="rayons" id="rayons" width="1000" height="1000" aria-hidden="true"></canvas>
+  <div class="ac-soleil" id="ac-soleil" aria-hidden="true"></div>
+  <svg class="ac-ville" viewBox="0 0 2000 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0,172V128H70L84,100H210L226,128H300L318,150H366L372,172Z M420,172L440,120H470L476,84H500L504,56H528L532,84H560L566,120H596L616,172Z M770,172L792,118H826L832,86H902L908,118H940L962,172Z"/>
+    <rect x="693" y="92" width="22" height="82" rx="11"/><rect x="668" y="128" width="32" height="14" rx="7"/><rect x="668" y="104" width="14" height="38" rx="7"/><rect x="708" y="116" width="32" height="14" rx="7"/><rect x="726" y="90" width="14" height="40" rx="7"/>
+    <path id="ac-paris" d=""/>
+    <rect x="0" y="170" width="2000" height="31"/>
+  </svg>
+  <div class="ac-grille">
+    <div class="ac-g">
+      <p class="tampons"><span style="--i:0">Bar brasserie</span><span style="--i:1">Paris 11e</span><span style="--i:2">Ouvert jusqu’à 2&nbsp;h</span></p>
+      <h1 class="enseigne" id="enseigne" aria-label="Far West">
+        <i class="poutre" aria-hidden="true"></i>
+        <span class="planche"><i class="corde g"></i><i class="corde d"></i><b>Far</b></span>
+        <span class="planche"><i class="corde g"></i><i class="corde d"></i><b>West</b></span>
+      </h1>
+      <p class="ac-phrase">Un bar brasserie de quartier, à l’heure du Far West : des fûts en bois, des néons, des jeux de société, du sport à l’écran et une terrasse au soleil.</p>
+      <p class="ac-boutons"><a class="btn plein" data-tel data-num>01 71 82 16 01</a><a class="btn" href="#journee">La journée, de 8&nbsp;h à 2&nbsp;h</a></p>
+      <p class="ac-adresse"><i class="et"></i>3 rue Faidherbe, à deux pas du métro Faidherbe-Chaligny</p>
+    </div>
+    <div class="ac-d">
+      <div class="facade" id="facade">
+        <p class="fa-nom">Bar <i class="et"></i> Brasserie</p>
+        <i class="tonneau" aria-hidden="true"></i>
+        <i class="fa-plaque" aria-hidden="true"></i><p class="fa-note" aria-hidden="true">5,0 sur Google</p>
+        <a class="baie" id="baie" href="#affiche" aria-label="Pousser les portes et entrer">
+          <span class="ba-ouvert" aria-hidden="true">Ouvert</span>
+          <span class="ba-heures" aria-hidden="true">jusqu'à 2&nbsp;h</span>
+          <span class="vantail g" id="vg" aria-hidden="true"><svg viewBox="0 0 100 150" preserveAspectRatio="none"><path class="pb" d="M0,8C26,2 40,8 56,25C70,38 86,35 100,27V150H0Z"/><g class="pl"><rect x="13" y="54" width="74" height="11" rx="3"/><rect x="13" y="71" width="74" height="11" rx="3"/><rect x="13" y="88" width="74" height="11" rx="3"/><rect x="13" y="105" width="74" height="11" rx="3"/><rect x="13" y="122" width="74" height="11" rx="3"/></g></svg></span>
+          <span class="vantail d" id="vd" aria-hidden="true"><svg viewBox="0 0 100 150" preserveAspectRatio="none"><path class="pb" d="M0,8C26,2 40,8 56,25C70,38 86,35 100,27V150H0Z"/><g class="pl"><rect x="13" y="54" width="74" height="11" rx="3"/><rect x="13" y="71" width="74" height="11" rx="3"/><rect x="13" y="88" width="74" height="11" rx="3"/><rect x="13" y="105" width="74" height="11" rx="3"/><rect x="13" y="122" width="74" height="11" rx="3"/></g></svg></span>
+          <span class="paillasson" aria-hidden="true">Poussez les portes</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. L'affiche -->
+<section class="affiche sec bois" id="affiche">
+  <div class="dans af-grille">
+    <div class="avis-cadre">
+      <div class="avis" id="avis" data-quand="avis" data-superpose>
+        <i class="clou g"></i><i class="clou d"></i>
+        <p class="l z" style="--n:0;--t:-2deg"><span>Avis à tout le quartier</span></p>
+        <p class="l rye" data-fit style="--n:1;--t:3deg"><span>Recherché</span></p>
+        <p class="l zi" style="--n:2;--t:-1deg"><span>pour un verre, un match ou une partie</span></p>
+        <i class="filet" style="--n:3"></i>
+        <p class="l six rouge" data-fit=".3" style="--n:4;--t:-3deg"><span>Le Far West</span></p>
+        <p class="l rye" data-fit style="--n:5;--t:2deg"><span>Bar <i class="et"></i> Brasserie</span></p>
+        <p class="l six" data-fit=".19" style="--n:6;--t:-2deg"><span>Vins et bières <i class="et"></i> Jeux de société</span></p>
+        <p class="l six" data-fit=".19" style="--n:7;--t:3deg"><span>Sport à l'écran <i class="et"></i> Terrasse au soleil</span></p>
+        <i class="filet" style="--n:8"></i>
+        <p class="l rye rouge" data-fit style="--n:9;--t:-2deg"><span>Ouvert jusqu’à 2&nbsp;h</span></p>
+        <p class="l z" style="--n:10;--t:2deg"><span>même le dimanche</span></p>
+        <p class="l six" data-fit=".19" style="--n:11;--t:-3deg"><span>Récompense : 5,0 sur 5</span></p>
+        <p class="l zi" style="--n:12;--t:1deg"><span>sur Google, 17 avis</span></p>
+        <div class="languettes" id="languettes"></div>
+      </div>
+    </div>
+    <div>
+      <p class="sur entre"><i class="et"></i>Le bar</p>
+      <h2 class="entre">Le nouveau Far West est en ville.</h2>
+      <p class="grand entre" style="--r:1">Des fûts en bois, des néons violets et bleus, une sélection de vins et de bières, de quoi manger. Un bar brasserie de quartier, à deux pas du métro Faidherbe-Chaligny, ouvert tard : jusqu’à 2&nbsp;h, même le dimanche.</p>
+      <div class="telegramme entre" style="--r:2" data-quand="tg">
+        <p class="tg-tete"><span>Télégramme</span><span>Paris 11e</span></p>
+        <p class="tg-texte" id="tg" aria-label="Nouveau dans le quartier mais déjà incontournable !!"></p>
+        <p class="tg-source">Un avis Google, octobre 2026</p>
+      </div>
+      <p class="af-indice entre" style="--r:3" id="af-indice"><i class="main" aria-hidden="true"></i>Arrachez une languette de l’affiche : le numéro est dessus.</p>
+      <p class="poche" id="poche" hidden>Le numéro est dans votre poche. <a class="btn" data-tel data-num>01 71 82 16 01</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. La terrasse -->
+<section class="terrasse sec clair" id="terrasse">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="dans tr-grille">
+    <div>
+      <p class="sur entre"><i class="et"></i>Dehors</p>
+      <h2 class="entre">Une terrasse au soleil.</h2>
+      <p class="grand entre" style="--r:1">Rue Faidherbe, la terrasse est ensoleillée. Faites tourner le soleil : les parasols font le reste.</p>
+      <p class="note entre" style="--r:2">Nombre de tables, chauffage, horaires de la terrasse : ................ à compléter avec vous.</p>
+      <p class="tr-etat entre" style="--r:3"><i class="et"></i><span id="tr-etat">Plein soleil</span></p>
+    </div>
+    <div class="tr-scene entre" id="tr-scene" role="img" aria-label="La terrasse vue du dessus : des parasols dont l’ombre suit le soleil">
+      <div class="tr-ciel"></div>
+      <div class="tr-store"><b>Far West</b></div>
+      <div class="tr-rue">Rue Faidherbe</div>
+      <div class="tr-table" style="--x:18%;--y:50%"><i class="ombre"></i><i class="chaise a"></i><i class="chaise b"></i><i class="parasol"></i></div>
+      <div class="tr-table" style="--x:47%;--y:46%"><i class="ombre"></i><i class="chaise a"></i><i class="chaise c"></i><i class="parasol" style="--c:var(--turq)"></i></div>
+      <div class="tr-table" style="--x:79%;--y:51%"><i class="ombre"></i><i class="chaise b"></i><i class="chaise c"></i><i class="parasol"></i></div>
+      <div class="tr-table" style="--x:33%;--y:72%"><i class="ombre"></i><i class="chaise a"></i><i class="chaise b"></i><i class="parasol" style="--c:var(--turq)"></i></div>
+      <div class="tr-table" style="--x:64%;--y:73%"><i class="ombre"></i><i class="chaise a"></i><i class="chaise b"></i><i class="parasol" style="--c:var(--soleil)"></i></div>
+      <div class="tr-voile" id="tr-voile"></div>
+      <div class="tr-soleil" id="tr-soleil"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Au comptoir -->
+<section class="comptoir sec" id="comptoir">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="dans">
+    <div class="co-tete">
+      <div><p class="sur entre"><i class="et"></i>La carte</p><h2 class="entre">Au comptoir.</h2></div>
+      <p class="grand entre" style="--r:1">Une sélection de vins et de bières, du café dès le matin, de quoi manger. La carte complète s’écrit avec vos mots et vos prix.</p>
+    </div>
+    <div class="futs" id="futs"></div>
+    <div class="etagere" aria-hidden="true"></div>
+    <p class="co-indice"><i class="et"></i>Touchez un fût : il fait un tour et montre ce qui reste à écrire.</p>
+  </div>
+</section>
+
+<!-- 5. De 8&nbsp;h à 2&nbsp;h -->
+<section class="journee" id="journee" aria-label="De 8&nbsp;h à 2&nbsp;h">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" style="z-index:2"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="jr-colle" id="jr-colle">
+    <div class="jr-etoiles" id="jr-etoiles" aria-hidden="true"><i style="--x:63%;--y:14%;--s:38px;--d:0s"></i><i style="--x:74%;--y:32%;--s:24px;--d:.6s"></i><i style="--x:88%;--y:12%;--s:30px;--d:1.1s"></i><i style="--x:70%;--y:52%;--s:20px;--d:1.7s"></i><i style="--x:93%;--y:40%;--s:22px;--d:.3s"></i><i style="--x:83%;--y:54%;--s:18px;--d:2s"></i></div>
+    <div class="jr-nuages" id="jr-nuages" aria-hidden="true"><i style="--x:50%;--y:20%;--w:clamp(120px,15vw,280px)"></i><i style="--x:76%;--y:44%;--w:clamp(90px,10vw,190px)"></i><i style="--x:30%;--y:55%;--w:clamp(80px,9vw,170px)"></i></div>
+    <div class="jr-soleil" id="jr-soleil" aria-hidden="true"></div>
+    <div class="jr-lune" id="jr-lune" aria-hidden="true"></div>
+    <svg class="jr-ville" id="jr-ville" viewBox="0 0 2000 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+    <p class="jr-enseigne" id="jr-enseigne" aria-hidden="true">Far West</p>
+    <div class="jr-texte">
+      <p class="sur"><i class="et"></i>Ouvert tous les jours</p>
+      <p class="jr-heure" aria-label="De 8&nbsp;h à 2&nbsp;h"><b id="jr-h">8</b><i>h</i></p>
+      <div class="jr-cote"><div class="jr-panneaux" id="jr-panneaux"></div>
+      <div class="jr-moments" id="jr-moments"></div></div>
+    </div>
+    <p class="jr-note">Horaires relevés sur Google le 9 novembre 2026, à confirmer avec vous.</p>
+  </div>
+</section>
+
+<!-- 6. Les soirs de match -->
+<section class="matchs sec sombre" id="matchs">
+  <div class="dans ma-grille">
+    <div class="ecran-cadre entre" id="ecran-cadre">
+      <div class="ecran">
+        <p class="ec-sur">Ce soir à l'écran</p>
+        <p class="tableau" id="tableau" aria-hidden="true"></p>
+      </div>
+      <div class="foule" id="foule" aria-hidden="true"></div>
+    </div>
+    <div>
+      <p class="sur entre"><i class="et"></i>Sport à l’écran</p>
+      <h2 class="entre">Les soirs de match.</h2>
+      <p class="grand entre" style="--r:1">Les évènements sportifs passent à l’écran, et le Far West reste ouvert jusqu’à 2&nbsp;h : on a le temps de refaire le match.</p>
+      <div class="prog entre" style="--r:2">
+        <p><b>Ce soir</b><span>................................</span></p>
+        <p><b>Demain</b><span>................................</span></p>
+        <p><b>Ce week-end</b><span>................................</span></p>
+      </div>
+      <p class="note entre" style="--r:3">Une ligne par match, que vous mettez à jour vous-même.</p>
+      <p class="ma-bouton entre" style="--r:3"><button class="btn" id="ma-but" type="button">Ça marque !</button><span>Touchez : la salle se lève.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Les jeux -->
+<section class="jeux sec sombre" id="jeux">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="dans">
+    <div class="je-tete">
+      <div>
+        <p class="sur entre"><i class="et"></i>Jeux de société</p>
+        <h2 class="entre">On sort les jeux.</h2>
+        <p class="grand entre" style="--r:1">Au Far West, on vient aussi pour jouer : il y a des jeux de société. En attendant votre tour, un duel. Ici, on ne dégaine qu’une carte.</p>
+      </div>
+      <button class="pile entre" id="pile" type="button" aria-label="Mélanger la pile de jeux" style="--r:2">
+        <span class="boite" style="--c:var(--neon);--k:var(--nuit);--w:86%;--m:8%"><span>Vos jeux</span><span>........</span></span>
+        <span class="boite" style="--c:var(--or);--k:var(--nuit);--w:100%"><span>Jeux de société</span><i class="et"></i></span>
+        <span class="boite" style="--c:var(--turq);--w:78%;--m:14%"><span>Vos jeux</span><span>........</span></span>
+        <span class="boite" style="--c:var(--rouge);--w:94%;--m:3%"><span>Vos jeux</span><span>........</span></span>
+      </button>
+    </div>
+    <div class="duel entre" id="duel" data-etat="repos" role="group" aria-label="Le duel de rapidité">
+      <div class="du-cote v"><p class="du-nom">Vous</p><div class="carte" id="du-vous" data-superpose><div class="int"><div class="dos"><i class="et"></i></div><div class="face">As<i class="et"></i><small>gagné</small></div></div></div></div>
+      <div class="du-centre">
+        <i class="du-signal" aria-hidden="true"></i>
+        <p class="du-msg" id="du-msg" aria-live="polite">Le duel.</p>
+        <p class="du-temps" id="du-temps">Quand l’étoile s’allume, touchez la table avant le shérif.</p>
+        <button class="btn du-btn" id="du-btn" type="button">Prêt ?</button>
+        <p class="du-vic" id="du-vic" aria-label="Manches gagnées"><i class="et"></i><i class="et"></i><i class="et"></i></p>
+      </div>
+      <div class="du-cote s"><p class="du-nom">Le shérif</p><div class="carte" id="du-sherif" data-superpose><div class="int"><div class="dos"><i class="et"></i></div><div class="face">Roi<i class="et"></i><small>perdu</small></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Privatiser -->
+<section class="prive sec" id="prive">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="dans pr-grille">
+    <div>
+      <p class="sur entre"><i class="et"></i>Anniversaires, afterworks, pots de départ</p>
+      <h2 class="entre">Le saloon est à vous.</h2>
+      <p class="grand entre" style="--r:1">Pour un groupe, on réserve. Gravez votre étoile, puis passez un coup de fil.</p>
+      <div class="choix entre" style="--r:2" id="ch-occ"><p>L’occasion</p><div><button type="button" data-v="anniversaire" aria-pressed="true">Anniversaire</button><button type="button" data-v="afterwork" aria-pressed="false">Afterwork</button><button type="button" data-v="depart" aria-pressed="false">Pot de départ</button></div></div>
+      <div class="choix entre" style="--r:3" id="ch-tai"><p>Vous êtes</p><div><button type="button" data-v="tablee" aria-pressed="false">Une tablée</button><button type="button" data-v="bande" aria-pressed="true">Une bande</button><button type="button" data-v="saloon" aria-pressed="false">Tout le saloon</button></div></div>
+      <p class="pr-phrase entre" style="--r:4" id="pr-phrase" aria-live="polite"></p>
+      <p class="pr-appel entre" style="--r:4"><a class="btn" data-tel>Appeler le <span data-num-txt>01 71 82 16 01</span></a></p>
+    </div>
+    <div class="insigne entre" id="insigne" aria-hidden="true">
+      <div class="in-tourne" id="in-tourne">
+        <div class="in-etoile"></div>
+        <i class="in-boule" style="--x:50%;--y:5%"></i><i class="in-boule" style="--x:88.7%;--y:27.5%"></i><i class="in-boule" style="--x:88.7%;--y:72.5%"></i><i class="in-boule" style="--x:50%;--y:95%"></i><i class="in-boule" style="--x:11.3%;--y:72.5%"></i><i class="in-boule" style="--x:11.3%;--y:27.5%"></i>
+        <div class="in-centre" id="in-centre"><small>Shérif d’un soir</small><b id="in-occ">Anniversaire</b><span id="in-tai">une bande</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Venir -->
+<section class="venir sec sombre" id="venir">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="dans">
+    <p class="sur entre"><i class="et"></i>Venir</p>
+    <h2 class="entre">C’est par là.</h2>
+    <div class="ve-grille">
+      <div class="poteau" id="poteau" data-quand="poteau" data-superpose>
+        <i class="mat" aria-hidden="true"></i>
+        <a class="fleche" data-carte style="--r:0;--a:1.6deg"><b>3 rue Faidherbe</b><span>75011 Paris</span></a>
+        <p class="fleche g" style="--r:1;--a:2.2deg"><b>Faidherbe-Chaligny</b><span>le métro, à deux pas</span></p>
+        <a class="fleche" data-tel style="--r:2;--a:-1.4deg"><b data-num-txt>01 71 82 16 01</b><span>pour réserver</span></a>
+        <a class="fleche g" data-carte style="--r:3;--a:-2deg"><b>Itinéraire</b><span>ouvrir le plan</span></a>
+      </div>
+      <div class="heures entre">
+        <p class="sur"><i class="et"></i>Horaires</p>
+        <p class="h-grand" aria-label="De 8&nbsp;h à 2&nbsp;h">8&nbsp;h <i></i> 2&nbsp;h</p>
+        <p class="h-jours" aria-label="Tous les jours"><b>L</b><b>M</b><b>M</b><b>J</b><b>V</b><b>S</b><b class="dim">D</b></p>
+        <p class="grand" style="margin-top:.5em">Tous les jours, même le dimanche.</p>
+        <p class="note">Horaires relevés sur Google le 9 novembre 2026, à confirmer avec vous.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Autant de pages -->
+<section class="aube sec clair" id="pages">
+  <svg class="battant" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,101V22C130,20 190,12 262,44C340,80 440,90 501,50V101Z"/><path d="M1000,101V22C870,20 810,12 738,44C660,80 560,90 499,50V101Z"/></svg>
+  <div class="au-ciel" data-quand="rien" aria-hidden="true"><div class="au-soleil"></div><p class="au-rouvre">8&nbsp;h : on rouvre</p></div>
+  <div class="dans au-grille">
+    <div>
+      <p class="sur entre"><i class="et"></i>Une seule page, pour vous donner l’idée</p>
+      <h2 class="entre">Votre site peut avoir autant de pages que vous voulez.</h2>
+      <p class="grand entre" style="--r:1">Une page pour la carte, une pour les matchs, une pour les réservations de groupe, une pour les soirées : c’est vous qui voyez.</p>
+    </div>
+    <div class="echelle entre" id="echelle" data-quand="echelle" aria-hidden="true">
+      <span class="ech"><b>La carte</b>
+        <span class="ech"><b style="--c:var(--lait);--k:var(--encre)">Les matchs</b>
+          <span class="ech"><b style="--c:var(--rouge)">Les réservations</b>
+            <span class="ech"><b style="--c:var(--turq)">Les soirées</b></span>
+          </span>
+        </span>
+      </span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <a class="kz-g" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <p>Maquette privée préparée pour le Far West. Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+  <p class="petit">Les textes en pointillés attendent vos vrais mots. Horaires et note relevés sur Google le 9 novembre 2026. L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p>
+</footer>
+
+<script src="contenu.js"></script>
+<script>
+(function () {
+  'use strict';
+  var C = window.CONTENU, H = document.documentElement;
+  var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var Q = new URLSearchParams(location.search), CALME = H.classList.contains('calme');
+  function borne(x, a, b) { return x < a ? a : x > b ? b : x; }
+  function cale(p, a, b) { return borne((p - a) / (b - a), 0, 1); }
+  function doux(x) { return x * x * (3 - 2 * x); }
+  function annoncer(t) { try { if (parent !== window) parent.postMessage({ type: t }, '*'); } catch (e) {} }
+  function css(n) { return getComputedStyle(H).getPropertyValue(n).trim(); }
+  function rvb(h) { h = h.replace('#', ''); var n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function mel(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+  function coul(c) { return 'rgb(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ')'; }
+  function alea(g) { return function () { g = (g * 16807) % 2147483647; return (g - 1) / 2147483646; }; }
+
+  /* Les faits : téléphone et plan */
+  $$('[data-tel]').forEach(function (a) { a.href = 'tel:' + C.telLien; if (a.hasAttribute('data-num')) a.textContent = C.telephone; });
+  $$('[data-num-txt]').forEach(function (a) { a.textContent = C.telephone; });
+  $$('[data-carte]').forEach(function (a) { a.href = C.carte; a.target = '_blank'; a.rel = 'noopener'; });
+
+  /* Un seul moteur : il tourne tant qu'un objet bouge, puis s'arrête */
+  var mobiles = [], enMarche = false, dernier = 0;
+  function lancer() { if (!enMarche) { enMarche = true; dernier = performance.now(); requestAnimationFrame(boucle); } }
+  function boucle(t) { var dt = Math.min(.05, (t - dernier) / 1000); dernier = t; var vivant = false; for (var i = 0; i < mobiles.length; i++) if (mobiles[i].pas(dt)) vivant = true; if (vivant) requestAnimationFrame(boucle); else enMarche = false; }
+  function Mobile(el, o) { this.el = el; this.a = o.a || 0; this.w = 0; this.k = o.k || 38; this.c = o.c || 1.5; this.max = o.max || 16; this.f = o.f || function (a) { return 'rotate(' + a.toFixed(2) + 'deg)'; }; this.vif = true; mobiles.push(this); el.style.transform = this.f(this.a); }
+  Mobile.prototype.pas = function (dt) {
+    if (!this.vif) return false;
+    this.w += (-this.k * this.a - this.c * this.w) * dt; this.a += this.w * dt;
+    if (this.a > this.max) { this.a = this.max; this.w *= -.35; } else if (this.a < -this.max) { this.a = -this.max; this.w *= -.35; }
+    if (Math.abs(this.a) < .03 && Math.abs(this.w) < .25) { this.a = 0; this.w = 0; this.vif = false; }
+    this.el.style.transform = this.f(this.a); return this.vif;
+  };
+  Mobile.prototype.pousse = function (v) { this.w += v; this.vif = true; lancer(); };
+
+  /* Les toits de Paris, dessinés une fois (formes pleines) */
+  function ville(x0, x1, sol, graine, hMin, hMax, fen) {
+    var r = alea(graine), d = '', F = [], x = x0;
+    while (x < x1) {
+      var w = 112 + (r() * 70 | 0); if (x + w > x1 - 60) w = x1 - x;
+      var haut = sol - (hMin + (r() * (hMax - hMin) | 0)), t = 30 + (r() * 9 | 0), e = 13;
+      d += 'M' + x + ',' + sol + 'V' + haut + 'L' + (x + e) + ',' + (haut - t) + 'H' + (x + w - e) + 'L' + (x + w) + ',' + haut + 'V' + sol + 'Z';
+      var n = 1 + (r() * 2 | 0);
+      for (var i = 0; i < n; i++) { var cx = (x + e + 8 + r() * (w - 2 * e - 40)) | 0, ch = 14 + (r() * 14 | 0), cw = 14 + (r() * 6 | 0); d += 'M' + cx + ',' + (haut - t + 1) + 'v-' + ch + 'h' + cw + 'v' + ch + 'Z'; }
+      if (fen) for (var fx = x + 18; fx < x + w - 26; fx += 30) for (var fy = haut + 14; fy < sol - 30; fy += 36) F.push([fx, fy, r()]);
+      x += w;
+    }
+    return { d: d, F: F };
+  }
+  $('#ac-paris').setAttribute('d', ville(1004, 2000, 172, 77, 62, 112, false).d);
+  var groupesFen = [];
+  (function () {
+    var v = ville(0, 2000, 300, 2026, 120, 232, true), svg = $('#jr-ville'), NS = 'http://www.w3.org/2000/svg';
+    function chemin(d, c) { var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('class', c); svg.appendChild(p); return p; }
+    chemin(v.d, 'murs');
+    var eteint = '', lots = ['', '', '', '', '', ''];
+    v.F.forEach(function (f) { var r = 'M' + f[0] + ',' + f[1] + 'h13v20h-13Z'; if (f[2] < .34) eteint += r; else lots[Math.floor((f[2] - .34) / .66 * 6)] += r; });
+    chemin(eteint, 'eteint');
+    lots.forEach(function (d) { var p = chemin(d, 'allume'); groupesFen.push(p); });
+  })();
+
+  /* Palette : trois ambiances, branchées sur le bouton Couleur de la page Bonjour */
+  var ciels = [];
+  function rayons() {
+    var cv = $('#rayons'), x = cv.getContext('2d'), n = cv.width, N = 18;
+    x.fillStyle = css('--ciel'); x.fillRect(0, 0, n, n); x.fillStyle = css('--ciel2');
+    for (var i = 0; i < N; i++) { x.beginPath(); x.moveTo(n / 2, n / 2); x.arc(n / 2, n / 2, n, i * 2 * Math.PI / N, (i + .5) * 2 * Math.PI / N); x.closePath(); x.fill(); }
+  }
+  function palette(n) {
+    if (!C.palettes[n]) n = 'couchant';
+    H.setAttribute('data-palette', n);
+    var m = $('meta[name=theme-color]'); if (m) m.content = C.palettes[n].theme;
+    var ciel = rvb(css('--ciel')), co = rvb(css('--couchant')), so = rvb(css('--soleil')), vi = rvb(css('--nuit2')), nu = rvb(css('--nuit'));
+    var ne = rvb(css('--neon')), vl = rvb(css('--violet'));
+    ciels = [[0, mel(ciel, [255, 255, 255], .34)], [.3, ciel], [.48, mel(so, co, .4)], [.58, co], [.66, mel(co, ne, .55)], [.75, mel(vl, vi, .35)], [.86, vi], [1, nu]];
+    $('#journee').style.setProperty('--fond', coul(ciels[0][1]));
+    rayons(); J.t = -1; if (pret) defile();
+  }
+  addEventListener('message', function (e) { if (e.data && e.data.type === 'kazura-couleur') palette(e.data.palette); });
+
+  /* Accueil : l'enseigne qui se balance, les portes battantes */
+  var planches = $$('.planche').map(function (el, i) {
+    var m = new Mobile(el, { a: CALME ? 0 : (i ? -11 : 14), k: 34 + i * 7, c: 1.25, max: 17 });
+    el.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') m.pousse(borne(e.movementX, -24, 24) * 2.2); });
+    el.addEventListener('pointerdown', function (e) { var r = el.getBoundingClientRect(); m.pousse((e.clientX < r.left + r.width / 2 ? 1 : -1) * 150); });
+    return m;
+  });
+  var vg = new Mobile($('#vg'), { a: CALME ? 0 : 78, k: 30, c: 1.15, max: 84, f: function (a) { return 'rotateY(' + a.toFixed(2) + 'deg)'; } });
+  var vd = new Mobile($('#vd'), { a: CALME ? 0 : 70, k: 26, c: 1.05, max: 84, f: function (a) { return 'rotateY(' + (-a).toFixed(2) + 'deg)'; } });
+  var baie = $('#baie');
+  function battre(f) { vg.pousse(f); vd.pousse(f * .86); }
+  baie.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse' && Math.abs(e.movementX) > 1) battre(borne(e.movementX, -20, 20) * 5); });
+  baie.addEventListener('click', function (e) { e.preventDefault(); battre(430); setTimeout(function () { $('#affiche').scrollIntoView({ behavior: CALME ? 'auto' : 'smooth' }); }, 420); });
+  var accueil = $('#accueil'), acSoleil = $('#ac-soleil'), facade = $('#facade');
+  function placerSoleil() {
+    var a = accueil.getBoundingClientRect(), d = facade.parentNode.getBoundingClientRect(), fw = facade.offsetWidth, fh = facade.offsetHeight, s = accueil.style;
+    s.setProperty('--sx', (d.left + d.width / 2 - a.left).toFixed(0) + 'px'); s.setProperty('--sy', (d.bottom - a.top - fh * .64).toFixed(0) + 'px'); s.setProperty('--sd', (fw * 1.42).toFixed(0) + 'px');
+  }
+  if (!CALME) setInterval(function () { if (scrollY < innerHeight * .8 && !document.hidden) { battre((Math.random() > .5 ? 1 : -1) * (90 + Math.random() * 90)); planches.forEach(function (m, i) { m.pousse((i ? -1 : 1) * (8 + Math.random() * 14)); }); } }, 5200);
+
+  /* L'affiche : lignes ajustées à la largeur, languettes, télégramme */
+  var avis = $('#avis');
+  function ajusterAffiche() {
+    var st = getComputedStyle(avis), dispo = (avis.clientWidth - parseFloat(st.paddingLeft) - parseFloat(st.paddingRight)) * .985;
+    $$('[data-fit]', avis).forEach(function (l) {
+      var s = l.firstElementChild, max = parseFloat(l.getAttribute('data-fit')) || 1;
+      l.style.fontSize = '100px'; s.style.letterSpacing = '0';
+      var fs = Math.min(100 * dispo / s.offsetWidth, max * dispo);
+      l.style.fontSize = fs.toFixed(1) + 'px';
+      var reste = dispo - s.offsetWidth, n = s.textContent.length;
+      if (reste > 2) { var e = reste / n; s.style.letterSpacing = e.toFixed(2) + 'px'; s.style.marginRight = (-e).toFixed(2) + 'px'; } else s.style.marginRight = '0';
+    });
+  }
+  var lg = $('#languettes');
+  for (var i = 0; i < 7; i++) { var b = document.createElement('button'); b.type = 'button'; b.className = 'lang'; b.setAttribute('aria-label', 'Arracher une languette : ' + C.telephone); b.innerHTML = '<span aria-hidden="true">' + C.telephone + '</span>'; lg.appendChild(b); }
+  lg.addEventListener('click', function (e) {
+    var b = e.target.closest('.lang'); if (!b || b.classList.contains('parti')) return;
+    b.classList.add('parti'); avis.classList.remove('secoue'); void avis.offsetWidth; avis.classList.add('secoue');
+    $('#poche').hidden = false; $('#af-indice').hidden = true;
+  });
+  function taper(el, texte) { var n = 0; el.textContent = ''; (function un() { n++; el.textContent = texte.slice(0, n); if (n < texte.length) setTimeout(un, texte[n - 1] === ' ' ? 20 : 36 + Math.random() * 40); })(); }
+
+  /* La terrasse : le soleil se déplace, les ombres suivent */
+  var T = { sc: $('#tr-scene'), sol: $('#tr-soleil'), voile: $('#tr-voile'), etat: $('#tr-etat'), t: .5, main: false, mot: '' };
+  T.tables = $$('.tr-table', T.sc).map(function (el, i) { return { x: parseFloat(el.style.getPropertyValue('--x')) / 100, y: parseFloat(el.style.getPropertyValue('--y')) / 100, ombre: $('.ombre', el), par: $('.parasol', el), i: i }; });
+  function soleilT(t) {
+    T.t = t; var W = T.W, Hh = T.H, sx = W * (.1 + .8 * t), sy = Hh * (.135 - .04 * Math.sin(Math.PI * t)), bas = 1 - Math.sin(Math.PI * t);
+    T.sol.style.transform = 'translate3d(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px,0) translate(-50%,-50%)';
+    T.tables.forEach(function (o) { var dx = o.x * W - sx, dy = o.y * Hh - sy, d = Math.sqrt(dx * dx + dy * dy) || 1, L = W * (.03 + .1 * bas); o.ombre.style.transform = 'translate3d(' + (dx / d * L).toFixed(1) + 'px,' + (dy / d * L).toFixed(1) + 'px,0)'; o.par.style.transform = 'rotate(' + (t * 60 + o.i * 17).toFixed(1) + 'deg)'; });
+    T.voile.style.opacity = (bas * .32).toFixed(3);
+    var mot = t < .3 ? 'Soleil du matin' : t > .7 ? 'Soleil du soir' : 'Plein soleil'; if (mot !== T.mot) { T.mot = mot; T.etat.textContent = mot; }
+  }
+  function saisir(e) { var r = T.sc.getBoundingClientRect(); soleilT(borne(((e.clientX - r.left) / r.width - .1) / .8, 0, 1)); }
+  T.sc.addEventListener('pointerdown', function (e) { T.main = true; T.prise = true; T.sc.style.cursor = 'grabbing'; try { T.sc.setPointerCapture(e.pointerId); } catch (x) {} saisir(e); });
+  T.sc.addEventListener('pointermove', function (e) { if (T.prise) saisir(e); else if (e.pointerType === 'mouse') { T.main = true; saisir(e); } });
+  ['pointerup', 'pointercancel'].forEach(function (ev) { T.sc.addEventListener(ev, function () { T.prise = false; T.sc.style.cursor = ''; }); });
+
+  /* Le comptoir : les fûts */
+  var futs = C.futs.map(function (f, i) {
+    var el = document.createElement('div'); el.className = 'fut';
+    el.innerHTML = '<button class="fut-roue" type="button" aria-label="' + f.a + ' : faire tourner le fût"><span class="fut-face"><b></b><span></span></span></button>';
+    $('#futs').appendChild(el);
+    var o = { el: el, roue: $('.fut-roue', el), face: $('.fut-face', el), b: $('b', el), s: $('.fut-face span', el), cote: 0, tour: 0, i: i, p: -1 };
+    function ecrire() { o.b.textContent = o.cote ? f.b : f.a; o.s.textContent = o.cote ? f.b2 : f.a2; o.face.classList.toggle('dos', !!o.cote); }
+    ecrire();
+    o.roue.addEventListener('click', function () { o.tour += 360; o.face.style.transform = 'rotate(' + o.tour + 'deg)'; setTimeout(function () { o.cote = 1 - o.cote; ecrire(); }, CALME ? 0 : 430); });
+    return o;
+  });
+  function rouler() {
+    var vh = innerHeight, W = innerWidth, range = W > 899;
+    futs.forEach(function (o) {
+      var r = o.el.getBoundingClientRect(), p = range ? cale(vh - r.top, vh * .02 + o.i * vh * .06, vh * .36 + o.i * vh * .06) : cale(vh - r.top, vh * .02, vh * .42);
+      if (CALME) p = 1; if (p === o.p) return; o.p = p;
+      var x = (1 - doux(p)) * (W - r.left + 20), R = r.width / 2;
+      o.roue.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0) rotate(' + (x / R * 57.3).toFixed(1) + 'deg)';
+    });
+  }
+
+  /* De 8 h à 2 h */
+  var J = { t: -1, sec: $('#journee'), colle: $('#jr-colle'), sol: $('#jr-soleil'), lune: $('#jr-lune'), eto: $('#jr-etoiles'), ens: $('#jr-enseigne'), h: $('#jr-h'), heure: -1, moment: -1 };
+  var HEURES = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2];
+  C.moments.forEach(function (m, i) {
+    var p = document.createElement('div'); p.className = 'jr-p'; p.innerHTML = '<h3>' + m.nom + '</h3><p>' + m.texte + '</p>'; $('#jr-panneaux').appendChild(p);
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = m.bouton; $('#jr-moments').appendChild(b);
+    b.addEventListener('click', function () { var d = J.sec.offsetHeight - innerHeight; scrollTo({ top: J.sec.offsetTop + d * (m.h ? (m.h + .1) / (HEURES.length - 1) : 0) + 2, behavior: CALME ? 'auto' : 'smooth' }); });
+  });
+  J.pan = $$('.jr-p'); J.bout = $$('#jr-moments button'); J.nua = $$('#jr-nuages i');
+  function majJour() {
+    var r = J.sec.getBoundingClientRect(), d = r.height - innerHeight, t = d > 0 ? borne(-r.top / d, 0, 1) : 0;
+    if (Math.abs(t - J.t) < .0004) return; J.t = t;
+    var i = 0; while (i < ciels.length - 2 && t > ciels[i + 1][0]) i++;
+    J.colle.style.backgroundColor = coul(mel(ciels[i][1], ciels[i + 1][1], cale(t, ciels[i][0], ciels[i + 1][0])));
+    J.colle.classList.toggle('soir', t > .6);
+    var W = J.W, Hh = J.H, etroit = W < 900, court = !etroit && Hh <= 860, x0 = etroit ? .1 : court ? .66 : .44, x1 = etroit ? .9 : court ? .95 : .94, yb = etroit ? .84 : .8, yh = etroit ? .58 : .2;
+    var s = t / .62;
+    J.sol.style.transform = 'translate3d(' + (W * (x0 + (x1 - x0) * s)).toFixed(1) + 'px,' + (Hh * (yb - (yb - yh) * Math.sin(Math.PI * Math.min(s, 1.25)))).toFixed(1) + 'px,0) translate(-50%,-50%)';
+    var m = doux(cale(t, .6, .92));
+    J.lune.style.transform = 'translate3d(' + (W * (x0 + .04 + (x1 - x0 - .22) * m)).toFixed(1) + 'px,' + (Hh * (yb + .1 - (yb + .1 - yh - (etroit ? .02 : .04)) * Math.sin(Math.PI / 2 * m))).toFixed(1) + 'px,0) translate(-50%,-50%)';
+    J.eto.style.opacity = cale(t, .66, .84).toFixed(3);
+    J.nua.forEach(function (n, k) { n.style.transform = 'translate3d(' + (-t * W * (.5 + k * .35)).toFixed(1) + 'px,0,0)'; n.style.opacity = (.85 * (1 - cale(t, .44, .6))).toFixed(2); });
+    groupesFen.forEach(function (g, k) { g.style.opacity = cale(t, .5 + k * .075, .55 + k * .075).toFixed(2); });
+    J.ens.classList.toggle('allume', t > .66);
+    var h = Math.round(t * (HEURES.length - 1));
+    if (h !== J.heure) { J.heure = h; J.h.textContent = HEURES[h]; if (!CALME) { J.h.classList.remove('bat'); void J.h.offsetWidth; J.h.classList.add('bat'); } }
+    var mo = 0; C.moments.forEach(function (x, k) { if (h >= x.h) mo = k; });
+    if (mo !== J.moment) { J.moment = mo; J.pan.forEach(function (p, k) { p.classList.toggle('on', k === mo); }); J.bout.forEach(function (b, k) { b.classList.toggle('on', k === mo); }); }
+  }
+
+  /* Les soirs de match : le tableau à lettres et la salle */
+  var tab = $('#tableau'), tuiles = [], motN = 0, tabTimer = null;
+  for (i = 0; i < 11; i++) { var tu = document.createElement('i'); tu.textContent = ' '; tab.appendChild(tu); tuiles.push(tu); }
+  function mot(m) {
+    var pad = Math.floor((tuiles.length - m.length) / 2);
+    tuiles.forEach(function (t, k) {
+      var c = m[k - pad] || ' '; if (t.getAttribute('data-c') === c) return; t.setAttribute('data-c', c);
+      setTimeout(function () { if (!CALME) { t.classList.remove('flap'); void t.offsetWidth; t.classList.add('flap'); } setTimeout(function () { t.textContent = c === ' ' ? ' ' : c; }, CALME ? 0 : 160); }, CALME ? 0 : k * 60);
+    });
+  }
+  mot(C.tableau[0]);
+  var foule = $('#foule'), tetes = [], COUL = ['var(--bois)', '', 'var(--lait)', 'var(--rouge)', '', 'var(--or)', 'var(--bois)'];
+  for (i = 0; i < 7; i++) {
+    var te = document.createElement('i'); te.className = 'tete'; te.style.setProperty('--h', (70 + (i * 37 % 26)) + '%');
+    if (COUL[i]) te.innerHTML = '<b class="chapeau" style="--c:' + COUL[i] + '"></b>';
+    foule.appendChild(te); tetes.push(te);
+  }
+  function sauter(t, k, haut) {
+    t.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-' + (haut ? 26 : 14) + '%)' }, { transform: 'translateY(0)' }], { duration: 520, delay: k * 70, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+    var ch = $('.chapeau', t); if (!ch || !haut) return; var s = k % 2 ? -1 : 1;
+    ch.animate([{ transform: 'translateY(0) rotate(0deg)' }, { transform: 'translateY(-' + (380 + k * 37 % 160) + '%) rotate(' + s * 400 + 'deg)', offset: .45 }, { transform: 'translateY(0) rotate(' + s * 720 + 'deg)' }], { duration: 1300, delay: k * 70, easing: 'cubic-bezier(.3,.5,.4,1)' });
+  }
+  function ola() { tetes.forEach(function (t, k) { sauter(t, k, true); }); }
+  $('#ma-but').addEventListener('click', ola);
+  $('#ecran-cadre').addEventListener('click', ola);
+  tetes.forEach(function (t) { t.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') sauter(t, 0, false); }); });
+
+  /* Les jeux : la pile et le duel */
+  var pile = $('#pile');
+  pile.addEventListener('click', function () { var b = pile.firstElementChild; b.style.transform = 'translateX(110%) rotate(8deg)'; setTimeout(function () { pile.appendChild(b); b.style.transform = 'translateX(-110%)'; void b.offsetWidth; b.style.transform = ''; }, CALME ? 0 : 300); });
+  (function () {
+    var z = $('#duel'), msg = $('#du-msg'), tps = $('#du-temps'), btn = $('#du-btn'), cv = $('#du-vous'), cs = $('#du-sherif'), vic = $$('#du-vic i');
+    var etat = 'repos', t0 = 0, tm = 0, ts = 0, gagne = 0;
+    function sec(ms) { return (ms / 1000).toFixed(3).replace('.', ',') + ' s'; }
+    function poser(e, m, t, b) { etat = e; z.setAttribute('data-etat', e); msg.textContent = m; tps.textContent = t; if (b) { btn.textContent = b; btn.hidden = false; } else btn.hidden = true; }
+    function pretDuel() {
+      clearTimeout(tm); clearTimeout(ts); cv.className = 'carte'; cs.className = 'carte';
+      if (gagne >= 3) { gagne = 0; vic.forEach(function (v) { v.classList.remove('ok'); }); }
+      poser('attente', 'Pas encore…', 'Attendez que l’étoile s’allume.', '');
+      tm = setTimeout(signal, 1300 + Math.random() * 2700);
+    }
+    function signal() {
+      poser('signal', 'Dégainez !', '', ''); t0 = performance.now();
+      var s = C.duel.sherif[Math.min(gagne, C.duel.sherif.length - 1)] + Math.random() * 40;
+      ts = setTimeout(function () { fin(false, s); }, s);
+    }
+    function fin(v, ms) {
+      clearTimeout(ts);
+      if (v) {
+        cv.classList.add('tire'); cs.classList.add('tombe'); vic[Math.min(gagne, 2)].classList.add('ok'); gagne++;
+        var rang = ''; for (var k = 0; k < C.duel.rangs.length; k++) if (ms < C.duel.rangs[k][0]) { rang = C.duel.rangs[k][1]; break; }
+        if (gagne >= 3) { poser('gagne', 'Shérif de la rue Faidherbe !', sec(ms) + '. Trois manches gagnées : l’étoile est à vous.', 'Rejouer'); ola(); }
+        else poser('gagne', 'Gagné.', sec(ms) + '. ' + rang, 'Manche suivante');
+      } else { cs.classList.add('tire'); cv.classList.add('tombe'); poser('perdu', 'Trop tard.', 'Le shérif a dégainé en ' + sec(ms) + '.', 'Revanche'); }
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); pretDuel(); });
+    z.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('#du-btn')) return;
+      if (etat === 'attente') { clearTimeout(tm); poser('faux', 'Faux départ !', 'On ne dégaine pas avant le signal.', 'Recommencer'); }
+      else if (etat === 'signal') fin(true, performance.now() - t0);
+    });
+    z.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && etat === 'signal') { e.preventDefault(); fin(true, performance.now() - t0); } });
+  })();
+
+  /* Privatiser : l'étoile gravée */
+  (function () {
+    var choix = { o: 'anniversaire', t: 'bande' }, tour = 0, ins = $('#insigne');
+    function maj(anime) {
+      var bo = $('#ch-occ [data-v="' + choix.o + '"]'), bt = $('#ch-tai [data-v="' + choix.t + '"]');
+      $('#in-occ').textContent = bo.textContent; $('#in-tai').textContent = bt.textContent.toLowerCase();
+      $('#pr-phrase').textContent = '« Bonjour, ce serait pour ' + C.occasions[choix.o] + ', ' + C.tailles[choix.t] + '. »';
+      if (!anime) return;
+      tour += 60; $('#in-tourne').style.transform = 'rotate(' + tour + 'deg)'; $('#in-centre').style.transform = 'rotate(' + (-tour) + 'deg)';
+      ins.classList.remove('brille'); void ins.offsetWidth; ins.classList.add('brille');
+    }
+    [['#ch-occ', 'o'], ['#ch-tai', 't']].forEach(function (g) {
+      $(g[0]).addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; choix[g[1]] = b.getAttribute('data-v'); $$('button', $(g[0])).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); maj(true); });
+    });
+    maj(false);
+  })();
+
+  /* L'enseigne en échelle de la fin */
+  var echelons = $$('.ech').map(function (el, i) {
+    var m = new Mobile(el, { a: 0, k: 30 + i * 5, c: 1.1, max: 6.5 }); m.vif = false;
+    el.addEventListener('pointerenter', function (e) { m.pousse((i % 2 ? -1 : 1) * 60); });
+    return m;
+  });
+
+  /* Menu du téléphone */
+  var burger = $('#burger');
+  function menu(o) { H.classList.toggle('menu', o); burger.setAttribute('aria-expanded', String(o)); burger.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); }
+  burger.addEventListener('click', function () { menu(!H.classList.contains('menu')); });
+  $('#nav').addEventListener('click', function (e) { if (e.target.closest('a')) menu(false); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') menu(false); });
+
+  /* Les entrées */
+  var QUAND = {
+    avis: function () { if (!CALME) { avis.classList.add('secoue'); } },
+    tg: function () { var el = $('#tg'); if (CALME) el.textContent = C.avis; else setTimeout(function () { taper(el, C.avis); }, 500); },
+    echelle: function () { if (!CALME) echelons.forEach(function (m, i) { m.pousse((i % 2 ? -1 : 1) * (50 + i * 14)); }); },
+    poteau: function () {}, rien: function () {}
+  };
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; var c = e.target; c.classList.add('vu'); io.unobserve(c); var q = c.getAttribute('data-quand'); if (q && QUAND[q]) QUAND[q](c); });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+  $$('.entre,[data-quand],.battant').forEach(function (e) { io.observe(e); });
+  var ioTab = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { clearInterval(tabTimer); if (e.isIntersecting && !CALME) tabTimer = setInterval(function () { motN = (motN + 1) % C.tableau.length; mot(C.tableau[motN]); }, 2900); });
+  }, { threshold: .2 });
+  ioTab.observe($('#ecran-cadre'));
+
+  /* Défilement : l'astre de l'en-tête, le soleil qui se couche, les fûts, la journée */
+  var astre = $('#astre'), barre = $('#barre'), liens = $$('#nav a'), cibles = liens.map(function (a) { return $(a.getAttribute('href')); });
+  var M = {}, pret = false, yPrec = 0, att = false, premier = true;
+  function mesurer() {
+    var vh = innerHeight; M.vh = vh; M.W = barre.clientWidth;
+    M.total = Math.max(1, document.scrollingElement.scrollHeight - vh);
+    M.nuit = J.sec.offsetTop + .62 * (J.sec.offsetHeight - vh); M.aube = $('#pages').offsetTop - vh * .45;
+    M.hero = accueil.offsetHeight;
+    T.W = T.sc.clientWidth; T.H = T.sc.clientHeight; J.W = J.colle.clientWidth; J.H = J.colle.clientHeight;
+    placerSoleil(); ajusterAffiche(); J.t = -1; futs.forEach(function (o) { o.p = -1; });
+  }
+  function defile() {
+    var y = scrollY, v = y - yPrec; yPrec = y;
+    var nuit = y >= M.nuit && y < M.aube; H.classList.toggle('nuit', nuit);
+    var q = y < M.nuit ? cale(y, 0, M.nuit) : y < M.aube ? cale(y, M.nuit, M.aube) : .5;
+    astre.style.transform = 'translate3d(' + (8 + (y / M.total) * (M.W - 46)).toFixed(1) + 'px,' + (17 - Math.sin(Math.PI * q) * 15).toFixed(1) + 'px,0)';
+    if (y < M.hero) { acSoleil.style.transform = 'translate3d(0,' + (y * .3).toFixed(1) + 'px,0)'; if (Math.abs(v) > 2 && !CALME) planches.forEach(function (m) { m.pousse(borne(v, -50, 50) * .9); }); }
+    if (!T.main) { var r = T.sc.getBoundingClientRect(); if (r.bottom > -200 && r.top < M.vh + 200) soleilT(cale((M.vh - r.top) / (M.vh + r.height), .12, .88)); }
+    rouler(); majJour();
+    var ici = -1; for (var k = 0; k < cibles.length; k++) if (cibles[k].getBoundingClientRect().top < M.vh * .45) ici = k;
+    liens.forEach(function (a, k) { a.classList.toggle('ici', k === ici); });
+    if (Math.abs(v) > 6 && !CALME && echelons[0].el.getBoundingClientRect().top < M.vh) echelons.forEach(function (m) { m.pousse(borne(v, -40, 40) * .5); });
+    if (premier === 0 && Math.abs(v) > 0) { annoncer('kazura-defile'); premier = 2; }
+    if (premier === true) premier = 0;
+  }
+  addEventListener('scroll', function () { if (att) return; att = true; requestAnimationFrame(function () { att = false; defile(); }); }, { passive: true });
+  addEventListener('resize', function () { mesurer(); defile(); });
+
+  palette(Q.get('palette') || 'couchant');
+  mesurer(); pret = true; defile(); lancer();
+  function fin() { mesurer(); defile(); H.classList.add('pret'); annoncer('kazura-pret'); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { requestAnimationFrame(fin); }); else fin();
+  addEventListener('load', function () { mesurer(); defile(); });
+  setTimeout(fin, 2500);
+})();
+</script>
+</body>
+</html>

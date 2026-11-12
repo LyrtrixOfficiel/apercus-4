@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La Frite Pochée, friterie à Auby</title>
+<meta name="description" content="Maquette privée préparée pour La Frite Pochée, friterie, snacking et petite restauration, 40 A rue Léon Blum à Auby, face à la mairie.">
+<meta name="theme-color" content="#d8281b">
+<link rel="icon" href="data:,">
+<script>if (/[?&]calme=1/.test(location.search)) document.documentElement.classList.add('calme');</script>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="logo" href="#accueil" aria-label="La Frite Pochée, retour en haut"><i class="logo-cornet" aria-hidden="true"></i><span>La Frite <b>Pochée</b></span></a>
+  <nav class="liens" id="liens" aria-label="Rubriques">
+    <a href="#nom">Le nom</a>
+    <a href="#bains">Les deux bains</a>
+    <a href="#carte">La carte</a>
+    <a href="#sauces">Les sauces</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#venir">Venir</a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="bouton petit" data-itin target="_blank" rel="noopener">Y aller</a>
+  <button class="menu-b" id="menu-b" type="button" aria-expanded="false" aria-controls="liens">Menu</button>
+  <div class="cuisson" aria-hidden="true"><i id="cuisson-f"></i><span id="cuisson-m">Crue</span></div>
+</header>
+
+<main>
+
+<!-- ============ ACCUEIL : l'enseigne et le cornet ============ -->
+<section class="accueil" id="accueil">
+  <div class="rayons-clip" aria-hidden="true"><div class="rayons"></div></div>
+  <div class="cadre accueil-grille">
+    <div class="accueil-texte">
+      <p class="plaques"><span>Friterie</span><span>Snacking</span><span>Petite restauration</span></p>
+      <h1 aria-label="La Frite Pochée"><span class="t1" aria-hidden="true">La Frite</span><span class="t2" id="t2" aria-hidden="true"></span></h1>
+      <p class="chapo">Une frite pochée, c’est une frite cuite deux fois&nbsp;: un bain doux, puis un bain vif. <b>À Auby, 40&nbsp;A rue Léon Blum, face à la mairie.</b></p>
+      <p class="actions"><a class="bouton or" href="#bains">Voir les deux bains</a><a class="bouton creme" data-itin target="_blank" rel="noopener">Y aller</a></p>
+    </div>
+    <div class="cornet-zone" id="cornet-zone">
+      <div class="etoile" aria-hidden="true"><span>Cuite<br>deux<br>fois</span></div>
+      <div class="cornet" id="cornet">
+        <div class="frites" id="frites" aria-hidden="true"></div>
+        <svg class="cone" viewBox="0 0 150 190" aria-hidden="true">
+          <path class="cone-dos" d="M6 14 L144 14 L80 186 Z"/>
+          <path class="cone-face" d="M0 22 L11 10 L22 22 L33 10 L44 22 L55 10 L66 22 L77 10 L88 22 L99 10 L110 22 L121 10 L132 22 L143 10 L150 22 L84 190 Z"/>
+          <path class="cone-pli" d="M104 16 L110 22 L121 10 L132 22 L143 10 L150 22 L84 190 Z"/>
+          <ellipse class="gras" cx="52" cy="92" rx="17" ry="12"/>
+          <ellipse class="gras" cx="86" cy="140" rx="9" ry="7"/>
+          <g transform="rotate(-8 64 60)"><rect class="cone-bande" x="18" y="44" width="92" height="30" rx="4"/><text x="64" y="67" text-anchor="middle">POCHÉE</text></g>
+        </svg>
+      </div>
+      <p class="pique" id="pique" aria-live="polite">Piquez une frite.</p>
+    </div>
+  </div>
+  <div class="coulure" data-coulure aria-hidden="true"></div>
+</section>
+
+<!-- ============ LE NOM ============ -->
+<section class="nom" id="nom">
+  <div class="cadre nom-grille">
+    <div class="nom-texte" data-entre>
+      <p class="sur">Pochée&nbsp;?</p>
+      <h2>Pochée,<br>puis saisie.</h2>
+      <p class="gros" id="nom-p">Pocher une frite, c’est lui donner un <mark>premier bain, doux</mark>&nbsp;: elle cuit à cœur et ressort toute pâle. On la relève, on la laisse souffler. Puis vient le <mark>second bain, vif</mark>&nbsp;: elle dore, elle croustille. Dans le Nord, on ne discute pas&nbsp;: une frite, c’est <mark>deux bains</mark>.</p>
+      <p class="note"><i class="fourchette" aria-hidden="true"></i>Votre tour de main, on le racontera avec vos mots.</p>
+    </div>
+    <div class="nom-photos" id="nom-photos">
+      <figure class="tirage t-pale" data-entre style="--i:1">
+        <img src="photos/bain1.webp" alt="Un panier de frites encore pâles, relevé du premier bain" loading="lazy" width="1200" height="1807">
+        <b class="pastille">Pochée</b>
+        <figcaption>Après le premier bain. <small>Image d’illustration</small></figcaption>
+      </figure>
+      <figure class="tirage t-doree" data-entre style="--i:2">
+        <img src="photos/mur.webp" alt="Des frites dorées dans le bac, après le second bain" loading="lazy" width="1000" height="1500">
+        <b class="pastille">Saisie</b>
+        <figcaption>Après le second. <small>Image d’illustration</small></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LES DEUX BAINS : scène épinglée, jouée au défilement ============ -->
+<section class="bains" id="bains">
+  <div class="bains-scene" id="bains-scene">
+    <div class="cadre bains-grille">
+      <div class="bains-texte">
+        <p class="sur clair">Les deux bains</p>
+        <div class="legendes" id="legendes">
+          <div class="legende actif"><h2>D’abord, <br>on poche.</h2><p>Premier bain, doux. La frite cuit à cœur, sans prendre de couleur.</p></div>
+          <div class="legende"><h2>On relève, <br>elle souffle.</h2><p>Le panier s’égoutte. La frite se repose avant la suite.</p></div>
+          <div class="legende"><h2>Puis, <br>on saisit.</h2><p>Second bain, vif. Ça chante, ça dore, ça croustille.</p></div>
+          <div class="legende"><h2>Et on <br>sert.</h2><p>Dorée dehors, fondante dedans. Un peu de sel, et c’est à vous.</p></div>
+        </div>
+        <div class="jauge" aria-hidden="true">
+          <div class="jauge-barre"><i id="jauge-f"></i><b class="jauge-fourche" id="jauge-c"></b></div>
+          <p><span>Crue</span><span>Pochée</span><span>Dorée</span></p>
+        </div>
+        <p class="indice" id="bains-indice">Faites défiler&nbsp;: c’est vous qui tenez le panier.</p>
+      </div>
+      <div class="plateau-zone" id="plateau-zone" aria-hidden="true">
+        <div class="plateau" id="plateau">
+          <div class="rail"></div>
+          <div class="bac bac-1"><div class="huile"><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i></div><b>Bain doux</b></div>
+          <div class="bac bac-2"><div class="huile"><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i><i class="bu"></i></div><b>Bain vif</b></div>
+          <div class="chariot" id="chariot"></div>
+          <div class="manche" id="manche"></div>
+          <div class="panier" id="panier">
+            <div class="panier-frites" id="panier-frites"></div>
+            <div class="grille"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="gouttes"><i></i><i></i><i></i></div>
+            <div class="vapeur"><i></i><i></i><i></i></div>
+          </div>
+          <div class="voile-huile v1"></div>
+          <div class="voile-huile v2"></div>
+          <div class="tampon" id="tampon"><span>Cuite<br>deux fois</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA CARTE : trois feuilles sur le comptoir ============ -->
+<section class="carte" id="carte">
+  <div class="coulure huile-c" data-coulure aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="carte-tete" data-entre>
+      <p class="sur">La carte</p>
+      <h2>On mange quoi&nbsp;?</h2>
+      <p class="gros">Friterie, snacking et petite restauration&nbsp;: les trois métiers de la maison. Vos produits et vos prix sont en pointillés, <b>on les remplit ensemble.</b></p>
+    </div>
+    <div class="feuilles" id="feuilles"></div>
+  </div>
+</section>
+
+<!-- ============ LES SAUCES : le jeu ============ -->
+<section class="sauces" id="sauces">
+  <div class="cadre sauces-grille">
+    <div class="sauces-texte" data-entre>
+      <p class="sur">Un jeu, pas la carte</p>
+      <h2>Et comme sauce&nbsp;?</h2>
+      <p class="gros">Prenez un flacon, appuyez sur la barquette et promenez-vous. Ces cinq sauces sont là pour jouer&nbsp;: les vôtres prendront leur place.</p>
+      <div class="flacons" id="flacons" role="group" aria-label="Choisir un flacon"></div>
+      <div class="suite">
+        <p class="verdict" id="verdict" aria-live="polite"><b>Barquette nature.</b> <span>Rien dessus, pour l’instant.</span></p>
+        <p class="actions"><button class="bouton rouge" id="vider" type="button">Une autre barquette</button></p>
+      </div>
+    </div>
+    <div class="barquette-zone" data-entre style="--i:1">
+      <div class="barquette" id="barquette">
+        <div class="barquette-frites" id="barquette-frites" aria-hidden="true"></div>
+        <canvas id="toile" aria-label="La barquette de frites : appuyez pour mettre de la sauce"></canvas>
+        <div class="deborde" id="deborde" aria-hidden="true"><span>Ça<br>déborde&nbsp;!</span></div>
+      </div>
+      <i class="fourchette grande" aria-hidden="true"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HORAIRES ============ -->
+<section class="horaires" id="horaires">
+  <div class="coulure mayo-c" data-coulure aria-hidden="true"></div>
+  <div class="cadre horaires-grille">
+    <div class="horloge-zone" data-entre>
+      <svg class="horloge" id="horloge" viewBox="-200 -200 400 400" role="img" aria-label="Horloge à l’heure d’Auby">
+        <circle class="h-bord" r="196"/>
+        <circle class="h-fond" r="172"/>
+        <g id="h-heures"></g>
+        <g id="h-petite" class="h-aiguille"><path d="M-9 26 L9 26 L13 -74 L13 -104 L4 -104 L0 -82 L-4 -104 L-13 -104 L-13 -74 Z"/></g>
+        <g id="h-grande" class="h-aiguille"><path d="M-8 30 L8 30 L12 -112 L12 -150 L4 -150 L0 -124 L-4 -150 L-12 -150 L-12 -112 Z"/></g>
+        <g id="h-seconde"><rect x="-5" y="-158" width="10" height="186" rx="4"/></g>
+        <circle class="h-axe" r="13"/>
+      </svg>
+      <p class="heure" id="heure">Il est .. h .. à Auby.</p>
+    </div>
+    <div class="horaires-texte">
+      <div data-entre>
+        <p class="sur clair">Les horaires</p>
+        <h2>La friteuse chauffe quand&nbsp;?</h2>
+      </div>
+      <ul class="semaine" id="semaine"></ul>
+      <p class="note clair" data-entre><i class="fourchette" aria-hidden="true"></i>Vos horaires s’écriront ici, jour par jour. Le site saura dire tout seul si c’est ouvert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VENIR ============ -->
+<section class="venir" id="venir">
+  <div class="voile-nuit" aria-hidden="true"></div>
+  <div class="cadre venir-grille">
+    <div class="panneau" data-entre>
+      <p class="sur">Venir</p>
+      <h2>Face à la mairie.</h2>
+      <p class="adresse"><b>40&nbsp;A rue Léon Blum</b><br>59950 Auby</p>
+      <p class="actions"><a class="bouton rouge" data-itin target="_blank" rel="noopener">Ouvrir l’itinéraire</a></p>
+      <p class="tel"><span>Téléphone</span><b>.. .. .. .. ..</b><small>Votre numéro, pour commander avant de passer.</small></p>
+    </div>
+    <figure class="tirage t-cornet" data-entre style="--i:1">
+      <img src="photos/cornet.webp" alt="Un cornet de frites avec sa mayonnaise et sa petite fourchette en bois, tenu dans la rue" loading="lazy" width="1300" height="1741">
+      <figcaption>À emporter, tout chaud. <small>Image d’illustration</small></figcaption>
+    </figure>
+  </div>
+  <div class="rue" id="rue" aria-hidden="true"></div>
+</section>
+
+<div class="bandeau" aria-hidden="true"><div class="bandeau-piste"><span>Pochée, puis saisie <i></i> Friterie <i></i> Snacking <i></i> Petite restauration <i></i> Auby, face à la mairie <i></i> </span><span>Pochée, puis saisie <i></i> Friterie <i></i> Snacking <i></i> Petite restauration <i></i> Auby, face à la mairie <i></i> </span></div></div>
+
+<!-- ============ AUTANT DE PAGES ============ -->
+<section class="pages" id="pages">
+  <div class="cadre pages-grille">
+    <div data-entre>
+      <p class="sur">Ici, une seule page pour vous donner l’idée</p>
+      <h2>Votre site peut avoir autant de pages que vous voulez.</h2>
+      <p class="gros">Une page pour la carte, une pour les sauces, une pour les horaires, une pour commander&nbsp;: c’est vous qui voyez.</p>
+    </div>
+    <div class="tickets" id="tickets" aria-hidden="true">
+      <span style="--r:-7deg;--i:0">La carte</span><span style="--r:4deg;--i:1">Les sauces</span><span style="--r:-3deg;--i:2">Les horaires</span><span style="--r:6deg;--i:3">Commander</span><span style="--r:-5deg;--i:4">Nous trouver</span><span style="--r:3deg;--i:5">Vos photos</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="haie" id="haie" aria-hidden="true"></div>
+  <div class="cadre pied-grille">
+    <p class="pied-nom">La Frite <b>Pochée</b></p>
+    <p class="pied-mot">Rien de tout ça n’est figé&nbsp;: vos textes, vos photos, vos couleurs, on ajuste tout ensemble.</p>
+    <a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    <p class="credits">Maquette privée, non référencée. Les photos sont des images d’illustration créées pour la maquette, en attendant les vôtres. Les sauces du jeu ne sont pas votre carte.</p>
+  </div>
+</footer>
+
+</body>
+</html>

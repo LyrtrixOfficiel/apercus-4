@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr" data-palette="vin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Eden Fleurs, fleuriste à Beblenheim sur la route du Vin</title>
+<meta name="description" content="Maquette privée préparée pour Eden Fleurs, fleuriste au 2 route du Vin à Beblenheim.">
+<meta name="theme-color" content="#2a0918">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script>(function(){var m=/[?&]palette=(vin|serre|aube)/.exec(location.search);if(m)document.documentElement.setAttribute('data-palette',m[1]);var seul=true;try{seul=window.top===window.self}catch(e){seul=false}if(seul&&!/[?&]sansbonjour/.test(location.search))document.documentElement.classList.add('bonjour-actif');if(/[?&]calme=1/.test(location.search))document.documentElement.classList.add('calme');})();</script>
+</head>
+<body>
+
+<div class="bonjour" id="bonjour" aria-hidden="true"><p><span><i>Bonjour</i></span><span class="b2"><i>Audrey,</i></span></p></div>
+
+<header class="tete">
+  <div class="tete-l">
+    <a class="marque" href="#haut">Eden <b>Fleurs</b></a>
+    <nav aria-label="Sommaire"><a href="#bouquets">Bouquets</a><a href="#plantes">Plantes</a><a href="#mariages">Mariages</a><a href="#deuil">Deuil</a><a href="#cadeaux">Cadeaux</a><a href="#commander">Commander</a><a href="#infos">Horaires</a></nav>
+    <div class="tete-d"><a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a><a class="bt-app" data-tel>Appeler</a></div>
+  </div>
+  <div class="store" aria-hidden="true"></div>
+</header>
+<div class="tige" id="tige" aria-hidden="true"><i class="tige-t" id="tigeT"></i><div class="tige-f" id="tigeF"></div></div>
+
+<main id="haut">
+
+<section class="heros" id="heros" aria-label="Eden Fleurs">
+  <canvas class="jardin" id="jardin" aria-hidden="true"></canvas>
+  <div class="heros-l" id="herosTexte">
+    <p class="lieu">Fleuriste à Beblenheim, sur la route du Vin</p>
+    <h1 class="nom" id="nom" aria-label="Eden Fleurs"><span class="ligne" aria-hidden="true"><span class="le" style="--i:0">E</span><span class="le" style="--i:1">d</span><span class="le" style="--i:2">e</span><span class="le" style="--i:3">n</span></span> <span class="ligne fl-l" aria-hidden="true"><span class="le" style="--i:4">F</span><span class="le" style="--i:5">l</span><span class="le" style="--i:6">e</span><span class="le" style="--i:7">u</span><span class="le" style="--i:8">r</span><span class="le" style="--i:9">s</span></span></h1>
+    <p class="sous">Bouquets, plantes, mariages, deuil, cadeaux et décoration. <strong>Chez Audrey, au 2 route du Vin.</strong></p>
+    <div class="actions"><a class="bt plein" href="#bouquets">Composer un bouquet</a><a class="bt" data-tel data-tel-texte></a></div>
+    <p class="geste" id="geste">Passez la main dans les fleurs. Touchez le jardin&nbsp;: il en pousse une.</p>
+  </div>
+</section>
+
+<section class="bloc boutique" id="boutique">
+  <div class="bloc-l bo-g">
+    <div class="bo-txt">
+      <p class="kicker">La boutique</p>
+      <h2 class="monte">Depuis juin, c’est <em>ici.</em></h2>
+      <p class="chapo monte">Eden Fleurs existe depuis 2018. À la mi-juin 2026, la boutique s’est installée au 2 route du Vin, à Beblenheim, sur l’ancien site du magasin Meubles Kautzmann.</p>
+      <div class="plaques" id="plaques" aria-label="2 route du Vin">
+        <button class="plaque num" type="button" aria-label="Plaque du numéro 2"><span>2</span></button>
+        <button class="plaque rue" type="button" aria-label="Plaque route du Vin"><span>Route<br>du Vin</span></button>
+      </div>
+    </div>
+    <figure class="arche bo-photo" data-glisse><img src="photos/route.webp" alt="Le vieux puits fleuri de Beblenheim, devant une maison à colombages" loading="lazy"><figcaption>Beblenheim, le vieux puits</figcaption></figure>
+  </div>
+  <div class="bloc-l faits" id="faits">
+    <p><b data-compte="2018">2018</b><span>l’année où Eden Fleurs est née</span></p>
+    <p><b data-compte="4,7">4,7</b><span>sur 5 sur Google, 89 avis</span></p>
+    <p><b data-compte="7">7</b><span>jours sur 7, dimanche matin compris</span></p>
+  </div>
+</section>
+
+<section class="bloc bouquets" id="bouquets">
+  <canvas class="massif" data-massif="roses" aria-hidden="true"></canvas>
+  <div class="bloc-l bq-g">
+    <div class="bq-txt">
+      <p class="kicker">Bouquets</p>
+      <h2 class="monte">Composez <em>le vôtre.</em></h2>
+      <p class="chapo monte">Des fleurs de saison et des roses, à emporter ou composées pour quelqu’un.</p>
+    </div>
+    <div class="bq-droite">
+      <div class="bq-scene" id="bqScene">
+        <div class="bq-fond"></div>
+        <div class="bq-fleurs" id="bqFleurs"></div>
+        <div class="bq-papier"></div>
+        <div class="bq-noeud"><i></i><i></i><b></b></div>
+        <div class="bq-carte" id="bqCarte">Pour toi</div>
+      </div>
+      <p class="bq-compte" id="bqCompte" aria-live="polite">Le papier attend ses fleurs.</p>
+    </div>
+    <div class="bq-jeu">
+      <p class="bq-regle">Touchez une fleur, elle rejoint le bouquet.</p>
+      <div class="bq-choix" id="bqChoix"></div>
+      <label class="bq-mot"><span>Un petit mot sur la carte</span><input id="bqMot" type="text" maxlength="26" placeholder="Pour toi" autocomplete="off"></label>
+      <div class="bq-fin"><a class="bt sombre" data-tel>Demander ce bouquet à Audrey</a><button class="lien" id="bqVider" type="button">Recommencer</button></div>
+      <p class="petit">Un jeu pour donner l’idée&nbsp;: le vrai bouquet, c’est Audrey qui le compose.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bloc plantes" id="plantes">
+  <canvas class="massif" data-massif="vert" aria-hidden="true"></canvas>
+  <div class="bloc-l pl-g">
+    <div class="pl-scene" id="plScene">
+      <figure class="arche" data-glisse><img src="photos/plantes.webp" alt="Grandes feuilles vertes couvertes de gouttes" loading="lazy"></figure>
+    </div>
+    <div class="pl-txt">
+      <p class="kicker">Plantes</p>
+      <h2 class="monte">Du vert <em>chez vous.</em></h2>
+      <p class="pl-mots" id="plMots"><span>D’intérieur.</span><span>D’extérieur.</span><span>Des orchidées.</span><span class="fin">Et les conseils qui vont avec.</span></p>
+      <p class="indice">Touchez les feuilles&nbsp;: une orchidée s’ouvre.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bloc mariages" id="mariages">
+  <canvas class="massif" data-massif="blanc" aria-hidden="true"></canvas>
+  <div class="ma-pluie" id="maPluie" aria-hidden="true"></div>
+  <div class="bloc-l ma-g">
+    <div class="ma-txt">
+      <p class="kicker">Mariages</p>
+      <h2 class="monte">Le grand <em>jour.</em></h2>
+      <p class="chapo monte">La décoration florale des mariages, des églises et de vos événements.</p>
+      <p class="monte">Plusieurs avis Google parlent de leur mariage.</p>
+      <button class="bt sombre" id="maLancer" type="button">Lancer les pétales</button>
+    </div>
+    <div class="ma-arche" id="maArche">
+      <figure class="arche" data-glisse><img src="photos/mariages.webp" alt="Un bouquet de mariée rouge et rose tenu devant une robe blanche" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="bloc deuil" id="deuil">
+  <canvas class="massif" data-massif="deuil" aria-hidden="true"></canvas>
+  <div class="bloc-l de-g">
+    <div class="de-couronne" id="deCouronne">
+      <div class="de-rond"><img src="photos/deuil.webp" alt="Deux lys blancs sur fond sombre" loading="lazy"></div>
+      <div class="de-tour" id="deTour"></div>
+    </div>
+    <div class="de-txt">
+      <p class="kicker">Deuil</p>
+      <h2 class="monte">Quand les mots <em>manquent.</em></h2>
+      <p class="chapo monte">Couronnes et compositions, préparées avec soin.</p>
+      <p class="monte de-appel">Un appel suffit&nbsp;: <a data-tel data-tel-texte></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="bloc cadeaux" id="cadeaux">
+  <canvas class="massif" data-massif="soleil" aria-hidden="true"></canvas>
+  <div class="bloc-l ca-g">
+    <div class="ca-txt">
+      <p class="kicker">Cadeaux et décoration</p>
+      <h2 class="monte">Et pas que <em>des fleurs.</em></h2>
+      <p class="chapo monte">Pour accompagner un bouquet, ou offrir autre chose que des fleurs.</p>
+      <p class="monte">En boutique en ce moment&nbsp;: <span class="ex">..............................</span></p>
+    </div>
+    <div class="ca-scene">
+      <button class="boite" id="boite" type="button" aria-label="Ouvrir la boîte cadeau">
+        <span class="b-fleurs" id="boiteFleurs"></span>
+        <span class="b-corps"></span>
+        <span class="b-couv"><i></i><i></i><b></b></span>
+      </button>
+      <p class="indice" id="boiteIndice">Touchez la boîte.</p>
+    </div>
+    <figure class="ca-photo" data-glisse><img src="photos/cadeaux.webp" alt="Un bouquet emballé dans du papier kraft, tendu à bout de bras" loading="lazy"></figure>
+  </div>
+  <div class="ruban" aria-label="Aussi chez Eden Fleurs"><div class="ruban-p" id="ruban"></div></div>
+</section>
+
+<section class="bloc avis" id="avis">
+  <canvas class="massif" data-massif="marguerites" aria-hidden="true"></canvas>
+  <div class="bloc-l av-g">
+    <div class="av-jeu">
+      <div class="paq" id="paq"><i class="paq-tige"></i><span class="paq-coeur"></span></div>
+      <p class="av-mot" id="avMot" aria-live="polite">Effeuillez la marguerite.</p>
+    </div>
+    <div class="av-txt">
+      <p class="kicker">Ce qu’on en dit</p>
+      <p class="av-note"><b>4,7</b><span>sur 5 sur Google<br>89 avis</span></p>
+      <div class="av-fleurs" id="avFleurs" aria-hidden="true"></div>
+      <blockquote class="monte"><p>«&nbsp;Le dernier bouquet m’a tenu 10 jours, je suis ravie.&nbsp;»</p><cite>Marine H., sur Google</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="bloc commander" id="commander">
+  <canvas class="massif" data-massif="mixte" aria-hidden="true"></canvas>
+  <div class="bloc-l co-g">
+    <div class="co-txt">
+      <p class="kicker">Commander</p>
+      <h2 class="monte">C’est pour <em>quand&nbsp;?</em></h2>
+      <p class="chapo monte">Trois façons d’avoir vos fleurs.</p>
+      <div class="co-choix" id="coChoix"><button type="button" class="on" data-co="tel">Par téléphone</button><button type="button" data-co="boutique">À la boutique</button><button type="button" data-co="livraison">En livraison</button></div>
+    </div>
+    <div class="env-z"><div class="env" id="env">
+      <div class="env-dos"></div>
+      <div class="env-carte" id="envCarte" aria-live="polite"></div>
+      <div class="env-devant"></div>
+      <div class="env-rabat"></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="bloc infos" id="infos">
+  <canvas class="massif" data-massif="vin" aria-hidden="true"></canvas>
+  <div class="bloc-l in-g">
+    <div class="in-adr">
+      <p class="kicker">Venir à la boutique</p>
+      <h2 class="adr monte">2 route du Vin<br><em>Beblenheim</em></h2>
+      <p class="in-cp">68980, en Alsace</p>
+      <p class="in-liens"><a class="bt plein" data-carte target="_blank" rel="noopener">Itinéraire</a><a class="bt" data-tel data-tel-texte></a></p>
+      <p class="in-liens2"><a data-mail></a><a data-fb target="_blank" rel="noopener">Facebook</a></p>
+    </div>
+    <div class="in-h">
+      <div class="etat" id="etat"><span class="etat-f" id="etatF"></span><p><b id="etatT">Horaires</b><span id="etatS">de la boutique</span></p></div>
+      <ul class="hor" id="hor"></ul>
+      <p class="petit">Horaires relevés sur Google le 9 novembre 2026&nbsp;: à confirmer ensemble.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied" id="pied">
+  <div class="pied-l">
+    <p class="grand">Votre site peut avoir autant de pages que vous voulez.</p>
+    <p>Une page pour les mariages, une pour le deuil, une par saison&nbsp;: c’est vous qui voyez. Maquette privée préparée pour Eden Fleurs. Rien n’est en ligne, rien n’est figé&nbsp;: textes, photos et couleurs se modifient.</p>
+    <p class="ex-note">En pointillés&nbsp;: ce qui reste à remplir avec vos mots.</p>
+    <p class="credits">Photos d’illustration, en attendant les vôtres (Unsplash). Le puits de Beblenheim&nbsp;: Espirat, Wikimedia Commons, CC BY-SA 4.0.</p>
+    <a class="kzp" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  </div>
+  <canvas class="jardin-fin" id="jardinFin" aria-hidden="true"></canvas>
+</footer>
+
+<script src="contenu.js"></script>
+<script src="fleurs.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

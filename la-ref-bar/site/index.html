@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr" data-palette="rose">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La REF'Bar, bar, café, brasserie et soirées à Gray</title>
+<meta name="description" content="Maquette privée préparée pour La REF'Bar, bar, café, brasserie, snack et soirées au 3 avenue Carnot à Gray.">
+<meta name="theme-color" content="#0a0f2c">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/bungee-inline-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="note" viewBox="0 0 40 56"><ellipse cx="13" cy="44" rx="13" ry="10" transform="rotate(-18 13 44)"/><rect x="20" y="4" width="7" height="40" rx="3"/><path d="M20 4c12 2 18 8 18 20-4-6-9-8-14-8z"/></symbol>
+  <symbol id="etoile" viewBox="0 0 48 48"><path d="M24 2.5l6.4 13.4 14.6 2-10.7 10.2 2.7 14.6L24 35.6 11 42.7l2.7-14.6L3 17.9l14.6-2z" stroke-linejoin="round" stroke-width="3"/></symbol>
+  <symbol id="micro" viewBox="0 0 240 380"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="120" cy="92" r="66" stroke-width="17"/><path d="M72 70h96M62 108h116" stroke-width="13"/><path d="M84 178h72" stroke-width="17"/><path d="M92 204l10 112q18 22 36 0l10-112" stroke-width="17"/><path d="M120 334c0 42-66 6-86 36" stroke-width="13"/></g></symbol>
+</svg>
+
+<header class="tete" id="tete">
+  <a class="logo" href="#accueil" aria-label="La REF’Bar, haut de la page"><i aria-hidden="true">La</i><b aria-hidden="true">REF’BAR</b></a>
+  <nav class="nav" id="nav" aria-label="Rubriques">
+    <a href="#bar">Le bar</a><a href="#soirees">Les soirées</a><a href="#karaoke">Karaoké</a><a href="#semaine">La semaine</a><a href="#jeux">Les jeux</a><a href="#venir">Venir</a>
+  </nav>
+  <div class="tete-d"><a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a><a class="btn btn-n1" data-tel href="tel:+33384319763">Appeler</a></div>
+  <div class="egal" id="egal" aria-hidden="true"></div>
+</header>
+
+<button class="coin" id="coin" type="button" aria-expanded="false" aria-controls="menu"><span class="coin-b" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="coin-t">Menu</span></button>
+<div class="menu" id="menu" hidden>
+  <a href="#accueil">L’enseigne</a><a href="#bar">Le bar</a><a href="#soirees">Les soirées</a><a href="#karaoke">Karaoké</a><a href="#semaine">La semaine</a><a href="#jeux">Les jeux</a><a href="#venir">Venir</a>
+</div>
+
+<main class="page" id="page">
+
+<!-- 1. L'enseigne -->
+<section class="accueil mur" id="accueil">
+  <i class="halo" id="halo" aria-hidden="true"></i>
+  <div class="acc-g">
+    <p class="plaques"><span class="plaque">Bar, café, brasserie, snack</span><span class="plaque">Soirées à thème, jeux, concerts</span><span class="plaque">3 avenue Carnot, Gray</span></p>
+    <h1 class="enseigne" id="enseigne" aria-label="La REF’Bar">
+      <span class="e-la tube" data-l="La" aria-hidden="true">La</span>
+      <span class="e-ref" aria-hidden="true"><b class="tube" data-l="R">R</b><b class="tube" data-l="E">E</b><b class="tube" data-l="F">F</b><b class="tube apo" data-l="’">’</b><b class="tube" data-l="B">B</b><b class="tube" data-l="A">A</b><b class="tube" data-l="R">R</b></span>
+    </h1>
+    <p class="accroche">Bar, café et brasserie le jour. <b>Karaoké, soirées à thème et jeux le soir.</b></p>
+    <p class="actions"><a class="btn btn-n3" href="#soirees">Voir les soirées</a><a class="btn btn-tube" data-tel href="tel:+33384319763"><span data-tel-t>03 84 31 97 63</span></a></p>
+  </div>
+  <div class="vitrine">
+    <div class="micro-z">
+      <a class="micro" id="micro" href="#karaoke" aria-label="Aller au karaoké"><svg class="mi" viewBox="0 0 240 380" aria-hidden="true"><use href="#micro"/></svg></a>
+      <span class="notes" aria-hidden="true"><svg viewBox="0 0 40 56"><use href="#note"/></svg><svg viewBox="0 0 40 56"><use href="#note"/></svg><svg viewBox="0 0 40 56"><use href="#note"/></svg></span>
+      <a class="micro-t" href="#karaoke">À vous de chanter</a>
+    </div>
+    <div class="vit-d">
+      <div class="caisson" id="auj">
+        <p class="caisson-s">Aujourd’hui, <b id="auj-j">jeudi</b></p>
+        <p class="caisson-h" id="auj-h">9 h à 14 h<br>18 h à 22 h</p>
+        <p class="caisson-n">Horaires relevés sur Google, à confirmer</p>
+      </div>
+      <p class="depuis">Ouvert depuis octobre 2026</p>
+      <button class="inter" id="inter" type="button" aria-pressed="true"><span class="inter-p" aria-hidden="true"><i></i></span><span class="inter-t">Éteindre l’enseigne</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Le bandeau lumineux -->
+<div class="bandeau" aria-hidden="true"><div class="bandeau-p" id="bandeau"></div></div>
+
+<!-- 3. Le bar -->
+<section class="bar papier" id="bar">
+  <i class="forme f-rond" aria-hidden="true"></i>
+  <div class="cadre bar-g">
+    <div class="bar-t">
+      <p class="sur rev">Le bar</p>
+      <h2 class="rev">Toute la journée, <em>avenue Carnot.</em></h2>
+      <p class="chapo rev">Au 3 avenue Carnot, à Gray, c’est toute la journée qu’on vient. Pour un café le matin, un plat à midi, et les soirées qui suivent.</p>
+      <dl class="fiche rev">
+        <div><dt>Ouvert depuis</dt><dd>octobre 2026</dd></div>
+        <div><dt>La carte</dt><dd class="av">à écrire avec vous</dd></div>
+        <div><dt>REF’, l’histoire du nom</dt><dd class="av">à raconter avec vous</dd></div>
+      </dl>
+    </div>
+    <div class="bar-m rev">
+      <div class="tableau" id="tableau" role="img" aria-label="Tableau à lettres : bar, café, brasserie, snack, salon de thé, restaurant. La carte et le plat du jour sont à écrire avec vous."></div>
+      <label class="saisie"><span>Écrivez sur le tableau</span><input id="saisie" type="text" maxlength="14" placeholder="Votre mot" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+    </div>
+    <div class="polas" data-superpose>
+      <figure class="pola p1 rev"><span class="pola-i"><img src="photos/matin.webp" alt="Un café serré sur un comptoir en zinc, au soleil du matin" loading="lazy" width="1000" height="1250"></span><figcaption>Le matin <small>image d’illustration</small></figcaption></figure>
+      <figure class="pola p2 rev"><span class="pola-i"><img src="photos/soir.webp" alt="Une soirée karaoké dans un petit bar : une femme chante au micro, ses amies applaudissent" loading="lazy" width="1000" height="1250"></span><figcaption>Le soir <small>image d’illustration</small></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Les soirées -->
+<section class="soirees mur" id="soirees">
+  <div class="dechire haut" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="soi-t">
+      <div><p class="sur rev">Les soirées</p><h2 class="rev">Le programme <em>s’affiche.</em></h2></div>
+      <p class="chapo rev">Karaoké, soirées à thème, jeux de société, jeux d’arcade, concerts, spectacles : le programme se colle ici, une affiche par soirée. <span class="geste">Touchez une affiche, elle se décolle.</span></p>
+    </div>
+    <div class="aff-zone" id="aff-zone" data-etroit><div class="affiches" id="affiches">
+      <article data-superpose class="aff a1" tabindex="0"><p class="aff-h">La REF’Bar présente</p><p class="aff-g">Karaoké</p><p class="aff-m">Le micro<br>est à vous.</p><p class="aff-b"><span>Déjà chanté</span> samedi 7 novembre 2026</p></article>
+      <article data-superpose class="aff a2" tabindex="0"><p class="aff-g">Soirée</p><p class="aff-s">à thème</p><i class="aff-q" aria-hidden="true">?</i><p class="aff-b"><span>Le thème</span> <i class="pt"></i></p></article>
+      <article data-superpose class="aff a3" tabindex="0"><p class="aff-g">Jeux</p><p class="aff-m">de société</p><i class="aff-f" aria-hidden="true"></i><p class="aff-b"><span>Prochaine partie</span> <i class="pt"></i></p></article>
+      <article data-superpose class="aff a4" tabindex="0"><p class="aff-m">Jeux d’</p><p class="aff-g">Arcade</p><i class="aff-px" aria-hidden="true"></i><p class="aff-b"><span>Glissez un jeton</span> <i class="pt"></i></p></article>
+      <article data-superpose class="aff a5" tabindex="0"><p class="aff-g" data-t="Con cer ts"><span>Con</span><span>cer</span><span>ts</span></p><p class="aff-b"><span>Sur scène</span> <i class="pt"></i></p></article>
+      <article data-superpose class="aff a6" tabindex="0"><p class="aff-s">Spectacles</p><p class="aff-m">Le rideau s’ouvre</p><p class="aff-b"><span>À l’affiche</span> <i class="pt"></i></p></article>
+      <article data-superpose class="aff a7" tabindex="0"><p class="aff-plus" aria-hidden="true">+</p><p class="aff-m">Votre prochaine soirée ici</p><p class="aff-b">Date, heure, affiche : à remplir avec vous</p></article>
+    </div></div>
+  </div>
+</section>
+
+<!-- 5. Karaoké, puis le public -->
+<section class="scene" id="karaoke">
+  <i class="faisceau f1" aria-hidden="true"></i><i class="faisceau f2" aria-hidden="true"></i>
+  <div class="cadre scene-g">
+    <div class="scene-t">
+      <p class="sur rev">Karaoké</p>
+      <h2 class="rev">À vous de <em>chanter.</em></h2>
+      <p class="chapo rev">Touchez le micro à chaque mot, ou gardez le doigt dessus. Les paroles sont écrites pour la maison : elles ne disent que ce qui est vrai ici.</p>
+      <div class="applau rev" id="applau">
+        <p class="applau-t">Applaudimètre</p>
+        <div class="applau-b" id="applau-b" aria-hidden="true"></div>
+        <p class="applau-s" id="salle">La salle attend.</p>
+      </div>
+      <button class="son rev" id="son" type="button" aria-pressed="true">Son : activé</button>
+    </div>
+    <div class="karaoke rev">
+      <div class="ecran" id="ecran">
+        <p class="ecran-h"><span>La chanson de la maison</span><span id="k-compte">1 / 11</span></p>
+        <div class="paroles" id="paroles"><div class="piste" id="piste"></div><i class="bille" id="bille" aria-hidden="true"><b></b></i></div>
+        <div class="bravo" id="bravo" hidden><p class="bravo-g">Bravo !</p><p class="bravo-p">Le public, lui, a déjà voté : 5,0 sur 5 sur Google.</p><button class="btn btn-n3" id="encore" type="button">Rechanter</button></div>
+      </div>
+      <div class="chante-z"><button class="chante" id="chante" type="button" aria-label="Chanter le mot suivant"><svg viewBox="0 0 240 380" aria-hidden="true"><use href="#micro"/></svg><span>Chanter</span></button></div>
+    </div>
+  </div>
+  <div class="cadre public" id="public">
+    <div class="note rev">
+      <p class="note-n" aria-label="5,0 sur 5"><span class="tube on" data-l="5,0" aria-hidden="true">5,0</span></p>
+      <p class="etoiles" id="etoiles" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#etoile"/></svg><svg viewBox="0 0 48 48"><use href="#etoile"/></svg><svg viewBox="0 0 48 48"><use href="#etoile"/></svg><svg viewBox="0 0 48 48"><use href="#etoile"/></svg><svg viewBox="0 0 48 48"><use href="#etoile"/></svg></p>
+      <p class="note-s">sur 5 sur Google, 7 avis, relevés le 9 novembre 2026</p>
+    </div>
+    <div class="pancartes" id="pancartes"></div>
+  </div>
+</section>
+
+<!-- 6. La semaine -->
+<section class="semaine" id="semaine">
+  <div class="dechire haut" aria-hidden="true"></div>
+  <div class="cadre sem-g">
+    <div class="sem-t">
+      <p class="sur rev">La semaine</p>
+      <h2 class="rev">Ouvert <em>quand ?</em></h2>
+      <p class="chapo rev">Arrachez la feuille pour passer au jour suivant, ou touchez un jour dans la grille.</p>
+      <div class="eph rev" id="eph">
+        <div class="eph-tete" aria-hidden="true"><i></i><span>La semaine</span><i></i></div>
+        <button class="eph-pile" id="eph-pile" type="button" aria-label="Passer au jour suivant">
+          <span class="feuille" id="feuille"></span>
+        </button>
+        <p class="eph-geste" aria-hidden="true">Touchez la feuille</p>
+      </div>
+    </div>
+    <div class="grille rev" id="grille">
+      <div class="echelle" aria-hidden="true"><span style="--x:0">9 h</span><span style="--x:29.4">14 h</span><span style="--x:52.9">18 h</span><span style="--x:76.5">22 h</span><span style="--x:100">2 h</span></div>
+      <div class="rangs" id="rangs"></div>
+      <p class="mention">Horaires relevés sur Google le 9 novembre 2026, à confirmer avec vous. Le programme des soirées est en pointillés : c’est vous qui le remplissez.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Les jeux -->
+<section class="jeux mur" id="jeux">
+  <div class="dechire haut" aria-hidden="true"></div>
+  <div class="cadre jeux-g">
+    <div class="borne rev" id="borne">
+      <p class="fronton" aria-hidden="true"><span>Arcade</span></p>
+      <div class="borne-e">
+        <canvas id="toile" width="200" height="150" aria-label="Casse-briques : déplacez la raquette avec la souris, le doigt ou les flèches"></canvas>
+        <p class="borne-m" id="borne-m">Glissez un jeton</p>
+      </div>
+      <div class="pupitre">
+        <span class="manette" id="manette" aria-hidden="true"><i></i></span>
+        <p class="score">Briques <b id="score">0</b></p>
+        <button class="jeton" id="jeton" type="button"><i aria-hidden="true"></i><span>Un jeton</span></button>
+      </div>
+    </div>
+    <div class="jeux-t">
+      <p class="sur rev">Les jeux</p>
+      <h2 class="rev">Une partie, <em>pour voir ?</em></h2>
+      <p class="chapo rev">Jeux de société et jeux d’arcade font partie de la maison. Cette borne-ci est branchée : glissez un jeton, puis bougez la raquette avec la souris, le doigt ou les flèches.</p>
+      <div class="jeux-b">
+        <div class="boites" id="boites" aria-hidden="true"><i style="--l:74%;--c:var(--n1)"></i><i style="--l:92%;--c:var(--papier)"></i><i style="--l:66%;--c:var(--n3)"></i><i style="--l:84%;--c:var(--n2)"></i><i style="--l:100%;--c:var(--bleu)"></i></div>
+        <figure class="pola p3 rev"><span class="pola-i"><img src="photos/jeux.webp" alt="Une partie de jeu de société sur une table de bar : pions, dés, cartes en main" loading="lazy" width="1000" height="1250"></span><figcaption>Une partie <small>image d’illustration</small></figcaption></figure>
+      </div>
+      <p class="mention rev">Sur l’étagère : les titres de vos jeux, à lister avec vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Venir -->
+<section class="venir papier" id="venir">
+  <div class="dechire haut" aria-hidden="true"></div>
+  <i class="forme f-bande" aria-hidden="true"></i>
+  <div class="cadre venir-g">
+    <figure class="carte-p rev"><span class="carte-i"><img id="saone" src="photos/gray-saone.webp" alt="La Saône et le pont de pierre à Gray" loading="lazy"></span><figcaption>Gray, au bord de la Saône.</figcaption></figure>
+    <div class="ticket rev" id="ticket">
+      <p class="sur">Venir</p>
+      <h2>La REF’Bar</h2>
+      <p class="adr">3 avenue Carnot<br>70100 Gray</p>
+      <a class="numero" id="numero" data-tel href="tel:+33384319763" aria-label="Appeler le 03 84 31 97 63"></a>
+      <p class="actions"><a class="btn btn-nuit" data-carte href="#" target="_blank" rel="noopener">Itinéraire</a><a class="btn btn-clair" data-tel href="tel:+33384319763">Appeler</a></p>
+    </div>
+    <form class="table rev" id="table" novalidate>
+      <p class="sur">Une table ?</p>
+      <p class="table-q">Quel soir ?</p>
+      <div class="jours" id="jours" role="group" aria-label="Jour"></div>
+      <p class="table-q">Combien ?</p>
+      <div class="combien"><button type="button" id="moins" aria-label="Une personne de moins">-</button><output id="nb">2</output><button type="button" id="plus" aria-label="Une personne de plus">+</button><span class="pile" id="pile" aria-hidden="true"></span></div>
+      <label class="table-q" for="prenom">À quel nom ?</label>
+      <input id="prenom" type="text" maxlength="18" placeholder="Votre prénom" autocomplete="off">
+      <button class="btn btn-n1" type="submit">Imprimer mon ticket</button>
+      <div class="fente" aria-live="polite"><div class="recu" id="recu"><p class="recu-g">Table notée</p><p id="recu-d"></p><p class="recu-n">Maquette : rien n’est envoyé. Le plus sûr reste un coup de fil.</p></div></div>
+    </form>
+  </div>
+</section>
+
+<!-- 9. Autant de pages, et le pied -->
+<section class="pages mur" id="pages">
+  <div class="dechire haut" aria-hidden="true"></div>
+  <div class="cadre pages-g">
+    <div>
+      <h2 class="rev">Votre site peut avoir <em>autant de pages</em> que vous voulez.</h2>
+      <p class="chapo rev">Une page pour la carte, une pour les soirées, une pour réserver une table, une pour les jeux : c’est vous qui voyez.</p>
+    </div>
+    <p class="onglets" id="onglets" aria-hidden="true"><span>La carte</span><span>Les soirées</span><span>Réserver</span><span>Les jeux</span></p>
+  </div>
+</section>
+<footer class="pied mur">
+  <p class="asoir" aria-hidden="true"><span class="tube on" data-l="À ce soir.">À ce soir.</span></p>
+  <div class="cadre pied-g">
+    <p class="pied-p">Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+    <a class="kz-g" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+    <p class="credits">Maquette privée préparée pour La REF’Bar. Gray et la Saône : G CHP, Wikimedia Commons, CC BY-SA 2.5. Les trois autres photos sont des images d’illustration créées pour la maquette, en attendant les vôtres : ce ne sont ni votre bar ni vos clients.</p>
+  </div>
+</footer>
+</main>
+<script src="contenu.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

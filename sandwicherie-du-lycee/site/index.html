@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La Sandwicherie du Lycée, à Bully-les-Mines</title>
+<meta name="description" content="Maquette privée préparée pour La Sandwicherie du Lycée, 15 rue César Marcellak à Bully-les-Mines : sandwichs chauds et froids, point chaud.">
+<meta name="theme-color" content="#1b45c7">
+<link rel="icon" href="data:,">
+<script>if (/[?&]calme=1/.test(location.search)) document.documentElement.classList.add('calme');</script>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="La Sandwicherie du Lycée, retour en haut"><b>La Sandwicherie</b><i>du Lycée</i></a>
+  <nav class="liens" id="liens" aria-label="Rubriques">
+    <a href="#bulletin" data-c="bleu"><small>9 h</small>Le bulletin</a>
+    <a href="#carte" data-c="jaune"><small>10 h</small>La carte</a>
+    <a href="#jeu" data-c="rouge"><small>12 h</small>Le jeu</a>
+    <a href="#horaires" data-c="vert"><small>13 h 30</small>Les horaires</a>
+    <a href="#quartier" data-c="orange"><small>15 h 30</small>Le quartier</a>
+    <a href="#mot" data-c="blanc"><small>17 h</small>Un mot</a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener" aria-label="Kazura, le studio qui a préparé cette maquette">Kazura</a>
+  <button class="heure" id="heure" type="button" aria-label="Faire sonner la sonnerie"><span class="mini-cloche" aria-hidden="true"></span><b id="heure-t">08:00</b></button>
+  <button class="menu-b" id="menu-b" type="button" aria-expanded="false" aria-controls="liens">Menu</button>
+  <div class="fil" id="fil" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><span id="fil-c"></span></div>
+</header>
+
+<div class="dring" id="dring" aria-hidden="true"><b>DRIIIING</b></div>
+
+<main id="main">
+
+<!-- 8 h : l'accueil -->
+<section id="accueil" class="accueil" data-h="8">
+  <div class="fond-cases" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="w accueil-g">
+    <div class="accueil-t">
+      <p class="case-h c-jaune"><b>8 h 00</b>Ça ouvre</p>
+      <h1 id="titre" aria-label="La Sandwicherie du Lycée"><span class="la" aria-hidden="true">La</span> <span class="sdw" aria-hidden="true">Sandwicherie</span> <span class="lycee" aria-hidden="true"><span>du Lycée</span></span></h1>
+      <p class="chapo">Sandwichs chauds et froids, point chaud. Au 15 rue César Marcellak, à Bully-les-Mines.</p>
+      <p class="etat" id="etat"><span class="voyant" aria-hidden="true"></span><b id="etat-t"></b><small>horaires à confirmer</small></p>
+      <p class="boutons"><a class="b b-jaune" href="#carte">Voir la carte</a><a class="b b-blanc" data-itin target="_blank" rel="noopener">Itinéraire</a></p>
+    </div>
+    <div class="accueil-d" id="scene">
+      <figure class="photo-h"><img src="photos/chaud.webp" alt="Un sandwich chaud dans son papier, tenu dans la rue" width="1000" height="1250"><figcaption>Image d’illustration</figcaption></figure>
+      <div class="pendule" id="pendule" aria-hidden="true"><i class="rep r12"></i><i class="rep r3"></i><i class="rep r6"></i><i class="rep r9"></i><i class="aig a-h" id="a-h"></i><i class="aig a-m" id="a-m"></i><i class="aig a-s" id="a-s"></i><i class="axe"></i></div>
+      <button class="cloche" id="cloche" type="button" aria-label="Faire sonner la sonnerie"><span class="socle"></span><span class="timbre"></span><span class="marteau"></span><span class="eclat e1"></span><span class="eclat e2"></span><span class="eclat e3"></span></button>
+      <p class="rentree" aria-label="Nouvelle équipe, 2026"><span>Nouvelle<b>2026</b>équipe</span></p>
+      <p class="touche">Touchez la sonnerie&nbsp;!</p>
+    </div>
+  </div>
+</section>
+
+<div class="bande bj" data-bande="Sortez une feuille"></div>
+
+<!-- 9 h : le bulletin de la maison -->
+<section id="bulletin" class="bulletin" data-h="9">
+  <div class="w bul-g">
+    <div>
+      <p class="case-h c-bleu"><b>9 h 00</b>Premier cours</p>
+      <h2>Le bulletin <em>de la maison.</em></h2>
+      <p class="intro">Tout ce qu’on sait de la sandwicherie, matière par matière. Ce qui manque est en pointillés&nbsp;: c’est vous qui le dictez.</p>
+      <p class="boutons"><a class="b b-bleu" href="#carte">Ouvrir les casiers</a></p>
+    </div>
+    <div class="bul">
+      <div class="bul-r" data-c="jaune"><b>Physique</b><p>Des sandwichs chauds, des sandwichs froids.</p><em>les deux états de la matière</em></div>
+      <div class="bul-r" data-c="rouge"><b>Technologie</b><p>Un point chaud, juste à côté des sandwichs.</p><em>à détailler avec vous</em></div>
+      <div class="bul-r" data-c="vert"><b>Ponctualité</b><p>Ouvert dès 8&nbsp;h, du lundi au vendredi.</p><em>à confirmer</em></div>
+      <div class="bul-r" data-c="orange"><b>Géographie</b><p>15 rue César Marcellak, à Bully-les-Mines.</p><em>Pas-de-Calais, pays minier</em></div>
+      <div class="bul-r" data-c="bleu"><b>Histoire</b><p>Une nouvelle équipe derrière le comptoir depuis l’automne 2026.</p><em>bienvenue&nbsp;!</em></div>
+      <div class="bul-r" data-c="noir"><b>Appréciation</b><p class="pointilles"><span class="vh">À compléter</span><i></i></p><em>vos mots à vous</em></div>
+    </div>
+  </div>
+</section>
+
+<div class="bande bj" data-bande="Driiiing ! C’est la récré"></div>
+
+<!-- 10 h : la carte, dans les casiers -->
+<section id="carte" class="carte" data-h="10">
+  <div class="w">
+    <header class="tete-s">
+      <div><p class="case-h c-jaune"><b>10 h 00</b>La récré</p>
+      <h2>La carte <em>est dans les casiers.</em></h2></div>
+      <p class="intro">Trois rayons, un casier chacun, et un dernier pour les formules. Ouvrez les portes&nbsp;: les lignes attendent vos sandwichs et vos prix, on les écrit ensemble.</p>
+    </header>
+    <div class="casiers" id="casiers"></div>
+  </div>
+</section>
+
+<div class="bande br" data-bande="On ne court pas dans les couloirs"></div>
+
+<!-- 12 h : le jeu -->
+<section id="jeu" class="jeu" data-h="12">
+  <div class="w jeu-g">
+    <div class="jeu-t">
+      <p class="case-h c-bleu"><b>12 h 00</b>La sonnerie de midi</p>
+      <h2>Empilez <em>avant que ça sonne.</em></h2>
+      <p class="intro">Les étages se balancent au-dessus du plateau. Touchez pour lâcher. Trop de travers, ça penche, puis tout part par terre. À la sonnerie, on ramasse les copies.</p>
+      <div class="scores"><p><b id="j-n">0</b>étages</p><p><b id="j-r">0</b>record</p></div>
+      <p class="boutons"><button class="b b-bleu" id="j-go" type="button">C’est parti</button></p>
+      <p class="petit">C’est un jeu&nbsp;: ces étages ne sont pas la carte de la maison.</p>
+    </div>
+    <div class="jeu-d">
+      <div class="table" id="table" tabindex="0" role="button" aria-label="Zone de jeu : touchez ou appuyez sur Espace pour lâcher un étage">
+        <div class="chrono" aria-hidden="true"><span class="mini-cloche"></span><div class="jauge"><i id="j-barre"></i></div><b id="j-s">30</b></div>
+        <div class="vol" id="vol" aria-hidden="true"></div>
+        <div class="cam" id="cam" aria-hidden="true"><div class="pile" id="pile"></div></div>
+        <div class="plateau" aria-hidden="true"></div>
+        <p class="j-msg" id="j-msg">Le plateau vous attend</p>
+        <div class="copie" id="copie" hidden>
+          <p class="copie-t">Copie rendue</p>
+          <p class="copie-n"><b id="note">0</b><span>/20</span></p>
+          <p class="copie-a" id="appr"></p>
+          <button class="b b-bleu" id="j-re" type="button">Rejouer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bande bv" data-bande="Sortez vos agendas"></div>
+
+<!-- 13 h 30 : l'emploi du temps -->
+<section id="horaires" class="horaires" data-h="13.5">
+  <div class="w edt-g">
+    <div class="edt-t">
+      <p class="case-h c-vert"><b>13 h 30</b>On note</p>
+      <h2>L’emploi <em>du temps.</em></h2>
+      <div class="jour-lu" id="jour-lu" aria-live="polite">
+        <p class="jour-n" id="jour-n"></p>
+        <p class="jour-c" id="jour-c"></p>
+      </div>
+      <p class="intro">Touchez un jour pour le lire. Samedi et dimanche&nbsp;: fermé.</p>
+      <p class="petit corrige">Horaires relevés dans les annuaires, sans doute d’avant la reprise&nbsp;: à confirmer avec vous.</p>
+    </div>
+    <div class="edt" id="edt"></div>
+  </div>
+</section>
+
+<div class="bande bo" data-bande="La sortie, c’est par ici"></div>
+
+<!-- 15 h 30 : le quartier -->
+<section id="quartier" class="quartier" data-h="15.5">
+  <div class="nuages" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="w quartier-g">
+    <div>
+      <p class="case-h c-orange"><b>15 h 30</b>La sortie</p>
+      <h2>Bully-les-Mines, <em>au pays des terrils.</em></h2>
+    </div>
+    <div class="plaque-adr">
+      <p class="plaque-t">15 rue César Marcellak</p>
+      <p class="plaque-s">62160 Bully-les-Mines, Pas-de-Calais</p>
+      <p class="pointilles"><span>Sur place ou à emporter</span><i></i></p>
+      <p class="boutons"><a class="b b-bleu" data-itin target="_blank" rel="noopener">Ouvrir l’itinéraire</a></p>
+    </div>
+  </div>
+  <div class="paysage" id="paysage" aria-hidden="true"></div>
+</section>
+
+<div class="bande bj" data-bande="Un mot dans le carnet"></div>
+
+<!-- 17 h : le mot -->
+<section id="mot" class="mot" data-h="17">
+  <div class="w mot-g">
+    <div class="mot-t">
+      <p class="case-h c-jaune"><b>17 h 00</b>Dernière heure</p>
+      <h2>Un mot <em>d’excuse&nbsp;?</em></h2>
+      <p class="intro">Le sandwich a duré plus longtemps que la pause. Ça arrive aux élèves, aux profs, et à ceux qui n’ont plus cours depuis longtemps. Touchez les mots soulignés, signez, envoyez.</p>
+    </div>
+    <div class="fiche">
+      <p class="fiche-t">Pour commander</p>
+      <p class="pointilles"><span>Téléphone</span><i></i></p>
+      <p class="fiche-l">Le numéro de la nouvelle équipe s’écrira ici.</p>
+      <p class="fiche-a">15 rue César Marcellak, 62160 Bully-les-Mines</p>
+      <p class="boutons"><a class="b b-jaune" data-itin target="_blank" rel="noopener">Itinéraire</a><a class="b b-blanc" href="#horaires">Les horaires</a></p>
+    </div>
+    <div class="mot-d">
+      <div class="papier-zone">
+        <div class="papier" id="papier">
+          <p class="papier-e">Mot d’excuse</p>
+          <p class="papier-c">Madame, Monsieur,<br>veuillez excuser <label class="trou-n"><span class="vh">Prénom</span><input id="m-nom" type="text" maxlength="16" placeholder="votre prénom" autocomplete="off"></label><br>pour son retard de <span role="button" tabindex="0" class="trou" data-k="retard"></span>.<br>Motif&nbsp;: <span role="button" tabindex="0" class="trou" data-k="motif"></span>.</p>
+          <p class="papier-s">Signé&nbsp;: <svg viewBox="0 0 220 70" aria-hidden="true"><path id="signe" d="M8 48 C22 8 34 8 30 40 C27 62 46 20 56 30 C66 40 52 56 66 48 C80 40 78 22 92 30 C104 37 92 54 108 46 C126 37 122 14 140 26 C154 36 138 56 160 44 C176 35 190 30 212 40"/></svg></p>
+        </div>
+      </div>
+      <p class="boutons centre"><button class="b b-jaune" id="m-go" type="button">Signer et envoyer</button></p>
+      <p class="petit clair" id="m-dit">Pour de rire, bien sûr. Sur votre vrai site, ce mot peut devenir une commande à venir chercher.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="w pied-g">
+    <div>
+      <p class="pied-n">La Sandwicherie <i>du Lycée</i></p>
+      <p>Sandwichs chauds et froids, point chaud.<br>15 rue César Marcellak, 62160 Bully-les-Mines.</p>
+    </div>
+    <div>
+      <p class="pied-g2">Ici, une seule page pour vous donner l’idée. Votre site peut avoir autant de pages que vous voulez&nbsp;: la carte, les formules, le point chaud, c’est vous qui voyez.</p>
+      <p class="credits">Maquette privée. Photos&nbsp;: images d’illustration (créées pour la maquette et Pexels), en attendant les vôtres. Ce qui est en pointillés attend vos vrais mots.</p>
+    </div>
+    <a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener" aria-label="Kazura">Kazura</a>
+  </div>
+</footer>
+
+</body>
+</html>

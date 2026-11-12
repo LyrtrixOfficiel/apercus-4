@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="fr" data-palette="cardinal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Richelieu, café bar à Tulle : du bon, du bio, du local</title>
+<meta name="description" content="Maquette privée préparée pour Le Richelieu, café bar, bistrot bio et local, 8 avenue Charles de Gaulle à Tulle.">
+<meta name="theme-color" content="#c2161c">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/rozha.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="narcisse" viewBox="-50 -50 100 100">
+    <g fill="#f6c11d"><ellipse cy="-27" rx="13" ry="22"/><ellipse cy="-27" rx="13" ry="22" transform="rotate(60)"/><ellipse cy="-27" rx="13" ry="22" transform="rotate(120)"/><ellipse cy="-27" rx="13" ry="22" transform="rotate(180)"/><ellipse cy="-27" rx="13" ry="22" transform="rotate(240)"/><ellipse cy="-27" rx="13" ry="22" transform="rotate(300)"/></g>
+    <circle r="15" fill="#ee8a1b"/><circle r="7.5" fill="#c9600a"/>
+  </symbol>
+  <symbol id="bugle" viewBox="-50 -50 100 100">
+    <g fill="#3947b5"><ellipse cy="-26" rx="13" ry="21"/><ellipse cy="-26" rx="13" ry="21" transform="rotate(72)"/><ellipse cy="-26" rx="13" ry="21" transform="rotate(144)"/><ellipse cy="-26" rx="13" ry="21" transform="rotate(216)"/><ellipse cy="-26" rx="13" ry="21" transform="rotate(288)"/></g>
+    <circle r="13" fill="#9aa6f2"/><circle r="6" fill="#f6c11d"/>
+  </symbol>
+  <symbol id="barrette" viewBox="0 0 32 32">
+    <path d="M7 14c1-9 5-9 6 0zM13 14c1-10 5-10 6 0zM19 14c1-9 5-9 6 0z" fill="#e2463b"/>
+    <path d="M5 26h22l-2-13H7z" fill="#c2161c"/><circle cx="16" cy="4.6" r="3.2" fill="#c2161c"/>
+    <rect x="3" y="24" width="26" height="5.5" rx="2.7" fill="#8a0d13"/>
+  </symbol>
+  <symbol id="cire" viewBox="0 0 100 100">
+    <path d="M50 4c9-2 17 3 24 7s14 9 17 18 3 18 0 27-9 17-17 22-18 9-27 8-19-4-26-10S8 62 6 53 6 34 11 26s11-14 19-18 13-3 20-4z" fill="#c2161c"/>
+    <circle cx="50" cy="50" r="31" fill="#8a0d13"/>
+  </symbol>
+</svg>
+
+<header class="barre" id="barre">
+  <a class="logo" href="#haut" aria-label="Le Richelieu, retour en haut"><svg aria-hidden="true"><use href="#barrette"/></svg><span>Le Richelieu</span></a>
+  <nav class="menu" id="menu" aria-label="Rubriques">
+    <a href="#maison">La maison</a>
+    <a href="#zinc">La carte</a>
+    <a href="#local">Le local</a>
+    <a href="#fleurs">Narcisse &amp; Bugle</a>
+    <a href="#agenda">L’agenda</a>
+    <a href="#venir">Venir</a>
+    <a href="#mot">Écrire</a>
+  </nav>
+  <a class="kaz" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="bouton b-venir" href="#venir">Venir</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><i></i><i></i><i></i></button>
+  <div class="ruban" aria-hidden="true"><i id="ruban"></i>
+    <svg class="sceau-fil" id="sceau" viewBox="0 0 40 52"><path d="M13 0h14v15H13z" fill="#8a0d13"/><path d="M20 11c5-1 9 0 12 3s5 7 4 12-3 9-7 11-9 3-13 1-8-5-9-10 0-10 3-13 6-4 10-4z" fill="#c2161c"/><circle cx="20" cy="28" r="10.5" fill="#8a0d13"/><text x="20" y="34.5" text-anchor="middle" font-family="Rozha, serif" font-size="17" fill="#e2463b">R</text></svg>
+  </div>
+</header>
+
+<main id="haut">
+
+<!-- 1. La une : le portrait d'apparat, dévoilé -->
+<section class="une" id="une">
+  <div class="une-in in">
+    <div class="une-txt">
+      <p class="etiq"><span style="--i:0">Café bar</span><span style="--i:1">Bistrot bio et local</span><span style="--i:2">Tulle, Corrèze</span></p>
+      <h1 class="nom" aria-label="Le Richelieu"><span class="nom-le" aria-hidden="true">Le</span><span class="nom-r" id="nom-r" aria-hidden="true">Richelieu</span></h1>
+      <p class="devise" id="devise">Du bon, du bio, du local.</p>
+      <p class="chapo">Un café bar à deux pas de la cathédrale. Depuis octobre 2026, une nouvelle équipe tient le comptoir&nbsp;: café, bières artisanales et petite restauration.</p>
+      <p class="actions"><a class="bouton plein" href="#zinc">Voir ce qu’on y sert</a><a class="bouton creme" href="#venir">8 avenue Charles de Gaulle</a></p>
+    </div>
+    <div class="une-portrait">
+      <button class="cadre" id="cadre" type="button" aria-label="Le portrait du comptoir. Touchez-le : il trinque.">
+        <i class="coin a"></i><i class="coin b"></i>
+        <span class="toile">
+        <svg id="cardinal" viewBox="0 0 400 500" data-objet="cafe" aria-hidden="true">
+          <circle cx="212" cy="200" r="172" fill="var(--halo)"/>
+          <path d="M400 0H286c10 70 46 130 114 164z" fill="var(--rouge-f)"/>
+          <path d="M400 0h-62c8 46 28 88 62 110z" fill="var(--rouge)"/>
+          <!-- la robe -->
+          <path d="M206 220c-56 0-88 26-102 76-20 70-44 140-78 204h360c-30-64-54-134-74-204-14-50-50-76-106-76z" fill="var(--rouge)"/>
+          <path d="M150 322c-4 70-24 130-50 178h50c14-60 14-120 0-178zM266 322c10 70 34 130 64 178h-48c-10-60-16-120-16-178z" fill="var(--rouge-f)"/>
+          <path d="M206 316c-4 68-10 128-20 184h46c-10-56-20-116-26-184z" fill="var(--rouge-c)"/>
+          <!-- le bras et ce qu'il tient -->
+          <g id="bras">
+            <path d="M130 248C100 268 76 310 64 346l58 18c8-28 26-52 44-68z" fill="var(--rouge)"/>
+            <path d="M122 364c8-28 26-52 44-68l-14-8c-18 18-34 44-42 72z" fill="var(--rouge-f)"/>
+            <path d="M62 340l64 20-12 26-44-10z" fill="var(--papier)"/>
+            <g class="objet o-cafe">
+              <g class="fumee" fill="none" stroke="#fffaf0" stroke-width="7" stroke-linecap="round"><path d="M70 306c-8-10 8-18 0-30"/><path d="M86 304c-8-10 8-18 0-30"/><path d="M102 306c-8-10 8-18 0-30"/></g>
+              <ellipse cx="86" cy="366" rx="38" ry="8" fill="#fffaf0"/>
+              <circle cx="118" cy="338" r="10" fill="none" stroke="#fffaf0" stroke-width="7"/>
+              <path d="M58 322h56c0 28-12 40-28 40s-28-12-28-40z" fill="#fffaf0"/>
+              <path d="M60 338h52c-1 5-3 9-5 12H65c-2-3-4-7-5-12z" fill="var(--jaune)"/>
+              <ellipse cx="86" cy="322" rx="28" ry="6" fill="#3a2018"/>
+            </g>
+            <g class="objet o-biere">
+              <ellipse cx="86" cy="366" rx="24" ry="6" fill="#e4e9eb"/><rect x="81" y="338" width="10" height="28" fill="#e4e9eb"/>
+              <path d="M56 280c-2 38 12 62 30 62s32-24 30-62z" fill="#f2a51d"/>
+              <path d="M64 286c-1 24 6 42 14 48l-4-48z" fill="#f9cf6a"/>
+              <path class="mousse" d="M52 282c-2-16 12-20 18-14 4-14 26-14 30-2 8-6 22 0 20 16z" fill="#fffaf0"/>
+            </g>
+            <g class="objet o-assiette" transform="translate(0 14)">
+              <path d="M56 404c0-52 60-52 60 0" fill="none" stroke="#8a5a2b" stroke-width="8"/>
+              <path class="feuille" d="M60 406c-12-22-6-38 4-44 8 14 8 30 2 44z" fill="#2f7d4a"/>
+              <path class="feuille" d="M108 406c-4-24 6-40 18-40 2 16-4 30-12 40z" fill="#256a3d"/>
+              <use href="#narcisse" x="54" y="386" width="26" height="26"/><use href="#bugle" x="98" y="384" width="24" height="24"/>
+              <path d="M44 402h84l-10 50H54z" fill="#c98f4a"/><path d="M46 414h80l-3 9H48zM50 434h72l-3 9H52z" fill="#a36f30"/>
+            </g>
+            <circle cx="88" cy="383" r="15" fill="var(--peau)"/>
+          </g>
+          <!-- le camail, le cordon bleu et sa croix -->
+          <path d="M206 210c-60 0-94 28-104 82 32 20 66 28 104 28s74-8 106-28c-10-54-46-82-106-82z" fill="var(--rouge-c)"/>
+          <path d="M170 226l36 74 36-74-16-6-20 44-20-44z" fill="var(--bleu)"/>
+          <path d="M206 288l6 12 12 6-12 6-6 12-6-12-12-6 12-6z" fill="var(--jaune)"/>
+          <path d="M168 200l38 8 38-8 4 30c-14 10-32 12-42 4-10 8-28 6-42-4z" fill="var(--papier)"/>
+          <!-- la tête -->
+          <path d="M158 136c-12 24-8 54 4 70l14-10-6-56zM254 136c12 24 8 54-4 70l-14-10 6-56z" fill="var(--poil)"/>
+          <ellipse cx="206" cy="154" rx="44" ry="54" fill="var(--peau)"/>
+          <path d="M158 144C152 78 260 78 254 144 230 128 182 128 158 144z" fill="var(--rouge)"/>
+          <g id="yeux"><ellipse cx="188" cy="153" rx="10" ry="7.5" fill="var(--papier)"/><ellipse cx="224" cy="153" rx="10" ry="7.5" fill="var(--papier)"/>
+            <g id="pupilles"><circle cx="188" cy="153" r="4.8" fill="var(--encre)"/><circle cx="224" cy="153" r="4.8" fill="var(--encre)"/></g></g>
+          <g id="sourcils" fill="var(--poil)"><rect x="176" y="136" width="24" height="6" rx="3" transform="rotate(-9 188 139)"/><rect x="212" y="136" width="24" height="6" rx="3" transform="rotate(9 224 139)"/></g>
+          <path d="M204 158c-2 12-7 20-5 25 4 4 10 4 14 0 2-5-3-13-5-25z" fill="#e0ab80"/>
+          <path d="M205 190c-9-5-19 0-31-8 6 15 22 17 31 12zM207 190c9-5 19 0 31-8-6 15-22 17-31 12z" fill="var(--poil)"/>
+          <path d="M197 203c4 4 14 4 18 0l-9 30z" fill="var(--poil)"/>
+        </svg>
+        </span>
+        <span class="drap" aria-hidden="true"></span>
+      </button>
+      <div class="cartel">
+        <span class="cartel-t" id="cartel-t" aria-live="polite">Son Éminence prend un café.</span>
+        <div class="pilules" id="pilules" role="group" aria-label="Que prend Son Éminence ?"></div>
+        <small>Touchez le portrait : il trinque. Son regard vous suit.</small>
+      </div>
+    </div>
+  </div>
+  <div class="frise" data-rangs="1" aria-hidden="true"></div>
+</section>
+
+<!-- 2. La maison -->
+<section class="maison sec" id="maison">
+  <div class="maison-in in">
+    <div>
+      <p class="sur" data-vu>La maison</p>
+      <h2 class="h2" data-vu>Un café de ville qui <em>change de mains.</em></h2>
+      <div class="plume" id="plume" data-vu>
+        <p class="plume-mots" id="plume-mots">du bon, du bio, du local</p>
+        <svg viewBox="0 0 60 80" aria-hidden="true"><path d="M9 76l6-19C10 30 27 8 53 2c2 25-9 49-33 60l-7 15z" fill="#c2161c"/><path d="M12 72L45 14" stroke="#8a0d13" stroke-width="4" stroke-linecap="round"/><path d="M5 80l9-21 6 5z" fill="#221416"/></svg>
+      </div>
+      <p class="source" data-vu>C’est écrit sur votre Instagram : «&nbsp;Bistrot tulliste avec du bon, du bio et du local&nbsp;».</p>
+      <p class="lead" data-vu>Depuis octobre 2026, une nouvelle équipe est derrière le comptoir du Richelieu. On y vient pour un café, une bière artisanale ou de quoi grignoter, à deux pas de la cathédrale de Tulle.</p>
+    </div>
+    <div class="dalles">
+      <div class="dalle r" data-vu="pose"><b>8</b><span>avenue Charles de Gaulle, à Tulle</span></div>
+      <div class="dalle b" data-vu="pose" style="--d:120"><b>IV</b><span>Licence IV : café, bar et petite restauration</span></div>
+      <div class="dalle j" data-vu="pose" style="--d:240"><b>19</b><span>La Corrèze. Tulle en est la préfecture.</span></div>
+      <div class="dalle n" data-vu="pose" style="--d:360"><q>Un troquet responsable et éthique.</q><span>Votre page Facebook</span></div>
+    </div>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 3. Sur le zinc : ce qu'on y sert -->
+<section class="zinc sec" id="zinc">
+  <div class="in">
+    <div class="zinc-tete">
+      <div><p class="sur" data-vu>La carte</p><h2 class="h2" data-vu>Sur le <em>zinc.</em></h2></div>
+      <p class="lead" data-vu>Trois choses sont sûres. Touchez-en une : elle est servie, et la carte se retourne. Les lignes attendent vos mots et vos prix.</p>
+    </div>
+    <div class="comptoir" id="comptoir" data-vu>
+      <div class="servis" role="group" aria-label="Ce qu’on y sert">
+        <button class="servi" type="button" data-k="cafe" aria-pressed="true" style="--i:0">
+          <svg viewBox="0 0 200 230" aria-hidden="true">
+            <g class="fumee" fill="none" stroke="#f7eedc" stroke-width="9" stroke-linecap="round"><path d="M70 32c-10-10 10-16 0-26"/><path d="M100 28c-10-10 10-16 0-26"/><path d="M130 32c-10-10 10-16 0-26"/></g>
+            <rect x="6" y="88" width="24" height="12" rx="6" fill="#75828a"/><rect x="170" y="88" width="24" height="12" rx="6" fill="#75828a"/>
+            <path d="M44 74c0-40 112-40 112 0z" fill="#c2161c"/><circle cx="100" cy="42" r="9" fill="#f6c11d"/>
+            <rect x="22" y="72" width="156" height="96" rx="16" fill="#e4e9eb"/><path d="M22 124h156v16H22z" fill="#b9c2c6"/>
+            <circle cx="100" cy="96" r="25" fill="#221416"/><circle cx="100" cy="96" r="19" fill="#fffaf0"/>
+            <rect class="aiguille" x="97" y="80" width="6" height="19" rx="3" fill="#c2161c"/>
+            <rect x="46" y="166" width="40" height="14" rx="4" fill="#221416"/><rect x="114" y="166" width="40" height="14" rx="4" fill="#221416"/>
+            <path d="M52 188h28c0 12-6 19-14 19s-14-7-14-19zM120 188h28c0 12-6 19-14 19s-14-7-14-19z" fill="#fffaf0"/>
+            <rect x="12" y="208" width="176" height="18" rx="9" fill="#75828a"/>
+          </svg>
+          <span class="servi-nom">Le café</span>
+        </button>
+        <button class="servi" type="button" data-k="biere" aria-pressed="false" style="--i:1">
+          <svg viewBox="0 0 200 230" aria-hidden="true">
+            <defs><clipPath id="coupe"><path d="M54 62c-4 64 18 110 46 110s50-46 46-110z"/></clipPath></defs>
+            <ellipse cx="100" cy="216" rx="38" ry="10" fill="#e4e9eb"/><rect x="92" y="168" width="16" height="48" fill="#e4e9eb"/>
+            <path d="M54 62c-4 64 18 110 46 110s50-46 46-110z" fill="#5d6a70"/>
+            <g clip-path="url(#coupe)"><rect class="biere-niv" x="40" y="62" width="120" height="112" fill="#f2a51d"/><path d="M66 62c-2 50 8 86 22 100l-8-100z" fill="#fff" opacity=".28"/></g>
+            <path class="mousse" d="M48 64c-4-22 18-28 26-18 6-20 46-20 52-2 12-10 32 0 26 20z" fill="#fffaf0"/>
+          </svg>
+          <span class="servi-nom">Les bières artisanales</span>
+        </button>
+        <button class="servi" type="button" data-k="assiette" aria-pressed="false" style="--i:2">
+          <svg viewBox="0 0 200 230" aria-hidden="true">
+            <path d="M40 134C40 30 160 30 160 134" fill="none" stroke="#8a5a2b" stroke-width="13"/>
+            <path class="feuille" d="M60 136c-20-40-6-66 12-72 10 28 6 52-2 72z" fill="#2f7d4a"/>
+            <path class="feuille" d="M98 136c-10-44 4-72 20-74 6 30 0 56-8 74z" fill="#256a3d"/>
+            <path class="feuille" d="M136 136c-6-32 8-54 24-54 2 24-6 42-14 54z" fill="#2f7d4a"/>
+            <use href="#narcisse" x="62" y="84" width="52" height="52"/><use href="#bugle" x="112" y="92" width="44" height="44"/>
+            <path d="M22 130h156l-16 90H38z" fill="#c98f4a"/><path d="M26 150h148l-3 15H29zM32 186h136l-3 15H35z" fill="#a36f30"/>
+          </svg>
+          <span class="servi-nom">La petite restauration</span>
+        </button>
+      </div>
+      <article class="carte" id="carte" aria-live="polite"></article>
+      <div class="plateau" aria-hidden="true"></div>
+      <div class="facade" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 4. Le local : les étiquettes à ficelle -->
+<section class="local sec" id="local">
+  <p class="fond-mot" id="fond-mot" aria-hidden="true">Corrèze</p>
+  <div class="in">
+    <div class="local-tete">
+      <div><p class="sur" data-vu>Le local</p><h2 class="h2" data-vu>Chaque producteur <em>a son étiquette.</em></h2></div>
+      <p class="lead" data-vu>Du bio et du local, ça se montre avec des noms. Dès que vous nous les donnez, chaque étiquette reçoit le sien : un nom, un village, une distance jusqu’à Tulle.</p>
+    </div>
+    <div class="corde" id="corde"></div>
+    <p class="local-note" data-vu>Passez la souris ou le doigt sur les étiquettes : elles se balancent. Aucun producteur n’est écrit ici tant qu’on ne le connaît pas.</p>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 5. Narcisse & Bugle : le carrelage -->
+<section class="fleurs sec" id="fleurs">
+  <div class="fleurs-in in">
+    <div data-vu>
+      <p class="sur">Le nom de la maison</p>
+      <h2 class="h2">Narcisse <span class="et">&amp;</span> Bugle.</h2>
+      <p class="lead">C’est le nom de la société qui tient Le Richelieu depuis octobre 2026. Ce sont aussi deux fleurs : le narcisse, jaune, et la bugle, bleue. Elles ont donné leurs couleurs à cette maquette, à côté du rouge du cardinal.</p>
+      <div class="bouquet">
+        <figure><svg viewBox="0 0 120 220" aria-hidden="true"><g class="tige"><rect x="56" y="64" width="9" height="156" rx="4" fill="#63b35e"/><path d="M60 220c-22-50-18-100-9-124 11 34 14 84 12 124z" fill="#2f7d4a"/><path d="M62 220c24-44 24-90 16-116-11 32-18 76-18 116z" fill="#256a3d"/></g><g transform="translate(60 54)"><g class="corolle"><use href="#narcisse" x="-52" y="-52" width="104" height="104"/></g></g></svg><figcaption>Le narcisse</figcaption></figure>
+        <figure><svg viewBox="0 0 110 220" id="bugle-epi" aria-hidden="true"><g class="tige"><rect x="50.5" y="24" width="9" height="196" rx="4" fill="#6a4a86"/></g><g class="epi"></g></svg><figcaption>La bugle</figcaption></figure>
+      </div>
+    </div>
+    <div class="jeu" data-vu="droite">
+      <div class="jeu-tete">
+        <h3>Refaites le carrelage</h3>
+        <p class="score"><span>Carreaux tournés <b id="n-tours">0</b></span><span>Fleurs <b id="n-fleurs">0</b></span></p>
+      </div>
+      <div class="sol" id="sol" role="img" aria-label="Carrelage de bistrot : chaque carreau se tourne d’un quart de tour"></div>
+      <div class="jeu-bas">
+        <button class="bouton jaune" type="button" data-motif="rosaces">Rosaces</button>
+        <button class="bouton creme" type="button" data-motif="ecailles">Écailles</button>
+        <button class="bouton creme" type="button" data-motif="hasard">Au hasard</button>
+        <p class="jeu-dit" id="jeu-dit" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 6. L'agenda : les lettres cachetées -->
+<section class="agenda sec" id="agenda">
+  <div class="in">
+    <div class="agenda-tete">
+      <div><p class="sur" data-vu>L’agenda</p><h2 class="h2" data-vu>Les prochaines <em>soirées.</em></h2></div>
+      <p class="lead" data-vu>Chaque soirée arrive sous pli. Brisez un sceau pour l’ouvrir : pour l’instant, les lignes vous attendent.</p>
+    </div>
+    <div class="lettres" id="lettres"></div>
+    <div class="agenda-bas" data-vu>
+      <p>Une ligne par soirée, que vous mettez à jour vous-même, en deux minutes.</p>
+      <a class="bouton jaune" data-lien="instagram" target="_blank" rel="noopener">En attendant, sur Instagram</a>
+    </div>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 7. Venir -->
+<section class="venir sec" id="venir">
+  <div class="venir-in in">
+    <div>
+      <p class="sur" data-vu>Venir</p>
+      <h2 class="h2" data-vu>À deux pas de <em>la cathédrale.</em></h2>
+      <div class="adresse" data-vu>
+        <p class="huit" aria-hidden="true"><span><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i></span></p>
+        <p class="adresse-t"><span class="vh">8 </span><b>avenue Charles de Gaulle</b><span>19000 Tulle, Corrèze</span><em>Le Richelieu, café bar</em></p>
+      </div>
+      <div class="semaine" id="semaine" data-vu></div>
+      <p class="semaine-note" data-vu>Vos jours et vos heures d’ouverture, votre téléphone <i class="tr"></i> : à confirmer avec vous. Rien n’est affiché tant que ce n’est pas sûr.</p>
+      <p class="actions" data-vu><a class="bouton" data-lien="carte" target="_blank" rel="noopener">Itinéraire</a><a class="bouton bleu" data-lien="instagram" target="_blank" rel="noopener">Instagram</a><a class="bouton creme" data-lien="facebook" target="_blank" rel="noopener">Facebook</a></p>
+    </div>
+    <figure class="arche" id="arche" data-vu="droite">
+      <img src="photos/clocher.webp" alt="Le clocher de la cathédrale Notre-Dame de Tulle" loading="lazy" width="1300" height="1733">
+      <figcaption>La cathédrale de Tulle. Photo Eunostos, Wikimedia Commons, CC BY-SA 3.0.</figcaption>
+    </figure>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
+<!-- 8. Un mot pour le comptoir -->
+<section class="mot sec" id="mot">
+  <div class="mot-in in">
+    <div data-vu>
+      <p class="sur">Écrire</p>
+      <h2 class="h2">Un mot pour <em>le comptoir.</em></h2>
+      <p class="lead">Une table, une soirée, une question : sur le vrai site, ce mot arrive directement chez vous. Ici, on s’entraîne : écrivez, puis maintenez le sceau pour cacheter.</p>
+      <p class="liens"><a class="bouton jaune" data-lien="instagram" target="_blank" rel="noopener">Instagram</a><a class="bouton creme" data-lien="facebook" target="_blank" rel="noopener">Facebook</a></p>
+    </div>
+    <form class="pli" id="pli" data-vu="droite" onsubmit="return false" autocomplete="off">
+      <label for="m-nom">Votre nom</label>
+      <input id="m-nom" type="text" maxlength="40">
+      <div class="sujets" id="sujets" role="group" aria-label="C’est pour">
+        <button class="pilule" type="button" aria-pressed="true">Une table</button>
+        <button class="pilule" type="button" aria-pressed="false">Une soirée</button>
+        <button class="pilule" type="button" aria-pressed="false">Une question</button>
+      </div>
+      <label for="m-mot">Votre mot</label>
+      <textarea id="m-mot" rows="3" maxlength="240"></textarea>
+      <div class="cacheter">
+        <button class="cachet" id="cachet" type="button" aria-label="Maintenir pour cacheter la lettre">
+          <span class="socle"></span><span class="cireg"><svg aria-hidden="true"><use href="#cire"/></svg></span><span class="lettre-r" aria-hidden="true">R</span>
+        </button>
+        <p>Maintenez le sceau pour cacheter.<small>La cire s’étale, puis le R s’imprime.</small></p>
+      </div>
+      <p class="recu" id="recu" role="status">Cachetée. Ceci est une maquette : rien n’est envoyé.<button type="button" id="autre-mot">Écrire un autre mot</button></p>
+    </form>
+  </div>
+</section>
+
+<!-- 9. Autant de pages que vous voulez -->
+<section class="pages sec" id="pages">
+  <div class="in">
+    <h2 class="h2" data-vu>Votre site peut avoir <em>autant de pages</em> que vous voulez.</h2>
+    <p class="lead" data-vu>Ici, une seule page pour vous donner l’idée. Une page pour la carte, une pour vos producteurs, une pour l’agenda : c’est vous qui voyez.</p>
+    <p class="onglets" data-vu><span style="--i:0">La carte</span><span style="--i:1">Les producteurs</span><span style="--i:2">L’agenda</span><span style="--i:3">La maison</span><span style="--i:4">Venir</span><span style="--i:5">Écrire</span></p>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="pied-in in">
+    <div>
+      <a class="logo" href="#haut"><svg aria-hidden="true"><use href="#barrette"/></svg><span>Le Richelieu</span></a>
+      <p><b>Café bar, bistrot bio et local.</b></p>
+      <p>8 avenue Charles de Gaulle, 19000 Tulle</p>
+    </div>
+    <div>
+      <p><b>Maquette privée.</b> Les pointillés attendent vos mots : la carte, les producteurs, les soirées, les horaires, le téléphone.</p>
+      <p><a data-lien="instagram" target="_blank" rel="noopener">Instagram</a> · <a data-lien="facebook" target="_blank" rel="noopener">Facebook</a> · <a data-lien="carte" target="_blank" rel="noopener">Itinéraire</a></p>
+    </div>
+    <div>
+      <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+      <p>Vos textes, vos photos, vos couleurs : on ajuste tout ensemble.</p>
+    </div>
+    <p class="alcool">L’abus d’alcool est dangereux pour la santé. À consommer avec modération.</p>
+    <p class="credits">Photo du clocher : Eunostos, Wikimedia Commons, CC BY-SA 3.0. Le portrait est un dessin, un clin d’œil au nom du café : il ne représente personne de la maison.</p>
+  </div>
+</footer>
+</body>
+</html>

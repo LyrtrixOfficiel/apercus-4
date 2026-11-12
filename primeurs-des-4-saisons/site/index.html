@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="fr" data-saison="automne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Primeur des 4 Saisons, Lunel : fruits, légumes, produits du terroir</title>
+<meta name="description" content="Maquette privée préparée pour le Primeur des 4 Saisons : fruits, légumes et produits du terroir, point relais colis, 322 boulevard Saint-Fructueux à Lunel.">
+<meta name="theme-color" content="#4a1b3e">
+<link rel="icon" href="data:,">
+<script>
+// La saison du jour est posée avant le premier affichage. Le réglage « moins de mouvement » du système n'est jamais lu :
+// tout bouge toujours ; le mode calme n'existe que sur demande, avec ?calme=1.
+(function () {
+  var h = document.documentElement, q = location.search, d = new Date(), m = d.getMonth(), j = d.getDate();
+  h.classList.add('js'); if (/[?&]calme=1/.test(q)) h.classList.add('calme');
+  var s = (m < 2 || (m === 2 && j < 20) || (m === 11 && j >= 21)) ? 'hiver' : (m < 5 || (m === 5 && j < 21)) ? 'printemps' : (m < 8 || (m === 8 && j < 22)) ? 'ete' : 'automne';
+  var p = /[?&](?:palette|saison)=(printemps|ete|automne|hiver)/.exec(q); h.dataset.saison = p ? p[1] : s; h.dataset.jour = s;
+})();
+</script>
+<link rel="preload" href="polices/playfair-i900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/barlow-c-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="fruits.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="Primeur des 4 Saisons, retour en haut">
+    <span class="mini" id="mini" aria-hidden="true"><svg viewBox="-20 -20 40 40"><g id="mini-g"><path d="M0 0L-14.140-14.140A20 20 0 0 1 14.140-14.140z" class="q-automne"/><path d="M0 0L14.140-14.140A20 20 0 0 1 14.140 14.140z" class="q-hiver"/><path d="M0 0L14.140 14.140A20 20 0 0 1-14.140 14.140z" class="q-printemps"/><path d="M0 0L-14.140 14.140A20 20 0 0 1-14.140-14.140z" class="q-ete"/></g><circle r="8.500" class="mini-moyeu"/><text y="4.600" text-anchor="middle" class="mini-4">4</text></svg></span>
+    <span class="marque-nom"><span class="marque-p">Primeur</span> <i>des 4 Saisons</i></span>
+  </a>
+  <nav class="liens" id="liens" aria-label="Rubriques">
+    <a href="#etal">L’étal</a>
+    <a href="#saisons">Les saisons</a>
+    <a href="#jeu">Le jeu</a>
+    <a href="#terroir">Le terroir</a>
+    <a href="#relais">Point relais</a>
+    <a href="#venir">Venir</a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <button class="tourner" id="tourner" type="button" aria-label="Tourner l’année : passer à la saison suivante">
+    <span class="tourner-mot" id="tourner-mot">Automne</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 1 2.400 5.300" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M3 15.500l4.800 2.300.6-5.300z" fill="currentColor"/></svg>
+  </button>
+  <button class="menu-b" id="menu-b" type="button" aria-expanded="false" aria-controls="liens">Menu</button>
+  <span class="roule" id="roule" aria-hidden="true"></span>
+</header>
+
+<main id="tout">
+
+<!-- ACCUEIL : la roue des saisons -->
+<section class="accueil" id="accueil">
+  <div class="air" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="cadre accueil-grille">
+    <div class="accueil-texte">
+      <p class="rubans" aria-label="Lunel, Hérault. Fruits et légumes, produits du terroir, point relais colis.">
+        <span class="ruban r1">Lunel, Hérault</span><span class="ruban r2">Fruits et légumes</span><span class="ruban r3">Terroir</span><span class="ruban r4">Point relais colis</span>
+      </p>
+      <h1 class="enseigne" id="enseigne">
+        <span class="e-primeur"><span id="nom-a">Primeur</span></span>
+        <span class="e-saisons" id="nom-b">des 4 Saisons</span>
+      </h1>
+      <p class="accroche">Fruits, légumes et produits du terroir, au <span class="rue">322 boulevard Saint-Fructueux</span> à Lunel. La boutique est aussi point relais colis.</p>
+      <p class="quand"><span id="quand">Aujourd’hui</span> : à l’étal, <span id="cest">c’est</span> <em class="mot" data-mot="le">l’automne</em>.</p>
+      <div class="annee" role="group" aria-label="Tourner l’année">
+        <span class="annee-t">Tournez l’année</span>
+        <button type="button" class="an" data-s="printemps">Printemps</button>
+        <button type="button" class="an" data-s="ete">Été</button>
+        <button type="button" class="an" data-s="automne">Automne</button>
+        <button type="button" class="an" data-s="hiver">Hiver</button>
+        <button type="button" class="an an-jour" id="an-jour" data-s="jour">Aujourd’hui</button>
+      </div>
+      <p class="boutons">
+        <a class="bouton plein" href="#etal">L’étal de saison</a>
+        <a class="bouton creux" href="#venir">Y aller</a>
+      </p>
+    </div>
+    <div class="roue-zone" id="roue-zone">
+      <div class="pique pique-date" id="pointeur" aria-hidden="true"><b id="p-date">12 NOV.</b><small id="p-sous">aujourd’hui</small></div>
+      <div class="roue" id="roue" role="slider" tabindex="0" aria-label="La roue des saisons : faites-la tourner avec le doigt, la souris ou les flèches" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0">
+        <div class="roue-disque" id="disque"></div>
+        <div class="roue-moyeu" aria-hidden="true"><b>4</b><span>saisons</span></div>
+      </div>
+      <p class="roue-aide" aria-hidden="true"><svg viewBox="0 0 40 20"><path d="M4 14C12 4 28 4 36 14" fill="none" stroke="currentColor" stroke-width="3.400" stroke-linecap="round"/><path d="M38.500 8l-1 8-7.500-2.500z" fill="currentColor"/></svg>Tirez la roue : toute la boutique change de saison.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LATTE DE CAGEOT : le métier au pochoir -->
+<div class="latte" aria-hidden="true"><div class="latte-piste" id="latte"><span>Fruits</span><i></i><span>Légumes</span><i></i><span>Produits du terroir</span><i></i><span>Point relais colis</span><i></i><span>Lunel</span><i></i><span>Fruits</span><i></i><span>Légumes</span><i></i><span>Produits du terroir</span><i></i><span>Point relais colis</span><i></i><span>Lunel</span><i></i><span>Fruits</span><i></i><span>Légumes</span><i></i><span>Produits du terroir</span><i></i><span>Point relais colis</span><i></i><span>Lunel</span><i></i></div></div>
+
+<!-- L'ÉTAL DE SAISON -->
+<section class="etal" id="etal">
+  <div class="cadre etal-grille">
+    <div class="etal-texte" data-vu>
+      <p class="sur">L’étal</p>
+      <h2>L’étal <span class="nb"><em class="mot" data-mot="de">d’automne</em>.</span></h2>
+      <p class="chapo">Chaque saison a ses fruits et ses légumes. Touchez un tas : l’étiquette se retourne et donne ses mois.</p>
+      <div class="bon-zone" data-superpose>
+      <figure class="pastille" id="pastille" data-vu>
+        <img id="pastille-img" src="photos/automne.webp" alt="" width="220" height="220" loading="lazy">
+        <figcaption>Photo d’illustration</figcaption>
+      </figure>
+      <div class="bon" data-vu>
+        <p class="bon-t">Cette semaine à l’étal</p>
+        <p class="pt" aria-label="À compléter">................................</p>
+        <p class="pt" aria-label="À compléter">................................</p>
+        <p class="pt" aria-label="À compléter">................................</p>
+        <p class="bon-n">Ce qui est sur l’étal cette semaine, c’est vous qui le dites : vous le changez vous-même, quand vous voulez.</p>
+      </div>
+      </div>
+    </div>
+    <div class="cageots" id="cageots">
+      <div class="cageot c-fruits" data-vu>
+        <div class="cageot-papier" id="tas-fruits"></div>
+        <span class="pochoir">Fruits</span>
+      </div>
+      <div class="cageot c-legumes" data-vu>
+        <div class="cageot-papier" id="tas-legumes"></div>
+        <span class="pochoir">Légumes</span>
+      </div>
+      <div class="cageot c-terroir" data-vu>
+        <div class="cageot-papier">
+          <div class="mystere" id="mystere" aria-hidden="true"></div>
+          <div class="fiche">
+            <p class="fiche-t">Produits du terroir</p>
+            <p class="pt" aria-label="À compléter">....................</p>
+            <p class="pt" aria-label="À compléter">....................</p>
+            <p class="pt" aria-label="À compléter">....................</p>
+          </div>
+        </div>
+        <span class="pochoir">Terroir</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LES SAISONS : le calendrier du Sud -->
+<section class="saisons" id="saisons">
+  <div class="cadre">
+    <div class="saisons-tete" data-vu>
+      <div>
+        <p class="sur">Les saisons</p>
+        <h2>Douze mois <em>dans le Sud.</em></h2>
+      </div>
+      <div class="saisons-dit">
+        <p class="chapo">Des repères généraux pour le Midi : fraises au printemps, tomates en été, raisin en automne, agrumes en hiver. L’étal de la boutique, lui, se décide chaque semaine.</p>
+        <div class="tri" role="group" aria-label="Filtrer le calendrier">
+          <button type="button" class="tri-b" data-tri="tout" aria-pressed="true">Tout</button>
+          <button type="button" class="tri-b" data-tri="fruit" aria-pressed="false">Fruits</button>
+          <button type="button" class="tri-b" data-tri="legume" aria-pressed="false">Légumes</button>
+          <button type="button" class="tri-b" data-tri="saison" aria-pressed="false">De saison <span class="mot" data-mot="moisnom">en novembre</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="cal" id="cal" data-vu></div>
+    <p class="cal-aide">Touchez un mois : toute la boutique y passe.</p>
+  </div>
+  <div class="roulade" data-sens="1" aria-hidden="true"></div>
+</section>
+
+<!-- LE JEU : de quelle saison ? -->
+<section class="jeu" id="jeu">
+  <div class="cadre jeu-grille">
+    <div class="jeu-texte" data-vu>
+      <p class="sur">Le jeu</p>
+      <h2>De quelle <em>saison ?</em></h2>
+      <p class="chapo">Déballez le fruit de son papier de soie, puis rangez-le dans le bon cageot.</p>
+      <p class="jeu-dit" id="jeu-dit" aria-live="polite">Touchez le papier pour le déballer.</p>
+      <p class="jeu-bas"><span class="pique pique-score"><b><span id="jeu-n">0</span> sur 8</b><small>du premier coup</small></span><button type="button" class="bouton creux" id="jeu-encore">Recommencer</button></p>
+    </div>
+    <div class="jeu-scene" id="jeu-scene">
+      <div class="file" id="file" aria-hidden="true"></div>
+      <div class="soie-zone">
+        <div class="soie" id="soie" role="button" tabindex="0" aria-label="Déballer le fruit">
+          <div class="soie-base"><span class="soie-rond"></span><span class="soie-fruit" id="soie-fruit"></span></div>
+          <i class="pan p-h"></i><i class="pan p-d"></i><i class="pan p-b"></i><i class="pan p-g"></i>
+          <span class="sceau" aria-hidden="true"><b>4</b></span>
+        </div>
+      </div>
+      <div class="jeu-cageots" id="jeu-cageots">
+        <button type="button" class="jc jc-printemps" data-s="printemps"><span class="jc-embleme" aria-hidden="true"></span><span class="jc-fond"></span><span class="pochoir">Printemps</span></button>
+        <button type="button" class="jc jc-ete" data-s="ete"><span class="jc-embleme" aria-hidden="true"></span><span class="jc-fond"></span><span class="pochoir">Été</span></button>
+        <button type="button" class="jc jc-automne" data-s="automne"><span class="jc-embleme" aria-hidden="true"></span><span class="jc-fond"></span><span class="pochoir">Automne</span></button>
+        <button type="button" class="jc jc-hiver" data-s="hiver"><span class="jc-embleme" aria-hidden="true"></span><span class="jc-fond"></span><span class="pochoir">Hiver</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LE TERROIR -->
+<section class="terroir" id="terroir">
+  <div class="paysage" id="paysage" aria-hidden="true">
+    <svg viewBox="0 0 1600 460" preserveAspectRatio="xMidYMax slice">
+      <rect class="p-ciel" width="1600" height="460"/>
+      <g class="p-soleil" id="p-soleil"><circle class="p-halo" cx="900" cy="150" r="92"/><circle class="p-astre" cx="900" cy="150" r="56"/></g>
+      <g class="plan" data-v="0.02">
+        <path class="p-loin" d="M-400 300H-40C120 220 260 250 400 262 520 190 700 180 860 250c120-44 250-50 380-8 130-56 290-40 420 30h400v190H-400z"/>
+      </g>
+      <g class="plan" data-v="0.05">
+        <path class="p-mi" d="M-400 340H-40C160 280 420 300 640 322c220-42 500-46 720-12 110-18 210-14 320 6h400v150H-400z"/>
+        <g class="p-rangs"><path d="M40 352C260 318 470 318 640 334"/><path d="M-20 384C240 344 500 338 700 350"/><path d="M-30 420C260 372 560 362 780 372"/><path d="M820 338c190-26 420-28 600-8"/><path d="M860 366c200-28 470-30 700-8"/><path d="M900 398c220-30 480-32 720-10"/></g>
+        <g class="p-cypres"><path d="M250 318c-12-40-10-92 0-130 10 38 12 90 0 130z"/><path d="M286 322c-10-32-8-72 0-104 8 32 10 72 0 104z"/><path d="M1396 316c-12-42-10-98 0-138 10 40 12 96 0 138z"/><path d="M1432 320c-9-30-8-66 0-96 8 30 9 66 0 96z"/><path d="M742 322c-9-28-8-62 0-90 8 28 9 62 0 90z"/></g>
+        <g class="p-mas"><path class="mas-mur" d="M1010 258h190v62h-190z"/><path class="mas-toit" d="M996 260l60-34h130l28 34z"/><path class="mas-mur2" d="M1200 276h70v44h-70z"/><path class="mas-toit" d="M1192 278l20-18h56l14 18z"/><path class="mas-volet" d="M1040 276h22v28h-22zM1090 276h22v28h-22zM1218 290h18v22h-18z"/><path class="mas-porte" d="M1146 282h26v38h-26z"/></g>
+        <g class="p-pin"><path class="pin-tronc" d="M560 330c2-34 0-64-4-92h14c-2 30-2 60 2 92z"/><ellipse class="pin-houppe" cx="566" cy="226" rx="78" ry="30"/><ellipse class="pin-houppe2" cx="540" cy="216" rx="46" ry="18"/></g>
+        <g class="p-fleurs"><circle cx="520" cy="212" r="7"/><circle cx="560" cy="204" r="8"/><circle cx="604" cy="218" r="7"/><circle cx="538" cy="234" r="6"/><circle cx="590" cy="238" r="6"/><circle cx="250" cy="330" r="6"/><circle cx="1396" cy="326" r="6"/></g>
+      </g>
+      <g class="plan" data-v="0.09">
+        <path class="p-eau" d="M-400 400H-40c200-18 420-14 640-4 260-22 620-22 1040 2h400v70H-400z"/>
+        <g class="p-reflets"><path d="M120 424h90M330 438h120M700 420h110M980 436h140M1300 424h100"/></g>
+        <g class="p-roseaux"><path d="M60 440c-2-30 2-50 8-66M84 440c0-26 6-44 14-56M108 440c2-22 0-40-6-52M1500 440c-2-30 2-52 10-68M1528 440c0-26 6-42 12-52M1474 440c2-20 0-36-4-46"/></g>
+        <g class="flamant" id="flamant-1" transform="translate(640 400)"><g class="flamant-c"><path class="fl-patte" d="M-3 8v34M6 8l-6 14 6 20"/><ellipse class="fl-corps" cx="0" cy="0" rx="20" ry="12"/><path class="fl-aile" d="M-16-2c8-8 22-8 30 0-8 8-22 9-30 0z"/><path class="fl-cou" d="M16-4c12-6 2-22 12-30"/><circle class="fl-corps" cx="29" cy="-36" r="5.500"/><path class="fl-bec" d="M33-36l9 3-5 5z"/></g></g>
+        <g class="flamant" id="flamant-2" transform="translate(730 412) scale(.82)"><g class="flamant-c"><path class="fl-patte" d="M-3 8v34M6 8v34"/><ellipse class="fl-corps" cx="0" cy="0" rx="20" ry="12"/><path class="fl-aile" d="M-16-2c8-8 22-8 30 0-8 8-22 9-30 0z"/><path class="fl-cou" d="M16-2c14 2 12 20 22 24"/><circle class="fl-corps" cx="40" cy="24" r="5.500"/><path class="fl-bec" d="M43 27l5 8-8-2z"/></g></g>
+        <g class="flamant" id="flamant-3" transform="translate(1040 404) scale(-.92 .92)"><g class="flamant-c"><path class="fl-patte" d="M-3 8v34M6 8l-6 14 6 20"/><ellipse class="fl-corps" cx="0" cy="0" rx="20" ry="12"/><path class="fl-aile" d="M-16-2c8-8 22-8 30 0-8 8-22 9-30 0z"/><path class="fl-cou" d="M16-4c12-6 2-22 12-30"/><circle class="fl-corps" cx="29" cy="-36" r="5.500"/><path class="fl-bec" d="M33-36l9 3-5 5z"/></g></g>
+      </g>
+    </svg>
+  </div>
+  <div class="cadre terroir-grille">
+    <div class="terroir-texte" data-vu>
+      <p class="sur">Le terroir</p>
+      <h2>Entre Camargue <em>et garrigue.</em></h2>
+      <p class="chapo">Fruits, légumes et produits du terroir : c’est le métier de la boutique. Vos producteurs et vos produits du coin ont leur place sur le site, avec leur nom et leur histoire.</p>
+    </div>
+    <div class="vignettes" id="vignettes">
+      <div class="vignette v1" data-vu><span class="vg-haut">Produit du terroir</span><span class="pt" aria-label="À compléter">..............</span><span class="vg-bas">Venu de <span class="pt" aria-label="À compléter">..........</span></span></div>
+      <div class="vignette v2" data-vu><span class="vg-haut">Produit du terroir</span><span class="pt" aria-label="À compléter">..............</span><span class="vg-bas">Venu de <span class="pt" aria-label="À compléter">..........</span></span></div>
+      <div class="vignette v3" data-vu><span class="vg-haut">Produit du terroir</span><span class="pt" aria-label="À compléter">..............</span><span class="vg-bas">Venu de <span class="pt" aria-label="À compléter">..........</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- POINT RELAIS COLIS -->
+<section class="relais" id="relais">
+  <div class="cadre relais-grille">
+    <div class="relais-texte" data-vu>
+      <p class="sur">Point relais colis</p>
+      <h2>Un colis <em>à retirer ?</em></h2>
+      <p class="chapo">C’est ici aussi : la boutique est point relais colis. On passe prendre son paquet, on repart avec des fruits.</p>
+      <p class="ligne-pt"><span>Réseau de colis</span><span class="pt" aria-label="À compléter">....................</span></p>
+      <p class="ligne-pt"><span>Retrait des colis</span><span class="pt" aria-label="À compléter">....................</span></p>
+      <p class="boutons"><button type="button" class="bouton plein" id="relais-b">Je viens chercher mon colis</button></p>
+      <p class="relais-dit" id="relais-dit" aria-live="polite">Six colis attendent sur l’étagère.</p>
+    </div>
+    <div class="comptoir" id="comptoir" data-vu>
+      <div class="casier rayon" id="rayon" aria-hidden="true">
+        <span class="casier-t">Colis à retirer</span>
+        <div class="planche">
+          <span class="colis k-a" style="--l:150px;--h:92px"><i></i></span>
+          <span class="colis k-b" style="--l:104px;--h:124px"><i></i></span>
+          <span class="colis k-c" style="--l:172px;--h:74px"><i></i></span>
+        </div>
+        <div class="planche">
+          <span class="colis k-c" style="--l:118px;--h:86px"><i></i></span>
+          <span class="colis k-a" style="--l:142px;--h:112px"><i></i></span>
+          <span class="colis k-b" style="--l:96px;--h:78px"><i></i></span>
+        </div>
+      </div>
+      <div class="plateau" aria-hidden="true">
+        <div class="pose" id="pose"></div>
+        <span class="pochoir">Point relais colis</span>
+      </div>
+    </div>
+  </div>
+  <div class="roulade" data-sens="-1" aria-hidden="true"></div>
+</section>
+
+<!-- VENIR -->
+<section class="venir" id="venir">
+  <div class="cadre venir-grille">
+    <div class="adresse" data-vu>
+      <p class="sur">Venir</p>
+      <div class="etiquette">
+        <span class="et-arc">Lunel <i></i> Hérault</span>
+        <b class="et-num">322</b>
+        <span class="et-rue">boulevard<br>Saint-Fructueux</span>
+        <span class="et-ville">34400 Lunel</span>
+      </div>
+      <p class="boutons"><a class="bouton plein" id="itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=322+boulevard+Saint-Fructueux+34400+Lunel" target="_blank" rel="noopener">Itinéraire</a></p>
+      <p class="depuis" id="depuis">Ouvert depuis octobre 2026</p>
+    </div>
+    <div class="horaires">
+      <h2 data-vu>Les <em>horaires.</em></h2>
+      <p class="chapo" data-vu>Chaque jour a son étiquette. Les heures attendent les vôtres.</p>
+      <div class="semaine" id="semaine"></div>
+      <div class="tel" data-vu>
+        <span class="tel-t">Téléphone</span>
+        <span class="pique pique-tel"><b id="tel">.. .. .. .. ..</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTANT DE PAGES QUE VOUS VOULEZ -->
+<section class="pages" id="pages">
+  <div class="cadre pages-grille">
+    <div class="pages-texte" data-vu>
+      <p class="sur">Et la suite</p>
+      <h2>Votre site peut avoir <em>autant de pages</em> que vous voulez.</h2>
+      <p class="chapo">Cette maquette tient en une seule page pour donner l’idée. Rien n’est figé : vos textes, vos photos, vos couleurs, on ajuste tout ensemble.</p>
+    </div>
+    <div class="gommettes" id="gommettes" data-vu>
+      <span class="gommette g1"><b>Une page</b>par saison</span>
+      <span class="gommette g2"><b>Une page</b>pour le terroir</span>
+      <span class="gommette g3"><b>Une page</b>pour vos paniers</span>
+      <span class="gommette g4"><b>Une page</b>pour le point relais</span>
+      <p class="gommettes-n">C’est vous qui voyez.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="cadre pied-grille">
+    <p class="pied-nom"><span class="marque-p">Primeur</span> <i>des 4 Saisons</i><span class="pied-adr">322 boulevard Saint-Fructueux, 34400 Lunel</span></p>
+    <p class="pied-notes">Maquette privée, non référencée. Le calendrier des saisons est un repère général pour le Sud de la France, pas la liste de l’étal. Photos d’illustration (Pexels), en attendant les vôtres.</p>
+    <a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  </div>
+</footer>
+
+</body>
+</html>

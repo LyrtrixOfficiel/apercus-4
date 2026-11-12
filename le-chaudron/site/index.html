@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Chaudron, traiteur et rôtisserie à Andernos-les-Bains</title>
+<meta name="description" content="Maquette privée : traiteur, rôtisserie, plats cuisinés à emporter et épicerie fine, 10 avenue de Bordeaux, Andernos-les-Bains.">
+<meta name="theme-color" content="#17606b">
+<link rel="icon" href="data:,">
+<script>(function(){var h=document.documentElement;h.classList.add('js');if(/[?&]calme=1/.test(location.search))h.classList.add('calme');if(/[?&]apercu=1/.test(location.search))h.classList.add('apercu')})();</script>
+<link rel="preload" href="polices/young-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<!-- Réserve de dessins : dégradés de cuivre et formes réutilisées -->
+<svg class="reserve" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gCu" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a3412"/><stop offset=".16" stop-color="#c4692f"/><stop offset=".34" stop-color="#f8cda8"/>
+      <stop offset=".5" stop-color="#d9804a"/><stop offset=".78" stop-color="#96431a"/><stop offset="1" stop-color="#c9713a"/>
+    </linearGradient>
+    <linearGradient id="gCuV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3b58a"/><stop offset=".45" stop-color="#c4692f"/><stop offset="1" stop-color="#7a3412"/>
+    </linearGradient>
+    <linearGradient id="gBouillon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9791f"/><stop offset=".5" stop-color="#f0b548"/><stop offset="1" stop-color="#c9791f"/>
+    </linearGradient>
+    <path id="f-flamme" d="M0 0 C-22 -8 -26 -40 -8 -62 C-10 -44 2 -40 4 -52 C8 -72 0 -86 -4 -100 C22 -84 34 -50 26 -24 C22 -10 12 -2 0 0 Z"/>
+  </defs>
+
+  <!-- Volaille rôtie, vue de côté, très stylisée -->
+  <symbol id="s-poulet" viewBox="0 0 84 60">
+    <path class="pl-c" d="M5 35 C5 18 20 8 39 8 C56 8 68 17 70 30 C72 44 59 53 39 53 C20 53 5 49 5 35 Z"/>
+    <path class="pl-o" d="M50 24 C53 13 63 6 70 10 C76 14 73 23 66 27 C60 31 53 32 50 30 Z"/>
+    <path d="M69 10 L77 3" stroke="#fff6e4" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path class="pl-o" d="M20 29 C26 22 37 23 40 31 C37 38 26 39 20 33 Z"/>
+    <path d="M13 27 C17 19 25 15 34 14" stroke="#fff" stroke-opacity=".38" stroke-width="4" stroke-linecap="round" fill="none"/>
+  </symbol>
+
+  <!-- Louche -->
+  <symbol id="s-louche" viewBox="0 0 60 200">
+    <path d="M30 6 a10 10 0 1 1 -10 10" stroke="url(#gCuV)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="26" y="14" width="8" height="132" rx="4" fill="url(#gCu)"/>
+    <path d="M4 142 H56 C56 176 44 194 30 194 C16 194 4 176 4 142 Z" fill="url(#gCu)"/>
+    <ellipse cx="30" cy="143" rx="26" ry="7" fill="#7a3412"/>
+    <ellipse class="lc-jus" cx="30" cy="144" rx="21" ry="4.5" fill="url(#gBouillon)"/>
+  </symbol>
+
+  <!-- Cocotte : corps et couvercle séparés, couleurs données par --corps, --bord, --bouton -->
+  <symbol id="s-corps" viewBox="0 0 220 130">
+    <path style="fill:var(--bord)" d="M2 34 h26 v16 h-26 a8 8 0 0 1 0 -16 Z M218 34 h-26 v16 h26 a8 8 0 0 0 0 -16 Z"/>
+    <path style="fill:var(--corps)" d="M26 22 H194 V86 C194 110 176 124 154 124 H66 C44 124 26 110 26 86 Z"/>
+    <path d="M40 34 V84 C40 98 48 108 60 112" stroke="#fff" stroke-opacity=".3" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <rect style="fill:var(--bord)" x="18" y="14" width="184" height="14" rx="7"/>
+  </symbol>
+  <symbol id="s-couv" viewBox="0 0 220 70">
+    <path style="fill:var(--corps)" d="M22 58 C30 24 190 24 198 58 Z"/>
+    <rect style="fill:var(--bord)" x="16" y="54" width="188" height="13" rx="6.5"/>
+    <rect style="fill:var(--bouton)" x="98" y="14" width="24" height="18" rx="4"/>
+    <rect style="fill:var(--bouton)" x="86" y="6" width="48" height="13" rx="6.5"/>
+    <path d="M48 46 C62 34 86 30 104 30" stroke="#fff" stroke-opacity=".34" stroke-width="7" stroke-linecap="round" fill="none"/>
+  </symbol>
+
+  <!-- Épicerie : bocal, bouteille, boîte. Teinte donnée par --t -->
+  <symbol id="s-bocal" viewBox="0 0 64 96">
+    <rect x="12" y="2" width="40" height="15" rx="5" fill="url(#gCu)"/>
+    <rect x="6" y="15" width="52" height="79" rx="11" style="fill:var(--t)"/>
+    <path d="M14 26 V78" stroke="#fff" stroke-opacity=".4" stroke-width="6" stroke-linecap="round"/>
+    <rect x="11" y="44" width="42" height="30" rx="3" fill="#fff8ea"/>
+    <path d="M17 60 H47" stroke="#1b1d1f" stroke-width="2.6" stroke-dasharray="2.6 4.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-bouteille" viewBox="0 0 44 130">
+    <rect x="16" y="0" width="12" height="12" rx="3" fill="url(#gCu)"/>
+    <path style="fill:var(--t)" d="M17 10 H27 V36 C27 46 40 50 40 66 V120 a8 8 0 0 1 -8 8 H12 a8 8 0 0 1 -8 -8 V66 C4 50 17 46 17 36 Z"/>
+    <path d="M11 66 V112" stroke="#fff" stroke-opacity=".35" stroke-width="5" stroke-linecap="round"/>
+    <rect x="8" y="74" width="28" height="32" rx="3" fill="#fff8ea"/>
+    <path d="M13 90 H31" stroke="#1b1d1f" stroke-width="2.6" stroke-dasharray="2.6 4.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="s-boite" viewBox="0 0 70 60">
+    <rect x="3" y="6" width="64" height="52" rx="6" style="fill:var(--t)"/>
+    <rect x="1" y="2" width="68" height="10" rx="5" fill="url(#gCu)"/>
+    <rect x="10" y="22" width="50" height="24" rx="3" fill="#fff8ea"/>
+    <path d="M17 34 H53" stroke="#1b1d1f" stroke-width="2.6" stroke-dasharray="2.6 4.4" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Le petit chaudron du logo -->
+  <symbol id="s-logo" viewBox="0 0 48 48">
+    <path d="M9 22 C9 6 39 6 39 22" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M6 22 H42 C44 34 38 44 24 44 C10 44 4 34 6 22 Z" fill="url(#gCu)"/>
+    <rect x="4" y="19" width="40" height="6" rx="3" fill="#7a3412"/>
+  </symbol>
+
+  <!-- Pin parasol -->
+  <symbol id="s-pin" viewBox="0 0 200 260">
+    <path d="M96 260 C100 200 92 150 110 96 L122 100 C108 150 116 204 114 260 Z" fill="#6b3f22"/>
+    <path d="M108 120 C92 108 78 106 66 96" stroke="#6b3f22" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <ellipse cx="62" cy="78" rx="58" ry="26" style="fill:var(--pin-f)"/>
+    <ellipse cx="128" cy="58" rx="68" ry="30" style="fill:var(--pin)"/>
+    <ellipse cx="96" cy="36" rx="54" ry="24" style="fill:var(--pin)"/>
+    <ellipse cx="150" cy="84" rx="44" ry="18" style="fill:var(--pin-f)"/>
+  </symbol>
+</svg>
+
+<header class="tete" id="tete">
+  <a class="logo" href="#accueil" aria-label="Le Chaudron, retour en haut">
+    <svg class="logo-pot" viewBox="0 0 48 48" aria-hidden="true"><use href="#s-logo"/></svg>
+    <span class="logo-nom">Le Chaudron</span>
+  </a>
+  <nav class="menu" id="menu" aria-label="Rubriques">
+    <a href="#jour">Ce qui mijote</a>
+    <a href="#broche">La rôtisserie</a>
+    <a href="#emporter">À emporter</a>
+    <a href="#epicerie">L’épicerie fine</a>
+    <a href="#traiteur">Le traiteur</a>
+    <a href="#venir">Venir</a>
+    <a class="m-cde" href="#commander">Commander</a>
+  </nav>
+  <a class="kz" href="https://kazura.fr" target="_blank" rel="noopener" aria-label="Site imaginé par Kazura">Kazura</a>
+  <a class="tete-cde" href="#commander">Commander</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  <div class="tringle" aria-hidden="true"><i id="chauffe"></i></div>
+</header>
+
+<main>
+
+<!-- 1. ACCUEIL : le chaudron -->
+<section class="sec accueil" id="accueil">
+  <div class="accueil-grille">
+    <h1 class="titre" id="titre" aria-label="Le Chaudron d’Andernos">
+      <span class="t-le" aria-hidden="true">Le</span>
+      <span class="t-ch" aria-hidden="true" data-lettres>Chaudron</span>
+      <span class="t-da" aria-hidden="true">d’Andernos</span>
+    </h1>
+
+    <div class="scene" id="scene">
+      <div class="volutes" id="volutes">
+        <a class="volute v1" href="#broche"><b>Rôtisserie</b><span>la broche tourne</span></a>
+        <a class="volute v2" href="#traiteur"><b>Traiteur</b><span>à la louche, ou pour cinquante</span></a>
+        <a class="volute v3" href="#emporter"><b>Plats cuisinés</b><span>à emporter</span></a>
+        <a class="volute v4" href="#epicerie"><b>Épicerie fine</b><span>le garde-manger</span></a>
+      </div>
+      <button class="pot" id="pot" type="button" aria-pressed="false" aria-label="Soulever ou reposer le couvercle du chaudron">
+        <svg viewBox="0 0 560 650" aria-hidden="true">
+          <!-- le feu, qui ne bouge pas avec le chaudron -->
+          <g class="buches">
+            <rect x="150" y="608" width="270" height="30" rx="15" fill="#4a2a17" transform="rotate(-5 285 623)"/>
+            <rect x="140" y="606" width="280" height="30" rx="15" fill="#6b3f22" transform="rotate(6 280 621)"/>
+          </g>
+          <g class="flammes">
+            <g transform="translate(196 628) scale(1.05 1.0)"><use class="fl f1" href="#f-flamme" fill="#e2401b"/></g>
+            <g transform="translate(266 632) scale(1.5 1.25)"><use class="fl f2" href="#f-flamme" fill="#e2401b"/></g>
+            <g transform="translate(350 628) scale(1.15 1.05)"><use class="fl f3" href="#f-flamme" fill="#e2401b"/></g>
+            <g transform="translate(228 632) scale(.95 .8)"><use class="fl f4" href="#f-flamme" fill="#f58220"/></g>
+            <g transform="translate(300 634) scale(1.15 .92)"><use class="fl f5" href="#f-flamme" fill="#f58220"/></g>
+            <g transform="translate(276 634) scale(.7 .56)"><use class="fl f6" href="#f-flamme" fill="#f9c13c"/></g>
+            <g transform="translate(330 632) scale(.55 .5)"><use class="fl f7" href="#f-flamme" fill="#f9c13c"/></g>
+          </g>
+          <!-- tout ce qui pend à la crémaillère -->
+          <g id="pendule">
+            <rect x="271" y="-30" width="18" height="118" rx="5" fill="#1b1d1f"/>
+            <path d="M289 6 l16 9 l-16 9 Z M289 34 l16 9 l-16 9 Z M289 62 l16 9 l-16 9 Z" fill="#1b1d1f"/>
+            <path d="M280 84 v26" stroke="#1b1d1f" stroke-width="10" stroke-linecap="round"/>
+            <path d="M112 268 C112 86 448 86 448 268" stroke="#1b1d1f" stroke-width="13" fill="none" stroke-linecap="round"/>
+            <path d="M96 262 C60 342 84 474 180 516 C236 540 324 540 380 516 C476 474 500 342 464 262 Z" fill="url(#gCu)"/>
+            <path d="M92 262 H468 V282 C400 300 160 300 92 282 Z" fill="#6b2a0d" opacity=".42"/>
+            <path d="M136 306 C112 378 132 452 190 492" stroke="#fff" stroke-opacity=".3" stroke-width="18" stroke-linecap="round" fill="none"/>
+            <path d="M432 322 C444 378 428 436 396 470" stroke="#5b2109" stroke-opacity=".26" stroke-width="26" stroke-linecap="round" fill="none"/>
+            <ellipse cx="280" cy="262" rx="194" ry="31" fill="#a24c1e"/>
+            <ellipse cx="280" cy="264" rx="176" ry="23" fill="#5b2109"/>
+            <g class="bouillon">
+              <ellipse cx="280" cy="268" rx="168" ry="18" fill="url(#gBouillon)"/>
+              <path class="remous r1" d="M180 268 C210 258 250 260 280 268 C310 276 350 276 380 266" stroke="#fbe2a2" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <path class="remous r2" d="M210 274 C240 268 262 272 290 276" stroke="#a85c12" stroke-width="5" stroke-linecap="round" fill="none"/>
+            </g>
+            <g class="vapeurs">
+              <path class="vp vp1" d="M214 244 C196 214 232 196 214 164 C200 140 226 122 214 96"/>
+              <path class="vp vp2" d="M282 240 C262 206 302 186 282 150 C266 122 296 104 282 74"/>
+              <path class="vp vp3" d="M350 244 C332 214 368 196 350 164 C336 140 362 122 350 96"/>
+            </g>
+            <circle cx="112" cy="268" r="15" fill="#1b1d1f"/><circle cx="112" cy="268" r="6" fill="#d9804a"/>
+            <circle cx="448" cy="268" r="15" fill="#1b1d1f"/><circle cx="448" cy="268" r="6" fill="#d9804a"/>
+            <g class="couv" id="couv">
+              <g class="couv-i">
+                <path d="M84 262 C104 172 456 172 476 262 C420 286 140 286 84 262 Z" fill="url(#gCu)"/>
+                <path d="M84 262 C140 286 420 286 476 262 C478 274 420 299 280 299 C140 299 82 274 84 262 Z" fill="#8a3d16"/>
+                <path d="M150 234 C190 204 250 196 300 196" stroke="#fff" stroke-opacity=".36" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <rect x="264" y="170" width="32" height="26" rx="6" fill="#1b1d1f"/>
+                <ellipse cx="280" cy="166" rx="34" ry="13" fill="#1b1d1f"/>
+                <ellipse cx="272" cy="162" rx="14" ry="4" fill="#fff" opacity=".22"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <p class="geste" id="geste">Touchez le chaudron&nbsp;: le couvercle se soulève.</p>
+    </div>
+
+    <div class="accroche">
+      <p class="chapo">Traiteur, rôtisserie, plats cuisinés à emporter et épicerie fine, au 10 avenue de Bordeaux, à Andernos-les-Bains.</p>
+      <p class="reprise"><span data-c="reprise">Maison reprise à l’automne 2026 par Nicolas Rambeau.</span> <span class="poin">Enseigne définitive&nbsp;: ............</span></p>
+      <div class="actions">
+        <a class="bouton b-cuivre" href="#jour">Voir ce qui mijote</a>
+        <a class="bouton b-email" href="#emporter">Composer un repas</a>
+        <a class="bouton b-trait" href="#venir">Venir</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. CE QUI MIJOTE : le fourneau -->
+<section class="sec jour" id="jour">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="jour-tete">
+    <p class="plaque entre">Aujourd’hui<span id="date-jour"></span></p>
+    <h2 class="entre">Ce qui mijote<br><em>aujourd’hui</em></h2>
+    <p class="chapo entre">Votre plat du jour s’affiche ici, en une ligne, chaque matin. Le reste du site ne bouge pas. Soulevez les couvercles.</p>
+  </div>
+  <div class="fourneau" id="fourneau">
+    <div class="feux">
+      <div class="feu c-email" data-cle="jour">
+        <div class="fiche-zone"><div class="fiche"><b>Plat du jour</b><span class="ecrit">............</span><i>.. €</i></div></div>
+        <button class="cocotte" type="button" aria-expanded="false" aria-label="Soulever le couvercle : plat du jour">
+          <svg class="k-couv" viewBox="0 0 220 70" aria-hidden="true"><use href="#s-couv"/></svg>
+          <svg class="k-corps" viewBox="0 0 220 130" aria-hidden="true"><use href="#s-corps"/></svg>
+          <span class="k-vap" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <span class="bruleur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <p class="feu-nom"><span>Plat du jour</span></p>
+      </div>
+      <div class="feu c-fonte" data-cle="broche">
+        <div class="fiche-zone"><div class="fiche"><b>À la broche</b><span class="ecrit">............</span><i>.. €</i></div></div>
+        <button class="cocotte" type="button" aria-expanded="false" aria-label="Soulever le couvercle : à la broche">
+          <svg class="k-couv" viewBox="0 0 220 70" aria-hidden="true"><use href="#s-couv"/></svg>
+          <svg class="k-corps" viewBox="0 0 220 130" aria-hidden="true"><use href="#s-corps"/></svg>
+          <span class="k-vap" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <span class="bruleur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <p class="feu-nom"><span>À la broche</span></p>
+      </div>
+      <div class="feu c-cuivre" data-cle="chaudron" style="--corps:url(#gCu)">
+        <div class="fiche-zone"><div class="fiche"><b>Dans le chaudron</b><span class="ecrit">............</span><i>.. €</i></div></div>
+        <button class="cocotte" type="button" aria-expanded="false" aria-label="Soulever le couvercle : dans le chaudron">
+          <svg class="k-couv" viewBox="0 0 220 70" aria-hidden="true"><use href="#s-couv"/></svg>
+          <svg class="k-corps" viewBox="0 0 220 130" aria-hidden="true"><use href="#s-corps"/></svg>
+          <span class="k-vap" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <span class="bruleur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <p class="feu-nom"><span>Dans le chaudron</span></p>
+      </div>
+      <div class="feu c-creme" data-cle="soir">
+        <div class="fiche-zone"><div class="fiche"><b>Pour ce soir</b><span class="ecrit">............</span><i>.. €</i></div></div>
+        <button class="cocotte" type="button" aria-expanded="false" aria-label="Soulever le couvercle : pour ce soir">
+          <svg class="k-couv" viewBox="0 0 220 70" aria-hidden="true"><use href="#s-couv"/></svg>
+          <svg class="k-corps" viewBox="0 0 220 130" aria-hidden="true"><use href="#s-corps"/></svg>
+          <span class="k-vap" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <span class="bruleur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <p class="feu-nom"><span>Pour ce soir</span></p>
+      </div>
+    </div>
+    <div class="piano" aria-hidden="true">
+      <div class="barre"></div>
+      <div class="boutons"><i></i><i></i><i></i><i></i></div>
+      <div class="four"><span class="hublot"><b></b></span></div>
+    </div>
+  </div>
+  <div class="jour-bas">
+    <figure class="photo ph-jour entre">
+      <img src="photos/sauce.webp" alt="" loading="lazy" width="1050" height="1200">
+      <figcaption>Photo d’illustration</figcaption>
+    </figure>
+    <p class="jour-note entre">Tout ce qui est en pointillés attend vos vrais mots&nbsp;: le plat, son prix, l’heure à laquelle il sort.</p>
+  </div>
+</section>
+
+<!-- 3. LA RÔTISSERIE : la rôtissoire à balancelles -->
+<section class="sec broche" id="broche">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="broche-grille">
+    <div class="broche-texte">
+      <p class="plaque entre">La rôtisserie</p>
+      <h2 class="entre">La broche <em>tourne.</em></h2>
+      <p class="chapo entre">La rôtisserie de la maison. Faites tourner la rôtissoire à la main ou en descendant la page&nbsp;: plus elle tourne, plus ça dore.</p>
+      <dl class="lignes entre">
+        <div><dt>Ce qui tourne aujourd’hui</dt><dd>............</dd></div>
+        <div><dt>À la broche cette semaine</dt><dd>............</dd></div>
+        <div><dt>Les jours de rôtisserie</dt><dd>............</dd></div>
+        <div><dt>Pour réserver</dt><dd>............</dd></div>
+      </dl>
+      <div class="cuisson entre" id="cuisson">
+        <p class="cuisson-mot" id="cuisson-mot" aria-live="polite">Ça tourne, ça commence à dorer.</p>
+        <div class="jauge" aria-hidden="true"><i id="jauge"></i><span>blond</span><span>doré</span><span>à point</span></div>
+        <button class="bouton b-braise" type="button" id="fournee" hidden>Remettre une fournée</button>
+      </div>
+    </div>
+    <div class="rotissoire entre" id="rotissoire">
+      <div class="caisson">
+        <div class="lueur"></div>
+        <div class="resist"><i></i><i></i><i></i><i></i></div>
+        <div class="roue" id="roue" role="img" aria-label="La rôtissoire, à faire tourner">
+          <i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i>
+          <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
+          <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
+          <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
+          <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
+          <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
+          <i class="moyeu"></i>
+        </div>
+        <div class="braises"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="vitre"></div>
+        <p class="a-point" id="a-point" aria-hidden="true">À point</p>
+      </div>
+      <div class="manivelle" id="manivelle" aria-hidden="true"><i></i></div>
+      <div class="socle-r"><span>Tournez-moi</span></div>
+    </div>
+    <figure class="photo ph-broche entre">
+      <img src="photos/grille.webp" alt="" loading="lazy" width="1400" height="859">
+      <figcaption>Photo d’illustration, en attendant les vôtres</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 4. À EMPORTER : composer sa commande -->
+<section class="sec emporter" id="emporter">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="emp-tete">
+    <p class="plaque entre">Plats cuisinés à emporter</p>
+    <h2 class="entre">Composez, <em>on prépare.</em></h2>
+    <p class="chapo entre">Les plats cuisinés à emporter sont fabriqués ici. Notez ce qui vous fait envie&nbsp;: les barquettes s’empilent, et la commande est prête à partir.</p>
+  </div>
+  <div class="emp-grille">
+    <div class="assiettes" id="assiettes">
+      <div class="choix entre" data-cle="broche">
+        <div class="assiette"><svg viewBox="0 0 84 60" aria-hidden="true"><use href="#s-poulet"/></svg></div>
+        <h3>À la broche</h3><p class="poin">............ .. €</p>
+        <div class="pas"><button type="button" class="moins" aria-label="Une part à la broche en moins">−</button><output>0</output><button type="button" class="plus" aria-label="Une part à la broche en plus">+</button></div>
+      </div>
+      <div class="choix entre" data-cle="chaudron">
+        <div class="assiette"><svg class="ic-louche" viewBox="0 0 60 200" aria-hidden="true"><use href="#s-louche"/></svg></div>
+        <h3>Du chaudron</h3><p class="poin">............ .. €</p>
+        <div class="pas"><button type="button" class="moins" aria-label="Une louche du chaudron en moins">−</button><output>0</output><button type="button" class="plus" aria-label="Une louche du chaudron en plus">+</button></div>
+      </div>
+      <div class="choix entre" data-cle="jour">
+        <div class="assiette c-email"><svg class="ic-coc" viewBox="0 0 220 130" aria-hidden="true"><use href="#s-corps"/></svg></div>
+        <h3>Plat du jour</h3><p class="poin">............ .. €</p>
+        <div class="pas"><button type="button" class="moins" aria-label="Un plat du jour en moins">−</button><output>0</output><button type="button" class="plus" aria-label="Un plat du jour en plus">+</button></div>
+      </div>
+      <div class="choix entre" data-cle="epicerie">
+        <div class="assiette"><svg class="ic-bocal" viewBox="0 0 64 96" aria-hidden="true"><use href="#s-bocal"/></svg></div>
+        <h3>De l’épicerie</h3><p class="poin">............ .. €</p>
+        <div class="pas"><button type="button" class="moins" aria-label="Un bocal en moins">−</button><output>0</output><button type="button" class="plus" aria-label="Un bocal en plus">+</button></div>
+      </div>
+    </div>
+    <div class="plan entre" id="plan">
+      <div class="pile-zone">
+        <p class="pile-vide" id="pile-vide">Le plan de travail est vide.<br>Touchez un +.</p>
+        <div class="pile" id="pile" aria-hidden="true"></div>
+        <p class="collant" id="collant" aria-hidden="true">À emporter</p>
+        <div class="inox" aria-hidden="true"></div>
+      </div>
+      <div class="ticket">
+        <h3>Votre commande</h3>
+        <ul class="t-lignes" id="t-lignes"><li class="t-rien">Rien de noté pour l’instant.</li></ul>
+        <p class="t-ligne"><span>À retirer le</span><b>............</b></p>
+        <p class="t-ligne"><span>Total</span><b>.. €</b></p>
+        <button class="bouton b-cuivre" type="button" id="fermer" disabled>Fermer les barquettes</button>
+        <p class="t-fin" id="t-fin" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <figure class="photo ph-emp entre">
+    <img src="photos/bouillon.webp" alt="" loading="lazy" width="1200" height="797">
+    <figcaption>Photo d’illustration</figcaption>
+  </figure>
+</section>
+
+<!-- 5. L'ÉPICERIE FINE : le garde-manger -->
+<section class="sec epicerie" id="epicerie">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="epi-grille">
+    <div class="epi-texte">
+      <p class="plaque entre">L’épicerie fine</p>
+      <h2 class="entre">Le garde-manger <em>s’ouvre.</em></h2>
+      <p class="chapo entre">Ce qu’on rapporte à la maison. Les portes s’ouvrent en descendant&nbsp;: touchez un bocal, son étiquette attend le nom du produit.</p>
+      <dl class="lignes entre">
+        <div><dt>Sur les étagères</dt><dd>............</dd></div>
+        <div><dt>D’où ça vient</dt><dd>............</dd></div>
+        <div><dt>À offrir</dt><dd>............</dd></div>
+      </dl>
+      <div class="etiquette entre" id="etiquette" aria-live="polite">
+        <p class="et-haut">Étiquette</p>
+        <p class="et-nom" id="et-nom">Touchez un bocal</p>
+        <p class="et-l"><span>Produit</span><b>............</b></p>
+        <p class="et-l"><span>Vient de</span><b>............</b></p>
+        <p class="et-l"><span>Prix</span><b>.. €</b></p>
+      </div>
+    </div>
+    <div class="garde entre" id="garde">
+      <p class="fronton">Épicerie fine</p>
+      <div class="armoire">
+        <div class="etageres" id="etageres">
+          <div class="etage">
+            <button type="button" class="art" style="--t:#d9a441" data-n="Bocal doré"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+            <button type="button" class="art" style="--t:#7d2f22" data-n="Bouteille foncée"><svg viewBox="0 0 44 130"><use href="#s-bouteille"/></svg></button>
+            <button type="button" class="art" style="--t:#b4442c" data-n="Bocal rouge"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+            <button type="button" class="art" style="--t:#2f6a45" data-n="Bouteille verte"><svg viewBox="0 0 44 130"><use href="#s-bouteille"/></svg></button>
+            <button type="button" class="art" style="--t:#e8c98a" data-n="Bocal clair"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+          </div>
+          <div class="etage">
+            <button type="button" class="art bas" style="--t:#17606b" data-n="Boîte bleue"><svg viewBox="0 0 70 60"><use href="#s-boite"/></svg></button>
+            <button type="button" class="art" style="--t:#8a9a3a" data-n="Bocal vert"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+            <button type="button" class="art bas" style="--t:#c9412a" data-n="Boîte rouge"><svg viewBox="0 0 70 60"><use href="#s-boite"/></svg></button>
+            <button type="button" class="art" style="--t:#e2b84a" data-n="Bouteille dorée"><svg viewBox="0 0 44 130"><use href="#s-bouteille"/></svg></button>
+            <button type="button" class="art bas" style="--t:#1b1d1f" data-n="Boîte noire"><svg viewBox="0 0 70 60"><use href="#s-boite"/></svg></button>
+          </div>
+          <div class="etage">
+            <button type="button" class="art" style="--t:#8f4a22" data-n="Bocal brun"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+            <button type="button" class="art bas" style="--t:#e9b23c" data-n="Boîte jaune"><svg viewBox="0 0 70 60"><use href="#s-boite"/></svg></button>
+            <button type="button" class="art" style="--t:#a8301f" data-n="Bouteille rouge"><svg viewBox="0 0 44 130"><use href="#s-bouteille"/></svg></button>
+            <button type="button" class="art" style="--t:#d98a5a" data-n="Bocal cuivré"><svg viewBox="0 0 64 96"><use href="#s-bocal"/></svg></button>
+            <button type="button" class="art bas" style="--t:#2c6146" data-n="Boîte verte"><svg viewBox="0 0 70 60"><use href="#s-boite"/></svg></button>
+          </div>
+        </div>
+        <div class="porte pg" aria-hidden="true"><i></i></div>
+        <div class="porte pd" aria-hidden="true"><i></i></div>
+      </div>
+      <figure class="photo ph-epi">
+        <img src="photos/etagere.webp" alt="" loading="lazy" width="1200" height="776">
+        <figcaption>Photo d’illustration</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6. LE TRAITEUR : la marmite qui grandit -->
+<section class="sec traiteur" id="traiteur">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="tr-grille">
+    <div class="tr-texte">
+      <p class="plaque entre">Le traiteur</p>
+      <h2 class="entre">À la louche,<br><em>ou pour cinquante.</em></h2>
+      <p class="chapo entre">Un plat à emporter ce soir, un repas pour une fête, une réception entière&nbsp;: la commande s’organise ici, sans courir après le téléphone.</p>
+      <dl class="lignes entre">
+        <div><dt>Vos réceptions, vos fêtes</dt><dd>............</dd></div>
+        <div><dt>Les formules</dt><dd>............</dd></div>
+        <div><dt>Le délai pour commander</dt><dd>............</dd></div>
+      </dl>
+      <figure class="photo ph-tr entre">
+        <img src="photos/table.webp" alt="" loading="lazy" width="1300" height="837">
+        <figcaption>Photo d’illustration</figcaption>
+      </figure>
+    </div>
+    <div class="banquet entre" id="banquet">
+      <div class="combien">
+        <p class="nb"><output id="nb">12</output><span>convives</span></p>
+        <p class="occasion" id="occasion">Un repas de famille</p>
+      </div>
+      <div class="marmite-zone" aria-hidden="true">
+        <div class="marmite" id="marmite" style="--corps:url(#gCu)">
+          <span class="m-vap"><i></i><i></i><i></i></span>
+          <svg viewBox="0 0 220 130"><use href="#s-corps"/></svg>
+        </div>
+        <div class="pile-ass" id="pile-ass"></div>
+        <div class="table-b"></div>
+      </div>
+      <div class="curseur" id="curseur">
+        <div class="rail" aria-hidden="true"><i id="rail-plein"></i></div>
+        <div class="poignee" id="poignee" role="slider" tabindex="0" aria-label="Nombre de convives" aria-valuemin="2" aria-valuemax="200" aria-valuenow="12">
+          <svg viewBox="0 0 60 200" aria-hidden="true"><use href="#s-louche"/></svg>
+        </div>
+        <span class="borne b-min" aria-hidden="true">2</span><span class="borne b-max" aria-hidden="true">200</span>
+      </div>
+      <p class="curseur-geste">Tirez la louche le long de la tringle.</p>
+      <a class="bouton b-cuivre" href="#commander" id="devis">Demander un devis pour 12 convives</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. VENIR : le bassin -->
+<section class="sec venir" id="venir">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="venir-tete">
+    <p class="plaque entre">Venir</p>
+    <h2 class="entre">Au bord <em>du bassin.</em></h2>
+  </div>
+  <div class="bassin" id="bassin">
+    <svg class="paysage" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <circle class="soleil" cx="626" cy="250" r="78" fill="#f6b25c"/>
+      <g class="oiseaux">
+        <path d="M0 0 q14 -14 28 0 q14 -14 28 0" transform="translate(0 196)"/>
+        <path d="M0 0 q10 -10 20 0 q10 -10 20 0" transform="translate(90 226)"/>
+        <path d="M0 0 q12 -12 24 0 q12 -12 24 0" transform="translate(-110 236)"/>
+      </g>
+      <path class="rive" d="M0 300 C120 286 220 292 330 282 C470 268 560 290 700 286 C860 280 960 268 1100 280 C1250 292 1400 276 1600 288 V330 H0 Z"/>
+      <path class="sable" d="M0 420 C200 380 420 372 640 396 C820 416 980 360 1200 372 C1380 382 1500 400 1600 392 V560 H0 Z"/>
+      <!-- cabanes sur pilotis -->
+      <g class="cabane" transform="translate(430 214)">
+        <path d="M14 96 V214 M52 96 V214 M108 96 V214 M146 96 V214" stroke="#3d2a1d" stroke-width="9" stroke-linecap="round"/>
+        <path d="M14 150 L52 110 M146 150 L108 110" stroke="#3d2a1d" stroke-width="6"/>
+        <rect x="0" y="88" width="160" height="12" rx="3" fill="#3d2a1d"/>
+        <rect x="16" y="36" width="128" height="54" fill="#fff4dc"/>
+        <rect x="16" y="36" width="128" height="12" fill="#e9d6b0"/>
+        <path d="M2 40 L80 0 L158 40 Z" style="fill:var(--acc)"/>
+        <rect x="34" y="52" width="26" height="38" style="fill:var(--mer-f)"/>
+        <rect x="80" y="54" width="46" height="22" style="fill:var(--mer-f)"/>
+        <path d="M103 54 V76" stroke="#fff4dc" stroke-width="4"/>
+      </g>
+      <g class="cabane" transform="translate(664 240) scale(.74)">
+        <path d="M14 96 V214 M52 96 V214 M108 96 V214 M146 96 V214" stroke="#3d2a1d" stroke-width="9" stroke-linecap="round"/>
+        <rect x="0" y="88" width="160" height="12" rx="3" fill="#3d2a1d"/>
+        <rect x="16" y="36" width="128" height="54" fill="#fff4dc"/>
+        <path d="M2 40 L80 0 L158 40 Z" fill="#96431a"/>
+        <rect x="34" y="52" width="26" height="38" style="fill:var(--mer-f)"/>
+        <rect x="80" y="54" width="46" height="22" style="fill:var(--mer-f)"/>
+      </g>
+      <!-- la marée -->
+      <g class="maree" id="maree">
+        <rect x="-20" y="330" width="1640" height="260" style="fill:var(--mer)"/>
+        <g class="rides">
+          <path d="M-200 352 h120 M40 352 h200 M380 352 h90 M620 352 h220 M980 352 h130 M1260 352 h240 M1620 352 h160"/>
+          <path d="M-120 386 h220 M260 386 h110 M520 386 h260 M900 386 h100 M1140 386 h220 M1500 386 h180"/>
+          <path d="M-220 428 h160 M80 428 h260 M470 428 h120 M760 428 h240 M1120 428 h140 M1380 428 h260"/>
+        </g>
+      </g>
+      <!-- la pinasse -->
+      <g class="pinasse-x" id="pinasse">
+        <g class="pinasse">
+          <path d="M0 0 C40 10 190 12 232 -8 C226 22 196 34 150 34 H44 C20 34 6 20 0 0 Z" style="fill:var(--acc)"/>
+          <path d="M6 6 C48 16 186 16 228 0" stroke="#fff4dc" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <rect x="84" y="-30" width="62" height="34" rx="4" fill="#fff4dc"/>
+          <rect x="94" y="-22" width="18" height="14" style="fill:var(--mer-f)"/><rect x="118" y="-22" width="18" height="14" style="fill:var(--mer-f)"/>
+          <path d="M60 -60 V4" stroke="#3d2a1d" stroke-width="5" stroke-linecap="round"/>
+          <path d="M60 -58 L24 -40 L60 -34 Z" fill="#f6b25c"/>
+        </g>
+      </g>
+      <!-- la jetée -->
+      <g class="jetee">
+        <path d="M1180 356 V520 M1280 356 V520 M1380 356 V520 M1480 356 V520 M1580 356 V520" stroke="#3d2a1d" stroke-width="12" stroke-linecap="round"/>
+        <rect x="1140" y="336" width="480" height="20" rx="4" fill="#6b3f22"/>
+        <path d="M1150 336 V300 M1250 336 V300 M1350 336 V300 M1450 336 V300 M1550 336 V300" stroke="#3d2a1d" stroke-width="7" stroke-linecap="round"/>
+        <path d="M1144 304 H1620" stroke="#3d2a1d" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      <!-- la terre et les pins -->
+      <path class="terre" d="M-20 560 V430 C80 404 200 410 300 440 C370 462 400 500 420 560 Z"/>
+      <use href="#s-pin" x="10" y="150" width="230" height="300"/>
+      <use href="#s-pin" x="170" y="224" width="170" height="222"/>
+      <use href="#s-pin" x="-70" y="230" width="170" height="222"/>
+    </svg>
+    <button class="bouton b-email maree-btn" type="button" id="maree-btn" aria-pressed="false">Faire descendre la marée</button>
+    <div class="venir-cartes">
+      <div class="plaque-rue entre" data-superpose>
+        <p class="pr-haut">Andernos-les-Bains</p>
+        <p class="pr-num">10</p>
+        <p class="pr-rue">avenue de Bordeaux</p>
+        <p class="pr-bas">33510</p>
+        <a class="bouton b-cuivre" href="#" data-carte target="_blank" rel="noopener">Itinéraire</a>
+      </div>
+      <div class="semainier entre">
+        <h3>Horaires</h3>
+        <ul id="jours"></ul>
+        <p class="sem-note">Vos horaires s’écriront ici, le jour d’aujourd’hui en premier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. COMMANDER -->
+<section class="sec commander" id="commander">
+  <div class="eau" aria-hidden="true"><i></i><i></i></div>
+  <div class="cde-grille">
+    <div class="cde-texte">
+      <p class="plaque entre">Commander</p>
+      <h2 class="entre">On vous le met <em>de côté&nbsp;?</em></h2>
+      <p class="chapo entre">Un plat pour ce soir, une volaille à la broche, un repas de fête&nbsp;: un appel, ou la commande en ligne.</p>
+      <div class="numero entre" id="numero" aria-label="Téléphone : numéro à venir">
+        <span>..</span><span>..</span><span>..</span><span>..</span><span>..</span>
+      </div>
+      <p class="num-note entre">Le numéro de la maison s’affichera ici, en grand. Depuis un téléphone, il suffira de le toucher pour appeler.</p>
+    </div>
+    <div class="cloche-zone entre" id="cloche-zone">
+      <div class="cloche-cadre">
+      <div class="bon" id="bon">
+        <h3>Ma commande</h3>
+        <ul id="bon-lignes"><li class="t-rien">Rien de noté. Passez par «&nbsp;À emporter&nbsp;» ou par «&nbsp;Le traiteur&nbsp;».</li></ul>
+        <p class="t-ligne"><span>Pour le</span><b>............</b></p>
+        <p class="t-ligne"><span>Au nom de</span><b>............</b></p>
+        <button class="bouton b-cuivre" type="button" id="envoyer">Mettre sous cloche</button>
+      </div>
+      <div class="cloche" id="cloche" aria-hidden="true">
+        <svg viewBox="0 0 360 250"><path d="M20 226 C20 96 100 34 180 34 C260 34 340 96 340 226 Z" fill="url(#gCu)"/><path d="M70 190 C74 120 112 78 160 62" stroke="#fff" stroke-opacity=".38" stroke-width="14" stroke-linecap="round" fill="none"/><rect x="4" y="220" width="352" height="22" rx="11" fill="#8a3d16"/><rect x="168" y="14" width="24" height="24" rx="5" fill="#1b1d1f"/><ellipse cx="180" cy="12" rx="26" ry="11" fill="#1b1d1f"/></svg>
+      </div>
+      </div>
+      <p class="cloche-mot" id="cloche-mot" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="pages">
+    <h2 class="entre">Votre site peut avoir <em>autant de pages</em> que vous voulez.</h2>
+    <div class="suspendues" id="suspendues">
+      <span class="susp"><b>La rôtisserie</b></span>
+      <span class="susp"><b>La carte traiteur</b></span>
+      <span class="susp"><b>L’épicerie</b></span>
+      <span class="susp"><b>Les fêtes</b></span>
+    </div>
+    <p class="chapo entre">Une page pour la rôtisserie, une pour la carte traiteur, une pour l’épicerie, une pour commander les fêtes&nbsp;: c’est vous qui voyez. Vos textes, vos photos, vos couleurs&nbsp;: on ajuste tout ensemble.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="pied-grille">
+    <a class="logo" href="#accueil"><svg class="logo-pot" viewBox="0 0 48 48" aria-hidden="true"><use href="#s-logo"/></svg><span class="logo-nom">Le Chaudron</span></a>
+    <p>Traiteur, rôtisserie, plats cuisinés à emporter, épicerie fine.<br>10 avenue de Bordeaux, 33510 Andernos-les-Bains.</p>
+    <p class="pied-kz">Maquette imaginée par <a class="kz-g" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a></p>
+  </div>
+  <p class="credits">Maquette privée, non référencée. Images d’illustration (Pexels), à remplacer par les vôtres. Ce qui est en pointillés attend vos vrais mots.</p>
+</footer>
+
+</body>
+</html>

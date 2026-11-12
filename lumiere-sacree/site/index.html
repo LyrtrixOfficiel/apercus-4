@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="fr" data-ambiance="or">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>L’Institut Lumière Sacrée, institut de beauté à Glageon</title>
+<meta name="description" content="Maquette privée préparée pour L’Institut Lumière Sacrée, institut de beauté à Glageon : épilations, soins du visage et du corps, massages, Head Spa japonais.">
+<meta name="theme-color" content="#fdf3e0">
+<link rel="icon" href="data:,">
+<script>/* Le mouvement joue toujours (le PC de Mathéo a les animations de Windows coupées). Mode calme sur demande : ?calme=1 */if(!/[?&]calme=1/.test(location.search))document.documentElement.classList.add('anime')</script>
+<style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:500 900;font-display:swap;src:url(polices/fraunces.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:500 900;font-display:swap;src:url(polices/fraunces-italique.woff2) format('woff2')}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 800;font-display:swap;src:url(polices/figtree.woff2) format('woff2')}
+:root{--plomb:#241318;--creme:#fdf3e0;--ambre:#f6b43a;--corail:#ee6f52;--rubis:#b9273f;--cobalt:#2845a6;--emeraude:#17705a;--rose:#f8c7b4;--ciel:#a9cdf2;--miel:#e3952a;--nuit:#3b2830;
+  --titre:'Fraunces',Georgia,serif;--texte:'Figtree',system-ui,sans-serif;--tete:64px;--mh:clamp(84px,14vw,170px);--pl:4px}
+[data-ambiance=or]{--h-fond:#f6b43a;--h-fond2:#f9c659;--h-encre:#241318;--h-accent:#b9273f;--h-lum:#fffaf0}
+[data-ambiance=aurore]{--h-fond:#f29b84;--h-fond2:#f6ad98;--h-encre:#241318;--h-accent:#8f1d34;--h-lum:#fffaf0}
+[data-ambiance=azur]{--h-fond:#2c4cb2;--h-fond2:#3558c2;--h-encre:#fdf3e0;--h-accent:#f6b43a;--h-lum:#ffd66e}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--tete) + 14px)}
+body{font:500 17px/1.5 var(--texte);color:var(--plomb);background:var(--creme);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--titre);font-weight:900;font-variation-settings:'SOFT' 100;line-height:.95;letter-spacing:-.02em}
+h2 em{font-style:italic;font-weight:800;color:var(--ac,inherit);white-space:nowrap}
+.nc{white-space:nowrap}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.kicker{font:800 13px/1.2 var(--texte);letter-spacing:.14em;text-transform:uppercase}
+.chapo{font-size:clamp(18px,2.1vw,22px);line-height:1.4;max-width:30em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border:var(--pl) solid var(--plomb);border-radius:14px;background:var(--rubis);color:var(--creme);font:800 17px/1 var(--texte);text-decoration:none;box-shadow:0 5px 0 var(--plomb);transition:transform .14s,box-shadow .14s;cursor:pointer;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--plomb)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--plomb)}
+.btn.clair{background:var(--creme);color:var(--plomb)}
+.btn.or{background:var(--ambre);color:var(--plomb)}
+.rg{display:flex;align-items:baseline;gap:10px;font-weight:700;padding:11px 0;border-top:3px solid currentColor}
+.rg .pt{flex:1;min-width:24px;border-bottom:3px dotted currentColor;opacity:.6;transform:translateY(-5px)}
+.rg b{font-weight:800}
+.ex-note{font:600 14px/1.35 var(--texte);opacity:.8;margin-top:18px}
+.ex-note::before{content:"";display:inline-block;width:30px;border-top:3px dotted currentColor;vertical-align:middle;margin-right:9px}
+.mq path,.mq circle,.fil path,.fil circle{stroke:var(--plomb);stroke-width:3}
+
+/* barre haute */
+.tete{position:fixed;inset:0 0 auto;z-index:40;background:var(--creme);border-bottom:var(--pl) solid var(--plomb)}
+.tete-l{display:flex;align-items:center;justify-content:space-between;gap:12px;height:calc(var(--tete) - var(--pl));padding:0 16px;max-width:1560px;margin:auto}
+.marque{display:flex;align-items:center;gap:9px;font:900 19px/1 var(--titre);font-variation-settings:'SOFT' 100;text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
+.marque i{color:var(--rubis);font-weight:800}
+.marque svg{width:36px;height:36px;flex:none;overflow:visible;transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
+.marque:hover svg{transform:rotate(90deg)}
+.tete nav{display:none;gap:clamp(14px,1.7vw,28px);font-weight:700;font-size:15.5px}
+.tete nav a{text-decoration:none;padding:6px 0;border-bottom:3px solid transparent;white-space:nowrap}
+.tete nav a:hover{border-color:var(--rubis)}
+.tete-d{display:flex;align-items:center;gap:12px}
+.kz{font:800 11px/1 var(--texte);letter-spacing:.08em;text-decoration:none;opacity:.72}
+.kz:hover{opacity:1}
+.tete .btn{min-height:40px;padding:0 14px;font-size:15px;border-width:3px;border-radius:11px;box-shadow:0 3px 0 var(--plomb)}
+
+/* la petite rosace : elle s'allume verre après verre avec la lecture, et ouvre le menu */
+.fil{position:fixed;right:12px;bottom:14px;z-index:35;width:62px;height:62px;padding:0;border:0;border-radius:50%;background:var(--plomb);box-shadow:0 5px 0 rgba(0,0,0,.3);cursor:pointer;display:grid;place-items:center;transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+.fil:hover{transform:scale(1.08)}
+.fil svg{width:88%;height:88%;overflow:visible;will-change:transform}
+.fil path{fill:#5a464e;transition:fill .45s}
+.fil path.al{fill:var(--c)}
+.fil.saut{animation:saut .4s cubic-bezier(.3,1.5,.5,1)}
+@keyframes saut{40%{transform:translateY(-9px) scale(1.12)}}
+.menu{position:fixed;inset:0;z-index:60;background:var(--plomb);padding:calc(var(--tete) + 8px) 12px 12px;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:8px;visibility:hidden;opacity:0;transition:opacity .25s,visibility 0s .25s}
+.menu.ouvert{visibility:visible;opacity:1;transition:opacity .25s}
+.menu a{display:flex;align-items:flex-end;padding:14px;border-radius:10px;background:var(--c);color:var(--t,var(--plomb));font:900 clamp(22px,5.4vw,46px)/1 var(--titre);font-variation-settings:'SOFT' 100;text-decoration:none;transform:scale(.8);opacity:0;transition:transform .45s calc(var(--n)*45ms) cubic-bezier(.3,1.4,.5,1),opacity .2s calc(var(--n)*45ms)}
+.menu.ouvert a{transform:none;opacity:1}
+.menu a:hover{filter:brightness(1.08)}
+.menu-x{position:absolute;right:12px;top:10px;min-height:44px;padding:0 16px;border:3px solid var(--creme);border-radius:11px;background:none;color:var(--creme);font-weight:800;cursor:pointer}
+
+/* accueil : la rosace */
+.heros{position:relative;min-height:100vh;min-height:100svh;padding:calc(var(--tete) + 24px) 16px 40px;color:var(--h-encre);overflow:hidden;display:flex;align-items:center;
+  background:var(--h-fond) repeating-conic-gradient(from 4deg at var(--cx,50%) var(--cy,78%),var(--h-fond2) 0 9deg,var(--h-fond) 9deg 18deg)}
+.rayon{position:absolute;left:var(--cx,50%);top:var(--cy,78%);width:170vmax;height:54vmax;margin-top:-27vmax;transform-origin:0 50%;transform:rotate(var(--ra,-90deg));clip-path:polygon(0 50%,100% 0,100% 100%);background:var(--h-lum);opacity:.34;pointer-events:none;z-index:1;will-change:transform}
+.heros-l{position:relative;z-index:2;width:100%;max-width:1480px;margin:auto;display:grid;gap:26px}
+.etiq{display:flex;flex-wrap:wrap;gap:8px;font:800 13.5px/1.2 var(--texte);animation:monte .6s .05s cubic-bezier(.2,.8,.2,1) backwards}
+.etiq span{border:3px solid currentColor;border-radius:99px;padding:5px 12px}
+h1{margin:16px 0 14px;font-size:clamp(54px,17.4vw,120px);line-height:.86}
+.h-av{display:block;font:800 clamp(22px,5.4vw,34px)/1 var(--titre);font-style:italic;letter-spacing:0;margin-bottom:.3em;animation:monte .6s .15s cubic-bezier(.2,.8,.2,1) backwards}
+.h-m{display:block;white-space:nowrap}
+.h-m.it{font-style:italic;font-weight:800;color:var(--h-accent);padding-left:.34em}
+.lt{display:inline-block;font-weight:inherit;-webkit-text-stroke:0 var(--plomb);paint-order:stroke fill;transition:color .22s,transform .4s cubic-bezier(.3,1.5,.5,1),-webkit-text-stroke-width .22s;animation:allume .8s calc(var(--i)*65ms + .2s) cubic-bezier(.3,1.3,.5,1) backwards}
+.lt.ec{color:var(--h-lum);-webkit-text-stroke-width:.075em;transform:translateY(-.05em) rotate(var(--rr,-3deg))}
+@keyframes allume{0%{opacity:0;transform:translateY(.55em) rotate(10deg) scale(.7)}45%{color:var(--h-lum)}100%{opacity:1}}
+@keyframes monte{from{opacity:0;transform:translateY(22px)}}
+.sous{font:600 clamp(19px,5vw,27px)/1.25 var(--texte);max-width:22em;letter-spacing:-.01em;animation:monte .7s 1.1s cubic-bezier(.2,.8,.2,1) backwards}
+.sous strong{font-weight:800}
+.h-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;animation:monte .7s 1.25s cubic-bezier(.2,.8,.2,1) backwards}
+.h-ros{position:relative;display:grid;justify-items:center;animation:monte .8s .5s cubic-bezier(.2,.8,.2,1) backwards}
+.ros-z{position:relative;width:min(84vw,400px);aspect-ratio:1;will-change:transform}
+.ros-in{width:100%;height:100%;animation:ouvre 1.6s .3s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes ouvre{from{transform:rotate(-120deg) scale(.6)}}
+.rosace{width:100%;height:100%;touch-action:pan-y;cursor:grab;will-change:transform;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;border-radius:50%}
+.rosace.tenue{cursor:grabbing}
+.rosace svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 9px 0 rgba(36,19,24,.28))}
+.rosace path,.rosace circle{stroke:var(--plomb);stroke-width:3.6;stroke-linejoin:round;transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .3s;animation:vitre .7s calc(var(--i)*60ms + .5s) backwards}
+@keyframes vitre{from{fill:#3b2830;opacity:.3}}
+.ros-fl{position:absolute;left:50%;top:-4%;width:11%;aspect-ratio:1/1.15;margin-left:-5.5%;background:var(--plomb);clip-path:polygon(0 0,100% 0,50% 100%);z-index:2;pointer-events:none}
+.tirage{position:relative;z-index:3;width:min(100%,400px);margin-top:-14px;background:var(--creme);color:var(--plomb);border:var(--pl) solid var(--plomb);border-radius:20px;padding:15px 18px 16px;box-shadow:0 7px 0 var(--plomb)}
+.tirage .kicker{color:var(--rubis)}
+.tirage h3{font-size:clamp(26px,6.6vw,34px);margin:6px 0 5px}
+.tirage p{font-size:15.5px;line-height:1.35}
+.tirage a{display:inline-block;margin-top:8px;font-weight:800;font-size:15.5px}
+
+/* le lever : chaque rubrique se lève comme un soleil sur la précédente */
+.lever{position:absolute;left:0;right:0;top:0;height:var(--mh);transform:translateY(-99.5%);overflow:hidden;pointer-events:none;z-index:3}
+.lever b{position:absolute;left:var(--sx,50%);bottom:calc(var(--mh)*-.62);width:calc(var(--mh)*1.24);height:calc(var(--mh)*1.24);margin-left:calc(var(--mh)*-.62);border-radius:50%;background:var(--sb);transform:translateY(50%);will-change:transform}
+.lever i{position:absolute;left:var(--sx,50%);bottom:0;width:calc(var(--mh)*.1);height:calc(var(--mh)*.98);margin-left:calc(var(--mh)*-.05);border-radius:99px;background:var(--sb);transform-origin:50% 100%;transform:rotate(var(--r)) scaleY(0);will-change:transform}
+
+.bloc{position:relative;padding:56px 16px calc(34px + var(--mh));background:var(--sb);color:var(--se)}
+.bloc-l{position:relative;z-index:4;max-width:1240px;margin:auto}
+h2{font-size:clamp(40px,10.4vw,88px);margin:12px 0 22px}
+
+/* la carte des soins : un vitrail */
+.soins{--sb:var(--creme);--se:var(--plomb);--ac:var(--rubis)}
+.soins .kicker{color:var(--rubis)}
+.vitrail{display:grid;gap:7px;background:var(--plomb);padding:7px;border-radius:26px;grid-template-columns:1fr 1fr;grid-template-areas:"hs hs" "ma ma" "ph vi" "ph co" "ep pi" "ta ta";box-shadow:0 9px 0 rgba(36,19,24,.2)}
+.vi{position:relative;overflow:hidden;min-height:118px;background:var(--c);color:var(--t,var(--plomb));padding:15px 15px 16px;border-radius:7px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;transition:transform .3s cubic-bezier(.3,1.4,.5,1)}
+.vi::before{content:"";position:absolute;inset:0;background:var(--nuit);opacity:0;transition:opacity .6s calc(var(--n)*90ms + .1s);pointer-events:none;z-index:2}
+.vi::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-70%;width:42%;background:rgba(255,255,255,.3);transform:skewX(-18deg);pointer-events:none;z-index:1}
+.anime .apparait:not(.vu) .vi::before{opacity:1}
+.vu .vi::after{animation:eclat 1s calc(var(--n)*90ms + .4s) both}
+a.vi:hover::after{animation:eclat2 .8s both}
+@keyframes eclat{to{transform:skewX(-18deg) translateX(480%)}}
+@keyframes eclat2{to{transform:skewX(-18deg) translateX(480%)}}
+a.vi:hover{transform:scale(.975)}
+.vi small{font:800 12px/1.2 var(--texte);letter-spacing:.12em;text-transform:uppercase;margin-bottom:auto;padding-bottom:10px}
+.vi h3{font-size:clamp(25px,6.6vw,50px)}
+.vi p{margin-top:7px;font-size:15.5px;line-height:1.32;max-width:24em;font-weight:600}
+.vi .va{margin-top:10px;font-weight:800;font-size:14.5px;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+.v-hs{grid-area:hs;--c:var(--cobalt);--t:var(--creme);--n:0;border-radius:20px 20px 7px 7px;min-height:210px}
+.v-ma{grid-area:ma;--c:var(--rubis);--t:var(--creme);--n:2;min-height:180px}
+.v-ph{grid-area:ph;--n:1;padding:0;min-height:230px}
+.v-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v-vi{grid-area:vi;--c:var(--rose);--n:3}
+.v-co{grid-area:co;--c:var(--emeraude);--t:var(--creme);--n:4}
+.v-ep{grid-area:ep;--c:var(--ambre);--n:5}
+.v-pi{grid-area:pi;--c:var(--ciel);--n:6}
+.v-ta{grid-area:ta;--c:var(--creme);--n:7;border-radius:7px 7px 20px 20px;min-height:0;flex-direction:row;align-items:baseline;justify-content:flex-start;gap:12px}
+.v-ta h3{font-size:clamp(22px,5vw,32px);white-space:nowrap}
+.v-ta .pt{flex:1;border-bottom:4px dotted currentColor;opacity:.55;transform:translateY(-6px)}
+.v-vi h3,.v-co h3,.v-ep h3,.v-pi h3{font-size:clamp(21px,5.6vw,38px)}
+
+/* Head Spa japonais : l'eau coule au défilement */
+.hs{position:relative;--sb:var(--cobalt);--se:var(--creme);background:var(--sb);color:var(--se);padding-bottom:var(--mh)}
+#headspa{position:absolute;top:0}
+.joue #headspa{top:100vh}
+.hs .scene{position:relative;padding:64px 16px;overflow:hidden}
+.hs-l{position:relative;z-index:2;max-width:1240px;margin:auto;display:grid;gap:22px;width:100%}
+.hs .kicker{color:var(--ambre)}
+.hs h2{margin-bottom:14px}
+.hs h2 em{color:var(--ciel)}
+.hs-p{font:800 clamp(22px,5.6vw,44px)/1.14 var(--titre);font-variation-settings:'SOFT' 100;max-width:16em;letter-spacing:-.01em}
+.hs-p span{transition:opacity .35s}
+.hs .rgs{margin:18px 0 20px;max-width:420px}
+.arche{position:relative;overflow:hidden;border:var(--pl) solid var(--plomb);border-radius:999px 999px 16px 16px;background:var(--ciel);box-shadow:0 9px 0 rgba(36,19,24,.32);aspect-ratio:4/5;max-height:62vh;margin:0 auto;width:min(100%,400px)}
+.arche img{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover;will-change:transform}
+.eau{position:absolute;inset:0;z-index:1;pointer-events:none}
+.eau i{position:absolute;top:0;border-radius:0 0 99px 99px;transform:translateY(-102%);will-change:transform}
+.sc-ind{position:absolute;left:0;right:0;bottom:12px;z-index:3;text-align:center;font-weight:800;font-size:14.5px;transition:opacity .4s;display:none}
+.joue .hs{height:250vh;height:250svh;padding-bottom:0}
+.joue .hs .scene{position:sticky;top:var(--tete);height:calc(100vh - var(--tete));height:calc(100svh - var(--tete));padding:16px 16px 44px;display:flex;align-items:center}
+.joue .hs-l{display:flex;flex-direction:column;justify-content:center;gap:16px;height:100%}
+.joue .hs .sc-ind{display:block}
+.joue .hs .arche{flex:1 1 0;min-height:0;max-height:300px;aspect-ratio:auto;width:min(100%,340px)}
+.joue .hs h2{margin:8px 0 10px}
+.joue .hs .rgs{margin:10px 0 12px}
+.joue .hs .rg{padding:7px 0}
+
+/* massages : les pierres qu'on chauffe */
+.ma{--sb:var(--rubis);--se:var(--creme);--ac:var(--ambre);--sx:24%}
+.ma .kicker{color:var(--ambre)}
+.ma-g{display:grid;gap:26px}
+.pierres{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;max-width:440px;margin:6px auto 0;width:100%}
+.pi-z{position:relative;display:grid;place-items:center;transform:rotate(var(--r,0deg));transition:transform .65s calc(var(--n)*110ms) cubic-bezier(.3,1.5,.5,1),opacity .2s calc(var(--n)*110ms)}
+.anime .apparait:not(.vu) .pi-z{opacity:0;transform:translateY(-70px) rotate(-16deg) scale(1.15)}
+.pi{position:relative;overflow:hidden;width:100%;aspect-ratio:1.32;border:0;padding:0 10px;background:var(--plomb);color:var(--creme);border-radius:var(--f);box-shadow:0 9px 0 rgba(0,0,0,.3);cursor:pointer;transition:transform .3s cubic-bezier(.3,1.5,.5,1);-webkit-tap-highlight-color:transparent}
+.pi::before{content:"";position:absolute;left:16%;top:13%;width:34%;height:20%;border-radius:50%;background:#3d2a31;transform:rotate(-14deg);z-index:1;transition:opacity .3s}
+.pi:hover{transform:translateY(-4px) rotate(-2deg)}
+.pi:active{transform:scale(.95)}
+.feu{position:absolute;inset:0;background:radial-gradient(circle at 50% 72%,#fff1c4 0 17%,#f9c659 17% 40%,#f6923a 40% 66%,#ee6f52 66%);transform:translateY(102%);transition:transform .7s cubic-bezier(.3,.9,.3,1)}
+.pi-n{position:relative;z-index:2;font:900 clamp(17px,4.9vw,25px)/1 var(--titre);font-variation-settings:'SOFT' 100;transition:color .3s .2s}
+.chaude .pi{transform:scale(1.06)}
+.chaude .feu{transform:none}
+.chaude .pi-n{color:var(--plomb)}
+.chaude .pi::before{opacity:0}
+.vap{position:absolute;left:50%;top:-14px;width:50%;height:38px;margin-left:-25%;display:flex;justify-content:space-between;pointer-events:none;z-index:2}
+.vap u{width:11px;height:100%;border-radius:99px;background:var(--creme);opacity:0;transform:translateY(8px) scaleY(.4)}
+.chaude .vap u{animation:vapeur 1.5s calc(var(--k)*.22s) infinite}
+@keyframes vapeur{0%{opacity:0;transform:translateY(8px) scaleY(.4)}40%{opacity:.85}100%{opacity:0;transform:translateY(-22px) scaleY(1)}}
+.fiche{position:relative;background:var(--creme);color:var(--plomb);border:var(--pl) solid var(--plomb);border-radius:24px;padding:20px 18px 22px;box-shadow:0 9px 0 rgba(0,0,0,.3);display:grid;gap:18px}
+.fiche .kicker{color:var(--rubis)}
+.fiche h3{font-size:clamp(34px,8.6vw,58px);margin:8px 0 10px}
+.fiche-p{font-size:18px;line-height:1.38;font-weight:600;min-height:2.76em}
+.fiche .rgs{margin:14px 0 18px}
+.fiche .arche{width:min(100%,300px);max-height:320px;background:var(--rose)}
+
+/* visage et corps : le masque qu'on retire */
+.vs{--sb:var(--rose);--se:var(--plomb);--ac:var(--rubis);--sx:76%}
+.vs .kicker{color:var(--rubis)}
+.vs-g{display:grid;gap:26px}
+.vs .rgs{margin-top:22px;max-width:480px}
+.masque{touch-action:pan-y;cursor:crosshair;width:min(100%,430px);background:#b9d6b1}
+.masque canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity .7s;touch-action:pan-y}
+.mq-c{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-4deg);background:var(--creme);border:3px solid var(--plomb);border-radius:99px;padding:9px 16px;font-weight:800;font-size:15.5px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 0 var(--plomb);transition:opacity .3s;animation:appel 2.2s 1s infinite}
+@keyframes appel{0%,60%,100%{margin-left:0}70%{margin-left:-16px}85%{margin-left:16px}}
+.masque.touche .mq-c{opacity:0}
+.mq-f{position:absolute;right:8%;bottom:7%;background:var(--ambre);border:3px solid var(--plomb);border-radius:14px;padding:8px 14px;font:900 22px/1 var(--titre);font-variation-settings:'SOFT' 100;transform:rotate(-7deg) scale(0);box-shadow:0 4px 0 var(--plomb);pointer-events:none;transition:transform .5s .3s cubic-bezier(.3,1.6,.5,1)}
+.masque.net canvas{opacity:0;pointer-events:none}
+.masque.net .mq-f{transform:rotate(-7deg) scale(1)}
+
+/* épilations : la bande de cire qu'on tire */
+.ep{--sb:var(--ambre);--se:var(--plomb);--ac:var(--rubis);--sx:50%;overflow-x:clip}
+.ep-g{display:grid;gap:26px}
+.bandes{display:grid;gap:18px}
+.zone{position:relative;border:var(--pl) solid var(--plomb);border-radius:16px;background:var(--creme);min-height:112px;box-shadow:0 7px 0 rgba(36,19,24,.3)}
+.z-d{padding:16px 18px;transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .3s}
+.anime .zone:not(.nette) .z-d{transform:scale(.94);opacity:.25}
+.z-d h3{font-size:clamp(25px,6.2vw,36px)}
+.z-d .rg{margin-top:10px;padding-bottom:0}
+.z-d .neuf{display:inline-block;margin-bottom:8px;background:var(--rubis);color:var(--creme);font:800 12px/1 var(--texte);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
+.bande{position:absolute;inset:-4px;z-index:2;border:var(--pl) solid var(--plomb);border-radius:14px 26px 22px 14px;background:#fff9ec;color:var(--plomb);cursor:grab;touch-action:pan-y;display:none;align-items:center;justify-content:space-between;gap:12px;padding:0 20px 0 0;font:900 clamp(21px,5.4vw,30px)/1 var(--titre);font-variation-settings:'SOFT' 100;transform-origin:0 100%;will-change:transform;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;overflow:hidden;text-align:left}
+.anime .bande{display:flex}
+.bande::before{content:"";align-self:stretch;width:15%;min-width:44px;background:var(--miel);border-right:var(--pl) solid var(--plomb);flex:none}
+.bande span{flex:1}
+.bande b{flex:none;font:800 14px/1 var(--texte);background:var(--plomb);color:var(--creme);padding:9px 13px;border-radius:99px;animation:tire 1.8s calc(var(--n)*.3s) infinite}
+@keyframes tire{0%,55%,100%{transform:none}75%{transform:translateX(9px)}}
+.bande.tenue{cursor:grabbing}
+.bandes{position:relative}
+.net-ok{position:absolute;right:-6px;bottom:-38px;z-index:3;background:var(--rubis);color:var(--creme);border:3px solid var(--plomb);border-radius:14px;padding:9px 15px;font:900 21px/1 var(--titre);font-variation-settings:'SOFT' 100;box-shadow:0 4px 0 var(--plomb);transform:rotate(5deg) scale(0);transition:transform .5s .35s cubic-bezier(.3,1.7,.5,1);pointer-events:none}
+.bandes.fini .net-ok{transform:rotate(5deg) scale(1)}
+.ep .arche{width:min(100%,400px);aspect-ratio:5/4;background:var(--creme)}
+
+/* Meggy : les fenêtres s'ouvrent */
+.mg{--sb:var(--creme);--se:var(--plomb);--ac:var(--rubis);--sx:22%}
+.mg .kicker{color:var(--rubis)}
+.fenetres{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.fe{position:relative;overflow:hidden;border:var(--pl) solid var(--plomb);border-radius:999px 999px 14px 14px;background:var(--c);color:var(--t,var(--plomb));width:76%;min-height:calc(var(--h)*.62);padding:76px 18px 18px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 8px 0 rgba(36,19,24,.22)}
+.fe::before{content:"";position:absolute;inset:0;background:var(--nuit);z-index:2;transform:translateY(101%);transition:transform 1s calc(var(--n)*260ms + .1s) cubic-bezier(.6,0,.2,1)}
+.anime .apparait:not(.vu) .fe::before{transform:none}
+.fe:nth-child(even){align-self:flex-end}
+.fe b{font:900 clamp(28px,7.4vw,48px)/1 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:-.02em}
+.fe p{margin-top:8px;font-size:15.5px;line-height:1.34;font-weight:600}
+.phrase{margin-top:44px;font:900 clamp(32px,8.2vw,74px)/1 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:-.02em;max-width:13em}
+.phrase em{font-style:italic;font-weight:800;color:var(--rubis)}
+.phrase span{display:inline-block;transition:transform .6s calc(var(--n)*70ms) cubic-bezier(.3,1.4,.5,1),opacity .3s calc(var(--n)*70ms)}
+.anime .phrase:not(.vu) span{opacity:0;transform:translateY(.5em) rotate(4deg)}
+
+/* rendez-vous : la flamme */
+.rv{--sb:var(--emeraude);--se:var(--creme);--ac:var(--ambre);--sx:74%}
+.rv .kicker{color:var(--ambre)}
+.rv-g{display:grid;gap:56px}
+.numero{display:flex;gap:clamp(5px,1.2vw,10px);text-decoration:none;margin:4px 0 20px;max-width:560px}
+.numero b{flex:1;display:grid;place-items:center;aspect-ratio:1/1.12;background:var(--c);color:var(--plomb);border:var(--pl) solid var(--plomb);border-radius:12px;font:900 clamp(26px,8.4vw,60px)/1 var(--titre);font-variation-settings:'SOFT' 100;box-shadow:0 6px 0 var(--plomb);transform:rotate(var(--r));transition:transform .6s calc(var(--n)*80ms) cubic-bezier(.3,1.5,.5,1),opacity .2s calc(var(--n)*80ms)}
+.anime .numero:not(.vu) b{opacity:0;transform:translateY(40px) rotate(var(--r))}
+.numero:hover b{animation:vague .5s calc(var(--n)*60ms) cubic-bezier(.3,1.5,.5,1)}
+@keyframes vague{40%{transform:translateY(-12px) rotate(var(--r))}}
+.rv .rgs{max-width:560px;margin-top:18px}
+.carte-rv{position:relative;background:var(--creme);color:var(--plomb);border:var(--pl) solid var(--plomb);border-radius:24px;padding:22px 18px 20px;box-shadow:0 9px 0 rgba(0,0,0,.32);display:grid;grid-template-columns:1fr 1fr;gap:12px 12px}
+.carte-rv h3{grid-column:1/-1;font-size:clamp(27px,6.6vw,38px);padding-right:56px;margin-bottom:4px}
+.carte-rv label{display:grid;gap:5px;font-weight:800;font-size:14px;min-width:0}
+.carte-rv .plein{grid-column:1/-1}
+.carte-rv input,.carte-rv select{width:100%;min-width:0;min-height:48px;border:3px solid var(--plomb);border-radius:11px;background:#fff9ec;padding:0 10px;font-weight:600;font-size:16px}
+.carte-rv input:focus,.carte-rv select:focus{outline:3px solid var(--ambre);outline-offset:1px}
+.mes{font-weight:700;font-size:15px;line-height:1.35;min-height:1.35em}
+.bougie{position:absolute;right:22px;top:-34px;width:30px;height:66px;background:var(--creme);border:var(--pl) solid var(--plomb);border-radius:9px 9px 4px 4px;z-index:2}
+.flamme{position:absolute;left:50%;bottom:calc(100% + 4px);width:30px;height:44px;margin-left:-15px;background:var(--ambre);border:var(--pl) solid var(--plomb);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:scale(0);transform-origin:50% 100%;transition:transform .5s cubic-bezier(.3,1.7,.5,1)}
+.flamme::after{content:"";position:absolute;left:28%;right:28%;bottom:10%;height:44%;border-radius:50%;background:#fff1c4}
+.allumee .flamme{transform:scale(1);animation:danse .9s .5s infinite alternate ease-in-out}
+@keyframes danse{from{transform:scale(1) rotate(-5deg)}to{transform:scale(1.08,.94) rotate(5deg)}}
+
+/* infos */
+.in{--sb:var(--plomb);--se:var(--creme);--ac:var(--ambre);--sx:26%;overflow:hidden;padding-bottom:190px}
+.in .kicker{color:var(--ambre)}
+.in-g{display:grid;gap:30px}
+.adr{font:900 clamp(26px,6.6vw,44px)/1.08 var(--titre);font-variation-settings:'SOFT' 100;margin-bottom:14px}
+.adr a{text-decoration:none}
+.liens{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.in .btn{border-color:var(--creme);box-shadow:0 5px 0 rgba(253,243,224,.28)}
+.in-d{max-width:560px}
+.in-ros{position:absolute;left:50%;margin-left:-150px;bottom:-170px;width:300px;height:300px;z-index:1;pointer-events:none}
+.in-ros svg{width:100%;height:100%;overflow:visible;animation:tourne 80s linear infinite}
+.in-ros path,.in-ros circle{stroke:var(--plomb);stroke-width:3.6}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.in .lever{z-index:5}
+
+.pied{position:relative;background:var(--creme);color:var(--plomb);border-top:var(--pl) solid var(--plomb);padding:44px 16px 96px}
+.pied>div{max-width:1240px;margin:auto}
+.pied .grand{font:900 clamp(28px,6.4vw,54px)/1.02 var(--titre);font-variation-settings:'SOFT' 100;letter-spacing:-.02em;max-width:15em;margin-bottom:14px}
+.pied p{max-width:44em}
+.pied .petit{font-size:14.5px;opacity:.82;margin-top:10px}
+.kzp{display:inline-block;margin-top:22px;font:900 30px/1 var(--titre);text-decoration:none;border-bottom:4px solid var(--rubis)}
+
+@media (min-width:900px){
+  :root{--tete:72px}
+  .tete nav{display:flex}
+  .tete-l,.heros,.bloc,.hs .scene,.joue .hs .scene,.pied{padding-left:40px;padding-right:40px}
+  .fil{width:84px;height:84px;right:22px;bottom:22px}
+  .menu{grid-template-columns:repeat(4,1fr);padding:calc(var(--tete) + 12px) 22px 22px;gap:10px}
+  .heros-l{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:36px;padding-right:64px}
+  h1{font-size:clamp(70px,min(8.8vw,21vh),176px)}
+  .h-av{font-size:clamp(24px,2.4vw,38px)}
+  .sous{font-size:clamp(20px,min(1.8vw,3.6vh),28px)}
+  .ros-z{width:min(100%,38vw,60vh,640px)}
+  .tirage{margin-top:-26px}
+  .bloc{padding-top:72px;padding-bottom:calc(44px + var(--mh))}
+  .vitrail{gap:9px;padding:9px;border-radius:34px;grid-template-columns:repeat(12,1fr);grid-template-rows:150px 150px 150px 150px;
+    grid-template-areas:"hs hs hs hs hs ph ph ph ma ma ma ma" "hs hs hs hs hs ph ph ph ma ma ma ma" "vi vi vi vi ep ep ep ep ep pi pi pi" "co co co co ta ta ta ta ta pi pi pi"}
+  .vi{padding:22px 24px;min-height:0}
+  .v-hs{border-radius:26px 7px 7px 7px}.v-ma{border-radius:7px 26px 7px 7px}.v-co{border-radius:7px 7px 7px 26px}.v-pi{border-radius:7px 7px 26px 7px}.v-ta{border-radius:7px;align-items:center}
+  .vi p{font-size:17px}
+  .joue .hs-l,.hs-l{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;gap:50px;height:auto}
+  .joue .hs .arche,.hs .arche{flex:none;height:min(62vh,560px);aspect-ratio:4/5;max-height:none;width:auto;max-width:100%;justify-self:center}
+  .joue .hs .rgs{margin:18px 0 20px}
+  .joue .hs h2{margin:12px 0 16px}
+  .ma-g{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px 56px;align-items:start}
+  .ma-h{grid-column:1}
+  .pierres{grid-column:1;margin:0;max-width:470px}
+  .fiche{grid-column:2;grid-row:1/3;grid-template-columns:minmax(0,1fr) minmax(0,250px);align-items:center;padding:30px 30px 32px;align-self:center}
+  .vs-g{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);align-items:center;gap:56px}
+  .masque{width:auto;max-width:100%;height:min(66vh,560px);max-height:none}
+  .ep-g{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px 56px;align-items:start}
+  .ep-h{grid-column:1;grid-row:1}
+  .bandes{grid-column:2;grid-row:1/3;align-self:center}
+  .net-ok{bottom:auto;top:-26px}
+  .ep .arche{grid-column:1;grid-row:2;margin:0;width:min(100%,380px)}
+  .fenetres{display:grid;grid-template-columns:1fr 1fr 1fr 1.5fr;gap:16px;align-items:end}
+  .fe{width:auto;min-height:var(--h);padding:120px 22px 24px}
+  .fe:nth-child(even){align-self:auto}
+  .fe:nth-child(4){padding-top:150px}
+  .fe p{font-size:17px}
+  .rv-g{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:60px;align-items:center}
+  .carte-rv{padding:30px 28px 26px}
+  .in-g{grid-template-columns:1fr 1fr;gap:60px;align-items:end}
+  .in-ros{width:560px;height:560px;margin-left:-280px;bottom:-350px}
+  .in{padding-bottom:270px}
+}
+@media (min-width:640px) and (max-width:899px){
+  .heros-l{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:24px}
+  h1{font-size:clamp(64px,9.6vw,88px)}
+  .ros-z{width:100%}
+  .fenetres{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:end}
+  .fe{width:auto;min-height:calc(var(--h)*.8)}
+  .fe:nth-child(even){align-self:auto}
+  .ma-g .fiche{grid-template-columns:minmax(0,1fr) minmax(0,240px);align-items:center}
+  .vs-g,.in-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:30px}
+  .carte-rv{max-width:560px}
+}
+@media (max-width:359px){.etiq span{padding:4px 9px;font-size:12.5px}.carte-rv{grid-template-columns:1fr}.kz{display:none}.marque{font-size:17px}}
+html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animation:none!important;transition:none!important}html:not(.anime){scroll-behavior:auto}
+</style>
+</head>
+<body>
+<header class="tete"><div class="tete-l">
+  <a class="marque" href="#accueil" aria-label="L’Institut Lumière Sacrée, retour en haut"><svg class="mq" viewBox="-58 -58 116 116" aria-hidden="true"></svg><span>Lumière <i>Sacrée</i></span></a>
+  <nav aria-label="Rubriques"><a href="#soins">Les soins</a><a href="#headspa">Head Spa</a><a href="#massages">Massages</a><a href="#visage">Visage et corps</a><a href="#epilations">Épilations</a><a href="#meggy">Meggy</a><a href="#infos">Infos</a></nav>
+  <div class="tete-d"><a class="kz" href="https://kazura.fr" target="_blank" rel="noopener">KAZURA</a><a class="btn" href="tel:+33644776216">Appeler</a></div>
+</div></header>
+
+<button class="fil" id="fil" type="button" title="Menu" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="-58 -58 116 116" aria-hidden="true"></svg></button>
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="menu-x" id="menuX" type="button">Fermer</button>
+  <a href="#accueil" style="--c:var(--ambre);--n:0">Accueil</a>
+  <a href="#soins" style="--c:var(--creme);--n:1">Les soins</a>
+  <a href="#headspa" style="--c:var(--cobalt);--t:var(--creme);--n:2">Head Spa japonais</a>
+  <a href="#massages" style="--c:var(--rubis);--t:var(--creme);--n:3">Massages</a>
+  <a href="#visage" style="--c:var(--rose);--n:4">Visage et corps</a>
+  <a href="#epilations" style="--c:var(--ciel);--n:5">Épilations et pieds</a>
+  <a href="#meggy" style="--c:var(--corail);--n:6">Meggy</a>
+  <a href="#rdv" style="--c:var(--emeraude);--t:var(--creme);--n:7">Rendez-vous et infos</a>
+</div>
+
+<main>
+<section class="heros" id="accueil">
+  <div class="rayon" id="rayon" aria-hidden="true"></div>
+  <div class="heros-l">
+    <div class="h-texte" id="hTexte">
+      <p class="etiq"><span>Institut de beauté</span><span>Chez Meggy, à Glageon</span><span>Sur rendez-vous</span></p>
+      <h1 id="nom"><span class="vh">L’Institut Lumière Sacrée</span>
+        <span class="h-av" aria-hidden="true">L’Institut</span>
+        <span class="h-m" aria-hidden="true"><b class="lt" style="--i:0">L</b><b class="lt" style="--i:1">u</b><b class="lt" style="--i:2">m</b><b class="lt" style="--i:3">i</b><b class="lt" style="--i:4">è</b><b class="lt" style="--i:5">r</b><b class="lt" style="--i:6">e</b></span>
+        <span class="h-m it" aria-hidden="true"><b class="lt" style="--i:7">S</b><b class="lt" style="--i:8">a</b><b class="lt" style="--i:9">c</b><b class="lt" style="--i:10">r</b><b class="lt" style="--i:11">é</b><b class="lt" style="--i:12">e</b></span>
+      </h1>
+      <p class="sous">Épilations, soins du visage et du corps, massages, et le <strong>Head Spa japonais</strong>.</p>
+      <div class="h-act"><a class="btn" href="#rdv">Prendre rendez-vous</a><a class="btn clair" href="#soins">Voir les soins</a></div>
+    </div>
+    <div class="h-ros">
+      <div class="ros-z" id="rosZ"><span class="ros-fl" aria-hidden="true"></span><div class="ros-in"><div class="rosace" id="rosace" role="button" tabindex="0" aria-label="Faire tourner la rosace : elle choisit un soin"></div></div></div>
+      <div class="tirage" id="tirage" aria-live="polite">
+        <p class="kicker" id="tiK">À vous de jouer</p>
+        <h3 id="tiH">Tournez la rosace</h3>
+        <p id="tiP">Glissez-la ou touchez-la : elle s’arrête sur un soin.</p>
+        <a id="tiA" href="#soins">Voir tous les soins</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc soins" id="soins">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l">
+    <p class="kicker">La carte des soins</p>
+    <h2>Tout ce que Meggy <em>propose</em></h2>
+    <div class="vitrail apparait">
+      <a class="vi v-hs" href="#headspa"><small>Cheveux et visage</small><h3>Head Spa japonais</h3><p>Un massage des cheveux et du visage, inspiré des rituels capillaires japonais.</p><span class="va">Voir ce soin</span></a>
+      <div class="vi v-ph"><img src="photos/headspa.webp" alt="Photo d’illustration : massage du cuir chevelu" loading="lazy"></div>
+      <a class="vi v-ma" href="#massages"><small>Quatre massages</small><h3>Massages</h3><p>Californien, pierres chaudes, africain, et un massage pour les femmes enceintes.</p><span class="va">Voir les massages</span></a>
+      <a class="vi v-vi" href="#visage"><h3>Soins du visage</h3></a>
+      <a class="vi v-co" href="#visage"><h3>Soins du corps</h3></a>
+      <a class="vi v-ep" href="#epilations"><h3>Épilations</h3><p>Visage et corps.</p></a>
+      <a class="vi v-pi" href="#epilations"><small>Depuis peu</small><h3>Soin des pieds</h3><p>Le soin anti-callosités.</p></a>
+      <div class="vi v-ta"><h3>Les tarifs</h3><span class="pt"></span></div>
+    </div>
+    <p class="ex-note">En pointillés : ce qui attend vos vrais mots.</p>
+  </div>
+</section>
+
+<section class="hs" id="hs">
+  <div class="lever" aria-hidden="true"></div>
+  <span id="headspa"></span>
+  <div class="scene" id="hsScene">
+    <div class="eau" id="eau" aria-hidden="true"></div>
+    <div class="hs-l">
+      <div>
+        <p class="kicker">Inspiré des rituels japonais</p>
+        <h2>Head Spa <em>japonais</em></h2>
+        <p class="hs-p" id="hsP">Un massage des cheveux et du visage, inspiré des rituels capillaires japonais.</p>
+        <div class="rgs"><div class="rg"><span>Durée</span><i class="pt"></i></div><div class="rg"><span>Tarif</span><i class="pt"></i></div></div>
+        <a class="btn or" href="#rdv">Réserver ce soin</a>
+      </div>
+      <figure class="arche" id="hsF"><img src="photos/headspa.webp" alt="Photo d’illustration : massage du cuir chevelu, les yeux fermés" loading="lazy"></figure>
+    </div>
+    <p class="sc-ind" id="hsI" aria-hidden="true">Défilez : l’eau coule.</p>
+  </div>
+</section>
+
+<section class="bloc ma" id="massages">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l ma-g">
+    <div class="ma-h">
+      <p class="kicker">Quatre massages</p>
+      <h2>Chauffez <em>une pierre</em></h2>
+      <p class="chapo">Touchez une pierre : elle chauffe, et elle vous montre son massage.</p>
+    </div>
+    <div class="pierres apparait" id="pierres">
+      <div class="pi-z chaude" style="--n:0;--r:-3deg"><span class="vap" aria-hidden="true"><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></span><button class="pi" type="button" data-k="0" style="--f:58% 42% 55% 45%/52% 60% 40% 48%"><span class="feu"></span><span class="pi-n">Californien</span></button></div>
+      <div class="pi-z" style="--n:1;--r:4deg"><span class="vap" aria-hidden="true"><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></span><button class="pi" type="button" data-k="1" style="--f:46% 54% 44% 56%/58% 48% 52% 42%"><span class="feu"></span><span class="pi-n">Pierres chaudes</span></button></div>
+      <div class="pi-z" style="--n:2;--r:2deg"><span class="vap" aria-hidden="true"><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></span><button class="pi" type="button" data-k="2" style="--f:52% 48% 60% 40%/46% 56% 44% 54%"><span class="feu"></span><span class="pi-n">Africain</span></button></div>
+      <div class="pi-z" style="--n:3;--r:-4deg"><span class="vap" aria-hidden="true"><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></span><button class="pi" type="button" data-k="3" style="--f:44% 56% 48% 52%/56% 44% 56% 44%"><span class="feu"></span><span class="pi-n">Femme enceinte</span></button></div>
+    </div>
+    <div class="fiche" id="fiche" aria-live="polite">
+      <div>
+        <p class="kicker">Massage</p>
+        <h3 id="fH">Californien</h3>
+        <p class="fiche-p" id="fP">Un massage bien-être, à choisir selon ce dont vous avez besoin.</p>
+        <div class="rgs"><div class="rg"><span>Durée</span><i class="pt"></i></div><div class="rg"><span>Tarif</span><i class="pt"></i></div></div>
+        <a class="btn" href="#rdv">Réserver ce massage</a>
+      </div>
+      <figure class="arche"><img id="fI" src="photos/massage.webp" alt="Photo d’illustration" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="bloc vs" id="visage">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l vs-g">
+    <div>
+      <p class="kicker">Visage et corps</p>
+      <h2>Retirez <em>le masque</em></h2>
+      <p class="chapo">Soins du visage et soins du corps, dans un espace bien-être aménagé chez Meggy.</p>
+      <div class="rgs"><div class="rg"><span>Soins du visage</span><i class="pt"></i></div><div class="rg"><span>Soins du corps</span><i class="pt"></i></div><div class="rg"><span>Durées et tarifs</span><i class="pt"></i></div></div>
+    </div>
+    <figure class="arche masque" id="masque"><img src="photos/visage.webp" alt="Photo d’illustration : soin du visage" loading="lazy"><canvas aria-hidden="true"></canvas><figcaption class="mq-c">Frottez ici</figcaption><span class="mq-f" aria-hidden="true">Et voilà.</span></figure>
+  </div>
+</section>
+
+<section class="bloc ep" id="epilations">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l ep-g">
+    <div class="ep-h">
+      <p class="kicker">Épilations et pieds</p>
+      <h2>Tirez <em>la bande</em></h2>
+      <p class="chapo">Trois bandes de cire. Tirez-les vers la droite, ou touchez-les.</p>
+    </div>
+    <div class="bandes" id="bandes">
+      <div class="zone" data-superpose><div class="z-d"><h3>Épilations du visage</h3><div class="rg"><span>Zones et tarifs</span><i class="pt"></i></div></div><button class="bande" type="button" style="--n:0" aria-label="Tirer la bande : épilations du visage"><span>Le visage</span><b>Tirez</b></button></div>
+      <div class="zone" data-superpose><div class="z-d"><h3>Épilations du corps</h3><div class="rg"><span>Zones et tarifs</span><i class="pt"></i></div></div><button class="bande" type="button" style="--n:1" aria-label="Tirer la bande : épilations du corps"><span>Le corps</span><b>Tirez</b></button></div>
+      <div class="zone" data-superpose><div class="z-d"><span class="neuf">Proposé depuis peu</span><h3>Soin anti-callosités des pieds</h3><div class="rg"><span>Durée et tarif</span><i class="pt"></i></div></div><button class="bande" type="button" style="--n:2" aria-label="Tirer la bande : soin des pieds"><span>Les pieds</span><b>Tirez</b></button></div>
+      <p class="net-ok" aria-hidden="true">Et voilà, tout est net.</p>
+    </div>
+    <figure class="arche"><img src="photos/pieds.webp" alt="Photo d’illustration : soin des pieds" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="bloc mg" id="meggy">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l">
+    <p class="kicker">Meggy Monni</p>
+    <h2>Une passion qu’elle a <em>retrouvée</em></h2>
+    <div class="fenetres apparait">
+      <div class="fe" style="--c:var(--ambre);--h:250px;--n:0"><b>2018</b><p>Meggy obtient son diplôme d’esthétique.</p></div>
+      <div class="fe" style="--c:var(--corail);--h:300px;--n:1"><b>Fourmies</b><p>Elle y ouvre un premier salon.</p></div>
+      <div class="fe" style="--c:var(--cobalt);--t:var(--creme);--h:350px;--n:2"><b>Un autre métier</b><p>Elle devient ensuite auxiliaire de vie.</p></div>
+      <div class="fe" style="--c:var(--rubis);--t:var(--creme);--h:420px;--n:3"><b>Glageon</b><p>À la naissance de son fils, elle revient à ce qu’elle aime : la beauté. Aujourd’hui, elle reçoit chez elle, dans un espace bien-être aménagé pour ça.</p></div>
+    </div>
+    <p class="phrase apparait" id="phrase">Ses soins sont ouverts <em>à toutes et à tous.</em></p>
+  </div>
+</section>
+
+<section class="bloc rv" id="rdv">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l rv-g">
+    <div>
+      <p class="kicker">Sur rendez-vous uniquement</p>
+      <h2>Prendre <em>rendez-vous</em></h2>
+      <a class="numero apparait" href="tel:+33644776216" aria-label="Appeler Meggy au 06 44 77 62 16">
+        <b style="--c:var(--ambre);--r:-3deg;--n:0">06</b><b style="--c:var(--rose);--r:2deg;--n:1">44</b><b style="--c:var(--creme);--r:-1deg;--n:2">77</b><b style="--c:var(--ciel);--r:3deg;--n:3">62</b><b style="--c:var(--corail);--r:-2deg;--n:4">16</b>
+      </a>
+      <p class="chapo">Par téléphone, ou en ligne sur Reservio.</p>
+      <div class="rgs"><div class="rg"><span>Lien Reservio</span><i class="pt"></i><b>à ajouter</b></div></div>
+    </div>
+    <form class="carte-rv" id="demande">
+      <span class="bougie" aria-hidden="true"><i class="flamme"></i></span>
+      <h3 id="dT">Demander un <span class="nc">rendez-vous</span></h3>
+      <label class="plein">Le soin<select required><option value="">Choisir un soin</option><option>Head Spa japonais</option><option>Massage californien</option><option>Massage aux pierres chaudes</option><option>Massage africain</option><option>Massage femme enceinte</option><option>Soin du visage</option><option>Soin du corps</option><option>Épilation</option><option>Soin anti-callosités des pieds</option></select></label>
+      <label>Le jour souhaité<input type="date" required></label>
+      <label>Votre prénom<input type="text" autocomplete="given-name" required></label>
+      <label class="plein">Votre téléphone<input type="tel" autocomplete="tel" required></label>
+      <button class="btn plein" type="submit">J’allume ma demande</button>
+      <p class="mes plein" id="dM" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="bloc in" id="infos">
+  <div class="lever" aria-hidden="true"></div>
+  <div class="bloc-l in-g">
+    <div>
+      <p class="kicker">Chez Meggy</p>
+      <h2>Glageon</h2>
+      <p class="adr"><a href="https://www.google.com/maps/search/?api=1&query=4+rue+de+la+Grosse+%C3%89pine+59132+Glageon" rel="noopener" target="_blank">4 rue de la Grosse Épine<br>59132 Glageon</a></p>
+      <p class="chapo">Meggy vous reçoit chez elle, sur rendez-vous uniquement.</p>
+      <p class="liens"><a class="btn or" href="https://www.google.com/maps/search/?api=1&query=4+rue+de+la+Grosse+%C3%89pine+59132+Glageon" rel="noopener" target="_blank">Itinéraire</a><a class="btn clair" href="tel:+33644776216">06 44 77 62 16</a></p>
+    </div>
+    <div class="in-d">
+      <div class="rg"><span>Horaires</span><i class="pt"></i></div>
+      <div class="rg"><span>Tarifs</span><i class="pt"></i></div>
+      <div class="rg"><span>Réservation en ligne</span><i class="pt"></i><b>Reservio</b></div>
+      <div class="rg"><span>Facebook</span><i class="pt"></i><b>L’Institut Lumière Sacrée</b></div>
+      <p class="ex-note">En pointillés : ce qui attend vos vrais mots.</p>
+    </div>
+  </div>
+  <div class="in-ros" id="inRos" aria-hidden="true"></div>
+</section>
+</main>
+
+<footer class="pied"><div>
+  <p class="grand">Votre site peut avoir autant de pages que vous voulez.</p>
+  <p>Une page par soin, une pour le Head Spa, une pour les futures mamans, une pour vos tarifs : c’est vous qui voyez. Ici, une seule pour donner l’idée.</p>
+  <p class="petit">Maquette privée préparée pour L’Institut Lumière Sacrée. Rien n’est en ligne, rien n’est réservé pour de vrai. Photos d’illustration (Unsplash), en attendant les vôtres.</p>
+  <a class="kzp" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+</div></footer>
+
+<script>
+(function(){
+  var q=new URLSearchParams(location.search),H=document.documentElement,p=q.get('palette'),AMB=['or','aurore','azur'];
+  if(AMB.indexOf(p)>=0)H.dataset.ambiance=p;
+  addEventListener('message',function(e){if(e.data&&e.data.type==='kazura-couleur'&&AMB.indexOf(e.data.palette)>=0)H.dataset.ambiance=e.data.palette});
+  var calme=!document.documentElement.classList.contains('anime');
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))},
+      cl=function(v){return v<0?0:v>1?1:v},lisse=function(t){return t*t*(3-2*t)};
+  function an(el,k,o){if(calme||!el.animate)return{finished:Promise.resolve()};return el.animate(k,o)}
+  var sale=true,enCours=false,TETE=64,masqueFini=false;
+
+  // ---- le dessin d'une rosace : anneau de verres à lobes, anneau intérieur, cœur
+  var VERRES=['#2845a6','#b9273f','#fdf3e0','#17705a','#ee6f52','#a9cdf2','#8f1d34','#f8c7b4'];
+  function pt(r,a){a=a*Math.PI/180;return (r*Math.cos(a)).toFixed(2)+' '+(r*Math.sin(a)).toFixed(2)}
+  function verre(r1,r2,a0,a1,lobe){
+    var d='M'+pt(r1,a0)+'L'+pt(r2,a0);
+    if(lobe){var ch=(2*r2*Math.sin((a1-a0)*Math.PI/360)*lobe).toFixed(2);d+='A'+ch+' '+ch+' 0 0 1 '+pt(r2,a1)}
+    else d+='A'+r2+' '+r2+' 0 0 1 '+pt(r2,a1);
+    return d+'L'+pt(r1,a1)+'A'+r1+' '+r1+' 0 0 0 '+pt(r1,a0)+'Z'}
+  function rosace(e){
+    var s='',k;
+    for(k=0;k<8;k++)s+='<path class="ext" data-k="'+k+'" style="--i:'+k+';--c:'+VERRES[k]+'" fill="'+VERRES[k]+'" d="'+verre(60*e,96*e,-112.5+45*k,-67.5+45*k,.56)+'"/>';
+    for(k=0;k<8;k++)s+='<path class="int" style="--i:'+(8+k)+'" fill="'+(k%2?'#f6b43a':'#fffaf0')+'" d="'+verre(27*e,60*e,-90+45*k,-45+45*k,0)+'"/>';
+    return s+'<circle style="--i:16" r="'+27*e+'" fill="#b9273f"/><circle style="--i:17" r="'+11*e+'" fill="#f6b43a"/>'}
+  $('.mq').innerHTML=rosace(.5);
+  var fil=$('#fil'),filS=$('svg',fil);filS.innerHTML=rosace(.5);
+  var filV=$$('.ext',filS);
+  $('#inRos').innerHTML='<svg viewBox="-116 -116 232 232">'+rosace(1)+'</svg>';
+
+  // ---- la grande rosace : on la fait tourner, elle s'arrête sur un soin
+  var SOINS=[
+    ['Head Spa japonais','Un massage des cheveux et du visage, inspiré des rituels capillaires japonais.','#headspa'],
+    ['Massage californien','Un des quatre massages de Meggy.','#massages'],
+    ['Soin du visage','Dans un espace bien-être aménagé, chez Meggy.','#visage'],
+    ['Pierres chaudes','Le massage aux pierres chaudes.','#massages'],
+    ['Épilations','Du visage et du corps.','#epilations'],
+    ['Soin des pieds','Le soin anti-callosités, proposé depuis peu.','#epilations'],
+    ['Massage africain','Un des quatre massages de Meggy.','#massages'],
+    ['Future maman','Un massage pensé pour les femmes enceintes.','#massages']];
+  var ros=$('#rosace'),rosZ=$('#rosZ'),tir=$('#tirage');
+  ros.innerHTML='<svg viewBox="-116 -116 232 232" aria-hidden="true">'+rosace(1)+'</svg>';
+  var rosV=$$('.ext',ros),A=0,V=0,tenue=false,dAng=0,dT=0,bouge=0,tourne=false,cR={x:0,y:0};
+  function centre(){var r=rosZ.getBoundingClientRect();cR={x:r.left+r.width/2,y:r.top+r.height/2}}
+  function angP(e){return Math.atan2(e.clientY-cR.y,e.clientX-cR.x)*180/Math.PI}
+  function peint(){ros.style.transform='rotate('+A.toFixed(2)+'deg)'}
+  function annonce(){
+    var k=((Math.round(-A/45)%8)+8)%8,s=SOINS[k];
+    ros.classList.add('a-choisi');
+    rosV.forEach(function(v,i){v.classList.toggle('elu',i===k);var a=(-90+45*i)*Math.PI/180;v.style.transform=i===k?'translate('+(9*Math.cos(a)).toFixed(1)+'px,'+(9*Math.sin(a)).toFixed(1)+'px)':''});
+    an(tir,[{transform:'perspective(700px) rotateX(0)'},{transform:'perspective(700px) rotateX(90deg)',offset:.5},{transform:'perspective(700px) rotateX(0)'}],{duration:460,easing:'ease-in-out'});
+    setTimeout(function(){$('#tiK').textContent='La rosace a choisi';$('#tiH').textContent=s[0];$('#tiP').textContent=s[1];var a=$('#tiA');a.textContent='Voir ce soin';a.href=s[2]},calme?0:230);
+  }
+  function direct(){A=Math.round((A+V*.4)/45)*45;peint();annonce()}
+  function lance(){
+    if(tourne)return;tourne=true;var der=performance.now();
+    ros.classList.remove('a-choisi');rosV.forEach(function(v){v.style.transform='';v.classList.remove('elu')});
+    (function pas(t){
+      var dt=Math.min(.05,Math.max(0,(t-der)/1000));der=t;
+      if(tenue){tourne=false;return}
+      if(Math.abs(V)>26){A+=V*dt;V*=Math.pow(.38,dt);peint();requestAnimationFrame(pas)}
+      else{var but=Math.round(A/45)*45,a0=A,t0=t;
+        (function cale(t2){var u=cl((t2-t0)/520),e=1-Math.pow(1-u,3);A=a0+(but-a0)*e;peint();
+          if(u<1&&!tenue)requestAnimationFrame(cale);else{if(!tenue){A=but;peint();annonce()}tourne=false}})(t)}
+    })(der);
+  }
+  ros.addEventListener('pointerdown',function(e){centre();tenue=true;bouge=0;V=0;dAng=angP(e);dT=performance.now();ros.classList.add('tenue');try{ros.setPointerCapture(e.pointerId)}catch(x){}});
+  ros.addEventListener('pointermove',function(e){
+    if(!tenue)return;var a=angP(e),d=a-dAng,t=performance.now();
+    if(d>180)d-=360;if(d<-180)d+=360;
+    A+=d;bouge+=Math.abs(d);V=V*.5+(d/Math.max(8,t-dT)*1000)*.5;dAng=a;dT=t;peint()});
+  function lache(){
+    if(!tenue)return;tenue=false;ros.classList.remove('tenue');
+    if(bouge<3)V=(520+Math.random()*520)*(Math.random()<.5?-1:1);
+    else if(performance.now()-dT>120)V=0;
+    V=Math.max(-1500,Math.min(1500,V));
+    if(calme)direct();else lance()}
+  ros.addEventListener('pointerup',lache);ros.addEventListener('pointercancel',lache);
+  ros.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();V=700+Math.random()*400;if(calme)direct();else lance()}});
+
+  // ---- le rayon : il part de la rosace, suit le doigt ou la souris, et allume les lettres qu'il touche
+  var heros=$('#accueil'),rayon=$('#rayon'),lettres=$$('.lt'),LP=[],rC={x:0,y:0},rA=-90,rBut=null,rVu=true,rDer=0,rT0=performance.now(),base=-90,rMarche=false;
+  function mesure(){
+    TETE=parseFloat(getComputedStyle(H).getPropertyValue('--tete'))||64;
+    var h=heros.getBoundingClientRect(),r=rosZ.getBoundingClientRect();
+    rC={x:r.left-h.left+r.width/2,y:r.top-h.top+r.height/2};
+    heros.style.setProperty('--cx',rC.x.toFixed(0)+'px');heros.style.setProperty('--cy',rC.y.toFixed(0)+'px');
+    LP=lettres.map(function(l){var b=l.getBoundingClientRect();return Math.atan2(b.top-h.top+b.height/2-rC.y,b.left-h.left+b.width/2-rC.x)*180/Math.PI});
+    var n=$('#nom').getBoundingClientRect();
+    base=Math.atan2(n.top-h.top+n.height*.56-rC.y,n.left-h.left+n.width*.4-rC.x)*180/Math.PI;
+  }
+  function ecart(a,b){var d=a-b;while(d>180)d-=360;while(d<-180)d+=360;return d}
+  function rayonPas(t){
+    if(!rVu){rMarche=false;return}
+    var but=rBut!==null&&t-rDer<2600?rBut:base+Math.sin((t-rT0)/1500)*13+Math.sin((t-rT0)/3700)*6;
+    rA+=ecart(but,rA)*.09;
+    rayon.style.setProperty('--ra',rA.toFixed(2)+'deg');
+    for(var i=0;i<lettres.length;i++){var on=Math.abs(ecart(LP[i],rA))<8.5;if(on!==lettres[i]._on){lettres[i]._on=on;lettres[i].classList.toggle('ec',on);lettres[i].style.setProperty('--rr',(i%2?3:-3)+'deg')}}
+    requestAnimationFrame(rayonPas)}
+  function rayonVa(){if(!rMarche&&rVu){rMarche=true;requestAnimationFrame(rayonPas)}}
+  function vise(e){var h=heros.getBoundingClientRect();rBut=Math.atan2(e.clientY-h.top-rC.y,e.clientX-h.left-rC.x)*180/Math.PI;rDer=performance.now()}
+  if(!calme){
+    heros.addEventListener('pointermove',vise,{passive:true});heros.addEventListener('pointerdown',vise,{passive:true});
+    var rayonPret=false;
+    new IntersectionObserver(function(en){rVu=en[0].isIntersecting;if(rVu&&rayonPret)rayonVa()}).observe(heros);
+    setTimeout(function(){mesure();rA=base+46;rT0=performance.now();rayonPret=true;rayonVa()},1500);
+  }else rayon.style.display='none';
+
+  // ---- menu en verres
+  var menu=$('#menu');
+  function ouvre(o){menu.classList.toggle('ouvert',o);menu.setAttribute('aria-hidden',o?'false':'true');fil.setAttribute('aria-expanded',o?'true':'false')}
+  fil.addEventListener('click',function(){ouvre(!menu.classList.contains('ouvert'))});
+  $('#menuX').addEventListener('click',function(){ouvre(false)});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))ouvre(false)});
+  addEventListener('keydown',function(e){if(e.key==='Escape')ouvre(false)});
+
+  // ---- les levers de soleil
+  var levers=$$('.lever').map(function(l){
+    var b=document.createElement('b'),rs=[],i;l.appendChild(b);
+    for(i=0;i<7;i++){var r=document.createElement('i');r.style.setProperty('--r',(-75+25*i)+'deg');l.appendChild(r);rs.push(r)}
+    return{sec:l.parentNode,b:b,rs:rs,p:-1}});
+
+  // ---- Head Spa : les filets d'eau
+  var hs=$('#hs'),scene=$('#hsScene'),eau=$('#eau'),hsP=$('#hsP'),hsI=$('#hsI'),hsImg=$('#hsF img'),filets=[],mots=[],sx=-999;
+  (function(){
+    var N=innerWidth<760?11:24,cs=['#3558c4','#1f3a94','#4c6fd8','#2f50b8','#1b3388','#5d80e6'],i;
+    for(i=0;i<N;i++){var f=document.createElement('i'),h=44+((i*37)%50),w=100/N,c=cs[i%cs.length];
+      f.style.cssText='left:'+(i*w+w*.16).toFixed(2)+'%;width:'+(w*.68).toFixed(2)+'%;height:'+h+'%;background:'+c;
+      eau.appendChild(f);filets.push({el:f,h:h/100,d:((i*53)%29)/29*.5,x:(i+.5)/N})}
+    hsP.innerHTML=hsP.textContent.trim().split(/\s+/).map(function(m){return '<span>'+m+'</span>'}).join(' ');
+    mots=$$('span',hsP);
+  })();
+  if(!calme){H.classList.add('joue');
+    scene.addEventListener('pointermove',function(e){var r=scene.getBoundingClientRect();sx=(e.clientX-r.left)/r.width;sale=true;demande()},{passive:true});
+    scene.addEventListener('pointerleave',function(){sx=-999;sale=true;demande()});
+  }
+  function eauPas(vh){
+    var r=hs.getBoundingClientRect(),i;
+    if(r.bottom<0||r.top>vh)return;
+    var p=cl((TETE-r.top)/(r.height-(vh-TETE)));
+    for(i=0;i<filets.length;i++){var f=filets[i],t=cl((p*1.22-f.d)/.62),y=-102+t*(104+100/f.h),dx=0;
+      if(sx>-1){var e=f.x-sx,a=Math.abs(e);if(a<.09)dx=(e<0?-1:1)*(1-a/.09)*26}
+      f.el.style.transform='translate('+dx.toFixed(1)+'px,'+y.toFixed(1)+'%)'}
+    for(i=0;i<mots.length;i++)mots[i].style.opacity=p>.06+i/mots.length*.5?1:.2;
+    hsImg.style.clipPath='inset(0 0 '+((1-cl((p-.08)/.5))*100).toFixed(1)+'% 0)';
+    hsI.style.opacity=p>.7?0:1;
+  }
+
+  // ---- le moteur : une seule boucle, qui s'arrête quand rien ne bouge
+  var secs=['accueil','soins','hs','massages','visage','epilations','meggy','rdv'].map(function(i){return document.getElementById(i)}),
+      rang=-1,hTexte=$('#hTexte'),arches=$$('.arche img').filter(function(i){return i!==hsImg});
+  function demande(){if(!enCours){enCours=true;requestAnimationFrame(image)}}
+  function image(){
+    enCours=false;if(!sale)return;sale=false;
+    var y=scrollY,vh=innerHeight,i,j;
+    filS.style.transform='rotate('+(y*.12).toFixed(1)+'deg)';
+    var k=0;for(i=0;i<secs.length;i++)if(secs[i].getBoundingClientRect().top<vh*.55)k=i;
+    if(k!==rang){var av=rang;rang=k;filV.forEach(function(v,n){v.classList.toggle('al',n<=k)});if(!calme&&av>=0){fil.classList.remove('saut');void fil.offsetWidth;fil.classList.add('saut')}}
+    if(calme)return;
+    if(y<vh*1.3){hTexte.style.transform='translateY('+(-y*.16).toFixed(1)+'px)';rosZ.style.transform=innerWidth<900?'translateY('+(y*.04).toFixed(1)+'px)':'translateY('+(y*.1).toFixed(1)+'px) scale('+(1+y/vh*.1).toFixed(3)+')'}
+    for(i=0;i<levers.length;i++){var L=levers[i],t=L.sec.getBoundingClientRect().top,q2=lisse(cl((vh-t)/(vh*.62)));
+      if(q2===L.p)continue;L.p=q2;
+      L.b.style.transform='translateY('+((1-q2)*50).toFixed(2)+'%)';
+      for(j=0;j<7;j++)L.rs[j].style.transform='rotate('+(-75+25*j)+'deg) scaleY('+cl(q2*1.7-.45-Math.abs(j-3)*.06).toFixed(3)+')'}
+    eauPas(vh);
+    for(i=0;i<arches.length;i++){var b=arches[i].parentNode.getBoundingClientRect();if(b.bottom>0&&b.top<vh)arches[i].style.transform='translateY('+(((b.top+b.height/2)/vh-.5)*-9).toFixed(2)+'%)'}
+  }
+  addEventListener('scroll',function(){sale=true;demande()},{passive:true});
+  addEventListener('resize',function(){mesure();if(!masqueFini)tailleMasque();sale=true;demande()});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){mesure();sale=true;demande()});
+  addEventListener('load',function(){mesure();if(!masqueFini)tailleMasque();sale=true;demande()});
+
+  // ---- ce qui s'allume en entrant
+  if('IntersectionObserver' in window&&!calme){
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}})},{threshold:.22});
+    $$('.apparait').forEach(function(e){io.observe(e)});
+  }else $$('.apparait').forEach(function(e){e.classList.add('vu')});
+  (function(){var o=$('#phrase'),n=0;
+    function decoupe(nd){[].slice.call(nd.childNodes).forEach(function(c){
+      if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(m){if(!m)return;if(/^\s+$/.test(m)){f.appendChild(document.createTextNode(' '));return}var s=document.createElement('span');s.textContent=m;s.style.setProperty('--n',n++);f.appendChild(s)});nd.replaceChild(f,c)}
+      else decoupe(c)})}
+    decoupe(o)})();
+
+  // ---- les pierres
+  var MASS=[['Californien','Un massage bien-être, à choisir selon ce dont vous avez besoin.','photos/massage.webp'],
+    ['Pierres chaudes','Le massage aux pierres chaudes.','photos/massage.webp'],
+    ['Africain','Un massage bien-être, à choisir selon ce dont vous avez besoin.','photos/massage.webp'],
+    ['Femme enceinte','Un massage pensé pour les femmes enceintes.','photos/enceinte.webp']];
+  var fiche=$('#fiche'),pz=$$('.pi-z');
+  $('#pierres').addEventListener('click',function(e){
+    var b=e.target.closest('.pi');if(!b)return;var k=+b.dataset.k,m=MASS[k];
+    if(b.parentNode.classList.contains('chaude'))return;
+    pz.forEach(function(z,i){z.classList.toggle('chaude',i===k)});
+    an(fiche,[{transform:'translateY(0)',opacity:1},{transform:'translateY(16px) rotate(.6deg)',opacity:.2,offset:.45},{transform:'translateY(0)',opacity:1}],{duration:520,easing:'ease-in-out'});
+    setTimeout(function(){$('#fH').textContent=m[0];$('#fP').textContent=m[1];var im=$('#fI');if(im.getAttribute('src')!==m[2])im.src=m[2]},calme?0:230);
+  });
+
+  // ---- le masque qu'on retire
+  var mq=$('#masque'),cv=$('canvas',mq),cx=cv.getContext('2d'),fait=0,der=null;
+  function tailleMasque(){
+    var r=mq.getBoundingClientRect();if(!r.width)return;
+    if(cv.width===Math.round(r.width)&&cv.height===Math.round(r.height)&&fait>0)return;
+    cv.width=Math.round(r.width);cv.height=Math.round(r.height);
+    cx.globalCompositeOperation='source-over';cx.fillStyle='#b9d6b1';cx.fillRect(0,0,cv.width,cv.height);
+    var i;cx.fillStyle='#a8cba0';for(i=0;i<7;i++){cx.beginPath();cx.ellipse(cv.width*((i*.37+.2)%1),cv.height*((i*.23+.12)%1),cv.width*.24,cv.height*.07,(i%3-1)*.5,0,7);cx.fill()}
+    cx.fillStyle='#cbe3c4';for(i=0;i<5;i++){cx.beginPath();cx.ellipse(cv.width*((i*.29+.5)%1),cv.height*((i*.31+.3)%1),cv.width*.16,cv.height*.04,(i%3-1)*.6,0,7);cx.fill()}
+    fait=0;der=null;mq.classList.remove('touche')}
+  function frotte(e){
+    if(masqueFini)return;var r=cv.getBoundingClientRect(),x=(e.clientX-r.left)*cv.width/r.width,y=(e.clientY-r.top)*cv.height/r.height;
+    mq.classList.add('touche');
+    cx.globalCompositeOperation='destination-out';cx.lineWidth=Math.max(58,cv.width*.2);cx.lineCap='round';cx.lineJoin='round';
+    cx.beginPath();if(der)cx.moveTo(der.x,der.y);else cx.moveTo(x-.5,y);cx.lineTo(x,y);cx.stroke();
+    fait+=der?Math.hypot(x-der.x,y-der.y):30;der={x:x,y:y};
+    if(fait>(cv.width+cv.height)*1.7){masqueFini=true;mq.classList.add('net')}}
+  if(calme){masqueFini=true;mq.classList.add('net','touche')}
+  else{
+    cv.addEventListener('pointerdown',function(e){der=null;frotte(e)});
+    cv.addEventListener('pointermove',function(e){if(e.pointerType==='mouse'||e.pressure>0||e.buttons)frotte(e)});
+    ['pointerup','pointerleave','pointercancel'].forEach(function(n){cv.addEventListener(n,function(){der=null})});
+    tailleMasque();
+  }
+
+  // ---- les bandes de cire
+  $$('.bande').forEach(function(b){
+    var x0=0,dx=0,tenu=false,L=1;
+    function part(){
+      var z=b.parentNode,fin=function(){b.style.display='none';z.classList.add('nette');if(!document.querySelector('.zone:not(.nette)'))z.parentNode.classList.add('fini')};
+      b.style.pointerEvents='none';
+      if(calme||!b.animate){fin();return}
+      b.animate([{transform:b.style.transform||'none',opacity:1},{transform:'translateX('+(L*1.2)+'px) rotate(-24deg)',opacity:1,offset:.8},{transform:'translateX('+(L*1.5)+'px) rotate(-30deg)',opacity:0}],{duration:520,easing:'cubic-bezier(.4,0,.7,1)',fill:'forwards'}).finished.then(fin,fin);
+      setTimeout(function(){z.classList.add('nette')},220)}
+    b.addEventListener('pointerdown',function(e){tenu=true;x0=e.clientX;dx=0;L=b.offsetWidth;b.classList.add('tenue');try{b.setPointerCapture(e.pointerId)}catch(x){}});
+    b.addEventListener('pointermove',function(e){if(!tenu)return;dx=Math.max(0,e.clientX-x0);b.style.transform='translateX('+dx.toFixed(1)+'px) rotate('+(-dx/L*16).toFixed(2)+'deg)'});
+    function fin(e){if(!tenu)return;tenu=false;b.classList.remove('tenue');
+      if(dx>L*.3||(dx<6&&e.type==='pointerup'))part();
+      else{an(b,[{transform:b.style.transform||'none'},{transform:'none'}],{duration:320,easing:'cubic-bezier(.3,1.5,.5,1)'});dx=0;b.style.transform=''}}
+    b.addEventListener('pointerup',fin);b.addEventListener('pointercancel',fin);
+    b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();L=b.offsetWidth;part()}});
+  });
+
+  // ---- la demande : la bougie s'allume
+  var dem=$('#demande');
+  dem.addEventListener('submit',function(e){e.preventDefault();dem.classList.add('allumee');$('#dT').textContent='C’est noté.';
+    $('#dM').textContent='Dans cette maquette, rien n’est envoyé. Sur votre vrai site, la demande arrive directement chez vous.'});
+
+  mesure();demande();
+})();
+</script>
+</body>
+</html>

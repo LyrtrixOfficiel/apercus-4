@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Boulangerie de La Ferrière-Bochard, le pain d’artisan est de retour au village</title>
+<meta name="description" content="Maquette privée préparée pour la boulangerie de La Ferrière-Bochard (Orne), rouverte en octobre 2026.">
+<meta name="theme-color" content="#121829">
+<link rel="icon" href="data:,">
+<link rel="preload" as="font" type="font/woff2" href="polices/young-serif-latin-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="polices/stardos-stencil-latin-700-normal.woff2" crossorigin>
+<script>(function(){var h=document.documentElement;h.classList.add('js');if(/[?&]calme=1/.test(location.search))h.classList.add('calme');else h.classList.add('rideau-baisse');})();</script>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<!-- Le rideau de fer : baissé à l'arrivée, il se relève tout seul, ou d'un geste. -->
+<div class="rideau" id="rideau" role="button" tabindex="0" aria-label="Relever le rideau de la boulangerie">
+  <div class="rideau-lames" aria-hidden="true"></div>
+  <div class="rideau-peint" aria-hidden="true">
+    <span class="rp-1">Boulangerie</span>
+    <span class="rp-2">La Ferrière-Bochard</span>
+    <span class="rp-3">15 mois</span>
+    <span class="rp-4">de rideau baissé.</span>
+    <span class="rp-5">On relève.</span>
+  </div>
+  <div class="rideau-barre" aria-hidden="true"><i></i></div>
+</div>
+
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="Boulangerie de La Ferrière-Bochard, retour en haut">
+    <span class="astre" id="astre" aria-hidden="true"><i class="astre-lune"></i><i class="astre-pain"></i></span>
+    <span class="marque-nom">Boulangerie <b><span class="de">de </span>La Ferrière-Bochard</b></span>
+  </a>
+  <span class="moment" id="moment" aria-hidden="true">La nuit</span>
+  <nav class="liens" aria-label="Rubriques">
+    <a href="#village">Le village</a>
+    <a href="#fournil">Le fournil</a>
+    <a href="#lame">Signez un pain</a>
+    <a href="#sac">Dans le sac</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#venir">Venir</a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="bouton petit plein aller" data-carte target="_blank" rel="noopener">Y aller</a>
+  <button class="menu-bouton" id="menu-bouton" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+<nav class="menu" id="menu" aria-label="Menu" hidden>
+  <a href="#village">Le village</a>
+  <a href="#fournil">Le fournil</a>
+  <a href="#lame">Signez un pain</a>
+  <a href="#sac">Dans le sac</a>
+  <a href="#horaires">Horaires</a>
+  <a href="#venir">Venir, réserver</a>
+</nav>
+
+<main>
+
+<!-- LA NUIT : le plan de travail fariné -->
+<section class="accueil" id="accueil" data-moment="La nuit">
+  <canvas id="farine" aria-hidden="true"></canvas>
+  <div class="dedans accueil-grille">
+    <div class="accueil-texte">
+      <p class="sur"><span>Boulangerie artisanale</span><span>Orne, 61420</span></p>
+      <h1><span class="h1-l"><span>La Ferrière-Bochard</span></span> <span class="h1-l"><span>a retrouvé</span></span> <span class="h1-l"><span><em>son pain.</em></span></span></h1>
+      <p class="chapo">Quinze mois de rideau baissé, puis le four s’est rallumé. Depuis octobre 2026, Christophe et Melinda font de nouveau le pain du village.</p>
+      <div class="actions">
+        <a class="bouton plein" href="#horaires">Voir les horaires</a>
+        <a class="bouton" data-carte target="_blank" rel="noopener">Y aller</a>
+      </div>
+    </div>
+    <div class="tas" id="tas">
+      <div class="pancarte" id="pancarte-haut" aria-hidden="true"><i class="ficelle"></i><span class="pancarte-carton"><b data-etat-mot>Ouvert</b><small data-etat-court></small></span></div>
+      <p class="tas-aide" id="tas-aide"><span>Écrivez dans la farine, au doigt ou à la souris.</span><button type="button" class="bouton petit" id="tamis">Remettre de la farine</button></p>
+    </div>
+    <figure class="bouche" id="bouche">
+      <span class="bouche-voute"><img src="photos/pains.webp" alt="Trois miches qui fument sur une grille, au petit matin" width="1500" height="1000" fetchpriority="high"></span>
+      <span class="vapeur" aria-hidden="true"><i></i><i></i><i></i></span>
+      <figcaption>Image d’illustration, en attendant vos photos.</figcaption>
+    </figure>
+  </div>
+  <p class="etat" id="etat" aria-live="polite"></p>
+</section>
+
+<!-- AVANT L'AUBE : le village -->
+<section class="village dents" id="village" data-moment="Avant l’aube">
+  <div class="dedans">
+    <div class="v-haut">
+      <div class="v-tete">
+        <p class="sur"><span>Le village</span></p>
+        <h2><b class="v-n" id="v-n">0</b> <span class="v-mois">mois</span> <span class="v-suite" id="v-suite">sans boulangerie.</span></h2>
+        <p class="texte">Le rideau est resté baissé de juillet 2025 à octobre 2026. Puis, en octobre, le pain est revenu dans le bourg.</p>
+        <div class="v-faits">
+          <p><b data-compte="709">709</b><span>habitants</span></p>
+          <p><b data-compte="1">1</b><span>boulangerie</span></p>
+          <p><b>17 oct.</b><span>2026, l’inauguration</span></p>
+        </div>
+      </div>
+      <div class="v-planche">
+        <ol class="mois" id="mois" aria-label="De juillet 2025 à octobre 2026 : quinze mois fermés, puis la réouverture"></ol>
+        <p class="v-legende" id="v-legende">Un pâton par mois. Faites défiler : en octobre 2026, la pâte lève enfin.</p>
+      </div>
+    </div>
+
+    <div class="v-bas">
+      <figure class="eglise" id="eglise">
+        <span class="eglise-soleil" aria-hidden="true"></span>
+        <span class="eglise-voute"><img src="photos/eglise-chaud.webp" alt="L’église Notre-Dame de La Ferrière-Bochard" width="1100" height="1466" loading="lazy"></span>
+        <figcaption>L’église Notre-Dame, dans le bourg. Photo GO69, Wikimedia Commons, CC BY-SA 4.0, teintes retouchées.</figcaption>
+      </figure>
+      <div class="v-mairie">
+        <p class="sur"><span>Affiché par la mairie</span></p>
+        <div class="affiches" id="affiches">
+          <article class="affiche a1">
+            <p class="affiche-date">Mairie, le 5 octobre 2026</p>
+            <p class="affiche-mot">« La boulangerie de la Ferrière-Bochard ouvrira ses portes le samedi 10 octobre. »</p>
+          </article>
+          <article class="affiche a2">
+            <p class="affiche-date">Mairie, le 10 octobre 2026</p>
+            <p class="affiche-gros">« La boulangerie est ouverte »</p>
+            <p class="affiche-mot">Inauguration le 17 octobre 2026.</p>
+          </article>
+          <article class="affiche a3">
+            <p class="affiche-date">Mairie, octobre 2026</p>
+            <p class="affiche-main">« Tous nos vœux de succès à Christophe et Melinda ! »</p>
+          </article>
+          <article class="affiche a4">
+            <p class="affiche-date">Ouest-France, octobre 2026</p>
+            <p class="affiche-journal">« Retour du pain d’artisan : la boulangerie de La Ferrière-Bochard rouvre ses portes »</p>
+            <p class="affiche-mot">D’après l’article : Christophe est fils de boulanger, celui de Ciral, et a vingt ans de métier. À relire avec vous.</p>
+          </article>
+        </div>
+        <blockquote class="appel" id="appel">
+          <p id="appel-mots">« Nous comptons sur vous tous pour faire vivre ce commerce très important pour notre village. »</p>
+          <footer>La mairie de La Ferrière-Bochard, à l’annonce de l’ouverture</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- L'AUBE : le fournil -->
+<section class="fournil dents" id="fournil" data-moment="L’aube">
+  <div class="dedans">
+    <div class="f-tete">
+      <p class="sur"><span>Le fournil</span></p>
+      <h2>Avant 7 h, il y a <em>toute une nuit.</em></h2>
+      <p class="texte">Pétrir, laisser lever, signer, cuire : le pain d’artisan prend son temps. Les heures du fournil sont les vôtres, on les écrira avec vous.</p>
+    </div>
+    <div class="gestes" id="gestes">
+      <article class="geste g-petrir">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="104" r="92" fill="#27335c"/>
+          <circle cx="100" cy="100" r="92" fill="#3d4c80"/>
+          <circle cx="100" cy="100" r="74" fill="#f4e4c2"/>
+          <g class="tourne"><path d="M100 90a10 10 0 0 1 0 20a22 22 0 0 1 0-44a34 34 0 0 1 0 68a46 46 0 0 1 0-92a58 58 0 0 1 0 116" fill="none" stroke="#e0c794" stroke-width="13" stroke-linecap="round"/></g>
+          <path d="M100 4v62q0 26 22 34" fill="none" stroke="#c9d2e6" stroke-width="15" stroke-linecap="round"/>
+        </svg>
+        <h3>Pétrir</h3>
+        <p>Farine, eau, sel, et le pétrin qui tourne dans la nuit.</p>
+        <p class="heure">Chez vous, à <span class="pt">.. h ..</span></p>
+      </article>
+      <article class="geste g-lever">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <path d="M22 118h156l-16 62a14 14 0 0 1-14 10H52a14 14 0 0 1-14-10z" fill="#a8672f"/>
+          <path d="M30 138h140M36 160h128" stroke="#8a4f1f" stroke-width="9" stroke-linecap="round"/>
+          <g class="gonfle"><path d="M30 120a70 78 0 0 1 140 0z" fill="#f7ead0"/><path d="M62 96q14-30 44-34" fill="none" stroke="#fffaf0" stroke-width="12" stroke-linecap="round"/></g>
+          <rect x="14" y="108" width="172" height="22" rx="11" fill="#8a4f1f"/>
+        </svg>
+        <h3>Laisser lever</h3>
+        <p>La pâte gonfle toute seule. Il suffit de lui laisser le temps.</p>
+        <p class="heure">Chez vous, pendant <span class="pt">.. h ..</span></p>
+      </article>
+      <article class="geste g-signer">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <ellipse cx="100" cy="112" rx="88" ry="62" fill="#f7ead0"/>
+          <ellipse cx="74" cy="92" rx="34" ry="16" fill="#fffaf0" opacity=".8"/>
+          <g class="entailles" fill="none" stroke="#c9a56a" stroke-width="10" stroke-linecap="round"><path d="M52 132q14-26 34-40"/><path d="M86 140q14-26 34-40"/><path d="M120 142q14-24 32-38"/></g>
+          <g class="lame-mini"><rect x="-6" y="-92" width="12" height="70" rx="6" fill="#7a4a22"/><path d="M-14-30h28l-4 22q-10 12-20 0z" fill="#e6ecf4"/></g>
+        </svg>
+        <h3>Signer</h3>
+        <p>Un coup de lame, la grigne : c’est la signature du boulanger.</p>
+        <p class="heure"><a href="#lame">Essayez plus bas</a></p>
+      </article>
+      <article class="geste g-cuire">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <path d="M10 192V100a90 90 0 0 1 180 0v92z" fill="#5a2d14"/>
+          <path d="M34 192v-88a66 66 0 0 1 132 0v88z" fill="#2a1208"/>
+          <path class="lueur" d="M34 192v-88a66 66 0 0 1 132 0v88z" fill="#ff8a2e"/>
+          <ellipse class="miche" cx="100" cy="158" rx="50" ry="26" fill="#f1dfb8"/>
+          <path class="miche-grigne" d="M72 152q28-16 56 0" fill="none" stroke="#fff3d6" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <h3>Cuire</h3>
+        <p>Le four est rallumé. La croûte dore, la boutique sent bon.</p>
+        <p class="heure">Chez vous, vers <span class="pt">.. h ..</span></p>
+      </article>
+    </div>
+    <div class="f-photos">
+      <figure class="f-photo four"><img src="photos/four.webp" alt="La bouche d’un four à pain qui rougeoie" width="1400" height="1400" loading="lazy"><figcaption>Image d’illustration : votre four à la place.</figcaption></figure>
+      <p class="f-cri"><span>Le four</span> <span>est</span> <em>rallumé.</em></p>
+      <figure class="f-photo patons"><img src="photos/paton.webp" alt="Des pâtons façonnés sur une toile" width="1200" height="798" loading="lazy"><figcaption>Image d’illustration.</figcaption></figure>
+    </div>
+    <a class="f-suite" href="#horaires"><b>7 h</b><span>le rideau se lève. Voir les horaires</span></a>
+  </div>
+</section>
+
+<!-- LE PETIT MATIN : la lame, le jeu -->
+<section class="lame dents" id="lame" data-moment="Le petit matin">
+  <div class="dedans lame-grille">
+    <div class="lame-texte">
+      <p class="sur"><span>À vous de jouer</span></p>
+      <h2>Signez <em>votre pain.</em></h2>
+      <p class="texte">Avant d’enfourner, le boulanger entaille la pâte d’un coup de lame. Tracez vos grignes avec le doigt ou la souris, puis enfournez : elles s’ouvrent à la cuisson.</p>
+      <div class="formes" role="group" aria-label="La forme du pain">
+        <button type="button" class="forme actif" data-forme="boule"><i class="f-boule"></i>Boule</button>
+        <button type="button" class="forme" data-forme="batard"><i class="f-batard"></i>Bâtard</button>
+        <button type="button" class="forme" data-forme="baguette"><i class="f-baguette"></i>Baguette</button>
+      </div>
+      <div class="lame-actions">
+        <button type="button" class="bouton plein" id="enfourner">Enfourner</button>
+        <button type="button" class="bouton" id="effacer">Effacer</button>
+      </div>
+      <p class="lame-dit" id="lame-dit" aria-live="polite">Tracez une grigne sur la pâte.</p>
+    </div>
+    <div class="planche" id="planche">
+      <div class="chaleur" aria-hidden="true"></div>
+      <svg id="scene-pain" viewBox="0 0 600 420" role="img" aria-label="Un pâton fariné, à entailler">
+        <defs>
+          <radialGradient id="g-cru" cx="42%" cy="36%" r="80%"><stop offset="0" stop-color="#fdf5df"/><stop offset="1" stop-color="#e8d3a4"/></radialGradient>
+          <radialGradient id="g-cuit" cx="42%" cy="36%" r="80%"><stop offset="0" stop-color="#f0b352"/><stop offset=".55" stop-color="#c9802c"/><stop offset="1" stop-color="#8c4915"/></radialGradient>
+          <clipPath id="decoupe"><path id="forme-clip" d="M130 210a170 160 0 1 0 340 0a170 160 0 1 0-340 0z"/></clipPath>
+        </defs>
+        <ellipse class="pain-ombre" cx="306" cy="372" rx="210" ry="26"/>
+        <g id="pain">
+          <path id="forme-cru" fill="url(#g-cru)" d="M130 210a170 160 0 1 0 340 0a170 160 0 1 0-340 0z"/>
+          <path id="forme-cuit" fill="url(#g-cuit)" d="M130 210a170 160 0 1 0 340 0a170 160 0 1 0-340 0z"/>
+          <g id="pain-farine" clip-path="url(#decoupe)"><ellipse cx="230" cy="140" rx="90" ry="46"/><ellipse cx="380" cy="270" rx="70" ry="38"/><ellipse cx="320" cy="110" rx="50" ry="22"/></g>
+          <g id="grignes" clip-path="url(#decoupe)"></g>
+        </g>
+        <g id="lame-outil" aria-hidden="true"><rect x="-7" y="-128" width="14" height="100" rx="7" fill="#7a4a22"/><path d="M-17-36h34l-5 26q-12 14-24 0z" fill="#eef2f7"/><path d="M-17-36h34l-2 10h-30z" fill="#b9c3d2"/></g>
+      </svg>
+      <div class="cuisson" id="cuisson" aria-hidden="true"><i></i></div>
+      <p class="tampon-sortie" id="sortie" aria-hidden="true">Sorti du four</p>
+      <span class="vapeur v-jeu" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- 7 H : dans le sac -->
+<section class="sac dents" id="sac" data-moment="7 h, c’est ouvert">
+  <div class="dedans">
+    <div class="sac-tete">
+      <p class="sur"><span>Dans le sac</span></p>
+      <h2>Le pain d’artisan <em>est de retour.</em></h2>
+      <p class="texte">Ce qui sort du four chaque jour, c’est à vous de nous le dire. Écrivez-le sur les pointillés : ça s’inscrit sur le sac, comme ce sera écrit sur votre site.</p>
+    </div>
+    <div class="sac-grille">
+      <div class="etal" id="etal">
+        <label class="rayon r-pain">
+          <span class="rayon-photo p-boule"><img src="photos/pains.webp" alt="Des miches sur une grille" loading="lazy" width="1500" height="1000"></span>
+          <span class="rayon-mot">Le pain</span>
+          <input type="text" data-rayon="0" maxlength="40" placeholder="................................" aria-label="Vos pains, à écrire">
+        </label>
+        <label class="rayon r-baguette">
+          <span class="rayon-photo p-longue"><img src="photos/baguettes.webp" alt="Des baguettes et un pain sorti du moule" loading="lazy" width="1200" height="800"></span>
+          <span class="rayon-mot">Les baguettes</span>
+          <input type="text" data-rayon="1" maxlength="40" placeholder="................................" aria-label="Vos baguettes, à écrire">
+        </label>
+        <label class="rayon r-reste">
+          <span class="rayon-photo p-ovale"><img src="photos/paton.webp" alt="Des pâtons sur une toile" loading="lazy" width="1200" height="798"></span>
+          <span class="rayon-mot">Et le reste</span>
+          <input type="text" data-rayon="2" maxlength="40" placeholder="................................" aria-label="Le reste de l’étal, à écrire">
+        </label>
+      </div>
+      <div class="sachet" id="sachet" aria-live="polite">
+        <div class="sachet-papier">
+          <p class="sachet-enseigne">Boulangerie<br><b>de La Ferrière-Bochard</b></p>
+          <p class="sachet-titre">Dans le sac aujourd’hui</p>
+          <p class="sachet-ligne" data-ligne="0"><span class="pt">........................</span></p>
+          <p class="sachet-ligne" data-ligne="1"><span class="pt">........................</span></p>
+          <p class="sachet-ligne" data-ligne="2"><span class="pt">........................</span></p>
+          <p class="sachet-bas">Le pain d’artisan est de retour</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA JOURNÉE : les horaires -->
+<section class="horaires dents" id="horaires" data-moment="La journée">
+  <div class="dedans horaires-grille">
+    <div class="h-tete">
+      <div class="pancarte grande" id="pancarte" aria-hidden="true"><i class="ficelle"></i><span class="pancarte-carton"><b data-etat-mot>Ouvert</b></span></div>
+      <p class="sur"><span>Horaires de la mairie</span></p>
+      <h2>Le rideau se lève <em>à 7 h.</em></h2>
+      <p class="h-dire" id="h-dire"></p>
+      <p class="texte">Du mardi au vendredi, de 7 h à 13 h et de 16 h à 19 h. Le samedi et le dimanche, de 7 h à 13 h. Fermeture le lundi.</p>
+    </div>
+    <div class="etagere" id="etagere" aria-label="Les horaires de la semaine">
+      <div class="etagere-heures" aria-hidden="true"><span style="--x:0">7 h</span><span style="--x:50">13 h</span><span style="--x:75">16 h</span><span style="--x:100">19 h</span></div>
+      <div id="semaine"></div>
+      <p class="etagere-note">Une baguette par ouverture. Plus elle est longue, plus c’est ouvert longtemps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LE SOIR : venir, réserver -->
+<section class="venir dents" id="venir" data-moment="Le soir">
+  <div class="dedans venir-grille">
+    <div class="v-adresse">
+      <div class="panneau" id="panneau" aria-hidden="true"><span class="panneau-plaque">La Ferrière-<br>Bochard</span><i></i><i></i></div>
+      <p class="sur"><span>Venir</span></p>
+      <h2>Dans le bourg.</h2>
+      <p class="adresse"><b>La Ferrière-Bochard, 61420</b><span>Rue : <span class="pt">..............................</span></span><span>Téléphone : <span class="pt">.. .. .. .. ..</span></span></p>
+      <a class="bouton plein" data-carte target="_blank" rel="noopener">Ouvrir l’itinéraire</a>
+    </div>
+    <form class="reserve" id="reserve" autocomplete="off">
+      <p class="sur"><span>Une idée pour votre site</span></p>
+      <h2>Un pain <em>mis de côté.</em></h2>
+      <p class="texte">Vos clients écrivent leur nom, vous préparez le sac. Essayez.</p>
+      <div class="reserve-champs">
+        <label><span>Votre nom</span><input type="text" id="r-nom" maxlength="22" placeholder="................"></label>
+        <label><span>Ce qu’il vous faut</span><input type="text" id="r-quoi" maxlength="40" placeholder="................................"></label>
+        <div class="quand" role="group" aria-label="Pour quand">
+          <span>Pour</span>
+          <button type="button" class="choix actif" data-quand="demain matin">Demain matin</button>
+          <button type="button" class="choix" data-quand="ce week-end">Ce week-end</button>
+          <button type="button" class="choix" data-quand="un autre jour">Un autre jour</button>
+        </div>
+      </div>
+      <button type="submit" class="bouton plein">Mettre de côté</button>
+      <div class="sac-nom" id="sac-nom" aria-live="polite">
+        <span class="sac-nom-pli" aria-hidden="true"></span>
+        <p class="sac-nom-main" id="sac-nom-main">Votre nom</p>
+        <p class="sac-nom-detail" id="sac-nom-detail">pour demain matin</p>
+      </div>
+      <p class="reserve-note" id="reserve-note">Rien n’est envoyé : c’est une démonstration. Sur le vrai site, la demande arrive à la boulangerie.</p>
+    </form>
+  </div>
+</section>
+
+<!-- À DEMAIN : le rideau redescend -->
+<section class="fin dents" id="fin" data-moment="À demain">
+  <div class="dedans">
+    <div class="pages">
+      <p>Ici, une seule page pour vous donner l’idée.</p>
+      <p class="pages-g">Votre site peut avoir autant de pages que vous voulez.</p>
+      <p>Une page pour le pain, une pour les gâteaux, une pour les commandes des fêtes : c’est vous qui voyez. Vos textes, vos photos, vos couleurs, on ajuste tout ensemble.</p>
+    </div>
+    <div class="vitrine" id="vitrine">
+      <div class="vitrine-dedans"><p>Bonne soirée.</p></div>
+      <div class="vitrine-rideau" id="rideau-fin" aria-hidden="true"><span id="mot-fin">À demain, 7 h.</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <p>Maquette privée, préparée pour la boulangerie de La Ferrière-Bochard. Rien n’est en ligne publiquement.</p>
+  <p class="credits">Images d’illustration (Pexels et images créées pour la maquette), en attendant les vôtres. L’église : GO69, Wikimedia Commons, CC BY-SA 4.0. Horaires et annonces : mairie de La Ferrière-Bochard, octobre 2026.</p>
+</footer>
+
+</body>
+</html>
