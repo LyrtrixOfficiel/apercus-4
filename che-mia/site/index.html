@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ché Mia, restauration sur place et à emporter à Lille</title>
+<meta name="description" content="Maquette privée préparée pour Ché Mia, restauration sur place et à emporter, 94 ter boulevard Victor Hugo à Lille, quartier de Wazemmes.">
+<meta name="theme-color" content="#d3212f">
+<link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js'); if (/[?&]calme=1/.test(location.search)) document.documentElement.classList.add('calme');</script>
+<link rel="stylesheet" href="style.css">
+<script src="contenu.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+
+<header class="barre" id="barre">
+  <a class="logo" href="#accueil" aria-label="Ché Mia, retour en haut"><i class="logo-pignon" aria-hidden="true"></i><span>Ché Mia</span></a>
+  <nav class="liens" id="liens" aria-label="Rubriques">
+    <a href="#nom">Le nom</a>
+    <a href="#table">Sur place ou à emporter</a>
+    <a href="#carte">La carte</a>
+    <a href="#buffet">Le buffet</a>
+    <a href="#horaires">Horaires</a>
+    <a href="#venir">Venir</a>
+  </nav>
+  <a class="kazura" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a>
+  <a class="bouton petit" data-itin target="_blank" rel="noopener">Y aller</a>
+  <button class="menu-b" id="menu-b" type="button" aria-expanded="false" aria-controls="liens">Menu</button>
+  <div class="piste" aria-hidden="true"><i class="moineau fil" id="fil"></i></div>
+</header>
+
+<main>
+
+<!-- ============ ACCUEIL : la façade, le pignon à pas de moineaux, le paillasson ============ -->
+<section class="accueil" id="accueil">
+  <div class="ciel" aria-hidden="true"><i class="nuage n1"></i><i class="nuage n2"></i><i class="nuage n3"></i><i class="nuage n4"></i><i class="nuage n5"></i></div>
+  <div class="cadre accueil-grille">
+    <div class="accueil-texte">
+      <p class="etiquettes"><span>Sur place</span><span>À emporter</span><span class="sombre">Wazemmes, Lille</span></p>
+      <h1 class="titre" id="titre" aria-label="Ché Mia">Ché Mia</h1>
+      <p class="chapo">Restauration sur place et à emporter, au <b>94&nbsp;ter boulevard Victor Hugo</b>, à Lille.</p>
+      <p class="main-ecrit accueil-mot">«&nbsp;Ché mi&nbsp;», en ch’ti&nbsp;: chez moi&nbsp;?</p>
+      <p class="boutons"><a class="bouton" href="#nom" id="pousser">Pousser la porte</a><a class="bouton clair" data-itin target="_blank" rel="noopener">Y aller</a></p>
+      <p class="astuce" id="astuce-accueil">Approchez des moineaux. Frottez le paillasson.</p>
+    </div>
+    <div class="maison" id="maison">
+      <svg class="facade" viewBox="0 0 600 700" role="img" aria-label="Une maison de brique à pignon à pas de moineaux, avec l’enseigne Ché Mia">
+        <defs>
+          <pattern id="briques" width="80" height="40" patternUnits="userSpaceOnUse">
+            <rect width="80" height="40" fill="var(--brique)"/>
+            <rect x="2" y="2" width="36" height="16" rx="2" fill="var(--brique3)" opacity=".5"/>
+            <rect x="42" y="2" width="36" height="16" rx="2" fill="var(--brique2)" opacity=".32"/>
+            <rect x="22" y="22" width="36" height="16" rx="2" fill="var(--brique2)" opacity=".45"/>
+            <rect x="62" y="22" width="36" height="16" rx="2" fill="var(--brique3)" opacity=".4"/>
+            <rect x="-18" y="22" width="36" height="16" rx="2" fill="var(--brique3)" opacity=".4"/>
+          </pattern>
+          <pattern id="dalles" width="28" height="28" patternUnits="userSpaceOnUse">
+            <rect width="28" height="28" fill="#fff3d9"/><rect width="14" height="14" fill="var(--sapin)"/><rect x="14" y="14" width="14" height="14" fill="var(--sapin)"/>
+          </pattern>
+        </defs>
+        <!-- les voisines -->
+        <g class="voisines">
+          <path d="M-20 700V330h30v-36h30v-36h30V700z" fill="#dba25c"/>
+          <rect x="6" y="400" width="40" height="64" rx="4" fill="#fff3d9"/><rect x="12" y="406" width="28" height="52" fill="#8fc5d6"/>
+          <rect x="6" y="540" width="40" height="64" rx="4" fill="#fff3d9"/><rect x="12" y="546" width="28" height="52" fill="#8fc5d6"/>
+          <path d="M530 700V300h40v-40h50V700z" fill="#8f3220"/>
+          <rect x="556" y="380" width="40" height="64" rx="4" fill="#fff3d9"/><rect x="562" y="386" width="28" height="52" fill="#f7d774"/>
+          <rect x="556" y="530" width="40" height="64" rx="4" fill="#fff3d9"/><rect x="562" y="536" width="28" height="52" fill="#8fc5d6"/>
+        </g>
+        <!-- la cheminée et sa fumée -->
+        <g class="cheminee"><rect x="452" y="118" width="46" height="110" fill="var(--brique2)"/><rect x="444" y="108" width="62" height="16" rx="3" fill="#fff3d9"/></g>
+        <g class="fumee"><circle cx="475" cy="92" r="16"/><circle cx="475" cy="92" r="16"/><circle cx="475" cy="92" r="16"/></g>
+        <!-- la façade -->
+        <g class="mur">
+          <path d="M60 662V250h40v-40h40v-40h40v-40h40V90h40V50h80v40h40v40h40v40h40v40h40v40h40v412z" fill="url(#briques)"/>
+        </g>
+        <g class="marches" fill="#fff3d9">
+          <rect x="54" y="242" width="52" height="12" rx="3" style="--i:0"/><rect x="494" y="242" width="52" height="12" rx="3" style="--i:0"/>
+          <rect x="94" y="202" width="52" height="12" rx="3" style="--i:1"/><rect x="454" y="202" width="52" height="12" rx="3" style="--i:1"/>
+          <rect x="134" y="162" width="52" height="12" rx="3" style="--i:2"/><rect x="414" y="162" width="52" height="12" rx="3" style="--i:2"/>
+          <rect x="174" y="122" width="52" height="12" rx="3" style="--i:3"/><rect x="374" y="122" width="52" height="12" rx="3" style="--i:3"/>
+          <rect x="214" y="82" width="52" height="12" rx="3" style="--i:4"/><rect x="334" y="82" width="52" height="12" rx="3" style="--i:4"/>
+          <rect x="254" y="42" width="92" height="12" rx="3" style="--i:5"/>
+        </g>
+        <!-- l'œil-de-bœuf -->
+        <g class="oeil"><circle cx="300" cy="132" r="34" fill="#fff3d9"/><circle class="vitre" cx="300" cy="132" r="23"/><rect x="295" y="109" width="10" height="46" fill="#fff3d9"/><rect x="277" y="127" width="46" height="10" fill="#fff3d9"/></g>
+        <!-- l'étage : deux fenêtres, rideaux, jardinières -->
+        <g class="fenetre-e" tabindex="0" role="button" aria-label="Allumer ou éteindre la fenêtre de gauche">
+          <rect x="108" y="268" width="134" height="150" rx="6" fill="#fff3d9"/><rect class="vitre" x="120" y="280" width="110" height="126"/>
+          <path class="voilage" d="M120 280h110v58q-14 16-27 0-14 16-28 0-14 16-27 0-14 16-28 0z" fill="#fff3d9"/>
+          <rect x="170" y="280" width="10" height="126" fill="#fff3d9"/>
+          <rect x="100" y="414" width="150" height="26" rx="5" fill="var(--sapin)"/>
+          <g class="fleurs-j"><circle cx="124" cy="408" r="13"/><circle cx="150" cy="402" r="14"/><circle cx="178" cy="408" r="13"/><circle cx="204" cy="402" r="14"/><circle cx="228" cy="408" r="12"/></g>
+        </g>
+        <g class="fenetre-e" tabindex="0" role="button" aria-label="Allumer ou éteindre la fenêtre de droite">
+          <rect x="358" y="268" width="134" height="150" rx="6" fill="#fff3d9"/><rect class="vitre" x="370" y="280" width="110" height="126"/>
+          <path class="voilage" d="M370 280h110v58q-14 16-27 0-14 16-28 0-14 16-27 0-14 16-28 0z" fill="#fff3d9"/>
+          <rect x="420" y="280" width="10" height="126" fill="#fff3d9"/>
+          <rect x="350" y="414" width="150" height="26" rx="5" fill="var(--sapin)"/>
+          <g class="fleurs-j"><circle cx="374" cy="408" r="13"/><circle cx="400" cy="402" r="14"/><circle cx="428" cy="408" r="13"/><circle cx="454" cy="402" r="14"/><circle cx="478" cy="408" r="12"/></g>
+        </g>
+        <!-- l'enseigne -->
+        <g class="enseigne"><rect x="76" y="456" width="448" height="62" rx="8" fill="var(--sapin)"/><text x="300" y="502" text-anchor="middle">Ché Mia</text></g>
+        <!-- le rez-de-chaussée : la vitrine, la porte -->
+        <g class="vitrine-m">
+          <rect x="250" y="534" width="258" height="112" rx="6" fill="#fff3d9"/><rect x="262" y="546" width="234" height="88" fill="#f7d774"/>
+          <rect x="372" y="546" width="14" height="22" fill="var(--encre)"/><path d="M349 590a30 26 0 0 1 60 0z" fill="var(--accent)"/>
+          <rect x="262" y="596" width="234" height="38" fill="#fff3d9"/><path d="M262 596h234v10q-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0-13 12-26 0z" fill="var(--accent)"/>
+        </g>
+        <g class="seuil"><rect x="104" y="534" width="116" height="128" rx="6" fill="#fff3d9"/><rect x="114" y="544" width="96" height="118" fill="#f7d774"/><rect x="114" y="622" width="96" height="40" fill="url(#dalles)"/><text x="162" y="596" text-anchor="middle">Entrez</text></g>
+        <g class="porte" id="porte" tabindex="0" role="button" aria-label="Pousser la porte">
+          <rect x="114" y="544" width="96" height="118" fill="var(--accent)"/><rect x="126" y="556" width="72" height="46" rx="4" fill="#f7d774"/><rect x="126" y="612" width="72" height="40" rx="4" fill="var(--accent2)"/><circle cx="196" cy="606" r="7" fill="#f7c843"/>
+        </g>
+        <rect class="sol" x="-20" y="660" width="640" height="40" fill="var(--trottoir)"/>
+      </svg>
+      <span class="plaque" aria-hidden="true">94 ter</span>
+      <button class="paillasson" id="paillasson" type="button" aria-label="Frotter le paillasson"><span class="p-avant">Essuyez vos pieds</span><span class="p-apres">Bienvenue</span></button>
+      <div class="vol" id="vol" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- frise de carreaux de ciment : on entre -->
+<div class="frise" aria-hidden="true"><i id="frise-1"></i></div>
+
+<!-- ============ LE NOM : le papier peint, les assiettes au mur ============ -->
+<section class="nom papier" id="nom">
+  <div class="cadre nom-grille">
+    <div class="nom-texte">
+      <p class="sur-titre">Le nom</p>
+      <h2 class="t2 allume" id="phrase-nom">«&nbsp;Ché mi&nbsp;», en ch’ti, ça se dit pour «&nbsp;chez moi&nbsp;».</h2>
+      <p>Est-ce de là que vient Ché Mia&nbsp;? On ne l’a lu nulle part&nbsp;: c’est une piste, pas une certitude. La vraie histoire du nom s’écrira ici, avec vos mots.</p>
+      <p class="ligne-a-remplir"><span>L’histoire du nom</span><i></i></p>
+      <p>En attendant, ce site se visite comme une maison&nbsp;: on essuie ses pieds, on passe à table, on regarde ce qui tient sur la porte du frigo, on ouvre le buffet.</p>
+    </div>
+    <div class="mur-assiettes" id="mur-assiettes">
+      <figure class="cadre-photo" id="cadre-photo"><i class="clou" aria-hidden="true"></i><img src="photos/table.webp" alt="Une table couverte d’une toile cirée jaune à cerises, deux assiettes dépareillées, une carafe, près d’une fenêtre" width="1100" height="730" loading="lazy"><figcaption>Image d’illustration, en attendant vos photos</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA TABLE : sur place ou à emporter ============ -->
+<section class="table" id="table">
+  <div class="festons" aria-hidden="true"></div>
+  <div class="cadre table-grille">
+    <div class="set">
+      <p class="sur-titre">Sur place ou à emporter</p>
+      <h2 class="t2">Vous restez, ou vous filez&nbsp;?</h2>
+      <p>Ché Mia fait les deux&nbsp;: on mange sur place, ou on emporte.</p>
+      <div class="choix" role="group" aria-label="Sur place ou à emporter">
+        <button type="button" class="pilule actif" data-mode="place" aria-pressed="true">Je reste</button>
+        <button type="button" class="pilule" data-mode="emporte" aria-pressed="false">J’emporte</button>
+      </div>
+      <p class="main-ecrit table-mot" id="table-mot" aria-live="polite">La table est mise. Asseyez-vous.</p>
+    </div>
+    <div class="scene-table mode-place" id="scene-table">
+      <div class="couvert" aria-hidden="true">
+        <i class="serviette"></i>
+        <i class="fourchette"><b></b></i>
+        <div class="assiette-t" id="assiette-t"><span class="main-ecrit">votre plat,<br>ici</span></div>
+        <i class="couteau"><b></b></i>
+        <i class="verre"></i>
+      </div>
+      <div class="emballage" aria-hidden="true">
+        <div class="boite"><i class="rabat r1"></i><i class="rabat r2"></i><i class="rabat r3"></i><i class="rabat r4"></i><i class="bande"></i><span class="pastille">Ché Mia</span></div>
+      </div>
+      <figure class="polaroid" id="polaroid">
+        <div class="polaroid-tourne">
+          <div class="face"><img src="photos/table.webp" alt="Une table dressée, sans plat, sur une toile cirée à cerises" width="1100" height="730" loading="lazy"></div>
+          <div class="face dos"><img src="photos/sac.webp" alt="Un sac en papier kraft posé sur la table, une main le prend, la porte est ouverte sur la rue" width="821" height="1100" loading="lazy"></div>
+        </div>
+        <figcaption>Image d’illustration</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- le pignon monte : on change de pièce -->
+<div class="pignons vers-carte" aria-hidden="true" data-pignons></div>
+
+<!-- ============ LA CARTE : la porte du frigo ============ -->
+<section class="carte" id="carte">
+  <div class="cadre carte-grille">
+    <div class="carte-texte">
+      <p class="sur-titre">La carte</p>
+      <h2 class="t2">Elle tient sur la porte du frigo.</h2>
+      <p>Comme le menu de la semaine, à la maison. Les lignes attendent vos plats et vos prix&nbsp;: rien n’est inventé.</p>
+      <p class="petit-mot">Les six rubriques viennent des annuaires d’avant la reprise. On garde, on raye, on remplace&nbsp;: c’est vous qui dites.</p>
+      <p class="astuce fonce">Déplacez les lettres. Tirez sur un gros aimant&nbsp;: la carte ne tient qu’à ça.</p>
+      <button class="bouton raccrocher" id="raccrocher" type="button" hidden>Raccrocher la carte</button>
+    </div>
+    <div class="frigo" id="frigo">
+      <i class="frigo-poignee" aria-hidden="true"></i>
+      <div class="frigo-porte" id="frigo-porte">
+        <div class="lettres" id="lettres" aria-hidden="true"></div>
+        <div class="feuille-zone">
+          <article class="feuille" id="feuille">
+            <header><h3>La carte</h3><p class="main-ecrit" data-etroit>à écrire avec vous</p></header>
+            <div class="rubriques" id="rubriques"></div>
+            <p class="feuille-bas">Sur place ou à emporter</p>
+          </article>
+          <button class="aimant gros a1" id="aimant-1" type="button" aria-label="Aimant en forme de cerises : tirez dessus"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 8q-14 10-13 26M30 8q10 8 13 24" fill="none" stroke="#1c5546" stroke-width="6" stroke-linecap="round"/><path d="M30 8q14-8 22 2-12 8-22-2z" fill="#1c5546"/><circle cx="17" cy="42" r="14" fill="var(--accent)"/><circle cx="43" cy="40" r="14" fill="var(--accent)"/><circle cx="12" cy="37" r="4" fill="#fff" opacity=".7"/><circle cx="38" cy="35" r="4" fill="#fff" opacity=".7"/></svg></button>
+          <button class="aimant gros a2" id="aimant-2" type="button" aria-label="Aimant en forme de maison : tirez dessus"><svg viewBox="0 0 60 60" aria-hidden="true"><path d="M2 56V30h8v-8h8v-8h8V6h8v8h8v8h8v8h8v26z" fill="#b8472d"/><rect x="24" y="36" width="12" height="20" rx="2" fill="#fff3d9"/><rect x="26" y="20" width="8" height="8" rx="1" fill="#f7c843"/></svg></button>
+        </div>
+        <div class="frigo-bas">
+          <figure class="frigo-photo"><img src="photos/sac.webp" alt="Un sac en papier kraft prêt à partir, posé sur la toile cirée" width="821" height="1100" loading="lazy"><figcaption>Image d’illustration</figcaption></figure>
+          <p class="postit main-ecrit" data-etroit>Vos plats,<br>vos prix&nbsp;:<br>on les note ici.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LE BUFFET : le jeu des paires ============ -->
+<section class="buffet" id="buffet">
+  <div class="cadre buffet-grille">
+    <div class="buffet-texte">
+      <figure class="photo-buffet"><img src="photos/vaisselle.webp" alt="Une pile d’assiettes dépareillées dans un vieux buffet en chêne, des tasses pendues, un torchon à carreaux" width="1100" height="1100" loading="lazy"><figcaption>Image d’illustration</figcaption></figure>
+      <p class="sur-titre">Le buffet</p>
+      <h2 class="t2">La vaisselle dépareillée.</h2>
+      <p class="buffet-mot">À la maison, aucune assiette ne va avec l’autre. Dans ce buffet, si&nbsp;: retournez-les deux par deux et retrouvez les six paires. Chaque paire dit une chose vraie sur la maison.</p>
+      <p class="score"><span>Coups <b id="coups">0</b></span><span>Paires <b id="trouvees">0</b> sur 6</span><button class="bouton petit clair" id="rejouer" type="button">Mélanger</button></p>
+    </div>
+    <ul class="faits" id="faits" aria-live="polite"></ul>
+    <div class="meuble">
+      <div class="corniche" aria-hidden="true"></div>
+      <div class="etageres" id="jeu" role="group" aria-label="Douze assiettes retournées"></div>
+      <p class="bravo" id="bravo" aria-live="polite"></p>
+      <div class="tiroirs" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LES HORAIRES : les torchons de la semaine ============ -->
+<section class="horaires" id="horaires">
+  <div class="festons bas" aria-hidden="true"></div>
+  <div class="cadre">
+    <div class="horaires-tete">
+      <div>
+        <p class="sur-titre">Les horaires</p>
+        <h2 class="t2">Un torchon par jour.</h2>
+      </div>
+      <p>Autrefois, on brodait un torchon pour chaque jour de la semaine. Ceux-ci attendent leurs heures&nbsp;: donnez-les, on les brode. <b>Horaires à compléter avec vous.</b></p>
+    </div>
+    <div class="tringle">
+      <ol class="torchons" id="torchons" data-etroit></ol>
+    </div>
+    <p class="legende-torchons">Le torchon de couleur, c’est aujourd’hui. Touchez-les, ou passez la souris&nbsp;: ils se balancent.</p>
+  </div>
+</section>
+
+<div class="pignons vers-venir" aria-hidden="true" data-pignons></div>
+
+<!-- ============ VENIR : la fenêtre, les rideaux, les toits ============ -->
+<section class="venir" id="venir">
+  <div class="cadre venir-grille">
+    <div class="fenetre" id="fenetre" role="button" tabindex="0" aria-label="Ouvrir ou fermer les rideaux">
+      <div class="vue" id="vue" aria-hidden="true"></div>
+      <i class="rideau g" aria-hidden="true"></i><i class="rideau d" aria-hidden="true"></i>
+      <i class="croisee" aria-hidden="true"></i>
+      <i class="appui" aria-hidden="true"><b></b></i>
+    </div>
+    <div class="venir-texte">
+      <p class="sur-titre">Venir</p>
+      <h2 class="t2">Par la fenêtre, Wazemmes.</h2>
+      <p>Ché Mia est à Lille, dans le quartier de Wazemmes.</p>
+      <div class="enveloppe" id="enveloppe">
+        <i class="timbre" aria-hidden="true"></i>
+        <p class="main-ecrit">Ché Mia<br>94 ter boulevard Victor Hugo<br>59000 Lille</p>
+      </div>
+      <p class="petit-mot">Une seconde adresse figure au registre&nbsp;: 49 rue de Wazemmes. Un angle, deux entrées&nbsp;? À préciser avec vous.</p>
+      <p class="boutons"><a class="bouton" data-itin target="_blank" rel="noopener">Ouvrir l’itinéraire</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- frise de carreaux de ciment -->
+<div class="frise deux" aria-hidden="true"><i id="frise-2"></i></div>
+
+<!-- ============ APPELER : le téléphone à cadran ============ -->
+<section class="appeler" id="appeler">
+  <div class="cadre appeler-grille">
+    <div class="appeler-texte">
+      <p class="sur-titre">Appeler</p>
+      <h2 class="t2">Le numéro de la maison.</h2>
+      <p>Il s’écrira ici, en gros, et un doigt suffira pour appeler. En attendant&nbsp;: des pointillés, et un cadran qui tourne.</p>
+      <p class="numero"><span>Téléphone</span><b>.. .. .. .. ..</b></p>
+      <p class="compose" id="compose" aria-live="polite">Faites tourner le cadran.</p>
+    </div>
+    <div class="telephone" id="telephone">
+      <i class="combine" aria-hidden="true"></i>
+      <div class="cadran" id="cadran"><div class="disque" id="disque" data-superpose></div><span class="centre main-ecrit">.. .. ..</span><i class="butee" aria-hidden="true"></i></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="toits" id="toits" aria-hidden="true"></div>
+  <div class="cadre pied-grille">
+    <div class="tapis"><span>À bientôt</span></div>
+    <div class="pied-texte">
+      <p class="pied-nom">Ché Mia</p>
+      <p>Restauration sur place et à emporter.<br>94 ter boulevard Victor Hugo, 59000 Lille.</p>
+      <p class="mentions">Maquette privée, non référencée. Photos&nbsp;: images d’illustration créées pour la maquette, en attendant les vôtres. Carte, prix, horaires et téléphone&nbsp;: à compléter avec vous.</p>
+      <p><a class="kazura grand" href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
