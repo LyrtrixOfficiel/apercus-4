@@ -103,6 +103,7 @@ section { position: relative; }
 .roulette .manche { position: absolute; left: 50%; bottom: 50%; width: 18px; height: 70px; margin-left: -9px; border-radius: 9px; background: var(--vif); border: 4px solid var(--encre); transform-origin: 50% 100%; transform: rotate(-40deg); }
 .roulette .lame { position: absolute; inset: 4px; border-radius: 50%; border: 5px solid var(--encre); background: conic-gradient(#f6f1e7 0 12%, #cfc8b9 0 25%, #f6f1e7 0 37%, #cfc8b9 0 50%, #f6f1e7 0 62%, #cfc8b9 0 75%, #f6f1e7 0 87%, #cfc8b9 0); transform: rotate(var(--r, 0deg)); will-change: transform; }
 .roulette .lame::after { content: ''; position: absolute; inset: 34%; border-radius: 50%; background: var(--encre); }
+.roulette.loin { display: none; } /* fluidité : loin de l'écran, la roulette (deux calques) sort du dessin ; elle revient dans la même image */
 
 /* ---------- Accueil ---------- */
 .accueil { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); min-height: min(100svh, 960px); padding-top: var(--barre); background: var(--kraft) var(--grain); overflow: hidden; }
@@ -177,6 +178,7 @@ section { position: relative; }
 .roue:active { cursor: grabbing; }
 .roue svg { width: 100%; height: 100%; overflow: visible; transform: rotate(var(--rot, 0deg)); transition: transform .8s cubic-bezier(.2, .9, .3, 1.08); filter: drop-shadow(0 8px 6px rgba(60, 20, 0, .35)); }
 .roue.tire svg { transition: none; }
+.roue.loin svg { display: none; } /* fluidité : loin de la carte, la roue sort du dessin (posé par app.js, revient un demi-écran avant) */
 .roue .part { cursor: pointer; transition: transform .45s cubic-bezier(.3, 1.5, .5, 1), opacity .3s; }
 .js .roue .part { opacity: 0; transform: translate(calc(var(--ux) * 70px), calc(var(--uy) * 70px)) rotate(18deg); }
 .js .vu .roue .part { opacity: 1; transform: none; transition-delay: calc(var(--i) * 70ms); }
@@ -292,6 +294,7 @@ section { position: relative; }
 @keyframes tampon-sortie { from { opacity: 0; transform: rotate(-12deg) scale(2.2); } to { opacity: 1; transform: rotate(7deg); } }
 .pate-photo { grid-area: photo; position: relative; width: min(100%, 520px); margin-top: 8px; transform: rotate(-2deg); }
 .pate-photo img { border-radius: 12px; border: 8px solid var(--creme); width: 100%; height: auto; aspect-ratio: 4 / 2.3; object-fit: cover; object-position: 40% 60%; }
+.pate-photo img, .partage img, .siege img { will-change: transform; } /* fluidité : les tirages qui flottent glissent sans être repeints */
 .pate-photo figcaption, .partage figcaption, .siege figcaption { position: absolute; right: 16px; bottom: 16px; padding: 4px 9px; border-radius: 6px; background: var(--creme); color: var(--encre); font-size: 12.5px; font-weight: 700; }
 @media (max-width: 1099px) {
   .jeu-corps { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; gap: 22px; }

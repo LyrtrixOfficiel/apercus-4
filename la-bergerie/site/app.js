@@ -395,56 +395,72 @@
   var liensNav = $$('.liens a'), sections = $$('main > section'), marque = $('#marque-pizza'), carte = $('#carte'), dernierIci = '';
   var tirages = $$('.pate-photo img, .partage img, .siege img');
   var demande = false;
+  // Fluidité (13/11) : toutes les lectures de la mise en page d'abord, toutes les écritures ensuite (plus de recalcul forcé entre deux),
+  // et une valeur n'est réécrite que si elle a changé.
+  var dejaEcrit = new Map();
+  function poserVar(el, nom, v) { var m = dejaEcrit.get(el); if (!m) { m = {}; dejaEcrit.set(el, m); } if (m[nom] === v) return; m[nom] = v; el.style.setProperty(nom, v); }
+  var collinesLoin = $('.collines.loin', paysage), soleil = $('.ciel-soleil', paysage), tempsLa = -1, arrive = null, roueLoin = null;
   function maj() {
     demande = false;
-    var y = scrollY, vh = innerHeight, vw = innerWidth, total = D.documentElement.scrollHeight - vh;
-    // la pizza de la barre : une part de moins à chaque dixième de page
-    marque.style.setProperty('--mange', Math.min(9, Math.floor(borne(y / Math.max(1, total), 0, 1) * 10 + .02)) * 36 + 'deg');
-    // la rubrique en cours
+    if (!geo) mesurer();
+    // ---- lectures ----
+    var y = scrollY, vh = innerHeight, vw = innerWidth, total = H.scrollHeight - vh;
     var ici = '';
-    sections.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top < vh * .45 && r.bottom > vh * .45) ici = s.id; });
+    for (var s = 0; s < sections.length; s++) { var r = sections[s].getBoundingClientRect(); if (r.top < vh * .45 && r.bottom > vh * .45) ici = sections[s].id; }
+    var hautsCoupes = coupes.map(function (c) { return c.el.getBoundingClientRect().top; });
+    var ra = accueil.getBoundingClientRect(), rbo = ra.bottom > 0 && boiteOuverte ? boiteScene.getBoundingClientRect() : null;
+    var partTel = -1, rc = carte.getBoundingClientRect();
+    if (etroit.matches && Date.now() > verrou) {
+      if (rc.top < vh * .5 && rc.bottom > vh * .5) {
+        var seuil = roueZone.getBoundingClientRect().bottom + 70;
+        for (var i = 0; i < N; i++) { if (lignes[i].getBoundingClientRect().bottom > seuil) { partTel = i; break; } }
+      }
+    }
+    var rf = fondTitre.getBoundingClientRect(), rb = bouche.getBoundingClientRect();
+    var rTirages = tirages.map(function (im) { return im.getBoundingClientRect(); });
+    var rh = histoire.getBoundingClientRect();
+    // ---- écritures ----
+    // la pizza de la barre : une part de moins à chaque dixième de page
+    poserVar(marque, '--mange', Math.min(9, Math.floor(borne(y / Math.max(1, total), 0, 1) * 10 + .02)) * 36 + 'deg');
+    // la rubrique en cours
     if (ici !== dernierIci) { dernierIci = ici; liensNav.forEach(function (a) { a.classList.toggle('ici', a.getAttribute('href') === '#' + ici); }); }
-    // la roulette qui coupe le carton à chaque changement de section
-    coupes.forEach(function (c) {
-      var t = c.el.getBoundingClientRect().top; if (t < -80 || t > vh + 80) return;
+    // la roulette qui coupe le carton à chaque changement de section (hors de vue, elle ne fait plus partie du dessin)
+    coupes.forEach(function (c, j) {
+      var t = hautsCoupes[j], loin = t < -80 || t > vh + 80;
+      if (loin !== c.loin) { c.loin = loin; c.r.classList.toggle('loin', loin); }
+      if (loin) return;
       var x = -90 + (1 - t / vh) * (vw + 180);
-      c.r.style.setProperty('--x', x.toFixed(1) + 'px'); c.lame.style.setProperty('--r', (x * 1.98).toFixed(1) + 'deg');
+      poserVar(c.r, '--x', x.toFixed(1) + 'px'); poserVar(c.lame, '--r', (x * 1.98).toFixed(1) + 'deg');
     });
     // le carton de l'accueil se referme quand il quitte l'écran par le haut (réglé sur sa propre position, pas sur celle de la section)
-    var ra = accueil.getBoundingClientRect();
-    if (ra.bottom > 0 && boiteOuverte) {
-      var rbo = boiteScene.getBoundingClientRect(), q = borne((vh * .4 - (rbo.top + rbo.height * .62)) / (vh * .5), 0, 1);
+    if (rbo) {
+      var q = borne((vh * .4 - (rbo.top + rbo.height * .62)) / (vh * .5), 0, 1);
       if (q > .06) { boite.classList.add('suit'); angle(OUVERT + (FERME - OUVERT) * lisse((q - .06) / .8)); }
       else if (boite.classList.contains('suit')) { boite.classList.remove('suit'); angle(OUVERT); }
     }
+    // la roue (des milliers de morceaux découpés) ne reste dans le dessin que près de la carte : loin d'elle, tout le reste de la page défile plus léger
+    var rl = rc.bottom < -vh * .6 || rc.top > vh * 1.6;
+    if (rl !== roueLoin) { roueLoin = rl; roue.classList.toggle('loin', rl); }
     // au téléphone, la carte fait tourner la roue en défilant
-    if (etroit.matches && Date.now() > verrou) {
-      var rc = carte.getBoundingClientRect();
-      if (rc.top < vh * .5 && rc.bottom > vh * .5) {
-        var seuil = roueZone.getBoundingClientRect().bottom + 70;
-        for (var i = 0; i < N; i++) { if (lignes[i].getBoundingClientRect().bottom > seuil) { if (i !== actif) activer(i); break; } }
-      }
-    }
+    if (partTel >= 0 && partTel !== actif) activer(partTel);
     // le titre de la pizza du mois fond, sa photo glisse dans la bouche du four
-    var rf = fondTitre.getBoundingClientRect();
-    if (rf.bottom > -200 && rf.top < vh + 100) fondTitre.style.setProperty('--g', lisse((vh * .92 - rf.top) / (vh * .7)).toFixed(3));
-    var rb = bouche.getBoundingClientRect();
-    if (rb.bottom > 0 && rb.top < vh) bouche.style.setProperty('--p', (-20 + 18 * borne((vh - rb.top) / (vh + rb.height), 0, 1)).toFixed(2) + '%');
+    if (rf.bottom > -200 && rf.top < vh + 100) poserVar(fondTitre, '--g', lisse((vh * .92 - rf.top) / (vh * .7)).toFixed(3));
+    if (rb.bottom > 0 && rb.top < vh) poserVar(bouche, '--p', (-20 + 18 * borne((vh - rb.top) / (vh + rb.height), 0, 1)).toFixed(2) + '%');
     // les tirages photo flottent un peu
-    tirages.forEach(function (im) { var r = im.getBoundingClientRect(); if (r.bottom < -40 || r.top > vh + 40) return; im.style.transform = 'translate3d(0,' + (((r.top + r.height / 2) / vh - .5) * -30).toFixed(1) + 'px,0)'; });
+    tirages.forEach(function (im, j) { var r = rTirages[j]; if (r.bottom < -40 || r.top > vh + 40) return; var v = 'translate3d(0,' + (((r.top + r.height / 2) / vh - .5) * -30).toFixed(1) + 'px,0)'; if (im._ty !== v) { im._ty = v; im.style.transform = v; } });
     // le camion
-    var rh = histoire.getBoundingClientRect();
     if (rh.top < vh && rh.bottom > 0) {
-      if (!geo) mesurer();
       var p = borne(-rh.top / Math.max(1, rh.height - vh), 0, 1), k = lisse((p - .04) / .84);
       var x = geo.depart + (geo.arrivee - geo.depart) * k, max = geo.W - geo.vw;
       var suit = borne(x + geo.cW * .5 - geo.vw * .36, 0, max), cam = suit + (max - suit) * lisse((p - .72) / .2);
-      monde.style.setProperty('--cx', (-cam).toFixed(1) + 'px'); camion.style.setProperty('--kx', x.toFixed(1) + 'px');
-      camion.style.setProperty('--rr', (x / geo.rayon * 57.3).toFixed(0) + 'deg');
-      paysage.style.setProperty('--lx', (-cam * .3).toFixed(1) + 'px'); paysage.style.setProperty('--sy', (geo.hp * .42 * p).toFixed(1) + 'px');
+      poserVar(monde, '--cx', (-cam).toFixed(1) + 'px'); poserVar(camion, '--kx', x.toFixed(1) + 'px');
+      poserVar(camion, '--rr', (x / geo.rayon * 57.3).toFixed(0) + 'deg');
+      // posées sur les deux éléments qui s'en servent, pas sur tout le paysage
+      if (collinesLoin) poserVar(collinesLoin, '--lx', (-cam * .3).toFixed(1) + 'px');
+      if (soleil) poserVar(soleil, '--sy', (geo.hp * .42 * p).toFixed(1) + 'px');
       var t = p < .3 ? 0 : p < .62 ? 1 : 2;
-      temps.forEach(function (e, i) { e.classList.toggle('la', i === t); e.classList.toggle('passe', i < t); });
-      paysage.classList.toggle('arrive', p > .86);
+      if (t !== tempsLa) { tempsLa = t; temps.forEach(function (e, i) { e.classList.toggle('la', i === t); e.classList.toggle('passe', i < t); }); }
+      var a = p > .86; if (a !== arrive) { arrive = a; paysage.classList.toggle('arrive', a); }
     }
   }
   function demander() { if (!demande) { demande = true; requestAnimationFrame(maj); } }
