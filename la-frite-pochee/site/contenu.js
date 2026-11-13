@@ -12,7 +12,8 @@ window.CONTENU = {
   familles: [
     { id: 'friterie', titre: 'La friterie', photo: 'mur', alt: 'Des frites dorées dans le bac d’une friteuse', phrase: 'Vos frites, vos portions, vos sauces.', lignes: 4 },
     { id: 'snacking', titre: 'Le snacking', photo: 'paquet', alt: 'Un paquet emballé dans son papier, tendu par-dessus le comptoir', phrase: 'Ce qui s’emporte et se mange sur le pouce.', lignes: 4 },
-    { id: 'restauration', titre: 'La petite restauration', photo: 'table', alt: 'Une table dressée, avec le sel et deux flacons de sauce', phrase: 'Vos plats, servis comme vous les faites.', lignes: 3 },
+    // Photo de barquette à emporter (13/11) : la table dressée laissait croire à une salle ; l'ancienne friterie du local ne faisait presque que de l'emporter (4 couverts).
+    { id: 'restauration', titre: 'La petite restauration', photo: 'barquette', alt: 'Une barquette de frites dans son papier, avec mayonnaise, ketchup et petite fourchette', phrase: 'Vos plats, servis comme vous les faites.', lignes: 3 },
   ],
   // Sauces du JEU : des noms génériques, sans marque. Ce n'est pas la carte du commerce.
   sauces: [

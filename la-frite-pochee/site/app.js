@@ -106,7 +106,7 @@
     [[12, 0, -98], [3, 112, 14], [6, 0, 126], [9, -112, 14]].forEach(function (c) { h += '<text class="h-chiffre" x="' + c[1] + '" y="' + c[2] + '">' + c[0] + '</text>'; });
     $('#h-heures').innerHTML = h;
   })();
-  var horloge = { vue: false, s: 0, m: 0, h: 0, ps: -1 }, fmt = null;
+  var horloge = { vue: false, ici: true, s: 0, m: 0, h: 0, ps: -1 }, fmt = null;
   try { fmt = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: 'numeric', minute: 'numeric', second: 'numeric', weekday: 'long', hour12: false }); } catch (x) {}
   function heureAuby() {
     var o = { h: 0, m: 0, s: 0, j: '' }, d = new Date();
@@ -114,10 +114,14 @@
     else { o.h = d.getHours(); o.m = d.getMinutes(); o.s = d.getSeconds(); o.j = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'][d.getDay()]; }
     return o;
   }
+  var heureEl = $('#heure'), joursLi = null;
   function tic() {
-    var t = heureAuby();
-    $('#heure').textContent = 'Il est ' + t.h + ' h ' + (t.m < 10 ? '0' : '') + t.m + ' à Auby.';
-    $$('li', semaine).forEach(function (li) { li.classList.toggle('jour', li.firstChild.textContent.toLowerCase() === t.j); });
+    // rubrique loin de l'écran : on ne touche à rien, tout est remis à l'heure dès qu'elle revient
+    if (!horloge.ici) return;
+    var t = heureAuby(), txt = 'Il est ' + t.h + ' h ' + (t.m < 10 ? '0' : '') + t.m + ' à Auby.';
+    if (heureEl.textContent !== txt) heureEl.textContent = txt;
+    joursLi = joursLi || $$('li', semaine);
+    joursLi.forEach(function (li) { li.classList.toggle('jour', li.firstChild.textContent.toLowerCase() === t.j); });
     if (!horloge.vue) return;
     if (horloge.ps >= 0 && t.s < horloge.ps) horloge.s += 360;
     horloge.ps = t.s;
@@ -169,10 +173,14 @@
     for (x = 0; x < 3; x++) haut += '<circle class="fumee" style="--i:' + x + '" cx="1432" cy="194" r="15" fill="#fff7e6"/>';
     rue.innerHTML = '<svg viewBox="0 80 2400 360" preserveAspectRatio="xMidYMax slice" focusable="false">' + s + '<rect class="nuit" x="-100" y="-400" width="2600" height="860"/><g class="lueurs">' + lu + '</g>' + haut + '</svg>';
   })();
+  // La nuit est écrite sur ces quatre éléments seulement, pas sur toute la rubrique : sinon chaque image recalcule les styles de toute la rue.
+  var nuitEls = [$('.voile-nuit', venir), $('.nuit', rue), $('.lueurs', rue), $('.soleil', rue)];
 
   /* ---------- Les deux bains : la scène épinglée ---------- */
   var bains = $('#bains'), zone = $('#plateau-zone'), plateau = $('#plateau'), panier = $('#panier'), manche = $('#manche'), chariot = $('#chariot');
-  var legendes = $$('.legende'), jauge = $('.jauge'), tampon = $('#tampon'), huile1 = $('.bac-1 .huile'), huile2 = $('.bac-2 .huile'), pDernier = -1;
+  var legendes = $$('.legende'), jaugeF = $('#jauge-f'), jaugeC = $('#jauge-c'), jaugeBarre = $('.jauge-barre'), tampon = $('#tampon'), huile1 = $('.bac-1 .huile'), huile2 = $('.bac-2 .huile'), pDernier = -1;
+  // Dernières valeurs écrites : on n'écrit dans le style que ce qui a changé (chaque écriture relance le calcul des styles).
+  var ecrit = { k: -1, b1: '', b2: '', jx: -1 }, geo = { jW: 0 };
   (function () {
     var h = '', i;
     for (i = 0; i < 9; i++) h += '<i class="pf" style="--g:' + (i * 16.4 + entre(-2, 2)).toFixed(1) + 'px;--l:' + entre(128, 174).toFixed(0) + 'px;--a:' + entre(-9, 9).toFixed(1) + 'deg"></i>';
@@ -192,14 +200,22 @@
     panier.style.transform = 'translate(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px)';
     chariot.style.transform = 'translateX(' + px.toFixed(1) + 'px)';
     manche.style.transform = 'translateX(' + px.toFixed(1) + 'px) scaleY(' + ((py - 56) / 100).toFixed(3) + ')';
-    panier.style.setProperty('--frite', teinte(k, 1)); panier.style.setProperty('--frite-o', teinte(k, .86)); panier.style.setProperty('--frite-l', teinte(k, 1.5));
-    huile1.style.setProperty('--b', (x < .5 ? .2 + .8 * bas : .2).toFixed(2));
-    huile2.style.setProperty('--b', (x >= .5 ? .25 + .75 * bas : .25).toFixed(2));
+    // la couleur des frites ne change que pendant les deux bains : 200 crans suffisent à l'œil
+    var kq = Math.round(k * 200) / 200;
+    if (kq !== ecrit.k) {
+      ecrit.k = kq;
+      panier.style.setProperty('--frite', teinte(kq, 1)); panier.style.setProperty('--frite-o', teinte(kq, .86)); panier.style.setProperty('--frite-l', teinte(kq, 1.5));
+      jaugeF.style.setProperty('--k', kq.toFixed(3));
+    }
+    var b1 = (x < .5 ? .2 + .8 * bas : .2).toFixed(2), b2 = (x >= .5 ? .25 + .75 * bas : .25).toFixed(2);
+    if (b1 !== ecrit.b1) { ecrit.b1 = b1; huile1.style.setProperty('--b', b1); }
+    if (b2 !== ecrit.b2) { ecrit.b2 = b2; huile2.style.setProperty('--b', b2); }
+    var jx = Math.round(kq * geo.jW * 2) / 2;
+    if (jx !== ecrit.jx) { ecrit.jx = jx; jaugeC.style.transform = 'translateX(' + jx + 'px)'; }
     panier.classList.toggle('egoutte', (p > .34 && p < .5) || (p > .83 && p < .93));
     panier.classList.toggle('chante', p > .6 && p < .82);
     panier.classList.toggle('fume', p > .85);
     tampon.classList.toggle('pose', p > .92);
-    jauge.style.setProperty('--k', k.toFixed(3));
     var n = p < .32 ? 0 : p < .54 ? 1 : p < .82 ? 2 : 3;
     legendes.forEach(function (l, i) { l.classList.toggle('actif', i === n); l.classList.toggle('passe', i < n); });
   }
@@ -234,12 +250,14 @@
   }
   function trait(a, b) { var d = Math.hypot(b.x - a.x, b.y - a.y), n = Math.max(1, Math.round(d / (R * .42))), i; if (d < R * .2) return false; for (i = 1; i <= n; i++) pose(a.x + (b.x - a.x) * i / n, a.y + (b.y - a.y) * i / n); return true; }
   function finTrait() { while (file.length) reflet(file.shift()); }
+  var verdictDit = '';
+  function ecritVerdict(h) { if (h !== verdictDit) { verdictDit = h; verdict.innerHTML = h; } }   // seulement quand la phrase change
   function dit() {
-    if (!mises.length) { verdict.innerHTML = '<b>Barquette nature.</b> <span>Rien dessus, pour l’instant.</span>'; return; }
+    if (!mises.length) { ecritVerdict('<b>Barquette nature.</b> <span>Rien dessus, pour l’instant.</span>'); return; }
     var noms = mises.map(function (n, i) { return i ? n.toLowerCase() : n; });
     var liste = noms.length === 1 ? noms[0] : noms.slice(0, -1).join(', ') + ' et ' + noms[noms.length - 1];
     var mot = dose < 60 ? 'Une touche, pour goûter.' : dose < 240 ? 'Honnête.' : dose < 560 ? 'Généreux, comme on aime.' : 'Là, ça déborde !';
-    verdict.innerHTML = '<b>' + liste + '.</b> <span>' + mot + '</span>';
+    ecritVerdict('<b>' + liste + '.</b> <span>' + mot + '</span>');
     if (dose >= 560 && !deborde.classList.contains('pose')) { deborde.classList.add('pose'); barquette.classList.remove('secoue'); void barquette.offsetWidth; barquette.classList.add('secoue'); }
   }
   function point(e) { var r = toile.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
@@ -298,9 +316,10 @@
   plante();
   if (!calme) {
     addEventListener('pointermove', function (e) {
-      var r = haie.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return;
-      var pres = e.clientY > r.top - 60 && e.clientY < r.bottom + 90, x = e.clientX / r.width;
-      brins.forEach(function (b) { var d = (b.x - x) * r.width; b.cible = pres && Math.abs(d) < 150 ? (d >= 0 ? 1 : -1) * (1 - Math.abs(d) / 150) * 34 : 0; });
+      // positions gardées en mémoire par le moteur de défilement : aucune lecture de mise en page à chaque mouvement de souris
+      var top = geo.hT - scrollY, bas = geo.hB - scrollY; if (top > innerHeight || bas < 0) return;
+      var pres = e.clientY > top - 60 && e.clientY < bas + 90, x = e.clientX / geo.hW;
+      brins.forEach(function (b) { var d = (b.x - x) * geo.hW; b.cible = pres && Math.abs(d) < 150 ? (d >= 0 ? 1 : -1) * (1 - Math.abs(d) / 150) * 34 : 0; });
       lanceHaie();
     }, { passive: true });
     $$('.tirage, .feuille').forEach(function (el) {
@@ -311,38 +330,68 @@
   }
 
   /* ---------- Le défilement : un seul moteur ---------- */
+  // Les positions sont mesurées une fois (chargement, redimensionnement, polices, changement de hauteur de la page) et gardées en mémoire :
+  // pendant le défilement, le moteur ne lit plus jamais la mise en page, il ne fait qu'écrire, et seulement ce qui a changé.
   var cuissonF = $('#cuisson-f'), cuissonM = $('#cuisson-m'), accueil = $('#accueil'), rubriques = $$('.liens a').map(function (a) { return { a: a, s: $(a.getAttribute('href')) }; }), attente = 0;
+  var der = { q: -1, n: '', coul: coulures.map(function () { return ''; }), ici: undefined };
+  // La barre de cuisson était la seule écriture faite à chaque image sur toute la page, et chaque écriture fait retraiter tout le document.
+  // Quand le navigateur sait lier une animation au défilement (style.css), c'est lui qui la joue : on n'écrit plus rien.
+  var cuissonCSS = !calme && !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()'));
+  function mesure() {
+    var y = scrollY, r;
+    geo.vh = innerHeight; geo.total = D.scrollingElement.scrollHeight - geo.vh; geo.accH = accueil.offsetHeight;
+    r = bains.getBoundingClientRect(); geo.bT = r.top + y; geo.bH = r.height;
+    geo.coul = coulures.map(function (c) { return c.getBoundingClientRect().top + y; });
+    r = rue.getBoundingClientRect(); geo.rT = r.top + y; geo.rB = r.bottom + y;
+    r = haie.getBoundingClientRect(); geo.hT = r.top + y; geo.hB = r.bottom + y; geo.hW = r.width;
+    geo.rub = rubriques.map(function (o) { return o.s ? o.s.getBoundingClientRect().top + y : Infinity; });
+    geo.jW = jaugeBarre.clientWidth;
+    pDernier = -1; ecrit.jx = -1;
+  }
   function maj() {
     attente = 0;
-    var vh = innerHeight, y = scrollY, total = D.scrollingElement.scrollHeight - vh, q = total > 0 ? borne(y / total, 0, 1) : 0, r;
-    cuissonF.style.transform = 'scaleX(' + q.toFixed(4) + ')';
+    var vh = geo.vh, y = scrollY, q = geo.total > 0 ? borne(y / geo.total, 0, 1) : 0, t;
+    if (!cuissonCSS && Math.abs(q - der.q) > .0002) { der.q = q; cuissonF.style.transform = 'scaleX(' + q.toFixed(4) + ')'; }
     var mot = q < .16 ? 'Crue' : q < .5 ? 'Pochée' : q < .93 ? 'Saisie' : 'Servie'; if (cuissonM.textContent !== mot) cuissonM.textContent = mot;
     // accueil : les frites s'envolent
-    var da = calme ? 0 : Math.min(y, accueil.offsetHeight) * 1.1;
+    var da = calme ? 0 : Math.min(y, geo.accH) * 1.1;
     if (da !== defileAccueil) { defileAccueil = da; lanceFrites(); }
     // les deux bains
-    r = bains.getBoundingClientRect();
-    if (r.top < vh && r.bottom > 0) majBains(borne(-r.top / (r.height - vh), 0, 1)); else if (r.top >= vh) majBains(0);
+    t = geo.bT - y;
+    if (t < vh && t + geo.bH > 0) majBains(borne(-t / (geo.bH - vh), 0, 1)); else majBains(t >= vh ? 0 : 1);
     // coulures
-    coulures.forEach(function (c) { var t = c.getBoundingClientRect().top; if (t > -200 && t < vh + 50) c.style.setProperty('--p', seg(1 - t / vh, .04, .8).toFixed(3)); });
+    coulures.forEach(function (c, i) { var tc = geo.coul[i] - y; if (tc > -200 && tc < vh + 50) { var v = seg(1 - tc / vh, .04, .8).toFixed(3); if (v !== der.coul[i]) { der.coul[i] = v; c.style.setProperty('--p', v); } } });
     // la nuit tombe sur la rue
-    r = rue.getBoundingClientRect();
-    if (r.top < vh + 40 && r.bottom > -40) venir.style.setProperty('--n', (.8 * doux(seg(1 - r.top / vh, .14, .7))).toFixed(3));
+    t = geo.rT - y;
+    if (t < vh + 40 && geo.rB - y > -40) { var n = (.8 * doux(seg(1 - t / vh, .14, .7))).toFixed(3); if (n !== der.n) { der.n = n; nuitEls.forEach(function (el) { if (el) el.style.setProperty('--n', n); }); } }
     // la haie frémit quand on arrive en bas
-    if (!calme && brins.length) { var dy = y - yPrec, rh = haie.getBoundingClientRect(); if (dy && rh.top < vh && rh.bottom > 0) { var coup = borne(dy * .5, -16, 16); brins.forEach(function (b, i) { b.vit += coup * (.5 + (i % 5) * .14); }); lanceHaie(); } }
+    if (!calme && brins.length) { var dy = y - yPrec; if (dy && geo.hT - y < vh && geo.hB - y > 0) { var coup = borne(dy * .5, -16, 16); brins.forEach(function (b, i) { b.vit += coup * (.5 + (i % 5) * .14); }); lanceHaie(); } }
     yPrec = y;
     // rubrique en cours
-    var ici = null; rubriques.forEach(function (o) { if (o.s && o.s.getBoundingClientRect().top < vh * .45) ici = o; });
-    rubriques.forEach(function (o) { o.a.classList.toggle('ici', o === ici); });
+    var ici = null; rubriques.forEach(function (o, i) { if (geo.rub[i] - y < vh * .45) ici = o; });
+    if (ici !== der.ici) { der.ici = ici; rubriques.forEach(function (o) { o.a.classList.toggle('ici', o === ici); }); }
   }
   function demande() { if (!attente) attente = requestAnimationFrame(maj); }
+  function remesure() { mesure(); demande(); }
   addEventListener('scroll', demande, { passive: true });
   function cadreRue() { rue.firstChild.setAttribute('viewBox', innerWidth < 700 ? '915 40 570 400' : '0 80 2400 360'); }
   cadreRue();
-  addEventListener('resize', function () { taillePlateau(); tailleToile(); cadreRue(); plante(); demande(); });
-  taillePlateau(); tailleToile(); maj();
+  addEventListener('resize', function () { taillePlateau(); tailleToile(); cadreRue(); plante(); remesure(); });
+  taillePlateau(); tailleToile(); mesure(); maj();
+  // la page change de hauteur (verdict des sauces sur deux lignes, polices, images) : on remesure, une fois, après la mise en page
+  if (window.ResizeObserver) new ResizeObserver(function () { remesure(); }).observe(D.body);
   $$('[data-entre], #semaine, #tickets').forEach(function (el) { io.observe(el); });
-  if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { taillePlateau(); demande(); });
+  if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { taillePlateau(); remesure(); });
+
+  /* ---------- Vigie : ce qui est loin de l'écran se met en pause (classe hors), et repart dans la même image au retour ---------- */
+  var vigie = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var loin = !e.isIntersecting;
+      e.target.classList.toggle('hors', loin);
+      if (e.target.id === 'horaires') { horloge.ici = !loin; if (!loin) tic(); }
+    });
+  }, { rootMargin: '160px 0px' });
+  [accueil, bains, $('#horaires'), rue, $('.bandeau')].forEach(function (el) { if (el) vigie.observe(el); });
 
   /* ---------- Liens avec la page d'accueil de l'aperçu ---------- */
   addEventListener('scroll', function un() { removeEventListener('scroll', un); try { if (parent !== window) parent.postMessage({ type: 'kazura-defile' }, '*'); } catch (x) {} }, { passive: true });

@@ -70,7 +70,13 @@ small { font-size: .78em; opacity: .8; }
 .menu-b { display: none; font-family: var(--titre); font-size: 1rem; text-transform: uppercase; background: var(--brun); color: var(--or); border: 0; border-radius: 11px; padding: .8em .8em .5em; line-height: 1; cursor: pointer; }
 /* La cuisson de la page : une longue frite qui dore à mesure qu'on lit */
 .cuisson { position: absolute; left: 0; right: 0; bottom: 0; height: 9px; background: #ecdcae; }
-.cuisson i { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #f3e3a0, var(--or) 45%, var(--or2) 80%, #d9780a); }
+.cuisson i { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(0); will-change: transform; background: linear-gradient(90deg, #f3e3a0, var(--or) 45%, var(--or2) 80%, #d9780a); }
+/* Là où le navigateur sait lier une animation au défilement, la frite dore sans aucun travail du fil principal (app.js n'écrit plus rien).
+   Ailleurs, et en mode calme, app.js écrit le transform comme avant. */
+@keyframes cuire { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@supports (animation-timeline: scroll()) {
+  html:not(.calme) .cuisson i { animation: cuire linear both; animation-timeline: scroll(root block); }
+}
 .cuisson span { position: absolute; right: var(--marge); top: 13px; font-family: var(--titre); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; background: var(--brun); color: var(--or); padding: .45em .7em .22em; border-radius: 0 0 9px 9px; line-height: 1; }
 
 /* ---------------- Accueil ---------------- */
@@ -173,7 +179,9 @@ mark { color: inherit; font-weight: 800; padding: 0 .12em; background: linear-gr
 .jauge { margin-top: clamp(.9rem, 3vh, 2rem); max-width: 440px; --k: 0; }
 .jauge-barre { position: relative; height: 26px; border-radius: 13px; background: #170a04; }
 .jauge-barre i { position: absolute; inset: 0; border-radius: 13px; background: linear-gradient(90deg, #f6ecd0, #f3dc86 42%, var(--or) 72%, #ec9a12); clip-path: inset(0 calc(100% - var(--k) * 100%) 0 0 round 13px); }
-.jauge-fourche { position: absolute; left: calc(var(--k) * 100%); top: -30px; width: 18px; height: 46px; margin-left: -9px; background: linear-gradient(90deg, var(--bois) 55%, var(--bois2) 55%); clip-path: polygon(28% 0, 72% 0, 88% 64%, 100% 100%, 68% 100%, 50% 76%, 32% 100%, 0 100%, 12% 64%); }
+/* la fourchette avance par transform (écrit par app.js), plus par left : plus de mise en page à chaque image */
+.jauge-barre i, .jauge-fourche { will-change: transform; }
+.jauge-fourche { position: absolute; left: 0; top: -30px; width: 18px; height: 46px; margin-left: -9px; background: linear-gradient(90deg, var(--bois) 55%, var(--bois2) 55%); clip-path: polygon(28% 0, 72% 0, 88% 64%, 100% 100%, 68% 100%, 50% 76%, 32% 100%, 0 100%, 12% 64%); }
 .jauge p { display: flex; justify-content: space-between; font-family: var(--titre); font-size: .95rem; letter-spacing: .06em; text-transform: uppercase; margin-top: .6rem; color: #e9c98a; }
 .indice { margin-top: 1rem; font-weight: 700; color: #e9c98a; font-size: 1rem; }
 .plateau-zone { position: relative; align-self: stretch; min-height: 0; display: grid; place-items: center; }
@@ -192,8 +200,10 @@ mark { color: inherit; font-weight: 800; padding: 0 .12em; background: linear-gr
 .bu:nth-child(5) { --g: 72%; --t: 22px; --v: 1.8s; --r: -1.1s; } .bu:nth-child(6) { --g: 86%; --t: 28px; --v: 2.4s; --r: -1.9s; }
 .bu:nth-child(7) { --g: 32%; --t: 36px; --v: 1.3s; --r: -.3s; } .bu:nth-child(8) { --g: 64%; --t: 34px; --v: 1.2s; --r: -.8s; }
 .bac-2 .bu { animation-duration: calc(var(--v) * .55); }
-.chariot { position: absolute; left: 124px; top: 22px; width: 76px; height: 44px; border-radius: 10px; background: linear-gradient(#7d8890 0 50%, #59636a 50%); }
-.manche { position: absolute; left: 153px; top: 60px; width: 18px; height: 100px; transform-origin: 50% 0; background: linear-gradient(90deg, #eef2f4 0 40%, #aab4bb 40%); }
+.chariot { position: absolute; left: 124px; top: 22px; width: 76px; height: 44px; border-radius: 10px; background: linear-gradient(#7d8890 0 50%, #59636a 50%); will-change: transform; }
+.manche { position: absolute; left: 153px; top: 60px; width: 18px; height: 100px; transform-origin: 50% 0; background: linear-gradient(90deg, #eef2f4 0 40%, #aab4bb 40%); will-change: transform; }
+/* hors écran, la scène rend ses calques */
+.bains.hors .chariot, .bains.hors .manche, .bains.hors .panier, .bains.hors .jauge-barre i, .bains.hors .jauge-fourche { will-change: auto; }
 .panier { position: absolute; left: 67px; top: 0; width: 190px; height: 150px; --frite: #f6ecd0; --frite-o: #e2d2a4; --frite-l: #fffaea; will-change: transform; }
 .panier-frites { position: absolute; left: 14px; right: 14px; bottom: 12px; height: 176px; }
 .pf { position: absolute; bottom: 0; left: var(--g); width: 21px; height: var(--l); border-radius: 5px; transform-origin: 50% 100%; transform: rotate(var(--a)); background: linear-gradient(90deg, var(--frite-l) 0 26%, var(--frite) 26% 76%, var(--frite-o) 76%); box-shadow: inset 0 6px 0 var(--frite-l); }
@@ -342,8 +352,9 @@ mark { color: inherit; font-weight: 800; padding: 0 .12em; background: linear-gr
 /* ---------------- Pied ---------------- */
 .pied { position: relative; background: var(--brun2); color: var(--mayo); padding: clamp(40px, 7vh, 80px) 0 clamp(34px, 5vh, 60px); }
 /* La haie de frites plantée sur le pied : elle se couche au passage de la souris, elle frémit au défilement */
-.haie { position: absolute; left: 0; right: 0; bottom: 100%; height: 130px; overflow: hidden; pointer-events: none; }
-.haie i { position: absolute; bottom: -8px; left: var(--g); width: var(--w); height: var(--h); border-radius: 5px 5px 0 0; transform-origin: 50% 100%; background: linear-gradient(90deg, var(--or3) 0 26%, #f9b72c 26% 76%, #e08a14 76%); box-shadow: inset 0 6px 0 #ffe9a3; will-change: transform; }
+/* un seul bloc isolé pour toute la haie, plutôt qu'un calque par frite (jusqu'à 77 sur grand écran) */
+.haie { position: absolute; left: 0; right: 0; bottom: 100%; height: 130px; overflow: hidden; pointer-events: none; contain: layout paint style; }
+.haie i { position: absolute; bottom: -8px; left: var(--g); width: var(--w); height: var(--h); border-radius: 5px 5px 0 0; transform-origin: 50% 100%; background: linear-gradient(90deg, var(--or3) 0 26%, #f9b72c 26% 76%, #e08a14 76%); box-shadow: inset 0 6px 0 #ffe9a3; }
 .haie i:nth-child(3n) { background: linear-gradient(90deg, #ffe07a 0 26%, #fcc23c 26% 76%, #e99a1c 76%); }
 .pages { padding-bottom: clamp(136px, 18vh, 180px); }
 .tirage img, .feuille img { transition: transform .25s ease-out; }
@@ -414,6 +425,11 @@ mark { color: inherit; font-weight: 800; padding: 0 .12em; background: linear-gr
   .semaine { gap: 5px; margin-top: .9rem; }
   .semaine li { padding-top: .36em; padding-bottom: .2em; }
 }
+
+/* Vigie (app.js) : une rubrique loin de l'écran reçoit la classe hors. Ses animations sans fin s'arrêtent là où elles sont
+   et repartent dans la même image quand elle revient. Ses calques permanents sont rendus. */
+.hors, .hors *, .hors *::before, .hors *::after { animation-play-state: paused !important; }
+.accueil.hors .fr i { will-change: auto; }
 
 /* Mode calme, seulement sur demande (?calme=1) */
 .calme *, .calme *::before, .calme *::after { animation: none !important; transition: none !important; }
