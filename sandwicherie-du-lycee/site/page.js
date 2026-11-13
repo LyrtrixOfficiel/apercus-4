@@ -4,6 +4,7 @@
   var C = window.CONTENU, doc = document, html = doc.documentElement;
   var $ = function (s, r) { return (r || doc).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || doc).querySelectorAll(s)); };
   var calme = html.classList.contains('calme');
+  var M = { secs: [], max: 0, fil: 0, pays: null };   // positions gardées en mémoire pour le défilement
   var borne = function (x, a, b) { return Math.max(a, Math.min(b, x)); };
   function relance(el, cl) { el.classList.remove(cl); void el.offsetWidth; el.classList.add(cl); }
   function hh(x) { var h = Math.floor(x), m = Math.round((x - h) * 60); return h + ' h' + (m ? ' ' + (m < 10 ? '0' : '') + m : ''); }
@@ -177,8 +178,12 @@
     if (G.n > record) { record = G.n; try { localStorage.setItem('sdl-record', record); } catch (e) {} $('#j-r').textContent = record; relance($('#j-r').parentNode, 'plus'); }
     setTimeout(function () { $('#note').textContent = note; $('#appr').textContent = appr; $('#copie').hidden = false; $('#j-go').textContent = 'Rejouer'; }, calme ? 0 : 1100);
   }
+  // La boucle ne tourne que quand la table est à l'écran (avant, elle tournait à vide tout le temps).
+  var boucle = false, permis = !calme;
+  function lance() { if (!boucle && permis && G.vu) { boucle = true; G.der = performance.now(); requestAnimationFrame(tic); } }
   function tic(t) {
-    var dt = Math.min(.05, (t - G.der) / 1000); G.der = t;
+    if (!G.vu) { boucle = false; return; }
+    var dt = Math.max(0, Math.min(.05, (t - G.der) / 1000)); G.der = t;
     if (G.vu) {
       var A = (table.clientWidth - lw()) / 2 - 10, joue = G.etat === 'balance' || G.etat === 'chute' || G.etat === 'rate';
       if (G.etat === 'balance' || G.etat === 'repos') { G.ph += dt * (G.etat === 'repos' ? 1.1 : Math.min(4.3, 1.9 + G.n * .14)); G.x = Math.sin(G.ph) * A * (G.etat === 'repos' ? .5 : 1); vol.style.transform = 'translate(' + G.x.toFixed(1) + 'px,0)'; }
@@ -193,12 +198,11 @@
     requestAnimationFrame(tic);
   }
   regle(); demo();
-  new IntersectionObserver(function (e) { G.vu = e[0].isIntersecting; }, { threshold: .05 }).observe(table);
-  if (!calme) requestAnimationFrame(tic); else G.vu = false;
+  new IntersectionObserver(function (e) { G.vu = e[0].isIntersecting; lance(); }, { threshold: .05 }).observe(table);
   table.addEventListener('click', function (e) { if (e.target.closest('.copie')) return; if (G.etat === 'repos') depart(); else lache(); });
   table.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (G.etat === 'repos' || G.etat === 'fin') depart(); else lache(); } });
   $('#j-go').addEventListener('click', depart); $('#j-re').addEventListener('click', depart);
-  if (calme) { $('#j-go').addEventListener('click', function () { G.vu = true; G.der = performance.now(); requestAnimationFrame(tic); }, { once: true }); }
+  if (calme) { $('#j-go').addEventListener('click', function () { permis = true; G.vu = true; lance(); }, { once: true }); }
 
   // 15 h 30 : le pays des terrils, dessiné en aplats. Les cartables font la file jusqu'à la porte.
   var pays = $('#paysage'), sacs = [];
@@ -227,10 +231,14 @@
     s += '<g id="file">' + cs.map(function (c) { return '<g class="sac"><rect x="-11" y="-77" width="22" height="20" rx="10" fill="none" stroke="' + c + '" stroke-width="7"/><rect x="-25" y="-66" width="50" height="66" rx="17" fill="' + c + '"/><rect x="-16" y="-34" width="32" height="24" rx="8" fill="rgba(255,255,255,.42)"/><rect x="-16" y="-52" width="32" height="7" rx="3.5" fill="rgba(0,0,0,.22)"/></g>'; }).join('') + '</g></svg>';
     pays.innerHTML = s; sacs = $$('.sac', pays);
   })();
-  function file() {
-    var r = pays.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
-    var ech = Math.max(r.width / 2000, r.height / 520), gauche = 1000 - r.width / ech / 2;
-    var p = calme ? 1 : borne((innerHeight - r.top) / (innerHeight * .55 + r.height * .7), 0, 1);
+  // Position du paysage gardée en mémoire (voir mesure()) : rien n'est relu pendant le défilement.
+  var derP = -1;
+  function file(y, H) {
+    var P = M.pays; if (!P) return;
+    var top = P.top - y; if (top + P.h < 0 || top > H) return;
+    var ech = Math.max(P.w / 2000, P.h / 520), gauche = 1000 - P.w / ech / 2;
+    var p = calme ? 1 : borne((H - top) / (H * .55 + P.h * .7), 0, 1);
+    if (p === derP) return; derP = p;
     sacs.forEach(function (g, i) {
       var q = borne(p * 1.35 - i * .07, 0, 1); q = q * q * (3 - 2 * q);
       var a = gauche - 50 - i * 90, b = 1024 - i * 60, x = a + (b - a) * q, y = q < 1 ? -Math.abs(Math.sin(x / 26)) * 20 : 0;
@@ -275,11 +283,21 @@
 
   // Le défilement : l'heure de la journée avance, la sonnerie marque chaque rubrique, les bandes filent, les cartables avancent.
   var secs = $$('main section'), heures = secs.map(function (s) { return +s.dataset.h; }).concat([18]), liens = $$('#liens a'), cur = -1, hT = $('#heure-t'), filC = $('#fil-c'), fil = $('#fil'), derTxt = '', prevu = false;
+  // Les positions sont mesurées une fois (chargement, polices, redimensionnement, changement de hauteur), jamais pendant le défilement.
+  var fonds = $$('.fond-cases i', acc).map(function (i) { return { el: i, v: parseFloat(getComputedStyle(i).getPropertyValue('--v')) || 60 }; });
+  function mesure() {
+    var y = scrollY;
+    M.secs = secs.map(function (s) { return { top: s.offsetTop, h: s.offsetHeight || 1 }; });
+    M.max = doc.scrollingElement.scrollHeight - innerHeight;
+    M.fil = fil.clientWidth;
+    bandes.forEach(function (B) { var r = B.el.getBoundingClientRect(); B.top = r.top + y; B.bas = r.bottom + y; });
+    var r = pays.getBoundingClientRect(); M.pays = { top: r.top + y, h: r.height, w: r.width }; derP = -1;
+  }
   function maj() {
     prevu = false;
-    var y = scrollY, H = innerHeight, ligne = y + H * .42, i = 0, max = doc.scrollingElement.scrollHeight - H;
-    for (var k = 0; k < secs.length; k++) if (secs[k].offsetTop <= ligne) i = k;
-    var s = secs[i], f = borne((ligne - s.offsetTop) / s.offsetHeight, 0, 1), h = heures[i] + (heures[i + 1] - heures[i]) * f;
+    var y = scrollY, H = innerHeight, ligne = y + H * .42, i = 0, max = M.max;
+    for (var k = 0; k < secs.length; k++) if (M.secs[k].top <= ligne) i = k;
+    var s = secs[i], f = borne((ligne - M.secs[i].top) / M.secs[i].h, 0, 1), h = heures[i] + (heures[i + 1] - heures[i]) * f;
     if (y <= 2) h = 8; if (y >= max - 2) h = 18;
     var mn = Math.round(h * 60 / 5) * 5, txt = ('0' + Math.floor(mn / 60)).slice(-2) + ':' + ('0' + mn % 60).slice(-2);
     if (txt !== derTxt) { hT.textContent = txt; derTxt = txt; }
@@ -287,19 +305,26 @@
       if (cur !== -1 && !calme) { relance(heure, 'sonne'); }
       cur = i; liens.forEach(function (a) { a.classList.toggle('ici', a.getAttribute('href') === '#' + s.id); });
     }
-    filC.style.transform = 'translateX(' + (borne(y / Math.max(1, max), 0, 1) * fil.clientWidth).toFixed(1) + 'px)';
-    if (y < H * 1.3) acc.style.setProperty('--sy', (y / H).toFixed(3));
+    filC.style.transform = 'translateX(' + (borne(y / Math.max(1, max), 0, 1) * M.fil).toFixed(1) + 'px)';
+    // Le fond de l'accueil : transform écrit directement (avant, une variable --sy recalculait tout l'accueil à chaque image).
+    if (y < H * 1.3) { var sy = y / H; fonds.forEach(function (F) { F.el.style.transform = 'translateY(' + (sy * F.v).toFixed(1) + 'px)'; }); scene.style.transform = 'translateY(' + (sy * -70).toFixed(1) + 'px)'; }
     if (!calme) bandes.forEach(function (B) {
-      var r = B.el.getBoundingClientRect(); if (r.bottom < -50 || r.top > H + 50) return;
-      var d = ((H - r.top) * .5) % B.w; B.d.style.transform = 'translateX(' + (B.sens < 0 ? -d : d - B.w).toFixed(1) + 'px)';
+      var top = B.top - y; if (B.bas - y < -50 || top > H + 50) return;
+      var d = ((H - top) * .5) % B.w; B.d.style.transform = 'translateX(' + (B.sens < 0 ? -d : d - B.w).toFixed(1) + 'px)';
     });
-    file();
+    file(y, H);
   }
   function demande() { if (!prevu) { prevu = true; requestAnimationFrame(maj); } }
   addEventListener('scroll', demande, { passive: true });
-  addEventListener('resize', function () { mesureBandes(); regle(); if (G.etat === 'repos') demo(); demande(); });
-  mesureBandes(); maj();
-  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { mesureBandes(); maj(); });
+  addEventListener('resize', function () { mesureBandes(); regle(); if (G.etat === 'repos') demo(); mesure(); demande(); });
+  mesureBandes(); mesure(); maj();
+  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { mesureBandes(); mesure(); maj(); });
+  // Une rubrique qui change de hauteur (texte du mot, fiche du jour) : on remesure, une fois.
+  if (window.ResizeObserver) new ResizeObserver(function () { mesure(); demande(); }).observe($('#main'));
+
+  // Les animations sans fin des rubriques loin de l'écran sont mises en pause (classe « hors »), et repartent avant d'y revenir.
+  var ioH = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('hors', !e.isIntersecting); }); }, { rootMargin: '150px 0px' });
+  secs.forEach(function (s) { ioH.observe(s); });
 
   // Page Bonjour : on prévient le cadre
   addEventListener('scroll', function un() { removeEventListener('scroll', un); try { if (parent !== window) parent.postMessage({ type: 'kazura-defile' }, '*'); } catch (x) {} }, { passive: true });

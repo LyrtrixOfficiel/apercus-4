@@ -390,6 +390,9 @@ h1 .l.hop { animation: hop .5s cubic-bezier(.3, 1.6, .5, 1); }
   .accueil-d { height: min(62vh, 660px); }
 }
 
+/* Rubrique loin de l'écran (classe posée par page.js) : ses animations sans fin attendent qu'on revienne */
+.hors .rentree::before, .hors .voyant, .hors .nuages i, .hors .roue, .hors .fumee, .hors .enseigne, .hors .vitrine-l, .hors .mnt, .hors .pile.berce { animation-play-state: paused; }
+
 /* Mode calme, seulement sur demande (?calme=1) */
 .calme *, .calme *::before, .calme *::after { animation: none !important; transition: none !important; }
 .calme .ap { opacity: 1; transform: none; } .calme h2 em { clip-path: none; } .calme .cr { transform: none; }
