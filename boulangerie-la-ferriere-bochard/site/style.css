@@ -31,9 +31,15 @@ h2{font-family:var(--titre);font-weight:400;font-size:clamp(2.2rem,1.2rem + 4vw,
 .sur span+span{position:relative;padding-left:32px}
 .sur span+span::before{content:"";position:absolute;left:0;top:50%;width:18px;height:5px;margin-top:-3px;border-radius:3px;background:currentColor}
 
-/* la dentelure du sac en papier, entre deux rubriques */
-.dents::before{content:"";position:absolute;left:0;right:0;top:-15px;height:16px;background:inherit;
-  -webkit-mask:conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) var(--gl,0px) 0/32px 16px repeat-x;mask:conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) var(--gl,0px) 0/32px 16px repeat-x}
+/* la dentelure du sac en papier, entre deux rubriques.
+   Fluidité (13/11) : la dentelure est un vrai élément (.dent, posé par app.js), plus large de 32 px de chaque côté,
+   que le script fait glisser par transform au défilement (calque à part, rien n'est repeint ni recalculé).
+   Avant, une variable --gl écrite sur html à chaque image faisait recalculer les styles de toute la page. */
+.dents:not(.a-dent)::before,.dents>.dent{content:"";position:absolute;left:0;right:0;top:-15px;height:16px;background:inherit;pointer-events:none;
+  -webkit-mask:conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) 0 0/32px 16px repeat-x;mask:conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) 0 0/32px 16px repeat-x}
+.dents>.dent{display:block;left:-32px;right:-32px;will-change:transform}
+/* ce qui est loin de l'écran ne bouge pas (vigie dans app.js) ; tout repart dès que la rubrique revient */
+.hors *,.hors *::before,.hors *::after{animation-play-state:paused!important}
 
 /* boutons */
 .bouton{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 26px;border-radius:999px;border:3px solid currentColor;background:transparent;color:inherit;font-weight:800;font-size:1.02rem;text-decoration:none;cursor:pointer;transition:transform .25s var(--ressort),background .2s,color .2s}
@@ -250,7 +256,7 @@ h1{font-family:var(--titre);font-weight:400;font-size:clamp(1.5rem,9.5cqw,5.6rem
 .calme .tourne,.calme .gonfle,.calme .entailles path,.calme .lame-mini,.calme .lueur,.calme .miche{animation:none}
 .calme .entailles path{stroke-dashoffset:0}.calme .lame-mini{transform:translate(170px,70px) rotate(40deg)}
 .f-photos{display:grid;gap:22px;align-items:center;margin-top:clamp(46px,8vh,84px)}
-.f-photo{position:relative}
+.f-photo{position:relative;will-change:translate}
 .f-photo img{width:100%;object-fit:cover}
 .f-photo figcaption{font-size:.8rem;font-weight:600;margin-top:8px;color:#6a4634}
 .f-photo.four{max-width:320px;transform:rotate(-3deg)}
@@ -263,8 +269,10 @@ h1{font-family:var(--titre);font-weight:400;font-size:clamp(1.5rem,9.5cqw,5.6rem
 .js .f-photos.vu .f-cri span,.js .f-photos.vu .f-cri em{opacity:1;transform:none}
 .js .f-photos.vu .f-cri span:nth-child(2){transition-delay:.12s}.js .f-photos.vu .f-cri em{transition-delay:.26s}
 .calme .f-cri span,.calme .f-cri em{opacity:1;transform:none}
-.f-cri em{color:var(--accent-f);text-shadow:0 0 0 transparent;animation:braise 2.4s ease-in-out infinite alternate}
-@keyframes braise{to{text-shadow:0 0 34px rgba(255,110,20,.65)}}
+/* la braise : la lueur est un double du mot (::after) dont seule l'opacité bouge, au lieu d'une ombre portée repeinte à chaque image */
+.f-cri em{color:var(--accent-f);position:relative}
+.f-cri em::after{content:attr(data-mot);position:absolute;left:0;top:0;color:transparent;text-shadow:0 0 34px rgba(255,110,20,.65);opacity:0;pointer-events:none;animation:braise 2.4s ease-in-out infinite alternate}
+@keyframes braise{to{opacity:1}}
 .f-suite{display:flex;align-items:center;gap:18px;width:fit-content;max-width:100%;margin-top:clamp(36px,6vh,60px);padding:12px 28px 12px 14px;border-radius:999px;background:var(--brun);color:var(--farine);text-decoration:none;font-weight:700;transition:transform .3s var(--ressort)}
 .f-suite b{font-family:var(--titre);font-weight:400;font-size:1.9rem;line-height:1;padding:9px 20px;border-radius:999px;background:var(--accent);color:var(--brun);white-space:nowrap}
 .f-suite:hover{transform:translateX(10px)}

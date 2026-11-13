@@ -334,29 +334,56 @@
   }
 
   // ---------- ce qui suit le défilement ----------
-  var sections = $$('main section'), liens = $$('.liens a'), astre = $('#astre'), moment = $('#moment'), eglise = $('#eglise'), vitrine = $('#vitrine'), fPhotos = $$('.f-photo');
+  // Fluidité (13/11) : toutes les lectures de positions d'abord, toutes les écritures ensuite, et seulement quand la valeur change.
+  // Plus aucune variable écrite sur html : la dentelure glisse par transform, l'astre tourne par transform.
+  var sections = $$('main section'), liens = $$('.liens a'), astre = $('#astre'), astrePain = $('.astre-pain', astre), moment = $('#moment'), eglise = $('#eglise'), vitrine = $('#vitrine'), fPhotos = $$('.f-photo');
+  var soleil = $('.eglise-soleil', eglise), egliseImg = $('.eglise-voute img', eglise);
   var JOUR = { accueil: 0, village: .12, fournil: .55, lame: .9, sac: 1, horaires: 1, venir: .55, fin: 0 }, secCourante = '';
+  // la dentelure : un vrai élément par rubrique, glissé par transform (voir style.css)
+  var dents = $$('.dents').map(function (s) { var d = document.createElement('i'); d.className = 'dent'; d.setAttribute('aria-hidden', 'true'); s.insertBefore(d, s.firstChild); s.classList.add('a-dent'); return d; });
+  // la lueur de « rallumé. » : un double du mot porte l'ombre, seule son opacité bouge
+  $$('.f-cri em').forEach(function (e) { e.setAttribute('data-mot', e.textContent); });
+  var vu = { tour: '', gl: '', sol: '', pa: '', b: '', ph: ['', ''] };
   var enAttente = false;
   function maj() {
     enAttente = false;
-    var vh = innerHeight, milieu = vh * .45, courante = sections[0], r, p;
-    sections.forEach(function (s) { if (s.getBoundingClientRect().top <= milieu) courante = s; });
+    var vh = innerHeight, milieu = vh * .45, courante = sections[0], y = scrollY, p, i;
+    // 1. lectures
+    for (i = 0; i < sections.length; i++) if (sections[i].getBoundingClientRect().top <= milieu) courante = sections[i];
+    var rMois = mois.getBoundingClientRect(), rEg = eglise.getBoundingClientRect(), rAp = appel.getBoundingClientRect(), rVi = vitrine.getBoundingClientRect();
+    var rPh = calme ? [] : fPhotos.map(function (f) { return f.getBoundingClientRect(); });
+    // 2. écritures
     if (courante.id !== secCourante) {
       secCourante = courante.id;
       astre.style.setProperty('--j', JOUR[secCourante]);
       moment.textContent = courante.dataset.moment;
       liens.forEach(function (a) { a.classList.toggle('actif', a.getAttribute('href') === '#' + secCourante); });
     }
-    astre.style.setProperty('--tour', (scrollY / 9).toFixed(1) + 'deg');
-    if (!calme) html.style.setProperty('--gl', (scrollY * .12).toFixed(1) + 'px');
-    r = mois.getBoundingClientRect(); majMois(borne((vh * .9 - r.top) / (vh * .55)));
-    r = eglise.getBoundingClientRect(); p = borne((vh - r.top) / (vh + r.height));
-    eglise.style.setProperty('--sol', borne(p * 2.1 - .25).toFixed(3)); eglise.style.setProperty('--pa', p.toFixed(3));
-    r = appel.getBoundingClientRect(); p = calme ? motsAppel.length : Math.round(borne((vh * .88 - r.top) / (vh * .5)) * motsAppel.length);
+    var tour = (y / 9).toFixed(1);
+    if (tour !== vu.tour) { vu.tour = tour; astrePain.style.transform = 'rotate(' + tour + 'deg)'; }
+    if (!calme) {
+      var gl = ((y * .12) % 32).toFixed(1);
+      if (gl !== vu.gl) { vu.gl = gl; for (i = 0; i < dents.length; i++) dents[i].style.transform = 'translate3d(' + gl + 'px,0,0)'; }
+    }
+    majMois(borne((vh * .9 - rMois.top) / (vh * .55)));
+    p = borne((vh - rEg.top) / (vh + rEg.height));
+    var sol = borne(p * 2.1 - .25).toFixed(3), pa = p.toFixed(3);
+    if (sol !== vu.sol) { vu.sol = sol; soleil.style.transform = 'translateY(' + ((1 - sol) * 70).toFixed(2) + '%)'; soleil.style.opacity = (.25 + sol * .75).toFixed(3); }
+    if (pa !== vu.pa) { vu.pa = pa; egliseImg.style.transform = 'translateY(' + (pa * -12).toFixed(2) + '%)'; }
+    p = calme ? motsAppel.length : Math.round(borne((vh * .88 - rAp.top) / (vh * .5)) * motsAppel.length);
     if (p !== nAppel) { nAppel = p; motsAppel.forEach(function (s, i) { s.classList.toggle('on', i < p); }); }
-    r = vitrine.getBoundingClientRect(); vitrine.style.setProperty('--b', calme ? 1 : borne((vh * .98 - r.top) / (vh * .6)).toFixed(3));
-    if (!calme) fPhotos.forEach(function (f, i) { var q = f.getBoundingClientRect(); f.style.translate = '0 ' + (((q.top + q.height / 2 - vh / 2) / vh) * (i ? 34 : -34)).toFixed(1) + 'px'; });
+    var b = calme ? '1' : borne((vh * .98 - rVi.top) / (vh * .6)).toFixed(3);
+    if (b !== vu.b) { vu.b = b; vitrine.style.setProperty('--b', b); }
+    for (i = 0; i < rPh.length; i++) {
+      var q = rPh[i], dec;
+      if (q.bottom < -vh * .5 || q.top > vh * 1.5) continue; // loin de l'écran : rien à bouger
+      dec = (((q.top + q.height / 2 - vh / 2) / vh) * (i ? 34 : -34)).toFixed(1);
+      if (dec !== vu.ph[i]) { vu.ph[i] = dec; fPhotos[i].style.translate = '0 ' + dec + 'px'; }
+    }
   }
+  // la vigie : une rubrique loin de l'écran met ses animations sans fin en pause (classe hors), elles repartent dès qu'elle revient
+  var vigie = new IntersectionObserver(function (es) { es.forEach(function (x) { x.target.classList.toggle('hors', !x.isIntersecting); }); }, { rootMargin: '150px 0px' });
+  sections.forEach(function (s) { vigie.observe(s); });
   function demander() { if (!enAttente) { enAttente = true; requestAnimationFrame(maj); } }
   addEventListener('scroll', demander, { passive: true }); addEventListener('resize', demander);
   maj();
