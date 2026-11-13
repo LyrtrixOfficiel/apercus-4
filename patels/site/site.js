@@ -27,6 +27,22 @@ addEventListener('scroll', () => { if (!demande) { demande = true; requestAnimat
 let tt = 0;
 addEventListener('resize', () => { clearTimeout(tt); tt = setTimeout(() => { const l = innerWidth !== vw; vw = innerWidth; vh = innerHeight; for (const f of surTaille) f(l); defile(); }, 180); });
 
+// Positions gardées en mémoire : le défilement ne relit jamais la mise en page, il calcule avec scrollY.
+// Remesurées au chargement, au redimensionnement, après les polices et dès que la hauteur de la page change.
+const pos = new Map();
+const haut = (e) => { let t = 0; for (let x = e; x; x = x.offsetParent) t += x.offsetTop; return t; };
+const suivre = (e) => { if (e) pos.set(e, { t: haut(e), h: e.offsetHeight }); };
+const remesure = () => { for (const e of pos.keys()) suivre(e); };
+const rect = (e) => { const p = pos.get(e) || { t: 0, h: 0 }, top = p.t - sy; return { top, bottom: top + p.h, height: p.h }; };
+const redemande = () => { if (!demande) { demande = true; requestAnimationFrame(defile); } };
+surTaille.push(remesure);
+if ('ResizeObserver' in window) new ResizeObserver(() => { remesure(); redemande(); }).observe(document.body);
+addEventListener('load', () => { remesure(); redemande(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { remesure(); redemande(); });
+
+// Vigie : les rubriques loin de l'écran mettent leurs animations sans fin en pause (classe hors), elles repartent avant d'être revues.
+const vigie = new IntersectionObserver((es) => { for (const e of es) e.target.classList.toggle('hors', !e.isIntersecting); }, { rootMargin: '30% 0px' });
+
 // La page Bonjour change la couleur d'ambiance
 addEventListener('message', (e) => { const d = e.data; if (d && d.type === 'kazura-couleur' && /^[a-z]+$/.test(d.palette || '')) H.setAttribute('data-palette', d.palette); });
 
@@ -60,25 +76,35 @@ menuBt.addEventListener('click', () => { const o = !menu.classList.contains('ouv
 menu.addEventListener('click', (e) => { if (e.target.closest('a')) fermeMenu(); });
 addEventListener('keydown', (e) => { if (e.key === 'Escape') fermeMenu(); });
 let ici = '';
+sections.forEach(suivre);
+const liens = $$('[data-vers]'), roule = $('.brac', menuBt);
 function ouSuisJe(y) {
   let id = sections[0].id;
-  for (const s of sections) if (s.getBoundingClientRect().top <= vh * .42) id = s.id;
-  if (id !== ici) { ici = id; $$('[data-vers]').forEach((l) => l.classList.toggle('ici', l.dataset.vers === id)); if (!calme) { rejoue(pile, 'tinte'); } }
-  menuBt.style.setProperty('--roule', (y * .3).toFixed(1) + 'deg');
+  for (const s of sections) if (rect(s).top <= vh * .42) id = s.id;
+  if (id !== ici) { ici = id; liens.forEach((l) => l.classList.toggle('ici', l.dataset.vers === id)); if (!calme && vw >= 1180) { rejoue(pile, 'tinte'); } }
+  roule.style.transform = `rotate(${(y * .3).toFixed(1)}deg)`;
 }
 surDefile.push(ouSuisJe);
 
 // ---------- bordures de sari : un rang de motifs tiré par le défilement ----------
-const rangs = $$('.bordure').map((b) => { const r = el('div', 'b-rang'), f = el('div', 'b-file'); r.appendChild(f); b.appendChild(r); return { f, r, m: b.dataset.motif, sens: +(b.dataset.sens || 1), pas: 1 }; });
+const rangs = $$('.bordure').map((b) => { const r = el('div', 'b-rang'), f = el('div', 'b-file'); r.appendChild(f); b.appendChild(r); suivre(b); return { b, f, r, m: b.dataset.motif, sens: +(b.dataset.sens || 1), pas: 1, o: NaN }; });
+const dpr = Math.min(3, devicePixelRatio || 1);
 function garnir() {
   for (const g of rangs) {
     const h = g.r.clientHeight, cote = h - 26, cell = cote + 2 * h * .06, n = (Math.ceil(vw / cell) + 5) & ~1;
     const alt = g.m === 'mangue' ? 'r' : g.m === 'feuille' ? 'h' : '';
     let s = ''; for (let i = 0; i < n; i++) s += motif(g.m, i % 2 ? alt : '');
-    g.f.innerHTML = s; g.pas = cell * 2;
+    g.f.innerHTML = s; g.pas = cell * 2; g.o = NaN;
   }
 }
-surDefile.push((y) => { for (const g of rangs) { const o = (((y * .32 * g.sens) % g.pas) + g.pas) % g.pas; g.f.style.transform = `translate3d(${-o.toFixed(1)}px,0,0)`; } });
+// Seules les bordures proches de l'écran bougent ; le décalage est arrondi au pixel d'écran.
+surDefile.push((y) => {
+  for (const g of rangs) {
+    const r = rect(g.b); if (r.bottom < -80 || r.top > vh + 80) continue;
+    const o = Math.round(((((y * .32 * g.sens) % g.pas) + g.pas) % g.pas) * dpr) / dpr;
+    if (o !== g.o) { g.o = o; g.f.style.transform = `translate3d(${-o}px,0,0)`; }
+  }
+});
 surTaille.push((l) => { if (l) garnir(); });
 
 // ---------- accueil : l'enseigne peinte, la guirlande, la bande ----------
@@ -115,6 +141,8 @@ function toran() {
   }
 }
 function tickToran(dt) {
+  // L'accueil est sorti de l'écran : la guirlande s'immobilise sans qu'on la voie, plus rien n'est écrit.
+  if (sy > accH()) { for (const o of brins) { o.a = o.v = 0; o.b.style.transform = ''; } return false; }
   let vif = false;
   for (const o of brins) {
     o.v += (-42 * o.a - 2.6 * o.v) * dt; o.a = borne(o.a + o.v * dt, -40, 40);
@@ -124,22 +152,27 @@ function tickToran(dt) {
   return vif;
 }
 function secoue(f) { if (calme) return; brins.forEach((o, i) => { o.v += f(o, i); }); anime(tickToran); }
-surDefile.push((y, v) => { if (y < accueil.offsetHeight && v) secoue(() => borne(v, -40, 40) * (1.1 + Math.random() * .8)); });
+suivre(accueil);
+const accH = () => rect(accueil).height;
+surDefile.push((y, v) => { if (y < accH() && v) secoue(() => borne(v, -40, 40) * (1.1 + Math.random() * .8)); });
 accueil.addEventListener('pointermove', (e) => { const r = accueil.getBoundingClientRect(), x = e.clientX / vw, y = e.clientY - r.top - 62; if (y > 240) return; secoue((o) => (Math.abs(o.x - x) * vw < 70 && y < o.l + 26) ? borne(e.movementX || 0, -30, 30) * 4 : 0); });
 setInterval(() => { if (sy < vh * .8 && !document.hidden) { const ph = Math.random() * 6; secoue((o, i) => 30 * Math.sin(i * .45 + ph)); } }, 3800);
 surTaille.push((l) => { if (l) toran(); });
 
 // Photos qui glissent dans leur arche
 const photoAcc = $('#acc-photo'), photoMas = $('#mas-img');
+suivre(photoMas.parentNode);
 surDefile.push((y) => {
-  if (y < vh * 1.3) photoAcc.style.setProperty('--py', (-13 + borne(y / vh, 0, 1) * 12).toFixed(2) + '%');
-  const r = photoMas.parentNode.getBoundingClientRect();
-  if (r.bottom > 0 && r.top < vh) photoMas.style.setProperty('--py', (-12 + borne((vh - r.top) / (vh + r.height), 0, 1) * 11).toFixed(2) + '%');
+  if (y < vh * 1.3) photoAcc.style.transform = `translate3d(0,${(-13 + borne(y / vh, 0, 1) * 12).toFixed(2)}%,0)`;
+  const r = rect(photoMas.parentNode);
+  if (r.bottom > 0 && r.top < vh) photoMas.style.transform = `translate3d(0,${(-12 + borne((vh - r.top) / (vh + r.height), 0, 1) * 11).toFixed(2)}%,0)`;
 });
 
 // ---------- le rangoli : il se dessine au défilement, on repeint ses pétales ----------
 function rangoli() {
+  // Un svg par anneau, empilés dans le même ordre qu'avant : chacun tourne en calque à part (compositeur), rien n'est repeint.
   const svg = $('#rangoli'), boite = svg.parentNode, col = C.holi;
+  const couche = (cls) => { const d = el('div', 'an'), s = sv('svg', { viewBox: '-205 -205 410 410', 'aria-hidden': 'true' }); if (cls) s.setAttribute('class', cls); d.appendChild(s); svg.appendChild(d); return { d, s }; };
   const anneaux = [
     { n: 16, d: 'M0-150C17-162 20-188 0-203C-20-188-17-162 0-150Z', c: ['#04676a', '#19a59c'], dur: 160, o: 3 },
     { n: 12, d: 'M0-90C24-106 28-136 0-158C-28-136-24-106 0-90Z', c: ['#f7a806', '#d9390f'], dur: 115, o: 2 },
@@ -147,17 +180,24 @@ function rangoli() {
   ];
   const groupes = [];
   for (const a of anneaux) {
-    const g = sv('g', { class: 'an' }, svg), t = sv('g', { class: 'tr' + (a.o % 2 ? '' : ' inv') }, g); t.style.setProperty('--dur', a.dur + 's');
+    const { d: g, s: t } = couche('tr' + (a.o % 2 ? '' : ' inv')); t.style.setProperty('--dur', a.dur + 's');
     for (let k = 0; k < a.n; k++) { const r = sv('g', { transform: `rotate(${k * 360 / a.n})` }, t), c = a.c[k % 2]; const p = sv('path', { class: 'pet', d: a.d, fill: c }, r); p.dataset.k = Math.max(0, col.indexOf(c)); }
-    groupes.push({ g, o: a.o });
+    groupes.push({ g, o: a.o, e: -1 });
   }
-  const centre = sv('g', { class: 'an' }, svg); sv('circle', { r: 34, fill: '#1b1560' }, centre);
+  const { d: dc, s: centre } = couche(''); sv('circle', { r: 34, fill: '#1b1560' }, centre);
   const u = sv('use', { href: '#m-lotus', x: -27, y: -27, width: 54, height: 54 }, centre); u.style.cssText = '--m1:#fff4e0;--m2:#f7a806;--m3:#d4145f';
-  groupes.push({ g: centre, o: 0 });
+  groupes.push({ g: dc, o: 0, e: -1 });
+  suivre(boite);
   function pose() {
-    const r = boite.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
+    const r = rect(boite); if (r.bottom < -200 || r.top > vh + 200) return;
     const p = calme ? 1 : borne((vh - r.top) / (vh * .8), 0, 1);
-    for (const x of groupes) { const q = borne(p * 1.7 - x.o * .22, 0, 1), e = 1 - Math.pow(1 - q, 3); x.g.style.transform = `rotate(${((1 - e) * (x.o % 2 ? -110 : 110)).toFixed(1)}deg) scale(${e.toFixed(3)})`; }
+    for (const x of groupes) {
+      const q = borne(p * 1.7 - x.o * .22, 0, 1), e = +(1 - Math.pow(1 - q, 3)).toFixed(3);
+      if (e === x.e) continue; x.e = e;
+      // calque réservé seulement pendant que l'anneau se dessine : posé, il est retracé à sa vraie taille, net
+      x.g.classList.toggle('bouge', e > 0 && e < 1);
+      x.g.style.transform = e >= 1 ? '' : `rotate(${((1 - e) * (x.o % 2 ? -110 : 110)).toFixed(1)}deg) scale(${e})`;
+    }
   }
   surDefile.push(pose); pose();
   svg.addEventListener('click', (e) => {
@@ -426,7 +466,8 @@ function rendezVous() {
 }
 function plan() {
   const p = $('#plan'), pion = $('#pion');
-  const pose = () => { const r = p.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; const q = calme ? 1 : borne((vh * .92 - r.top) / (vh * .62), 0, 1), t = .2 + q * .42; pion.setAttribute('transform', `translate(${(136 + 480 * t).toFixed(1)} ${(356 - 198 * t).toFixed(1)}) rotate(${(q * 540).toFixed(0)})`); };
+  suivre(p);
+  const pose = () => { const r = rect(p); if (r.bottom < 0 || r.top > vh) return; const q = calme ? 1 : borne((vh * .92 - r.top) / (vh * .62), 0, 1), t = .2 + q * .42; pion.setAttribute('transform', `translate(${(136 + 480 * t).toFixed(1)} ${(356 - 198 * t).toFixed(1)}) rotate(${(q * 540).toFixed(0)})`); };
   surDefile.push(pose); pose();
   const j = new Date().getDay(), l = $(`#horaires .ligne[data-j="${j}"]`);
   if (l) { l.classList.add('jour'); const s = el('small', '', 'aujourd’hui'); l.appendChild(s); }
@@ -439,7 +480,8 @@ function decors() {
     [1, 2].forEach((k) => { const d = el('div', 'deco d' + k, motif(M[(i * 2 + k) % M.length])); d.setAttribute('aria-hidden', 'true'); s.insertBefore(d, s.firstChild); liste.push({ d, s, k }); });
   });
   if (calme) return;
-  surDefile.push(() => { if (vw < 1000) return; for (const o of liste) { const r = o.s.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) continue; o.d.style.translate = '0 ' + ((r.top + r.height / 2 - vh / 2) * (o.k === 1 ? -.14 : .1)).toFixed(1) + 'px'; } });
+  $$('main .sec').forEach(suivre);
+  surDefile.push(() => { if (vw < 1000) return; for (const o of liste) { const r = rect(o.s); if (r.bottom < -100 || r.top > vh + 100) continue; o.d.style.translate = '0 ' + ((r.top + r.height / 2 - vh / 2) * (o.k === 1 ? -.14 : .1)).toFixed(1) + 'px'; } });
 }
 
 // ---------- lancement ----------
@@ -448,5 +490,7 @@ lance(decors); lance(garnir); lance(toran); lance(rangoli); lance(bracelets); la
 // Les titres se peignent : le voile est porté par un enfant, pour que l'observateur voie bien le titre entrer.
 $$('.titre.entre').forEach((t) => { const s = el('span', 'peint'); while (t.firstChild) s.appendChild(t.firstChild); t.appendChild(s); });
 $$('.entre,[data-vu]').forEach((e) => io.observe(e));
+$$('main > section, .pied').forEach((s) => vigie.observe(s));
+remesure();
 defile();
 })();

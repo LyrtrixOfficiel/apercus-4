@@ -82,7 +82,7 @@ section{position:relative;scroll-margin-top:var(--th)}
 
 /* Menu du téléphone : un bracelet qui roule avec la page */
 .menu-bt{position:fixed;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:70;width:68px;height:68px;overflow:hidden;border-radius:50%;display:grid;place-items:center}
-.menu-bt .brac{position:absolute;inset:0;--c:var(--rani);--o:var(--or);transform:rotate(var(--roule,0deg))}
+.menu-bt .brac{position:absolute;inset:0;--c:var(--rani);--o:var(--or);transform:rotate(var(--roule,0deg));will-change:transform}
 .menu-bt b{position:relative;width:64%;height:64%;border-radius:50%;background:var(--indigo);color:var(--creme);display:grid;place-items:center;overflow:hidden;font:700 11px/1 var(--texte);letter-spacing:.02em;box-shadow:0 0 0 3px var(--creme)}
 .menu{position:fixed;inset:0;z-index:65;background:var(--rani);color:var(--creme);display:flex;flex-direction:column;justify-content:center;gap:2px;padding:calc(var(--th) + 22px) var(--pad) 96px;clip-path:circle(0 at calc(100% - 44px) calc(100% - 44px));transition:clip-path .65s cubic-bezier(.6,0,.2,1);visibility:hidden;overflow:auto}
 .menu.ouvert{clip-path:circle(150% at calc(100% - 44px) calc(100% - 44px));visibility:visible}
@@ -163,7 +163,7 @@ html[data-palette=souci] .soucis5 svg{--m1:var(--rani);--m2:var(--verm);--m3:var
 .bordure::before{bottom:calc(100% - 1px)}
 .bordure::after{top:calc(100% - 1px);transform:scaleY(-1)}
 .bordure.plat::before{display:none}
-.b-rang{height:var(--bh);overflow:hidden;position:relative;background:var(--br,transparent)}
+.b-rang{height:var(--bh);overflow:hidden;position:relative;background:var(--br,transparent);content-visibility:auto}/* hauteur fixe : un rang loin de l'écran n'est plus peint, rien ne bouge dans la mise en page */
 .b-rang::before,.b-rang::after{content:'';position:absolute;left:0;right:0;height:7px;background:var(--m2);z-index:1}
 .b-rang::before{top:0}.b-rang::after{bottom:0}
 .b-file{display:flex;height:100%;align-items:center;will-change:transform;padding:13px 0}
@@ -177,11 +177,14 @@ html[data-palette=souci] .soucis5 svg{--m1:var(--rani);--m2:var(--verm);--m3:var
 .institut{background:var(--creme)}
 .inst-grille{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,90px);align-items:center}
 .rangoli-boite{position:relative;max-width:min(560px,62vh);width:100%;justify-self:center}
-#rangoli{display:block;width:100%;height:auto;overflow:visible;touch-action:manipulation}
-#rangoli .pet{cursor:pointer;transform-box:fill-box;transform-origin:50% 50%;transition:fill .35s}
-#rangoli .tr{animation:tourne var(--dur,90s) linear infinite;transform-origin:0 0}
+/* Chaque anneau est son propre calque (un svg par anneau) : la rotation et le dessin au défilement passent par le compositeur, sans repeindre les pétales */
+#rangoli{position:relative;display:block;width:100%;aspect-ratio:1;touch-action:manipulation}
+#rangoli .an{position:absolute;inset:0;transform-origin:50% 50%;pointer-events:none}
+#rangoli .an.bouge{will-change:transform}
+#rangoli svg{display:block;width:100%;height:100%;overflow:visible}
+#rangoli .pet{pointer-events:visiblePainted;cursor:pointer;transform-box:fill-box;transform-origin:50% 50%;transition:fill .35s}
+#rangoli .tr{animation:tourne var(--dur,90s) linear infinite;transform-origin:50% 50%}
 #rangoli .tr.inv{animation-direction:reverse}
-#rangoli .an{transform-origin:0 0;will-change:transform}
 .rg-aide{text-align:center;font-weight:700;margin-top:10px;font-size:.95em}
 .inst-texte .titre{color:var(--rani);--ts:var(--or)}
 .inst-texte p + p{margin-top:.8em}
@@ -420,3 +423,5 @@ html[data-palette=souci] .soucis5 svg{--m1:var(--rani);--m2:var(--verm);--m3:var
 .deco.d2{right:calc(clamp(250px,25vw,480px)*-.42);top:5%}
 @media (min-width:1000px){.deco{display:block}}
 @media (max-width:420px){.numero{gap:6px;flex-wrap:nowrap}.numero span{width:calc((100% - 24px)/5);font-size:clamp(22px,7.6vw,30px)}}
+/* Rubrique loin de l'écran : ses animations sans fin attendent (elles repartent avant qu'on la revoie). En fin de fichier pour passer après les raccourcis animation. */
+.hors .soucis5 svg,.hors .flot,.hors .flot.c,.hors .bande-file,.hors #rangoli .tr,.hors .deco svg{animation-play-state:paused}
