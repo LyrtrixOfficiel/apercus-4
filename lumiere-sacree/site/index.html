@@ -75,7 +75,7 @@ h2 em{font-style:italic;font-weight:800;color:var(--ac,inherit);white-space:nowr
 /* accueil : la rosace */
 .heros{position:relative;min-height:100vh;min-height:100svh;padding:calc(var(--tete) + 24px) 16px 40px;color:var(--h-encre);overflow:hidden;display:flex;align-items:center;
   background:var(--h-fond) repeating-conic-gradient(from 4deg at var(--cx,50%) var(--cy,78%),var(--h-fond2) 0 9deg,var(--h-fond) 9deg 18deg)}
-.rayon{position:absolute;left:var(--cx,50%);top:var(--cy,78%);width:170vmax;height:54vmax;margin-top:-27vmax;transform-origin:0 50%;transform:rotate(var(--ra,-90deg));clip-path:polygon(0 50%,100% 0,100% 100%);background:var(--h-lum);opacity:.34;pointer-events:none;z-index:1;will-change:transform}
+.rayon{position:absolute;left:var(--cx,50%);top:var(--cy,78%);width:170vmax;height:54vmax;margin-top:-27vmax;transform-origin:0 50%;transform:rotate(-90deg);clip-path:polygon(0 50%,100% 0,100% 100%);background:var(--h-lum);opacity:.34;pointer-events:none;z-index:1;will-change:transform}
 .heros-l{position:relative;z-index:2;width:100%;max-width:1480px;margin:auto;display:grid;gap:26px}
 .etiq{display:flex;flex-wrap:wrap;gap:8px;font:800 13.5px/1.2 var(--texte);animation:monte .6s .05s cubic-bezier(.2,.8,.2,1) backwards}
 .etiq span{border:3px solid currentColor;border-radius:99px;padding:5px 12px}
@@ -207,7 +207,7 @@ a.vi:hover{transform:scale(.975)}
 .masque{touch-action:pan-y;cursor:crosshair;width:min(100%,430px);background:#b9d6b1}
 .masque canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity .7s;touch-action:pan-y}
 .mq-c{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-4deg);background:var(--creme);border:3px solid var(--plomb);border-radius:99px;padding:9px 16px;font-weight:800;font-size:15.5px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 0 var(--plomb);transition:opacity .3s;animation:appel 2.2s 1s infinite}
-@keyframes appel{0%,60%,100%{margin-left:0}70%{margin-left:-16px}85%{margin-left:16px}}
+@keyframes appel{0%,60%,100%{translate:0 0}70%{translate:-16px 0}85%{translate:16px 0}}
 .masque.touche .mq-c{opacity:0}
 .mq-f{position:absolute;right:8%;bottom:7%;background:var(--ambre);border:3px solid var(--plomb);border-radius:14px;padding:8px 14px;font:900 22px/1 var(--titre);font-variation-settings:'SOFT' 100;transform:rotate(-7deg) scale(0);box-shadow:0 4px 0 var(--plomb);pointer-events:none;transition:transform .5s .3s cubic-bezier(.3,1.6,.5,1)}
 .masque.net canvas{opacity:0;pointer-events:none}
@@ -223,13 +223,13 @@ a.vi:hover{transform:scale(.975)}
 .z-d h3{font-size:clamp(25px,6.2vw,36px)}
 .z-d .rg{margin-top:10px;padding-bottom:0}
 .z-d .neuf{display:inline-block;margin-bottom:8px;background:var(--rubis);color:var(--creme);font:800 12px/1 var(--texte);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
-.bande{position:absolute;inset:-4px;z-index:2;border:var(--pl) solid var(--plomb);border-radius:14px 26px 22px 14px;background:#fff9ec;color:var(--plomb);cursor:grab;touch-action:pan-y;display:none;align-items:center;justify-content:space-between;gap:12px;padding:0 20px 0 0;font:900 clamp(21px,5.4vw,30px)/1 var(--titre);font-variation-settings:'SOFT' 100;transform-origin:0 100%;will-change:transform;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;overflow:hidden;text-align:left}
+.bande{position:absolute;inset:-4px;z-index:2;border:var(--pl) solid var(--plomb);border-radius:14px 26px 22px 14px;background:#fff9ec;color:var(--plomb);cursor:grab;touch-action:pan-y;display:none;align-items:center;justify-content:space-between;gap:12px;padding:0 20px 0 0;font:900 clamp(21px,5.4vw,30px)/1 var(--titre);font-variation-settings:'SOFT' 100;transform-origin:0 100%;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;overflow:hidden;text-align:left}
 .anime .bande{display:flex}
 .bande::before{content:"";align-self:stretch;width:15%;min-width:44px;background:var(--miel);border-right:var(--pl) solid var(--plomb);flex:none}
 .bande span{flex:1}
 .bande b{flex:none;font:800 14px/1 var(--texte);background:var(--plomb);color:var(--creme);padding:9px 13px;border-radius:99px;animation:tire 1.8s calc(var(--n)*.3s) infinite}
 @keyframes tire{0%,55%,100%{transform:none}75%{transform:translateX(9px)}}
-.bande.tenue{cursor:grabbing}
+.bande.tenue{cursor:grabbing;will-change:transform}
 .bandes{position:relative}
 .net-ok{position:absolute;right:-6px;bottom:-38px;z-index:3;background:var(--rubis);color:var(--creme);border:3px solid var(--plomb);border-radius:14px;padding:9px 15px;font:900 21px/1 var(--titre);font-variation-settings:'SOFT' 100;box-shadow:0 4px 0 var(--plomb);transform:rotate(5deg) scale(0);transition:transform .5s .35s cubic-bezier(.3,1.7,.5,1);pointer-events:none}
 .bandes.fini .net-ok{transform:rotate(5deg) scale(1)}
@@ -282,8 +282,8 @@ a.vi:hover{transform:scale(.975)}
 .liens{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 .in .btn{border-color:var(--creme);box-shadow:0 5px 0 rgba(253,243,224,.28)}
 .in-d{max-width:560px}
-.in-ros{position:absolute;left:50%;margin-left:-150px;bottom:-170px;width:300px;height:300px;z-index:1;pointer-events:none}
-.in-ros svg{width:100%;height:100%;overflow:visible;animation:tourne 80s linear infinite}
+.in-ros{position:absolute;left:50%;margin-left:-150px;bottom:-170px;width:300px;height:300px;z-index:1;pointer-events:none;animation:tourne 80s linear infinite}
+.in-ros svg{display:block;width:100%;height:100%;overflow:visible}
 .in-ros path,.in-ros circle{stroke:var(--plomb);stroke-width:3.6}
 @keyframes tourne{to{transform:rotate(360deg)}}
 .in .lever{z-index:5}
@@ -350,7 +350,11 @@ a.vi:hover{transform:scale(.975)}
   .vs-g,.in-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:30px}
   .carte-rv{max-width:560px}
 }
+/* téléphone et tablette : le soleil levant de la carte des soins passe sous la carte « Tournez la rosace » (le lever est à 3) */
+@media (max-width:899px){.heros-l{z-index:4}}
 @media (max-width:359px){.etiq span{padding:4px 9px;font-size:12.5px}.carte-rv{grid-template-columns:1fr}.kz{display:none}.marque{font-size:17px}}
+/* fluidité : une rubrique loin de l'écran (classe hors, posée par une seule vigie) ne fait rien tourner et ne garde aucun calque */
+.anime .hors *,.anime .hors *::before,.anime .hors *::after{animation-play-state:paused!important;will-change:auto!important}
 html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animation:none!important;transition:none!important}html:not(.anime){scroll-behavior:auto}
 </style>
 </head>
@@ -645,7 +649,7 @@ html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animatio
   ros.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();V=700+Math.random()*400;if(calme)direct();else lance()}});
 
   // ---- le rayon : il part de la rosace, suit le doigt ou la souris, et allume les lettres qu'il touche
-  var heros=$('#accueil'),rayon=$('#rayon'),lettres=$$('.lt'),LP=[],rC={x:0,y:0},rA=-90,rBut=null,rVu=true,rDer=0,rT0=performance.now(),base=-90,rMarche=false;
+  var heros=$('#accueil'),rayon=$('#rayon'),lettres=$$('.lt').map(function(l,i){l.style.setProperty('--rr',(i%2?3:-3)+'deg');return l}),LP=[],rC={x:0,y:0},rA=-90,rBut=null,rVu=true,rDer=0,rT0=performance.now(),base=-90,rMarche=false;
   function mesure(){
     TETE=parseFloat(getComputedStyle(H).getPropertyValue('--tete'))||64;
     var h=heros.getBoundingClientRect(),r=rosZ.getBoundingClientRect();
@@ -660,8 +664,8 @@ html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animatio
     if(!rVu){rMarche=false;return}
     var but=rBut!==null&&t-rDer<2600?rBut:base+Math.sin((t-rT0)/1500)*13+Math.sin((t-rT0)/3700)*6;
     rA+=ecart(but,rA)*.09;
-    rayon.style.setProperty('--ra',rA.toFixed(2)+'deg');
-    for(var i=0;i<lettres.length;i++){var on=Math.abs(ecart(LP[i],rA))<8.5;if(on!==lettres[i]._on){lettres[i]._on=on;lettres[i].classList.toggle('ec',on);lettres[i].style.setProperty('--rr',(i%2?3:-3)+'deg')}}
+    rayon.style.transform='rotate('+rA.toFixed(2)+'deg)';
+    for(var i=0;i<lettres.length;i++){var on=Math.abs(ecart(LP[i],rA))<8.5;if(on!==lettres[i]._on){lettres[i]._on=on;lettres[i].classList.toggle('ec',on)}}
     requestAnimationFrame(rayonPas)}
   function rayonVa(){if(!rMarche&&rVu){rMarche=true;requestAnimationFrame(rayonPas)}}
   function vise(e){var h=heros.getBoundingClientRect();rBut=Math.atan2(e.clientY-h.top-rC.y,e.clientX-h.left-rC.x)*180/Math.PI;rDer=performance.now()}
@@ -700,8 +704,8 @@ html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animatio
     scene.addEventListener('pointermove',function(e){var r=scene.getBoundingClientRect();sx=(e.clientX-r.left)/r.width;sale=true;demande()},{passive:true});
     scene.addEventListener('pointerleave',function(){sx=-999;sale=true;demande()});
   }
-  function eauPas(vh){
-    var r=hs.getBoundingClientRect(),i;
+  function eauPas(vh,r){
+    var i;
     if(r.bottom<0||r.top>vh)return;
     var p=cl((TETE-r.top)/(r.height-(vh-TETE)));
     for(i=0;i<filets.length;i++){var f=filets[i],t=cl((p*1.22-f.d)/.62),y=-102+t*(104+100/f.h),dx=0;
@@ -718,18 +722,24 @@ html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animatio
   function demande(){if(!enCours){enCours=true;requestAnimationFrame(image)}}
   function image(){
     enCours=false;if(!sale)return;sale=false;
-    var y=scrollY,vh=innerHeight,i,j;
+    var y=scrollY,vh=innerHeight,i,j,k=0,lt=[],ar=[],rh=null;
+    // toutes les lectures de mise en page d'abord, toutes les écritures ensuite (une seule mise en page par image)
+    for(i=0;i<secs.length;i++)if(secs[i].getBoundingClientRect().top<vh*.55)k=i;
+    if(!calme){
+      for(i=0;i<levers.length;i++)lt.push(levers[i].sec.getBoundingClientRect().top);
+      rh=hs.getBoundingClientRect();
+      for(i=0;i<arches.length;i++)ar.push(arches[i].parentNode.getBoundingClientRect());
+    }
     filS.style.transform='rotate('+(y*.12).toFixed(1)+'deg)';
-    var k=0;for(i=0;i<secs.length;i++)if(secs[i].getBoundingClientRect().top<vh*.55)k=i;
     if(k!==rang){var av=rang;rang=k;filV.forEach(function(v,n){v.classList.toggle('al',n<=k)});if(!calme&&av>=0){fil.classList.remove('saut');void fil.offsetWidth;fil.classList.add('saut')}}
     if(calme)return;
     if(y<vh*1.3){hTexte.style.transform='translateY('+(-y*.16).toFixed(1)+'px)';rosZ.style.transform=innerWidth<900?'translateY('+(y*.04).toFixed(1)+'px)':'translateY('+(y*.1).toFixed(1)+'px) scale('+(1+y/vh*.1).toFixed(3)+')'}
-    for(i=0;i<levers.length;i++){var L=levers[i],t=L.sec.getBoundingClientRect().top,q2=lisse(cl((vh-t)/(vh*.62)));
+    for(i=0;i<levers.length;i++){var L=levers[i],t=lt[i],q2=lisse(cl((vh-t)/(vh*.62)));
       if(q2===L.p)continue;L.p=q2;
       L.b.style.transform='translateY('+((1-q2)*50).toFixed(2)+'%)';
       for(j=0;j<7;j++)L.rs[j].style.transform='rotate('+(-75+25*j)+'deg) scaleY('+cl(q2*1.7-.45-Math.abs(j-3)*.06).toFixed(3)+')'}
-    eauPas(vh);
-    for(i=0;i<arches.length;i++){var b=arches[i].parentNode.getBoundingClientRect();if(b.bottom>0&&b.top<vh)arches[i].style.transform='translateY('+(((b.top+b.height/2)/vh-.5)*-9).toFixed(2)+'%)'}
+    eauPas(vh,rh);
+    for(i=0;i<arches.length;i++){var b=ar[i];if(b.bottom>0&&b.top<vh)arches[i].style.transform='translateY('+(((b.top+b.height/2)/vh-.5)*-9).toFixed(2)+'%)'}
   }
   addEventListener('scroll',function(){sale=true;demande()},{passive:true});
   addEventListener('resize',function(){mesure();if(!masqueFini)tailleMasque();sale=true;demande()});
@@ -741,6 +751,11 @@ html:not(.anime) *,html:not(.anime) *::before,html:not(.anime) *::after{animatio
     var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}})},{threshold:.22});
     $$('.apparait').forEach(function(e){io.observe(e)});
   }else $$('.apparait').forEach(function(e){e.classList.add('vu')});
+  // ---- la vigie : une rubrique à plus d'un demi-écran de la vue se met en pause (classe hors), elle repart avant d'arriver
+  if('IntersectionObserver' in window&&!calme){
+    var vigie=new IntersectionObserver(function(en){en.forEach(function(e){e.target.classList.toggle('hors',!e.isIntersecting)})},{rootMargin:'50% 0px 50% 0px'});
+    $$('main>section').forEach(function(s){vigie.observe(s)});
+  }
   (function(){var o=$('#phrase'),n=0;
     function decoupe(nd){[].slice.call(nd.childNodes).forEach(function(c){
       if(c.nodeType===3){var f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(function(m){if(!m)return;if(/^\s+$/.test(m)){f.appendChild(document.createTextNode(' '));return}var s=document.createElement('span');s.textContent=m;s.style.setProperty('--n',n++);f.appendChild(s)});nd.replaceChild(f,c)}
