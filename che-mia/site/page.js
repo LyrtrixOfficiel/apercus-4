@@ -178,7 +178,7 @@
 
   /* ---------- Le nom : assiettes au mur, cadre qui penche, phrase qui s'allume ---------- */
   var mur = $('#mur-assiettes'), cadrePhoto = $('#cadre-photo');
-  [['fleurs', 'Sur place'], ['rayons', 'À emporter'], ['feuilles', 'Wazemmes, Lille'], ['festons', 'Nouvelle équipe, octobre 2026']].forEach(function (a, i) {
+  [['fleurs', 'Sur place'], ['rayons', 'À emporter'], ['feuilles', 'Wazemmes, Lille'], ['festons', 'À cette adresse depuis 2009']].forEach(function (a, i) {
     var b = D.createElement('button'); b.type = 'button'; b.className = 'assiette-mur'; b.style.setProperty('--d', (i * .14).toFixed(2) + 's');
     b.setAttribute('aria-label', a[1] + ' : faire tourner l’assiette');
     b.innerHTML = '<span class="am">' + assiette(a[0], false) + '<b>' + a[1] + '</b></span>';
@@ -191,7 +191,7 @@
 
   /* ---------- Ce qui se balance : les torchons et le cadre (petits ressorts) ---------- */
   var corps = [], eveille = false;
-  function corpsNouveau(el, raideur, frein, limite) { var o = { el: el, a: 0, v: 0, k: raideur, c: frein, lim: limite }; corps.push(o); return o; }
+  function corpsNouveau(el, raideur, frein, limite, base) { var o = { el: el, a: 0, v: 0, k: raideur, c: frein, lim: limite, base: base || 0, vif: false }; corps.push(o); return o; }
   function pousser(o, f) { if (calme) return; o.v += f; if (!eveille) { eveille = true; requestAnimationFrame(pas); } }
   function pas() {
     var encore = false;
@@ -200,11 +200,14 @@
       o.v += -o.k * o.a; o.v *= o.c; o.a += o.v;
       if (o.a > o.lim) { o.a = o.lim; o.v *= -.35; } else if (o.a < -o.lim) { o.a = -o.lim; o.v *= -.35; }
       if (Math.abs(o.a) < .04 && Math.abs(o.v) < .04) { o.a = 0; o.v = 0; } else encore = true;
-      o.el.style.setProperty('--a', o.a.toFixed(2) + 'deg');
+      // le calque n'existe que pendant le balancement ; la rotation s'écrit sur l'élément lui-même
+      if (!o.vif) { o.vif = true; o.el.style.willChange = 'transform'; }
+      o.el.style.transform = 'rotate(' + (o.base + o.a).toFixed(2) + 'deg)';
+      if (!o.a && !o.v) { o.vif = false; o.el.style.willChange = ''; }
     });
     if (encore) requestAnimationFrame(pas); else eveille = false;
   }
-  var cadreCorps = corpsNouveau(cadrePhoto, .05, .955, 9);
+  var cadreCorps = corpsNouveau(cadrePhoto, .05, .955, 9, -2.5);
   cadrePhoto.addEventListener('click', function () { pousser(cadreCorps, hasard(0, 1) < .5 ? -1.6 : 1.6); });
   cadrePhoto.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') pousser(cadreCorps, .7); });
 
@@ -374,7 +377,13 @@
   $('#toits').innerHTML = '<svg viewBox="0 0 1600 130" preserveAspectRatio="xMidYMax slice">' + rangee(1600, 131, 46, 112, ['#2b1710'], ['#f7c843', '#4a2616'], 62, 108) + '</svg>';
   var fenetre = $('#fenetre'), rideauxFermes = false;
   function basculeRideaux() { rideauxFermes = !rideauxFermes; majRideaux(); }
-  function majRideaux() { var r = fenetre.getBoundingClientRect(), vh = innerHeight; fenetre.style.setProperty('--o', rideauxFermes ? 0 : (calme ? 1 : doux(seg(r.top, vh * .86, vh * .3)).toFixed(3))); }
+  var rideaux = $$('.rideau', fenetre), ouverture = -1;
+  function majRideaux(y) { // y : le défilement déjà lu par maj (le relire après des écritures forcerait un recalcul)
+    if (!geo) mesurer();
+    var haut = geo.fenetre - (y === undefined ? scrollY : y), vh = geo.vh, o = rideauxFermes ? 0 : (calme ? 1 : +doux(seg(haut, vh * .86, vh * .3)).toFixed(3));
+    if (o === ouverture) return; ouverture = o;
+    var t = 'scaleX(' + (1 - .74 * o).toFixed(4) + ')'; rideaux[0].style.transform = t; rideaux[1].style.transform = t;
+  }
   fenetre.addEventListener('click', basculeRideaux);
   fenetre.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); basculeRideaux(); } });
 
@@ -407,8 +416,8 @@
   var MOTIF = [.25, .5, .75, 1, 1, .75, .5, .25];
   var bandes = $$('[data-pignons]').map(function (b) {
     var n = innerWidth < 700 ? 16 : innerWidth < 1300 ? 24 : 32, cols = [];
-    for (var i = 0; i < n; i++) { var c = D.createElement('i'); c.style.setProperty('--h', MOTIF[i % 8]); b.appendChild(c); cols.push({ el: c, o: alea() * .42 }); }
-    return { el: b, cols: cols };
+    for (var i = 0; i < n; i++) { var c = D.createElement('i'); c.style.setProperty('--h', MOTIF[i % 8]); b.appendChild(c); cols.push({ el: c, o: alea() * .42, s: '' }); }
+    return { el: b, cols: cols, t: 0, h: 0, actif: false };
   });
 
   /* ---------- Apparitions ---------- */
@@ -426,54 +435,109 @@
     aVoir.forEach(function (e) { io.observe(e); });
   }
 
-  /* ---------- Le défilement : un seul passage par image ---------- */
+  /* ---------- L'arrivée une fois jouée : on retire ses animations (chacune garderait son calque pour toujours) ---------- */
+  if (calme) H.classList.add('arrive');
+  else tapis.addEventListener('animationend', function fin(e) {
+    if (e.animationName !== 'monte') return;
+    tapis.removeEventListener('animationend', fin); setTimeout(function () { H.classList.add('arrive'); }, 400);
+  });
+
+  /* ---------- Les mesures : prises une fois (chargement, polices, redimensionnement, contenu qui grandit), gardées en mémoire ---------- */
   var fil = $('#fil'); fil.innerHTML = MOINEAU; fil.classList.add('pose');
-  var frise1 = $('#frise-1'), frise2 = $('#frise-2'), ciel = $('.ciel'), accueil = $('#accueil');
-  var sections = $$('main section[id]'), liensNav = $$('a', liens), dernierY = scrollY, attente = false, sensFil = 1, partisPourDefil = false, reposFil = 0;
+  var ciel = $('.ciel'), accueil = $('#accueil');
+  var frises = [$('#frise-1'), $('#frise-2')].map(function (el) { return { el: el, boite: el.parentNode, t: 0, h: 0, actif: false }; });
+  var sections = $$('main section[id]'), liensNav = $$('a', liens);
+  // Les zones : loin de l'écran, elles se mettent en pause et ne se peignent plus (classe loin, voir style.css).
+  var zones = $$('#accueil,.frise,#mur-assiettes,#scene-table,#frigo,.meuble,.tringle,#fenetre,#telephone,.pignons,.pied').map(function (el) { return { el: el, t: 0, b: 0, loin: false }; });
+  var geo = null;
+  function posY(el) { var t = 0; while (el) { t += el.offsetTop; el = el.offsetParent; } return t; } // position dans la page, sans les transformations
+  function mesurer() {
+    var vh = innerHeight;
+    geo = {
+      vh: vh, vw: innerWidth, total: Math.max(1, D.scrollingElement.scrollHeight - vh), marge: Math.max(vh, 700),
+      sections: sections.map(posY), accueilH: accueil.offsetHeight, tuile: frises[0].el.offsetHeight,
+      phrase: posY(phrase), phraseH: phrase.offsetHeight, fenetre: posY(fenetre),
+      tringle: posY(tringle), tringleH: tringle.offsetHeight, cadre: posY(cadrePhoto), cadreH: cadrePhoto.offsetHeight,
+    };
+    zones.forEach(function (z) { z.t = posY(z.el); z.b = z.t + z.el.offsetHeight; });
+    bandes.forEach(function (b) { b.t = posY(b.el); b.h = b.el.offsetHeight; });
+    frises.forEach(function (f) { f.t = posY(f.boite); f.h = f.boite.offsetHeight; });
+  }
+
+  /* ---------- Le défilement : un seul passage par image, toutes les lectures avant toutes les écritures ---------- */
+  var dernierY = scrollY, attente = false, sensFil = 1, filX = 8, filPose = true, filVole = false, partisPourDefil = false, reposFil = 0, iciAvant, motsOn = 0, calmeFait = false;
+  function poserFil(fy) { fil.style.transform = 'translate3d(' + filX.toFixed(1) + 'px,' + fy.toFixed(1) + 'px,0) scaleX(' + sensFil + ')'; }
+  function filAuRepos() { fil.classList.remove('vole'); fil.classList.add('pose'); filVole = false; filPose = true; poserFil(0); }
   function maj() {
     attente = false;
-    var y = scrollY, vh = innerHeight, dv = y - dernierY, total = Math.max(1, D.scrollingElement.scrollHeight - vh), p = borne(y / total, 0, 1);
+    if (!geo) mesurer();
+    var y = scrollY, vh = geo.vh, dv = y - dernierY, i, n;
     dernierY = y;
+    // ce qui est loin s'arrête, ce qui approche repart (dans la même image, avant la peinture)
+    for (i = 0; i < zones.length; i++) {
+      var z = zones[i], loin = z.b < y - geo.marge || z.t > y + vh + geo.marge;
+      if (loin !== z.loin) { z.loin = loin; z.el.classList.toggle('loin', loin); }
+    }
     // le moineau de la barre
     if (dv) sensFil = dv > 0 ? 1 : -1;
-    fil.style.setProperty('--fx', (8 + p * (innerWidth - 46)).toFixed(1) + 'px');
-    fil.style.setProperty('--fy', calme ? '0px' : (-Math.abs(Math.sin(y / 52)) * 10).toFixed(1) + 'px');
-    fil.style.setProperty('--fs', sensFil);
-    if (dv && !calme) { fil.classList.remove('pose'); fil.classList.toggle('vole', Math.abs(dv) > 46); clearTimeout(reposFil); reposFil = setTimeout(function () { fil.classList.remove('vole'); fil.classList.add('pose'); fil.style.setProperty('--fy', '0px'); }, 260); }
+    filX = 8 + borne(y / geo.total, 0, 1) * (geo.vw - 46);
+    poserFil(calme ? 0 : -Math.abs(Math.sin(y / 52)) * 10);
+    if (dv && !calme) {
+      if (filPose) { filPose = false; fil.classList.remove('pose'); }
+      var bat = Math.abs(dv) > 46; if (bat !== filVole) { filVole = bat; fil.classList.toggle('vole', bat); }
+      clearTimeout(reposFil); reposFil = setTimeout(filAuRepos, 260);
+    }
     // rubrique en cours
-    var ici = null; sections.forEach(function (s) { if (s.getBoundingClientRect().top < vh * .45) ici = s.id; });
-    liensNav.forEach(function (a) { a.classList.toggle('ici', a.getAttribute('href') === '#' + ici); });
-    if (calme) { bandes.forEach(function (b) { b.cols.forEach(function (c) { c.el.style.setProperty('--p', 1); }); }); mots.forEach(function (m) { m.classList.add('on'); }); majRideaux(); return; }
+    var ici = null; for (i = 0; i < sections.length; i++) if (geo.sections[i] - y < vh * .45) ici = sections[i].id;
+    if (ici !== iciAvant) { iciAvant = ici; liensNav.forEach(function (a) { a.classList.toggle('ici', a.getAttribute('href') === '#' + ici); }); }
+    if (calme) {
+      if (!calmeFait) { calmeFait = true; bandes.forEach(function (b) { b.cols.forEach(function (c) { c.el.style.transform = 'none'; }); }); mots.forEach(function (m) { m.classList.add('on'); }); }
+      majRideaux(y); return;
+    }
     // accueil : le ciel glisse, les moineaux s'envolent quand on descend
     if (y < vh * 1.2) ciel.style.transform = 'translate3d(0,' + (y * .28).toFixed(1) + 'px,0)';
-    var hA = accueil.offsetHeight;
+    var hA = geo.accueilH;
     if (!partisPourDefil && y > hA * .34) { partisPourDefil = true; nuee.tousPartent(true); }
     else if (partisPourDefil && y < hA * .12) { partisPourDefil = false; nuee.tousReviennent(); }
-    // frises
-    var tf = frise1.offsetHeight;
-    frise1.style.transform = 'translate3d(' + (-((y * .22) % tf)).toFixed(1) + 'px,0,0)';
-    frise2.style.transform = 'translate3d(' + (-tf + ((y * .22) % tf)).toFixed(1) + 'px,0,0)';
-    // phrase qui s'allume
-    var rp = phrase.getBoundingClientRect();
-    if (rp.top < vh && rp.bottom > -200) { var pp = seg(rp.top, vh * .88, vh * .36) * mots.length; mots.forEach(function (m, i) { m.classList.toggle('on', i < pp); }); }
-    // pignons
+    // frises : seulement celle qui est à l'écran
+    var tf = geo.tuile, d = (y * .22) % tf;
+    for (i = 0; i < 2; i++) {
+      var f = frises[i], la = f.t < y + vh + 40 && f.t + f.h > y - 40;
+      if (la !== f.actif) { f.actif = la; f.boite.classList.toggle('actif', la); }
+      if (la) f.el.style.transform = 'translate3d(' + (i ? -tf + d : -d).toFixed(1) + 'px,0,0)';
+    }
+    // phrase qui s'allume : on ne touche qu'aux mots qui changent
+    var hp = geo.phrase - y;
+    if (hp < vh && hp + geo.phraseH > -200) {
+      n = Math.min(mots.length, Math.ceil(seg(hp, vh * .88, vh * .36) * mots.length));
+      while (motsOn < n) mots[motsOn++].classList.add('on');
+      while (motsOn > n) mots[--motsOn].classList.remove('on');
+    }
+    // pignons : seulement la bande qui est à l'écran, seulement les colonnes qui bougent
     bandes.forEach(function (b) {
-      var r = b.el.getBoundingClientRect(); if (r.top > vh + 40 || r.bottom < -40) return;
-      var P = seg(r.top, vh, vh * .5);
-      b.cols.forEach(function (c) { c.el.style.setProperty('--p', doux(seg(P, c.o, c.o + .56)).toFixed(3)); });
+      var haut = b.t - y, la = !(haut > vh + 40 || haut + b.h < -40);
+      if (la !== b.actif) { b.actif = la; b.el.classList.toggle('actif', la); }
+      if (!la) return;
+      var P = seg(haut, vh, vh * .5);
+      b.cols.forEach(function (c) {
+        var t = ((1 - doux(seg(P, c.o, c.o + .56))) * 101).toFixed(1);
+        if (t !== c.s) { c.s = t; c.el.style.transform = 'translateY(' + t + '%)'; }
+      });
     });
     // rideaux
-    majRideaux();
+    majRideaux(y);
     // le vent du défilement
     if (dv) {
-      var rt = tringle.getBoundingClientRect();
-      if (rt.top < vh && rt.bottom > 0) corpsTorchons.forEach(function (o, i) { pousser(o, borne(dv * .045, -1.5, 1.5) * (.6 + ((i * 37) % 10) / 12)); });
-      var rc = cadrePhoto.getBoundingClientRect();
-      if (rc.top < vh && rc.bottom > 0) pousser(cadreCorps, borne(dv * .02, -.7, .7));
+      if (geo.tringle - y < vh && geo.tringle + geo.tringleH - y > 0) corpsTorchons.forEach(function (o, i) { pousser(o, borne(dv * .045, -1.5, 1.5) * (.6 + ((i * 37) % 10) / 12)); });
+      if (geo.cadre - y < vh && geo.cadre + geo.cadreH - y > 0) pousser(cadreCorps, borne(dv * .02, -.7, .7));
     }
   }
   function demander() { if (!attente) { attente = true; requestAnimationFrame(maj); } }
+  function perime() { geo = null; demander(); }
   addEventListener('scroll', demander, { passive: true });
-  addEventListener('resize', demander);
+  addEventListener('resize', perime);
+  addEventListener('load', perime);
+  if (D.fonts && D.fonts.ready) D.fonts.ready.then(perime);
+  if ('ResizeObserver' in window) new ResizeObserver(perime).observe($('main')); // le jeu des paires allonge la page
   maj();
 })();

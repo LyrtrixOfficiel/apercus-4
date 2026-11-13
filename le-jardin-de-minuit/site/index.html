@@ -23,6 +23,8 @@
   --sauge:#14463a;--menthe:#bfe3c2;--pousse:#2f6e33;
   --the:#e9dfae;--arc:clamp(26px,min(5vw,9vh),84px);
 }
+/* le décalage de la lune au défilement ne se transmet pas à ses enfants : seul le bloc de la lune est recalculé */
+@property --sy{syntax:'<number>';inherits:false;initial-value:0}
 html[data-ambiance=sousbois]{--nuit:#12402f;--nuit2:#0a2a1f;--nuit3:#1f5c44;--face:#2f7a5b;--encre:#0a2a1f;--cyan:#e0f0dc;--sauge:#0e3a63;--menthe:#cfe2f5}
 html[data-ambiance=ardoise]{--nuit:#2d2b3a;--nuit2:#1c1b26;--nuit3:#434057;--face:#5a5674;--encre:#1c1b26;--cyan:#ebe6f2;--sauge:#3a2f2a;--menthe:#f0d9c4}
 
@@ -149,8 +151,8 @@ h1 .le{display:inline-block;transform-origin:50% 100%;transition:transform .5s c
 .cr-n small{font:italic 9cqw/1 'Fell',Georgia,serif;letter-spacing:0}
 .cr-hms{font:700 5cqw/1.2 'Karla',sans-serif;font-variant-numeric:tabular-nums;margin-top:1.2cqw}
 .cr-date{font:italic 5.6cqw/1.15 'Fell',Georgia,serif;margin-top:1.6cqw;max-width:62cqw}
-.lune.ouvert .cr-n{font-size:15.5cqw;line-height:.95;letter-spacing:-.02em;margin:2cqw 0 3cqw}
-.lune.ouvert .cr-hms{display:none}
+.lune.apres .cr-n{display:block;font-size:14.5cqw;line-height:.95;letter-spacing:-.02em;margin:2.4cqw 0 3.4cqw;max-width:76cqw;text-wrap:balance}
+.lune.apres .cr-hms{display:none}
 .verso{transform:rotateX(180deg);color:#3b2007;background:
   radial-gradient(circle at 24% 30%,rgba(120,62,14,.5) 0 3.4%,transparent 3.8%),radial-gradient(circle at 70% 22%,rgba(120,62,14,.45) 0 2.6%,transparent 3%),
   radial-gradient(circle at 80% 58%,rgba(120,62,14,.5) 0 4%,transparent 4.4%),radial-gradient(circle at 34% 76%,rgba(120,62,14,.45) 0 3%,transparent 3.4%),
@@ -516,6 +518,22 @@ main{overflow-x:clip}
 .pied p{font-size:.95rem;line-height:1.45;max-width:56em}
 .pied p+p{margin-top:.5em}
 @media(max-width:699px){.pied .cont{grid-template-columns:1fr}}
+
+/* écrans larges mais bas (2000 x 738, 1366 x 768) : à l'arrivée sur une section, ses deux colonnes tiennent dans la hauteur */
+@media(min-width:900px) and (max-height:800px){
+  .sec{padding-top:clamp(38px,6.5vh,52px)}
+  h2{font-size:clamp(2.35rem,min(4.5vw,10vh),4.5rem)}
+  .carte{margin-top:clamp(14px,2.4vh,20px);padding:clamp(16px,3vh,24px) clamp(20px,2.6vw,34px)}
+  .carte h3{margin-bottom:.2em}
+  .carte dt{margin-top:.65em}
+  .carte dd{line-height:1.25}
+  .creperie .note{margin-top:.8em!important}
+}
+
+/* ce qui n'est pas à l'écran se repose : ses animations en boucle sont retirées (plus de calque ni de calcul), elles repartent
+   dès qu'il revient (le script pose .dort hors écran, avec 260 px de marge). Les animations jouées une seule fois ne sont pas touchées. */
+.dort.fantome svg,.dort .brin svg,.dort .halo i,.dort .lune,.dort .indice i,.dort .ruban-in,.dort .louche,.dort .rozell,.dort .fumee i,
+.dort .vap,.dort .sablier,.dort .affiche,.dort .coin{animation:none!important}
 
 /* mode calme : seulement sur demande (?calme=1) */
 .calme *,.calme *::before,.calme *::after{animation:none!important;transition:none!important}
@@ -896,18 +914,20 @@ $$('[data-plante]').forEach(function(e){e.innerHTML=plante(e.dataset.plante)});
   h1.addEventListener('pointerleave',function(){ls.forEach(function(s){s.style.transform=''})});
 })();
 
-/* ---------- le compte à rebours de l'ouverture (17 novembre 2026), puis « ouvert » ---------- */
+/* ---------- le compte à rebours de l'ouverture annoncée (17 novembre 2026) ----------
+   La date n'est confirmée par aucune source : une fois le 17 passé, la lune n'affirme rien (jamais « ouvert »),
+   elle rappelle seulement la date annoncée, « à confirmer avec vous ». */
 var OUV=new Date(2026,10,17,0,0,0),T0=Date.now(),FAUX=q.get('jour')?new Date(q.get('jour')+'T12:00:00').getTime():0;
 function maintenant(){return FAUX?FAUX+(Date.now()-T0):Date.now()}
-var JOUR=OUV.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+var JOUR=OUV.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),DATE=OUV.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
 function d2(n){return (n<10?'0':'')+n}
-var lune=$('#lune'),crN=$('#cr-n'),crU=$('#cr-u'),crH=$('#cr-hms'),crS=$('#cr-sur'),crD=$('#cr-date'),dejaOuvert=null;
+var lune=$('#lune'),crN=$('#cr-n'),crU=$('#cr-u'),crH=$('#cr-hms'),crS=$('#cr-sur'),crD=$('#cr-date'),dejaPasse=null;
 function rebours(){
   var r=OUV.getTime()-maintenant(),ouvert=r<=0;
-  if(ouvert!==dejaOuvert){dejaOuvert=ouvert;lune.classList.toggle('ouvert',ouvert);
-    if(ouvert){crS.textContent='Le jardin a poussé';crN.textContent='C’est ouvert';crU.textContent='';crD.textContent='depuis le '+JOUR;
-      $('#ouv').textContent='Ouvert depuis le '+JOUR+'.';$('#l-ouv').textContent='Ouvert depuis le '+JOUR+'.'}
-    else{crD.textContent='le '+JOUR;$('#ouv').textContent='Ouverture annoncée le '+JOUR+'.';$('#l-ouv').textContent='Ouverture annoncée le '+JOUR+'.'}}
+  if(ouvert!==dejaPasse){dejaPasse=ouvert;lune.classList.toggle('apres',ouvert);
+    $('#ouv').textContent='Ouverture annoncée le '+JOUR+'.';$('#l-ouv').textContent='Ouverture annoncée le '+JOUR+'.';
+    if(ouvert){crS.textContent='Ouverture annoncée le';crN.textContent=DATE;crU.textContent='';crD.textContent='à confirmer avec vous'}
+    else{crS.textContent='Ouverture annoncée dans';crD.textContent='le '+JOUR}}
   if(ouvert)return;
   var s=Math.floor(r/1000),j=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
   if(j>0){crN.textContent=j;crU.textContent=j>1?'jours':'jour';crH.textContent=d2(h)+' h '+d2(m)+' min '+d2(s%60)+' s'}
@@ -1056,16 +1076,34 @@ var liens=$$('.liens a, .onglets a'),ong=$('#onglets');
 var ioS=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var id='#'+e.target.id;liens.forEach(function(a){var on=a.getAttribute('href')===id;a.classList.toggle('actif',on);if(on&&a.parentNode===ong&&ong.scrollWidth>ong.clientWidth)ong.scrollTo({left:a.offsetLeft-(ong.clientWidth-a.offsetWidth)/2,behavior:CALME?'auto':'smooth'})})})},{rootMargin:'-45% 0px -50% 0px'});
 $$('main section[id]').forEach(function(s){ioS.observe(s)});
 
-var arcs=$$('.arc'),scene=$('#scene'),accL=$('#acc-lune'),ronds=$$('.rond'),enAttente=false;
-function maj(){enAttente=false;var vh=innerHeight,y=scrollY,max=Math.max(1,document.scrollingElement.scrollHeight-vh);
-  H.style.setProperty('--ph',(y/max).toFixed(3));
-  if(y<vh*1.2)accL.style.setProperty('--sy',y.toFixed(0));
-  arcs.forEach(function(a){var t=a.parentNode.getBoundingClientRect().top;if(t>-200&&t<vh+200)a.style.setProperty('--lev',borne((vh-t)/(vh*.55),0,1).toFixed(3))});
-  ronds.forEach(function(f){var b=f.getBoundingClientRect();if(b.bottom>-50&&b.top<vh+50)f.style.setProperty('--para',borne((b.top+b.height/2-vh/2)/vh,-.6,.6).toFixed(3))});
-  var r=scene.getBoundingClientRect();if(r.top<vh+100&&r.bottom>-100)scene.style.setProperty('--ri',CALME?1:borne((vh*.95-r.top)/(vh*.5),0,1).toFixed(3));
+/* Ce qui bouge en boucle (plantes au vent, lune, ruban, plaque, théière, affiches, carnet) s'arrête hors de l'écran et repart en y revenant. */
+if(window.IntersectionObserver){var ioD=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('dort',!e.isIntersecting)})},{rootMargin:'260px 0px'});
+  $$('.fantome,.acc-lune,.acc-texte,.ruban,.jeu,.meuble,#the,.affiches,.livre').forEach(function(e){ioD.observe(e)})}
+
+/* Défilement : aucune lecture de mise en page pendant qu'on défile. Les positions sont mesurées une fois (chargement,
+   polices, redimensionnement, contenu qui change de hauteur) et gardées ; à chaque image on ne fait qu'écrire, et
+   seulement sur l'élément qui bouge (jamais une variable sur html : tout le document recalculait ses styles). */
+var arcs=$$('.arc'),arcI=arcs.map(function(a){return a.firstElementChild}),scene=$('#scene'),rideaux=$$('.rideau',scene),accL=$('#acc-lune'),
+  ronds=$$('.rond'),rondI=ronds.map(function(f){return $('img',f)}),phase=$('.phase i'),enAttente=false,aMesurer=true,vh=0,maxY=1,P={a:[],r:[],s:[0,0]};
+function haut(e){var t=0;while(e){t+=e.offsetTop;e=e.offsetParent}return t}
+function mesure(){aMesurer=false;vh=innerHeight;maxY=Math.max(1,document.scrollingElement.scrollHeight-vh);
+  P.a=arcs.map(function(a){return haut(a.parentNode)});
+  P.r=ronds.map(function(f){return [haut(f),f.offsetHeight]});
+  P.s=[haut(scene),scene.offsetHeight]}
+function pose(e,n,v){if(e['v'+n]!==v){e['v'+n]=v;e.style.setProperty(n,v)}}
+function maj(){enAttente=false;if(aMesurer)mesure();var y=scrollY,i,t,b;
+  pose(phase,'--ph',(y/maxY).toFixed(2));
+  if(y<vh*1.2)pose(accL,'--sy',y.toFixed(0));
+  for(i=0;i<arcI.length;i++){t=P.a[i]-y;if(t>-200&&t<vh+200)pose(arcI[i],'--lev',borne((vh-t)/(vh*.55),0,1).toFixed(3))}
+  for(i=0;i<rondI.length;i++){t=P.r[i][0]-y;b=P.r[i][1];if(t+b>-50&&t<vh+50)pose(rondI[i],'--para',borne((t+b/2-vh/2)/vh,-.6,.6).toFixed(3))}
+  t=P.s[0]-y;if(t<vh+100&&t+P.s[1]>-100){b=CALME?'1':borne((vh*.95-t)/(vh*.5),0,1).toFixed(3);pose(rideaux[0],'--ri',b);pose(rideaux[1],'--ri',b)}
 }
 function demande(){if(!enAttente){enAttente=true;requestAnimationFrame(maj)}}
-addEventListener('scroll',demande,{passive:true});addEventListener('resize',demande);maj();
+function remesure(){aMesurer=true;demande()}
+addEventListener('scroll',demande,{passive:true});addEventListener('resize',remesure);addEventListener('load',remesure);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(remesure);
+if(window.ResizeObserver)new ResizeObserver(remesure).observe($('main'));
+maj();
 })();
 </script>
 </body>

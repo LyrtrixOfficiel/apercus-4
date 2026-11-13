@@ -65,7 +65,7 @@ h1,h2,h3,p{margin:0}
 .menu-ouvert .burger i:nth-child(2){opacity:0}
 .menu-ouvert .burger i:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
 .ruban{position:absolute;left:0;right:0;bottom:0;height:8px;background:#ead9bd}
-.ruban i{position:absolute;inset:0;background:var(--rouge);transform-origin:left;transform:scaleX(0)}
+.ruban i{position:absolute;inset:0;background:var(--rouge);transform-origin:left;transform:scaleX(0);will-change:transform}
 .sceau-fil{position:absolute;left:0;top:0;width:50px;height:65px;margin-left:-25px;transform-origin:50% 0;pointer-events:none;will-change:transform;filter:drop-shadow(0 3px 0 rgba(34,20,22,.28))}
 
 @media (max-width:1040px){
@@ -102,13 +102,19 @@ section{position:relative}
 
 /* Frises de carreaux de ciment (transitions entre rubriques, liées au défilement) */
 .frise{--t:64px;display:grid;grid-template-columns:repeat(var(--n,20),var(--t));grid-auto-rows:var(--t);justify-content:center;overflow:hidden;background:var(--f);height:calc(var(--t)*var(--rangs,1))}
-.frise b,.sol b{display:block;border-radius:5px;transition:transform .7s var(--doux-t);will-change:transform;
+.frise b,.sol b{display:block;border-radius:5px;transition:transform .7s var(--doux-t);
   background:
     radial-gradient(circle farthest-side at 0 0,var(--b) 43.5%,transparent 44.5%),
     radial-gradient(circle farthest-side at 0 0,var(--a) 98.6%,transparent 99.6%),
     radial-gradient(circle farthest-side at 100% 100%,var(--c) 38.5%,transparent 39.5%),
     var(--f);
   box-shadow:inset 0 0 0 1.5px var(--joint,rgba(34,20,22,.14))}
+/* Fluidité : ce qui est loin de l'écran n'est ni calculé ni peint. La frise a une hauteur fixe ; pour les rubriques, page.js relève
+   la hauteur exacte (contain-intrinsic-block-size) avant de poser la classe cv sur html : rien ne bouge quand elles reviennent. */
+.frise{content-visibility:auto}
+.cv main > section,.cv .pied{content-visibility:auto}
+/* Fluidité : un carreau n'est un calque que lorsque sa frise approche de l'écran (classe pres posée par page.js), ou pendant qu'il tourne */
+.frise.pres b{will-change:transform}
 @media (max-width:760px){.frise{--t:46px}}
 
 /* 1. La une : le portrait d'apparat */
@@ -177,6 +183,9 @@ section{position:relative}
 .feuille{animation:balance 3.4s infinite ease-in-out;transform-box:fill-box;transform-origin:50% 100%}
 .feuille:nth-child(2n){animation-delay:-1.2s;animation-duration:4.1s}
 @keyframes balance{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(8deg)}}
+/* Fluidité : hors écran, le portrait ne travaille plus ; seul l'objet tenu en main est animé */
+.une:not(.ici) #yeux,#cardinal .fumee path,#cardinal .mousse,#cardinal .feuille{animation-play-state:paused}
+.une.ici #cardinal[data-objet=cafe] .fumee path,.une.ici #cardinal[data-objet=biere] .mousse,.une.ici #cardinal[data-objet=assiette] .feuille{animation-play-state:running}
 .cartel{background:var(--papier);color:var(--encre);border-radius:12px;padding:12px 16px 14px;width:min(100%,460px);box-shadow:0 6px 0 rgba(34,20,22,.3);text-align:center;opacity:0;transform:translateY(20px)}
 .pret .cartel{animation:tombe .7s var(--doux-t) 2.1s forwards}
 .cartel-t{display:block;font:italic 400 clamp(19px,1.2vw + 12px,24px)/1.15 var(--fell);min-height:1.2em}
@@ -275,7 +284,8 @@ section{position:relative}
 .local .h2 em{color:var(--rouge)}
 .corde{position:relative;user-select:none;-webkit-user-select:none;margin-top:clamp(26px,5vh,54px);padding-top:16px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.5vw,24px)}
 .corde::before{content:'';position:absolute;left:calc(-1*var(--m));right:calc(-1*var(--m));top:0;height:12px;border-radius:6px;background:var(--encre)}
-.etiquette{position:relative;transform-origin:50% -10px;transform:rotate(calc(var(--a,0)*1deg));will-change:transform;padding-top:clamp(26px,4vh,44px);touch-action:pan-y}
+.etiquette{position:relative;transform-origin:50% -10px;transform:rotate(calc(var(--a,0)*1deg));padding-top:clamp(26px,4vh,44px);touch-action:pan-y}
+.local.ici .etiquette{will-change:transform}
 .etiquette::before{content:'';position:absolute;left:50%;top:-14px;width:8px;margin-left:-4px;height:calc(clamp(26px,4vh,44px) + 30px);background:var(--encre);border-radius:4px}
 .etiquette-c{position:relative;display:block;background:var(--papier);border-radius:16px;padding:clamp(34px,4vw,48px) clamp(12px,1.2vw,20px) clamp(16px,1.6vw,22px);box-shadow:0 8px 0 rgba(34,20,22,.24);
   clip-path:polygon(22% 0,78% 0,100% 16%,100% 100%,0 100%,0 16%)}

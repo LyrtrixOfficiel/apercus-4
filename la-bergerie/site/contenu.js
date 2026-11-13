@@ -7,7 +7,7 @@ window.CONTENU = {
   carteLien: 'https://www.google.com/maps/search/?api=1&query=La+Bergerie+33540+Saint-Laurent-du-Bois',
   ville: 'Saint-Laurent-du-Bois',
   note: '5,0 sur 5',
-  avis: '73 avis',
+  avis: '73 avis', // relu sur Google le 13/11/2026 : 5,0 et 73 avis
   supplement: 'Supplément ingrédient : 1,00 €.',
 
   // La carte publiée par le commerce (image « Carte pizza » de son site).

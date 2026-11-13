@@ -1,4 +1,4 @@
-// Fiche des faits vérifiés de la maquette (mise à jour le 12/11/2026).
+// Fiche des faits vérifiés de la maquette (mise à jour le 13/11/2026).
 // Depuis la refonte du 12/11, la page (index.html) porte ses textes elle-même et ne charge plus ce fichier :
 // il reste ici comme référence, pour décliner la maquette ou relire ce qui est sûr. Chaque fait vient de SOURCES.md.
 // Ce qui est inconnu reste en pointillés sur la page.
@@ -7,7 +7,7 @@ window.CONTENU = {
   metier: 'Crêperie végétarienne, herboristerie, salon de thé, lieu culturel (pas de la street food)',
   adresse: '36 rue Vaneau, 35000 Rennes',
   telephone: '06 81 16 67 34', // confirmé (LISTE-29-VERIFIEE.csv). Jamais le 06 83 24 13 63, sans source.
-  ouverture: 'Annoncée le 17/11/2026 (Instagram du Jardin de Minuit, repris par Google). La page compte les jours, puis affiche « C’est ouvert ».',
+  ouverture: 'Annoncée le 17/11/2026 (Instagram du Jardin de Minuit, repris par Google), non revérifiée le 13/11. La page compte les jours jusqu’au 17 ; ensuite elle n’affirme rien : « Ouverture annoncée le 17 novembre 2026, à confirmer avec vous ». Jamais « ouvert ».',
   facebook: 'https://www.facebook.com/people/Le-jardin-de-Minuit/100092447431267/',
   itineraire: 'https://www.google.com/maps/search/?api=1&query=36+rue+Vaneau+35000+Rennes',
   creperie: 'Des galettes classiques, et d’autres aux plantes et micro-pousses. Aucun nom de galette, aucun prix connus : pointillés.',

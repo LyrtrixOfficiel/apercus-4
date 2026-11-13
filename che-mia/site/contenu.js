@@ -9,10 +9,10 @@ window.CONTENU = {
   quartier: 'Wazemmes',
   numero: '94 ter',
   carteLien: 'https://www.google.com/maps/search/?api=1&query=94+ter+boulevard+Victor+Hugo+59000+Lille',
-  // Aucun numéro : ceux des annuaires datent d'avant la reprise.
+  // Aucun numéro : ceux des annuaires ne sont pas confirmés pour la société d'octobre 2026.
   telephone: null,
   jours: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-  // Rubriques relevées dans les annuaires AVANT la reprise (eat-list, Sluurpy) : présentées comme telles, à confirmer.
+  // Rubriques relevées dans les annuaires (eat-list, Sluurpy, fiches d'avant octobre 2026) : présentées comme telles, à confirmer.
   // Aucun plat, aucun prix.
   rubriques: ['Burgers', 'Wraps', 'Sandwiches et paninis', 'Pâtes', 'Menus et assiettes', 'Frites et apéritifs'],
   // Les aimants à lettres de la porte du frigo.
@@ -24,7 +24,7 @@ window.CONTENU = {
     { decor: 'feuilles', titre: 'Wazemmes', texte: 'Le quartier, à Lille.' },
     { decor: 'festons', titre: '94 ter boulevard Victor Hugo', texte: 'La première adresse.' },
     { decor: 'bandes', titre: '49 rue de Wazemmes', texte: 'La seconde adresse.' },
-    { decor: 'losanges', titre: 'Octobre 2026', texte: 'Une nouvelle équipe.' },
+    { decor: 'losanges', titre: 'Depuis 2009', texte: 'Ché Mia, à cette adresse.' },
   ],
   // Trois ambiances proposées depuis la page d'accueil de l'aperçu.
   palettes: {

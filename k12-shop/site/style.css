@@ -90,7 +90,7 @@ html.js .texte.vu > .etoile { animation: pop .75s cubic-bezier(.2, 1.7, .4, 1) b
 @keyframes bat { 50% { opacity: .2; } }
 .burger { display: none; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--p); color: var(--l); font: 900 13px/1 var(--g); letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 3px 0 var(--p-b); }
 .tube { position: absolute; left: 0; right: 0; bottom: -6px; height: 6px; background: var(--nuit-2); }
-.tube i { display: block; height: 100%; background: #fff; transform-origin: 0 50%; transform: scaleX(var(--av, 0)); box-shadow: 0 0 14px rgba(255, 255, 255, .8); }
+.tube i { display: block; height: 100%; background: #fff; transform-origin: 0 50%; transform: scaleX(0); will-change: transform; box-shadow: 0 0 14px rgba(255, 255, 255, .8); } /* son propre calque : la barre n'est pas repeinte quand il s'allonge */
 
 /* ---------- 1. L'enseigne ---------- */
 .enseigne { padding: calc(var(--barre) + 20px) 14px 14px; background: var(--nuit); min-height: calc(100vh - 64px); min-height: calc(100svh - 64px); display: flex; }
@@ -104,8 +104,7 @@ html.js .caisson.allume::after { animation: allumage 1.5s steps(1) forwards; }
 .tubes i { position: absolute; left: 2%; right: 2%; height: 17%; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .34), rgba(255, 255, 255, 0)); }
 .tubes i:nth-child(1) { top: 9%; } .tubes i:nth-child(2) { top: 42%; } .tubes i:nth-child(3) { top: 75%; }
 .e-gauche, .e-droite { position: relative; z-index: 2; min-width: 0; }
-.e-gauche { transform: translate3d(0, calc(var(--sc, 0) * -70px), 0); }
-.e-droite { transform: translate3d(0, calc(var(--sc, 0) * -24px), 0); }
+.e-gauche, .e-droite { transform: translate3d(0, 0, 0); } /* le script écrit le décalage au défilement, directement sur ces deux blocs */
 
 .k12 { --fk: min(19vw, 44vh); position: relative; display: inline-flex; align-items: flex-end; margin: 0 0 .16em; font: 400 var(--fk)/.84 var(--t); color: var(--l); white-space: nowrap; letter-spacing: -.01em; }
 .k12 .lt { display: inline-block; cursor: pointer; transform: translate3d(calc(var(--px, 0) * var(--d, 10) * 1px), calc(var(--py, 0) * var(--d, 10) * 1px), 0); }
@@ -198,7 +197,7 @@ html.js .totem.vu .pan.balance { animation: balance 1.2s cubic-bezier(.3, .7, .3
 .manque h2 span { white-space: nowrap; }
 
 .manque h2 i { display: inline-block; width: 1.25em; height: 1.25em; margin-left: -.1em; line-height: 1.2em; text-align: center; font-style: normal; background: var(--rose); color: var(--encre); clip-path: var(--etoile); vertical-align: -.12em; animation: question 2.6s cubic-bezier(.4, 0, .4, 1) infinite; }
-@keyframes question { 0%, 100% { rotate: -12deg; } 50% { rotate: 14deg; scale: 1.08; } }
+@keyframes question { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(14deg) scale(1.08); } } /* en transform : l'animation tourne sur le compositeur, sans recalcul de style */
 .q-forme label, .pa-forme label { display: block; font-weight: 800; margin-bottom: 8px; }
 .q-champ { display: flex; gap: 10px; }
 .q-champ input { flex: 1; min-width: 0; height: 58px; padding: 0 18px; border: 0; border-radius: 14px; background: var(--blanc); color: var(--encre); font-weight: 800; font-size: 19px; box-shadow: inset 0 5px 0 rgba(6, 34, 42, .14); }
@@ -395,7 +394,7 @@ html[data-palette=corail] .rail .c { color: var(--l); }
 html[data-palette=corail] .adresse small { color: #fff; }
 .accroche-plaque { position: relative; display: grid; justify-items: center; padding-top: 74px; }
 .ventouse { position: absolute; top: 0; left: 50%; width: 60px; height: 60px; margin-left: -30px; border-radius: 50%; background: var(--blanc); box-shadow: 0 6px 0 rgba(6, 34, 42, .28); }
-.horaires { position: relative; width: min(440px, 100%); padding-bottom: 14px; border-radius: 20px; background: #fff; box-shadow: 0 12px 0 rgba(6, 34, 42, .3); transform-origin: 50% -44px; transform: rotate(var(--ang, 0deg)); }
+.horaires { position: relative; width: min(440px, 100%); padding-bottom: 14px; border-radius: 20px; background: #fff; box-shadow: 0 12px 0 rgba(6, 34, 42, .3); transform-origin: 50% -44px; transform: rotate(0deg); will-change: transform; }
 .horaires::before { content: ''; position: absolute; left: 50%; top: -50px; width: 12px; height: 64px; margin-left: -6px; border-radius: 6px; background: var(--encre); z-index: -1; }
 .ho-tete { padding: 14px 10px 16px; border-radius: 20px 20px 0 0; background: var(--a); color: var(--a-t); text-align: center; font: 400 clamp(22px, 2vw, 30px)/1 var(--t); text-transform: uppercase; letter-spacing: .1em; }
 .ho-lignes { padding: 8px 22px 2px; }
@@ -508,6 +507,9 @@ html.js .pages h2.vu, html.js .pages .gros.vu { opacity: 1; translate: 0 0; tran
   .frais { padding: 40px 0 110px; }
   .venir { padding: 50px 0 60px; }
 }
+
+/* ---------- Hors de l'écran : les animations sans fin attendent (classe posée par la vigie de page.js, retirée au retour) ---------- */
+.hors .lt b, .hors .piste, .hors .piste i, .hors h2 i, .hors .f-tete span, .hors .reflet, .hors .f-lueur, .hors .horloge i, .hors .astre, .hors .caisson-mini { animation-play-state: paused !important; }
 
 /* ---------- Mode calme, seulement sur demande (?calme=1) ---------- */
 html.calme *, html.calme *::before, html.calme *::after { animation-duration: .001s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; transition-delay: 0s !important; }

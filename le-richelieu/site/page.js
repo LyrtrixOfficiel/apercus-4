@@ -28,8 +28,10 @@
     jusqu = Math.max(jusqu, performance.now() + (ms || 900));
     if (!tourne) { tourne = true; dernier = performance.now(); requestAnimationFrame(boucle); }
   }
+  var aDefiler = false, defile = function () {};
   function boucle(t) {
     var dt = Math.min(.05, (t - dernier) / 1000), vivant = false; dernier = t;
+    if (aDefiler) defile(); // une seule fois par image, avant toute écriture
     for (var i = 0; i < pas.length; i++) if (pas[i](dt, t)) vivant = true;
     if (vivant || t < jusqu) requestAnimationFrame(boucle); else tourne = false;
   }
@@ -41,6 +43,8 @@
   dev.innerHTML = dev.textContent.trim().split(/,\s*/).map(function (m, i, t) { return '<span style="--i:' + i + '">' + m + (i < t.length - 1 ? ',' : '') + '</span>'; }).join(' ');
   function pret() {
     ajusterNom(); H.classList.add('pret');
+    geoSale = true; demander(); // les polices sont là : les positions gardées en mémoire sont remesurées
+    cvCoupe(700);
   }
   function ajusterNom() { // le nom tient toujours sur sa ligne
     var t = $('.nom'); t.style.fontSize = '';
@@ -48,24 +52,29 @@
     $$('span', nomR).forEach(function (l) { w += l.offsetWidth; });
     if (w > nomR.clientWidth) t.style.fontSize = Math.floor(f * nomR.clientWidth / w * .99) + 'px';
   }
+  // Toutes les polices sont demandées tout de suite, même celles des rubriques encore loin de l'écran (elles ne sont plus calculées d'avance).
+  if (document.fonts && document.fonts.load) ['400 1em Rozha', 'italic 400 1em Fell', '500 1em Figtree', '400 1em Plume'].forEach(function (f) { try { document.fonts.load(f); } catch (e) {} });
   var attente = new Promise(function (ok) { setTimeout(ok, 1400); });
   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, attente]) : attente).then(function () { setTimeout(pret, 120); });
 
   var cadre = $('#cadre'), card = $('#cardinal'), pup = $('#pupilles'), cartelT = $('#cartel-t');
-  var oeil = { x: 0, y: 0, cx: 0, cy: .2 }, souris = 0;
+  var oeil = { x: 0, y: 0, cx: 0, cy: .2 }, souris = 0, pupT = '';
+  /* Fluidité : toutes les positions sont mesurées une fois (chargement, polices, redimensionnement, changement de hauteur)
+     et gardées ici. Ni le défilement ni la souris ne relisent la mise en page. */
+  var geo = { W: innerWidth, Hh: innerHeight, max: 0, cadre: { l: 0, t: 0, w: 1, h: 1 }, local: { t: 0, h: 0 }, arche: { t: 0, h: 0 } }, geoSale = true, sy = 0;
   function viser(x, y) {
-    var r = cadre.getBoundingClientRect(), mx = r.left + r.width * .52, my = r.top + r.height * .31;
-    oeil.cx = borne((x - mx) / (innerWidth * .3), -1, 1); oeil.cy = borne((y - my) / (innerHeight * .4), -1, 1);
+    var k = geo.cadre, mx = k.l + k.w * .52, my = k.t - sy + k.h * .31;
+    oeil.cx = borne((x - mx) / (geo.W * .3), -1, 1); oeil.cy = borne((y - my) / (geo.Hh * .4), -1, 1);
     reveil();
   }
   addEventListener('pointermove', function (e) {
     viser(e.clientX, e.clientY);
     if (e.pointerType === 'mouse') {
       souris = performance.now();
-      var r = cadre.getBoundingClientRect();
-      if (r.bottom > 0) {
-        cadre.style.setProperty('--ry', (borne((e.clientX - (r.left + r.width / 2)) / innerWidth, -1, 1) * 16).toFixed(2) + 'deg');
-        cadre.style.setProperty('--rx', (borne((e.clientY - (r.top + r.height / 2)) / innerHeight, -1, 1) * -12).toFixed(2) + 'deg');
+      var k = geo.cadre, haut = k.t - sy;
+      if (haut + k.h > 0) {
+        cadre.style.transform = 'rotateX(' + (borne((e.clientY - (haut + k.h / 2)) / geo.Hh, -1, 1) * -12).toFixed(2) + 'deg) rotateY(' +
+          (borne((e.clientX - (k.l + k.w / 2)) / geo.W, -1, 1) * 16).toFixed(2) + 'deg)';
       }
     }
   }, { passive: true });
@@ -73,7 +82,8 @@
   pas.push(function () {
     var dx = oeil.cx - oeil.x, dy = oeil.cy - oeil.y;
     oeil.x += dx * .16; oeil.y += dy * .16;
-    pup.setAttribute('transform', 'translate(' + (oeil.x * 4.8).toFixed(2) + ' ' + (oeil.y * 3.2).toFixed(2) + ')');
+    var t = 'translate(' + (oeil.x * 4.8).toFixed(2) + ' ' + (oeil.y * 3.2).toFixed(2) + ')';
+    if (t !== pupT) { pupT = t; pup.setAttribute('transform', t); } // on n'écrit que si le regard a bougé
     return Math.abs(dx) + Math.abs(dy) > .004;
   });
 
@@ -114,16 +124,16 @@
   $$('.servi').forEach(function (b) { b.addEventListener('click', function () { prendre(b.getAttribute('data-k')); }); });
 
   /* 2. La plume écrit la devise */
-  var plume = $('#plume'), mots = $('#plume-mots'), ecrit = -1;
-  function ecrire() { ecrit = 0; reveil(3200); }
+  var plume = $('#plume'), mots = $('#plume-mots'), ecrit = -1, plumeW = 0, plumeY = 0;
+  function ecrire() { plumeW = mots.offsetWidth; plumeY = mots.offsetTop + mots.offsetHeight * .7; ecrit = 0; reveil(3200); } // mesuré une fois, pas à chaque image
   plume.addEventListener('click', ecrire);
   pas.push(function (dt) {
     if (ecrit < 0 || ecrit >= 1) return false;
     ecrit = Math.min(1, ecrit + dt / (CALME ? .05 : 2.7));
-    var p = ecrit, w = mots.offsetWidth, fin = p >= 1;
+    var p = ecrit, w = plumeW, fin = p >= 1;
     plume.style.setProperty('--p', p.toFixed(4));
     plume.style.setProperty('--px', (p * w).toFixed(1));
-    plume.style.setProperty('--py', (mots.offsetTop + mots.offsetHeight * .7 + (fin ? 0 : Math.sin(p * 64) * 5)).toFixed(1));
+    plume.style.setProperty('--py', (plumeY + (fin ? 0 : Math.sin(p * 64) * 5)).toFixed(1));
     plume.style.setProperty('--pr', (fin ? 14 : Math.sin(p * 47) * 9).toFixed(1));
     plume.style.setProperty('--po', 1);
     return !fin;
@@ -146,13 +156,15 @@
     var p = pend[[].indexOf.call(corde.children, el)], r = el.getBoundingClientRect();
     if (p) pousser(p, (e.clientX < r.left + r.width / 2 ? 1 : -1) * 150);
   }, { passive: true });
+  var pendVus = true; // les étiquettes ne se balancent que si leur rubrique est à l'écran (ou tout près)
   pas.push(function (dt) {
     var vivant = false;
     for (var i = 0; i < pend.length; i++) {
       var p = pend[i];
+      if (!pendVus) { if (p.a || p.v) { p.a = 0; p.v = 0; p.el.style.transform = ''; } continue; }
       p.v += (-p.k * p.a - 1.5 * p.v) * dt; p.a = borne(p.a + p.v * dt, -13, 13); if (Math.abs(p.a) >= 13) p.v *= -.4;
-      if (Math.abs(p.a) > .04 || Math.abs(p.v) > .4) { vivant = true; p.el.style.setProperty('--a', p.a.toFixed(2)); }
-      else if (p.a) { p.a = 0; p.el.style.setProperty('--a', 0); }
+      if (Math.abs(p.a) > .04 || Math.abs(p.v) > .4) { vivant = true; p.el.style.transform = 'rotate(' + p.a.toFixed(2) + 'deg)'; }
+      else if (p.a) { p.a = 0; p.el.style.transform = ''; }
     }
     return vivant;
   });
@@ -279,15 +291,17 @@
   cachet.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   cachet.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); tenir(); } });
   cachet.addEventListener('keyup', function (e) { if (e.key === 'Enter' || e.key === ' ') lacher(); });
+  var cireT = '';
   pas.push(function (dt) {
     if (fait) return false;
     if (tenu) { cire = Math.min(1, cire + dt / (CALME ? .1 : 1.15)); if (cire >= 1) { fait = true; tenu = false; cachet.classList.remove('appuie'); pli.classList.add('cachete'); } }
     else if (cire > 0) cire = Math.max(0, cire - dt * 2);
-    cachet.style.setProperty('--c', cire.toFixed(3));
+    var c = cire.toFixed(3);
+    if (c !== cireT) { cireT = c; cachet.style.setProperty('--c', c); } // rien n'est écrit tant que la cire ne bouge pas
     return tenu || (cire > 0 && cire < 1);
   });
   $('#autre-mot').addEventListener('click', function () {
-    fait = false; cire = 0; cachet.style.setProperty('--c', 0); pli.classList.remove('cachete'); $('#m-nom').value = ''; $('#m-mot').value = '';
+    fait = false; cire = 0; cireT = ''; cachet.style.setProperty('--c', 0); pli.classList.remove('cachete'); $('#m-nom').value = ''; $('#m-mot').value = '';
   });
 
   /* Menu du téléphone */
@@ -303,51 +317,80 @@
     frises = $$('.frise').map(function (f) {
       var t = innerWidth < 760 ? 46 : 64, nb = Math.ceil(innerWidth / t); if (nb % 2) nb++;
       var rangs = +(f.getAttribute('data-rangs') || 1), s = '';
-      f.style.setProperty('--n', nb); f.style.setProperty('--rangs', rangs);
+      f.style.setProperty('--n', nb); f.style.setProperty('--rangs', rangs); f.classList.remove('pres');
       for (var i = 0; i < nb * rangs; i++) s += '<b></b>';
       f.innerHTML = s;
-      return { el: f, nb: nb, c: $$('b', f).map(function (b, i) { var x = i % nb, y = Math.floor(i / nb); return { el: b, x: x, base: cible.rosaces(x, y), k: -1 }; }) };
+      return { el: f, nb: nb, t: 0, h: 0, pres: false, c: $$('b', f).map(function (b, i) { var x = i % nb, y = Math.floor(i / nb); return { el: b, x: x, base: cible.rosaces(x, y), k: -1 }; }) };
     });
+    geoSale = true;
   }
-  function tournerFrises() {
-    var Hh = innerHeight;
-    frises.forEach(function (f) {
-      var r = f.el.getBoundingClientRect(); if (r.bottom < -40 || r.top > Hh + 40) return;
-      var p = 1 - (r.top + r.height / 2) / Hh;
-      f.c.forEach(function (c) {
-        var k = CALME ? 0 : Math.max(0, Math.floor(p * 5.5 - (c.x / f.nb) * 1.6));
+  function tournerFrises(y) {
+    var Hh = geo.Hh;
+    for (var i = 0; i < frises.length; i++) {
+      var f = frises[i], haut = f.t - y;
+      // les carreaux ne sont des calques que lorsque leur frise approche de l'écran
+      var pres = haut + f.h > -260 && haut < Hh + 260;
+      if (pres !== f.pres) { f.pres = pres; f.el.classList.toggle('pres', pres); }
+      if (haut + f.h < -40 || haut > Hh + 40) continue;
+      var p = 1 - (haut + f.h / 2) / Hh;
+      for (var j = 0; j < f.c.length; j++) {
+        var c = f.c[j], k = CALME ? 0 : Math.max(0, Math.floor(p * 5.5 - (c.x / f.nb) * 1.6));
         if (k !== c.k) { c.k = k; c.el.style.transform = 'rotate(' + (c.base + k) * 90 + 'deg)'; }
-      });
-    });
+      }
+    }
   }
 
   /* Défilement : ruban, sceau, parallaxes, regard */
-  var ruban = $('#ruban'), sceau = { el: $('#sceau'), a: 0, v: 0, x: 0 }, fondMot = $('#fond-mot'), local = $('#local'), arche = $('#arche'), photo = $('#arche img');
-  var sy = scrollY;
-  function defile() {
-    var y = scrollY, max = H.scrollHeight - innerHeight, p = max > 0 ? borne(y / max, 0, 1) : 0, d = y - sy; sy = y;
-    ruban.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-    sceau.x = borne(p * innerWidth, innerWidth < 860 ? 18 : 28, innerWidth - (innerWidth < 860 ? 18 : 28));
+  var ruban = $('#ruban'), sceau = { el: $('#sceau'), a: 0, v: 0, x: 0, t: '' }, fondMot = $('#fond-mot'), local = $('#local'), arche = $('#arche'), photo = $('#arche img');
+  var rubanT = '', fondT = '', photoT = '';
+  sy = scrollY;
+  function mesurer() { // des lectures seulement, toutes ensemble
+    var y = scrollY, r;
+    geo.W = innerWidth; geo.Hh = innerHeight; geo.max = H.scrollHeight - geo.Hh;
+    for (var i = 0; i < frises.length; i++) { r = frises[i].el.getBoundingClientRect(); frises[i].t = r.top + y; frises[i].h = r.height; }
+    r = local.getBoundingClientRect(); geo.local.t = r.top + y; geo.local.h = r.height;
+    r = arche.getBoundingClientRect(); geo.arche.t = r.top + y; geo.arche.h = r.height;
+    r = cadre.getBoundingClientRect(); geo.cadre.l = r.left; geo.cadre.t = r.top + y; geo.cadre.w = r.width; geo.cadre.h = r.height;
+    geoSale = false;
+  }
+  defile = function () {
+    aDefiler = false;
+    if (geoSale) mesurer();
+    var y = scrollY, W = geo.W, Hh = geo.Hh, p = geo.max > 0 ? borne(y / geo.max, 0, 1) : 0, d = y - sy, t; sy = y;
+    // à partir d'ici, des écritures seulement
+    t = 'scaleX(' + p.toFixed(4) + ')'; if (t !== rubanT) { rubanT = t; ruban.style.transform = t; }
+    sceau.x = borne(p * W, W < 860 ? 18 : 28, W - (W < 860 ? 18 : 28));
+    var haut = geo.local.t - y, h = geo.local.h;
+    pendVus = haut + h > -120 && haut < Hh + 120;
     if (!CALME) {
       sceau.v -= borne(d, -60, 60) * 5;
-      for (var i = 0; i < pend.length; i++) pend[i].v += borne(d, -50, 50) * .9 * pend[i].s;
+      if (pendVus) for (var i = 0; i < pend.length; i++) pend[i].v += borne(d, -50, 50) * .9 * pend[i].s;
     }
-    var Hh = innerHeight, r = local.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < Hh) fondMot.style.setProperty('--x', (((r.top - Hh) / (r.height + Hh)) * innerWidth * .55 + innerWidth * .12).toFixed(1));
-    r = arche.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < Hh) photo.style.setProperty('--y', borne((r.top + r.height / 2 - Hh / 2) * -.11, -r.height * .11, r.height * .11).toFixed(1));
+    if (haut + h > 0 && haut < Hh) {
+      t = 'translate(' + (((haut - Hh) / (h + Hh)) * W * .55 + W * .12).toFixed(1) + 'px,-56%)';
+      if (t !== fondT) { fondT = t; fondMot.style.transform = t; }
+    }
+    haut = geo.arche.t - y; h = geo.arche.h;
+    if (haut + h > 0 && haut < Hh) {
+      t = 'translateY(' + borne((haut + h / 2 - Hh / 2) * -.11, -h * .11, h * .11).toFixed(1) + 'px)';
+      if (t !== photoT) { photoT = t; photo.style.transform = t; }
+    }
     if (performance.now() - souris > 1500 && y < Hh) { oeil.cy = borne(y / 260, .1, 1); oeil.cx *= .9; }
-    tournerFrises(); reveil();
-  }
+    tournerFrises(y);
+  };
+  function demander() { aDefiler = true; reveil(); } // le défilement ne fait que demander une image
   pas.push(function (dt) {
     var s = sceau;
     s.v += (-70 * s.a - 5 * s.v) * dt; s.a = borne(s.a + s.v * dt, -42, 42);
     var bouge = Math.abs(s.a) > .05 || Math.abs(s.v) > .5;
     if (!bouge) s.a = 0;
-    s.el.style.transform = 'translateX(' + s.x.toFixed(1) + 'px) rotate(' + s.a.toFixed(2) + 'deg)';
+    var t = 'translateX(' + s.x.toFixed(1) + 'px) rotate(' + s.a.toFixed(2) + 'deg)';
+    if (t !== s.t) { s.t = t; s.el.style.transform = t; }
     return bouge;
   });
-  addEventListener('scroll', defile, { passive: true });
+  addEventListener('scroll', demander, { passive: true });
+  // Si la hauteur de la page change (carte retournée, message du jeu, lettre cachetée), les positions sont remesurées à l'image suivante.
+  if (window.ResizeObserver) new ResizeObserver(function () { geoSale = true; demander(); }).observe(document.body);
 
   /* Entrées et rubrique en cours */
   var vu = new IntersectionObserver(function (es) {
@@ -374,10 +417,37 @@
   }, { rootMargin: '-45% 0px -50% 0px' });
   $$('main > section').forEach(function (s) { enCours.observe(s); });
 
+  /* Fluidité : une rubrique loin de l'écran n'est ni calculée ni peinte (content-visibility, classe cv sur html).
+     Pour que rien ne bouge quand elle revient, sa hauteur exacte est relevée tant qu'elle est affichée et gardée en réserve
+     (contain-intrinsic-block-size). Si la fenêtre change, on coupe, tout se remet en page, les hauteurs sont relevées, puis on réactive. */
+  var cvActif = false, cvT = 0, cvOk = !!(window.ResizeObserver && window.CSS && CSS.supports && CSS.supports('content-visibility', 'auto')), cvW = H.clientWidth, cvH = H.clientHeight;
+  function cvCoupe(ms) {
+    if (!cvOk) return;
+    if (cvActif) { cvActif = false; H.classList.remove('cv'); }
+    clearTimeout(cvT); cvT = setTimeout(function () { cvActif = true; H.classList.add('cv'); }, ms || 500);
+  }
+  if (cvOk) {
+    var cvRo = new ResizeObserver(function (es) {
+      var large = false;
+      for (var i = 0; i < es.length; i++) {
+        var e = es[i], b = e.contentBoxSize && e.contentBoxSize[0], h = b ? b.blockSize : e.contentRect.height, w = b ? b.inlineSize : e.contentRect.width, t = e.target;
+        if (cvActif && t.cvL != null && Math.abs(t.cvL - w) > .5) large = true; // la largeur a changé sans prévenir
+        t.cvL = w;
+        if (h > 0 && h !== t.cvHt) { t.cvHt = h; t.style.containIntrinsicBlockSize = h + 'px'; }
+      }
+      if (large) cvCoupe();
+    });
+    $$('main > section, .pied').forEach(function (r) { cvRo.observe(r); });
+    addEventListener('load', function () { cvCoupe(700); });
+  }
+
   var largeur = innerWidth, re = 0;
   addEventListener('resize', function () {
+    // la barre d'adresse du téléphone qui se replie ne compte pas : seule la taille de la page compte
+    if (cvOk && (H.clientWidth !== cvW || H.clientHeight !== cvH)) { cvW = H.clientWidth; cvH = H.clientHeight; cvCoupe(600); }
     clearTimeout(re);
-    re = setTimeout(function () { if (innerWidth !== largeur) { largeur = innerWidth; batirFrises(); batirSol(); ajusterNom(); } defile(); }, 180);
+    re = setTimeout(function () { if (innerWidth !== largeur) { largeur = innerWidth; batirFrises(); batirSol(); ajusterNom(); } geoSale = true; demander(); }, 180);
   });
+  addEventListener('load', function () { geoSale = true; demander(); });
   batirFrises(); defile();
 })();

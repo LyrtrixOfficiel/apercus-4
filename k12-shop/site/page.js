@@ -11,6 +11,17 @@
   function hasard(g) { return function () { g |= 0; g = g + 0x6D2B79F5 | 0; var t = Math.imul(g ^ g >>> 15, 1 | g); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
   var visible = function (e, m) { var r = e.getBoundingClientRect(); return r.bottom > -(m || 0) && r.top < innerHeight + (m || 0); };
 
+  /* ---------- Ce qui est à l'écran ----------
+     Une seule vigie pour toute la page. Rien n'est mesuré pendant le défilement : chaque bloc suivi porte e._la
+     (vrai tant qu'il est à l'écran) et la classe « hors » quand il n'y est pas (ses animations sans fin se mettent en pause). */
+  var vigie = new IntersectionObserver(function (es) {
+    es.forEach(function (x) { var e = x.target, la = x.isIntersecting; e._la = la; e.classList.toggle('hors', !la); if (la && e._reprend) e._reprend(); });
+  }, { rootMargin: '60px 0px' });
+  function suis(e, reprend) { e._la = true; e._reprend = reprend; vigie.observe(e); return e; }
+  $$('main > section').forEach(function (s) { suis(s); });
+  // La taille de la fenêtre, lue une fois par redimensionnement (la lire à chaque image force une mise en page sur téléphone)
+  var vw = innerWidth, vh = innerHeight;
+
   /* ---------- Le moteur ---------- */
   var abonnes = [], tourne = false, avant = 0;
   function tic(t) {
@@ -77,31 +88,33 @@
   });
   caisson.addEventListener('pointerleave', function () { cx = cy = 0; reveille(); });
   abonnes.push(function () {
-    if (calme) return false;
+    if (calme || (px === cx && py === cy)) return false; // rien à écrire tant que la souris n'a pas bougé (jamais au doigt)
     px += (cx - px) * .12; py += (cy - py) * .12;
+    if (Math.abs(cx - px) + Math.abs(cy - py) <= .002) { px = cx; py = cy; }
     k12.style.setProperty('--px', px.toFixed(3)); k12.style.setProperty('--py', py.toFixed(3));
-    return Math.abs(cx - px) + Math.abs(cy - py) > .002;
+    return px !== cx || py !== cy;
   });
 
   /* ---------- La porte : les lanières ---------- */
   var porte = $('#porte'), boite = $('#lanieres'), bandes = [], sourisX = -9999, sourisDans = false, vDefil = 0;
   function tendLanieres() {
-    var n = Math.round(innerWidth / (innerWidth < 700 ? 44 : 76)), al = hasard(12);
+    var n = Math.round(vw / (vw < 700 ? 44 : 76)), al = hasard(12);
     boite.textContent = ''; bandes = [];
-    for (var i = 0; i < n; i++) { var el = cree('i'); boite.appendChild(el); bandes.push({ el: el, a: 0, v: 0, g: al(), x: (i + .5) / n }); }
+    for (var i = 0; i < n; i++) { var el = cree('i'); boite.appendChild(el); bandes.push({ el: el, a: 0, v: 0, g: al(), x: (i + .5) / n, e: '' }); }
   }
   tendLanieres();
   porte.addEventListener('pointermove', function (e) { sourisX = e.clientX; sourisDans = true; reveille(); });
   porte.addEventListener('pointerleave', function () { sourisDans = false; });
+  suis(porte, reveille);
   abonnes.push(function (dt, t) {
-    if (calme || !visible(porte, 40)) return false;
-    var L = innerWidth * 1.06, x0 = -innerWidth * .03, remue = false;
+    if (calme || !porte._la) return false; // hors de l'écran : arrêt complet, la vigie relance au retour
+    var L = vw * 1.06, x0 = -vw * .03;
     for (var i = 0; i < bandes.length; i++) {
       var b = bandes[i], cible = borne(vDefil * -.011, -15, 15) * (.55 + b.g * .9) + Math.sin(t / 900 + b.g * 9) * 1.1;
       if (sourisDans) { var dx = x0 + b.x * L - sourisX, p = 1 - Math.abs(dx) / 150; if (p > 0) cible += (dx < 0 ? -1 : 1) * p * 30; }
       b.v += ((cible - b.a) * 70 - b.v * 7) * dt; b.a += b.v * dt;
-      b.el.style.transform = 'rotate(' + b.a.toFixed(2) + 'deg)';
-      if (Math.abs(b.v) > .05) remue = true;
+      var e = 'rotate(' + (Math.round(b.a * 20) / 20) + 'deg)'; // au vingtième de degré (moins d'un quart de pixel au bas d'une lanière) : on n'écrit que ce qui change
+      if (e !== b.e) { b.e = e; b.el.style.transform = e; }
     }
     return true; // tant que la porte est à l'écran, les lanières respirent
   });
@@ -114,6 +127,7 @@
   });
   var douze = $('.douze'), epicerie = $('#epicerie'), piste = $('#piste');
   for (var tourB = 0; tourB < 2; tourB++) (C.bandeau || []).forEach(function (m) { piste.appendChild(cree('span', '', m)); piste.appendChild(cree('i')); });
+  suis(piste.parentNode);
 
   /* ---------- 3. Il vous manque quoi ? ---------- */
   var mur = $('#mur'), champ = $('#q'), reponse = $('#reponse'), envies = $('#envies'), rayons = [], nPaquet = 0;
@@ -169,9 +183,11 @@
   $('#q-forme').addEventListener('submit', function (e) { e.preventDefault(); cherche(champ.value); champ.blur(); });
   var attente; champ.addEventListener('input', function () { clearTimeout(attente); attente = setTimeout(function () { if (champ.value.trim().length >= 3) cherche(champ.value, false); }, 450); });
   // Un paquet sursaute de temps en temps
+  suis(mur);
+  var tous = $$('.pq', mur);
   if (!calme) setInterval(function () {
-    if (D.hidden || !mur.classList.contains('pret') || !visible(mur)) return;
-    var tous = $$('.pq', mur), p = tous[Math.floor(Math.random() * tous.length)];
+    if (D.hidden || !mur._la || !mur.classList.contains('pret')) return;
+    var p = tous[Math.floor(Math.random() * tous.length)];
     if (p && !p.parentNode.classList.contains('allume')) { p.classList.add('hop'); setTimeout(function () { p.classList.remove('hop'); }, 650); }
   }, 1300);
 
@@ -277,24 +293,34 @@
     });
     nuit(avance, true);
   }
-  var derniers = '';
+  // Chaque écriture de la nuit est gardée en mémoire : on ne touche à la page que si la valeur a changé.
+  var derniers = '', soleil = $('.soleil', quartier), nVu = -1, solVu = '', allumeesVu = -1, inconnueVu = null;
   function nuit(p, force) {
     avance = borne(p, 0, 1);
-    quartier.style.setProperty('--n', borne(avance * 1.2, 0, 1).toFixed(3));
+    // Le soleil glisse à chaque image (son calque seul bouge). Le reste de la tombée du jour (ciel, façades, lueurs)
+    // se repeint par 250 petits pas au lieu d'une fois par image : à l'oeil, c'est le même fondu.
+    var nExact = borne(avance * 1.2, 0, 1), n = Math.round(nExact * 250) / 250, sol = 'translate3d(0,' + (nExact * 380).toFixed(1) + 'px,0)';
+    if (sol !== solVu) { solVu = sol; soleil.style.transform = sol; }
+    if (n !== nVu) { nVu = n; quartier.style.setProperty('--n', n); }
     var allumees = 0;
     fenetres.forEach(function (f) { var eteinte = f.main ? f.main === 'off' : avance >= f.t; if (!eteinte) allumees++; if (f.eteinte !== eteinte || force) { f.eteinte = eteinte; f.el.classList.toggle('off', eteinte); } });
-    compte.textContent = allumees; compteMot.textContent = allumees > 1 ? 'fenêtres encore allumées' : allumees === 1 ? 'fenêtre encore allumée' : 'fenêtre allumée : tout le quartier dort';
-    quartier.classList.toggle('dort-la', allumees === 0);
+    if (allumees !== allumeesVu) {
+      allumeesVu = allumees; compte.textContent = allumees; compteMot.textContent = allumees > 1 ? 'fenêtres encore allumées' : allumees === 1 ? 'fenêtre encore allumée' : 'fenêtre allumée : tout le quartier dort';
+      quartier.classList.toggle('dort-la', allumees === 0);
+    }
     var inconnue = avance > .93, min = Math.round(20 * 60 + avance * 330), h = Math.floor(min / 60) % 24, m = min % 60;
     var txt = inconnue ? '....' : (h < 10 ? '0' : '') + h + (m < 10 ? '0' : '') + m;
-    chiffres.forEach(function (c) { c.classList.toggle('pts', inconnue); });
-    horloge.classList.toggle('inconnue', inconnue);
+    if (inconnue !== inconnueVu) { inconnueVu = inconnue; chiffres.forEach(function (c) { c.classList.toggle('pts', inconnue); }); horloge.classList.toggle('inconnue', inconnue); }
     if (txt !== derniers) { for (var i = 0; i < 4; i++) if (txt[i] !== derniers[i]) { var c = chiffres[i]; c.textContent = inconnue ? '..' : txt[i]; if (!joue || i < 3) { c.classList.remove('change'); void c.offsetWidth; c.classList.add('change'); } } derniers = txt; }
-    if (+curseur.value !== Math.round(avance * 1000)) curseur.value = Math.round(avance * 1000);
+    // Quand l'horloge tourne seule, le curseur avance par 250 crans (un pixel environ) ; sous le doigt, il garde ses 1000 crans.
+    var cran = joue ? Math.round(avance * 250) * 4 : Math.round(avance * 1000);
+    if (+curseur.value !== cran) curseur.value = cran;
   }
   function jouer(oui) { joue = oui; dejaJoue = true; nJouer.textContent = oui ? 'Arrêter l’horloge' : avance >= 1 ? 'Rejouer la nuit' : 'Laisser passer la nuit'; if (oui) { if (avance >= 1) rallume(); reveille(); } }
   function rallume() { fenetres.forEach(function (f) { f.main = ''; }); nuit(0, true); }
-  abonnes.push(function (dt) { if (!joue) return false; nuit(avance + dt / 17); if (avance >= 1) { jouer(false); return false; } return true; });
+  // La nuit ne passe que sous les yeux : hors de l'écran, l'horloge attend, et repart là où elle en était.
+  suis(quartier, function () { if (joue) reveille(); });
+  abonnes.push(function (dt) { if (!joue || !quartier._la) return false; nuit(avance + dt / 17); if (avance >= 1) { jouer(false); return false; } return true; });
   curseur.addEventListener('input', function () { if (joue) jouer(false); dejaJoue = true; nuit(curseur.value / 1000); nJouer.textContent = avance >= 1 ? 'Rejouer la nuit' : 'Laisser passer la nuit'; });
   nJouer.addEventListener('click', function () { jouer(!joue); });
   $('#n-rallumer').addEventListener('click', function () { jouer(false); rallume(); nJouer.textContent = 'Laisser passer la nuit'; });
@@ -320,10 +346,12 @@
   plaque.parentNode.addEventListener('vu', function () { pousse(70); });
   plaque.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') pousse(e.movementX < 0 ? -26 : 26); });
   $('.ho-tete', plaque).addEventListener('click', function () { pousse(ang > 0 ? -60 : 60); });
+  var accrochePlaque = suis(plaque.parentNode, function () { if (vAng || ang) reveille(); });
   abonnes.push(function (dt) {
-    if (calme || (Math.abs(ang) < .03 && Math.abs(vAng) < .08)) { if (ang) { ang = 0; plaque.style.setProperty('--ang', '0deg'); } return false; }
-    vAng += (-ang * 34 - vAng * 1.25) * dt; var lim = innerWidth < 620 ? 3.5 : 14; ang = borne(ang + vAng * dt, -lim, lim);
-    plaque.style.setProperty('--ang', ang.toFixed(2) + 'deg'); return true;
+    if (calme || (Math.abs(ang) < .03 && Math.abs(vAng) < .08)) { if (ang || vAng) { ang = vAng = 0; plaque.style.transform = 'rotate(0deg)'; } return false; }
+    if (!accrochePlaque._la) return false; // hors de l'écran, la plaque garde son élan et finit de se balancer au retour
+    vAng += (-ang * 34 - vAng * 1.25) * dt; var lim = vw < 620 ? 3.5 : 14; ang = borne(ang + vAng * dt, -lim, lim);
+    plaque.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)'; return true; // le calque de la plaque tourne seul : rien n'est recalculé à l'intérieur
   });
   var copier = $('#copier');
   copier.addEventListener('click', function () {
@@ -339,21 +367,42 @@
   });
 
   /* ---------- Défilement : tube, enseigne, lanières, 12, plaque ---------- */
-  var yAvant = scrollY, tAvant = performance.now();
+  // Les positions sont mesurées une seule fois (chargement, polices, redimensionnement, page qui change de hauteur) et gardées
+  // en mémoire. Pendant le défilement : une lecture (scrollY), puis seulement des écritures de transform, aucune mesure.
+  var eGauche = $('.e-gauche', caisson), eDroite = $('.e-droite', caisson), geo = { max: 0, milieu: 0 };
+  var yAvant = scrollY, tAvant = performance.now(), scVu = -1, avVu = '', douzeVu = '';
+  function mesure() {
+    var y = scrollY, r = epicerie.getBoundingClientRect();
+    vw = innerWidth; vh = innerHeight;
+    geo.max = D.scrollingElement.scrollHeight - vh; geo.milieu = r.top + y + r.height / 2;
+  }
   function defile() {
     var y = scrollY, t = performance.now(), dt = Math.max(8, t - tAvant), v = (y - yAvant) / dt * 1000; yAvant = y; tAvant = t;
     vDefil = vDefil * .6 + v * .4;
-    var max = D.scrollingElement.scrollHeight - innerHeight; tube.style.setProperty('--av', max > 0 ? (y / max).toFixed(4) : 0);
+    var av = 'scaleX(' + (geo.max > 0 ? borne(y / geo.max, 0, 1).toFixed(4) : 0) + ')';
+    if (av !== avVu) { avVu = av; tube.style.transform = av; }
     if (!calme) {
-      if (y < innerHeight * 1.2) caisson.style.setProperty('--sc', borne(y / innerHeight, 0, 1).toFixed(3));
-      if (visible(epicerie)) { var r = epicerie.getBoundingClientRect(), p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; douze.style.transform = 'translate3d(0,calc(-50% + ' + (p * -110).toFixed(1) + 'px),0) rotate(' + (p * 7).toFixed(2) + 'deg)'; }
-      if (visible(plaque)) vAng += borne(v * .012, -9, 9);
+      var sc = borne(y / vh, 0, 1);
+      if (sc !== scVu) { scVu = sc; eGauche.style.transform = 'translate3d(0,' + (sc * -70).toFixed(1) + 'px,0)'; eDroite.style.transform = 'translate3d(0,' + (sc * -24).toFixed(1) + 'px,0)'; }
+      if (epicerie._la) { var p = (geo.milieu - y - vh / 2) / vh, dz = 'translate3d(0,calc(-50% + ' + (p * -110).toFixed(1) + 'px),0) rotate(' + (p * 7).toFixed(2) + 'deg)'; if (dz !== douzeVu) { douzeVu = dz; douze.style.transform = dz; } }
+      if (accrochePlaque._la) vAng += borne(v * .012, -9, 9);
       reveille();
     }
   }
   abonnes.push(function () { vDefil *= .86; return Math.abs(vDefil) > 4; });
   addEventListener('scroll', defile, { passive: true });
-  var redim; addEventListener('resize', function () { clearTimeout(redim); redim = setTimeout(function () { tendLanieres(); tailleRails(); batis(); defile(); }, 160); });
-  defile(); reveille();
+  var redim, vwAvant = vw;
+  addEventListener('resize', function () {
+    clearTimeout(redim); redim = setTimeout(function () {
+      mesure();
+      // Sur téléphone, la barre d'adresse qui se replie change la hauteur seulement : on ne retend pas le rideau pour ça.
+      if (vw !== vwAvant) { vwAvant = vw; tendLanieres(); tailleRails(); batis(); mesure(); }
+      defile();
+    }, 160);
+  });
+  // La page change de hauteur (polices arrivées, réponse sur deux lignes) : on remesure, juste après la mise en page, sans rien forcer.
+  if (window.ResizeObserver) new ResizeObserver(mesure).observe(D.body);
+  if (D.fonts && D.fonts.ready) D.fonts.ready.then(function () { mesure(); defile(); });
+  mesure(); defile(); reveille();
   window.__k12 = true;
 })();

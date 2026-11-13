@@ -11,7 +11,8 @@ window.CONTENU = {
   facebook: 'https://www.facebook.com/caferichelieu',
   carte: 'https://www.google.com/maps/search/?api=1&query=Caf%C3%A9+Le+Richelieu+8+avenue+Charles+de+Gaulle+19000+Tulle',
 
-  // Les trois choses servies (BODACC du 29/10/2026 : café, bar licence IV, petite restauration ; Facebook : bières artisanales, locales et bios).
+  // Les trois choses servies (BODACC du 29/10/2026 : café, bar licence IV, petite restauration).
+  // « Bières artisanales, locales et bios » décrit très probablement le bar de l'équipe précédente (2021 à 2026) : présenté comme la maison jusqu'ici, à confirmer.
   // Les lignes de la carte sont volontairement vides : ni boisson, ni plat, ni prix inventé.
   objets: {
     cafe: {
@@ -21,7 +22,7 @@ window.CONTENU = {
     },
     biere: {
       pilule: 'Une bière artisanale', cartel: 'Son Éminence prend une bière artisanale.',
-      titre: 'Les bières artisanales', sous: 'Locales et bios.',
+      titre: 'Les bières artisanales', sous: 'Locales et bios jusqu’ici. Vous les gardez ?',
       note: 'Vos bières du moment et leurs prix : à compléter avec vous.',
     },
     assiette: {
