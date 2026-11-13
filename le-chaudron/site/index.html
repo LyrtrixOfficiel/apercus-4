@@ -144,7 +144,9 @@
         <a class="volute v4" href="#epicerie"><b>Épicerie fine</b><span>le garde-manger</span></a>
       </div>
       <button class="pot" id="pot" type="button" aria-pressed="false" aria-label="Soulever ou reposer le couvercle du chaudron">
-        <svg viewBox="0 0 560 650" aria-hidden="true">
+        <!-- trois calques superposés (même viewBox) : le feu, le chaudron qui pend (immobile dedans), ce qui bouge dans le chaudron.
+             Le balancement tourne le calque entier par le compositeur, sans redessiner le cuivre. -->
+        <svg class="pot-feu" viewBox="0 0 560 650" aria-hidden="true">
           <!-- le feu, qui ne bouge pas avec le chaudron -->
           <g class="buches">
             <rect x="150" y="608" width="270" height="30" rx="15" fill="#4a2a17" transform="rotate(-5 285 623)"/>
@@ -159,8 +161,11 @@
             <g transform="translate(276 634) scale(.7 .56)"><use class="fl f6" href="#f-flamme" fill="#f9c13c"/></g>
             <g transform="translate(330 632) scale(.55 .5)"><use class="fl f7" href="#f-flamme" fill="#f9c13c"/></g>
           </g>
-          <!-- tout ce qui pend à la crémaillère -->
-          <g id="pendule">
+        </svg>
+        <!-- tout ce qui pend à la crémaillère -->
+        <span class="pend" id="pendule">
+        <svg class="pot-corps" viewBox="0 0 560 650" aria-hidden="true">
+          <g>
             <rect x="271" y="-30" width="18" height="118" rx="5" fill="#1b1d1f"/>
             <path d="M289 6 l16 9 l-16 9 Z M289 34 l16 9 l-16 9 Z M289 62 l16 9 l-16 9 Z" fill="#1b1d1f"/>
             <path d="M280 84 v26" stroke="#1b1d1f" stroke-width="10" stroke-linecap="round"/>
@@ -173,6 +178,12 @@
             <ellipse cx="280" cy="264" rx="176" ry="23" fill="#5b2109"/>
             <g class="bouillon">
               <ellipse cx="280" cy="268" rx="168" ry="18" fill="url(#gBouillon)"/>
+            </g>
+          </g>
+        </svg>
+        <svg class="pot-vif" viewBox="0 0 560 650" aria-hidden="true">
+          <g>
+            <g class="bouillon">
               <path class="remous r1" d="M180 268 C210 258 250 260 280 268 C310 276 350 276 380 266" stroke="#fbe2a2" stroke-width="5" stroke-linecap="round" fill="none"/>
               <path class="remous r2" d="M210 274 C240 268 262 272 290 276" stroke="#a85c12" stroke-width="5" stroke-linecap="round" fill="none"/>
             </g>
@@ -195,6 +206,7 @@
             </g>
           </g>
         </svg>
+        </span>
       </button>
       <p class="geste" id="geste">Touchez le chaudron&nbsp;: le couvercle se soulève.</p>
     </div>
@@ -302,7 +314,7 @@
         <div class="lueur"></div>
         <div class="resist"><i></i><i></i><i></i><i></i></div>
         <div class="roue" id="roue" role="img" aria-label="La rôtissoire, à faire tourner">
-          <i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i>
+          <span class="rayons" id="rayons"><i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i><i class="bras"></i></span>
           <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
           <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>
           <div class="bal"><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg><svg viewBox="0 0 84 60"><use href="#s-poulet"/></svg></div>

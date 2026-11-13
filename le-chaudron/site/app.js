@@ -31,8 +31,10 @@
 
   // ---------- moteur : une seule boucle, qui s'arrête quand plus rien ne bouge ----------
   var acteurs = [], tourne = false, der = 0;
+  var Y = scrollY, VH = innerHeight; // lus une fois en tête d'image, avant toute écriture (aucune mise en page forcée ensuite)
   function reveille() { if (!tourne) { tourne = true; der = performance.now(); requestAnimationFrame(boucle); } }
   function boucle(t) {
+    Y = scrollY; VH = innerHeight;
     var dt = Math.min(.05, (t - der) / 1000); der = t; var vivant = false;
     for (var i = 0; i < acteurs.length; i++) if (acteurs[i](dt, t / 1000)) vivant = true;
     if (vivant) requestAnimationFrame(boucle); else tourne = false;
@@ -75,7 +77,7 @@
 
   // ---------- 1. le chaudron de l'accueil ----------
   var scene = $('#scene'), pot = $('#pot'), pend = $('#pendule');
-  var pPot = pendule(pend, function (a) { pend.setAttribute('transform', 'rotate(' + a.toFixed(2) + ' 280 -30)'); }, { k: 22, d: 1.5, max: 7 });
+  var pPot = pendule(pend, function (a) { pend.style.transform = 'rotate(' + a.toFixed(2) + 'deg)'; }, { k: 22, d: 1.5, max: 7 });
   function ouvrir(o) { scene.classList.toggle('ouvert', o); pot.setAttribute('aria-pressed', o); pousse(pPot, o ? 26 : -18); }
   pot.addEventListener('click', function () { scene.classList.add('joue'); ouvrir(!scene.classList.contains('ouvert')); });
   scene.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') pousse(pPot, borne(e.movementX || 0, -20, 20) * .22); });
@@ -116,13 +118,15 @@
   fourneau._vu = function () { setTimeout(function () { if (!fourneau._joue) leve(feux[0], true); }, calme ? 0 : 1300); setTimeout(function () { if (!fourneau._joue) leve(feux[2], true); }, calme ? 0 : 1750); };
 
   // ---------- 3. la rôtissoire ----------
-  var roti = $('#rotissoire'), roue = $('#roue'), bras = $$('.bras', roue), bals = $$('.bal', roue), maniv = $('#manivelle');
+  var roti = $('#rotissoire'), roue = $('#roue'), rayons = $('#rayons'), bras = $$('.bras', roue), bals = $$('.bal', roue), maniv = $('#manivelle');
   var jauge = $('#jauge'), motC = $('#cuisson-mot'), btnF = $('#fournee');
-  var R = { a: 0, v: 14, tenu: false, cuit: 0, pret: false, rayon: 100, etat: -1 }, NB = bals.length, PAS = 360 / NB;
+  var R = { a: 0, v: 14, tenu: false, cuit: 0, pret: false, rayon: 100, etat: -1, q: -1 }, NB = bals.length, PAS = 360 / NB;
   function mesureRoue() { R.rayon = roue.clientWidth * .36; }
   var MOTS = ['Ça tourne, ça commence à dorer.', 'Ça dore, encore un tour.', 'Presque : encore un petit tour.', 'Doré à point : c’est prêt.'];
+  // les cinq bras tournent ensemble : on tourne leur support, une seule écriture par image
+  for (var ib = 0; ib < NB; ib++) bras[ib].style.transform = 'rotate(' + (ib * PAS - 90) + 'deg)';
   function poseRoue(t) {
-    for (var i = 0; i < NB; i++) bras[i].style.transform = 'rotate(' + (R.a + i * PAS - 90).toFixed(2) + 'deg)';
+    rayons.style.transform = 'rotate(' + R.a.toFixed(2) + 'deg)';
     var incl = borne(-R.v * .05, -22, 22);
     for (var j = 0; j < NB; j++) {
       var g = (R.a + j * PAS) * Math.PI / 180;
@@ -133,7 +137,12 @@
   function cuire(d) {
     if (R.pret) return;
     R.cuit = Math.min(1, R.cuit + Math.abs(d) / 1500);
-    roti.style.setProperty('--dore', R.cuit.toFixed(3)); jauge.style.setProperty('--c', R.cuit.toFixed(3));
+    // la couleur des volailles ne change que par paliers de 1/200 : on ne repeint les balancelles que quand l'œil peut le voir
+    var q = Math.round(R.cuit * 200);
+    if (q !== R.q) {
+      if (Math.round(q / 4) !== Math.round(R.q / 4)) roti.style.setProperty('--dore', (Math.round(q / 4) / 50).toFixed(3));
+      R.q = q; jauge.style.transform = 'scaleX(' + (q / 200).toFixed(3) + ')';
+    }
     var e = R.cuit >= 1 ? 3 : R.cuit > .66 ? 2 : R.cuit > .3 ? 1 : 0;
     if (e !== R.etat) { R.etat = e; motC.textContent = MOTS[e]; }
     if (R.cuit >= 1) { R.pret = true; roti.classList.add('pret'); btnF.hidden = false; }
@@ -227,7 +236,7 @@
   };
 
   // ---------- 5. le garde-manger ----------
-  var garde = $('#garde'), armoire = $('.armoire', garde), etiq = $('#etiquette'), etNom = $('#et-nom');
+  var garde = $('#garde'), armoire = $('.armoire', garde), portes = [$('.pg', garde), $('.pd', garde)], etiq = $('#etiquette'), etNom = $('#et-nom');
   var RANGS = ['étagère du haut', 'étagère du milieu', 'étagère du bas'], ouv = { v: 0, auto: false };
   function choisir(a) {
     $$('.art.choisi', garde).forEach(function (x) { x.classList.remove('choisi'); });
@@ -241,7 +250,7 @@
   // ---------- 6. le traiteur : la louche sur la tringle ----------
   var curseur = $('#curseur'), poignee = $('#poignee'), nbEl = $('#nb'), occ = $('#occasion'), marmite = $('#marmite'), pileA = $('#pile-ass'), lienDevis = $('#devis'), banquet = $('#banquet');
   var T = { x: 0, n: 0 };
-  var pLouche = pendule(poignee, function (a) { poignee.style.setProperty('--bal', a.toFixed(2)); }, { k: 40, d: 3, max: 24 });
+  var pLouche = pendule(poignee, function (a) { poignee.style.rotate = a.toFixed(2) + 'deg'; }, { k: 40, d: 3, max: 24 });
   function convives(x) { return Math.round(2 + 198 * Math.pow(x, 2.2)); }
   function regle(x, sansBalancer) {
     x = borne(x, 0, 1); var n = convives(x);
@@ -308,20 +317,31 @@
   });
 
   // ---------- défilement : tringle, eau, portes, balancements ----------
-  var eaux = $$('.eau').map(function (e) { return { el: e, sec: e.parentElement }; });
-  var photos = $$('.photo').map(function (f, i) { return { el: f, base: parseFloat(getComputedStyle(f).getPropertyValue('--r')) || 3, k: i % 2 ? 1 : -1 }; });
-  var yPrec = scrollY, sale = true, tetePrec = 0;
-  var paysage = $('.paysage', bassin);
-  function mesure() { mesureRoue(); M.etroit = innerWidth <= 900; paysage.setAttribute('preserveAspectRatio', M.etroit ? 'xMinYMax slice' : 'xMidYMax slice'); sale = true; reveille(); }
+  // Les positions dans la page sont mesurées une fois (chargement, polices, redimensionnement, changement de hauteur du corps)
+  // et gardées en mémoire : à chaque image on ne lit plus que scrollY, puis on écrit.
+  var eaux = $$('.eau').map(function (e) { var i = $$('i', e); return { el: e, sec: e.parentElement, a: i[0], b: i[1], dx: '' }; });
+  var photos = $$('.photo').map(function (f, i) { return { el: f, base: 3, k: i % 2 ? 1 : -1, haut: 0, h: 0, r: '' }; });
+  var yPrec = scrollY, sale = true, tetePrec = 0, MAX = 1, pPrec = -1, posArm = 0, posBas = 0, hBas = 1;
+  var paysage = $('.paysage', bassin), logoPot = $('.logo-pot', tete);
+  function hautDoc(el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; } // position de mise en page, sans les transformations
+  function mesure() {
+    mesureRoue(); M.etroit = innerWidth <= 900; paysage.setAttribute('preserveAspectRatio', M.etroit ? 'xMinYMax slice' : 'xMidYMax slice');
+    MAX = document.scrollingElement.scrollHeight - innerHeight;
+    posArm = hautDoc(armoire); posBas = hautDoc(bassin); hBas = bassin.offsetHeight || 1;
+    photos.forEach(function (p) { p.base = parseFloat(getComputedStyle(p.el).getPropertyValue('--r')) || 3; p.haut = hautDoc(p.el); p.h = p.el.offsetHeight; });
+    sale = true; reveille();
+  }
   addEventListener('scroll', function () { sale = true; reveille(); }, { passive: true });
   addEventListener('resize', mesure);
+  if (window.ResizeObserver) new ResizeObserver(function () { mesure(); }).observe(document.body);
+  var REMUE = [{ transform: 'none', easing: 'cubic-bezier(.2,.8,.2,1)' }, { transform: 'rotate(-14deg)', offset: .3, easing: 'cubic-bezier(.2,.8,.2,1)' }, { transform: 'rotate(9deg)', offset: .65, easing: 'cubic-bezier(.2,.8,.2,1)' }, { transform: 'none' }];
   acteurs.push(function () {
     if (!sale) return false; sale = false;
-    var y = scrollY, vh = innerHeight, dy = y - yPrec; yPrec = y;
-    var max = document.scrollingElement.scrollHeight - vh;
-    chauffe.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : 0);
-    var dx = (y * .22) % 120;
-    eaux.forEach(function (o) { if (visibles[o.sec.id]) o.el.style.setProperty('--dx', dx.toFixed(1)); });
+    var y = Y, vh = VH, dy = y - yPrec; yPrec = y;
+    var p = MAX > 0 ? borne(y / MAX, 0, 1) : 0;
+    if (Math.abs(p - pPrec) > .0004) { pPrec = p; chauffe.style.transform = 'scaleX(' + p.toFixed(4) + ')'; }
+    var dx = (y * .22) % 120, dxs = dx.toFixed(1);
+    eaux.forEach(function (o) { if (visibles[o.sec.id] && o.dx !== dxs) { o.dx = dxs; o.a.style.transform = 'translateX(' + (-dx - 60).toFixed(1) + 'px)'; o.b.style.transform = 'translateX(' + dxs + 'px)'; } });
     if (calme) { armoire.style.setProperty('--ouv', 1); M.sc = .5; return false; }
     if (dy) {
       var f = borne(dy, -60, 60);
@@ -329,15 +349,19 @@
       if (visibles.traiteur) pousse(pLouche, f * .7);
       if (visibles.commander) { pousse(pNum, f * .55); pousse(pSusp, f * .5); }
       if (visibles.broche && !R.tenu) { R.v = borne(R.v + f * 2.6, -420, 420); }
-      if (Math.abs(dy) > 30 && performance.now() - tetePrec > 900) { tetePrec = performance.now(); tete.classList.remove('remue'); void tete.offsetWidth; tete.classList.add('remue'); }
+      if (Math.abs(dy) > 30 && performance.now() - tetePrec > 900 && logoPot.animate) { tetePrec = performance.now(); logoPot.animate(REMUE, { duration: 500 }); }
     }
     if (visibles.epicerie) {
-      var r = armoire.getBoundingClientRect(), o = lisse((vh * .94 - r.top) / (vh * .58));
-      if (Math.abs(o - ouv.v) > .002) { ouv.v = o; armoire.style.setProperty('--ouv', o.toFixed(3)); }
+      var o = lisse((vh * .94 - (posArm - y)) / (vh * .58));
+      if (Math.abs(o - ouv.v) > .002) { ouv.v = o; portes[0].style.transform = 'rotateY(' + (o * -106).toFixed(2) + 'deg)'; portes[1].style.transform = 'rotateY(' + (o * 106).toFixed(2) + 'deg)'; }
       if (o > .97 && !ouv.auto) { ouv.auto = true; setTimeout(function () { if (!$('.art.choisi', garde)) choisir($$('.art', garde)[6]); }, 500); }
     }
-    if (visibles.venir) { var rb = bassin.getBoundingClientRect(); M.sc = borne((vh - rb.top) / (vh + rb.height), 0, 1); }
-    photos.forEach(function (p) { var r = p.el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; p.el.style.setProperty('--r', (p.base + p.k * ((r.top + r.height / 2 - vh / 2) / vh) * 7).toFixed(2) + 'deg'); });
+    if (visibles.venir) M.sc = borne((vh - (posBas - y)) / (vh + hBas), 0, 1);
+    photos.forEach(function (ph) {
+      var top = ph.haut - y; if (top + ph.h < 0 || top > vh) return;
+      var r = (ph.base + ph.k * ((top + ph.h / 2 - vh / 2) / vh) * 7).toFixed(2) + 'deg';
+      if (r !== ph.r) { ph.r = r; ph.el.style.rotate = r; }
+    });
     return false;
   });
 
