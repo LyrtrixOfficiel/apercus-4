@@ -1,7 +1,7 @@
 // Page Bonjour statique : ouverture, salutation, aperçu en direct, un seul bouton de couleur.
 (function () {
   var H = document.documentElement; H.classList.add('vivant');
-  var reduit = false, /* consigne du 12/11 : on ne lit jamais le réglage « moins de mouvement » du système */ etroit = matchMedia('(max-width: 699px)');
+  var reduit = false, /* consigne du 12/11 : on ne lit jamais le réglage « moins de mouvement » du système (il vaut vrai sur le PC de Mathéo) */ etroit = matchMedia('(max-width: 699px)');
   var APP = { ordi: { l: 1280, h: 800 }, tel: { l: 390, h: 844 } };
   var mode = etroit.matches ? 'tel' : 'ordi', actif = 0, jeton = 0;
   var D = JSON.parse(document.getElementById('donnees').textContent);

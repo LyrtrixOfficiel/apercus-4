@@ -3,8 +3,11 @@
 window.CONTENU = {
   faits: {
     nom: 'Porte Lune',
-    adresse: '25 rue Armand Caduc, 33190 La Réole',
-    lieux: ['Boutique de créateurs', 'Bar associatif', 'Espace jeux de table'],
+    // Sans numéro : la mairie donne le 21 pour l'association, l'adresse de la boutique n'est écrite nulle part (vérification du 13/11).
+    adresse: 'Rue Armand Caduc, La Réole',
+    // Seule la boutique est attestée (actu.fr). Le bar associatif et le coin jeux de table restent des idées à confirmer.
+    lieux: ['Boutique de créateurs'],
+    idees: ['Un bar associatif ?', 'Un coin jeux de table ?'],
     ouverture: 'Sigfried Lebaillif et l’association La Guilde France ont ouvert Porte Lune, boutique mêlant artisanat local et initiatives solidaires (actu.fr).',
     boutique: 'Costumes, accessoires en cuir à tannage végétal, bijouterie, mailles et écailles métalliques. Création artisanale et sur mesure (annuaire de la mairie de La Réole).',
     association: 'Festivals à thème historique, fantastique ou culturel, chasses au trésor, parcours immersifs, promotion de l’artisanat (JeVeuxAider).',

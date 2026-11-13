@@ -98,7 +98,8 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .monte{opacity:0;transform:translateY(26px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
 .monte.vu{opacity:1;transform:none}
 .arche{position:relative;overflow:hidden;border-radius:999px 999px 22px 22px;background:rgba(0,0,0,.12)}
-.arche img,.ca-photo img{position:absolute;left:0;top:-9%;width:100%;height:118%;object-fit:cover;will-change:transform}
+.arche img,.ca-photo img{position:absolute;left:0;top:-9%;width:100%;height:118%;object-fit:cover}
+.arche img.bouge,.ca-photo img.bouge{will-change:transform}
 .arche figcaption{position:absolute;left:12px;bottom:12px;background:var(--creme);color:var(--vin);font:800 13.5px/1 var(--texte);padding:8px 11px;border-radius:9px}
 
 /* la boutique */
@@ -138,8 +139,9 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .bq-droite{text-align:center}
 .bq-scene{position:relative;width:min(100%,430px);aspect-ratio:1/1.14;margin:0 auto;touch-action:pan-y}
 .bq-fond{position:absolute;left:4%;right:4%;top:37%;bottom:1%;background:var(--kraft2);clip-path:polygon(0 9%,20% 0,50% 12%,80% 0,100% 9%,58% 100%,42% 100%)}
-.bq-fleurs{position:absolute;inset:0;transform-origin:50% 62%;will-change:transform}
-.bq-fleurs .fl{position:absolute;left:0;top:0;will-change:transform}
+.bq-fleurs{position:absolute;inset:0;transform-origin:50% 62%}
+.bouquets:not(.hors) .bq-fleurs{will-change:transform}
+.bq-fleurs .fl{position:absolute;left:0;top:0}
 .bq-papier{position:absolute;left:11%;right:11%;top:51%;bottom:0;background:linear-gradient(100deg,var(--kraft3) 0 34%,var(--kraft) 34% 68%,var(--kraft2) 68%);clip-path:polygon(0 4%,26% 0,50% 9%,76% 0,100% 5%,59% 100%,41% 100%)}
 .bq-noeud{position:absolute;left:50%;top:80%;width:0;height:0}
 .bq-noeud i{position:absolute;top:-17px;width:52px;height:34px;background:var(--creme);border-radius:60% 30% 30% 60%;right:6px;transform:rotate(14deg);box-shadow:inset -8px 0 0 rgba(61,15,36,.12)}
@@ -155,7 +157,8 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .pl-g{display:grid;gap:30px}
 .pl-scene{position:relative;width:min(78%,400px);margin:26px auto 10px}
 .pl-scene .arche{aspect-ratio:3/3.9}
-.pl-scene .pf{position:absolute;transform-origin:50% 100%;will-change:transform;pointer-events:auto;cursor:pointer}
+.pl-scene .pf{position:absolute;transform-origin:50% 100%;pointer-events:auto;cursor:pointer}
+.plantes:not(.hors) .pl-scene .pf{will-change:transform}
 .pl-scene .po{position:absolute;transform:translate(-50%,-50%) scale(0) rotate(-60deg);transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
 .pl-scene .po.on{transform:translate(-50%,-50%) scale(1) rotate(var(--r,0deg))}
 .pl-txt{position:relative;z-index:6}
@@ -173,9 +176,9 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .ma-txt .bt{margin-top:22px}
 .ma-arche{position:relative;width:min(70%,380px);margin:40px auto 30px}
 .ma-arche .arche{aspect-ratio:3/4.2}
-.ma-arche .af{position:absolute;left:0;top:0;will-change:transform}
+.ma-arche .af{position:absolute;left:0;top:0}
 .ma-pluie{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
-.ma-pluie i{position:absolute;top:-30px;width:22px;height:15px;border-radius:0 85% 0 85%;will-change:transform}
+.ma-pluie i{position:absolute;top:-30px;width:22px;height:15px;border-radius:0 85% 0 85%}
 
 /* deuil */
 .deuil{background:var(--nuit);color:var(--creme)}
@@ -186,7 +189,8 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .de-rond{position:absolute;inset:17%;border-radius:50%;overflow:hidden;background:#0c0c12}
 .de-rond img{width:100%;height:100%;object-fit:cover;transform:scale(1.25)}
 .de-tour{position:absolute;inset:0;animation:tour 160s linear infinite}
-.de-tour .cf{position:absolute;left:50%;top:50%;will-change:transform}
+.de-tour .cf{position:absolute;left:50%;top:50%}
+.hors .de-tour,.hors .etat-f .fl{animation-play-state:paused}
 @keyframes tour{to{transform:rotate(360deg)}}
 .de-appel{margin-top:16px;font-weight:700;font-size:20px}
 .de-appel a{font:900 clamp(26px,6vw,36px)/1.2 var(--titre);text-decoration:none;white-space:nowrap;border-bottom:4px solid #cbb9f5}
@@ -213,7 +217,8 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .bf .fl{position:absolute;left:0;top:0;transform:translate(-50%,-50%)}
 .ca-photo{position:relative;overflow:hidden;border-radius:22px 22px 999px 999px;aspect-ratio:3/3.6;width:min(70%,330px);margin:0 auto;background:rgba(0,0,0,.1)}
 .ruban{position:relative;z-index:4;margin:52px calc(var(--gout)*-1) 0 -18px;transform:rotate(-2.2deg) scale(1.04);background:var(--framboise);color:var(--creme);overflow:hidden;padding:15px 0 14px;box-shadow:0 7px 0 rgba(61,15,36,.2)}
-.ruban-p{display:flex;align-items:center;gap:18px;white-space:nowrap;font:800 clamp(19px,2.4vw,26px)/1 var(--texte);width:max-content;will-change:transform}
+.ruban-p{display:flex;align-items:center;gap:18px;white-space:nowrap;font:800 clamp(19px,2.4vw,26px)/1 var(--texte);width:max-content}
+.cadeaux:not(.hors) .ruban-p{will-change:transform}
 .ruban-p .fl{flex:none}
 
 /* avis */
@@ -223,7 +228,7 @@ h2 em,.adr em{font-style:italic;font-weight:800;letter-spacing:-.02em}
 .av-jeu{text-align:center}
 .paq{position:relative;width:min(74vw,330px);aspect-ratio:1;margin:0 auto}
 .paq-tige{position:absolute;left:50%;top:50%;width:12px;height:50%;margin-left:-6px;background:var(--vert);border-radius:0 0 12px 12px}
-.paq .pe{position:absolute;left:50%;top:50%;width:20%;height:44%;margin:-44% 0 0 -10%;border:0;padding:0;background:#fff;border-radius:50% 50% 46% 46%/62% 62% 38% 38%;transform-origin:50% 100%;transform:rotate(var(--a));box-shadow:inset 0 -18px 0 #f1dfc8;cursor:pointer;will-change:transform;transition:margin-top .2s}
+.paq .pe{position:absolute;left:50%;top:50%;width:20%;height:44%;margin:-44% 0 0 -10%;border:0;padding:0;background:#fff;border-radius:50% 50% 46% 46%/62% 62% 38% 38%;transform-origin:50% 100%;transform:rotate(var(--a));box-shadow:inset 0 -18px 0 #f1dfc8;cursor:pointer;transition:margin-top .2s}
 .paq .pe:hover{margin-top:-46%}
 .paq .pe.partie{visibility:hidden}
 .paq .pe.revient{animation:repousse .6s calc(var(--n)*50ms) cubic-bezier(.3,1.5,.5,1) backwards}

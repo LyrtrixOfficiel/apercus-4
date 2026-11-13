@@ -109,6 +109,10 @@
     $$('.monte,.plaques,.pl-mots,.av-fleurs,#faits').forEach(function (el) { io.observe(el); });
     var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { vus[e.target.id] = e.isIntersecting; if (e.isIntersecting && e.target.id === 'env' && !envOuverte) { envOuverte = true; setTimeout(function () { env.classList.add('ouverte'); }, 350); } if (e.isIntersecting && e.target.id === 'maArche' && !pluieFaite) { pluieFaite = true; setTimeout(pluie, 500); } }); }, { threshold: .35 });
     ['bqScene', 'plScene', 'maArche', 'deCouronne', 'ruban', 'env'].forEach(function (id) { io2.observe($('#' + id)); });
+    // Une seule vigie : la classe « hors » sur les rubriques loin de l'écran. En dessous, les animations sans fin
+    // se mettent en pause et les calques des éléments qui bougent disparaissent ; tout repart dans la même image au retour.
+    var vigie = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('hors', !e.isIntersecting); }); }, { rootMargin: '160px 0px' });
+    $$('.bloc').forEach(function (s) { vigie.observe(s); });
   } else { $$('.monte,.plaques,.pl-mots,.av-fleurs').forEach(function (el) { el.classList.add('vu'); }); }
 
   // les plaques de la rue
@@ -314,27 +318,39 @@
   var glisses = $$('[data-glisse]').map(function (f) { return { f: f, img: $('img', f) }; }), navs = $$('.tete nav a'), yVu = -1, hVu = -1, lVu = innerWidth;
   function defile() {
     var y = scrollY, vh = innerHeight, i, r;
+    // Toutes les lectures d'abord, tant que la mise en page est propre, puis toutes les écritures :
+    // plus aucun recalcul forcé au milieu de l'image.
+    var th = tige.clientHeight, hm = [], rf = null, rg = [], rp = null, ra = maArche.getBoundingClientRect(), rc = deCouronne.getBoundingClientRect();
+    for (i = 0; i < massifs.length; i++) hm[i] = massifs[i].j.vu ? massifs[i].sec.getBoundingClientRect().top : null;
+    if (jardinFin.vu) rf = jardinFin.cv.getBoundingClientRect();
+    for (i = 0; i < glisses.length; i++) rg[i] = glisses[i].f.getBoundingClientRect();
+    if (vus.plScene !== false) rp = plScene.getBoundingClientRect();
     // la tige
-    var p = borne(y / docH, 0, 1), th = tige.clientHeight;
+    var p = borne(y / docH, 0, 1);
     tigeT.style.transform = 'scaleY(' + p + ')'; tigeF.style.transform = 'translateY(' + p * th + 'px) rotate(' + y * .25 + 'deg)';
     for (i = 0; i < feuillesTige.length; i++) feuillesTige[i].classList.toggle('on', y >= bornes[i + 1] - vh * .5);
     var act = 0; for (i = 0; i < bornes.length; i++) if (y + vh * .5 >= bornes[i]) act = i;
     if (act !== secActuelle) { secActuelle = act; tetesTige.forEach(function (t, k) { t.classList.toggle('on', k === act); }); var id = sections[act].id; navs.forEach(function (a) { a.classList.toggle('ici', a.getAttribute('href') === '#' + id); }); }
     // les massifs poussent quand leur section arrive
-    for (i = 0; i < massifs.length; i++) { if (!massifs[i].j.vu) continue; r = massifs[i].sec.getBoundingClientRect(); massifs[i].j.cible = borne((vh - r.top + massifs[i].j.H) / (massifs[i].j.H + vh * .2), 0, 1); }
-    if (jardinFin.vu) { r = jardinFin.cv.getBoundingClientRect(); jardinFin.cible = borne((vh - r.top) / (r.height * .75), 0, 1); }
-    // les photos glissent dans leur cadre
-    for (i = 0; i < glisses.length; i++) { r = glisses[i].f.getBoundingClientRect(); if (r.bottom < -50 || r.top > vh + 50) continue; glisses[i].img.style.transform = 'translateY(' + (-borne((r.top + r.height / 2 - vh / 2) / vh, -1, 1) * 7.2).toFixed(2) + '%)'; }
+    for (i = 0; i < massifs.length; i++) { if (hm[i] == null) continue; massifs[i].j.cible = borne((vh - hm[i] + massifs[i].j.H) / (massifs[i].j.H + vh * .2), 0, 1); }
+    if (rf) jardinFin.cible = borne((vh - rf.top) / (rf.height * .75), 0, 1);
+    // les photos glissent dans leur cadre (calque seulement pendant qu'elles sont à l'écran)
+    for (i = 0; i < glisses.length; i++) {
+      r = rg[i]; var dedans = !(r.bottom < -50 || r.top > vh + 50);
+      if (dedans !== glisses[i].bouge) { glisses[i].bouge = dedans; glisses[i].img.classList.toggle('bouge', dedans); }
+      if (!dedans) continue;
+      glisses[i].img.style.transform = 'translateY(' + (-borne((r.top + r.height / 2 - vh / 2) / vh, -1, 1) * 7.2).toFixed(2) + '%)';
+    }
     // plantes
-    if (vus.plScene !== false) { r = plScene.getBoundingClientRect(); plP = borne((vh * .92 - r.top) / (vh * .55), 0, 1); }
+    if (rp) plP = borne((vh * .92 - rp.top) / (vh * .55), 0, 1);
     // l'arche
-    r = maArche.getBoundingClientRect();
+    r = ra;
     if (r.bottom > -100 && r.top < vh + 100) {
       var pa = borne((vh * .95 - r.top) / (vh * .7), 0, 1);
       if (Math.abs(pa - maP) > .004) { maP = pa; fleursArche.forEach(function (f) { var s = rebond(borne((pa * 1.3 - f.ordre) / .3, 0, 1)); if (Math.abs(s - f.s) > .003) { f.s = s; f.el.style.transform = 'rotate(' + f.rot + 'rad) scale(' + s.toFixed(3) + ')'; } }); }
     }
     // la couronne
-    r = deCouronne.getBoundingClientRect();
+    r = rc;
     if (r.bottom > -100 && r.top < vh + 100) {
       var pc = borne((vh * .95 - r.top) / (vh * .75), 0, 1);
       if (Math.abs(pc - deP) > .004) { deP = pc; fleursCouronne.forEach(function (f) { var s = sortie(borne((pc * 1.25 - f.ordre) / .25, 0, 1)); if (Math.abs(s - f.s) > .003) { f.s = s; f.el.style.transform = 'translate(' + f.x.toFixed(1) + 'px,' + f.y.toFixed(1) + 'px) rotate(' + f.rot + 'rad) scale(' + s.toFixed(3) + ')'; } }); }

@@ -1,5 +1,13 @@
 /* Porte Lune : « Frappez trois coups ». Enluminure en aplats, sans contour : vert de nuit, vermillon, or, parchemin.
    Le mouvement joue toujours ; mode calme seulement avec ?calme=1 (classe calme sur html). Le réglage du système n'est jamais lu. */
+/* Polices locales (aucune requête externe) : Grenze Gotisch 700 et 900, Grenze 500 à 700 et italique 500, alphabets latin et latin étendu.
+   Fichiers variables de Google Fonts (licence SIL Open Font License), téléchargés le 13/11/2026 dans polices\. */
+@font-face{font-family:'Grenze Gotisch';font-style:normal;font-weight:700 900;font-display:swap;src:url(polices/grenze-gotisch-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Grenze Gotisch';font-style:normal;font-weight:700 900;font-display:swap;src:url(polices/grenze-gotisch-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Grenze';font-style:normal;font-weight:500 700;font-display:swap;src:url(polices/grenze-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Grenze';font-style:normal;font-weight:500 700;font-display:swap;src:url(polices/grenze-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Grenze';font-style:italic;font-weight:500;font-display:swap;src:url(polices/grenze-italique-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Grenze';font-style:italic;font-weight:500;font-display:swap;src:url(polices/grenze-italique-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --nuit:#0f2f2b;--nuit2:#0a2320;--toits:#17453e;
   --sinople:#1d6a4d;--sinople-f:#124a35;--sinople-c:#2c8a66;
@@ -57,6 +65,8 @@ h3{margin:0 0 .45em;font:700 clamp(26px,2.3vw,38px)/1.05 var(--fd)}
 .js [data-e]{opacity:0;transform:translateY(34px)}
 .js [data-e].vu{opacity:1;transform:none;transition:opacity .7s ease calc(var(--i,0)*.14s),transform .85s cubic-bezier(.2,.9,.3,1) calc(var(--i,0)*.14s)}
 html.calme *,html.calme *::before,html.calme *::after{animation:none!important;transition:none!important}
+/* Fluidité : une rubrique loin de l'écran (classe hors, posée par page.js) met ses animations en pause ; elles repartent avant de revenir à l'écran. */
+.hors *,.hors *::before,.hors *::after{animation-play-state:paused!important}
 html.calme [data-e]{opacity:1!important;transform:none!important}
 
 /* créneaux entre les sections */
@@ -103,17 +113,21 @@ html.calme [data-e]{opacity:1!important;transform:none!important}
 .porte{position:relative;display:flex;flex-direction:column;min-height:min(100svh,1000px);padding-top:calc(var(--barre) + clamp(14px,3vh,40px));background:var(--nuit);color:var(--lune);overflow:hidden}
 .ciel{position:absolute;inset:0;pointer-events:none}
 .toits{position:absolute;left:0;right:0;bottom:0;display:block;width:100%;height:clamp(84px,13.5vh,170px)}
-.nuage{position:absolute;left:0;height:clamp(30px,4.6vh,54px);border-radius:99px;background:var(--toits);animation:nuage linear infinite}
+/* Fluidité : le nuage glisse par son enveloppe (nuage-v), sans quoi chaque image recalculait son style ; même trajet, même vitesse. */
+.nuage-v{position:absolute;left:0;animation:nuage linear infinite}
+.nv1{top:15%;animation-duration:80s;animation-delay:-30s}
+.nv2{top:34%;animation-duration:110s;animation-delay:-70s}
+.nv3{top:7%;animation-duration:60s;animation-delay:-8s}
+.nuage{position:relative;display:block;height:clamp(30px,4.6vh,54px);border-radius:99px;background:var(--toits)}
 .nuage::before,.nuage::after{content:"";position:absolute;border-radius:50%;background:inherit}
 .nuage::before{left:16%;bottom:30%;width:36%;aspect-ratio:1}
 .nuage::after{left:44%;bottom:20%;width:30%;aspect-ratio:1}
-.n1{top:15%;width:clamp(150px,15vw,290px);animation-duration:80s;animation-delay:-30s}
-.n2{top:34%;width:clamp(110px,10vw,200px);animation-duration:110s;animation-delay:-70s;opacity:.7}
-.n3{top:7%;width:clamp(90px,8vw,160px);animation-duration:60s;animation-delay:-8s;opacity:.8}
+.n1{width:clamp(150px,15vw,290px)}
+.n2{width:clamp(110px,10vw,200px);opacity:.7}
+.n3{width:clamp(90px,8vw,160px);opacity:.8}
 @keyframes nuage{from{transform:translateX(-32vw)}to{transform:translateX(104vw)}}
-.fens rect{animation:fenetre 9s steps(1) infinite}
-.fens rect:nth-child(2n){animation-delay:-3s}.fens rect:nth-child(3n){animation-delay:-6.5s}
-@keyframes fenetre{0%,58%{opacity:1}60%,70%{opacity:.18}72%,100%{opacity:1}}
+/* fenêtres qui clignotent : page.js pose la classe eteinte aux bons instants (même rythme que l'ancienne animation, aucun travail à chaque image) */
+.fens rect.eteinte,.fen-tour.eteinte{opacity:.18}
 
 .porte-grille{flex:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,100px);align-items:center}
 .porte-texte{position:relative;z-index:4;padding-bottom:clamp(70px,15vh,150px)}
@@ -144,7 +158,6 @@ html.calme [data-e]{opacity:1!important;transform:none!important}
 @keyframes halo{to{opacity:.34;transform:scale(1.14)}}
 .flamme{animation:flamme 1.1s ease-in-out infinite alternate}
 @keyframes flamme{to{opacity:.78}}
-.fen-tour{animation:fenetre 7s steps(1) infinite}
 .chat{cursor:pointer;pointer-events:auto;transform-origin:20px 33px}
 .chat .queue{transform-origin:34px 30px;animation:queue 2.2s ease-in-out infinite alternate}
 @keyframes queue{from{transform:rotate(-16deg)}to{transform:rotate(20deg)}}

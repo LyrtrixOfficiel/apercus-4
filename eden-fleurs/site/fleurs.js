@@ -189,10 +189,16 @@
     this.souffle = 0; this.cible = opt.pousse === 'defile' ? 0 : 1; this.t0 = 0; this.vu = false; this.parti = false; this.L = 0; this.H = 0;
     jardins.push(this); this.mesure();
   }
+  // Densité des jardins : plafonnée à 1,5 sur téléphone et tablette (écran étroit ou doigt), 2 sur ordinateur.
+  // Les fleurs sont des aplats : la différence ne se voit pas, et la carte graphique peint presque deux fois moins de pixels.
+  function plafond() {
+    var tel = innerWidth < 760 || (window.matchMedia && matchMedia('(pointer: coarse)').matches);
+    return Math.min(window.devicePixelRatio || 1, tel ? 1.5 : 2);
+  }
   Jardin.prototype.mesure = function () {
     var r = this.cv.getBoundingClientRect(), L = Math.round(r.width), H = Math.round(r.height);
     if (!L || !H) return;
-    var dpr = E.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = E.dpr = plafond();
     if (L === this.L && H === this.H && dpr === this.dpr) return;
     var semer = L !== this.L || !this.fl.length;
     this.L = L; this.H = H; this.dpr = dpr; this.cv.width = Math.round(L * dpr); this.cv.height = Math.round(H * dpr);
@@ -242,11 +248,14 @@
     };
   };
   Jardin.prototype.poser = function () {
-    var o = this.o, i, f, haut = (o.haut || .8);
+    var o = this.o, i, f, fondJ = o.fond || '#3d0f24', V = E.VERTS;
     for (i = 0; i < this.fl.length; i++) {
       f = this.fl[i]; f.x = f.xn * this.L; f.y = this.yButte(f.x) + 10 + f.z * 8;
       f.Lg = Math.max(26, this.zonePx(f.xn) * f.hn - f.r * (ESP[f.esp].face ? .5 : 1.4));
-      f.sp = tete(f.esp, f.teinte, f.r, o.fond || '#3d0f24', f.voile);
+      f.sp = tete(f.esp, f.teinte, f.r, fondJ, f.voile);
+      // couleurs de la tige et des deux feuilles, calculées une fois (et plus à chaque image)
+      f.cT = f.voile ? mix(V.tige, fondJ, f.voile) : V.tige;
+      f.cF = [f.voile ? mix(V.fonce, fondJ, f.voile) : (f.vert ? V.clair : V.fonce), f.voile ? mix(V.clair, fondJ, f.voile) : (1 ^ f.vert ? V.clair : V.fonce)];
     }
   };
   Jardin.prototype.planter = function (x, esp, teinte) {
@@ -310,7 +319,7 @@
       f.v += acc * dt; f.a += f.v * dt; f.a = borne(f.a, -1.25, 1.25);
       // tige
       var a = f.a, tx = f.x + Math.sin(a) * Lg + f.courbe * Lg * .12, ty = f.y - Math.cos(a) * Lg, qx = f.x + f.courbe * Lg * .3, qy = f.y - Lg * .56;
-      var ep = Math.max(3.5, f.r * .2) * (.8 + f.z * .3), vt = f.voile ? mix(E.VERTS.tige, o.fond || '#3d0f24', f.voile) : E.VERTS.tige;
+      var ep = Math.max(3.5, f.r * .2) * (.8 + f.z * .3), vt = f.cT;
       c.setTransform(dpr, 0, 0, dpr, 0, 0);
       c.strokeStyle = vt; c.lineWidth = ep; c.lineCap = 'round'; c.beginPath(); c.moveTo(f.x, f.y); c.quadraticCurveTo(qx, qy, tx, ty); c.stroke();
       // feuilles
@@ -320,7 +329,7 @@
         var tg = Math.atan2(2 * w * (qy - f.y) + 2 * u * (ty - qy), 2 * w * (qx - f.x) + 2 * u * (tx - qx));
         var ang = tg + fe[1] * (.95 - Math.abs(f.v) * .02), ll = f.r * 1.5 * fe[2] * sortie((gt - u - .1) * 3), ca = Math.cos(ang) * ll * dpr, sa = Math.sin(ang) * ll * dpr;
         c.setTransform(ca, sa, -sa * fe[1], ca * fe[1], bx * dpr, by * dpr);
-        c.fillStyle = f.voile ? mix(j ? E.VERTS.clair : E.VERTS.fonce, o.fond || '#3d0f24', f.voile) : (j ^ f.vert ? E.VERTS.clair : E.VERTS.fonce); c.fill(feuille);
+        c.fillStyle = f.cF[j]; c.fill(feuille);
       }
       // tête : tournée, jamais étirée
       if (gh > .01) {

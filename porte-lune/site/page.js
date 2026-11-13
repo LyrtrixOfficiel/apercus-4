@@ -68,7 +68,8 @@
     var bouge = false;
     for (var i = 0; i < pendules.length; i++) {
       var p = pendules[i];
-      if (Math.abs(p.a) < .03 && Math.abs(p.w) < .08) { if (p.a !== 0) { p.a = 0; p.w = 0; p.el.style.transform = ''; } continue; }
+      // loin de l'écran, le balancement s'arrête net (personne ne le voit) ; le défilement le relance au retour
+      if ((p.zone && p.zone._vu === false) || (Math.abs(p.a) < .03 && Math.abs(p.w) < .08)) { if (p.a !== 0 || p.w !== 0) { p.a = 0; p.w = 0; p.el.style.transform = ''; } continue; }
       p.w += (-p.k * p.a - p.c * p.w) * dt; p.a = borne(p.a + p.w * dt, -p.max, p.max);
       p.el.style.transform = 'rotate(' + p.a.toFixed(2) + 'deg)'; bouge = true;
     }
@@ -107,7 +108,7 @@
   }
   function ouvrir() {
     ouverte = true; baie.classList.add('ouverte'); dedans.inert = false; bFrapper.textContent = 'Refermer la porte';
-    setTimeout(function () { if (ouverte) consigne.textContent = 'Entrez : trois lieux vous attendent derrière.'; }, 1500);
+    setTimeout(function () { if (ouverte) consigne.textContent = 'Entrez : trois arches vous attendent derrière.'; }, 1500);
   }
   function fermer() {
     ouverte = false; refermee = true; coups = 0; baie.classList.remove('ouverte'); dedans.inert = true;
@@ -129,6 +130,24 @@
     if (innerWidth < 861) porche.scrollIntoView({ behavior: calme ? 'auto' : 'smooth', block: 'center' });
   });
   var chat = $('#chat'); if (chat) chat.addEventListener('click', function () { rejoue(chat, 'saute'); });
+  // Les fenêtres qui clignotent : éteintes de 60 à 72 % d'un cycle de 9 s (7 s pour la fenêtre de la tour), décalées comme avant.
+  // Un minuteur pose la classe eteinte quand l'état change : plus aucun recalcul de style à chaque image.
+  (function () {
+    if (calme) return;
+    var fens = [];
+    $$('.fens').forEach(function (g) { $$('rect', g).forEach(function (r, i) { var n = i + 1; fens.push({ el: r, cycle: 9000, avance: n % 3 === 0 ? 6500 : n % 2 === 0 ? 3000 : 0, zone: r.closest('section'), eteinte: false }); }); });
+    var ft = $('.fen-tour'); if (ft) fens.push({ el: ft, cycle: 7000, avance: 0, zone: ft.closest('section'), eteinte: false });
+    var t0 = performance.now();
+    function tic() {
+      var t = performance.now() - t0;
+      for (var i = 0; i < fens.length; i++) {
+        var f = fens[i]; if (f.zone && f.zone.classList.contains('hors')) continue;
+        var ph = ((t + f.avance) % f.cycle) / f.cycle, e = ph >= .6 && ph < .72;
+        if (e !== f.eteinte) { f.eteinte = e; f.el.classList.toggle('eteinte', e); }
+      }
+    }
+    tic(); setInterval(tic, 120);
+  })();
   var luneSvg = $('#lune svg'), toitsHeros = $('.porte .toits');
   $('#porte').addEventListener('pointermove', function (e) {
     if (calme || e.pointerType !== 'mouse') return;
@@ -233,7 +252,7 @@
       }, calme ? 0 : Math.abs(j - i) * 110);
     });
     clearTimeout(tArdoise); ardoise.innerHTML = '<b>Santé\u00a0!</b>'; ardoise.classList.add('dit'); rejoue(ardoise, 'flip');
-    tArdoise = setTimeout(function () { ardoise.innerHTML = '<b>Bar</b><b>associatif</b>'; ardoise.classList.remove('dit', 'flip'); }, 1500);
+    tArdoise = setTimeout(function () { ardoise.innerHTML = '<b>Bar</b><b>associatif ?</b>'; ardoise.classList.remove('dit', 'flip'); }, 1500);
     zincDit.textContent = nSante === 1 ? 'Santé ! Tous les godets se sont levés.' : 'Santé ! Déjà ' + nSante + ' fois.';
   }
   godets.forEach(function (g, i) { g.addEventListener('click', function () { trinquer(i); }); });
@@ -388,28 +407,51 @@
   })();
 
   /* ---------- défilement : la lune de la barre se remplit, le rouleau se déroule, tout ce qui pend bouge ---------- */
-  var cadres = $$('.cadre'), sy = scrollY, premier = true, attente = false;
+  // Fluidité : les positions sont mesurées une fois (au départ, au redimensionnement, quand la hauteur de la page change)
+  // et gardées en mémoire ; à chaque image on ne fait qu'écrire, et seulement ce qui a changé.
+  var cadres = $$('.cadre').map(function (c) { return { el: c, img: $('img', c), para: +c.dataset.para, top: 0, h: 0, ecrit: '' }; });
+  var sy = scrollY, premier = true, attente = false, mes = null, lfPas = -1, dEcrit = '', hautEcrit = '';
+  function mesurer() {
+    var y = scrollY, r = rouleau.getBoundingClientRect();
+    mes = { max: Math.max(1, H.scrollHeight - innerHeight), rouleau: r.top + y, rouleauH: r.height };
+    cadres.forEach(function (c) { var q = c.el.getBoundingClientRect(); c.top = q.top + y; c.h = q.height; });
+  }
   function surDefilement() {
     attente = false;
-    var y = scrollY, dy = y - sy, vh = innerHeight, max = Math.max(1, H.scrollHeight - vh); sy = y;
-    dessinePhase(lfClair, 12, .03 + borne(y / max, 0, 1) * .47);
-    if (!calme && y < vh * 1.4) { luneSvg.style.transform = 'translateY(' + (y * .2).toFixed(1) + 'px)'; toitsHeros.style.transform = 'translateY(' + (y * .07).toFixed(1) + 'px)'; }
+    if (!mes) mesurer();
+    var y = scrollY, dy = y - sy, vh = innerHeight; sy = y;
+    var pas = Math.round(borne(y / mes.max, 0, 1) * 80);
+    if (pas !== lfPas) { lfPas = pas; dessinePhase(lfClair, 12, .03 + pas / 80 * .47); }
+    if (!calme) {
+      var yh = Math.min(y, vh * 1.4), haut = yh.toFixed(0);
+      if (haut !== hautEcrit) { hautEcrit = haut; luneSvg.style.transform = 'translateY(' + (yh * .2).toFixed(1) + 'px)'; toitsHeros.style.transform = 'translateY(' + (yh * .07).toFixed(1) + 'px)'; }
+    }
     if (!ouverte && !sequence && !refermee && y > 90 && y < vh) troisCoups(true);
-    var r = rouleau.getBoundingClientRect();
-    if (r.top < vh + 200 && r.bottom > -400) papier.style.setProperty('--d', calme ? 1 : borne((vh * .9 - r.top) / (vh * .45), 0, 1).toFixed(3));
-    if (!calme) cadres.forEach(function (c) { var q = c.getBoundingClientRect(); if (q.bottom < -60 || q.top > vh + 60) return; c.style.setProperty('--py', (((q.top + q.height / 2) - vh / 2) / vh * +c.dataset.para).toFixed(1)); });
+    var rt = mes.rouleau - y;
+    if (rt < vh + 200 && rt + mes.rouleauH > -400) {
+      var d = calme ? 1 : borne((vh * .9 - rt) / (vh * .45), 0, 1), dt = d >= 1 ? 'none' : 'translateY(' + ((d - 1) * 100).toFixed(1) + '%)';
+      if (dt !== dEcrit) { dEcrit = dt; papier.style.transform = dt; }
+    }
+    if (!calme) cadres.forEach(function (c) {
+      var top = c.top - y; if (top + c.h < -60 || top > vh + 60) return;
+      var t = 'translateY(calc(' + (((top + c.h / 2) - vh / 2) / vh * c.para).toFixed(1) + 'px - 7%))';
+      if (t !== c.ecrit) { c.ecrit = t; c.img.style.transform = t; }
+    });
     if (dy && !calme) { var f = borne(dy, -70, 70) * 1.5; pendules.forEach(function (p) { if (p.zone && p.zone._vu === false) return; p.w += f * (.55 + (p.n * 37 % 10) / 14); }); reveille(); }
     if (dy && premier) { premier = false; annoncer('kazura-defile'); }
   }
   addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(surDefilement); } }, { passive: true });
-  addEventListener('resize', function () { placerPion(); surDefilement(); });
+  addEventListener('resize', function () { mes = null; placerPion(); surDefilement(); });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { mes = null; }).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { mes = null; });
 
   /* ---------- entrées, section courante ---------- */
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -7% 0px', threshold: .1 });
     $$('[data-e]').forEach(function (el) { io.observe(el); });
     var sections = $$('main > section[id]');
-    var ioZ = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target._vu = e.isIntersecting; }); }, { rootMargin: '10% 0px' });
+    // la vigie : une rubrique loin de l'écran met ses animations en pause (classe hors), elles repartent un peu avant son retour
+    var ioZ = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target._vu = e.isIntersecting; e.target.classList.toggle('hors', !e.isIntersecting); }); }, { rootMargin: '20% 0px' });
     sections.forEach(function (s) { ioZ.observe(s); });
     var ioN = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
