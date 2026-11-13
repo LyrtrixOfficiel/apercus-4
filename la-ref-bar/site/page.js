@@ -17,9 +17,9 @@
   var el = function (b, c, t) { var e = document.createElement(b); if (c) e.className = c; if (t != null) e.textContent = t; return e; };
 
   /* ---------- ambiance (couleur des néons) ---------- */
-  var PAL = Object.keys(C.palettes), COUL = [];
-  function couleurs() { var s = getComputedStyle(H); COUL = ['--n1', '--n3', '--n2', '--papier', '--n1'].map(function (v) { return s.getPropertyValue(v).trim(); }); }
-  function palette(n) { if (PAL.indexOf(n) < 0) return; H.dataset.palette = n; var m = $('meta[name=theme-color]'); if (m) m.content = C.palettes[n].theme; couleurs(); }
+  var PAL = Object.keys(C.palettes), COUL = [], EG = { n: 0, b: [], w: 0, d: 1, lu: .02, c: [] };
+  function couleurs() { var s = getComputedStyle(H); COUL = ['--n1', '--n3', '--n2', '--papier', '--n1'].map(function (v) { return s.getPropertyValue(v).trim(); }); EG.c = [COUL[0], COUL[2], COUL[1]]; }
+  function palette(n) { if (PAL.indexOf(n) < 0) return; H.dataset.palette = n; var m = $('meta[name=theme-color]'); if (m) m.content = C.palettes[n].theme; couleurs(); sale = true; }
   palette(new URLSearchParams(location.search).get('palette') || 'rose');
   addEventListener('message', function (e) { if (e.data && e.data.type === 'kazura-couleur') palette(e.data.palette); });
 
@@ -29,8 +29,27 @@
   $$('[data-carte]').forEach(function (a) { a.href = C.carte; });
 
   /* ---------- égaliseur sous la barre ---------- */
-  var egal = $('#egal');
-  (function () { var n = innerWidth < 700 ? 26 : 64, h = ''; for (var i = 0; i < n; i++) h += '<i style="--k:' + (i / n).toFixed(3) + ';--d:-' + hasard(0, 1.4).toFixed(2) + 's;--h:' + hasard(.4, 1).toFixed(2) + ';--c:var(--n' + (1 + i % 3) + ')"></i>'; egal.innerHTML = h; })();
+  // Un seul canvas : les mêmes barres (26 au téléphone, 64 à l'ordinateur), la même danse, le même étirement.
+  // En éléments animés un par un, elles coûtaient à elles seules 5 ms par image sur un téléphone.
+  var egal = $('#egal'), eg = el('canvas'), egx = eg.getContext('2d');
+  egal.appendChild(eg);
+  function tailleEgal() {
+    var n = innerWidth < 700 ? 26 : 64;
+    if (EG.n !== n) { EG.n = n; EG.b = []; for (var i = 0; i < n; i++) EG.b.push({ d: hasard(0, 1.4), h: hasard(.4, 1) }); }
+    EG.w = egal.clientWidth || innerWidth; EG.d = Math.min(window.devicePixelRatio || 1, innerWidth < 700 ? 1.5 : 2); // densité plafonnée à 1,5 sur téléphone
+    var cw = Math.round(EG.w * EG.d), ch = Math.round(40 * EG.d); if (eg.width !== cw || eg.height !== ch) { eg.width = cw; eg.height = ch; }
+  }
+  function dessinerEgal(t, etire) {
+    var n = EG.n, d = EG.d, pas = (EG.w + 3) / n, lw = Math.max(1, Math.round((pas - 3) * d) / d), r = Math.min(3, lw / 2);
+    egx.setTransform(d, 0, 0, d, 0, 0); egx.clearRect(0, 0, EG.w, 40);
+    for (var i = 0; i < n; i++) {
+      var b = EG.b[i], s = 1;
+      if (!calme) { var u = (t / 1000 + b.d) / 1.05, f = u % 1; if (Math.floor(u) % 2) f = 1 - f; f = f * f * (3 - 2 * f); s = .22 + (b.h - .22) * f; }
+      var h = 9 * s * etire, ry = 3 * s * etire, x = Math.round(i * pas * d) / d; // bords calés sur les pixels de l'écran
+      egx.globalAlpha = borne((EG.lu - i / n) * 80 + 1, .3, 1); egx.fillStyle = EG.c[i % 3];
+      egx.beginPath(); egx.moveTo(x, 0); egx.lineTo(x + lw, 0); egx.lineTo(x + lw, h - ry); egx.quadraticCurveTo(x + lw, h, x + lw - r, h); egx.lineTo(x + r, h); egx.quadraticCurveTo(x, h, x, h - ry); egx.closePath(); egx.fill();
+    }
+  }
 
   /* ---------- 1. l'enseigne : elle s'allume lettre par lettre, on l'éteint, on touche une lettre ---------- */
   var acc = $('#accueil'), tubes = $$('#enseigne .tube'), inter = $('#inter'), allume = true, minut = [];
@@ -42,15 +61,16 @@
   allumer();
   if (!calme) setInterval(function () { // un tube grésille de temps en temps
     if (document.hidden) return;
-    var on = $$('.tube.on').filter(function (t) { var r = t.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
+    var on = $$('.tube.on').filter(function (t) { return !t.closest('.hors'); }); // seulement dans une rubrique à l'écran, sans lire la mise en page
     if (!on.length) return; var t = on[Math.floor(Math.random() * on.length)];
     t.classList.remove('gres'); void t.offsetWidth; t.classList.add('gres'); setTimeout(function () { t.classList.remove('gres'); }, 700);
   }, 2600);
   $('#auj-j').textContent = JOURS[auj].toLowerCase();
   $('#auj-h').innerHTML = (plages(C.horaires[auj][1], '<br>') || 'Horaires à confirmer');
   var halo = $('#halo');
-  acc.addEventListener('pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = acc.getBoundingClientRect(); halo.style.opacity = 1; halo.style.transform = 'translate(' + (e.clientX - r.left) + 'px,' + (e.clientY - r.top) + 'px)'; });
-  acc.addEventListener('pointerleave', function () { halo.style.opacity = 0; });
+  var haloVu = false; // l'accueil est le premier bloc de la page : sa position dans le document ne se relit pas à chaque mouvement
+  acc.addEventListener('pointermove', function (e) { if (e.pointerType !== 'mouse') return; if (!haloVu) { haloVu = true; halo.style.willChange = 'transform'; halo.style.opacity = 1; } halo.style.transform = 'translate(' + (e.pageX - P.accX) + 'px,' + (e.pageY - P.accY) + 'px)'; });
+  acc.addEventListener('pointerleave', function () { haloVu = false; halo.style.opacity = 0; halo.style.willChange = ''; });
 
   /* ---------- 2. le bandeau lumineux ---------- */
   var bd = $('#bandeau'), bx = 0, bw = 0;
@@ -96,26 +116,33 @@
 
   /* ---------- 5. le karaoké ---------- */
   var sc = $('#karaoke'), piste = $('#piste'), bille = $('#bille'), paroles = $('#paroles'), bouton = $('#chante'), ecran = $('#ecran'), bravo = $('#bravo');
-  var K = { l: 0, m: 0, n: 0, joueur: false, fini: false, energie: 0, vu: false, dernier: 0, retour: null }, lignes = [];
+  var K = { l: 0, m: 0, n: 0, joueur: false, fini: false, energie: 0, vu: false, dernier: 0, retour: null, w: -1, lh: 0, cx: [], alt: false }, lignes = [];
   C.paroles.forEach(function (mots) { var p = el('p', 'ligne'); mots.forEach(function (m) { p.appendChild(el('span', 'mot', m)); }); piste.appendChild(p); lignes.push(p); });
-  function ajuster() { // la plus longue ligne tient toujours dans l'écran
-    var w = paroles.clientWidth, base = borne(w / 11.5, 18, 60), max = 0;
-    piste.style.setProperty('--kf', base + 'px');
-    lignes.forEach(function (l) { var s = 0; $$('.mot', l).forEach(function (m) { s += m.offsetWidth; }); s += (l.children.length - 1) * base * .26; max = Math.max(max, s); });
-    if (max > w - 10) piste.style.setProperty('--kf', (base * (w - 10) / max).toFixed(1) + 'px');
+  function ajuster(force) { // la plus longue ligne tient toujours dans l'écran
+    var w = paroles.clientWidth;
+    if (force || w !== K.w) {
+      var base = borne(w / 11.5, 18, 60), max = 0; K.w = w;
+      piste.style.setProperty('--kf', base + 'px');
+      lignes.forEach(function (l) { var s = 0; $$('.mot', l).forEach(function (m) { s += m.offsetWidth; }); s += (l.children.length - 1) * base * .26; max = Math.max(max, s); });
+      if (max > w - 10) piste.style.setProperty('--kf', (base * (w - 10) / max).toFixed(1) + 'px');
+    }
+    // la place de chaque mot est lue ici, une fois : la bille ne relit plus la mise en page à chaque mot chanté
+    K.lh = lignes[0].offsetHeight;
+    K.cx = lignes.map(function (l) { return [].map.call(l.children, function (m) { return m.offsetLeft + m.offsetWidth / 2; }); });
     placer(); viser();
   }
+  var compte = $('#k-compte');
   function placer() {
-    piste.style.transform = 'translateY(' + (-K.l * lignes[0].offsetHeight) + 'px)';
+    piste.style.transform = 'translateY(' + (-K.l * K.lh) + 'px)';
     lignes.forEach(function (l, i) { l.classList.toggle('ici', i === K.l); l.classList.toggle('suite', i === K.l + 1); l.classList.toggle('passe', i < K.l); });
-    $('#k-compte').textContent = (K.l + 1) + ' / ' + lignes.length;
+    compte.textContent = (K.l + 1) + ' / ' + lignes.length;
   }
-  function viser() { var l = lignes[K.l], m = l.children[Math.min(K.m, l.children.length - 1)]; bille.style.transform = 'translate(' + (m.offsetLeft + m.offsetWidth / 2) + 'px,22px)'; }
+  function viser() { var c = K.cx[K.l]; bille.style.transform = 'translate(' + c[Math.min(K.m, c.length - 1)] + 'px,22px)'; }
   function debut() { K.l = 0; K.m = 0; K.n = 0; K.fini = false; $$('.mot.dit', piste).forEach(function (m) { m.classList.remove('dit'); }); bravo.hidden = true; piste.style.visibility = ''; bille.style.visibility = ''; placer(); viser(); }
   function chanter(parJoueur) {
     if (K.fini) return;
     var l = lignes[K.l]; l.children[K.m].classList.add('dit');
-    bille.classList.remove('saute'); void bille.offsetWidth; bille.classList.add('saute');
+    K.alt = !K.alt; bille.classList.toggle('saute', K.alt); bille.classList.toggle('saute2', !K.alt); // deux animations jumelles en alternance : le saut repart sans forcer un calcul de mise en page
     if (parJoueur) { note(K.n); envoyerNote(); K.energie = Math.min(1, K.energie + .12); }
     K.n++; K.m++;
     if (K.m >= l.children.length) {
@@ -319,41 +346,63 @@
 
   /* ---------- la boucle : défilement, bandeau, karaoké, borne ---------- */
   var images = $$('.pola-i img,.carte-i img'), accG = $('.acc-g'), vit = $('.vitrine');
-  var sale = true, dy = scrollY, vel = 0, tp = performance.now(), defile = false, demo = 0;
-  function mesurer() { bw = bd.scrollWidth / 2; ajuster(); sale = true; }
+  var sale = true, dy = scrollY, vel = 0, tp = performance.now(), defile = false, demo = 0, manV = '', iciV = -2, pair = false;
+  // Tout ce que la boucle a besoin de savoir de la mise en page est lu ICI, une fois (chargement, redimensionnement, polices,
+  // page qui change de hauteur), puis gardé : pendant le défilement, la boucle ne lit plus que scrollY.
+  var P = { vh: innerHeight, large: innerWidth >= 1000, max: 1, img: [], cib: [], zt: 0, zh: 0, trop: 0, accX: 0, accY: 0 };
+  function reperer() {
+    var y = scrollY, x = scrollX, ar = acc.getBoundingClientRect();
+    P.vh = innerHeight; P.large = innerWidth >= 1000; P.accX = ar.left + x; P.accY = ar.top + y;
+    P.max = Math.max(1, document.scrollingElement.scrollHeight - P.vh);
+    P.img = images.map(function (im, i) { var b = im.parentNode.getBoundingClientRect(); return { im: im, t: b.top + y, h: b.height, v: P.img[i] ? P.img[i].v : '' }; });
+    P.cib = P.large ? cibles.map(function (c) { return c ? c.getBoundingClientRect().top + y : Infinity; }) : [];
+    if (lie) { var zr = zone.getBoundingClientRect(); P.zt = zr.top + y; P.zh = zr.height; P.trop = bande.scrollWidth - zone.clientWidth + 2 * parseFloat(getComputedStyle(zone).paddingLeft); }
+    sale = true;
+  }
+  function mesurer(force) { tailleEgal(); bw = bd.scrollWidth / 2; ajuster(force === true); reperer(); }
+  // Ce qui n'est pas à l'écran s'arrête : les animations sans fin de la rubrique (classe « hors »), le bandeau, le grésillement.
+  var bandeauVu = true;
+  var ioz = new IntersectionObserver(function (l) {
+    l.forEach(function (e) { if (e.target === bd.parentNode) bandeauVu = e.isIntersecting; else e.target.classList.toggle('hors', !e.isIntersecting); });
+  }, { rootMargin: '60px 0px' });
+  [acc, bd.parentNode, $('#soirees'), sc, $('#jeux'), $('.pied')].forEach(function (z) { ioz.observe(z); });
   function tick(t) {
     var dt = Math.min(.05, (t - tp) / 1000); tp = t;
-    var y = scrollY, vh = innerHeight, v = (y - dy) / Math.max(dt, .001); dy = y; vel += (v - vel) * Math.min(1, dt * 8);
+    var y = scrollY, vh = P.vh, v = (y - dy) / Math.max(dt, .001); dy = y; vel += (v - vel) * Math.min(1, dt * 8);
     if (!calme) {
-      egal.style.transform = 'scaleY(' + (1 + Math.min(3.4, Math.abs(vel) / 420)).toFixed(2) + ')';
-      if (bw) { bx -= (46 + Math.min(1500, Math.abs(vel)) * .6) * dt; if (bx < -bw) bx += bw; bd.style.transform = 'translate3d(' + bx.toFixed(1) + 'px,0,0)'; }
+      if (bw && bandeauVu) { bx -= (46 + Math.min(1500, Math.abs(vel)) * .6) * dt; if (bx < -bw) bx += bw; bd.style.transform = 'translate3d(' + bx.toFixed(1) + 'px,0,0)'; }
       if (sale) {
-        if (y < vh * 1.3 && innerWidth >= 1000) { accG.style.transform = 'translate3d(0,' + (y * .2).toFixed(1) + 'px,0)'; vit.style.transform = 'translate3d(0,' + (y * .09).toFixed(1) + 'px,0) rotate(' + (y * .012).toFixed(2) + 'deg)'; }
-        images.forEach(function (im) { var b = im.parentNode.getBoundingClientRect(); if (b.bottom < -40 || b.top > vh + 40) return; var q = borne((vh - b.top) / (vh + b.height), 0, 1); im.style.transform = 'translate3d(0,' + (-q * 12).toFixed(2) + '%,0)'; });
+        if (P.large && y < vh * 1.3) { accG.style.transform = 'translate3d(0,' + (y * .2).toFixed(1) + 'px,0)'; vit.style.transform = 'translate3d(0,' + (y * .09).toFixed(1) + 'px,0) rotate(' + (y * .012).toFixed(2) + 'deg)'; }
+        for (var i = 0; i < P.img.length; i++) { // les photos glissent dans leur cadre
+          var o = P.img[i], top = o.t - y; if (top + o.h < -40 || top > vh + 40) continue;
+          var s = 'translate3d(0,' + (-borne((vh - top) / (vh + o.h), 0, 1) * 12).toFixed(2) + '%,0)'; if (s !== o.v) { o.v = s; o.im.style.transform = s; }
+        }
         if (lie) { // la bande d'affiches glisse pendant qu'on traverse la rubrique
-          var zr = zone.getBoundingClientRect(), trop = bande.scrollWidth - zone.clientWidth + 2 * parseFloat(getComputedStyle(zone).paddingLeft);
-          if (trop > 0 && zr.bottom > -100 && zr.top < vh + 100) { var q2 = borne((vh * .8 - zr.top) / (vh * .8 - Math.max(64, vh * .5 - zr.height / 2)), 0, 1); bande.style.transform = 'translate3d(' + (-trop * q2).toFixed(1) + 'px,0,0)'; }
-          else if (trop <= 0) bande.style.transform = '';
+          var zt = P.zt - y;
+          if (P.trop > 0 && zt + P.zh > -100 && zt < vh + 100) { var q2 = borne((vh * .8 - zt) / (vh * .8 - Math.max(64, vh * .5 - P.zh / 2)), 0, 1); bande.style.transform = 'translate3d(' + (-P.trop * q2).toFixed(1) + 'px,0,0)'; }
+          else if (P.trop <= 0) bande.style.transform = '';
         }
       }
       // karaoké : démonstration tant que personne n'a touché le micro
       if (K.vu && !K.joueur && !K.fini) { demo += dt; if (demo > .52) { demo = 0; chanter(false); } }
       if (K.energie > 0) { K.energie = Math.max(0, K.energie - dt * (K.fini ? .04 : .1)); }
       applaudir();
-      if (G.vu) { pasJeu(Math.min(dt, .033)); dessiner(); manette.style.transform = 'translateX(' + borne((G.cible - G.px) * .6, -9, 9).toFixed(1) + 'px)'; }
+      if (G.vu) { pasJeu(Math.min(dt, .033)); dessiner(); var mv = 'translateX(' + borne((G.cible - G.px) * .6, -9, 9).toFixed(1) + 'px)'; if (mv !== manV) { manV = mv; manette.style.transform = mv; } }
     }
     if (sale) {
-      var ici = -1; cibles.forEach(function (c, i) { if (c && c.getBoundingClientRect().top < vh * .45) ici = i; });
-      liens.forEach(function (a, i) { a.classList.toggle('actif', i === ici); });
-      egal.style.setProperty('--lu', borne(y / Math.max(1, document.scrollingElement.scrollHeight - vh), .02, 1).toFixed(3)); // l'égaliseur s'allume au fil de la lecture
+      if (P.large) { var ici = -1; for (var k = 0; k < P.cib.length; k++) if (P.cib[k] - y < vh * .45) ici = k; if (ici !== iciV) { iciV = ici; liens.forEach(function (a, j) { a.classList.toggle('actif', j === ici); }); } }
+      EG.lu = borne(y / P.max, .02, 1); // l'égaliseur s'allume au fil de la lecture
+      if (calme) dessinerEgal(t, 1);
       sale = false;
     }
+    if (!calme) { var et = 1 + Math.min(3.4, Math.abs(vel) / 420); if (et > 1.02 || (pair = !pair)) dessinerEgal(t, et); } // page immobile : la danse lente se redessine une image sur deux
     requestAnimationFrame(tick);
   }
   addEventListener('scroll', function () { sale = true; if (!defile) { defile = true; try { parent.postMessage({ type: 'kazura-defile' }, '*'); } catch (e) { } } }, { passive: true });
   addEventListener('resize', mesurer);
-  addEventListener('load', function () { mesurer(); try { parent.postMessage({ type: 'kazura-pret' }, '*'); } catch (e) { } });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(mesurer);
-  mesurer(); if (calme) { dessiner(); applaudir(); }
+  addEventListener('load', function () { mesurer(true); try { parent.postMessage({ type: 'kazura-pret' }, '*'); } catch (e) { } });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { mesurer(true); });
+  if (window.ResizeObserver) new ResizeObserver(reperer).observe($('#page')); // la page change de hauteur (ticket imprimé, par exemple) : on relit les positions
+  mesurer(true); if (calme) { dessiner(); applaudir(); }
   requestAnimationFrame(tick);
 })();
