@@ -65,7 +65,10 @@ h1,h2,h3{font-weight:900;font-stretch:var(--wd);text-transform:uppercase;letter-
 /* cadres photo : un parallélogramme, la photo glisse dedans */
 .cadre{position:relative;overflow:hidden;clip-path:polygon(9% 0,100% 0,91% 100%,0 100%);background:var(--noir2)}
 .cadre.inv{clip-path:polygon(0 0,91% 0,100% 100%,9% 100%)}
-.cadre img{position:absolute;inset:-9% 0;width:100%;height:118%;object-fit:cover;will-change:transform}
+.cadre img{position:absolute;inset:-9% 0;width:100%;height:118%;object-fit:cover}
+.cadre img[data-px]{will-change:transform}
+/* fluidité : les animations sans fin s'arrêtent hors écran (classe posée par app.js) */
+.defile.hors .defile-p,.heros.hors .laque-b,.rail-aide.hors svg{animation-play-state:paused}
 .js .cadre.ap{opacity:1;transform:none;clip-path:polygon(9% 0,9% 0,0 100%,0 100%);transition:clip-path 1.2s var(--doux)}
 .js .cadre.ap.vu{clip-path:polygon(9% 0,100% 0,91% 100%,0 100%)}
 .js .cadre.inv.ap{clip-path:polygon(0 0,0 0,9% 100%,9% 100%)}
@@ -73,7 +76,7 @@ h1,h2,h3{font-weight:900;font-stretch:var(--wd);text-transform:uppercase;letter-
 
 /* ---------- barre haute ---------- */
 .tete{position:fixed;inset:0 0 auto;z-index:60;height:var(--tete);background:var(--noir);color:var(--appret);display:flex;align-items:center;gap:clamp(8px,2vw,34px);padding:0 var(--bord)}
-.tete::after{content:"";position:absolute;left:0;right:0;top:100%;height:6px;background:var(--t);transform-origin:0 50%;transform:scaleX(var(--av,0))}
+.tete .avance{position:absolute;left:0;right:0;top:100%;height:6px;background:var(--t);transform-origin:0 50%;transform:scaleX(0);will-change:transform;pointer-events:none}
 .marque{font:900 17px/1 var(--f);font-stretch:125%;text-transform:uppercase;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
 .marque b{font-weight:900;color:var(--t)}
 .tete nav{display:none;gap:clamp(14px,1.7vw,30px);margin-left:auto;font:700 14px/1 var(--f);font-stretch:88%;text-transform:uppercase;letter-spacing:.1em}
@@ -159,7 +162,7 @@ h1,h2,h3{font-weight:900;font-stretch:var(--wd);text-transform:uppercase;letter-
 .t-intro{position:absolute;left:0;bottom:0;max-width:min(40%,19em);opacity:var(--r);transform:translateY(calc((1 - var(--r))*-4vh))}
 .t-carte>.E{display:block;margin-bottom:1.6vh}
 .t-mot{display:inline-block;white-space:nowrap;font-size:11vw;line-height:.86}
-.t-mot i{position:relative;display:inline-block;font-style:normal;will-change:transform}
+.t-mot i{position:relative;display:inline-block;font-style:normal}
 .t-mot.monte{overflow:hidden;padding-top:.2em;margin-top:-.2em;vertical-align:top}
 .t-mot.monte i{--q:clamp(0,(var(--p) - .4)*3.4 - var(--i)*.06,1);transform:translateY(calc((1 - var(--q))*112%))}
 .t-ligne{display:block;width:max-content;white-space:nowrap;font:900 60px/.92 var(--f);font-stretch:62%;text-transform:uppercase;letter-spacing:.005em;margin-top:1.4vh}

@@ -94,7 +94,7 @@
       pont.style.setProperty('--hp', hp + 'px');
       pont.style.setProperty('--course', Math.max(0, vh - tete - vh * .04 - hp - vh * .06).toFixed(0) + 'px');
     }
-    reveil();
+    mesurerPos();
   }
 
   /* ---------- apparitions ---------- */
@@ -117,43 +117,66 @@
     for (var n = 0; n < 11; n++) h += '<span>' + (n % 10) + '</span>';
     t.className = 'tambour'; b.innerHTML = h; t.appendChild(b); tb.appendChild(t); tamb.unshift(b);
   }
-  var trans = $$('.trans').map(function (el) { return { el: el, p: 0, aff: -1 }; });
-  var glisse = $$('[data-px]').map(function (el) { return { el: el, cadre: el.parentNode, f: +el.dataset.px }; });
-  var liens = $$('.tete nav a'), cibles = liens.map(function (a) { return $(a.getAttribute('href')); });
+  /* fluidité (13/11) : les positions sont mesurées une fois (chargement, polices, redimensionnement, changement de hauteur
+     de la page) et gardées en mémoire ; la boucle ne lit plus la mise en page, elle calcule puis écrit. */
+  var trans = $$('.trans').map(function (el) { return { el: el, p: 0, aff: -1, top: 0, h: 0 }; });
+  var glisse = $$('[data-px]').map(function (el) { return { el: el, cadre: el.parentNode, f: +el.dataset.px, top: 0, h: 0, aff: '' }; });
+  var liens = $$('.tete nav a'), cibles = liens.map(function (a) { return $(a.getAttribute('href')); }), hautsCibles = [], navCur = -2;
+  var avance = D.createElement('i'), avAff = '', tambAff = ['', '', '', ''], tambVisibles = false, maxDef = 0;
+  avance.className = 'avance'; avance.setAttribute('aria-hidden', 'true'); if (entete) entete.appendChild(avance);
   var raf = 0, navT = 0;
   if (CALME) trans.forEach(function (t) { t.el.style.setProperty('--p', 1); });
+  function mesurerPos() {
+    var y = scrollY;
+    trans.forEach(function (t) { var r = t.el.getBoundingClientRect(); t.top = r.top + y; t.h = r.height; });
+    glisse.forEach(function (o) { var r = o.cadre.getBoundingClientRect(); o.top = r.top + y; o.h = r.height; });
+    hautsCibles = cibles.map(function (c) { return c ? c.getBoundingClientRect().top + y : Infinity; });
+    maxDef = D.scrollingElement.scrollHeight - innerHeight;
+    tambVisibles = !!(tb && tb.getClientRects().length);
+    reveil();
+  }
   function reveil() { if (!raf) raf = requestAnimationFrame(boucle); }
   function boucle(temps) {
     raf = 0;
-    var y = scrollY, vh = innerHeight, encore = false, max = D.scrollingElement.scrollHeight - vh;
-    entete.style.setProperty('--av', (max > 0 ? y / max : 0).toFixed(4));
-    if (tamb.length) {
+    var y = scrollY, vh = innerHeight, encore = false;
+    var av = 'scaleX(' + (maxDef > 0 ? borne(y / maxDef, 0, 1) : 0).toFixed(4) + ')';
+    if (av !== avAff) { avance.style.transform = av; avAff = av; }
+    if (tamb.length && tambVisibles) {
       var v = y * .02646;
       for (var k = 0; k < 4; k++) {
         var u = Math.pow(10, k), d = Math.floor(v / u) % 10, bas = v % u, pos = k === 0 ? v % 10 : d + Math.max(0, bas - (u - 1));
-        tamb[k].style.transform = 'translateY(' + (-pos * 1.5).toFixed(3) + 'em)';
+        var tr = 'translateY(' + (-pos * 1.5).toFixed(3) + 'em)';
+        if (tr !== tambAff[k]) { tamb[k].style.transform = tr; tambAff[k] = tr; }
       }
     }
     if (!CALME) trans.forEach(function (t) {
-      var r = t.el.getBoundingClientRect();
-      if (r.bottom < -vh || r.top > vh * 2) return;
-      var deb = vh * .8, fin = -(r.height - vh), c = borne((deb - r.top) / (deb - fin), 0, 1), e = c - t.p;
+      var haut = t.top - y;
+      if (haut + t.h < -vh || haut > vh * 2) return;
+      var deb = vh * .8, fin = -(t.h - vh), c = borne((deb - haut) / (deb - fin), 0, 1), e = c - t.p;
       if (Math.abs(e) > .0008) { t.p += e * .17; encore = true; } else t.p = c;
       if (t.p !== t.aff) { t.el.style.setProperty('--p', t.p.toFixed(4)); t.aff = t.p; }
     });
     if (!CALME) glisse.forEach(function (o) {
-      var r = o.cadre.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      o.el.style.transform = 'translate3d(0,' + ((r.top + r.height / 2 - vh / 2) / vh * o.f * -78).toFixed(2) + '%,0)';
+      var haut = o.top - y;
+      if (haut + o.h < 0 || haut > vh) return;
+      var tr = 'translate3d(0,' + ((haut + o.h / 2 - vh / 2) / vh * o.f * -78).toFixed(2) + '%,0)';
+      if (tr !== o.aff) { o.el.style.transform = tr; o.aff = tr; }
     });
     if (temps - navT > 160) {
       navT = temps; var cur = -1;
-      cibles.forEach(function (c, i) { if (c && c.getBoundingClientRect().top < vh * .5) cur = i; });
-      liens.forEach(function (a, i) { a.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
+      hautsCibles.forEach(function (h, i) { if (h - y < vh * .5) cur = i; });
+      if (cur !== navCur) { navCur = cur; liens.forEach(function (a, i) { a.setAttribute('aria-current', i === cur ? 'true' : 'false'); }); }
     }
     if (encore) reveil();
   }
   addEventListener('scroll', reveil, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(function () { mesurerPos(); }).observe(D.body);
+
+  /* les animations sans fin s'arrêtent hors écran et repartent juste avant d'y revenir */
+  var vigie = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { e.target.classList.toggle('hors', !e.isIntersecting); });
+  }, { rootMargin: '20% 0px 20% 0px' });
+  $$('.defile,.heros,.rail-aide').forEach(function (e) { vigie.observe(e); });
   var lw = innerWidth, lh = innerHeight, rt = 0;
   addEventListener('resize', function () {
     clearTimeout(rt);
@@ -421,10 +444,11 @@
   if (cur && FIN && !CALME) D.addEventListener('pointermove', function (e) {
     if (e.pointerType !== 'mouse') return;
     var t = e.target.closest ? e.target.closest('[data-cur]') : null;
-    cur.style.setProperty('--cx', e.clientX + 'px'); cur.style.setProperty('--cy', e.clientY + 'px'); cur.style.setProperty('--cs', t ? 1 : 0);
+    cur.style.setProperty('--cx', e.clientX + 'px'); cur.style.setProperty('--cy', e.clientY + 'px'); cur.style.setProperty('--cs', t ? 1 : 0); curMontre = !!t;
     if (t && cur.textContent !== t.dataset.cur) cur.textContent = t.dataset.cur;
   }, { passive: true });
-  if (cur) addEventListener('scroll', function () { cur.style.setProperty('--cs', 0); }, { passive: true });
+  var curMontre = false;
+  if (cur && FIN && !CALME) addEventListener('scroll', function () { if (curMontre) { curMontre = false; cur.style.setProperty('--cs', 0); } }, { passive: true });
 
   ajuster();
   if (D.fonts && D.fonts.load) D.fonts.load('900 100px Archivo').then(function () { ajuster(); monter(true); }).catch(function () {});
