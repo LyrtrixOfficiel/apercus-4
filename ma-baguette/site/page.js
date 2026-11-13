@@ -9,6 +9,7 @@
   function annoncer(t) { try { if (parent !== window) parent.postMessage({ type: t }, '*'); } catch (e) {} }
   function rejoue(el, cl) { el.classList.remove(cl); void el.offsetWidth; el.classList.add(cl); }
   var mb = innerWidth < 760 ? .7 : 1, vh = innerHeight;
+  var G = { sec: [], jourTop: 0, jourH: 1, colleW: 0, colleH: 0, meTop: 0, meH: 0 };   // positions gardées en mémoire (voir mesurer)
 
   // ---------- liens ----------
   $$('[data-carte]').forEach(function (a) { a.href = C.carte; a.target = '_blank'; a.rel = 'noopener'; });
@@ -173,10 +174,10 @@
     };
     o.batir(); return o;
   });
-  function majRangs() {
+  function majRangs(y) {
     rangs.forEach(function (o) {
-      var r = o.el.getBoundingClientRect(); if (r.top > vh + 60 || r.bottom < -160) return;
-      var q = borne((vh * .94 - r.top) / (vh * .52), 0, 1);
+      var top = o.top - y; if (top > vh + 60 || top + o.h < -160) return;
+      var q = borne((vh * .94 - top) / (vh * .52), 0, 1);
       o.b.forEach(function (k) {
         var l = borne((q - k.t) / .26, 0, 1); if (!o.tombe) l = 1 - l;
         if (Math.abs(l - k.der) < .004) return; k.der = l;
@@ -256,9 +257,9 @@
   var meScene = $('#me-scene'), meBande = $('#me-bande'), meCm = $('#me-cm'), meG = $('#me-g'), meAig = $('.me-balance .ho-m'), meDer = -1;
   for (var c5 = 5; c5 <= 65; c5 += 5) { var eb = D.createElement('b'); eb.textContent = c5; eb.style.left = (c5 / 65 * 100).toFixed(3) + '%'; meBande.appendChild(eb); }
   meAig.style.setProperty('--a', '-135deg');
-  function majMetre() {
-    var r = meScene.getBoundingClientRect(); if (r.top > vh + 80 || r.bottom < -80) return;
-    var q = borne((vh * .9 - r.top) / (vh * .62), 0, 1); q = q * q * (3 - 2 * q);
+  function majMetre(y) {
+    var top = G.meTop - y; if (top > vh + 80 || top + G.meH < -80) return;
+    var q = borne((vh * .9 - top) / (vh * .62), 0, 1); q = q * q * (3 - 2 * q);
     if (Math.abs(q - meDer) < .002) return; meDer = q;
     meScene.style.setProperty('--q', q.toFixed(4));
     meCm.textContent = Math.round(q * 65); meG.textContent = Math.round(q * 250 / 5) * 5;
@@ -298,6 +299,7 @@
       for (var e = 0; e < 2; e++) { h += '<div class="etage">'; for (var f = 0; f < 3; f++) h += '<span class="fen"><i class="vl g"></i><i class="vl d"></i></span>'; h += '</div>'; }
       if (n === 2) h += '<div class="rdc boul"><span class="ens"><em>Ma</em>BAGUETTE</span><span class="arc vit"><span class="pains"><i style="--s:-1"></i><i style="--s:1"></i><i style="--s:-.4"></i><i style="--s:.8"></i><i style="--s:-1.2"></i><i style="--s:.3"></i></span></span><span class="arc porte"></span><span class="num12">12</span></div>';
       else h += '<div class="rdc"><span class="arc porte" style="--pc:' + p[2] + '"></span><span class="arc porte" style="--pc:' + p[2] + '"></span></div>';
+      h += '<i class="imm-nuit"></i>';
       im.innerHTML = h; rue.appendChild(im);
       $$('.fen', im).forEach(function (f) { fenetres.push({ el: f, ouvre: 6.5 + al() * 2.9, ferme: 19.7 + al() * 1.4, lampe: al() < .45, etat: '' }); });
     });
@@ -306,18 +308,27 @@
     var halo = D.createElement('i'); halo.className = 'halo'; rue.appendChild(halo);
     var rev = D.createElement('i'); rev.className = 'reverbere'; rue.appendChild(rev);
   })();
+  // Fluidité (13/11) : chaque variable est posée sur les seuls éléments qui la lisent, et seulement quand elle change.
+  // Posées sur .j-colle, elles faisaient recalculer les styles de toute la scène (près de 300 éléments) à chaque image.
+  var cibles = {
+    nuit: $$('.c-nuit, .j-ciel .lune, .j-ciel .nuage, .imm-nuit, .halo', colle), soir: $$('.c-soir', colle),
+    vitrine: $$('.boul .arc', colle), lampe: $$('.reverbere', colle), ax: $$('.astre', colle), ay: $$('.astre', colle)
+  }, ecrit = {};
+  function pose(k, v) { if (ecrit[k] === v) return; ecrit[k] = v; cibles[k].forEach(function (e) { e.style.setProperty('--' + k, v); }); }
+  var jhH = $('.ho-h', jh), jhM = $('.ho-m', jh), jhDer = '';
   var MOMENTS = [0, .2, .42, .6, .82], CIBLES = [.05, .3, .5, .7, .95], momentOn = -1, pDer = -1;
   function heureDe(p) { return p < .16 ? 5.75 + p / .16 * 1.35 : 7.1 + (p - .16) / .84 * 14.1; }
-  function majJour() {
-    var r = jour.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return;
-    var p = borne(-r.top / (r.height - vh), 0, 1); if (Math.abs(p - pDer) < .0008) return; pDer = p;
-    var h = heureDe(p), W = colle.clientWidth, Hh = colle.clientHeight;
+  function majJour(y) {
+    var top = G.jourTop - y; if (top > vh || top + G.jourH < 0) return;
+    var p = borne(-top / (G.jourH - vh), 0, 1); if (Math.abs(p - pDer) < .0008) return; pDer = p;
+    var h = heureDe(p), W = G.colleW, Hh = G.colleH;
     var matin = borne(1 - (h - 5.9) / 2.1, 0, 1), nuit2 = borne((h - 19.6) / 1.5, 0, 1) * .85, nuit = Math.max(matin, nuit2), soir = borne((h - 17) / 2.2, 0, 1) * (1 - nuit2 * .5);
-    var s = colle.style, t = (h - 6.3) / 14, taille = borne(W * .066, 58, 104);
-    s.setProperty('--nuit', nuit.toFixed(3)); s.setProperty('--soir', soir.toFixed(3));
-    s.setProperty('--vitrine', Math.max(nuit, .5).toFixed(3)); s.setProperty('--lampe', nuit > .3 ? 1 : 0);
-    s.setProperty('--ax', (W * (.03 + .94 * t) - taille / 2).toFixed(1) + 'px'); s.setProperty('--ay', (Hh * (.72 - .56 * Math.sin(Math.PI * borne(t, 0, 1))) - taille / 2).toFixed(1) + 'px');
-    aiguilles(jh, h, false);
+    var t = (h - 6.3) / 14, taille = borne(W * .066, 58, 104);
+    pose('nuit', nuit.toFixed(3)); pose('soir', soir.toFixed(3));
+    pose('vitrine', Math.max(nuit, .5).toFixed(3)); pose('lampe', nuit > .3 ? '1' : '0');
+    pose('ax', (W * (.03 + .94 * t) - taille / 2).toFixed(1) + 'px'); pose('ay', (Hh * (.72 - .56 * Math.sin(Math.PI * borne(t, 0, 1))) - taille / 2).toFixed(1) + 'px');
+    var T = h * 3600, ah = (T / 120).toFixed(2) + 'deg', am = (T / 10).toFixed(2) + 'deg';
+    if (am !== jhDer) { jhDer = am; jhH.style.setProperty('--a', ah); jhM.style.setProperty('--a', am); }
     fenetres.forEach(function (f) {
       var ouv = h > f.ouvre && h < f.ferme, lum = ouv && f.lampe && (h < f.ouvre + .9 && h < 8.4 || h > 18.7), e = (ouv ? 'o' : '') + (lum ? 'l' : '');
       if (e === f.etat) return; f.etat = e; f.el.classList.toggle('ouverte', ouv); f.el.classList.toggle('allumee', lum);
@@ -372,18 +383,34 @@
   $$('.revele').forEach(function (e) { io.observe(e); });
 
   // ---------- une seule boucle au défilement ----------
-  var att = false, defile = false;
+  // Fluidité (13/11) : les positions sont mesurées une fois (chargement, redimensionnement, polices, changement de taille
+  // du contenu) et gardées en mémoire ; à chaque image on ne fait plus que des calculs et des écritures, aucune lecture.
+  // offsetTop ignore les transformations : les apparitions en cours ne faussent pas les positions.
+  function absTop(el) { var t = 0; while (el) { t += el.offsetTop; el = el.offsetParent; } return t; }
+  function mesurer() {
+    G.sec = sections.map(absTop);
+    rangs.forEach(function (o) { o.top = absTop(o.el); o.h = o.el.offsetHeight; });
+    G.jourTop = absTop(jour); G.jourH = jour.offsetHeight; G.colleW = colle.clientWidth; G.colleH = colle.clientHeight;
+    G.meTop = absTop(meScene); G.meH = meScene.offsetHeight;
+    dents.forEach(function (d) { d._top = absTop(d); d._h = d.offsetHeight; d._dx = ''; });
+    cadres.forEach(function (c) { c._top = absTop(c); c._h = c.offsetHeight; });
+    pDer = -1; meDer = -1;
+  }
+  var att = false, defile = false, sDer = '';
   function rendu() {
     att = false;
     var y = scrollY, n = 1;
-    for (var i = 0; i < sections.length; i++) if (sections[i].getBoundingClientRect().top < vh * .5) n = i + 1;
+    for (var i = 0; i < G.sec.length; i++) if (G.sec[i] - y < vh * .5) n = i + 1;
     servir(n);
-    if (y < vh * 1.3 && !calme) { hbag.style.setProperty('--sy', (y * .2).toFixed(1) + 'px'); hbag.style.setProperty('--sr', Math.min(16, y * .016).toFixed(2) + 'deg'); }
-    majRangs(); majJour(); majMetre();
-    dents.forEach(function (d) { var r = d.getBoundingClientRect(); if (r.top < vh + 40 && r.bottom > -40) d.style.setProperty('--dx', ((r.top / vh - .5) * -46).toFixed(1) + 'px'); });
+    if (y < vh * 1.3 && !calme) { var sy = (y * .2).toFixed(1) + 'px'; if (sy !== sDer) { sDer = sy; hbag.style.setProperty('--sy', sy); hbag.style.setProperty('--sr', Math.min(16, y * .016).toFixed(2) + 'deg'); } }
+    majRangs(y); majJour(y); majMetre(y);
+    dents.forEach(function (d) {
+      var top = d._top - y; if (top >= vh + 40 || top + d._h <= -40) return;
+      var dx = ((top / vh - .5) * -46).toFixed(1) + 'px'; if (dx !== d._dx) { d._dx = dx; d.style.setProperty('--dx', dx); }
+    });
     cadres.forEach(function (c) {
-      var r = c.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return;
-      var k = borne((vh - r.top) / (vh + r.height), 0, 1);
+      var top = c._top - y; if (top > vh || top + c._h < 0) return;
+      var k = borne((vh - top) / (vh + c._h), 0, 1);
       c.style.setProperty('--par', ((k - .5) * 9).toFixed(2) + '%');
       if (!c._main) c.style.setProperty('--rx', (-80 + k * 190).toFixed(1) + '%');
     });
@@ -391,10 +418,19 @@
   function dem() { if (!att) { att = true; requestAnimationFrame(rendu); } if (!defile) { defile = true; annoncer('kazura-defile'); } }
   addEventListener('scroll', dem, { passive: true });
   addEventListener('resize', function () {
-    var a = mb; mb = innerWidth < 760 ? .7 : 1; vh = innerHeight; pDer = -1;
-    rangs.forEach(function (o) { o.batir(); }); att = false; rendu(); if (a !== mb) $$('.brq').forEach(function (b) { b.classList.remove('on'); });
+    var a = mb; mb = innerWidth < 760 ? .7 : 1; vh = innerHeight;
+    rangs.forEach(function (o) { o.batir(); }); mesurer(); att = false; rendu(); if (a !== mb) $$('.brq').forEach(function (b) { b.classList.remove('on'); });
   });
-  rendu();
+  mesurer(); rendu();
+  // le contenu change de hauteur (photos chargées, polices, mots collés, ticket) : on remesure
+  if (window.ResizeObserver) new ResizeObserver(function () { mesurer(); dem(); }).observe($('main'));
+  addEventListener('load', function () { mesurer(); dem(); });
+
+  // ---------- les animations sans fin s'arrêtent hors de l'écran (et repartent avant d'y revenir) ----------
+  if (window.IntersectionObserver) {
+    var vigie = new IntersectionObserver(function (en) { en.forEach(function (e) { e.target.classList.toggle('hors', !e.isIntersecting); }); }, { rootMargin: '60% 0px 60% 0px' });
+    sections.forEach(function (s) { vigie.observe(s); });
+  }
 
   (D.fonts && D.fonts.ready ? D.fonts.ready : Promise.resolve()).then(function () { H.classList.add('pret'); annoncer('kazura-pret'); }, function () { annoncer('kazura-pret'); });
 })();

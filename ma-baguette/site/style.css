@@ -427,7 +427,7 @@ h3{font:800 clamp(30px,2.8vw,44px)/1 var(--pl);text-transform:uppercase;letter-s
 .imm{position:relative;flex:0 0 clamp(220px,20.5vw,400px);height:100%;display:flex;flex-direction:column;background-color:var(--mur);background-image:var(--mur-img);background-size:372px 168px;box-shadow:inset -6px 0 0 rgba(0,0,0,.12)}
 .imm.bas{height:88%}.imm.haut{height:100%}.imm.moyen{height:94%}
 .imm::before{content:"";position:absolute;inset:0;background:var(--teinte,transparent);pointer-events:none}
-.imm::after{content:"";position:absolute;inset:0;z-index:3;background:#151a4a;opacity:calc(var(--nuit,0)*.7);pointer-events:none}
+.imm-nuit{position:absolute;inset:0;z-index:3;background:#151a4a;opacity:calc(var(--nuit,0)*.7);pointer-events:none}
 .toit{position:relative;z-index:4;flex:none;height:clamp(10px,2.2vh,20px);margin:0 -7px;background:#a44a31;border-radius:5px 5px 0 0;box-shadow:0 5px 0 rgba(0,0,0,.22)}
 .etage{position:relative;flex:1 1 0;min-height:0;display:flex;justify-content:space-evenly;align-items:center}
 .fen{position:relative;width:17%;height:66%;max-height:120px;background:#232a4c;border-radius:2px;box-shadow:0 0 0 clamp(3px,.4vw,5px) #f4ead8}
@@ -564,6 +564,13 @@ h3{font:800 clamp(30px,2.8vw,44px)/1 var(--pl);text-transform:uppercase;letter-s
   .choix button{padding:.66em .9em .6em}
   .s-composer,.s-place,.s-commande,.s-metre{padding-top:clamp(100px,15vh,130px)}
 }
+
+/* ---------- fluidité (13/11) ---------- */
+/* les animations sans fin s'arrêtent quand leur rubrique est loin de l'écran (classe hors posée par page.js, marge de 60 % d'écran) */
+.hors .reflet::after,.hors .h-bag-f,.hors .di-ticket.appel,.hors .co-croc::after,.hors .nuage,.hors .cheminee i,.hors .chevalet,.hors .jr.auj{animation-play-state:paused!important}
+/* ce que le défilement déplace passe par le compositeur, sans repeindre l'ombre portée ni le reste de la page */
+.h-bag,.h-bag-in,.me-photo,.me-boitier i,.dents,.j-ciel .astre{will-change:transform}
+.c-soir,.c-nuit{will-change:opacity}
 
 /* ---------- mode calme, sur demande seulement (?calme=1) ---------- */
 .calme *,.calme *::before,.calme *::after{animation:none !important;transition:none !important}
