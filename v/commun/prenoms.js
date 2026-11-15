@@ -207,7 +207,7 @@ const FEMININS = {
   perinatal: 'périnatale', prenatal: 'prénatale', postnatal: 'postnatale', familial: 'familiale', conjugal: 'conjugale',
   corporel: 'corporelle', emotionnel: 'émotionnelle', professionnel: 'professionnelle', certifie: 'certifiée', diplome: 'diplômée',
   masseur: 'masseuse', magnetiseur: 'magnétiseuse', guerisseur: 'guérisseuse', animateur: 'animatrice', formateur: 'formatrice',
-  educateur: 'éducatrice', conseiller: 'conseillère', praticien: 'praticienne', createur: 'créatrice', instructeur: 'instructrice',
+  educateur: 'éducatrice', conseiller: 'conseillère', professeur: 'professeure', directeur: 'directrice', praticien: 'praticienne', createur: 'créatrice', instructeur: 'instructrice',
 };
 const garderCasse = (modele, mot) => (/^\p{Lu}/u.test(modele) ? majuscule(mot) : mot);
 
