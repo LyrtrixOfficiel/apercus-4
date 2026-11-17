@@ -856,3 +856,14 @@ html.menu-ouvert .voile-menu { opacity: 1; pointer-events: auto; }
   .capsule-nom, .bouton-menu { height: 48px; }
   .avatar-mini { width: 38px; height: 38px; }
 }
+
+/* 18/11 : l'ancienne règle de la maquette (46vh au-dessus de « Mon approche » au téléphone, pour laisser voir sa photo
+   de fond) laissait un grand vide bleu sous l'accueil. La section commence maintenant juste après. */
+.approche { min-height: 0; }
+.approche .scene-contenu.approche-grille { padding: clamp(90px, 14vh, 150px) 16px clamp(40px, 7vh, 80px); }
+@media (max-width: 899px) {
+  .approche .scene-contenu.approche-grille { padding: clamp(56px, 8vh, 80px) 12px clamp(40px, 7vh, 70px); }
+}
+/* 18/11 : l'ouverture se mesure sur sa propre largeur (pas 100vw, qui compte la barre de défilement de l'ordinateur et
+   décalait les deux moitiés du signe et du nom) */
+.battant-dans { width: calc(100% * 1000 / 503); }
