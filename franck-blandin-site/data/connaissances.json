@@ -1,0 +1,68 @@
+{
+  "_note": "Source unique des informations pratiques du site (tarifs, lieu, stage). Les pages les lisent par {{chemin.de.la.valeur}}. Un changement se fait ici, puis node construire.mjs.",
+  "praticien": {
+    "nom": "Franck Blandin",
+    "metier": "Psychopraticien",
+    "approche": "Approche psychothérapeutique intégrative",
+    "devise": "Être soi, simplement.",
+    "depuis": "2011",
+    "siren": "533 962 353"
+  },
+  "contact": {
+    "telephone": "06 85 05 27 50",
+    "telephoneLien": "tel:+33685052750",
+    "email": "fpj.blandin@orange.fr",
+    "emailLien": "mailto:fpj.blandin@orange.fr"
+  },
+  "lieu": {
+    "batiment": "Bâtiment Le Verdi",
+    "rue": "60 rue Lucien Rose",
+    "cp": "73000",
+    "ville": "Chambéry",
+    "adresse": "Bâtiment Le Verdi, 60 rue Lucien Rose, 73000 Chambéry",
+    "departement": "Savoie",
+    "region": "Auvergne-Rhône-Alpes",
+    "itineraire": "https://www.google.com/maps/dir/?api=1&destination=60+rue+Lucien+Rose%2C+73000+Chamb%C3%A9ry"
+  },
+  "tarifs": {
+    "individuel": {
+      "prix": "70 €",
+      "duree": "45 minutes",
+      "pour": "la séance individuelle, pour un adulte"
+    },
+    "couple": {
+      "prix": "100 €",
+      "duree": "60 minutes",
+      "pour": "la séance de couple",
+      "detail": "soit 50 € par personne"
+    }
+  },
+  "stage": {
+    "titre": "Stage résidentiel de psychothérapie en analyse transactionnelle",
+    "dates": "27 et 28 novembre 2026",
+    "debut": "2026-11-27",
+    "fin": "2026-11-28",
+    "ville": "Yenne, en Savoie",
+    "lieu": "Clos des Capucins, 80 chemin de la Curiaz, 73170 Yenne",
+    "horaires": "du vendredi 27 à 9 h 15 au samedi 28 à 16 h",
+    "prix": "340 €",
+    "hebergement": "135,60 € en chambre double, ou 161,60 € en chambre simple selon les disponibilités, par personne et en pension complète",
+    "participants": "de 5 à 12 personnes",
+    "avec": "Martine Durand"
+  },
+  "livre": {
+    "titre": "Tomber amoureux ! ... et après ?",
+    "auteurs": "Franck Blandin et Martine Durand",
+    "preface": "Elyane Alleysson",
+    "isbn": "978-2-9555150-0-6",
+    "lien": "https://www.amazon.fr/Tomber-amoureux-Franck-Blandin-Martine/dp/2955515000/"
+  },
+  "formation": {
+    "declaration": "84 73 02333 73"
+  },
+  "rdv": {
+    "agenda": ""
+  },
+  "avertissement": "Les accompagnements présentés sur ce site ne remplacent pas un avis, un diagnostic ou un traitement médical.",
+  "urgence": "En cas d'urgence, appelez le 15, ou le 3114, numéro national de prévention du suicide, jour et nuit."
+}
