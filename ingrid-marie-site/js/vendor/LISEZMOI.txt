@@ -1,0 +1,2 @@
+Lenis 1.1.13 (https://github.com/darkroom-engineering/lenis), licence MIT, Copyright (c) darkroom.engineering.
+Copie locale de dist/lenis.min.js : le site ne charge rien depuis l'extérieur (règle CSP default-src 'self').
