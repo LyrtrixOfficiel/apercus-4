@@ -679,7 +679,8 @@ function creerApparitions(tete) {
 // ---------------------------------------------------------------- les photos glissent dans leur cadre, et s'ouvrent
 function creerParallaxe() {
   if (edition) return nul;
-  const cartes = [...document.querySelectorAll('.photo-carte')].map((c) => ({ c, img: c.querySelector('img') }));
+  // une affiche se lit en entier : elle s'ouvre comme les autres cadres, mais son image ne glisse pas (ni agrandie, ni coupée)
+  const cartes = [...document.querySelectorAll('.photo-carte')].map((c) => ({ c, img: c.classList.contains('affiche') ? null : c.querySelector('img') }));
   const couches = [...document.querySelectorAll('[data-glisse]')].map((el) => ({ el, f: parseFloat(el.dataset.glisse) || 0.1 }));
   if (!cartes.length && !couches.length) return nul;
   let avant = null;

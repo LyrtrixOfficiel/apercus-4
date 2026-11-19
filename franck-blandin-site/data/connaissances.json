@@ -35,6 +35,16 @@
       "duree": "60 minutes",
       "pour": "la séance de couple",
       "detail": "soit 50 € par personne"
+    },
+    "supervision": {
+      "prix": "80 €",
+      "duree": "45 minutes",
+      "pour": "la séance de supervision",
+      "lieu": "Au cabinet ou en distanciel"
+    },
+    "analyse": {
+      "prix": "Sur devis",
+      "pour": "l'analyse des pratiques professionnelles"
     }
   },
   "stage": {
