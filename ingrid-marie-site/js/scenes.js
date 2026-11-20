@@ -1,0 +1,241 @@
+/* Ingrid Marie : les scènes de ses mots (css/scenes.css).
+   L'arrivée sous la Lune du jour, le cairn de la terre, le ciel « Lune et Soleil », les cartes des cinq éléments,
+   le vent des voyages, la rivière des soins. Tout suit le défilement ; seuls le léger balancement du cairn et la
+   dérive du vent bougent d'eux-mêmes, et s'arrêtent dans la version calme (« ?calme=1 »). */
+(function () {
+  'use strict';
+  var html = document.documentElement;
+  var calme = html.classList.contains('calme');
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var borne = function (x, a, b) { return x < a ? a : x > b ? b : x; };
+  var lisse = function (a, b, x) { x = borne((x - a) / (b - a), 0, 1); return x * x * (3 - 2 * x); };
+  var vh = window.innerHeight, vw = window.innerWidth;
+  var mobile = window.matchMedia('(max-width: 900px)').matches;
+  var maintenant = function () { return performance.now() / 1000; };
+  var luneDuJour = null;
+  try { luneDuJour = window.LuneDuJour ? window.LuneDuJour.lune(new Date()) : null; } catch (e) {}
+  var partDuJour = luneDuJour ? luneDuJour.part : 0.4;
+
+  /* progression d'une section épinglée : 0 quand elle arrive en haut, 1 quand elle repart */
+  function avance(el) {
+    var r = el.getBoundingClientRect();
+    var course = r.height - vh;
+    return course > 0 ? borne(-r.top / course, 0, 1) : (r.top < 0 ? 1 : 0);
+  }
+  function visible(el, marge) { var r = el.getBoundingClientRect(); return r.bottom > -(marge || 0) && r.top < vh + (marge || 0); }
+
+  /* ------------------------------------------------------------ l'arrivée : la Lune du jour se remplit, puis le jour se lève */
+  var entree = $('#entree');
+  function arrivee() {
+    if (!entree || !html.classList.contains('entree-la')) { if (window.IM && IM.apresEntree) IM.apresEntree(); return; }
+    try { sessionStorage.setItem('im-entree', '1'); } catch (e) {}
+    window.scrollTo(0, 0);
+    if (window.IM && IM.lenis) IM.lenis.stop();
+    var nom = $('.entree__nom', entree), phase = $('#entree-phase'), toile = $('#entree-lune');
+    nom.innerHTML = nom.textContent.split('').map(function (c, i) {
+      return c === ' ' ? ' ' : '<span class="l" style="transition-delay:' + (0.5 + i * 0.07).toFixed(2) + 's">' + c + '</span>';
+    }).join('');
+    if (luneDuJour && phase) phase.textContent = "Aujourd'hui : " + luneDuJour.nom;
+    var astre = window.Astre && toile ? new window.Astre(toile, { rayon: 0.6 }) : null;
+    if (astre && !astre.ok) astre = null;
+    var debut = maintenant(), duree = calme ? 1.2 : 2.9, depart = null, fini = false;
+    var siteOk = function () { return html.classList.contains('nom-ecrit') || !html.classList.contains('eau-voulue') || !$('#rivage'); };
+    requestAnimationFrame(function () { nom.classList.add('vu'); });
+    function image() {
+      if (fini) return;
+      requestAnimationFrame(image);
+      var t = maintenant() - debut;
+      var charge = (!astre || astre.charge) && siteOk();
+      var p = lisse(0, duree, t);
+      if (!depart && p >= 1 && (charge || t > 7)) depart = maintenant();
+      var e = depart ? borne((maintenant() - depart) / 1.5, 0, 1) : 0;
+      var ee = e * e * (3 - 2 * e);
+      if (astre) astre.dessine({ part: 0.03 + (partDuJour - 0.03) * (calme ? 1 : p), eclat: ee, halo: 1 + ee });
+      entree.style.setProperty('--k', (1 + ee * 0.35).toFixed(3));
+      entree.style.setProperty('--r', (-22 + ee * 150).toFixed(2));
+      if (e >= 1) {
+        fini = true;
+        html.classList.remove('entree-la');
+        entree.parentNode.removeChild(entree);
+        if (window.IM && IM.lenis) IM.lenis.start();
+        if (window.IM && IM.apresEntree) IM.apresEntree();
+      }
+    }
+    requestAnimationFrame(image);
+  }
+
+  /* ------------------------------------------------------------ la terre : le cairn se construit pierre par pierre */
+  var cairn = $('#ancrage'), pile = $('#cairn'), pierres = pile ? $$('.cairn__pierre', pile) : [];
+  // largeur de chaque pierre par rapport à la base, décalage de côté, inclinaison une fois posée
+  var LARGEUR = [1, 0.86, 0.78, 0.64, 0.6, 0.5, 0.4], COTE = [0, -0.05, 0.06, -0.04, 0.05, -0.03, 0.015], PENTE = [0, 2.2, -2.6, 3, -2.2, 2.4, -1.4];
+  var posees = [], base = 0, cumul = [], derniereChute = 0, avantCairn = -1;
+  function mesurerCairn() {
+    if (!pile) return;
+    base = pile.getBoundingClientRect().width;
+    var y = 0;
+    pierres.forEach(function (p, i) {
+      var im = $('img', p), l = base * LARGEUR[i];
+      p.style.width = l.toFixed(1) + 'px';
+      var h = l * (im.getAttribute('height') / im.getAttribute('width'));
+      cumul[i] = y;
+      y += h * (i === 0 ? 0.74 : 0.7);
+    });
+  }
+  function cairnImage(t) {
+    if (!cairn || calme) return;
+    if (!visible(cairn, 100)) return;
+    var p = avance(cairn);
+    var balance = 0;
+    pierres.forEach(function (pierre, i) {
+      var a = 0.04 + i * 0.105, u = lisse(a, a + 0.085, p);
+      var chute = (1 - u) * (vh * 1.05 + cumul[i]);
+      var rebond = u > 0 && u < 1 ? Math.sin(u * Math.PI) * 6 : 0;
+      var x = -50 + COTE[i] * 100;
+      var r = PENTE[i] + (1 - u) * (i % 2 ? 9 : -9);
+      pierre.style.transform = 'translate(' + x.toFixed(2) + '%, ' + (-(cumul[i]) + chute - rebond).toFixed(1) + 'px) rotate(' + r.toFixed(2) + 'deg)';
+      var pose = u >= 1;
+      if (pose !== !!posees[i]) { posees[i] = pose; pierre.classList.toggle('pose', pose); if (pose) derniereChute = t; }
+    });
+    // l'équilibre : la pile oscille un peu après chaque pierre, puis respire à peine
+    balance = Math.sin(t * 2.1) * (1.6 * Math.exp(-(t - derniereChute) * 1.4)) + Math.sin(t * 0.7) * 0.25;
+    pile.style.transform = 'rotate(' + balance.toFixed(3) + 'deg)';
+    cairn.classList.toggle('fini', p > 0.8);
+    avantCairn = p;
+  }
+
+  /* ------------------------------------------------------------ le ciel : le soleil se couche, la Lune du jour se lève */
+  var ciel = $('#lune'), couches = ciel ? $$('.ciel__couche', ciel) : [], temps = ciel ? $$('.ciel__temps', ciel) : [];
+  var toileLune = $('#ciel-lune'), astreCiel = null;
+  // chaque texte : arrive, reste, repart (le dernier reste)
+  var FENETRES = [[-1, 0.03, 0.2, 0.26], [0.24, 0.3, 0.42, 0.48], [0.5, 0.57, 0.68, 0.74], [0.74, 0.8, 2, 3]];
+  function cielImage() {
+    if (!ciel || !visible(ciel, 50)) return;
+    if (!astreCiel && toileLune && window.Astre) { astreCiel = new window.Astre(toileLune, { rayon: 0.5 }); if (!astreCiel.ok) toileLune.style.display = 'none'; }
+    var p = avance(ciel);
+    var rose = lisse(0.2, 0.42, p), nuit = lisse(0.44, 0.62, p);
+    couches[0].style.transform = 'scale(' + (1.04 + p * 0.1).toFixed(4) + ') translateY(' + (p * 3).toFixed(2) + '%)';
+    couches[1].style.opacity = rose.toFixed(3);
+    couches[1].style.transform = 'scale(' + (1.12 - p * 0.08).toFixed(4) + ')';
+    couches[2].style.opacity = nuit.toFixed(3);
+    couches[2].style.transform = 'scale(' + (1.1 - nuit * 0.1).toFixed(4) + ')';
+    var lune = lisse(0.5, 0.66, p);
+    if (toileLune) {
+      toileLune.style.opacity = lune.toFixed(3);
+      toileLune.style.setProperty('--monte', ((1 - lune) * 40).toFixed(1) + '%');
+      if (astreCiel && astreCiel.ok && lune > 0) astreCiel.dessine({ part: 0.02 + (partDuJour - 0.02) * lisse(0.54, 0.78, p), halo: 1.3 });
+    }
+    temps.forEach(function (el, i) {
+      var f = FENETRES[i];
+      var o = lisse(f[0], f[1], p) * (1 - lisse(f[2], f[3], p));
+      if (i === 0) o = 1 - lisse(f[2], f[3], p);
+      el.style.opacity = o.toFixed(3);
+      var d = (1 - lisse(f[0], f[1], p)) * 3 - lisse(f[2], f[3], p) * 3;
+      el.style.transform = 'translateY(' + d.toFixed(2) + 'rem)';
+    });
+  }
+
+  /* ------------------------------------------------------------ les cartes : cinq éléments, face cachée */
+  var table = $('#cartes'), cartes = table ? $$('.carte', table) : [], encore = $('#carte-encore'), choisie = null, ouverture = 0;
+  function eventail() {
+    var n = cartes.length, ecart = mobile ? Math.min(vw * 0.115, 52) : Math.min(vw * 0.075, 120);
+    cartes.forEach(function (c, i) {
+      var k = i - (n - 1) / 2, o = ouverture;
+      var x = k * ecart * o, y = Math.abs(k) * Math.abs(k) * 8 * o, r = k * 7 * o;
+      if (choisie) {
+        if (c === choisie) { c.style.transform = 'translate(-50%, -50%) translateY(-2%) scale(' + (mobile ? 1.65 : 1.7) + ') rotateY(180deg)'; c.style.zIndex = 10; c.style.opacity = 1; return; }
+        c.style.transform = 'translate(-50%, -50%) translate(' + (k * ecart * 2.2).toFixed(1) + 'px, 70%) rotate(' + (k * 14) + 'deg) scale(.8)';
+        c.style.opacity = 0; c.style.zIndex = 1; return;
+      }
+      c.style.opacity = 1; c.style.zIndex = 5 - Math.abs(Math.round(k));
+      c.style.transform = 'translate(-50%, -50%) translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + r.toFixed(2) + 'deg)';
+    });
+  }
+  function oracleImage() {
+    if (!table || !visible(table, 50)) return;
+    var r = table.getBoundingClientRect();
+    var o = calme ? 1 : lisse(vh * 1.0, vh * 0.35, r.top);
+    if (Math.abs(o - ouverture) > 0.002) { ouverture = o; if (!choisie) eventail(); }
+  }
+  cartes.forEach(function (c) {
+    c.addEventListener('click', function () {
+      if (choisie) return;
+      // le hasard choisit la carte, pas l'endroit où l'on a cliqué : on échange leurs faces
+      var tiree = cartes[Math.floor(Math.random() * cartes.length)];
+      if (tiree !== c) { var f1 = $('.carte__face', c), f2 = $('.carte__face', tiree); var tmp = document.createElement('span'); f1.parentNode.replaceChild(tmp, f1); f2.parentNode.replaceChild(f1, f2); tmp.parentNode.replaceChild(f2, tmp); }
+      choisie = c; c.classList.add('choisie');
+      cartes.forEach(function (x) { x.setAttribute('aria-label', x === c ? 'Votre carte : ' + $('.carte__mots b', x).textContent + '. ' + $('.carte__mots span', x).textContent : 'Carte'); });
+      eventail();
+      if (encore) setTimeout(function () { encore.hidden = false; }, 700);
+    });
+  });
+  if (encore) encore.addEventListener('click', function () {
+    if (choisie) choisie.classList.remove('choisie');
+    choisie = null; encore.hidden = true;
+    cartes.forEach(function (x) { x.setAttribute('aria-label', 'Retourner une carte'); });
+    eventail();
+  });
+
+  /* ------------------------------------------------------------ l'air : les mots passent avec le vent */
+  var vent = $('#voyages'), mots = vent ? $$('[data-vent]', vent) : [], cielVent = vent ? $('.vent__ciel img', vent) : null, yAvant = window.scrollY, vitesse = 0;
+  function ventImage(t, dt) {
+    var y = window.scrollY;
+    vitesse += ((y - yAvant) / Math.max(dt, 0.008) - vitesse) * 0.08;
+    yAvant = y;
+    if (!vent || !visible(vent, 50)) return;
+    var r = vent.getBoundingClientRect();
+    var p = (vh - r.top) / (vh + r.height);
+    mots.forEach(function (m, i) {
+      var k = parseFloat(m.getAttribute('data-vent')), l = m.offsetWidth;
+      var derive = calme ? 0 : t * 18 * (i % 2 ? -1 : 1);
+      var x = (k > 0 ? -l : vw) + (k > 0 ? 1 : -1) * ((p * 1.15 * Math.abs(k)) * (vw + l)) + derive;
+      m.style.setProperty('--x', x.toFixed(1) + 'px');
+      m.style.setProperty('--s', borne(-vitesse * 0.004 * k, -10, 10).toFixed(2) + 'deg');
+    });
+    if (cielVent && !calme) cielVent.style.setProperty('--v', ((p - 0.5) * -60).toFixed(1) + 'px');
+  }
+
+  /* ------------------------------------------------------------ l'eau : la photo du soin change dans son galet */
+  var riviere = $('#riviere'), soinsListe = riviere ? $$('.riviere__soin', riviere) : [], galet = $('#riviere-galet'), photosSoin = galet ? $$('img', galet) : [], soinIci = 0;
+  var FORMES = ['47% 53% 51% 49% / 57% 45% 55% 43%', '58% 42% 46% 54% / 44% 58% 42% 56%', '42% 58% 57% 43% / 52% 40% 60% 48%', '53% 47% 40% 60% / 60% 52% 48% 40%', '45% 55% 52% 48% / 46% 60% 40% 54%'];
+  var TOURNE = [0, -3, 2.5, -1.5, 3];
+  function riviereImage() {
+    if (!riviere || !visible(riviere, 50)) return;
+    var cible = mobile ? vh * 0.7 : vh * 0.5, meilleur = 0, d = 1e9;
+    soinsListe.forEach(function (li, i) { var r = li.getBoundingClientRect(), e = Math.abs(r.top + r.height / 2 - cible); if (e < d) { d = e; meilleur = i; } });
+    if (meilleur === soinIci) return;
+    soinIci = meilleur;
+    soinsListe.forEach(function (li, i) { li.classList.toggle('ici', i === meilleur); });
+    photosSoin.forEach(function (im, i) { im.classList.toggle('ici', i === meilleur); });
+    galet.style.setProperty('--forme', FORMES[meilleur % FORMES.length]);
+    galet.style.setProperty('--tourne', TOURNE[meilleur % TOURNE.length] + 'deg');
+  }
+
+  /* ------------------------------------------------------------ l'en-tête suit la lumière : clair sur les scènes de nuit */
+  var nuits = $$('[data-nuit]'), enNuit = false;
+  function teteImage() {
+    var n = false;
+    for (var i = 0; i < nuits.length; i++) { var r = nuits[i].getBoundingClientRect(); if (r.top <= 44 && r.bottom > 44) { n = true; break; } }
+    if (n && ciel && nuits[i] === ciel) n = avance(ciel) > 0.4;
+    if (n !== enNuit) { enNuit = n; html.classList.toggle('tete-nuit', n); }
+  }
+
+  /* ------------------------------------------------------------ la boucle */
+  var tAvant = maintenant();
+  function image() {
+    requestAnimationFrame(image);
+    var t = maintenant(), dt = t - tAvant; tAvant = t;
+    cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); teteImage();
+  }
+  function retailler() {
+    vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
+    mesurerCairn(); eventail();
+  }
+  window.addEventListener('resize', retailler);
+  window.addEventListener('load', retailler);
+  pierres.forEach(function (p) { var im = $('img', p); if (!im.complete) im.addEventListener('load', mesurerCairn); });
+  mesurerCairn(); eventail();
+  if (calme) pierres.forEach(function (p) { p.classList.add('pose'); });
+  arrivee();
+  requestAnimationFrame(image);
+})();

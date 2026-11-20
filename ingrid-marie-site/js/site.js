@@ -21,6 +21,10 @@
   /* ------------------------------------------------------------ défilement doux, même à la molette (au doigt : celui du téléphone) */
   var lenis = null;
   if (!calme && window.Lenis) { try { lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 0.95, syncTouch: false }); } catch (e) { lenis = null; } }
+  IM.lenis = lenis;
+  /* la marée de l'accueil attend la fin de l'arrivée sous la Lune (js/scenes.js) */
+  var attendre = html.classList.contains('entree-la'), compose = false;
+  IM.apresEntree = function () { attendre = false; if (compose && !depart) depart = secondes(); };
 
   /* ------------------------------------------------------------ l'aperçu (votremaquette.fr, hébergement sans formulaires) : on le dit au lieu de faire semblant d'envoyer */
   if (/votremaquette\.fr$|github\.io$/.test(location.hostname)) $$('form.mot').forEach(function (f) {
@@ -230,7 +234,7 @@
       nom.innerHTML = nom.textContent.trim().split(/\s+/).map(function (m) { return '<span>' + m + '</span>'; }).join(' ');
       var quand = function () {
         var polices = document.fonts && document.fonts.load ? document.fonts.load('italic 400 80px Fraunces') : Promise.resolve();
-        polices.then(composer, composer).then(function () { depart = secondes(); });
+        polices.then(composer, composer).then(function () { compose = true; if (!attendre) depart = secondes(); });
       };
       if (imageFond.complete && imageFond.naturalWidth) quand(); else imageFond.addEventListener('load', quand);
     }
