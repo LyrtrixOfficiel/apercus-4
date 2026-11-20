@@ -1,7 +1,9 @@
 /* Ingrid Marie : le moteur d'eau du site.
    Deux programmes WebGL, aucune bibliothèque :
    - « fond »  : le rivage, derrière tout le site. Deux matières (photos) à la fois : celle de la section
-                 qu'on quitte et celle de la section qui arrive. Une vague monte et dépose la suivante.
+                 qu'on quitte et celle de la section qui arrive. Le passage de l'une à l'autre prend la forme de
+                 l'élément de la section qui arrive (uMode) : une vague, du sable qui coule, un feu qui brûle,
+                 un vent qui emporte, une nuit qui se répand comme une encre, une aube.
                  À l'accueil, la première matière est le sable où le nom est écrit, sous une eau qui se retire.
    - « voile » : la nappe laiteuse qui couvre l'écran pour passer d'une page à l'autre.
    Si WebGL manque, rien ne casse : chaque section garde sa photo, posée en simple image. */
@@ -45,6 +47,84 @@
     'uniform vec2 uLave;',       // voile crème sur chaque matière, pour que le texte se lise
     'uniform vec2 uBain;',       // part d'eau permanente sur chaque matière
     'uniform vec3 uOnde[6];',    // x, y, naissance : les ondes laissées par le doigt
+    'uniform float uMode;',      // le passage vers la matière suivante : 0 eau, 1 terre, 2 feu, 3 air, 4 univers, 5 lumière
+
+    // les passages des autres éléments : la matière B prend la place de A sous le bord uFront (B en dessous)
+    'vec3 passage(vec2 p,float t,float asp){',
+    '  float F=uFront,px=1.0/uRes.y,mB=0.0,voile=0.0,ombreA=1.0,ombreB=1.0;',
+    '  vec2 dA=vec2(0.0),dB=vec2(0.0);vec3 teinte=vec3(1.0),voileC=vec3(1.0),ajout=vec3(0.0),charbon=vec3(0.0);float brule=0.0;',
+    '  if(F<5.0){',
+    '    if(uMode<1.5){',          // terre : le sable coule et recouvre, grain par grain
+    '      float bord=F+0.045*sin(p.x*2.3+1.7)+0.08*(fbm(vec2(p.x*1.6,t*0.05))-0.5);',
+    '      float g=h1(floor(v*uRes/1.6));',
+    '      float d=v.y-bord;',
+    '      float pres=smoothstep(0.09,0.0,abs(d));',
+    '      mB=smoothstep(-px*1.5,px*1.5,d+(g-0.5)*0.05*pres);',
+    '      float dessus=smoothstep(0.22,0.0,-d)*step(d,0.0);',
+    '      float coule=fbm(vec2(p.x*11.0,v.y*3.0-t*1.1));',
+    '      dA=vec2(0.0,-dessus*dessus*0.07*(0.55+0.45*coule));',
+    '      float liseret=smoothstep(0.045,0.0,abs(d-0.008))*(0.7+0.3*fbm(vec2(p.x*20.0,t*0.6)));',
+    '      voile=liseret*(0.7+0.3*g);voileC=vec3(0.88,0.75,0.55)*(0.82+0.36*g);',
+    '      ombreB=1.0-0.3*smoothstep(0.1,0.0,d)*step(0.0,d);',
+    '      ombreA=1.0-0.12*dessus;',
+    '    }else if(uMode<2.5){',    // feu : la matière brûle, un liseré de braise, des flammes qui lèchent le dessus
+    '      float n=fbm(p*2.4+vec2(0.0,t*0.14));',
+    '      float bord=F+(n-0.5)*0.3+0.025*sin(p.x*5.0+t*1.3);',
+    '      float d=v.y-bord,haut=-d;',
+    '      mB=smoothstep(-px*2.0,px*2.0,d);',
+    '      brule=smoothstep(0.075,0.0,haut)*step(0.0,haut);',
+    '      charbon=vec3(0.13,0.06,0.03);',
+    '      float fl=fbm(vec2(p.x*4.6,haut*4.2-t*1.9)+3.0);',
+    '      float langue=smoothstep(0.52,0.95,fl+0.42-haut*4.6)*step(-0.004,haut)*step(haut,0.32);',
+    '      float braise=exp(-abs(d)*85.0)*(0.65+0.7*fbm(p*16.0-vec2(0.0,t*2.2)));',
+    '      ajout=vec3(1.0,0.42,0.07)*braise*1.7+vec3(1.0,0.88,0.5)*exp(-abs(d)*300.0)*1.3;',
+    '      ajout+=mix(vec3(0.95,0.28,0.04),vec3(1.0,0.86,0.42),smoothstep(0.55,1.0,fl))*langue*0.95;',
+    '      float chaleur=smoothstep(0.28,0.0,d)*step(0.0,d);',
+    '      dB=vec2(sin(p.y*70.0-t*10.0)*0.0028,sin(p.x*40.0+t*7.0)*0.0018)*chaleur;',
+    '      teinte=mix(vec3(1.0),vec3(1.18,0.92,0.78),chaleur);',
+    '    }else if(uMode<3.5){',    // air : un vent passe, la brume s'étire et emporte la matière
+    '      float n=fbm(vec2(p.x*1.3-t*0.32,v.y*2.4));',
+    '      float bord=F+(n-0.5)*0.36;',
+    '      float d=v.y-bord;',
+    '      float bande=smoothstep(0.34,0.0,abs(d));',
+    '      float fil=fbm(vec2(p.x*1.1-t*0.6,p.y*7.0+n*2.0));',
+    '      dA=vec2(-bande*0.09*(fil-0.25),0.0);dB=vec2(bande*0.06*(fil-0.5),0.0);',
+    '      mB=smoothstep(-0.05,0.05,d+(fil-0.5)*0.14);',
+    '      float trait=smoothstep(0.6,0.92,fbm(vec2(p.x*0.55-t*1.0,p.y*24.0)))*bande;',
+    '      voile=max(bande*smoothstep(0.32,0.82,fil)*0.88,trait*0.75);',
+    '      voileC=vec3(0.965,0.975,0.99);',
+    '    }else if(uMode<4.5){',    // univers : la nuit se répand comme une encre, une nébuleuse au bord
+    '      float n=fbm(p*1.7+vec2(t*0.03,-t*0.025)),n2=fbm(p*5.0-vec2(t*0.05,0.0));',
+    '      float s=v.y-F+(n-0.5)*0.75+(n2-0.5)*0.14;',
+    '      mB=smoothstep(-0.012,0.012,s);',
+    '      float e=exp(-abs(s)*16.0);',
+    '      vec3 neb=mix(vec3(0.40,0.30,0.86),vec3(0.95,0.70,0.95),n2);',
+    '      neb=mix(neb,vec3(1.0,0.86,0.55),smoothstep(0.58,0.88,n));',
+    '      ajout=neb*e*0.6+vec3(1.0,0.97,0.92)*exp(-abs(s)*140.0)*0.55;',
+    '      dB=vec2(sin(s*22.0+t),cos(s*18.0-t))*0.005*e;',
+    '    }else{',                  // lumière : une aube passe, une bande de jour qui éclaire et dépose la suite
+    '      float n=fbm(vec2(p.x*1.4,t*0.08));',
+    '      float bord=F+(n-0.5)*0.16+0.03*sin(p.x*2.0+t*0.4);',
+    '      float d=v.y-bord;',
+    '      mB=smoothstep(-0.07,0.07,d);',
+    '      float g=exp(-d*d*55.0);',
+    '      float rai=pow(fbm(vec2(p.x*6.0+v.y*1.6,t*0.12)),2.0);',
+    '      voile=g*(0.6+0.3*rai);voileC=vec3(1.0,0.975,0.92);',
+    '      dA=vec2(0.0,g*0.012);',
+    '    }',
+    '  }',
+    '  vec2 w=v-0.5;',
+    '  vec3 a=texture2D(uA,(w+dA)*uCadreA.xy+0.5+uCadreA.zw).rgb;',
+    '  vec3 b=texture2D(uB,(w+dB)*uCadreB.xy+0.5+uCadreB.zw).rgb;',
+    '  a=mix(a,vec3(0.961,0.937,0.890),uLave.x)*ombreA;b=mix(b,vec3(0.961,0.937,0.890),uLave.y)*ombreB;',
+    '  a=mix(a,a*vec3(0.84,0.97,0.93),uBain.x*0.45);b=mix(b,b*vec3(0.84,0.97,0.93),uBain.y*0.45);',
+    '  a=mix(a,charbon,brule*brule*0.92);',
+    '  vec3 col=mix(a,b*teinte,mB);',
+    '  col=mix(col,voileC,voile);',
+    '  col+=ajout;',
+    '  float lum=fbm(p*1.15+vec2(t*0.022,-t*0.016));',
+    '  return col*(0.965+0.075*lum);',
+    '}',
 
     // hauteur de la surface : houle lente + ondes du doigt
     'float surface(vec2 p,float t){',
@@ -59,6 +139,7 @@
     '  float asp=uRes.x/uRes.y;',
     '  vec2 p=vec2(v.x*asp,v.y);',
     '  float t=uTime;',
+    '  if(uMode>0.5&&uMaree>5.0){gl_FragColor=vec4(passage(p,t,asp),1.0);return;}',
     '  vec3 CREME=vec3(0.961,0.937,0.890);',
     // un bord festonné qui respire
     '  float feston=0.030*sin(p.x*2.6+t*0.50)+0.018*sin(p.x*6.1-t*0.36)+0.050*(fbm(vec2(p.x*1.7,t*0.07))-0.5)+0.010*sin(t*0.9);',
@@ -177,7 +258,7 @@
     gl.enableVertexAttribArray(loc);
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     this.u = {};
-    var noms = ['uRes', 'uTime', 'uMaree', 'uCouvre', 'uA', 'uB', 'uCadreA', 'uCadreB', 'uFront', 'uBande', 'uLave', 'uBain'];
+    var noms = ['uRes', 'uTime', 'uMaree', 'uCouvre', 'uA', 'uB', 'uCadreA', 'uCadreB', 'uFront', 'uBande', 'uLave', 'uBain', 'uMode'];
     for (var n = 0; n < noms.length; n++) this.u[noms[n]] = gl.getUniformLocation(prog, noms[n]);
     this.uOnde = gl.getUniformLocation(prog, 'uOnde[0]');
     if (this.voile) {
@@ -245,7 +326,7 @@
     this.iOnde = (this.iOnde + 1) % 6;
   };
 
-  /* Fond : e = { a, b, cadreA, cadreB, maree, front, bande, lave: [a, b], bain: [a, b] }. Voile : rien à passer. */
+  /* Fond : e = { a, b, cadreA, cadreB, maree, front, bande, lave: [a, b], bain: [a, b], mode }. Voile : rien à passer. */
   Eau.prototype.dessine = function (t, e) {
     if (!this.ok) return;
     var gl = this.gl, c = this.canvas, u = this.u;
@@ -266,6 +347,7 @@
       gl.uniform1f(u.uBande, e.bande);
       gl.uniform2f(u.uLave, e.lave[0], e.lave[1]);
       gl.uniform2f(u.uBain, e.bain[0], e.bain[1]);
+      gl.uniform1f(u.uMode, e.mode || 0);
       var plat = [];
       for (var i = 0; i < 6; i++) plat.push(this.ondes[i][0], this.ondes[i][1], this.ondes[i][2]);
       gl.uniform3fv(this.uOnde, new Float32Array(plat));

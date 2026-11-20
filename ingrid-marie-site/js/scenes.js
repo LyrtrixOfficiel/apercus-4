@@ -25,41 +25,73 @@
   }
   function visible(el, marge) { var r = el.getBoundingClientRect(); return r.bottom > -(marge || 0) && r.top < vh + (marge || 0); }
 
-  /* ------------------------------------------------------------ l'arrivée : la Lune du jour se remplit, puis le jour se lève */
+  /* ------------------------------------------------------------ l'arrivée : un vrai chargement, puis la marée
+     La Lune se remplit avec ce qui est réellement chargé (polices, Lune, sable écrit, eau prête), un compteur de 0 à 100
+     le dit. À 100, la marée monte sur la nuit, et se retire sur le rivage, déjà sous l'eau : le site n'apparaît jamais nu. */
   var entree = $('#entree');
   function arrivee() {
     if (!entree || !html.classList.contains('entree-la')) { if (window.IM && IM.apresEntree) IM.apresEntree(); return; }
     try { sessionStorage.setItem('im-entree', '1'); } catch (e) {}
     window.scrollTo(0, 0);
     if (window.IM && IM.lenis) IM.lenis.stop();
-    var nom = $('.entree__nom', entree), phase = $('#entree-phase'), toile = $('#entree-lune');
+    var nom = $('.entree__nom', entree), phase = $('#entree-phase'), toile = $('#entree-lune'), compte = $('#entree-compte'), etat = $('#entree-etat');
     nom.innerHTML = nom.textContent.split('').map(function (c, i) {
-      return c === ' ' ? ' ' : '<span class="l" style="transition-delay:' + (0.5 + i * 0.07).toFixed(2) + 's">' + c + '</span>';
+      return c === ' ' ? ' ' : '<span class="l" style="transition-delay:' + (0.3 + i * 0.06).toFixed(2) + 's">' + c + '</span>';
     }).join('');
-    if (luneDuJour && phase) phase.textContent = "Aujourd'hui : " + luneDuJour.nom;
+    if (luneDuJour && phase) phase.textContent = "La Lune aujourd'hui : " + luneDuJour.nom;
     var astre = window.Astre && toile ? new window.Astre(toile, { rayon: 0.6 }) : null;
     if (astre && !astre.ok) astre = null;
-    var debut = maintenant(), duree = calme ? 1.2 : 2.9, depart = null, fini = false;
-    var siteOk = function () { return html.classList.contains('nom-ecrit') || !html.classList.contains('eau-voulue') || !$('#rivage'); };
-    requestAnimationFrame(function () { nom.classList.add('vu'); });
+    var debut = maintenant(), tAvant = debut, aff = 0, fini = false, sortie = 0, montee = false;
+    var polices = !document.fonts;
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { polices = true; });
+    requestAnimationFrame(function () { entree.classList.add('vu'); nom.classList.add('vu'); });
+    function prets() {
+      var l = [polices, !astre || astre.charge, html.classList.contains('nom-ecrit') || !html.classList.contains('eau-voulue') || !$('#rivage'), !window.IM || !IM.eauPrete || IM.eauPrete()];
+      var n = 0; l.forEach(function (x) { if (x) n++; });
+      return n / l.length;
+    }
+    function finir() {
+      if (fini) return;
+      fini = true;
+      html.classList.remove('entree-la', 'entree-maree');
+      if (entree.parentNode) entree.parentNode.removeChild(entree);
+      if (window.IM && IM.lenis) IM.lenis.start();
+    }
     function image() {
       if (fini) return;
       requestAnimationFrame(image);
-      var t = maintenant() - debut;
-      var charge = (!astre || astre.charge) && siteOk();
-      var p = lisse(0, duree, t);
-      if (!depart && p >= 1 && (charge || t > 7)) depart = maintenant();
-      var e = depart ? borne((maintenant() - depart) / 1.5, 0, 1) : 0;
-      var ee = e * e * (3 - 2 * e);
-      if (astre) astre.dessine({ part: 0.03 + (partDuJour - 0.03) * (calme ? 1 : p), eclat: ee, halo: 1 + ee });
-      entree.style.setProperty('--k', (1 + ee * 0.35).toFixed(3));
-      entree.style.setProperty('--r', (-22 + ee * 150).toFixed(2));
-      if (e >= 1) {
-        fini = true;
-        html.classList.remove('entree-la');
-        entree.parentNode.removeChild(entree);
-        if (window.IM && IM.lenis) IM.lenis.start();
-        if (window.IM && IM.apresEntree) IM.apresEntree();
+      var t = maintenant(), dt = Math.min(0.1, t - tAvant), age = t - debut; tAvant = t;
+      // ce qui est prêt, avec une avance lente pour que le compteur ne reste jamais figé ; au bout de 9 s, on y va
+      var cible = Math.max(prets(), Math.min(0.9, age / 9));
+      if (age > 9) cible = 1;
+      // jamais plus vite que 1,8 s pour aller de 0 à 100 : le chargement se lit
+      aff = Math.min(aff + (cible - aff) * (1 - Math.exp(-dt * 3.2)) + (cible >= 1 ? dt * 0.25 : 0), cible, age / 1.8);
+      if (cible >= 1 && aff > 0.985) aff = Math.min(1, age / 1.8);
+      if (compte) compte.textContent = Math.round(aff * 100);
+      if (astre) astre.dessine({ part: 0.03 + 0.47 * (calme ? 1 : aff), eclat: sortie, halo: 0.45 + aff * 0.3 + sortie });
+      if (aff >= 1 && !montee) {
+        montee = true;
+        entree.classList.add('fin');
+        if (etat) etat.textContent = 'La marée monte';
+        setTimeout(function () {
+          // la marée monte : sous son bord, le rivage (déjà sous l'eau) ; au-dessus, la nuit encore
+          var ok = !calme && window.IM && IM.maree && IM.maree(function () {
+            finir();
+            if (window.IM && IM.apresEntree) IM.apresEntree();
+          }, function (m) { entree.style.setProperty('--m', (m * 100).toFixed(2)); });
+          if (ok) html.classList.add('entree-maree');
+          if (!ok) {
+            // sans la nappe d'eau : la nuit s'ouvre en cercle autour de la Lune
+            var d0 = maintenant();
+            (function ouvre() {
+              var e = borne((maintenant() - d0) / 1.3, 0, 1), ee = e * e * (3 - 2 * e);
+              sortie = ee;
+              entree.style.setProperty('--k', (1 + ee * 0.35).toFixed(3));
+              entree.style.setProperty('--r', (-22 + ee * 150).toFixed(2));
+              if (e < 1) requestAnimationFrame(ouvre); else { finir(); if (window.IM && IM.apresEntree) IM.apresEntree(); }
+            })();
+          }
+        }, 380);
       }
     }
     requestAnimationFrame(image);

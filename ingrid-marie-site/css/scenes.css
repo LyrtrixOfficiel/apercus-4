@@ -31,6 +31,15 @@
 .entree__nom.vu .l { opacity: 1; transform: none; filter: none; }
 .entree__phase { margin-top: 1.6rem; font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 600; color: #b9c2d4; opacity: 0; transition: opacity 1.2s ease .6s; }
 .entree__nom.vu + .entree__phase { opacity: 1; }
+.entree__charge { position: absolute; left: 0; right: 0; bottom: max(2.4rem, env(safe-area-inset-bottom, 0px) + 1.6rem); display: flex; flex-direction: column; align-items: center; gap: .5rem; opacity: 0; transition: opacity .8s ease .3s; }
+.entree.vu .entree__charge { opacity: 1; }
+.entree__compte { font-family: var(--titre); font-style: italic; font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 144; font-size: clamp(3.4rem, 8vw, 5.6rem); line-height: .9; letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #ffffff 0%, #d5dbe4 60%, #9aa5b8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .1em; }
+.entree__compte::after { content: ' %'; font-size: .4em; letter-spacing: 0; }
+.entree__etat { font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; font-weight: 600; color: #b9c2d4; }
+.entree.fin .entree__etat { color: #e9d7a8; }
+.entree-maree .voile { z-index: 97; }
+.entree-maree .entree { -webkit-mask-image: linear-gradient(180deg, #000 calc(var(--m, 130) * 1% - 9%), transparent calc(var(--m, 130) * 1% + 5%)); mask-image: linear-gradient(180deg, #000 calc(var(--m, 130) * 1% - 9%), transparent calc(var(--m, 130) * 1% + 5%)); }
 .entree-la body { overflow: hidden; }
 .entree-la .tete, .entree-la .rdv-fixe { opacity: 0; }
 .tete, .rdv-fixe { transition: opacity .9s ease .2s, background .5s, transform .6s var(--doux), padding .5s; }
@@ -277,4 +286,29 @@
   .voix__avis { width: 78vw; }
   .voix__avis blockquote p { font-size: 1rem; }
   .table__dedans { padding-top: 46vh; padding-top: 46svh; padding-bottom: 6rem; }
+}
+
+/* ------------------------------------------------------------------ avec la toile : un seul fond dessiné derrière tout l'accueil
+   Chaque scène laisse voir la toile (js/eau.js). Le passage d'une scène à l'autre prend la forme de son élément :
+   le sable coule (terre), la matière brûle (feu), une aube passe (lumière), la nuit se répand (univers), le vent emporte
+   (air), une vague (eau). Sans WebGL, les fonds CSS ci-dessus restent. */
+.eau-seule .cairn, .eau-seule .cairn__scene, .eau-seule .ciel, .eau-seule .oracle, .eau-seule .vent, .eau-seule .riviere,
+.eau-seule .cycle, .eau-seule .ensemble, .eau-seule .voix, .eau-seule .table { background: none; }
+.eau-seule .ciel__couche, .eau-seule .vent__ciel, .eau-seule .autour__fond, .eau-seule .table__fond { display: none; }
+
+/* ------------------------------------------------------------------ lisibilité (retour du 20/11 au soir : « le texte ressort assez mal ») */
+.grand-texte { font-weight: 400; }
+.cairn__tete .grand-texte, .vent__dedans .grand-texte, .ensemble__texte .grand-texte, .autour .grand-texte { color: #2a241b; text-shadow: 0 0 22px rgba(250, 245, 234, .95), 0 0 3px rgba(250, 245, 234, .8); }
+.cairn__tete h2, .vent__dedans h2, .autour h2 { text-shadow: 0 0 40px rgba(250, 245, 234, .85); }
+.cairn__pierre span { font-weight: 400; text-shadow: 0 0 14px rgba(255, 248, 232, .95); }
+.oracle__tete .grand-texte { color: #e8ebf1; }
+.ciel__phrase { font-weight: 400; text-shadow: 0 4px 30px rgba(40, 6, 34, .7), 0 0 2px rgba(40, 6, 34, .4); }
+.ciel__temps .grand-texte { text-shadow: 0 2px 24px rgba(4, 8, 20, .9); }
+.riviere .grand-texte, .riviere__soin p { color: #e6efeb; }
+.riviere__soin a { opacity: .55; }
+.element-nom { font-weight: 400; }
+@media (max-width: 900px) {
+  /* la fenêtre du galet laisse voir l'eau dessinée derrière, floutée */
+  .eau-seule .riviere__fenetre { background: rgba(14, 50, 42, .35); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+    -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 100%); mask-image: linear-gradient(180deg, #000 82%, transparent 100%); }
 }

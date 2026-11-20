@@ -145,6 +145,7 @@
   var rivage = $('#rivage'), sceneRivage = null, nom = null, imageFond = null;
   var maree = -0.32, depart = 0, echelleEau = 1, lent = 0, compte = 0, tAvant = 0;
   var front = 9, kAvant = -1, impulsion = null, attenteCompo = null;
+  var MODES = { eau: 0, terre: 1, feu: 2, air: 3, univers: 4, lumiere: 5 };
 
   /* Le sable de l'accueil, avec le nom écrit du doigt exactement là où le titre est posé. */
   function composer() {
@@ -181,14 +182,32 @@
     html.classList.add('nom-ecrit');
   }
 
+  /* des dégradés « angle|couleur position|couleur position », séparés par « / », peints sur la photo (ou seuls) */
+  function peindre(spec, im) {
+    var c = document.createElement('canvas'), w = 512, h = 512;
+    if (im) { var k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight)); w = Math.round(im.naturalWidth * k); h = Math.round(im.naturalHeight * k); }
+    c.width = w; c.height = h;
+    var x = c.getContext('2d');
+    if (im) x.drawImage(im, 0, 0, w, h);
+    spec.split('/').forEach(function (couche) {
+      var p = couche.split('|'), a = (parseFloat(p[0]) || 180) * Math.PI / 180;
+      var dx = Math.sin(a), dy = -Math.cos(a), l = Math.abs(w * dx) + Math.abs(h * dy);
+      var g = x.createLinearGradient(w / 2 - dx * l / 2, h / 2 - dy * l / 2, w / 2 + dx * l / 2, h / 2 + dy * l / 2);
+      for (var i = 1; i < p.length; i++) { var m = p[i].trim().match(/^(.*\)|#\w+)\s+([\d.]+)$/); if (m) g.addColorStop(parseFloat(m[2]), m[1]); }
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+    });
+    return c;
+  }
+
   function charger(s) {
-    if (s.etat || s.rivage || !s.sources.length) return;
+    if (s.etat || s.rivage) return;
+    if (!s.sources.length) { if (s.degrade && eau) { s.mat = eau.texture(peindre(s.degrade, null)); s.etat = 2; } return; }
     s.etat = 1;
     var besoin = Math.max(toile.width, toile.height * 1.5) * 0.85, choix = s.sources[s.sources.length - 1];
     for (var i = 0; i < s.sources.length; i++) if (s.sources[i].l >= besoin) { choix = s.sources[i]; break; }
     var im = new Image();
     im.decoding = 'async';
-    im.onload = function () { if (!eau) return; s.mat = eau.texture(im); s.etat = 2; };
+    im.onload = function () { if (!eau) return; s.mat = eau.texture(s.degrade ? peindre(s.degrade, im) : im); s.etat = 2; };
     im.onerror = function () { s.etat = 3; };   // pas de nouvel essai : la section garde un aplat crème
     im.src = choix.u;
   }
@@ -197,31 +216,42 @@
     if (!toile || !window.Eau) return;
     echelleEau = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.25);
     eau = new window.Eau(toile, { mode: 'fond', echelle: echelleEau });
-    var els = $$('[data-matiere]');
+    var els = $$('[data-matiere], [data-toile]');
     if (!eau.ok || !els.length) { eau = null; return; }
     eau.taille();
-    scenes = els.map(function (el, i) {
+    var listeSources = function (txt) { return (txt || '').split(',').map(function (x) { var p = x.trim().split(/\s+/); return { u: p[0], l: parseFloat(p[1]) || 0 }; }).filter(function (x) { return x.u; }); };
+    var entree = function (el, sec, sources, mode, degrade, q) {
       var f = (el.getAttribute('data-foyer') || '50 50').split(/\s+/);
       return {
-        el: el, rang: i, rivage: el === rivage, mat: null, etat: 0, haut: 0, h: 0, longe: null,
-        sources: (el.getAttribute('data-sources') || '').split(',').map(function (x) { var p = x.trim().split(/\s+/); return { u: p[0], l: parseFloat(p[1]) || 0 }; }).filter(function (x) { return x.u; }),
-        lave: parseFloat(el.getAttribute('data-lave')) || 0, bain: parseFloat(el.getAttribute('data-bain')) || 0,
+        el: el, sec: sec, virtuel: q != null, q: q || 0, rivage: el === rivage && q == null, mat: null, etat: 0, haut: 0, pos: 0, h: 0, longe: null,
+        sources: sources, mode: MODES[mode] || 0, degrade: degrade || '',
+        lave: parseFloat(el.getAttribute('data-lave')) || 0, bain: q == null ? parseFloat(el.getAttribute('data-bain')) || 0 : 0,
         fx: (parseFloat(f[0]) || 50) / 100, fy: (parseFloat(f[1]) || 50) / 100,
         seches: [], emportes: []
       };
+    };
+    scenes = [];
+    var reels = els.map(function (el, i) {
+      var e = entree(el, i, listeSources(el.getAttribute('data-sources')), el.getAttribute('data-passage'), el.getAttribute('data-degrade'));
+      scenes.push(e);
+      (el.getAttribute('data-puis') || '').split(';').forEach(function (bout) {
+        var m = bout.trim().match(/^([\d.]+)\s+(\w+)\s+(.+)$/);
+        if (m) scenes.push(entree(el, i, listeSources(m[3]), m[2], el.getAttribute('data-degrade-puis'), parseFloat(m[1])));
+      });
+      return e;
     });
     var horsScene = [];
-    $$('[data-seche]').forEach(function (e) { var p = e.closest('[data-matiere]'), i = els.indexOf(p); if (i >= 0) scenes[i].seches.push(e); else horsScene.push(e); });
+    $$('[data-seche]').forEach(function (e) { var p = e.closest('[data-matiere], [data-toile]'), i = els.indexOf(p); if (i >= 0) reels[i].seches.push(e); else horsScene.push(e); });
     veiller(horsScene);
-    $$('[data-emporte]').forEach(function (e) { var p = e.closest('[data-matiere]'), i = els.indexOf(p); if (i >= 0) scenes[i].emportes.push(e); });
+    $$('[data-emporte]').forEach(function (e) { var p = e.closest('[data-matiere], [data-toile]'), i = els.indexOf(p); if (i >= 0) reels[i].emportes.push(e); });
     // tout ce qui est posé sur une matière part avec elle : la vague emporte aussi les blocs qui n'ont rien demandé
     var hors = '.scene__fond, .rivage__fond, script, style';
-    scenes.forEach(function (s) {
+    reels.forEach(function (s) {
       var liste = s.emportes;
       var pris = function (e) { for (var a = 0; a < liste.length; a++) if (liste[a] === e || liste[a].contains(e)) return true; return false; };
       var contient = function (e) { for (var a = 0; a < liste.length; a++) if (e.contains(liste[a])) return true; return false; };
       var ajouter = function (e, niveau) {
-        if (e.matches(hors) || pris(e) || (e.closest('[data-matiere]') !== s.el)) return;
+        if (e.matches(hors) || pris(e) || (e.closest('[data-matiere], [data-toile]') !== s.el)) return;
         if (e.matches('.halo')) { e._doux = true; e.classList.add('emportable'); liste.push(e); return; }
         var enfants = Array.prototype.slice.call(e.children);
         var cadre = e.matches('.scene__dedans, .soin-scene__colle, .rivage__scene, .seance__scene');
@@ -265,7 +295,7 @@
     var ox = mx * (2 * s.fx - 1), oy = my * (2 * s.fy - 1);
     if (!calme) {
       if (s.longe != null) ox = mx * (2 * s.longe - 1) * 0.9;
-      oy -= borne(((s.haut + s.h / 2) - (y + vh / 2)) / vh, -1.2, 1.2) * 0.03;
+      oy -= borne(((s.pos + s.h / 2) - (y + vh / 2)) / vh, -1.2, 1.2) * 0.03;
     }
     return [sx, sy, borne(ox, -mx, mx), borne(oy, -my, my)];
   }
@@ -307,13 +337,13 @@
       maree = calme ? but : maree + (but - maree) * (1 - Math.exp(-dt * 5.2));
       mar = maree * sceneRivage.clientHeight / H;
       rivage.classList.toggle('basse', p > 0.8);
-    }
+    } else if (A.rivage && sceneRivage) mar = maree * sceneRivage.clientHeight / H;
 
     // les photos : celles d'ici et d'à côté, pas plus
     for (i = 0; i < n; i++) {
       var s = scenes[i], ecart = i - k;
-      if (ecart >= -1 && ecart <= (mobile ? 1 : 2)) charger(s);
-      else if ((ecart < -2 || ecart > 3) && s.mat && !s.rivage) { eau.liberer(s.mat); s.mat = null; s.etat = 0; }
+      if (ecart >= -1 && ecart <= (mobile ? 2 : 3)) charger(s);
+      else if ((ecart < -3 || ecart > 5) && s.mat && !s.rivage) { eau.liberer(s.mat); s.mat = null; s.etat = 0; }
     }
     if (!pret && A.mat) {
       pret = true; html.classList.add('eau-ok');
@@ -323,25 +353,29 @@
     var kH = vh / H;
     eau.dessine(t, {
       a: A.mat, b: B.mat, cadreA: cadre(A, y), cadreB: cadre(B, y), maree: mar,
-      front: f > 5 ? 9 : f * kH, bande: bande * kH, lave: [A.lave, B.lave], bain: [A.bain, B.bain]
+      front: f > 5 ? 9 : f * kH, bande: bande * kH, lave: [A.lave, B.lave], bain: [A.bain, B.bain],
+      mode: f > 5 || impulsion ? 0 : scenes[k].mode
     });
 
     // ce que la vague découvre, ce qu'elle emporte
     var fpx = f > 5 ? -1e9 : f * vh, limite = fpx + bande * vh * 0.85;
-    for (i = Math.max(0, k - 1); i <= Math.min(n - 1, k + 1); i++) {
+    var ici = scenes[k], avant = -1;
+    if (k > 0 && !ici.virtuel) { avant = k - 1; while (avant > 0 && scenes[avant].virtuel) avant--; }
+    for (i = 0; i < n; i++) {
       var sc = scenes[i], j, el, r;
+      if (sc.virtuel || Math.abs(sc.sec - ici.sec) > 1) continue;
       for (j = 0; j < sc.seches.length; j++) {
         el = sc.seches[j];
         if (el._vu) continue;
         r = el.getBoundingClientRect();
         if (r.top > vh * 0.93) continue;
-        if (r.bottom > 0 && f < 5 && i >= k && !impulsion && r.top < limite) continue;
+        if (r.bottom > 0 && f < 5 && sc.sec >= ici.sec && !ici.virtuel && !impulsion && r.top < limite) continue;
         el._vu = true; el.classList.add('sec');
       }
       for (j = 0; j < sc.emportes.length; j++) {
         el = sc.emportes[j];
         var parti = false;
-        if (i === k - 1 && !impulsion) {
+        if (i === avant && !impulsion) {
           if (balaye) parti = true;
           else if (f < 5) { r = el.getBoundingClientRect(); parti = (el._doux ? (Math.max(r.top, 0) + Math.min(r.bottom, vh)) / 2 : r.bottom - 8) > fpx; }
         }
@@ -374,7 +408,11 @@
 
   function mesurer() {
     var y = window.scrollY;
-    scenes.forEach(function (s) { var r = s.el.getBoundingClientRect(); s.haut = r.top + y; s.h = r.height; });
+    scenes.forEach(function (s) {
+      var r = s.el.getBoundingClientRect();
+      s.pos = r.top + y; s.h = r.height;
+      s.haut = s.virtuel ? s.pos + s.q * Math.max(0, s.h - vh) + vh : s.pos;
+    });
     if (seance) { seance._haut = seance.getBoundingClientRect().top + y; seance._long = seance.offsetHeight - vh; }
   }
 
@@ -389,14 +427,28 @@
   function imageVoile(t) {
     if (!voile || !passage) return;
     var k = borne((t - passage.debut) / passage.duree, 0, 1), e = k * k * (3 - 2 * k);
-    voile.taille(); voile.couvre = 1;
+    voile.taille(); voile.couvre = passage.couvre != null ? passage.couvre : 1;
     voile.maree = passage.sens === 'monte' ? melange(1.2, -0.3, e) : melange(-0.3, 1.25, e);
     voile.dessine(t);
+    if (passage.chaque) passage.chaque(voile.maree);
     if (k >= 1) {
-      if (passage.sens === 'monte') { if (!passage.parti) { passage.parti = true; window.location.href = passage.url; } }
+      if (passage.sens === 'monte') {
+        if (!passage.parti) {
+          passage.parti = true;
+          if (passage.cb) { var suite = passage.cb; passage = null; voile.couvre = 0; voile.efface(); suite(); }
+          else window.location.href = passage.url;
+        }
+      }
       else { passage = null; voile.couvre = 0; voile.efface(); }
     }
   }
+  IM.maree = function (suite, chaque) {
+    if (!voile) return false;
+    voile.taille(); voile.couvre = 0;
+    passage = { sens: 'monte', debut: secondes(), duree: 2.4, couvre: 0, cb: suite, chaque: chaque };
+    return true;
+  };
+  IM.eauPrete = function () { return !eau || (pret && compose && html.classList.contains('eau-seule')); };
   IM.partir = function (adresse) {
     if (!voile) { window.location.href = adresse; return; }
     try { sessionStorage.setItem('im-vague', '1'); } catch (e) {}
