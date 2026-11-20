@@ -184,3 +184,97 @@
   .riviere__soin a { padding: 2.2rem 0; }
   .riviere__nom { font-size: 2.6rem; }
 }
+
+/* ------------------------------------------------------------------ la séance : un cycle de Lune, en plein jour */
+.cycle { position: relative; z-index: 2; height: 400vh; height: 400svh; background: linear-gradient(180deg, #c6cde6 0%, #e4deec 45%, #f6ebdd 100%); }
+.cycle__scene { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.cycle__tete { position: absolute; z-index: 2; left: var(--marge); right: var(--marge); top: clamp(6.5rem, 15vh, 9.5rem); }
+.cycle__tete h2 { font-size: clamp(2.6rem, 5.6vw, 5.8rem); line-height: .94; }
+.cycle__tete .element-nom { color: #6b5a8e; }
+.cycle__lune { position: absolute; left: 27%; top: 58%; width: min(56vh, 40vw); height: min(56vh, 40vw); transform: translate(-50%, -50%); }
+.cycle__etapes { position: absolute; z-index: 2; left: 54%; right: var(--marge); top: 60%; transform: translateY(-50%); height: 22rem; }
+.cycle__etapes li { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateY(2rem); transition: opacity .7s ease, transform .9s var(--doux); pointer-events: none; }
+.cycle__etapes li.ici { opacity: 1; transform: none; pointer-events: auto; }
+.cycle__num { font-family: var(--titre); font-style: italic; font-weight: 300; font-size: clamp(5rem, 9vw, 9rem); line-height: .8; color: var(--fuchsia); letter-spacing: -0.04em; }
+.cycle__phase { margin-top: 1.4rem; font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; color: #6b5a8e; }
+.cycle__etapes h3 { margin-top: .6rem; font-size: clamp(2.1rem, 3.8vw, 3.8rem); font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 144; letter-spacing: -0.02em; line-height: 1; }
+.cycle__etapes p { margin-top: 1rem; max-width: 26ch; font-family: var(--titre); font-weight: 300; font-size: clamp(1.2rem, 1.8vw, 1.7rem); line-height: 1.3; }
+.cycle__etapes .cycle__source { font-family: var(--texte); font-size: .9rem; margin-top: .6rem; font-weight: 500; }
+
+/* ------------------------------------------------------------------ enfants et parents : deux galets ensemble */
+.ensemble { position: relative; z-index: 2; height: 280vh; height: 280svh; background: linear-gradient(165deg, #f8eadc 0%, #f1d3c6 55%, #e4b3b8 100%); }
+.ensemble__scene { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.ensemble__texte { position: absolute; z-index: 2; left: var(--marge); top: 50%; transform: translateY(-46%); width: min(40rem, 44vw); }
+.ensemble__texte .element-nom { color: var(--fuchsia); }
+.ensemble__texte h2 { font-size: clamp(3rem, 6.6vw, 7rem); line-height: .92; margin-bottom: 1.8rem; }
+.ensemble__texte h2 em { color: var(--fuchsia); }
+.ensemble__texte .grand-texte + .grand-texte { margin-top: 1rem; }
+.ensemble__bouton { margin-top: 2rem; }
+.ensemble__galets { position: absolute; right: calc(var(--marge) + 4vw); bottom: 22vh; width: min(30vw, 30rem); height: 1px; }
+.ensemble__ombre { position: absolute; left: -25%; right: -25%; bottom: -2.6rem; height: 5rem; background: radial-gradient(ellipse closest-side, rgba(110, 40, 50, .3), rgba(110, 40, 50, 0)); }
+.ensemble__grand, .ensemble__petit { position: absolute; left: 50%; bottom: 0; will-change: transform; }
+.ensemble__grand { width: 100%; }
+.ensemble__petit { width: 46%; }
+.ensemble__grand img, .ensemble__petit img { width: 100%; height: auto; filter: drop-shadow(0 14px 14px rgba(90, 40, 40, .3)); }
+.ensemble__grand span, .ensemble__petit span { position: absolute; left: 50%; bottom: calc(100% + .6rem); transform: translateX(-50%); font-family: var(--titre); font-style: italic; font-weight: 300; font-size: clamp(1.4rem, 2.2vw, 2.2rem); white-space: nowrap; transition: opacity .6s ease; }
+.ensemble.uni .ensemble__grand span, .ensemble.uni .ensemble__petit span { opacity: 0; }
+.ensemble__mot { position: absolute; left: 50%; top: 3.4rem; transform: translate(-50%, 1rem); font-family: var(--titre); font-style: italic; font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 144; font-size: clamp(2.6rem, 5vw, 5rem); color: var(--fuchsia); opacity: 0; transition: opacity .9s ease .2s, transform 1.1s var(--doux) .2s; }
+.ensemble.uni .ensemble__mot { opacity: 1; transform: translate(-50%, 0); }
+
+/* ------------------------------------------------------------------ les avis : vingt-cinq voix, posées de côté */
+.voix { position: relative; z-index: 2; height: 380vh; height: 380svh; background: linear-gradient(180deg, #dde9e6 0%, #eef0ea 50%, #f5efe3 100%); }
+.voix__scene { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.voix__tete { position: absolute; z-index: 2; left: var(--marge); right: var(--marge); top: clamp(6rem, 13vh, 8.5rem); display: flex; flex-wrap: wrap; align-items: flex-end; gap: .4rem 3rem; }
+.voix__tete .element-nom { width: 100%; margin-bottom: 0; }
+.voix__note { display: flex; align-items: baseline; gap: 1rem; }
+.voix__note b { font-family: var(--titre); font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 144; font-size: clamp(5rem, 11vw, 11rem); line-height: .85; letter-spacing: -0.05em; color: var(--emeraude); }
+.voix__note span { font-family: var(--titre); font-style: italic; font-size: clamp(1.4rem, 2.4vw, 2.4rem); }
+.voix__piste { position: absolute; left: 0; right: 0; bottom: clamp(3rem, 9vh, 6rem); }
+.voix__rang { display: flex; align-items: flex-end; gap: clamp(1.5rem, 3.5vw, 3.5rem); padding: 0 var(--marge); width: max-content; will-change: transform; transform: translateX(var(--x, 0px)); }
+.voix__avis { flex: 0 0 auto; width: min(28rem, 80vw); padding: clamp(1.6rem, 2.6vw, 2.4rem); background: #fbf8f1; border-radius: 2.6rem 2rem 2.8rem 2.2rem; box-shadow: 0 40px 60px -40px rgba(30, 60, 50, .5); }
+.voix__avis:nth-child(odd) { transform: translateY(-2.5rem) rotate(-1.2deg); }
+.voix__avis:nth-child(3n) { transform: translateY(-1rem) rotate(1deg); }
+.voix__avis blockquote p { font-family: var(--titre); font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 36; font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.38; }
+.voix__avis figcaption { margin-top: 1.2rem; display: flex; flex-direction: column; font-size: .85rem; }
+.voix__avis figcaption strong { font-size: 1rem; }
+
+/* ------------------------------------------------------------------ les communes et le tarif, sur leurs propres matières */
+.autour--pierre { z-index: 2; isolation: isolate; }
+.autour__fond { position: absolute; inset: 0; z-index: -1; }
+.autour__fond img { width: 100%; height: 100%; object-fit: cover; }
+.autour__fond::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245, 239, 227, .2) 0%, rgba(245, 239, 227, .05) 50%, rgba(245, 239, 227, .55) 100%); }
+.autour--pierre .element-nom { color: #6b4a1e; }
+.table { position: relative; z-index: 2; isolation: isolate; min-height: 115vh; min-height: 115svh; overflow: hidden; display: flex; align-items: center; }
+.table__fond { position: absolute; inset: -8% 0; z-index: -1; }
+.table__fond img { width: 100%; height: 100%; object-fit: cover; object-position: 26% 50%; transform: translateY(var(--t, 0px)) scale(1.04); }
+.table__dedans { width: 100%; display: flex; justify-content: flex-end; padding: 8rem var(--marge); }
+.table__carte { width: min(34rem, 100%); padding: clamp(2rem, 3.4vw, 3.4rem); background: rgba(251, 248, 241, .86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-radius: 2.6rem 2rem 2.8rem 2.2rem; box-shadow: 0 50px 80px -50px rgba(60, 40, 15, .6); }
+.table__carte .element-nom { color: #7a4f24; }
+
+.calme .cycle, .calme .ensemble, .calme .voix, .no-js .cycle, .no-js .ensemble, .no-js .voix { height: auto; }
+.calme .cycle__scene, .calme .ensemble__scene, .calme .voix__scene, .no-js .cycle__scene, .no-js .ensemble__scene, .no-js .voix__scene { position: relative; height: auto; padding: 8rem var(--marge) 5rem; display: grid; gap: 3rem; }
+.calme .cycle__tete, .calme .cycle__etapes, .calme .ensemble__texte, .calme .voix__tete, .calme .voix__piste, .no-js .cycle__tete, .no-js .cycle__etapes, .no-js .ensemble__texte, .no-js .voix__tete, .no-js .voix__piste { position: relative; inset: auto; top: 0; left: 0; right: 0; transform: none; width: auto; height: auto; }
+.calme .cycle__etapes li, .no-js .cycle__etapes li { position: relative; opacity: 1; transform: none; margin-bottom: 3rem; }
+.calme .cycle__lune, .no-js .cycle__lune, .calme .ensemble__galets, .no-js .ensemble__galets { display: none; }
+.calme .voix__rang, .no-js .voix__rang { width: auto; flex-wrap: wrap; padding: 0; }
+
+@media (max-width: 900px) {
+  .cycle__tete h2 { font-size: 2.5rem; }
+  .cycle__lune { left: 50%; top: 40%; width: 46vw; height: 46vw; }
+  .cycle__etapes { left: var(--marge); top: auto; bottom: 7.5rem; bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px)); transform: none; height: 15rem; }
+  .cycle__num { font-size: 4rem; }
+  .cycle__phase { margin-top: .6rem; }
+  .cycle__etapes h3 { font-size: 2rem; }
+  .cycle__etapes p { font-size: 1.15rem; margin-top: .6rem; }
+  .ensemble__texte { top: 5.6rem; transform: none; width: auto; right: var(--marge); }
+  .ensemble__texte h2 { font-size: 2.8rem; margin-bottom: 1rem; }
+  .ensemble__texte .grand-texte { font-size: 1.12rem; }
+  .ensemble__bouton { margin-top: 1.2rem; }
+  .ensemble__galets { right: auto; left: 50%; margin-left: -23vw; width: 46vw; bottom: 22vh; bottom: 22svh; }
+  .ensemble__mot { font-size: 2.2rem; top: 2.4rem; }
+  .voix__note b { font-size: 6rem; }
+  .voix__piste { bottom: 6.5rem; }
+  .voix__avis { width: 78vw; }
+  .voix__avis blockquote p { font-size: 1rem; }
+  .table__dedans { padding-top: 46vh; padding-top: 46svh; padding-bottom: 6rem; }
+}

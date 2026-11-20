@@ -210,7 +210,9 @@
         seches: [], emportes: []
       };
     });
-    $$('[data-seche]').forEach(function (e) { var p = e.closest('[data-matiere]'), i = els.indexOf(p); if (i >= 0) scenes[i].seches.push(e); else e.classList.add('sec'); });
+    var horsScene = [];
+    $$('[data-seche]').forEach(function (e) { var p = e.closest('[data-matiere]'), i = els.indexOf(p); if (i >= 0) scenes[i].seches.push(e); else horsScene.push(e); });
+    veiller(horsScene);
     $$('[data-emporte]').forEach(function (e) { var p = e.closest('[data-matiere]'), i = els.indexOf(p); if (i >= 0) scenes[i].emportes.push(e); });
     // tout ce qui est posé sur une matière part avec elle : la vague emporte aussi les blocs qui n'ont rien demandé
     var hors = '.scene__fond, .rivage__fond, script, style';
@@ -363,8 +365,8 @@
   };
 
   /* sans le rivage animé : les blocs apparaissent simplement quand on arrive dessus */
-  function sansEau() {
-    var tous = $$('[data-seche]');
+  function sansEau() { veiller($$('[data-seche]')); }
+  function veiller(tous) {
     if (!('IntersectionObserver' in window)) { tous.forEach(function (e) { e.classList.add('sec'); }); return; }
     var veille = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('sec'); veille.unobserve(e.target); } }); }, { threshold: 0.12 });
     tous.forEach(function (e) { veille.observe(e); });

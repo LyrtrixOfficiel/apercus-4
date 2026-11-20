@@ -6,7 +6,7 @@
   var SOMMETS = 'attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0.0, 1.0); }';
   var PIXELS = [
     'precision mediump float;',
-    'varying vec2 v; uniform sampler2D tex; uniform vec3 soleil; uniform float eclat, halo, rayon, pret;',
+    'varying vec2 v; uniform sampler2D tex; uniform vec3 soleil; uniform float eclat, halo, rayon, pret, jour;',
     'void main(){',
     '  vec2 q = v / rayon; float r = length(q);',
     '  float bord = fwidth(r) * 1.5 + 0.004;',
@@ -22,7 +22,10 @@
     '  float plein = clamp(soleil.z * 0.5 + 0.5, 0.0, 1.0);',
     '  float h = exp(-max(r - 1.0, 0.0) * 5.5) * (1.0 - dedans) * halo * (0.3 + 0.55 * plein + eclat * 0.7);',
     '  float a = dedans + h;',
-    '  gl_FragColor = vec4(c * dedans + vec3(0.92, 0.94, 1.0) * h, clamp(a, 0.0, 1.0));',
+    '  vec4 nuit = vec4(c * dedans + vec3(0.92, 0.94, 1.0) * h, clamp(a, 0.0, 1.0));',
+    '  vec3 pale = mix(photo * (0.8 + 0.3 * lumiere), vec3(0.95, 0.96, 1.0), 0.32);',
+    '  vec4 clair = vec4(pale, dedans * (lumiere * 0.94 + 0.05));',
+    '  gl_FragColor = mix(nuit, clair, jour);',
     '}'
   ].join('\n');
 
@@ -50,7 +53,7 @@
     var a = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
     this.u = {};
     var self = this;
-    ['tex', 'soleil', 'eclat', 'halo', 'rayon', 'pret'].forEach(function (n) { self.u[n] = gl.getUniformLocation(prog, n); });
+    ['tex', 'soleil', 'eclat', 'halo', 'rayon', 'pret', 'jour'].forEach(function (n) { self.u[n] = gl.getUniformLocation(prog, n); });
     this.gl = gl; this.pret = 0;
     var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([140, 140, 140, 255]));
@@ -88,6 +91,7 @@
     gl.uniform1f(this.u.halo, o.halo == null ? 1 : o.halo);
     gl.uniform1f(this.u.rayon, this.rayon);
     gl.uniform1f(this.u.pret, this.pret);
+    gl.uniform1f(this.u.jour, o.jour || 0);
     gl.uniform1i(this.u.tex, 0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   };

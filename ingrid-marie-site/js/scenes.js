@@ -211,6 +211,55 @@
     galet.style.setProperty('--tourne', TOURNE[meilleur % TOURNE.length] + 'deg');
   }
 
+
+  /* ------------------------------------------------------------ la séance : la Lune croît d'étape en étape, en plein jour */
+  var cycle = $('#cycle'), etapesCycle = cycle ? $$('#cycle-etapes li', cycle) : [], toileCycle = $('#cycle-lune'), astreCycle = null, etapeIci = 0;
+  function cycleImage() {
+    if (!cycle || !visible(cycle, 50)) return;
+    if (!astreCycle && toileCycle && window.Astre) { astreCycle = new window.Astre(toileCycle, { rayon: 0.86 }); if (!astreCycle.ok) toileCycle.style.display = 'none'; }
+    var p = avance(cycle);
+    // nouvelle lune, premier quartier, pleine lune, dernier quartier : la Lune suit la séance
+    if (astreCycle && astreCycle.ok) astreCycle.dessine({ part: 0.035 + p * 0.73, jour: 1, halo: 0 });
+    var e = Math.min(etapesCycle.length - 1, Math.floor(p * etapesCycle.length * 0.999));
+    if (e !== etapeIci) { etapeIci = e; etapesCycle.forEach(function (li, i) { li.classList.toggle('ici', i === e); }); }
+  }
+
+  /* ------------------------------------------------------------ enfants et parents : le petit galet rejoint le grand */
+  var ensemble = $('#famille'), grand = ensemble ? $('.ensemble__grand', ensemble) : null, petit = ensemble ? $('.ensemble__petit', ensemble) : null, uni = false;
+  function ensembleImage() {
+    if (!ensemble || !grand || !visible(ensemble, 50)) return;
+    var p = calme ? 1 : avance(ensemble);
+    var a = lisse(0.04, 0.34, p), b = lisse(0.3, 0.42, p), pose = lisse(0.36, 0.7, p);
+    var hg = grand.offsetHeight, hp = petit.offsetHeight;
+    // le grand galet monte du sable, le petit descend et se pose sur lui
+    var yg = (1 - a) * vh * 0.55;
+    var yp = -(hg * 0.72) - (1 - pose) * vh * (mobile ? 0.15 : 0.62);
+    var xp = -50 + (1 - pose) * 26;
+    grand.style.transform = 'translate(-50%, ' + yg.toFixed(1) + 'px) rotate(' + ((1 - a) * -4).toFixed(2) + 'deg)';
+    grand.style.opacity = a.toFixed(3);
+    petit.style.transform = 'translate(' + xp.toFixed(2) + '%, ' + yp.toFixed(1) + 'px) rotate(' + ((1 - pose) * 12 - 2).toFixed(2) + 'deg)';
+    petit.style.opacity = b.toFixed(3);
+    var u = pose >= 1;
+    if (u !== uni) { uni = u; ensemble.classList.toggle('uni', u); }
+  }
+
+  /* ------------------------------------------------------------ les avis : ils passent de côté */
+  var voix = $('#avis'), rangVoix = $('#voix');
+  function voixImage() {
+    if (!voix || !rangVoix || calme || !visible(voix, 50)) return;
+    var p = avance(voix);
+    var course = Math.max(0, rangVoix.scrollWidth - vw);
+    rangVoix.style.setProperty('--x', (-lisse(0.04, 0.96, p) * course).toFixed(1) + 'px');
+  }
+
+  /* ------------------------------------------------------------ le tarif : la table glisse doucement sous la carte */
+  var tarif = $('#tarif'), fondTable = tarif ? $('.table__fond img', tarif) : null;
+  function tableImage() {
+    if (!tarif || !fondTable || calme || !visible(tarif, 50)) return;
+    var r = tarif.getBoundingClientRect();
+    fondTable.style.setProperty('--t', (((r.top + r.height / 2) - vh / 2) * -0.12).toFixed(1) + 'px');
+  }
+
   /* ------------------------------------------------------------ l'en-tête suit la lumière : clair sur les scènes de nuit */
   var nuits = $$('[data-nuit]'), enNuit = false;
   function teteImage() {
@@ -225,7 +274,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); teteImage();
+    cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
