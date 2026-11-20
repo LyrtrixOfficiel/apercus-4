@@ -28,7 +28,8 @@
     "individuel": {
       "prix": "70 €",
       "duree": "45 minutes",
-      "pour": "la séance individuelle, pour un adulte"
+      "pour": "la séance individuelle, pour un adulte",
+      "lieu": "Au cabinet ou en distanciel"
     },
     "couple": {
       "prix": "100 €",

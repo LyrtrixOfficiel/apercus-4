@@ -887,3 +887,13 @@ html.menu-ouvert .voile-menu { opacity: 1; pointer-events: auto; }
 }
 .photo-carte.affiche::after { display: none; }
 .lien-entier { white-space: nowrap; }
+
+/* 20/11 : la citation de Franck dans Approche (« Ici, pas d'artifices ») */
+.citation-moyenne { margin: 0; font-size: clamp(1.2rem, 1rem + .9vw, 1.65rem); line-height: 1.3; font-weight: 640; letter-spacing: -.02em; text-wrap: pretty; }
+/* 20/11 : l'illustration « Psychodrame » de Franck (fond blanc) se montre en entier, sans voile ni glissement */
+.photo-carte.illustration { background: #fefefe; }
+.photo-carte.illustration img { object-fit: contain; transform: none; will-change: auto; }
+.photo-carte.illustration::after { display: none; }
+.w-photo.illustration { background: #fefefe; }
+.w-photo.illustration img { object-fit: contain; }
+a.widget:hover .w-photo.illustration img { transform: none; }
