@@ -116,12 +116,12 @@
       var cache = ((1 - o) * 100).toFixed(2) + '%';
       cadre.style.setProperty(d[3] > 0 ? '--haut' : '--bas', cache);
       cadre.style.setProperty('--z', (1.28 - 0.24 * lisse(d[1], 1, p)).toFixed(4));
-      var y = d[3] > 0 ? (1 - p) * 16 - 4 : (p - 0.5) * 12;
+      var y = mobile ? 0 : (d[3] > 0 ? (1 - p) * 16 - 4 : (p - 0.5) * 12); // au téléphone la scène suit la page : pas de décalage
       el.style.transform = 'translateY(' + y.toFixed(2) + 'vh)';
       el.style.setProperty('--c', lisse(d[2] - 0.04, d[2] + 0.08, p).toFixed(3));
     });
     tmTexte.forEach(function (el, i) {
-      var a = 0.42 + i * 0.07, u = lisse(a, a + 0.14, p);
+      var a = 0.42 + i * 0.07, u = mobile ? lisse(vh * 0.98, vh * 0.78, el.getBoundingClientRect().top + i * 8) : lisse(a, a + 0.14, p);
       el.style.opacity = u.toFixed(3);
       el.style.transform = 'translateY(' + ((1 - u) * 1.6).toFixed(2) + 'rem)';
     });
@@ -171,22 +171,22 @@
   var ciel = $('#lune'), couches = ciel ? $$('.ciel__couche', ciel) : [], temps = ciel ? $$('.ciel__temps', ciel) : [];
   var toileLune = $('#ciel-lune'), astreCiel = null;
   // chaque texte : arrive, reste, repart (le dernier reste)
-  var FENETRES = [[-1, 0.03, 0.2, 0.26], [0.24, 0.3, 0.42, 0.48], [0.5, 0.57, 0.68, 0.74], [0.74, 0.8, 2, 3]];
+  var FENETRES = [[-1, 0.03, 0.3, 0.4], [0.48, 0.58, 2, 3]];
   function cielImage() {
     if (!ciel || !visible(ciel, 50)) return;
     if (!astreCiel && toileLune && window.Astre) { astreCiel = new window.Astre(toileLune, { rayon: 0.5 }); if (!astreCiel.ok) toileLune.style.display = 'none'; }
     var p = avance(ciel);
-    var rose = lisse(0.2, 0.42, p), nuit = lisse(0.44, 0.62, p);
+    var rose = lisse(0.1, 0.3, p), nuit = lisse(0.32, 0.5, p);
     couches[0].style.transform = 'scale(' + (1.04 + p * 0.1).toFixed(4) + ') translateY(' + (p * 3).toFixed(2) + '%)';
     couches[1].style.opacity = rose.toFixed(3);
     couches[1].style.transform = 'scale(' + (1.12 - p * 0.08).toFixed(4) + ')';
     couches[2].style.opacity = nuit.toFixed(3);
     couches[2].style.transform = 'scale(' + (1.1 - nuit * 0.1).toFixed(4) + ')';
-    var lune = lisse(0.5, 0.66, p);
+    var lune = lisse(0.48, 0.62, p);
     if (toileLune) {
       toileLune.style.opacity = lune.toFixed(3);
       toileLune.style.setProperty('--monte', ((1 - lune) * 40).toFixed(1) + '%');
-      if (astreCiel && astreCiel.ok && lune > 0) astreCiel.dessine({ part: 0.02 + (partDuJour - 0.02) * lisse(0.54, 0.78, p), halo: 1.3 });
+      if (astreCiel && astreCiel.ok && lune > 0) astreCiel.dessine({ part: partDuJour, halo: 1.3 });
     }
     temps.forEach(function (el, i) {
       var f = FENETRES[i];
@@ -297,6 +297,15 @@
     });
   }
 
+  /* ------------------------------------------------------------ enfants et parents : la photo s'ouvre en montant */
+  var famillePhoto = $('#famille-photo'), familleImg = famillePhoto ? $('img', famillePhoto) : null;
+  function familleImage() {
+    if (!famillePhoto || !visible(famillePhoto, 50)) return;
+    var r = famillePhoto.getBoundingClientRect(), o = calme ? 1 : lisse(vh * 1.02, vh * 0.42, r.top);
+    famillePhoto.style.setProperty('--o', o.toFixed(3));
+    if (familleImg && !calme) familleImg.style.transform = 'scale(' + (1.16 - o * 0.12).toFixed(4) + ') translateY(' + (((r.top + r.height / 2) - vh / 2) * -0.04).toFixed(1) + 'px)';
+  }
+
   /* ------------------------------------------------------------ la séance : la Lune croît d'étape en étape, en plein jour */
   var cycle = $('#cycle'), etapesCycle = cycle ? $$('#cycle-etapes li', cycle) : [], toileCycle = $('#cycle-lune'), astreCycle = null, etapeIci = 0;
   function cycleImage() {
@@ -360,7 +369,7 @@
   function teteImage() {
     var n = false;
     for (var i = 0; i < nuits.length; i++) { var r = nuits[i].getBoundingClientRect(); if (r.top <= 44 && r.bottom > 44) { n = true; break; } }
-    if (n && ciel && nuits[i] === ciel) n = avance(ciel) > 0.4;
+    if (n && ciel && nuits[i] === ciel) n = avance(ciel) > 0.36;
     if (n !== enNuit) { enNuit = n; html.classList.toggle('tete-nuit', n); }
   }
 
@@ -369,7 +378,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); pileImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
+    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); pileImage(); cycleImage(); ensembleImage(); familleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
