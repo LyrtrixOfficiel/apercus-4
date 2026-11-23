@@ -238,6 +238,14 @@
     eventail();
   });
 
+  /* ------------------------------------------------------------ ses pratiques : les mots arrivent un à un */
+  var dons = $('#dons'), donsMots = dons ? $$('.dons__pratiques li', dons) : [];
+  function donsImage() {
+    if (!dons || !visible(dons, 50)) return;
+    var r = dons.getBoundingClientRect(), p = borne((vh - r.top) / (vh * 0.95), 0, 2);
+    donsMots.forEach(function (li, i) { var a = 0.32 + i * 0.075, u = calme ? 1 : lisse(a, a + 0.2, p); li.style.setProperty('--u', u.toFixed(3)); });
+  }
+
   /* ------------------------------------------------------------ l'air : les mots passent avec le vent */
   var vent = $('#voyages'), mots = vent ? $$('[data-vent]', vent) : [], cielVent = vent ? $('.vent__ciel img', vent) : null, yAvant = window.scrollY, vitesse = 0;
   function ventImage(t, dt) {
@@ -336,7 +344,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    terremerImage(); cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
+    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
