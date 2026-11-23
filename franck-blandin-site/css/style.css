@@ -897,3 +897,15 @@ html.menu-ouvert .voile-menu { opacity: 1; pointer-events: auto; }
 .w-photo.illustration { background: #fefefe; }
 .w-photo.illustration img { object-fit: contain; }
 a.widget:hover .w-photo.illustration img { transform: none; }
+
+/* 22/11 : sept accompagnements, la formation en large sur toute la rangée ; l'affiche de Samedi en scène ; le psychodrame en texte long */
+@media (min-width: 900px) {
+  .widgets.six .widget-large { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); column-gap: clamp(22px, 3vw, 40px); align-items: center; }
+  .widgets.six .widget-large .w-photo { grid-row: 1 / span 2; margin: 0; }
+}
+@media (max-width: 899px) { .widgets.six .widget-large { grid-column: 1 / -1; } }
+.photo-carte.affiche.affiche-portrait { aspect-ratio: 1080 / 1350; width: 100%; background: #0d2c6e; }
+.duo-affiche { align-items: center; }
+@media (min-width: 900px) { .duo-affiche { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); } }
+.panneau.texte-long > p { max-width: 70ch; }
+.panneau.texte-long strong { font-weight: 700; }
