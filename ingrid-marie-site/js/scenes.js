@@ -97,6 +97,36 @@
     requestAnimationFrame(image);
   }
 
+  /* ------------------------------------------------------------ entre terre et mer : ses deux photos se découvrent
+     « Entre terre » arrive de gauche, « et mer » de droite ; la mer (elle, au bord de l'océan) s'ouvre de bas en haut,
+     la terre de haut en bas ; chaque photo glisse doucement dans son cadre. Tout suit le défilement. */
+  var terremer = $('#terre-mer'), tmL1 = $('.terremer__l1'), tmL2 = $('.terremer__l2');
+  var tmMer = $('.terremer__photo--mer'), tmTerre = $('.terremer__photo--terre'), tmTexte = terremer ? $$('.terremer__texte > *', terremer) : [];
+  function terremerImage() {
+    if (!terremer || calme || !visible(terremer, 80)) return;
+    var r = terremer.getBoundingClientRect();
+    // 0 quand la section arrive par le bas, 1 quand elle repart : l'arrivée compte pour un tiers
+    var p = borne((vh - r.top) / r.height, 0, 1);
+    var t = lisse(0.1, 0.4, p);
+    tmL1.style.transform = 'translateX(' + ((1 - t) * -9).toFixed(2) + 'vw)'; tmL1.style.opacity = (0.15 + t * 0.85).toFixed(3);
+    tmL2.style.transform = 'translateX(' + ((1 - t) * 11).toFixed(2) + 'vw)'; tmL2.style.opacity = (0.15 + t * 0.85).toFixed(3);
+    [[tmMer, 0.2, 0.52, 1], [tmTerre, 0.3, 0.62, -1]].forEach(function (d) {
+      var el = d[0]; if (!el) return;
+      var o = lisse(d[1], d[2], p), cadre = el.firstElementChild;
+      var cache = ((1 - o) * 100).toFixed(2) + '%';
+      cadre.style.setProperty(d[3] > 0 ? '--haut' : '--bas', cache);
+      cadre.style.setProperty('--z', (1.28 - 0.24 * lisse(d[1], 1, p)).toFixed(4));
+      var y = d[3] > 0 ? (1 - p) * 16 - 4 : (p - 0.5) * 12;
+      el.style.transform = 'translateY(' + y.toFixed(2) + 'vh)';
+      el.style.setProperty('--c', lisse(d[2] - 0.04, d[2] + 0.08, p).toFixed(3));
+    });
+    tmTexte.forEach(function (el, i) {
+      var a = 0.42 + i * 0.07, u = lisse(a, a + 0.14, p);
+      el.style.opacity = u.toFixed(3);
+      el.style.transform = 'translateY(' + ((1 - u) * 1.6).toFixed(2) + 'rem)';
+    });
+  }
+
   /* ------------------------------------------------------------ la terre : le cairn se construit pierre par pierre */
   var cairn = $('#ancrage'), pile = $('#cairn'), pierres = pile ? $$('.cairn__pierre', pile) : [];
   // largeur de chaque pierre par rapport à la base, décalage de côté, inclinaison une fois posée
@@ -306,7 +336,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
+    terremerImage(); cairnImage(t); cielImage(); oracleImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
