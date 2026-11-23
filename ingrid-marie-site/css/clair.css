@@ -116,3 +116,4 @@ main > .rivage { background: none; border-radius: 0; margin-top: 0; box-shadow: 
   .carrousel__aide { font-size: .68rem; }
   .carrousel__fleche { width: 2.8rem; height: 2.8rem; }
 }
+@media (max-width: 900px) { .terremer__cadre::after { inset: 38% 0 0; background: linear-gradient(180deg, rgba(20, 26, 10, 0), rgba(20, 26, 10, .62)); } }
