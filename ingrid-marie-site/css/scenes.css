@@ -440,3 +440,82 @@
   .riviere--lotus .riviere__soin a { opacity: .78; }
   .dons__pratiques { max-width: none; font-size: clamp(1.9rem, 9.4vw, 3rem); }
 }
+
+/* ------------------------------------------------------------------ 23/11 nuit : les soins en cartes qui s'empilent
+   Chaque carte reste en haut de l'écran ; la suivante monte et se pose dessus, la précédente recule un peu. */
+.soins { position: relative; z-index: 2; background: linear-gradient(90deg, rgba(238, 240, 226, .78) 0%, rgba(238, 240, 226, .45) 100%), url('../images/lotus-1200.webp') 64% 50% / cover fixed; color: var(--encre); }
+.eau-seule .soins { background: none; }
+.soins__dedans { padding: clamp(7rem, 16vh, 10rem) var(--marge) clamp(5rem, 14vh, 9rem); }
+.soins__tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: 1rem 5vw; align-items: end; }
+.soins__tete .element-nom { grid-column: 1 / -1; margin-bottom: 0; }
+.soins__tete h2 { font-size: clamp(3.2rem, 10vw, 10.5rem); line-height: .88; text-shadow: 0 0 40px rgba(246, 243, 230, .9); }
+.soins__tete h2 em { color: var(--pistache-fonce); }
+.soins__tete .grand-texte { color: #2a2a1e; text-shadow: 0 0 22px rgba(246, 243, 230, .95); }
+.soins__pile { list-style: none; margin: clamp(3.5rem, 10vh, 7rem) 0 0; padding: 0; }
+.soin-carte { position: sticky; top: calc(clamp(6rem, 13vh, 8rem) + var(--i) * 1.1rem); margin-bottom: 14vh; }
+.soin-carte:last-child { margin-bottom: 0; }
+.soin-carte__lien { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); min-height: min(72vh, 36rem); background: #f7f4ea; border-radius: 2rem; overflow: hidden; color: var(--encre); text-decoration: none; box-shadow: 0 -1px 0 rgba(255, 255, 255, .7) inset, 0 50px 80px -40px rgba(38, 50, 18, .45), 0 10px 24px -14px rgba(38, 50, 18, .25); transform-origin: 50% 0; transform: scale(calc(1 - var(--r, 0) * .05)); filter: brightness(calc(1 - var(--r, 0) * .1)); will-change: transform; }
+.soin-carte__image { position: relative; overflow: hidden; }
+.soin-carte__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); transition: transform 1.6s var(--doux); }
+.soin-carte__lien:hover .soin-carte__image img, .soin-carte__lien:focus-visible .soin-carte__image img { transform: scale(1.08); }
+.soin-carte__texte { display: flex; flex-direction: column; padding: clamp(2rem, 4vw, 4rem); }
+.soin-carte__haut { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.4rem; }
+.soin-carte__num { font-family: var(--titre); font-style: italic; font-weight: 300; font-size: 1.6rem; color: var(--pistache-fonce); }
+.soin-carte__num i { font-size: .9rem; color: #8b8e78; font-style: italic; }
+.soin-carte__pour { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--pistache-fonce); }
+.soin-carte__nom { margin-top: auto; padding-top: 2rem; font-family: var(--titre); font-weight: 300; font-variation-settings: 'SOFT' 100, 'opsz' 144; font-size: clamp(2.6rem, 4.6vw, 5rem); line-height: .95; letter-spacing: -0.035em; }
+.soin-carte__resume { margin-top: 1.2rem; max-width: 34ch; font-family: var(--titre); font-weight: 300; font-size: clamp(1.1rem, 1.35vw, 1.35rem); line-height: 1.45; color: #3a3b2e; }
+.soin-carte__bas { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .6rem 1.5rem; margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid rgba(41, 38, 31, .12); font-size: .95rem; font-weight: 600; }
+.soin-carte__bas b { font-family: var(--titre); font-style: italic; font-weight: 400; font-size: 1.25rem; color: var(--pistache-fonce); }
+.soin-carte__bas b::after { content: ' \2192'; font-family: var(--texte); font-style: normal; display: inline-block; transition: transform .5s var(--doux); }
+.soin-carte__lien:hover .soin-carte__bas b::after { transform: translateX(.3rem); }
+.soins__fin { display: flex; flex-wrap: wrap; gap: 1rem 3rem; margin-top: clamp(3rem, 8vh, 5rem); }
+.calme .soin-carte, .no-js .soin-carte { position: relative; top: auto; margin-bottom: 2rem; }
+@media (max-width: 900px) {
+  .soins { background: #e3e9d3; }
+  .eau-seule .soins { background: none; }
+  .soins__dedans { padding-top: 6.5rem; padding-bottom: 7rem; }
+  .soins__tete { grid-template-columns: 1fr; }
+  .soins__pile { margin-top: 2.5rem; }
+  .soin-carte { top: calc(4.9rem + var(--i) * .55rem); margin-bottom: 8svh; }
+  .soin-carte__lien { grid-template-columns: 1fr; grid-template-rows: auto 1fr; min-height: 0; border-radius: 1.5rem; }
+  .soin-carte__image { height: 24svh; min-height: 9.5rem; }
+  .soin-carte__texte { padding: 1.3rem 1.35rem 1.35rem; }
+  .soin-carte__num { font-size: 1.3rem; }
+  .soin-carte__pour { font-size: .66rem; letter-spacing: .14em; }
+  .soin-carte__nom { margin-top: .5rem; padding-top: 0; font-size: 2.25rem; }
+  .soin-carte__resume { margin-top: .7rem; font-size: 1.02rem; line-height: 1.42; }
+  .soin-carte__bas { margin-top: 1rem; padding-top: .9rem; font-size: .85rem; }
+  .soin-carte__bas b { font-size: 1.1rem; }
+  .soins__fin { flex-direction: column; gap: 1rem; }
+}
+
+/* ------------------------------------------------------------------ 23/11 nuit : repassé écran par écran à 360 px */
+.soin-carte { margin-bottom: 26vh; }
+.soin-carte:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  /* on lit une carte en entier avant que la suivante ne monte dessus */
+  .soin-carte { margin-bottom: 34svh; }
+  .soin-carte:last-child { margin-bottom: 0; }
+  /* terre et mer : les légendes ne touchent plus le texte */
+  .terremer__photo { --l: 35vw; }
+  .terremer__photo--mer { top: 31svh; }
+  .terremer__photo--terre { top: 32.5svh; }
+  .cairn__pile { --base: min(48vw, 28vh); left: 30%; }
+  /* enfants et parents : les deux galets prennent la place */
+  .ensemble__galets { width: 66vw; margin-left: -33vw; bottom: 25svh; }
+  .ensemble__grand span, .ensemble__petit span { font-size: 1.5rem; }
+  /* les avis : un à la fois, droits */
+  .voix__avis, .voix__avis:nth-child(odd), .voix__avis:nth-child(3n) { width: 82vw; transform: none; border-radius: 1.6rem; }
+  .voix__piste { bottom: 6rem; }
+  /* le Pays basque : le titre reste lisible sur la ferme */
+  .autour--basque .autour__tete { position: relative; }
+  .autour--basque .autour__tete::before { content: ''; position: absolute; z-index: -1; left: -2rem; right: -1rem; top: -2.5rem; bottom: -2rem; background: radial-gradient(ellipse 75% 70% at 35% 50%, rgba(248, 244, 233, .92) 0%, rgba(248, 244, 233, .7) 55%, rgba(248, 244, 233, 0) 100%); pointer-events: none; }
+  .autour--basque .autour__suite { position: relative; }
+  .autour--basque .autour__suite::before { content: ''; position: absolute; z-index: -1; left: -1rem; right: -1rem; top: -2rem; bottom: -2rem; background: radial-gradient(ellipse 80% 70% at 45% 50%, rgba(248, 244, 233, .9) 0%, rgba(248, 244, 233, .65) 55%, rgba(248, 244, 233, 0) 100%); pointer-events: none; }
+}
+
+/* le Pays basque, aussi sur ordinateur : un voile clair derrière le titre et le texte, pas une boîte */
+.autour--basque .autour__tete, .autour--basque .autour__suite { position: relative; }
+.autour--basque .autour__tete::before, .autour--basque .autour__suite::before { content: ''; position: absolute; z-index: -1; left: -4rem; right: 20%; top: -3rem; bottom: -2.5rem; background: radial-gradient(ellipse 60% 70% at 30% 50%, rgba(248, 244, 233, .9) 0%, rgba(248, 244, 233, .62) 55%, rgba(248, 244, 233, 0) 100%); pointer-events: none; }
+@media (max-width: 900px) { .autour--basque .autour__tete::before, .autour--basque .autour__suite::before { left: -2rem; right: -1rem; background: radial-gradient(ellipse 80% 70% at 40% 50%, rgba(248, 244, 233, .92) 0%, rgba(248, 244, 233, .68) 55%, rgba(248, 244, 233, 0) 100%); } }

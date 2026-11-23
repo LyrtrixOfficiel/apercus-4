@@ -134,11 +134,11 @@
   var posees = [], base = 0, cumul = [], derniereChute = 0, avantCairn = -1;
   function mesurerCairn() {
     if (!pile) return;
-    base = pile.getBoundingClientRect().width;
+    base = pile.offsetWidth;
     var y = 0;
     pierres.forEach(function (p, i) {
       var im = $('img', p), l = base * LARGEUR[i];
-      p.style.width = l.toFixed(1) + 'px';
+      p.style.width = (LARGEUR[i] * 100) + '%'; // relatif à la pile : juste même si la mesure tombe pendant un redimensionnement
       var h = l * (im.getAttribute('height') / im.getAttribute('width'));
       cumul[i] = y;
       y += h * (i === 0 ? 0.74 : 0.7);
@@ -147,6 +147,7 @@
   function cairnImage(t) {
     if (!cairn || calme) return;
     if (!visible(cairn, 100)) return;
+    if (Math.abs(pile.offsetWidth - base) > 0.5) mesurerCairn();
     var p = avance(cairn);
     var balance = 0;
     pierres.forEach(function (pierre, i) {
@@ -282,6 +283,20 @@
   }
 
 
+  /* ------------------------------------------------------------ les soins : la carte suivante se pose sur la précédente */
+  var pileSoins = $('#pile'), cartesSoin = pileSoins ? $$('.soin-carte', pileSoins) : [];
+  function pileImage() {
+    if (!pileSoins || !visible(pileSoins, 50)) return;
+    cartesSoin.forEach(function (c, i) {
+      var suite = cartesSoin[i + 1], r = 0;
+      if (suite && !calme) {
+        var a = c.getBoundingClientRect(), b = suite.getBoundingClientRect();
+        r = borne(1 - (b.top - a.top) / Math.max(a.height, 1), 0, 1);
+      }
+      c.style.setProperty('--r', r.toFixed(3));
+    });
+  }
+
   /* ------------------------------------------------------------ la séance : la Lune croît d'étape en étape, en plein jour */
   var cycle = $('#cycle'), etapesCycle = cycle ? $$('#cycle-etapes li', cycle) : [], toileCycle = $('#cycle-lune'), astreCycle = null, etapeIci = 0;
   function cycleImage() {
@@ -319,6 +334,16 @@
     if (!voix || !rangVoix || calme || !visible(voix, 50)) return;
     var p = avance(voix);
     var course = Math.max(0, rangVoix.scrollWidth - vw);
+    if (mobile) {
+      // un avis à la fois, centré : il reste posé, puis glisse vers le suivant
+      var avisListe = rangVoix.children, nb = avisListe.length;
+      if (nb > 1) {
+        var t = lisse(0.03, 0.97, p) * (nb - 1), k = Math.min(nb - 2, Math.floor(t)), f = lisse(0.3, 0.7, t - k);
+        var centre = function (i) { var el = avisListe[i]; return el.offsetLeft + el.offsetWidth / 2 - vw / 2; };
+        rangVoix.style.setProperty('--x', (-(centre(k) + (centre(k + 1) - centre(k)) * f)).toFixed(1) + 'px');
+        return;
+      }
+    }
     rangVoix.style.setProperty('--x', (-lisse(0.04, 0.96, p) * course).toFixed(1) + 'px');
   }
 
@@ -344,7 +369,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
+    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); pileImage(); cycleImage(); ensembleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;
