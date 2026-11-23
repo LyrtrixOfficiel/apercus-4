@@ -145,7 +145,8 @@
   var rivage = $('#rivage'), sceneRivage = null, nom = null, imageFond = null;
   var maree = -0.32, depart = 0, echelleEau = 1, lent = 0, compte = 0, tAvant = 0;
   var front = 9, kAvant = -1, impulsion = null, attenteCompo = null;
-  var MODES = { eau: 0, terre: 1, feu: 2, air: 3, univers: 4, lumiere: 5 };
+  // 23/11 : tous les passages entre sections sont un fondu doux (le trait de chaque élément paraissait bizarre)
+  var MODES = { eau: 5, terre: 5, feu: 5, air: 5, univers: 5, lumiere: 5 };
 
   /* Le sable de l'accueil, avec le nom écrit du doigt exactement là où le titre est posé. */
   function composer() {

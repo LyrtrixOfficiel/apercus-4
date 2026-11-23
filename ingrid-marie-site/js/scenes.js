@@ -116,12 +116,12 @@
       var cache = ((1 - o) * 100).toFixed(2) + '%';
       cadre.style.setProperty(d[3] > 0 ? '--haut' : '--bas', cache);
       cadre.style.setProperty('--z', (1.28 - 0.24 * lisse(d[1], 1, p)).toFixed(4));
-      var y = mobile ? 0 : (d[3] > 0 ? (1 - p) * 16 - 4 : (p - 0.5) * 12); // au téléphone la scène suit la page : pas de décalage
+      var y = 0; // la scène suit la page (plus épinglée) : pas de décalage
       el.style.transform = 'translateY(' + y.toFixed(2) + 'vh)';
       el.style.setProperty('--c', lisse(d[2] - 0.04, d[2] + 0.08, p).toFixed(3));
     });
     tmTexte.forEach(function (el, i) {
-      var a = 0.42 + i * 0.07, u = mobile ? lisse(vh * 0.98, vh * 0.78, el.getBoundingClientRect().top + i * 8) : lisse(a, a + 0.14, p);
+      var a = 0.42 + i * 0.07, u = lisse(vh * 0.98, vh * 0.78, el.getBoundingClientRect().top + i * 8);
       el.style.opacity = u.toFixed(3);
       el.style.transform = 'translateY(' + ((1 - u) * 1.6).toFixed(2) + 'rem)';
     });
@@ -378,7 +378,7 @@
   function image() {
     requestAnimationFrame(image);
     var t = maintenant(), dt = t - tAvant; tAvant = t;
-    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); pileImage(); cycleImage(); ensembleImage(); familleImage(); voixImage(); tableImage(); teteImage();
+    terremerImage(); cairnImage(t); cielImage(); oracleImage(); donsImage(); ventImage(t, dt); riviereImage(); cycleImage(); ensembleImage(); familleImage(); voixImage(); tableImage(); teteImage();
   }
   function retailler() {
     vh = window.innerHeight; vw = window.innerWidth; mobile = window.matchMedia('(max-width: 900px)').matches;

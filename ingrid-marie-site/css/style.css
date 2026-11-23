@@ -482,3 +482,22 @@ main, .pied { position: relative; z-index: 1; }
 
 .calme { scroll-behavior: auto; }
 .calme *, .calme *::before, .calme *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+
+/* ------------------------------------------------------------------ 23/11 nuit (3) : le menu du téléphone, rangé
+   Les soins regroupés dans un encadré, puis les pages, chacune sur sa ligne, avec de l'air. */
+.menu { padding-top: 6rem; }
+.menu__liens { display: flex; flex-direction: column; gap: 0; }
+.menu__groupe { margin-bottom: 1.1rem; padding: 1.1rem 1.2rem 1.2rem; background: rgba(185, 204, 142, .22); border-radius: 1.3rem; opacity: 0; transform: translateY(1rem); transition: opacity .6s var(--doux), transform .6s var(--doux); }
+.menu-ouvert .menu__groupe { opacity: 1; transform: none; }
+.menu__titre { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: var(--pistache-fonce); margin: 0 0 .6rem; }
+.menu__soins { display: grid; grid-template-columns: 1fr 1fr; gap: .15rem 1rem; }
+.menu__liens .menu__soins a { font-family: var(--titre); font-weight: 400; font-size: 1.12rem; line-height: 1.25; letter-spacing: -0.005em; padding: .45rem 0; opacity: 1; transform: none; text-decoration: none; }
+.menu__liens a.menu__page { font-size: 1.75rem; line-height: 1.1; padding: .78rem 0; border-bottom: 1px solid rgba(41, 38, 31, .1); }
+.menu__liens a.menu__page:last-child { border-bottom: 0; }
+.menu__liens a.menu__page::after { content: '\2192'; float: right; font-family: var(--texte); font-size: 1.1rem; line-height: 1.9; color: var(--pistache-fonce); }
+.menu__liens a[aria-current] { color: var(--pistache-fonce); }
+.menu__bas { margin-top: 1.6rem; }
+
+.menu__soins { grid-template-columns: 1fr; gap: 0; }
+.menu__liens .menu__soins a { padding: .34rem 0; font-size: 1.08rem; }
+.menu__liens a.menu__page { font-size: 1.55rem; padding: .66rem 0; }

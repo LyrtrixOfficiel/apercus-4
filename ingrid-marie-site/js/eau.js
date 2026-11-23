@@ -102,15 +102,9 @@
     '      neb=mix(neb,vec3(1.0,0.86,0.55),smoothstep(0.58,0.88,n));',
     '      ajout=neb*e*0.6+vec3(1.0,0.97,0.92)*exp(-abs(s)*140.0)*0.55;',
     '      dB=vec2(sin(s*22.0+t),cos(s*18.0-t))*0.005*e;',
-    '    }else{',                  // lumière : une aube passe, une bande de jour qui éclaire et dépose la suite
-    '      float n=fbm(vec2(p.x*1.4,t*0.08));',
-    '      float bord=F+(n-0.5)*0.16+0.03*sin(p.x*2.0+t*0.4);',
-    '      float d=v.y-bord;',
-    '      mB=smoothstep(-0.07,0.07,d);',
-    '      float g=exp(-d*d*55.0);',
-    '      float rai=pow(fbm(vec2(p.x*6.0+v.y*1.6,t*0.12)),2.0);',
-    '      voile=g*(0.6+0.3*rai);voileC=vec3(1.0,0.975,0.92);',
-    '      dA=vec2(0.0,g*0.012);',
+    '    }else{',                  // fondu : la matière suivante monte en douceur, sans bord ni trait (23/11)
+    '      float d=v.y-F;',
+    '      mB=smoothstep(-0.32,0.32,d);',
     '    }',
     '  }',
     '  vec2 w=v-0.5;',
