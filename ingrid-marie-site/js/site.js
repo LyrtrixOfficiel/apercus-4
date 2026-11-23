@@ -214,7 +214,8 @@
   }
 
   function preparerEau() {
-    if (!toile || !window.Eau) return;
+    // 23/11 : l'eau animée seulement en haut de l'accueil ; les autres pages sont posées sur des fonds unis
+    if (!toile || !window.Eau || !rivage) return;
     echelleEau = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.25);
     eau = new window.Eau(toile, { mode: 'fond', echelle: echelleEau });
     var els = $$('[data-matiere], [data-toile]');

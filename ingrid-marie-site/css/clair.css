@@ -1,0 +1,118 @@
+/* Ingrid Marie : lisible avant tout (23/11/2026, retour de Mathéo : « le texte ressort mal », « que des images de fond »,
+   « les pages se démarquent mal »). Chargé après style.css et scenes.css, il a le dernier mot.
+   - Plus de photo derrière le texte : chaque partie a un fond uni, et les parties se suivent comme des feuilles
+     posées l'une sur l'autre (coins arrondis, teintes qui alternent).
+   - Les photos sont encadrées.
+   - Une partie ne prend plus forcément tout l'écran.
+   - L'eau animée ne reste que tout en haut de l'accueil. */
+
+:root {
+  --f-lait: #fbf8f1;
+  --f-sable: #f2ece0;
+  --f-pistache: #e8eedb;
+  --f-rose: #f6e9e3;
+  --f-ciel: #e8edf0;
+  --f-feuille: #f4f1e6;
+  --pli: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+/* ------------------------------------------------------------------ les parties : fonds unis, posées l'une sur l'autre */
+.scene { min-height: 0; justify-content: flex-start; }
+.scene__dedans { padding: clamp(5rem, 11vh, 8rem) var(--marge) clamp(4.5rem, 10vh, 7rem); }
+.halo::before { display: none; }
+.scene__fond { display: none; }
+
+main > section, .pied {
+  position: relative; z-index: 2;
+  background: var(--fond, var(--f-lait));
+  border-radius: var(--pli) var(--pli) 0 0;
+  margin-top: calc(var(--pli) * -1);
+  box-shadow: 0 -18px 40px -30px rgba(60, 50, 30, .25);
+}
+main > section:first-child { margin-top: 0; border-radius: 0; box-shadow: none; }
+/* l'accueil commence par la marée : la partie suivante se pose dessus */
+main > .rivage { background: none; border-radius: 0; margin-top: 0; box-shadow: none; }
+
+/* les teintes */
+.recit, .mots, .avis-accueil, .temoins { --fond: var(--f-lait); }
+.ouverture, .soins, .reperes, .autres, .parcours { --fond: var(--f-sable); }
+.matiere, .terremer, .questions, .grand-prix, .prix { --fond: var(--f-pistache); }
+.famille, .ensemble { --fond: var(--f-rose); }
+.lune { --fond: var(--f-ciel); }
+.table, .communes { --fond: var(--f-feuille); }
+.pied { --fond: #2f3a2b; color: #f3efe4; }
+
+/* ce que le moteur d'eau rendait transparent redevient opaque */
+.eau-seule .mots, .eau-seule .soins, .eau-seule .famille, .eau-seule .terremer, .eau-seule .avis-accueil, .eau-seule .table,
+.eau-seule .scene:not(.rivage), .eau-seule .pied { background: var(--fond, var(--f-lait)); }
+.eau-seule .table__fond, .table__fond { display: none; }
+
+/* ------------------------------------------------------------------ l'ouverture des pages : le texte d'un côté, la photo encadrée de l'autre */
+.ouverture {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 5vw, 5rem); align-items: center;
+  padding: clamp(7.5rem, 16vh, 10rem) var(--marge) clamp(4rem, 9vh, 6rem);
+}
+.ouverture .scene__fond {
+  display: block; position: relative; inset: auto; z-index: 0; grid-column: 2; grid-row: 1;
+  width: 100%; aspect-ratio: 4 / 5; max-height: 74vh; border-radius: 2rem; overflow: hidden; background: var(--sable);
+  box-shadow: 0 50px 80px -50px rgba(60, 50, 30, .55);
+}
+.ouverture .scene__fond img { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.ouverture .scene__fond::after { display: none; }
+.ouverture__texte, .ouverture--droite .ouverture__texte { grid-column: 1; grid-row: 1; width: auto; }
+.ouverture h1 { font-size: clamp(3rem, 6.2vw, 6.6rem); }
+.ouverture--prix .prix__chiffre { font-size: clamp(5.5rem, 12vw, 11rem); }
+
+/* ------------------------------------------------------------------ quelques parties, réglées une à une */
+.recit__dedans .grand-texte { font-size: clamp(1.25rem, 1.9vw, 1.8rem); line-height: 1.38; margin-left: 0; max-width: 34em; }
+.matiere__mots p { font-size: clamp(2rem, 4.6vw, 4.6rem); }
+.lune__titre { font-size: clamp(3rem, 7vw, 7rem); }
+.prix .scene__dedans { justify-content: flex-start; }
+.prix__chiffre { font-size: clamp(5rem, 11vw, 10rem); }
+.pied__dedans { padding-top: clamp(5rem, 12vh, 8rem); }
+.pied__mots { font-size: clamp(3rem, 9vw, 9rem); }
+.pied__mots em { color: #c9d9a6; }
+.pied a, .pied h2 { color: inherit; }
+.pied__bas { border-top-color: rgba(243, 239, 228, .25); }
+
+/* l'accueil */
+.mots .scene__dedans { padding-top: clamp(5rem, 11vh, 8rem); }
+.soins__dedans, .famille__dedans, .avis-accueil { padding-top: clamp(5rem, 11vh, 8rem); }
+.famille__dedans { min-height: 0; }
+.terremer--libre .terremer__scene { padding-top: clamp(5rem, 11vh, 8rem); }
+.table { min-height: 0; }
+.table__dedans { min-height: 0; padding: clamp(5rem, 11vh, 8rem) var(--marge); display: flex; justify-content: center; }
+.table__carte { margin: 0 auto; box-shadow: 0 50px 80px -50px rgba(60, 50, 30, .45); }
+
+/* ------------------------------------------------------------------ les avis : un carrousel, de gauche à droite, avec des flèches */
+.avis-accueil__rang {
+  display: flex; gap: clamp(1rem, 2vw, 1.8rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--marge);
+  padding: .5rem var(--marge) 1.5rem; margin-top: clamp(2rem, 5vh, 3rem); scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.avis-accueil__rang::-webkit-scrollbar { display: none; }
+.avis-carte { flex: 0 0 min(25rem, 80vw); scroll-snap-align: start; border: 1px solid rgba(41, 38, 31, .08); }
+.avis-carte blockquote p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 8; overflow: hidden; }
+.carrousel__bas { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 var(--marge); }
+.carrousel__aide { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--encre-2); }
+.carrousel__fleches { display: flex; gap: .6rem; }
+.carrousel__fleche { width: 3.2rem; height: 3.2rem; border-radius: 50%; border: 1px solid var(--encre); background: transparent; color: var(--encre); font-size: 1.2rem; cursor: pointer; transition: background .3s, color .3s, opacity .3s; }
+.carrousel__fleche:hover { background: var(--encre); color: var(--ecume); }
+.carrousel__fleche:disabled { opacity: .3; cursor: default; background: transparent; color: var(--encre); }
+
+/* ------------------------------------------------------------------ téléphone */
+@media (max-width: 900px) {
+  .scene__dedans { padding: 4.5rem var(--marge) 4.5rem; }
+  .ouverture { grid-template-columns: 1fr; gap: 1.6rem; padding: 5.6rem var(--marge) 3.5rem; }
+  .ouverture .scene__fond { grid-column: 1; grid-row: 1; aspect-ratio: 16 / 11; max-height: 36svh; border-radius: 1.5rem; }
+  .ouverture__texte, .ouverture--droite .ouverture__texte { grid-column: 1; grid-row: 2; }
+  .ouverture h1 { font-size: clamp(2.6rem, 11vw, 3.4rem); margin-bottom: 1rem; }
+  .ouverture__court { font-size: 1.2rem; }
+  .ouverture__boutons { margin-top: 1.4rem; }
+  .recit__dedans .grand-texte { font-size: 1.15rem; }
+  .matiere__mots p { font-size: 1.9rem; }
+  .soins__dedans, .famille__dedans, .avis-accueil, .terremer--libre .terremer__scene, .mots .scene__dedans { padding-top: 4.5rem; }
+  .table__dedans { padding: 4.5rem var(--marge) 6rem; }
+  .pied__dedans { padding-top: 4.5rem; }
+  .carrousel__aide { font-size: .68rem; }
+  .carrousel__fleche { width: 2.8rem; height: 2.8rem; }
+}

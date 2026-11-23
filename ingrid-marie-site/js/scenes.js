@@ -373,6 +373,25 @@
     if (n !== enNuit) { enNuit = n; html.classList.toggle('tete-nuit', n); }
   }
 
+  /* ------------------------------------------------------------ les avis : le carrousel et ses flèches */
+  var rangAvis = $('#avis-rang'), flechesAvis = $$('[data-defile]');
+  function flechesEtat() {
+    if (!rangAvis) return;
+    var max = rangAvis.scrollWidth - rangAvis.clientWidth - 2;
+    flechesAvis.forEach(function (b) { b.disabled = +b.getAttribute('data-defile') < 0 ? rangAvis.scrollLeft <= 2 : rangAvis.scrollLeft >= max; });
+  }
+  if (rangAvis) {
+    flechesAvis.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var carte = rangAvis.firstElementChild, pas = carte ? carte.getBoundingClientRect().width + 16 : rangAvis.clientWidth * 0.8;
+        rangAvis.scrollBy({ left: pas * +b.getAttribute('data-defile'), behavior: 'smooth' });
+      });
+    });
+    rangAvis.addEventListener('scroll', flechesEtat, { passive: true });
+    window.addEventListener('resize', flechesEtat);
+    flechesEtat();
+  }
+
   /* ------------------------------------------------------------ la boucle */
   var tAvant = maintenant();
   function image() {
