@@ -15,35 +15,45 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#f4efe6">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141414'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%23c9a24c' stroke-width='2'/%3E%3Cpath d='M3 16h5.5M23.5 16H29' stroke='%23c9a24c' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0d1526">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d1526'/%3E%3Cpath d='M10 16a6 6 0 0 1 12 0' fill='none' stroke='%23e2bd72' stroke-width='2'/%3E%3Cpath d='M4 16h24' stroke='%23e2bd72' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="polices/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/jost.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=202611231623">
+<link rel="stylesheet" href="css/style.css?v=202611240104">
 <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('one-vu'))document.documentElement.classList.add('deja-vu')}catch(e){}</script>
 </head>
 <body data-page="espace">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="signe" viewBox="0 0 48 24">
-    <circle cx="24" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
-    <path d="M1.5 12h10.6M35.9 12h10.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-    <circle cx="24" cy="12" r="1.7" fill="currentColor"/>
+  <symbol id="signe" viewBox="0 0 48 32">
+    <path d="M15.5 16a8.5 8.5 0 0 1 17 0" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M15.5 16a8.5 8.5 0 0 0 17 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.6 2.4" opacity=".55"/>
+    <path d="M1.5 16h45" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M24 2.5v27" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".7"/>
   </symbol>
 </svg>
 
 <div class="chargement" aria-hidden="true">
-  <canvas class="chargement-fil"></canvas>
+  <span class="chargement-horizon"><i></i></span>
+  <span class="chargement-axe"><i></i></span>
   <div class="chargement-texte">
-    <svg class="chargement-signe"><use href="#signe"/></svg>
     <p class="chargement-nom">Espace <em>ONE</em></p>
-    <p class="chargement-etat"><span class="chargement-mot">Le mode alerte</span> <span class="chargement-pc">0</span></p>
+    <p class="chargement-devise">Retrouver son axe. Revenir à soi.</p>
   </div>
+  <p class="chargement-etat"><span class="chargement-mot">Le vent souffle</span><span class="chargement-pc">0</span></p>
 </div>
 
-<div class="voile" aria-hidden="true"><span class="voile-fil"></span></div>
+<div class="voile" aria-hidden="true"><span class="voile-horizon"></span></div>
 
-<canvas class="fil" aria-hidden="true"></canvas>
+<canvas class="lac" aria-hidden="true"></canvas>
+<div class="lac-secours" aria-hidden="true"></div>
+
+<div class="instrument" aria-hidden="true">
+  <span class="instrument-nom">État du lac</span>
+  <span class="instrument-piste"><i class="instrument-point"></i></span>
+  <span class="instrument-bornes"><b>Alerte</b><b>Calme</b></span>
+  <span class="instrument-etat">Vent fort</span>
+</div>
 
 <header class="entete">
   <a class="marque" href="index.html" aria-label="Espace ONE, Delphine Wydrzynski, accueil">
@@ -82,7 +92,7 @@
 </div>
 
 <main id="contenu">
-<section class="tete-page" data-fond="nuit" data-tension="0.18" data-fil="0.82">
+<section class="scene tete-page" data-lac="0.96 0 0.25 1.55 0.9 0.35" data-ton="sombre">
   <div class="enveloppe">
     <p class="surtitre">Transformer en profondeur</p>
     <h1 class="titre-page">Immersion <em>ONE</em></h1>
@@ -91,7 +101,7 @@
   </div>
 </section>
 
-<section class="bloc" data-fond="nuit" data-tension="0.12" data-fil="0.14">
+<section class="scene scene-contenu" data-lac="0.7 0.15 -0.6 1.3 0.4 0.9" data-ton="sombre">
   <div class="enveloppe deux-colonnes">
     <div class="texte-long revele">
       <p class="grand">Parfois, la tension est installée depuis si longtemps qu'elle est devenue familière.</p>
@@ -104,7 +114,7 @@
   </div>
 </section>
 
-<section class="bloc" data-fond="sable" data-tension="0.03" data-fil="0.9">
+<section class="bloc bloc-sable" data-ton="clair">
   <div class="enveloppe deux-colonnes">
     <div class="revele">
       <p class="surtitre">Ce que vous pouvez cultiver</p>
@@ -126,7 +136,7 @@
   </div>
 </section>
 
-<section class="bloc" data-fond="creme" data-tension="0.05" data-fil="0.12">
+<section class="bloc" data-ton="clair">
   <div class="enveloppe">
     <p class="surtitre revele">Les trois espaces</p>
     <h2 class="titre-section revele">Choisissez simplement <em>l'endroit où vous en êtes aujourd'hui.</em></h2>
@@ -139,7 +149,7 @@
   </div>
 </section>
 
-<section class="bloc appel" data-fond="aube" data-tension="0" data-fil="0.7">
+<section class="scene appel" data-lac="1 0 0.1 1.05 0.5 0.5" data-ton="sombre">
   <div class="enveloppe" style="text-align:center">
     <p class="surtitre revele">Le premier pas</p>
     <h2 class="titre-section revele" style="margin-inline:auto">Un appel découverte, <em>gratuit, 30 minutes.</em></h2>
@@ -154,13 +164,13 @@
 
 </main>
 
-<footer class="pied" data-fond="nuit" data-tension="0" data-fil="cache">
+<footer class="pied" data-ton="sombre">
   <div class="pied-haut">
     <a class="pied-marque" href="index.html" aria-label="Accueil">
       <svg class="pied-signe"><use href="#signe"/></svg>
       <span>Espace <em>ONE</em></span>
     </a>
-    <p class="pied-devise">Sortir du mode alerte.<br>Retrouver la sécurité intérieure.</p>
+    <p class="pied-devise">Retrouver son axe.<br><em>Revenir à soi.</em></p>
   </div>
   <div class="pied-colonnes">
     <div>
@@ -180,10 +190,10 @@
   <p class="pied-bas"><span>Delphine Wydrzynski · Instructrice agréée LemniWave® et Micro Massage®</span><a href="mentions-legales.html">Mentions légales</a><span>Site conçu par Kazura</span></p>
 </footer>
 
-<a class="rdv-flottant bouton" href="https://glaads.com/profil-professionnel/espace-one" target="_blank" rel="noopener">Réserver un appel découverte</a>
+<a class="rdv-flottant" href="https://glaads.com/profil-professionnel/espace-one" target="_blank" rel="noopener"><span>Réserver</span></a>
 
 <script src="js/vendor/lenis.min.js"></script>
-<script src="js/fil.js?v=202611231623"></script>
-<script src="js/site.js?v=202611231623"></script>
+<script src="js/lac.js?v=202611240104"></script>
+<script src="js/site.js?v=202611240104"></script>
 </body>
 </html>
