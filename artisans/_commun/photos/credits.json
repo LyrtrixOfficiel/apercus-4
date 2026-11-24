@@ -1,0 +1,1114 @@
+{
+"chantier-01": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-person-doing-carpentry-6790048/",
+"alt": "Close-up of a carpenter drilling wood, showcasing craftsmanship and attention to detail.",
+"requete": "carpenter working wood",
+"portrait": true,
+"pexels_id": 6790048
+},
+"chantier-02": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-person-doing-carpentry-6790088/",
+"alt": "Carpenter shaping wood with planer in a workshop. Hands-on craftsmanship and skills.",
+"requete": "carpenter working wood",
+"portrait": true,
+"pexels_id": 6790088
+},
+"chantier-03": {
+"photographe": "Gizem toprak",
+"page": "https://www.pexels.com/photo/craftsman-sharpening-tool-in-workshop-setting-37358118/",
+"alt": "Detailed view of a craftsman sharpening a tool, highlighting skilled handwork in a workshop environment.",
+"requete": "craftsman hands tools",
+"portrait": false,
+"pexels_id": 37358118
+},
+"chantier-04": {
+"photographe": "Antoni Shkraba",
+"page": "https://www.pexels.com/photo/man-drilling-in-a-wall-in-an-apartment-4981802/",
+"alt": "A construction worker wearing a helmet uses a drill to install a wall outlet inside an apartment.",
+"requete": "construction worker house renovation",
+"portrait": true,
+"pexels_id": 4981802
+},
+"chantier-05": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-man-in-white-shirt-painting-a-house-6473982/",
+"alt": "A man in a white shirt and gloves using a metal ruler for indoor wall renovation work.",
+"requete": "construction worker house renovation",
+"portrait": false,
+"pexels_id": 6473982
+},
+"chantier-06": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-man-in-white-shirt-painting-a-house-6474123/",
+"alt": "A man works meticulously on drywall installation during a house renovation.",
+"requete": "construction worker house renovation",
+"portrait": true,
+"pexels_id": 6474123
+},
+"chantier-07": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-man-sanding-the-wall-6473978/",
+"alt": "Photo of a man using a power tool to sand a wall during an indoor home renovation project.",
+"requete": "construction worker house renovation",
+"portrait": false,
+"pexels_id": 6473978
+},
+"chantier-08": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/a-person-doing-carpentry-6790071/",
+"alt": "Close-up of a craftsman accurately measuring and marking wood in a workshop.",
+"requete": "builder measuring wood",
+"portrait": false,
+"pexels_id": 6790071
+},
+"chantier-09": {
+"photographe": "Karina Badura",
+"page": "https://www.pexels.com/photo/a-person-taking-a-measurement-12774152/",
+"alt": "Detailed close-up of hands using a measuring tool on wood. Ideal for crafting themes.",
+"requete": "builder measuring wood",
+"portrait": false,
+"pexels_id": 12774152
+},
+"chantier-10": {
+"photographe": "Themba Mtegha",
+"page": "https://www.pexels.com/photo/a-man-measuring-a-wooden-board-22397986/",
+"alt": "A man working with precision measuring wood in Blantyre, Malawi for carpentry.",
+"requete": "builder measuring wood",
+"portrait": true,
+"pexels_id": 22397986
+},
+"chantier-11": {
+"photographe": "Antoni Shkraba",
+"page": "https://www.pexels.com/photo/a-construction-worker-holding-a-pencil-and-measuring-tape-5493676/",
+"alt": "A builder in a hard hat measures a wall's dimensions with a tape measure.",
+"requete": "builder measuring wood",
+"portrait": true,
+"pexels_id": 5493676
+},
+"chantier-12": {
+"photographe": "Anastasia  Shuraeva",
+"page": "https://www.pexels.com/photo/a-man-drilling-hole-on-a-wood-6232443/",
+"alt": "Craftsman busy drilling wooden planks in a carpentry workshop with various tools around.",
+"requete": "builder measuring wood",
+"portrait": false,
+"pexels_id": 6232443
+},
+"isolation-01": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/room-on-attic-8082327/",
+"alt": "Spacious attic room with natural light from skylights, featuring a brick pillar and a wooden ladder.",
+"requete": "attic insulation",
+"portrait": false,
+"pexels_id": 8082327
+},
+"isolation-02": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/spacious-attic-room-design-8082324/",
+"alt": "Explore this bright, spacious modern attic apartment with skylights and contemporary design.",
+"requete": "attic insulation",
+"portrait": false,
+"pexels_id": 8082324
+},
+"isolation-03": {
+"photographe": "MUHAMMED TARIK  KAHRAMAN",
+"page": "https://www.pexels.com/photo/bed-in-a-wooden-building-17395999/",
+"alt": "Warm wooden attic bedroom with bed and natural light in Kemer, Türkiye.",
+"requete": "attic insulation",
+"portrait": true,
+"pexels_id": 17395999
+},
+"isolation-04": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/a-brown-couch-inside-the-room-8146154/",
+"alt": "Spacious attic room featuring large skylights, a brown sofa, and wooden flooring.",
+"requete": "attic insulation",
+"portrait": false,
+"pexels_id": 8146154
+},
+"isolation-05": {
+"photographe": "Mike van Schoonderwalt",
+"page": "https://www.pexels.com/photo/residential-building-under-construction-5511085/",
+"alt": "Scaffolding at a residential building under construction with windows and insulation sheets visible.",
+"requete": "insulation installation",
+"portrait": false,
+"pexels_id": 5511085
+},
+"isolation-06": {
+"photographe": "Anıl Karakaya",
+"page": "https://www.pexels.com/photo/plumber-installs-pipe-fittings-6419128/",
+"alt": "Close-up of a plumber's hands installing steel pipes indoors, showcasing skilled manual work.",
+"requete": "insulation installation",
+"portrait": false,
+"pexels_id": 6419128
+},
+"isolation-07": {
+"photographe": "Jimmy Nilsson Masth",
+"page": "https://www.pexels.com/photo/man-wearing-gloves-on-a-renovation-11427055/",
+"alt": "Close-up of a gloved hand applying plaster to a wall indoors in Falun, Sweden.",
+"requete": "insulation installation",
+"portrait": false,
+"pexels_id": 11427055
+},
+"isolation-08": {
+"photographe": "Antoni Shkraba",
+"page": "https://www.pexels.com/photo/a-construction-worker-working-at-site-5493673/",
+"alt": "Construction worker in hard hat applying wallpaper inside a building under renovation.",
+"requete": "insulation installation",
+"portrait": true,
+"pexels_id": 5493673
+},
+"isolation-09": {
+"photographe": "Engin Akyurt",
+"page": "https://www.pexels.com/photo/brown-and-white-sponge-9893816/",
+"alt": "Detailed close-up view of brown wool texture, ideal for backgrounds.",
+"requete": "mineral wool insulation wall",
+"portrait": false,
+"pexels_id": 9893816
+},
+"isolation-10": {
+"photographe": "picjumbo.com",
+"page": "https://www.pexels.com/photo/wooden-ceiling-in-close-up-4457372/",
+"alt": "Close-up of a rustic wooden ceiling with exposed beams and natural wood texture.",
+"requete": "attic renovation wooden beams",
+"portrait": false,
+"pexels_id": 4457372
+},
+"isolation-11": {
+"photographe": "Saeed Khokhar",
+"page": "https://www.pexels.com/photo/wooden-frame-of-roof-on-concrete-building-8491085/",
+"alt": "Wooden roof structure in progress with open sky view, ideal for construction themes.",
+"requete": "attic renovation wooden beams",
+"portrait": false,
+"pexels_id": 8491085
+},
+"isolation-12": {
+"photographe": "Curtis Adams",
+"page": "https://www.pexels.com/photo/black-flat-tv-on-wooden-table-in-empty-spacious-room-5502248/",
+"alt": "Bright attic room featuring skylights, wooden floors, and a TV setup, perfect for modern living.",
+"requete": "attic renovation wooden beams",
+"portrait": false,
+"pexels_id": 5502248
+},
+"menuiserie-01": {
+"photographe": "Francesca Cinel",
+"page": "https://www.pexels.com/photo/person-holding-black-and-gray-electronic-device-9729590/",
+"alt": "Detail shot of hands examining a window frame section, highlighting construction materials.",
+"requete": "window installation",
+"portrait": true,
+"pexels_id": 9729590
+},
+"menuiserie-02": {
+"photographe": "Daniel & Hannah Snipes",
+"page": "https://www.pexels.com/photo/modern-window-with-indoor-houseplant-29973455/",
+"alt": "Elegant window with lush indoor plant in soft natural light.",
+"requete": "window installation",
+"portrait": true,
+"pexels_id": 29973455
+},
+"menuiserie-03": {
+"photographe": "Barnabas Davoti",
+"page": "https://www.pexels.com/photo/white-glass-windows-9246507/",
+"alt": "Close-up of two white framed windows with curtains against a rustic wooden house exterior.",
+"requete": "window installation",
+"portrait": false,
+"pexels_id": 9246507
+},
+"menuiserie-04": {
+"photographe": "Dima Solomin",
+"page": "https://www.pexels.com/photo/photograph-of-windows-with-curtains-9980246/",
+"alt": "Serene interior with white curtains framing a lush green outdoor view through a window.",
+"requete": "window installation",
+"portrait": false,
+"pexels_id": 9980246
+},
+"menuiserie-05": {
+"photographe": "Александр Лич",
+"page": "https://www.pexels.com/photo/classic-architectural-window-design-34176760/",
+"alt": "Elegant classical window surrounded by ornamental white columns and arch details on a facade.",
+"requete": "window installation",
+"portrait": false,
+"pexels_id": 34176760
+},
+"menuiserie-06": {
+"photographe": "Luk Sauvage",
+"page": "https://www.pexels.com/photo/rustic-wooden-window-with-reflections-40581644/",
+"alt": "A weathered wooden window reflects trees and sky, creating a rustic look.",
+"requete": "wooden window frame",
+"portrait": true,
+"pexels_id": 40581644
+},
+"menuiserie-07": {
+"photographe": "mahmurekoseogluu",
+"page": "https://www.pexels.com/photo/old-house-entrance-14750384/",
+"alt": "Charming entrance of an old stone house featuring a rustic wooden door.",
+"requete": "front door house",
+"portrait": true,
+"pexels_id": 14750384
+},
+"menuiserie-08": {
+"photographe": "Yelena Wegel",
+"page": "https://www.pexels.com/photo/exterior-of-a-traditional-house-with-wooden-door-in-a-town-17490027/",
+"alt": "Charming wooden door with surrounding facade in Amberg, Bavaria. Explore traditional architecture.",
+"requete": "front door house",
+"portrait": true,
+"pexels_id": 17490027
+},
+"menuiserie-09": {
+"photographe": "Sevde Altıntaş",
+"page": "https://www.pexels.com/photo/charming-wooden-door-with-ivy-and-greenery-39490599/",
+"alt": "A cozy wooden door surrounded by lush green ivy, creating an inviting entrance.",
+"requete": "front door house",
+"portrait": true,
+"pexels_id": 39490599
+},
+"menuiserie-10": {
+"photographe": "Ben Prater",
+"page": "https://www.pexels.com/photo/elegant-brick-house-entrance-with-green-door-40478569/",
+"alt": "Classic brick house entrance featuring a green door and lush ivy wall for a charming look.",
+"requete": "front door house",
+"portrait": true,
+"pexels_id": 40478569
+},
+"menuiserie-11": {
+"photographe": "Efrem  Efre",
+"page": "https://www.pexels.com/photo/windows-24800096/",
+"alt": "Charming Venetian building facade with green shutters, showcasing classic architecture of Venice, Italy.",
+"requete": "house window shutters",
+"portrait": false,
+"pexels_id": 24800096
+},
+"menuiserie-12": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/white-wall-with-blue-shutters-and-rustic-charm-37625127/",
+"alt": "A rustic white wall with aged blue shutters under a sunny blue sky, showcasing Mediterranean architecture.",
+"requete": "house window shutters",
+"portrait": false,
+"pexels_id": 37625127
+},
+"menuiserie-13": {
+"photographe": "Alina Skazka",
+"page": "https://www.pexels.com/photo/a-window-with-shutters-15258476/",
+"alt": "An elegant urban building facade with closed green shutters against a peach wall.",
+"requete": "house window shutters",
+"portrait": true,
+"pexels_id": 15258476
+},
+"menuiserie-14": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/facade-of-a-building-with-wooden-window-shutters-10805560/",
+"alt": "Close-up of a vintage stone facade with wooden shutters, showing rustic charm.",
+"requete": "house window shutters",
+"portrait": false,
+"pexels_id": 10805560
+},
+"menuiserie-15": {
+"photographe": "Hakan Yasar",
+"page": "https://www.pexels.com/photo/windows-with-shutters-of-a-stone-house-14503143/",
+"alt": "Beautiful stone wall with classic blue shutters in Muğla, Turkey.",
+"requete": "house window shutters",
+"portrait": true,
+"pexels_id": 14503143
+},
+"menuiserie-16": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/close-up-shot-of-carpentry-tools-6790031/",
+"alt": "A workbench with various woodworking tools alongside sketches and wood shavings, indicating an active project.",
+"requete": "carpenter workshop",
+"portrait": false,
+"pexels_id": 6790031
+},
+"menuiserie-17": {
+"photographe": "Ono  Kosuki",
+"page": "https://www.pexels.com/photo/crop-artisan-near-carpentry-tools-on-workbench-5974022/",
+"alt": "From above of crop anonymous woodworker with assorted instruments and wooden shavings in workshop",
+"requete": "carpenter workshop",
+"portrait": false,
+"pexels_id": 5974022
+},
+"toiture-01": {
+"photographe": "Clément Proust",
+"page": "https://www.pexels.com/photo/roof-installation-with-terracotta-tiles-in-progress-31763541/",
+"alt": "Partial installation of a terracotta tile roof on a building in progress.",
+"requete": "roofer working roof",
+"portrait": true,
+"pexels_id": 31763541
+},
+"toiture-02": {
+"photographe": "Clément Proust",
+"page": "https://www.pexels.com/photo/rustic-roof-renovation-with-chimney-and-ladder-31763534/",
+"alt": "A traditional rooftop under renovation with visible chimney and ladder.",
+"requete": "roofer working roof",
+"portrait": true,
+"pexels_id": 31763534
+},
+"toiture-03": {
+"photographe": "Clément Proust",
+"page": "https://www.pexels.com/photo/roofer-working-on-new-house-roof-installation-31771166/",
+"alt": "A roofer carefully installs shingles on a new residential roof under a cloudy sky.",
+"requete": "roofer working roof",
+"portrait": true,
+"pexels_id": 31771166
+},
+"toiture-04": {
+"photographe": "Clément Proust",
+"page": "https://www.pexels.com/photo/roof-construction-with-red-tiles-and-wooden-framework-31763538/",
+"alt": "Red roofing tiles and wooden framework in progress on a building roof.",
+"requete": "roofer working roof",
+"portrait": true,
+"pexels_id": 31763538
+},
+"toiture-05": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/red-roof-tiles-against-clear-blue-sky-29114658/",
+"alt": "Close-up of red tiled roofs under a clear blue sky, showcasing architectural design.",
+"requete": "roof tiles",
+"portrait": false,
+"pexels_id": 29114658
+},
+"toiture-06": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/detailed-close-up-of-traditional-roof-tiles-39279728/",
+"alt": "Close-up image showing classic terracotta roof tiles arranged in neat rows.",
+"requete": "roof tiles",
+"portrait": false,
+"pexels_id": 39279728
+},
+"toiture-07": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/terracotta-tile-rooftop-with-weathered-texture-38798423/",
+"alt": "Close-up of terracotta roof tiles showcasing weathered texture and earthy tones.",
+"requete": "roof tiles",
+"portrait": false,
+"pexels_id": 38798423
+},
+"toiture-08": {
+"photographe": "Edgard Motta",
+"page": "https://www.pexels.com/photo/red-tiled-roof-with-chimney-under-clear-sky-38844819/",
+"alt": "Close-up of a red tiled roof and chimney under a bright blue sky, showcasing vibrant architectural detail.",
+"requete": "roof tiles",
+"portrait": false,
+"pexels_id": 38844819
+},
+"toiture-09": {
+"photographe": "Francesco Ungaro",
+"page": "https://www.pexels.com/photo/roof-window-in-red-frame-18513458/",
+"alt": "Close-up of a skylight with a red frame embedded in a dark wooden rooftop.",
+"requete": "skylight roof window",
+"portrait": false,
+"pexels_id": 18513458
+},
+"toiture-10": {
+"photographe": "Andreas Ebner",
+"page": "https://www.pexels.com/photo/window-in-room-ceiling-17475107/",
+"alt": "A skylight in a dark room providing a view of a cloudy sky, adding natural light.",
+"requete": "skylight roof window",
+"portrait": false,
+"pexels_id": 17475107
+},
+"toiture-11": {
+"photographe": "Adrien Olichon",
+"page": "https://www.pexels.com/photo/modern-skylight-with-blue-sky-view-32560949/",
+"alt": "A modern skylight reveals a bright blue sky with passing clouds, framed by wooden paneling.",
+"requete": "skylight roof window",
+"portrait": false,
+"pexels_id": 32560949
+},
+"toiture-12": {
+"photographe": "Mathias Reding",
+"page": "https://www.pexels.com/photo/brown-tiled-roofing-11912130/",
+"alt": "A picturesque red tiled roof featuring chimneys and skylight windows against a blue sky.",
+"requete": "skylight roof window",
+"portrait": false,
+"pexels_id": 11912130
+},
+"toiture-13": {
+"photographe": "Horst Joachims",
+"page": "https://www.pexels.com/photo/houses-with-gray-roofs-13075346/",
+"alt": "Aesthetic overhead view of gray tiled rooftops in a quaint residential neighborhood with lush greenery.",
+"requete": "slate roof house",
+"portrait": false,
+"pexels_id": 13075346
+},
+"toiture-14": {
+"photographe": "Santiago  Boada",
+"page": "https://www.pexels.com/photo/chimney-on-vintage-house-rooftop-21854540/",
+"alt": "A classic brick house rooftop with chimney, capturing vintage architecture in Derby, UK.",
+"requete": "slate roof house",
+"portrait": true,
+"pexels_id": 21854540
+},
+"chauffage-01": {
+"photographe": "alpha innotec",
+"page": "https://www.pexels.com/photo/modern-heat-pump-in-residential-setting-38067300/",
+"alt": "Energy-efficient heat pump in a green residential garden setting.",
+"requete": "heat pump house",
+"portrait": false,
+"pexels_id": 38067300
+},
+"chauffage-02": {
+"photographe": "Pavel Danilyuk",
+"page": "https://www.pexels.com/photo/steel-pipes-with-pressure-gauge-7937300/",
+"alt": "Close-up view of an industrial plumbing system featuring a pressure gauge and steel pipes.",
+"requete": "boiler installation",
+"portrait": false,
+"pexels_id": 7937300
+},
+"chauffage-03": {
+"photographe": "МОБО Модульные Котельные",
+"page": "https://www.pexels.com/photo/technician-maintaining-heating-system-in-workshop-34938442/",
+"alt": "Technician inspects and repairs a heating system in an industrial workshop setting.",
+"requete": "boiler installation",
+"portrait": false,
+"pexels_id": 34938442
+},
+"chauffage-04": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/a-red-radiator-11056184/",
+"alt": "A vibrant red radiator against a matching wall captures minimalist and modern interior design.",
+"requete": "radiator home",
+"portrait": false,
+"pexels_id": 11056184
+},
+"chauffage-05": {
+"photographe": "Esra Erdem",
+"page": "https://www.pexels.com/photo/deocrative-flowers-in-vase-16798065/",
+"alt": "Purple flowers in a glass vase on radiator by the window, creating a cozy indoor scene.",
+"requete": "radiator home",
+"portrait": true,
+"pexels_id": 16798065
+},
+"chauffage-06": {
+"photographe": "Sümeyye  Başbil",
+"page": "https://www.pexels.com/photo/sunlit-interior-with-art-and-radiator-29021527/",
+"alt": "Bright interior with painting, radiator, and wooden furniture in natural light.",
+"requete": "radiator home",
+"portrait": true,
+"pexels_id": 29021527
+},
+"chauffage-07": {
+"photographe": "cottonbro studio",
+"page": "https://www.pexels.com/photo/white-wooden-frame-glass-window-5747908/",
+"alt": "A clean, minimalist Scandinavian room interior featuring a wooden stepladder and an open window.",
+"requete": "radiator home",
+"portrait": true,
+"pexels_id": 5747908
+},
+"chauffage-08": {
+"photographe": "Tuğba",
+"page": "https://www.pexels.com/photo/close-up-of-burning-firewood-in-a-stove-39144595/",
+"alt": "A warm and cozy view of firewood burning in a stove, highlighting the natural flames.",
+"requete": "wood stove fire",
+"portrait": false,
+"pexels_id": 39144595
+},
+"chauffage-09": {
+"photographe": "Tuğba",
+"page": "https://www.pexels.com/photo/crackling-firewood-in-a-rustic-stove-39144594/",
+"alt": "Close-up of firewood burning in a rustic stove, showcasing warm flames and glowing embers.",
+"requete": "wood stove fire",
+"portrait": false,
+"pexels_id": 39144594
+},
+"chauffage-10": {
+"photographe": "Erik Mclean",
+"page": "https://www.pexels.com/photo/fire-in-stove-14946362/",
+"alt": "A warm wood-burning stove adds a cozy touch to an indoor space, perfect for cold seasons.",
+"requete": "wood stove fire",
+"portrait": true,
+"pexels_id": 14946362
+},
+"chauffage-11": {
+"photographe": "Sergei Starostin",
+"page": "https://www.pexels.com/photo/professional-plumber-installing-a-radiator-pipe-29226620/",
+"alt": "Close-up of a plumber installing a radiator pipe using specialized tools.",
+"requete": "heating pipes",
+"portrait": false,
+"pexels_id": 29226620
+},
+"chauffage-12": {
+"photographe": "МОБО Модульные Котельные",
+"page": "https://www.pexels.com/photo/engineer-adjusting-industrial-pipes-in-factory-34938441/",
+"alt": "Engineer working on industrial pipe system in a factory for heating and production adjustment.",
+"requete": "heating pipes",
+"portrait": false,
+"pexels_id": 34938441
+},
+"chauffage-13": {
+"photographe": "Vladimir Srajber",
+"page": "https://www.pexels.com/photo/meters-on-pipes-19841125/",
+"alt": "Industrial pipes and pressure gauges in a facility at Garešnica, Croatia.",
+"requete": "heating pipes",
+"portrait": false,
+"pexels_id": 19841125
+},
+"plomberie-01": {
+"photographe": "Anastasia  Shuraeva",
+"page": "https://www.pexels.com/photo/person-getting-water-from-a-faucet-5495066/",
+"alt": "Close-up of a person washing hands at a sink with running water, wearing a wristwatch.",
+"requete": "plumber working",
+"portrait": false,
+"pexels_id": 5495066
+},
+"plomberie-02": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/washstand-under-mirror-in-contemporary-bathroom-at-home-6436774/",
+"alt": "Modern bathroom interior with white washbasin and tap under mirror reflecting water heater at home",
+"requete": "water heater",
+"portrait": true,
+"pexels_id": 6436774
+},
+"plomberie-03": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/white-washing-machine-in-the-bathroom-8142983/",
+"alt": "A sleek white bathroom featuring a washing machine, sink, and boiler.",
+"requete": "water heater",
+"portrait": true,
+"pexels_id": 8142983
+},
+"plomberie-04": {
+"photographe": "Marcus Lenk",
+"page": "https://www.pexels.com/photo/a-yellow-pipe-is-connected-to-a-concrete-wall-18418266/",
+"alt": "Vertical yellow pipes casting shadows on a rugged concrete wall in Berlin.",
+"requete": "pipes plumbing",
+"portrait": true,
+"pexels_id": 18418266
+},
+"plomberie-05": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/interior-of-modern-bathroom-with-glass-shower-cabin-7005268/",
+"alt": "Shower cabin with glass walls near mirror hanging on wall above sink in modern minimalist styled bathroom",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 7005268
+},
+"plomberie-06": {
+"photographe": "Arshad Khan",
+"page": "https://www.pexels.com/photo/modern-minimalist-bathroom-interior-design-35868666/",
+"alt": "A sleek and stylish modern bathroom with minimalist design, featuring dual washbasins, marble tiles, and a glass shower enclosure.",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 35868666
+},
+"plomberie-07": {
+"photographe": "Arshad Khan",
+"page": "https://www.pexels.com/photo/elegant-modern-bathroom-with-double-sinks-35868664/",
+"alt": "Stylish and elegant modern bathroom featuring double sinks, oval mirrors, and marble tiles.",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 35868664
+},
+"plomberie-08": {
+"photographe": "Josh (PleaseLinkToOurWebsite)",
+"page": "https://www.pexels.com/photo/modern-renovated-bathroom-with-marble-tiles-40440096/",
+"alt": "Contemporary bathroom featuring elegant marble tiles and a pristine bathtub.",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 40440096
+},
+"plomberie-09": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/modern-bathroom-interior-with-shower-cabin-and-mirror-in-house-7018243/",
+"alt": "Contemporary shower room between cabinet with washstand and toilet bowl on tiled floor at home",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 7018243
+},
+"plomberie-10": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/bathroom-interior-with-bidet-and-toilet-near-sink-and-shower-6585753/",
+"alt": "Interior of modern bright bathroom with bidet and toilet near shower and sink on counter under round mirror on tile",
+"requete": "bathroom renovation",
+"portrait": false,
+"pexels_id": 6585753
+},
+"solaire-01": {
+"photographe": "Robert So",
+"page": "https://www.pexels.com/photo/a-house-with-solar-panel-on-the-roof-12243093/",
+"alt": "Solar panels on a suburban home, surrounded by lush greenery and a sunny blue sky.",
+"requete": "solar panels roof house",
+"portrait": false,
+"pexels_id": 12243093
+},
+"solaire-02": {
+"photographe": "Robert So",
+"page": "https://www.pexels.com/photo/a-white-wooden-house-13558357/",
+"alt": "A modern two-story home with solar panels on its roof under a clear blue sky.",
+"requete": "solar panels roof house",
+"portrait": false,
+"pexels_id": 13558357
+},
+"solaire-03": {
+"photographe": "Vladimir Srajber",
+"page": "https://www.pexels.com/photo/close-up-of-solar-panels-on-a-roof-of-a-house-17965455/",
+"alt": "Close-up of solar panels on a red tiled roof in Croatia, highlighting renewable energy.",
+"requete": "solar panels roof house",
+"portrait": false,
+"pexels_id": 17965455
+},
+"solaire-04": {
+"photographe": "Iqbal farooz",
+"page": "https://www.pexels.com/photo/solar-panels-on-residential-roof-in-srinagar-37083400/",
+"alt": "Rooftop solar panels on a house in Srinagar against a blue sky backdrop.",
+"requete": "solar panels roof house",
+"portrait": false,
+"pexels_id": 37083400
+},
+"solaire-05": {
+"photographe": "Sergej  *****",
+"page": "https://www.pexels.com/photo/sustainable-energy-modern-brick-house-exterior-31912311/",
+"alt": "A modern brick house with solar panels on the roof, surrounded by lush greenery, under a clear blue sky.",
+"requete": "solar panels roof house",
+"portrait": true,
+"pexels_id": 31912311
+},
+"solaire-06": {
+"photographe": "Gustavo Fring",
+"page": "https://www.pexels.com/photo/an-electrician-installing-a-solar-panel-4254164/",
+"alt": "Low angle of serious bearded male electrician in hardhat and protective gloves installing solar photovoltaic panel system using drill",
+"requete": "installing solar panels",
+"portrait": false,
+"pexels_id": 4254164
+},
+"solaire-07": {
+"photographe": "Gustavo Fring",
+"page": "https://www.pexels.com/photo/electricians-inspecting-the-solar-panels-4254162/",
+"alt": "Concentrated male coworkers in hardhats working at solar energy station and discussing technical aspects of panels",
+"requete": "installing solar panels",
+"portrait": false,
+"pexels_id": 4254162
+},
+"solaire-08": {
+"photographe": "Markus Spiske",
+"page": "https://www.pexels.com/photo/person-wearing-gloves-holding-a-power-tool-on-a-solar-panel-14384695/",
+"alt": "A technician uses a power tool to install solar panels, showcasing renewable energy efforts.",
+"requete": "installing solar panels",
+"portrait": false,
+"pexels_id": 14384695
+},
+"solaire-09": {
+"photographe": "Michael Pointner",
+"page": "https://www.pexels.com/photo/black-solar-panels-18306342/",
+"alt": "Detailed view of solar panels capturing sunlight, promoting renewable energy.",
+"requete": "solar panels sunlight",
+"portrait": false,
+"pexels_id": 18306342
+},
+"electricite-01": {
+"photographe": "Anete Lusina",
+"page": "https://www.pexels.com/photo/man-installing-light-bulb-in-apartment-4792522/",
+"alt": "Concentrated repairman screwing light bulb in stylish lamp hanging on ceiling of new flat",
+"requete": "electrician working",
+"portrait": true,
+"pexels_id": 4792522
+},
+"electricite-02": {
+"photographe": "kaboompics",
+"page": "https://www.pexels.com/photo/photo-of-a-person-s-hands-holding-cables-7285965/",
+"alt": "A technician precisely cuts and organizes colorful wires using pliers, showcasing expertise in wiring tasks.",
+"requete": "electrician working",
+"portrait": false,
+"pexels_id": 7285965
+},
+"electricite-03": {
+"photographe": "ranjeet .",
+"page": "https://www.pexels.com/photo/an-electrical-panel-with-wires-and-switches-28265032/",
+"alt": "Complex network of electrical wiring and control panels in an industrial setting.",
+"requete": "electrical panel",
+"portrait": false,
+"pexels_id": 28265032
+},
+"electricite-04": {
+"photographe": "Elite Power Group",
+"page": "https://www.pexels.com/photo/close-up-of-electrical-circuit-breakers-panel-38171184/",
+"alt": "Close-up view of Clipsal electrical circuit breakers in a distribution board.",
+"requete": "electrical panel",
+"portrait": true,
+"pexels_id": 38171184
+},
+"electricite-05": {
+"photographe": "Akashni Weimers",
+"page": "https://www.pexels.com/photo/electricity-box-on-white-wall-13785838/",
+"alt": "Electrical meter and fuse box on a white wall in Cape Town, South Africa, for energy monitoring or billing.",
+"requete": "electrical panel",
+"portrait": false,
+"pexels_id": 13785838
+},
+"electricite-06": {
+"photographe": "Pavel Danilyuk",
+"page": "https://www.pexels.com/photo/close-up-of-wires-in-outlets-7937305/",
+"alt": "Close-up of green electrical boxes and wiring in a wall setup.",
+"requete": "electrician wiring",
+"portrait": false,
+"pexels_id": 7937305
+},
+"electricite-07": {
+"photographe": "Sphinxx69",
+"page": "https://www.pexels.com/photo/close-up-of-multimeter-and-tools-on-table-38292956/",
+"alt": "Close-up view of a multimeter and various tools on a workspace table.",
+"requete": "electrician wiring",
+"portrait": false,
+"pexels_id": 38292956
+},
+"audit-01": {
+"photographe": "Pavel Danilyuk",
+"page": "https://www.pexels.com/photo/helmet-level-and-sketches-7937319/",
+"alt": "Architectural floor plans with helmet and keys on sunlit floor, perfect for real estate or construction themes.",
+"requete": "house blueprint plans",
+"portrait": false,
+"pexels_id": 7937319
+},
+"audit-02": {
+"photographe": "Thirdman",
+"page": "https://www.pexels.com/photo/white-helmet-and-spirit-level-on-paper-house-plan-8470842/",
+"alt": "Top view of architectural blueprint with helmet and tools on table, ideal for construction theme.",
+"requete": "house blueprint plans",
+"portrait": true,
+"pexels_id": 8470842
+},
+"audit-03": {
+"photographe": "SHVETS production",
+"page": "https://www.pexels.com/photo/person-holding-a-floor-plan-9052461/",
+"alt": "Hands on a detailed architectural floor plan paper, showcasing home design layout.",
+"requete": "house blueprint plans",
+"portrait": false,
+"pexels_id": 9052461
+},
+"audit-04": {
+"photographe": "Anete Lusina",
+"page": "https://www.pexels.com/photo/set-of-scheme-and-pen-with-glasses-on-table-4792507/",
+"alt": "Composition of plan of room and black pen with eyeglasses placed on wooden table at daytime",
+"requete": "house blueprint plans",
+"portrait": false,
+"pexels_id": 4792507
+},
+"audit-05": {
+"photographe": "Anete Lusina",
+"page": "https://www.pexels.com/photo/set-of-various-instruments-for-work-for-architect-4792501/",
+"alt": "Top view of set of plan of room with tape measure and pen for work for architect with cup with coffee on wooden table in soft daylight",
+"requete": "house blueprint plans",
+"portrait": false,
+"pexels_id": 4792501
+},
+"audit-06": {
+"photographe": "Anete Lusina",
+"page": "https://www.pexels.com/photo/pen-with-ruler-and-eyeglasses-placed-on-house-plan-4792480/",
+"alt": "From above of ruler with pencil and glasses placed on paper sheet of house plan for construction",
+"requete": "architect plans table",
+"portrait": false,
+"pexels_id": 4792480
+},
+"audit-07": {
+"photographe": "SHVETS production",
+"page": "https://www.pexels.com/photo/man-and-woman-discussing-on-a-plan-9052536/",
+"alt": "Two architects brainstorming over floor plans in a modern office setting.",
+"requete": "architect plans table",
+"portrait": false,
+"pexels_id": 9052536
+},
+"audit-08": {
+"photographe": "Michael Burrows",
+"page": "https://www.pexels.com/photo/measuring-tape-placed-on-sketches-on-table-7148003/",
+"alt": "From above of yellow measuring tape placed on papers with sketches on table in daytime",
+"requete": "measuring tape plans",
+"portrait": true,
+"pexels_id": 7148003
+},
+"audit-09": {
+"photographe": "Christina & Peter",
+"page": "https://www.pexels.com/photo/close-up-of-tape-measure-on-construction-site-30413398/",
+"alt": "Detailed view of a tape measure on a construction surface, highlighting measurement accuracy.",
+"requete": "measuring tape plans",
+"portrait": false,
+"pexels_id": 30413398
+},
+"audit-10": {
+"photographe": "kaboompics",
+"page": "https://www.pexels.com/photo/a-black-and-yellow-measuring-tape-4959750/",
+"alt": "Close-up image of a measuring tape and a laptop on a work desk, representing precision in work.",
+"requete": "measuring tape plans",
+"portrait": false,
+"pexels_id": 4959750
+},
+"audit-11": {
+"photographe": "Levent Simsek",
+"page": "https://www.pexels.com/photo/a-black-house-with-a-tree-in-front-of-it-28080388/",
+"alt": "Charming rural home with brick base and a tall pine tree under a clear summer sky.",
+"requete": "thermal insulation house",
+"portrait": false,
+"pexels_id": 28080388
+},
+"audit-12": {
+"photographe": "Ahmet Yüksek ✪",
+"page": "https://www.pexels.com/photo/charming-snow-covered-yellow-house-in-austria-36961520/",
+"alt": "A picturesque yellow house in Teichalm, Austria, covered in winter snow, creates a warm retreat.",
+"requete": "thermal insulation house",
+"portrait": false,
+"pexels_id": 36961520
+},
+"audit-13": {
+"photographe": "Damir K",
+"page": "https://www.pexels.com/photo/snow-on-the-roof-of-a-building-14512087/",
+"alt": "Scenic winter view of a charming house with snow-covered roof, surrounded by frosted trees.",
+"requete": "thermal insulation house",
+"portrait": false,
+"pexels_id": 14512087
+},
+"maison-01": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/charming-normandy-facade-in-fecamp-france-29767521/",
+"alt": "Explore the intricate architecture of a traditional house facade in Fécamp, Normandy.",
+"requete": "french house facade",
+"portrait": false,
+"pexels_id": 29767521
+},
+"maison-02": {
+"photographe": "Jan van der Wolf",
+"page": "https://www.pexels.com/photo/rustic-brick-facade-with-shuttered-windows-30021085/",
+"alt": "Old brick building facade with shuttered windows in Normandië, France.",
+"requete": "french house facade",
+"portrait": false,
+"pexels_id": 30021085
+},
+"maison-03": {
+"photographe": "AXP Photography",
+"page": "https://www.pexels.com/photo/a-house-with-a-garden-and-flowers-in-front-27536561/",
+"alt": "Picturesque half-timbered house with lush garden in Normandy, France.",
+"requete": "french house facade",
+"portrait": false,
+"pexels_id": 27536561
+},
+"maison-04": {
+"photographe": "Eric Prouzet",
+"page": "https://www.pexels.com/photo/facade-of-an-old-building-with-wooden-shutters-17556479/",
+"alt": "Rustic facade of a French house with wooden shutters in Grandchamp, IDF.",
+"requete": "french house facade",
+"portrait": false,
+"pexels_id": 17556479
+},
+"maison-05": {
+"photographe": "Barış Türköz",
+"page": "https://www.pexels.com/photo/rustic-brick-and-stone-building-facade-34802817/",
+"alt": "Close-up of a brick and stone building facade under a clear blue sky.",
+"requete": "stone house renovated",
+"portrait": true,
+"pexels_id": 34802817
+},
+"maison-06": {
+"photographe": "Thomas P",
+"page": "https://www.pexels.com/photo/rustic-courtyard-with-artistic-sculptures-39288509/",
+"alt": "A charming rustic courtyard featuring unique sculptures and vintage decor.",
+"requete": "stone house renovated",
+"portrait": false,
+"pexels_id": 39288509
+},
+"maison-07": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/clouds-over-house-with-garden-8092383/",
+"alt": "Tudor-style home with landscaped garden and pool under a vibrant cloudy sky.",
+"requete": "house exterior garden",
+"portrait": false,
+"pexels_id": 8092383
+},
+"maison-08": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/modern-cottage-with-green-backyard-7061676/",
+"alt": "Exterior of contemporary residential house with balcony and cozy terrace with couch near trees on green yard on daytime",
+"requete": "house exterior garden",
+"portrait": false,
+"pexels_id": 7061676
+},
+"maison-09": {
+"photographe": "AXP Photography",
+"page": "https://www.pexels.com/photo/a-row-of-colorful-houses-in-a-village-27536572/",
+"alt": "Colorful half-timbered houses in a traditional Normandy village with lush gardens.",
+"requete": "village houses france",
+"portrait": false,
+"pexels_id": 27536572
+},
+"maison-10": {
+"photographe": "Eric Prouzet",
+"page": "https://www.pexels.com/photo/house-with-closed-shutters-17556478/",
+"alt": "A picturesque view of a traditional French house with rustic shutters under a vibrant blue sky.",
+"requete": "village houses france",
+"portrait": true,
+"pexels_id": 17556478
+},
+"maison-11": {
+"photographe": "AXP Photography",
+"page": "https://www.pexels.com/photo/a-row-of-old-houses-with-wooden-shutters-27536573/",
+"alt": "Explore beautifully preserved half-timbered houses on a quaint street in Normandy, France.",
+"requete": "village houses france",
+"portrait": false,
+"pexels_id": 27536573
+},
+"outils-01": {
+"photographe": "Thirdman",
+"page": "https://www.pexels.com/photo/a-person-checking-the-level-of-the-wall-8470029/",
+"alt": "Close-up of hands using a yellow bubble level on a white wall indoors, checking alignment.",
+"requete": "level tool construction",
+"portrait": true,
+"pexels_id": 8470029
+},
+"outils-02": {
+"photographe": "Thirdman",
+"page": "https://www.pexels.com/photo/a-person-holding-a-yellow-leveling-tool-against-the-wall-8470042/",
+"alt": "A close-up of a hand using a yellow level tool against a white wall to ensure vertical alignment.",
+"requete": "level tool construction",
+"portrait": false,
+"pexels_id": 8470042
+},
+"outils-03": {
+"photographe": "Fez Brook",
+"page": "https://www.pexels.com/photo/handwerk-arbeiten-wasserwaage-waage-6251067/",
+"alt": "Detailed view of a spirit level with a vibrant yellow backdrop.",
+"requete": "level tool construction",
+"portrait": false,
+"pexels_id": 6251067
+},
+"outils-04": {
+"photographe": "Thirdman",
+"page": "https://www.pexels.com/photo/white-paper-on-the-concrete-ground-8470064/",
+"alt": "Rolled blueprint, hard hat, and level tool arranged against a white background.",
+"requete": "level tool construction",
+"portrait": true,
+"pexels_id": 8470064
+},
+"outils-05": {
+"photographe": "Thirdman",
+"page": "https://www.pexels.com/photo/a-man-in-black-long-sleeves-checking-the-white-wall-using-spirit-level-8470044/",
+"alt": "Adult man using a yellow spirit level against a white wall, wearing a blue shirt indoors.",
+"requete": "level tool construction",
+"portrait": false,
+"pexels_id": 8470044
+},
+"outils-06": {
+"photographe": "Anna Shvets",
+"page": "https://www.pexels.com/photo/red-and-yellow-hand-tool-on-the-table-4312846/",
+"alt": "A collection of construction tools and safety gloves laid on a flat surface, ideal for construction themes.",
+"requete": "level tool construction",
+"portrait": true,
+"pexels_id": 4312846
+},
+"outils-07": {
+"photographe": "Jimmy Nilsson Masth",
+"page": "https://www.pexels.com/photo/person-cutting-a-plasterboard-with-a-cutter-11427094/",
+"alt": "A gloved hand using a cutter and ruler to cut plasterboard for construction work.",
+"requete": "work gloves tools",
+"portrait": true,
+"pexels_id": 11427094
+},
+"outils-08": {
+"photographe": "kaboompics",
+"page": "https://www.pexels.com/photo/a-close-up-shot-of-a-person-doing-woodworks-7285914/",
+"alt": "Detailed view of a woodworking project with a power drill, bracket, and safety gloves.",
+"requete": "work gloves tools",
+"portrait": false,
+"pexels_id": 7285914
+},
+"outils-09": {
+"photographe": "kaboompics",
+"page": "https://www.pexels.com/photo/carpenter-drawing-cutting-line-on-wooden-board-7285925/",
+"alt": "Close-up of a gloved carpenter measuring wood indoors using a ruler and pencil.",
+"requete": "work gloves tools",
+"portrait": false,
+"pexels_id": 7285925
+},
+"outils-10": {
+"photographe": "Thijs van der Weide",
+"page": "https://www.pexels.com/photo/man-holding-wooden-stick-while-drilling-hole-1094767/",
+"alt": "Close-up of a person using an electric drill on a wooden plank, showcasing detailed woodworking skills.",
+"requete": "drill tools wood",
+"portrait": false,
+"pexels_id": 1094767
+},
+"outils-11": {
+"photographe": "Ono  Kosuki",
+"page": "https://www.pexels.com/photo/modern-convenient-screwdriver-drill-among-tools-for-carpentry-5974048/",
+"alt": "From above of contemporary screwdriver with drill near hammer and tools on wooden desk",
+"requete": "drill tools wood",
+"portrait": true,
+"pexels_id": 5974048
+},
+"outils-12": {
+"photographe": "Tima Miroshnichenko",
+"page": "https://www.pexels.com/photo/close-up-shot-of-woodwork-tools-on-a-wooden-surface-6790761/",
+"alt": "A close-up view of various woodworking tools scattered on a wooden surface with sawdust.",
+"requete": "drill tools wood",
+"portrait": false,
+"pexels_id": 6790761
+},
+"interieur-01": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/clean-unfurnished-apartment-room-8146336/",
+"alt": "Wide-angle shot of a modern unfurnished apartment with wooden flooring and large windows.",
+"requete": "renovated living room",
+"portrait": false,
+"pexels_id": 8146336
+},
+"interieur-02": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/brown-wooden-table-near-white-wall-8146214/",
+"alt": "Bright and spacious empty room with wooden flooring, modern design, ideal for interior design inspiration.",
+"requete": "bright home interior wood",
+"portrait": false,
+"pexels_id": 8146214
+},
+"interieur-03": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/modern-studio-apartment-with-white-furniture-and-mirror-in-sunlight-6890395/",
+"alt": "Interior of modern light apartment with comfortable couch and kitchen zone with counter on sunny day",
+"requete": "bright home interior wood",
+"portrait": false,
+"pexels_id": 6890395
+},
+"interieur-04": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/photo-of-the-living-room-7546716/",
+"alt": "Bright and spacious living room with a modern design featuring a stylish sofa and elegant decor.",
+"requete": "bright home interior wood",
+"portrait": false,
+"pexels_id": 7546716
+},
+"interieur-05": {
+"photographe": "Curtis Adams",
+"page": "https://www.pexels.com/photo/elegant-home-entrance-with-wooden-door-and-stairs-37153438/",
+"alt": "Bright and airy home entrance featuring a wooden door, glass panels, and elegant staircase.",
+"requete": "bright home interior wood",
+"portrait": false,
+"pexels_id": 37153438
+},
+"interieur-06": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/house-with-table-with-chairs-next-to-kitchen-and-tv-6782283/",
+"alt": "Modern apartment interior with table with chairs next to shelves and open kitchen with cabinets near TV on wall",
+"requete": "bright home interior wood",
+"portrait": false,
+"pexels_id": 6782283
+},
+"interieur-07": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/contemporary-interior-of-kitchen-with-bar-counter-and-kettle-6508353/",
+"alt": "Modern kitchen with contemporary interior with metal geometrical lamps and new white cabinets",
+"requete": "new kitchen interior",
+"portrait": false,
+"pexels_id": 6508353
+},
+"interieur-08": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/interior-of-modern-kitchen-with-wooden-furniture-7031617/",
+"alt": "Interior of spacious kitchen with wooden counter located in middle with built in stove appliances and many cabinets",
+"requete": "new kitchen interior",
+"portrait": false,
+"pexels_id": 7031617
+},
+"interieur-09": {
+"photographe": "Max Vakhtbovych",
+"page": "https://www.pexels.com/photo/interior-of-house-with-bed-near-armchairs-and-sofa-7174402/",
+"alt": "Spacious apartment interior with bed near armchairs and couch next to table and windows near cabinet under chandelier",
+"requete": "loft conversion attic room",
+"portrait": false,
+"pexels_id": 7174402
+}
+}
