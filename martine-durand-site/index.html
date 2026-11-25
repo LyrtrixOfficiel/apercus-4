@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Martine Durand, psychopraticienne intégrative à Décines</title>
+  <meta name="description" content="Martine Durand, psychopraticienne intégrative à Décines (Rhône) : psychothérapie individuelle et de groupe, analyse transactionnelle certifiée EATA, art-thérapie. Enfants, adultes, couples.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fbfaf4">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Nunito+Sans:opsz,wght@6..12,300..800&family=Caveat:wght@500..700&display=swap">
+  <link rel="stylesheet" href="css/site.css">
+  <script>
+    /* Décidé avant l'affichage. Le réglage « mouvements réduits » du système n'est jamais lu :
+       la version calme se demande avec ?calme=1. Si le script ne démarre pas, tout s'affiche au bout de 3 s. */
+    (function () {
+      var h = document.documentElement;
+      h.classList.add('js');
+      if (/[?&]calme=1/.test(location.search)) h.classList.add('calme');
+      setTimeout(function () { if (!window.MD) h.classList.remove('js'); }, 3000);
+    })();
+  </script>
+  <script src="js/lenis.min.js" defer></script>
+  <script src="js/site.js" defer></script>
+</head>
+<body data-page="accueil">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-goutte" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#c3e48a"/>
+      <stop offset=".55" stop-color="#6db33f"/>
+      <stop offset="1" stop-color="#1f6b3a"/>
+    </linearGradient>
+  </defs>
+  <symbol id="goutte" viewBox="0 0 40 56"><path fill="url(#g-goutte)" d="M20 1.5C17 8 6 22 6 35a14 14 0 0 0 28 0C34 22 23 8 20 1.5Z"/><path fill="#fff" opacity=".75" d="M13.5 33c.4-4.6 2.6-8.8 4.6-11.8.4-.6-.3-1.1-.8-.6-3 3.3-5.6 7.8-5.9 12.3-.1 1.2 2 1.3 2.1.1Z"/></symbol>
+  <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 3.5h2.6l1.4 4-2 1.3a12 12 0 0 0 6.6 6.6l1.3-2 4 1.4v2.6a2 2 0 0 1-2.2 2A17.6 17.6 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="m4.5 7.5 7.5 6 7.5-6"/></symbol>
+    <symbol id="i-lieu" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+    <symbol id="i-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-public" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3.2"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M2.8 19.5c.6-3.4 2.9-5.3 5.7-5.3s5.1 1.9 5.7 5.3M14.6 14.3c2.8-.3 5 1.4 5.8 4.7"/></symbol>
+    <symbol id="i-rythme" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M8 3.5v4M16 3.5v4M4 10h16"/></symbol>
+  </g>
+  <!-- le signe des sections : une goutte tombe, s'ouvre en trois cercles, comme sur sa carte -->
+  <symbol id="signe" viewBox="0 0 100 64">
+    <g class="s-cercles" fill="none" stroke="currentColor" stroke-width="2.2">
+      <circle class="s-c1" cx="50" cy="44" r="9.5"/>
+      <circle class="s-c2" cx="50" cy="44" r="9.5"/>
+      <circle class="s-c3" cx="50" cy="44" r="9.5"/>
+    </g>
+    <use class="s-goutte" href="#goutte" x="43" y="0" width="14" height="20"/>
+  </symbol>
+</svg>
+
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<!-- Le fil : une tige de ginkgo qui descend avec la lecture, sa goutte se pose à chaque partie -->
+<div class="fil" aria-hidden="true">
+  <div class="fil-tige"><i class="fil-plein"></i></div>
+  <div class="fil-reperes"></div>
+  <div class="fil-goutte"><svg><use href="#goutte"/></svg><span class="fil-onde"></span></div>
+</div>
+
+<header class="entete">
+  <a class="marque" href="#accueil" aria-label="Martine Durand, retour en haut">
+    <span class="marque-cercles" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="marque-texte"><strong>Martine Durand</strong><small>Psychopraticienne intégrative</small></span>
+  </a>
+  <nav class="nav" aria-label="Menu principal">
+    <a href="#psychotherapie">Psychothérapie</a>
+    <a href="#approches">Approches</a>
+    <a href="#formes">Séances</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="dessine-et-sens.html" class="nav-atelier">Dessine et Sens</a>
+  </nav>
+  <a class="bouton bouton-plein entete-contact" href="#contact">Me contacter</a>
+  <button class="bouton-menu" type="button" aria-expanded="false" aria-controls="menu-mobile"><span class="bm-traits" aria-hidden="true"><i></i><i></i></span><span class="bm-mot">Menu</span></button>
+</header>
+
+<div class="menu-mobile" id="menu-mobile" hidden>
+  <nav aria-label="Menu">
+    <a href="#accueil"><span>Accueil</span></a>
+    <a href="#psychotherapie"><span>Psychothérapie</span></a>
+    <a href="#pour-qui"><span>Pour qui, pour quoi</span></a>
+    <a href="#approches"><span>Une thérapie intégrative</span></a>
+    <a href="#formes"><span>Sous quelle forme</span></a>
+    <a href="#parcours"><span>Avec qui</span></a>
+    <a href="#pratique"><span>Informations pratiques</span></a>
+    <a href="#tarifs"><span>Tarifs</span></a>
+    <a href="dessine-et-sens.html" class="mm-atelier"><span>Dessine et Sens</span></a>
+    <a href="#contact"><span>Me contacter</span></a>
+  </nav>
+  <a class="mm-tel" href="tel:+33652143463"><svg class="i"><use href="#i-tel"/></svg>06 52 14 34 63</a>
+</div>
+
+<main id="contenu">
+
+  <!-- 1. ACCUEIL -->
+  <section class="accueil" id="accueil" data-repere="Accueil">
+    <div class="accueil-texte">
+      <p class="accueil-sur" data-revele>Psychothérapie <i class="pt"></i> Analyse transactionnelle <i class="pt"></i> Art-thérapie</p>
+      <h1 class="accueil-nom" data-revele style="--i:1"><span>Martine</span> <span>Durand</span></h1>
+      <p class="accueil-metier" data-revele style="--i:2">Psychopraticienne intégrative à Décines</p>
+    </div>
+    <figure class="accueil-toile" data-revele style="--i:1">
+      <svg class="accueil-cercles" viewBox="0 0 120 340" aria-hidden="true"><circle cx="60" cy="58" r="52"/><circle cx="60" cy="170" r="52"/><circle cx="60" cy="282" r="52"/></svg>
+      <div class="toile toile-ginkgo">
+        <img src="img/ginkgo.webp" width="476" height="600" alt="Peinture de Martine Durand : une feuille de ginkgo verte d'où naît une goutte d'eau" fetchpriority="high">
+        <span class="goutte-qui-tombe" aria-hidden="true"><svg><use href="#goutte"/></svg></span>
+      </div>
+      <span class="ondes" aria-hidden="true"><i></i><i></i><i></i></span>
+    </figure>
+    <div class="accueil-suite">
+      <blockquote class="accueil-phrase" data-revele style="--i:3">
+        <p><span class="ligne">C’est par le contact et la relation</span> <span class="ligne">que nous nous construisons.</span></p>
+        <p><span class="ligne">C’est par le contact et la relation</span> <span class="ligne">que nous <em>guérissons</em>.</span></p>
+      </blockquote>
+      <div class="accueil-actions" data-revele style="--i:4">
+        <a class="bouton bouton-plein" href="#contact">Me contacter<svg class="i"><use href="#i-fleche"/></svg></a>
+        <a class="bouton bouton-ligne" href="tel:+33652143463"><svg class="i"><use href="#i-tel"/></svg>06 52 14 34 63</a>
+      </div>
+    </div>
+    <a class="accueil-bas" href="#psychotherapie" aria-label="Descendre vers la psychothérapie"><span>Découvrir</span><svg><use href="#goutte"/></svg></a>
+  </section>
+
+  <!-- 2. PSYCHOTHÉRAPIE : sa définition, et ses quatre visages qui se posent l'un sur l'autre -->
+  <section class="emotions" id="psychotherapie" data-repere="Psychothérapie">
+    <div class="emotions-scene">
+      <div class="emotions-texte">
+        <header class="titre-section">
+          <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+          <p class="sur-titre">Psychothérapie</p>
+        </header>
+        <p class="definition">La psychothérapie est le processus par lequel la personne va repérer et changer les comportements limitants, <span class="def-l" data-de="0">traiter la douleur du passé</span> <span class="def-l" data-de="2">dans le présent</span> <span class="def-l" data-de="3">pour libérer son avenir.</span></p>
+        <div class="emotion-nom" aria-hidden="true">
+          <span data-e="0">la tristesse</span><span data-e="1">la peur</span><span data-e="2">la colère</span><span data-e="3">la joie</span>
+        </div>
+        <ol class="emotion-points" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+        <p class="pile-legende">Aquarelles de Martine Durand&nbsp;: la tristesse, la peur, la colère, la joie.</p>
+      </div>
+      <div class="emotions-pile">
+        <figure class="carte-emotion" data-k="0"><img src="img/tristesse.webp" width="640" height="851" alt="Aquarelle de Martine Durand : un visage rond qui pleure, en bleu"></figure>
+        <figure class="carte-emotion" data-k="1"><img src="img/peur.webp" width="634" height="854" alt="Aquarelle de Martine Durand : un visage rond saisi par la peur, en vert" loading="lazy"></figure>
+        <figure class="carte-emotion" data-k="2"><img src="img/colere.webp" width="636" height="850" alt="Aquarelle de Martine Durand : un visage rond en colère, en rouge" loading="lazy"></figure>
+        <figure class="carte-emotion" data-k="3"><img src="img/joie.webp" width="631" height="859" alt="Aquarelle de Martine Durand : un visage rond qui sourit, en jaune" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. POUR QUI, POUR QUOI -->
+  <section class="section pour-qui" id="pour-qui" data-repere="Pour qui">
+    <div class="cadre">
+      <header class="titre-section centre" data-revele>
+        <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+        <p class="sur-titre">Psychothérapie</p>
+        <h2 class="grand-titre">Pour qui&nbsp;?</h2>
+      </header>
+      <ul class="trois-cercles" data-revele aria-label="Pour qui">
+        <li style="--i:0"><span>Enfants</span></li>
+        <li style="--i:1"><span>Adultes</span></li>
+        <li style="--i:2"><span>Couples</span></li>
+      </ul>
+
+      <div class="pour-quoi">
+        <figure class="pour-quoi-toile" data-revele>
+          <div class="toile toile-goutte"><img src="img/goutte.webp" width="737" height="999" alt="Peinture de Martine Durand : une goutte verte et jaune qui se détache" loading="lazy"></div>
+        </figure>
+        <div class="pour-quoi-texte">
+          <header class="titre-section" data-revele>
+            <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+            <p class="sur-titre">Psychothérapie</p>
+            <h2 class="grand-titre">Pour quoi&nbsp;?</h2>
+          </header>
+          <ul class="raisons">
+            <li data-revele><svg class="puce"><use href="#goutte"/></svg><p>Vous traversez actuellement une crise <strong>professionnelle</strong>&nbsp;: stress, épuisement, reconversion, licenciement… ou <strong>personnelle</strong>&nbsp;: une maladie, un deuil, une séparation, un événement traumatique récent, un blocage…</p></li>
+            <li data-revele><svg class="puce"><use href="#goutte"/></svg><p>Vous souhaitez traiter une <strong>problématique ancienne</strong>&nbsp;: traumatisme, problèmes relationnels qui se répètent, intégrer des éléments de votre histoire personnelle et/ou familiale pour vous libérer d’angoisses, de symptômes psychosomatiques ou psychologiques…</p></li>
+            <li data-revele><svg class="puce"><use href="#goutte"/></svg><p>Vous souhaitez <strong>mieux vous connaître</strong> et trouver votre liberté dans le lien avec les autres, quel que soit votre profil émotionnel, intellectuel…</p></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. UNE THÉRAPIE INTÉGRATIVE -->
+  <section class="section approches" id="approches" data-repere="Approches">
+    <div class="cadre">
+      <header class="titre-section" data-revele>
+        <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+        <p class="sur-titre">Approches</p>
+        <h2 class="grand-titre">Une thérapie<br><em>intégrative</em></h2>
+      </header>
+
+      <article class="approche approche-at" data-revele>
+        <div class="approche-tete">
+          <span class="approche-num">1</span>
+          <h3>Analyse transactionnelle intégrative</h3>
+          <p class="verbes"><span>penser,</span> <span>comprendre,</span> <span>décider</span></p>
+        </div>
+        <div class="approche-corps">
+          <p>L’Analyse Transactionnelle, fondée par Eric Berne dans les années 1950, est une approche de psychothérapie humaniste qui explore nos interactions internes et externes.</p>
+          <p>Bien qu’elle soit une théorie complexe et profonde, elle a la particularité d’utiliser un langage simple, ce qui facilite la compréhension et la pratique pour la personne accompagnée. Elle offre un regard clair sur nos pensées, émotions et comportements, permettant de comprendre et changer les schémas non constructifs.</p>
+          <p>Cela vous donne le pouvoir d’être acteur de vos choix, favorise des décisions conscientes et renforce des relations plus saines pour un changement en profondeur. En travaillant ensemble, nous utilisons cette approche pour vous guider vers une meilleure compréhension de vous-même et une vie où vous êtes aux commandes de votre bien-être.</p>
+        </div>
+      </article>
+
+      <div class="approches-liste">
+        <article class="approche" data-revele><span class="approche-num">2</span><h3>La psychothérapie d’enfant</h3><p class="verbes"><span>jouer</span></p></article>
+        <article class="approche" data-revele><span class="approche-num">3</span><h3>Psycho-traumatologie</h3><p class="verbes"><span>trouver des ressources</span></p></article>
+        <article class="approche" data-revele><span class="approche-num">4</span><h3>Art-thérapie</h3><p class="verbes"><span>rêver,</span> <span>réinventer</span></p></article>
+        <article class="approche" data-revele><span class="approche-num">5</span><h3>Psychologie biodynamique</h3><p class="verbes"><span>ressentir,</span> <span>nettoyer</span></p><p class="approche-mot">Écouter son corps permet de développer un sixième sens, d’écouter sa résonance avec le monde, avec son environnement.</p></article>
+        <article class="approche" data-revele><span class="approche-num">6</span><h3>Reiki</h3><p class="verbes"><span>énergiser</span></p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SOUS QUELLE FORME -->
+  <section class="section formes" id="formes" data-repere="Séances">
+    <div class="cadre">
+      <header class="titre-section" data-revele>
+        <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+        <p class="sur-titre">Séances</p>
+        <h2 class="grand-titre">Sous quelle<br><em>forme&nbsp;?</em></h2>
+      </header>
+      <ul class="formes-liste">
+        <li class="forme" data-revele style="--i:0">
+          <svg class="forme-signe" viewBox="0 0 120 80" aria-hidden="true"><circle cx="60" cy="40" r="22"/></svg>
+          <h3>Thérapie individuelle</h3>
+        </li>
+        <li class="forme" data-revele style="--i:1">
+          <svg class="forme-signe" viewBox="0 0 120 80" aria-hidden="true"><circle cx="60" cy="14" r="9"/><circle cx="85" cy="32" r="9"/><circle cx="76" cy="62" r="9"/><circle cx="44" cy="62" r="9"/><circle cx="35" cy="32" r="9"/></svg>
+          <h3>Thérapie de groupe en soirée</h3>
+          <p>Un groupe de 5 personnes, toutes les 3 semaines.</p>
+        </li>
+        <li class="forme" data-revele style="--i:2">
+          <svg class="forme-signe" viewBox="0 0 120 80" aria-hidden="true"><circle cx="60" cy="40" r="30" class="pointille"/><circle cx="60" cy="10" r="7"/><circle cx="88" cy="50" r="7"/><circle cx="32" cy="50" r="7"/><use href="#goutte" x="53" y="30" width="14" height="20" class="plein"/></svg>
+          <h3>Thérapie de groupe l’après-midi avec médiation</h3>
+          <p>Un mercredi après-midi par mois&nbsp;: 4 heures d’art-thérapie.</p>
+        </li>
+        <li class="forme" data-revele style="--i:3">
+          <svg class="forme-signe" viewBox="0 0 120 80" aria-hidden="true"><circle cx="42" cy="40" r="18"/><circle cx="78" cy="40" r="18"/></svg>
+          <h3>Stages résidentiels sur 2 jours</h3>
+        </li>
+        <li class="forme" data-revele style="--i:4">
+          <svg class="forme-signe" viewBox="0 0 120 80" aria-hidden="true"><circle cx="60" cy="9" r="6.5"/><circle cx="82" cy="18" r="6.5"/><circle cx="91" cy="40" r="6.5"/><circle cx="82" cy="62" r="6.5"/><circle cx="60" cy="71" r="6.5"/><circle cx="38" cy="62" r="6.5"/><circle cx="29" cy="40" r="6.5"/><circle cx="38" cy="18" r="6.5"/></svg>
+          <h3>Groupe de parole</h3>
+          <p>Des séances de 1&nbsp;h&nbsp;30, à 8 personnes.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. AVEC QUI -->
+  <section class="section parcours" id="parcours" data-repere="Parcours">
+    <div class="cadre parcours-grille">
+      <div class="parcours-carte-zone" data-revele>
+        <div class="carte-visite">
+          <div class="cv-haut">
+            <p class="cv-nom">Martine Durand</p>
+            <p class="cv-titre">Psychopraticienne</p>
+          </div>
+          <span class="cv-cercles" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div class="cv-bas">
+            <p class="cv-psy">Psychothérapie</p>
+            <p>Analyste Transactionnelle certifiée EATA</p>
+            <p class="cv-art">Art-thérapie</p>
+          </div>
+          <p class="cv-adresse">33 avenue Jean Jaurès 69150 Décines</p>
+        </div>
+      </div>
+      <div class="parcours-texte">
+        <header class="titre-section" data-revele>
+          <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+          <p class="sur-titre">Avec qui&nbsp;?</p>
+          <h2 class="grand-titre">Martine Durand</h2>
+        </header>
+        <p class="parcours-intro" data-revele>Psychopraticienne intégrative, analyste transactionnelle certifiée EATA et art-thérapeute.</p>
+        <p data-revele>Formée à l’art-thérapie, au psychotrauma, à la psychologie biodynamique et au reiki.</p>
+        <ul class="titres-liste">
+          <li data-revele style="--i:0"><strong>EATA</strong><span>Analyste transactionnelle certifiée par l’European Association for Transactional Analysis</span></li>
+          <li data-revele style="--i:1"><strong>CEP</strong><span>Titulaire du Certificat Européen de Psychothérapie</span></li>
+          <li data-revele style="--i:2"><strong>FF2P</strong><span>Membre de la Fédération Française de Psychothérapie et Psychanalyse</span></li>
+          <li data-revele style="--i:3"><strong>IFAT</strong><span>Membre de l’Institut Français d’Analyse Transactionnelle</span></li>
+        </ul>
+        <p class="parcours-peintre" data-revele>Les peintures de ce site sont les siennes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INFORMATIONS PRATIQUES ET TARIFS -->
+  <section class="section pratique" id="pratique" data-repere="Pratique">
+    <div class="cadre pratique-grille">
+      <div class="infos">
+        <header class="titre-section" data-revele>
+          <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+          <p class="sur-titre">À Décines</p>
+          <h2 class="grand-titre moyen">Informations <em>pratiques</em></h2>
+        </header>
+        <ul class="infos-liste">
+          <li data-revele><svg class="i"><use href="#i-lieu"/></svg><div><strong>Le cabinet</strong><p>33 avenue Jean Jaurès<br>69150 Décines</p><a class="lien" href="https://www.openstreetmap.org/search?query=33%20avenue%20Jean%20Jaur%C3%A8s%2069150%20D%C3%A9cines-Charpieu" target="_blank" rel="noopener">Voir sur la carte<svg class="i"><use href="#i-fleche"/></svg></a></div></li>
+          <li data-revele><svg class="i"><use href="#i-public"/></svg><div><strong>Pour qui</strong><p>Des adultes surtout, mais aussi des couples et des enfants.</p></div></li>
+          <li data-revele><svg class="i"><use href="#i-rythme"/></svg><div><strong>Les groupes</strong><p>Le groupe du soir&nbsp;: 5 personnes, toutes les 3 semaines.<br>L’art-thérapie&nbsp;: un mercredi après-midi par mois, durant 4 heures.</p></div></li>
+          <li data-revele><svg class="i"><use href="#i-tel"/></svg><div><strong>Par téléphone</strong><p><a href="tel:+33652143463">06 52 14 34 63</a></p></div></li>
+        </ul>
+      </div>
+
+      <div class="tarifs" id="tarifs" data-repere="Tarifs">
+        <header class="titre-section" data-revele>
+          <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+          <p class="sur-titre">Thérapie et groupe de parole</p>
+          <h2 class="grand-titre moyen">Tarifs</h2>
+        </header>
+        <div class="tarifs-feuille" data-revele>
+          <h3>Thérapie</h3>
+          <dl>
+            <div><dt>Thérapie individuelle</dt><dd>70&nbsp;€</dd></div>
+            <div><dt>Thérapie de groupe</dt><dd>50&nbsp;€</dd></div>
+            <div><dt>Thérapie avec médiations</dt><dd>70&nbsp;€</dd></div>
+            <div><dt>Stage résidentiel sur 2 jours</dt><dd>340&nbsp;€</dd></div>
+          </dl>
+          <h3>Groupe de parole</h3>
+          <dl>
+            <div><dt>La séance de 1&nbsp;h&nbsp;30</dt><dd>150&nbsp;€<small>pour 8 personnes</small></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. DESSINE ET SENS, l'atelier -->
+  <section class="atelier-teaser" id="atelier" data-repere="Atelier">
+    <div class="cadre atelier-grille">
+      <div class="atelier-persos" aria-hidden="true">
+        <img class="perso p-bleu" src="img/perso-bleu.webp" width="212" height="431" alt="" loading="lazy">
+        <img class="perso p-orange" src="img/perso-orange.webp" width="315" height="400" alt="" loading="lazy">
+        <img class="perso p-violet" src="img/perso-violet.webp" width="215" height="350" alt="" loading="lazy">
+        <img class="perso p-vert" src="img/perso-vert.webp" width="169" height="381" alt="" loading="lazy">
+      </div>
+      <div class="atelier-texte" data-revele>
+        <p class="sur-titre">L’atelier de Martine</p>
+        <h2 class="titre-atelier"><span class="c1">Dessine</span> <span class="c2">et</span> <span class="c3">Sens</span></h2>
+        <p>Un atelier d’arts plastiques, 2 heures par semaine, et des stages pendant les vacances scolaires.</p>
+        <a class="bouton bouton-couleur" href="dessine-et-sens.html">Découvrir l’atelier<svg class="i"><use href="#i-fleche"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ME CONTACTER -->
+  <section class="section contact" id="contact" data-repere="Contact">
+    <div class="cadre contact-grille">
+      <div class="contact-texte">
+        <header class="titre-section" data-revele>
+          <svg class="signe" aria-hidden="true"><use href="#signe"/></svg>
+          <p class="sur-titre">Me contacter</p>
+          <h2 class="grand-titre">Vous avez<br><em>une question&nbsp;?</em></h2>
+        </header>
+        <p data-revele>Envoyez-moi un message et je vous répondrai dans les plus brefs délais. Si toutefois je ne vous ai pas répondu dans les 48&nbsp;h, merci de me laisser un message téléphonique.</p>
+        <ul class="coordonnees" data-revele>
+          <li><a href="tel:+33652143463"><svg class="i"><use href="#i-tel"/></svg><span>06 52 14 34 63</span></a></li>
+          <li><a href="mailto:martine.simiane.durand@gmail.com"><svg class="i"><use href="#i-mail"/></svg><span>martine.simiane.durand@gmail.com</span></a></li>
+          <li><span class="sans-lien"><svg class="i"><use href="#i-lieu"/></svg><span>33 avenue Jean Jaurès, 69150 Décines</span></span></li>
+        </ul>
+      </div>
+      <form class="formulaire" data-revele novalidate>
+        <div class="champ"><label for="f-nom">Nom et prénom</label><input id="f-nom" name="nom" autocomplete="name" required></div>
+        <div class="champs-2">
+          <div class="champ"><label for="f-mail">E-mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" required></div>
+          <div class="champ"><label for="f-tel">Téléphone <small>(facultatif)</small></label><input id="f-tel" name="tel" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="champ"><label for="f-msg">Votre message</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+        <label class="accord"><input type="checkbox" name="accord" required><span class="case" aria-hidden="true"></span><span>J’autorise Martine Durand à utiliser mes données personnelles pour me recontacter dans le cadre de ma demande indiquée dans ce formulaire.</span></label>
+        <button class="bouton bouton-plein" type="submit">Envoyer le message<svg class="i"><use href="#i-fleche"/></svg></button>
+        <p class="form-retour" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="pied" id="pied">
+  <div class="pied-chute" aria-hidden="true">
+    <svg class="pied-goutte"><use href="#goutte"/></svg>
+    <span class="pied-cercles"><i></i><i></i><i></i></span>
+  </div>
+  <p class="pied-phrase">C’est par le contact et la relation que nous guérissons.</p>
+  <p class="pied-nom">Martine Durand</p>
+  <p class="pied-metier">Psychopraticienne intégrative <i class="pt"></i> Analyste transactionnelle certifiée EATA <i class="pt"></i> Art-thérapie</p>
+  <nav class="pied-nav" aria-label="Plan du site">
+    <a href="#psychotherapie">Psychothérapie</a><a href="#approches">Approches</a><a href="#formes">Séances</a><a href="#parcours">Parcours</a><a href="#tarifs">Tarifs</a><a href="dessine-et-sens.html">Dessine et Sens</a><a href="#contact">Contact</a>
+  </nav>
+  <p class="pied-coord"><a href="tel:+33652143463">06 52 14 34 63</a><i class="pt"></i><a href="mailto:martine.simiane.durand@gmail.com">martine.simiane.durand@gmail.com</a><i class="pt"></i><span>33 avenue Jean Jaurès, 69150 Décines</span></p>
+  <div class="pied-bas">
+    <span>© <span data-annee>2026</span> Martine Durand</span>
+    <span>Peintures et aquarelles&nbsp;: Martine Durand</span>
+    <span>Site conçu par <a href="https://kazura.fr" target="_blank" rel="noopener">Kazura</a></span>
+  </div>
+</footer>
+</body>
+</html>
