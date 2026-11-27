@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Désinscription</title>
+<style>
+  :root { color-scheme: light dark; --fond: #f6f4ef; --carte: #ffffff; --texte: #1f1f1f; --doux: #5c5c5c; }
+  @media (prefers-color-scheme: dark) { :root { --fond: #15171a; --carte: #1f2226; --texte: #ececec; --doux: #a9a9a9; } }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--fond); color: var(--texte);
+    font: 17px/1.55 Arial, Helvetica, sans-serif; padding: 16px; box-sizing: border-box; }
+  main { background: var(--carte); max-width: 30rem; width: 100%; padding: 1.6rem 1.5rem; border-radius: 12px; box-shadow: 0 2px 14px rgba(0,0,0,.08); }
+  h1 { font-size: 1.3rem; margin: 0 0 .8rem; }
+  p { margin: 0 0 .8rem; }
+  .doux { color: var(--doux); font-size: .95rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="titre">Désinscription en cours</h1>
+  <p id="texte">Un instant, votre adresse est en train d'être retirée de nos listes.</p>
+  <noscript><p>Votre navigateur bloque cette page. Pour ne plus recevoir de message, répondez simplement « stop » au mail reçu : votre adresse sera retirée.</p></noscript>
+  <p class="doux">Mathéo, Kazura</p>
+</main>
+<script>
+// 27/11 : le lien écrit dans les mails de prospection passe par ce domaine, puis la désinscription
+// s'enregistre dans l'application Courrier (même jeton signé que le lien direct).
+(function () {
+  var j = new URLSearchParams(location.search).get('j') || '';
+  if (/^[a-z0-9]{4,40}\.[A-Za-z0-9_-]{22}$/.test(j)) {
+    location.replace('https://courrier-kazura.netlify.app/desinscription/' + encodeURIComponent(j));
+    return;
+  }
+  document.getElementById('titre').textContent = 'Lien incomplet';
+  document.getElementById('texte').textContent = "Ce lien n'est pas reconnu, peut-être a-t-il été coupé par votre messagerie. Pour ne plus recevoir de message, répondez simplement « stop » au mail reçu : votre adresse sera retirée.";
+})();
+</script>
+</body>
+</html>
